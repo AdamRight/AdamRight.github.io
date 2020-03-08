@@ -1,0 +1,517 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>单例模式 | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='John Doe'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 士不可以不弘毅，任重而道远 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Android/"><i class="fa "></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Web/"><i class="fa "></i>Web</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Java/"><i class="fa "></i>Java</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="单例模式">
+            
+	            单例模式
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Android">
+            Android
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/设计模式" title='设计模式'>
+                        设计模式
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/04/24</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>单例模式：保证整个程序只有一个实例。</p>
+<p>套路：1、构造函数私有，防止在外部new对象；2、内部必须提供一个静态的方法，让外部调用。</p>
+<h3 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h3><pre><code>public class SingletonEHan {
+
+    private SingletonEHan() {
+    }
+
+    private static SingletonEHan singletonEHan = new SingletonEHan();
+
+    public static SingletonEHan getInstance() {
+        return singletonEHan;
+    }
+//  SingletonEHan instance= SingletonEHan.getInstance();
+}
+</code></pre><blockquote>
+<ul>
+<li>优点：比较简单，在类加载的时候就完成了实例化，避免了线程的同步问题。</li>
+<li>缺点：由于在类加载的时候就实例化了，也就是说可能我没有用到这个实例，但是它也会加载，会造成内存的浪费(但是这个浪费可以忽略)。</li>
+</ul>
+</blockquote>
+<h3 id="懒汉模式，四种方式"><a href="#懒汉模式，四种方式" class="headerlink" title="懒汉模式，四种方式"></a>懒汉模式，四种方式</h3><pre><code>public class SingletonLanHan {
+
+    private SingletonLanHan() {
+    }
+
+    /**
+     * 单例模式的懒汉式[线程不安全，不可用]
+     */
+    private static SingletonLanHan singletonLanHan;
+    public static SingletonLanHan getInstance() {
+        if (singletonLanHan == null) { //多线程并发，这里线程是不安全的,可能得到两个不同的实例
+            singletonLanHan = new SingletonLanHan();
+        }
+        return singletonLanHan;
+    }
+
+    /**
+     * 懒汉式线程安全的:加锁，[线程安全，效率低不推荐使用]
+     * 缺点：效率太低，每个线程在想获得类的实例时候，执行getSingletonLanHanTwo()方法都要进行同步。
+     */
+    private static SingletonLanHan singletonLanHanTwo;
+    public static synchronized SingletonLanHan getSingletonLanHanTwo() {
+        if (singletonLanHanTwo == null) {
+            singletonLanHanTwo = new SingletonLanHan();
+        }
+        return singletonLanHanTwo;
+    }
+
+    /**
+     * 单例模式懒汉式[线程不安全，不可用]
+     * 虽然加了锁，new Singleton()跳出这个锁时，另一个已经进入if语句的线程同样会实例化另外一个Singleton对象。
+     * 
+     */
+    private static SingletonLanHan singletonLanHanThree = null;
+    public static SingletonLanHan getSingletonLanHanThree() {
+        if (singletonLanHanThree == null) {
+            synchronized (SingletonLanHan.class) {// 线程不安全
+                singletonLanHanThree = new SingletonLanHan();
+            }
+        }
+        return singletonLanHanThree;
+    }
+
+    /**
+     * 懒汉式双重校验
+     * 缺点:不推荐用，下面解释
+     */
+    private static SingletonLanHan singletonLanHanFour;
+    public static SingletonLanHan getSingletonLanHanFour() {
+        if (singletonLanHanFour == null) {//只执行一次锁，所以效率高一些
+            synchronized (SingletonLanHan.class) {
+                if (singletonLanHanFour == null) {
+                    singletonLanHanFour = new SingletonLanHan();
+                }
+            }
+        }
+        return singletonLanHanFour;
+    }
+}
+</code></pre><blockquote>
+<p>1、开辟一块内存空间，2、初始化对象，3、给变量赋值，指向内存地址。在java中2和3的顺序不一定，也可能先3再2。用volatile保证123的顺序执行，防止重排序。</p>
+</blockquote>
+<h3 id="volatile-同步锁DCL"><a href="#volatile-同步锁DCL" class="headerlink" title="volatile[同步锁DCL]"></a>volatile[同步锁DCL]</h3><pre><code>public class SingletonLanHan {
+
+    private SingletonLanHan() {
+    }
+
+    //volatile解决了gvm指令重排序优化
+    private static volatile SingletonLanHan singletonLanHanFour;
+
+    public static SingletonLanHan getSingletonLanHanFour() {
+        if (singletonLanHanFour == null) {
+            synchronized (SingletonLanHan.class) {
+                if (singletonLanHanFour == null) {
+                    singletonLanHanFour = new SingletonLanHan();
+                }
+            }
+        }
+        return singletonLanHanFour;
+    }
+}
+</code></pre><blockquote>
+<p>volatile关键字作用:防止重排序,线程可见性。</p>
+</blockquote>
+<p>线程可见性:某一个线程改了公用对象(变量)，短时间内另一个线程可能是不可见的，因为每一个线程都有自己的缓存区(线程工作区)。</p>
+<p>举例：可以看加不加volatile的区别：</p>
+<pre><code>public class VolatileTest {
+    public static void main(String[] args) {
+        ThreadDemo td = new ThreadDemo();
+        new Thread(td).start();
+        while(true){
+            if(td.isFlag()){
+                System.out.println(&quot;主线程flag:&quot; + td.isFlag());
+                break;
+            }
+        }
+    }
+}
+class ThreadDemo implements Runnable {
+    private volatile boolean flag = false;
+    @Override
+    public void run() {
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+        }
+        flag = true;
+        System.out.println(&quot;其他线程flag=&quot; + isFlag());
+    }
+    public boolean isFlag() {
+        return flag;
+    }
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+}
+</code></pre><h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><pre><code>/**
+ * 内部类[推荐用]
+ * 在饿汉式方式是只要Singleton类被装载就会实例化,
+ * 内部类是在需要实例化时，调用getInstance方法，才会装载SingletonHolder类
+ * 优点：避免了线程不安全，延迟加载，效率高。
+ */
+public class SingletonIn {
+
+    private SingletonIn() {
+    }
+
+    private static class SingletonInHodler {
+        private static final SingletonIn singletonIn = new SingletonIn();
+    }
+
+    public static SingletonIn getSingletonIn() {
+        return SingletonInHodler.singletonIn;
+    }
+}
+</code></pre><h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><pre><code>/**
+ * 枚举[推荐使用]
+ * SingletonEnum.instance
+ * 这里的instance即为SingletonEnum类型的引用所以得到它就可以调用枚举中的方法了。
+ * 借助JDK1.5中添加的枚举来实现单例模式。不仅能避免多线程同步问题，而且还能防止反序列化重新创建新的对象
+ */
+
+public enum SingletonEnum {
+
+    instance;
+
+    private SingletonEnum() {
+    }
+    public void whateverMethod() {
+    }
+    // SingletonEnum.instance.method();
+}
+</code></pre><h3 id="容器管理"><a href="#容器管理" class="headerlink" title="容器管理"></a>容器管理</h3><p><code>SystemServiceRegistry.getSystemService</code>系统的服务就是用的这种</p>
+<pre><code>public class Singleton {
+    private static Map&lt;String,Object&gt; mSingleMap = new HashMap&lt;&gt;();
+
+    static {
+        mSingleMap.put(&quot;activity_manager&quot;,new Singleton());
+    }
+
+    private Singleton() {
+
+    }
+
+    public static Object getService(String serviceName){
+        return mSingleMap.get(serviceName);
+    }
+}
+</code></pre><h2 id="补充复习static"><a href="#补充复习static" class="headerlink" title="补充复习static"></a>补充复习static</h2><p>static关键字的特点：随着类的加载而加载，随着类的消失而消失；优先于对象存在；被类的所有对象共享。</p>
+<p>静态变量存储于方法区的静态区；成员变量存储于堆内存。</p>
+<p>静态代码块：在类中方法外出现，并加上static修饰；用于给类进行初始化(全局初始化)，在类加载的时候就执行，并且只执行一次。main主方法所在的类中的静态代码块优先于主方法执行。</p>
+<pre><code>class Student {
+    static {
+        System.out.println(&quot;Student 静态代码块&quot;);
+    }
+
+    {
+        System.out.println(&quot;Student 构造代码块&quot;);
+    }
+
+    public Student() {
+        System.out.println(&quot;Student 构造方法&quot;);
+    }
+}
+class Demo2_Student {
+    static {
+        System.out.println(&quot;Demo2_Student静态代码块&quot;);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(&quot;我是main方法&quot;);
+
+        Student s1 = new Student();
+        Student s2 = new Student();
+    }
+}
+</code></pre><p>输出结果：</p>
+<pre><code>Demo2_Student静态代码块
+我是main方法
+Student 静态代码块
+Student 构造代码块
+Student 构造方法
+Student 构造代码块
+Student 构造方法
+</code></pre>
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="../../../../img/reward-alipay.jpg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="../../../../img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2019/04/26/17.学习node/" class="pre-post btn btn-default" title='学习Node'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">学习Node</span>
+        </a>
+    
+    
+        <a href="/2019/04/17/15.反射、注解、泛型/" class="next-post btn btn-default" title='反射、注解、泛型'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">反射、注解、泛型</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式"><span class="toc-text">单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#饿汉模式"><span class="toc-text">饿汉模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#懒汉模式，四种方式"><span class="toc-text">懒汉模式，四种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile-同步锁DCL"><span class="toc-text">volatile[同步锁DCL]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态内部类"><span class="toc-text">静态内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举"><span class="toc-text">枚举</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容器管理"><span class="toc-text">容器管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充复习static"><span class="toc-text">补充复习static</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>

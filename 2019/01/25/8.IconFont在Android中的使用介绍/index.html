@@ -1,0 +1,409 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>IconFont在Android中的使用介绍 | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='John Doe'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 士不可以不弘毅，任重而道远 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Android/"><i class="fa "></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Web/"><i class="fa "></i>Web</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Java/"><i class="fa "></i>Java</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="IconFont在Android中的使用介绍">
+            
+	            IconFont在Android中的使用介绍
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Android">
+            Android
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/IconFont" title='IconFont'>
+                        IconFont
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/01/25</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="iconfont介绍"><a href="#iconfont介绍" class="headerlink" title="iconfont介绍"></a>iconfont介绍</h2><p>常用iconfont字体库</p>
+<pre><code>https://www.iconfont.cn/
+http://fontawesome.dashgame.com/
+https://ionicons.com/
+</code></pre><p>优点：</p>
+<p>1.IconFont是矢量图标,可以随意设置大小。</p>
+<p>2.体积小可以减小APK的体积。</p>
+<p>3.一套图标资源可以在不同平台使用(android ,ios,web)</p>
+<p>4.很容易实现图文混排，因为都是Icon也被看做为文字.</p>
+<p>缺点：</p>
+<p>1.添加图标是需要重新制作ttf文件</p>
+<p>2.只能支持单色（不支持渐变色图标）</p>
+<blockquote>
+<p>ttf文件中每个图片对应的一个unicode码。TextView设置文字的时候，使用对应的unicode码就能显示出图片。</p>
+</blockquote>
+<h2 id="具体使用"><a href="#具体使用" class="headerlink" title="具体使用"></a>具体使用</h2><p>下载<code>iconfont.ttf</code>文件，放在项目<code>main/assets/iconfont/</code>下</p>
+<h3 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h3><p>xml中</p>
+<pre><code>&lt;TextView
+    android:id=&quot;@+id/tv1&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;@string/home&quot;
+    android:textColor=&quot;@android:color/holo_orange_light&quot;
+    android:textSize=&quot;50sp&quot; /&gt;
+</code></pre><p>strings中Unicode</p>
+<pre><code>&lt;string name=&quot;home&quot;&gt;&amp;#xe664;&lt;/string&gt;
+</code></pre><p>最后直接设置</p>
+<pre><code>Typeface iconfont1 = Typeface.createFromAsset(getAssets(), &quot;iconfont/iconfont.ttf&quot;);
+TextView textview1 = findViewById(R.id.tv1);
+textview1.setTypeface(iconfont1);
+</code></pre><h3 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h3><p>自定义TextView</p>
+<pre><code>public class IconFontView extends AppCompatTextView {
+
+    private Context context;
+    private boolean isFirst = true;
+    private String text;
+    private int textColor;
+    private String clicked_text;
+    private int clicked_textColor;
+
+    public IconFontView(Context context) {
+        this(context, null);
+    }
+
+    public IconFontView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public IconFontView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        this.context = context;
+        init(attrs);
+    }
+
+    /** 初始化 */
+    private void init(AttributeSet attrs){
+        // 设置字体类型
+        setTypeface(Typeface.createFromAsset(context.getAssets(), &quot;iconfont/iconfont.ttf&quot;));
+        // 获取配置信息（text &amp;&amp; textColor）
+        getAttrs(attrs);
+    }
+
+    /** 获得配置信息 */
+    private void getAttrs(AttributeSet attrs) {
+        TypedArray taCustom = context.obtainStyledAttributes(attrs, R.styleable.IconFontViewAttr);
+        clicked_text = taCustom.getString(R.styleable.IconFontViewAttr_clicked_text);
+        clicked_textColor = taCustom.getColor(R.styleable.IconFontViewAttr_clicked_textColor, 0);
+        taCustom.recycle();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN){
+            text = getText().toString();
+            textColor = getCurrentTextColor();
+        }
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    protected void dispatchSetPressed(boolean pressed) {
+        super.dispatchSetPressed(pressed);
+        if (isDuplicateParentStateEnabled()) {
+            if (pressed){
+                if(clicked_text != null)
+                    this.setText(clicked_text);
+                if(clicked_textColor != 0)
+                    this.setTextColor(clicked_textColor);
+            }else {
+                this.setText(text);
+                this.setTextColor(textColor);
+            }
+        }
+    }
+}
+</code></pre><p>在<code>res/values/attrs</code>中定义属性</p>
+<pre><code>&lt;!-- IconFontView属性 --&gt;
+&lt;declare-styleable name=&quot;IconFontViewAttr&quot;&gt;
+    &lt;attr name=&quot;clicked_text&quot; format=&quot;string&quot; /&gt;
+    &lt;attr name=&quot;clicked_textColor&quot; format=&quot;color&quot; /&gt;
+&lt;/declare-styleable&gt;
+</code></pre><p>使用</p>
+<pre><code>&lt;com.example.iconfont.IconFontView
+    android:id=&quot;@+id/tv2&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;@string/hot&quot;
+    android:textColor=&quot;@android:color/holo_red_dark&quot;
+    android:textSize=&quot;50sp&quot; /&gt;
+</code></pre><p>strings中Unicode</p>
+<pre><code>&lt;string name=&quot;hot&quot;&gt;&amp;#xe614;&lt;/string&gt;
+</code></pre><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>可以图文混用</p>
+<pre><code>&lt;string name=&quot;my&quot;&gt;我可以图文混用&amp;#xe624;啦！！&lt;/string&gt;
+</code></pre><p>使用阿里iconfont可以在<code>demo_index.html</code>文件中查找对应的Unicode</p>
+<p>fontawesome查找Unicode对照表</p>
+<pre><code>https://fontawesome.com/cheatsheet?from=io
+</code></pre>
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="../../../../img/reward-alipay.jpg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="../../../../img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2019/02/17/9.微信小程序开发/" class="pre-post btn btn-default" title='微信小程序开发'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">微信小程序开发</span>
+        </a>
+    
+    
+        <a href="/2019/01/23/7.快速入门kotlin/" class="next-post btn btn-default" title='快速入门和详解kotlin'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">快速入门和详解kotlin</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#iconfont介绍"><span class="toc-text">iconfont介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体使用"><span class="toc-text">具体使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方式一"><span class="toc-text">方式一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方式二"><span class="toc-text">方式二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>

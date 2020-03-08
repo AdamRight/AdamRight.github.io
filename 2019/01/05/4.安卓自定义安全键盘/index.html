@@ -1,0 +1,453 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>安卓自定义安全键盘 | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='John Doe'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 士不可以不弘毅，任重而道远 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Android/"><i class="fa "></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Web/"><i class="fa "></i>Web</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Java/"><i class="fa "></i>Java</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="安卓自定义安全键盘">
+            
+	            安卓自定义安全键盘
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Android">
+            Android
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/自定义" title='自定义'>
+                        自定义
+                    </a>
+                
+                    <a href="/tags/键盘" title='键盘'>
+                        键盘
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/01/05</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="Keyboard"><a href="#Keyboard" class="headerlink" title="Keyboard"></a>Keyboard</h2><p>我们只需要用到系统提供的两个类：Keyboard和KeyboardView。</p>
+<p>res下新建xml，新建Keyboard文件</p>
+<p>Keyboard中</p>
+<pre><code>android:keyWidth//每一个按键的宽
+android:keyHeight//每一个按键的高
+android:verticalGap//行与行之间的间隙
+android:horizontalGap//列与列之间的间隙
+</code></pre><p>Row的作用是按键的换行，每一个按键Key都在Row中。</p>
+<p>Key中</p>
+<pre><code>android:keyLabel//按键上的文字
+android:codes//输出的文字，对应ASCII表
+android:keyIcon//按键放置图片
+android:isRepeatable//删除键长按连续删除
+</code></pre><p>宽高、间距的单位既可以是像素，英寸等，也可以是相对于基础取值的百分比，以<code>%p</code>结尾。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;Keyboard xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:horizontalGap=&quot;0px&quot;
+    android:verticalGap=&quot;0px&quot;
+    android:keyHeight=&quot;7.5%p&quot;
+    android:keyWidth=&quot;30%p&quot;&gt;
+    &lt;Row android:verticalGap=&quot;1%p&quot;&gt;
+        &lt;Key
+            android:codes=&quot;49&quot;
+            android:keyLabel=&quot;1&quot;
+            android:horizontalGap=&quot;2%p&quot;&gt;
+
+        &lt;/Key&gt;
+        &lt;Key
+            android:codes=&quot;50&quot;
+            android:keyLabel=&quot;2&quot;
+            android:horizontalGap=&quot;2%p&quot;&gt;
+
+        &lt;/Key&gt;
+        &lt;Key
+            android:codes=&quot;51&quot;
+            android:keyLabel=&quot;3&quot;
+            android:horizontalGap=&quot;2%p&quot;&gt;
+
+        &lt;/Key&gt;
+    &lt;/Row&gt;
+    &lt;Row android:verticalGap=&quot;1%p&quot;&gt;
+        &lt;Key
+            android:codes=&quot;52&quot;
+            android:keyLabel=&quot;4&quot;
+            android:horizontalGap=&quot;2%p&quot;&gt;
+
+        &lt;/Key&gt;
+        &lt;Key
+            android:codes=&quot;53&quot;
+            android:keyLabel=&quot;5&quot;
+            android:horizontalGap=&quot;2%p&quot;&gt;
+
+        &lt;/Key&gt;
+        &lt;Key
+            android:codes=&quot;54&quot;
+            android:keyLabel=&quot;6&quot;
+            android:horizontalGap=&quot;2%p&quot;&gt;
+
+        &lt;/Key&gt;
+    &lt;/Row&gt;
+    &lt;Row android:verticalGap=&quot;1%p&quot;&gt;
+        &lt;Key
+            android:codes=&quot;55&quot;
+            android:keyLabel=&quot;7&quot;
+            android:horizontalGap=&quot;2%p&quot;&gt;
+
+        &lt;/Key&gt;
+        &lt;Key
+            android:codes=&quot;56&quot;
+            android:keyLabel=&quot;8&quot;
+            android:horizontalGap=&quot;2%p&quot;&gt;
+
+        &lt;/Key&gt;
+        &lt;Key
+            android:codes=&quot;57&quot;
+            android:keyLabel=&quot;9&quot;
+            android:horizontalGap=&quot;2%p&quot;&gt;
+
+        &lt;/Key&gt;
+    &lt;/Row&gt;
+    &lt;Row&gt;
+        &lt;Key
+            android:codes=&quot;-2&quot;
+            android:keyLabel=&quot;abc&quot;
+            android:horizontalGap=&quot;2%p&quot;&gt;
+
+        &lt;/Key&gt;
+        &lt;Key
+            android:codes=&quot;48&quot;
+            android:keyLabel=&quot;0&quot;
+            android:horizontalGap=&quot;2%p&quot;&gt;
+
+        &lt;/Key&gt;
+        &lt;Key
+            android:codes=&quot;-5&quot;
+            android:isRepeatable=&quot;true&quot;
+            android:keyIcon=&quot;@mipmap/ic_delete&quot;
+            android:horizontalGap=&quot;2%p&quot;&gt;
+
+        &lt;/Key&gt;
+    &lt;/Row&gt;
+&lt;/Keyboard&gt;
+</code></pre><h2 id="KeyboardView"><a href="#KeyboardView" class="headerlink" title="KeyboardView"></a>KeyboardView</h2><p>KeyboardView</p>
+<pre><code>android:keyBackground//键盘背景图
+android:keyPreviewLayout//键盘点击时候预览图的布局
+android:keyPreviewHeight//键盘点击时候预览图的高度
+android:keyTextColor//按键文字的颜色
+android:keyTextSize//按键文字大小
+android:labelTextSize//如果同时设置了文字+图片的按键
+android:shadowColor 
+android:shadowRadius
+</code></pre><p>代码</p>
+<pre><code>&lt;android.inputmethodservice.KeyboardView
+    android:id=&quot;@+id/kbv&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:background=&quot;#999999&quot;
+    android:focusable=&quot;true&quot;
+    android:focusableInTouchMode=&quot;true&quot;
+    android:keyBackground=&quot;@color/colorPrimaryDark&quot;
+    android:keyPreviewHeight=&quot;64dp&quot;
+    android:keyPreviewLayout=&quot;@layout/keyboard_preview&quot;
+    android:keyTextColor=&quot;@android:color/black&quot;
+    android:keyTextSize=&quot;24sp&quot;
+    android:labelTextSize=&quot;18sp&quot;
+    android:paddingTop=&quot;8dip&quot;
+    android:paddingBottom=&quot;8dip&quot;
+    android:shadowColor=&quot;#FFFFFF&quot;
+    android:shadowRadius=&quot;0.0&quot;
+    android:visibility=&quot;gone&quot;
+    /&gt;
+</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>设置</p>
+<pre><code>Keyboard keyboard = new Keyboard(this,R.xml.tea_keyboard_num);
+keyboardView.setKeyboard(keyboard);
+keyboardView.setPreviewEnabled(true);
+keyboardView.setOnKeyboardActionListener(onKeyboardActionListener);
+</code></pre><p>OnKeyboardActionListener</p>
+<pre><code>KeyboardView.OnKeyboardActionListener onKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() {
+    ......
+    @Override
+    public void onKey(int primaryCode, int[] keyCodes) {
+        if (primaryCode == Keyboard.KEYCODE_CANCEL) {// 完成
+
+        } else if (primaryCode == Keyboard.KEYCODE_DELETE) {//回退
+            Toast.makeText(BoardActivity.this,&quot;delete&quot;,Toast.LENGTH_SHORT).show();
+        } else if (primaryCode == Keyboard.KEYCODE_SHIFT) {//大小写切换
+
+        } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE) {//数字键盘切换
+
+        } else {
+
+        }
+    }
+};
+</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://github.com/onlyloveyd/LazyKeyboard" target="_blank" rel="noopener">https://github.com/onlyloveyd/LazyKeyboard</a></p>
+<p><a href="https://github.com/r17171709/android_demo/tree/master/KeyBoardDemo" target="_blank" rel="noopener">https://github.com/r17171709/android_demo/tree/master/KeyBoardDemo</a></p>
+
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="../../../../img/reward-alipay.jpg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="../../../../img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2019/01/07/5.移动web开发记录/" class="pre-post btn btn-default" title='移动web开发记录'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">移动web开发记录</span>
+        </a>
+    
+    
+        <a href="/2018/12/02/3.OkHttp基本使用及网络封装/" class="next-post btn btn-default" title='OkHttp基本使用及网络封装'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">OkHttp基本使用及网络封装</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Keyboard"><span class="toc-text">Keyboard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KeyboardView"><span class="toc-text">KeyboardView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>

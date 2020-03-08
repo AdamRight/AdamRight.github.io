@@ -1,0 +1,406 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>责任链模式 | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='John Doe'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 士不可以不弘毅，任重而道远 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Android/"><i class="fa "></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Web/"><i class="fa "></i>Web</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Java/"><i class="fa "></i>Java</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="责任链模式">
+            
+	            责任链模式
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Android">
+            Android
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/设计模式" title='设计模式'>
+                        设计模式
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/03/28</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>职责链模式(Chain of Responsibility Pattern，职责链模式)：避免请求发送者与接收者耦合在一起，让多个对象都有可能接收请求，将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。职责链模式是一种对象行为型模式。职责链模式结构的核心在于引入了一个抽象处理者。</p>
+<p>重点：上一个处理对象必须含有下一个处理对象的引用，形成一个单向链表。</p>
+<h2 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h2><ul>
+<li><p>Handler（抽象处理者）：定义一个处理请求的抽象类，由于不同的具体处理者处理请求的方式不同，因此在其中定义了抽象请求处理方法。因为每一个处理者的下家还是一个处理者，因此在抽象处理者中定义了一个抽象处理者类型的对象，作为其对下家的引用。通过该引用，处理者可以连成一条链。</p>
+</li>
+<li><p>ConcreteHandler（具体处理者）：它是抽象处理者的子类，可以处理用户请求，在处理请求之前需要进行判断，看是否有相应的处理权限，如果可以处理请求就处理它，否则将请求转发给后继者；在具体处理者中可以访问链中下一个对象，以便请求的转发。</p>
+</li>
+</ul>
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>安卓实例，比如，事件分发机制。在View、ViewGroup、Activity中都有机会处理OnTouchEvent请求。</p>
+<p>例子：主任、副董事长、董事长有不同的审批金额的权利，当超过自己额度审批范围，就像上级提交。</p>
+<pre><code>class Client {
+    public static void main(String[] args) {
+        ApproverHander little, middle, high;
+        little = new Director(&quot;张三&quot;);
+        middle = new VicePresident(&quot;李四&quot;);
+        high = new President(&quot;王五&quot;);
+
+        //创建职责链
+        little.setSuccessor(middle);
+        middle.setSuccessor(high);
+
+        //创建采购单
+        PurchaseRequest pr1 = new PurchaseRequest(45000);
+        little.processRequest(pr1);
+
+        PurchaseRequest pr2 = new PurchaseRequest(60000);
+        little.processRequest(pr2);
+
+        PurchaseRequest pr3 = new PurchaseRequest(160000);
+        little.processRequest(pr3);
+    }
+}
+
+//采购单：请求类
+class PurchaseRequest {
+    private double amount;  //采购金额
+
+    public PurchaseRequest(double amount) {
+        this.amount = amount;
+    }
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+    public double getAmount() {
+        return this.amount;
+    }
+}
+
+//审批者类：抽象处理者
+abstract class ApproverHander {
+
+    protected ApproverHander hander; //定义后继对象
+    protected String name; //审批者姓名
+
+    public ApproverHander(String name) {
+        this.name = name;
+    }
+    //设置后继者
+    public void setSuccessor(ApproverHander hander) {
+        this.hander = hander;
+    }
+    //抽象请求处理方法
+    public abstract void processRequest(PurchaseRequest request);
+}
+
+//主任类：具体处理者
+class Director extends ApproverHander {
+
+    public Director(String name) {
+        super(name);
+    }
+
+    //具体请求处理方法
+    public void processRequest(PurchaseRequest request) {
+        if (request.getAmount() &lt; 50000) {
+            System.out.println(&quot;主任&quot; + this.name + &quot;审批金额：&quot; + request.getAmount());  //处理请求
+        } else {
+            this.hander.processRequest(request);  //转发请求
+        }
+    }
+}
+
+//副董事长类：具体处理者
+class VicePresident extends ApproverHander {
+    public VicePresident(String name) {
+        super(name);
+    }
+
+    //具体请求处理方法
+    public void processRequest(PurchaseRequest request) {
+        if (request.getAmount() &lt; 100000) {
+            System.out.println(&quot;副董事长&quot; + this.name + &quot;审批金额：&quot; + request.getAmount());  //处理请求
+        } else {
+            this.hander.processRequest(request);  //转发请求
+        }
+    }
+}
+
+//董事长类：具体处理者
+class President extends ApproverHander {
+    public President(String name) {
+        super(name);
+    }
+
+    //具体请求处理方法
+    public void processRequest(PurchaseRequest request) {
+            System.out.println(&quot;董事长&quot; + this.name + &quot;审批金额：&quot; + request.getAmount());  //处理请求
+
+    }
+}    
+</code></pre><h2 id="和观察者模式区别"><a href="#和观察者模式区别" class="headerlink" title="和观察者模式区别"></a>和观察者模式区别</h2><p>受众数量不同。观察者广播链式可以 1:N 的方式广播，而责任链则要求是的 1:1 的传递，必然有一个且只有一个类完成请求的处理;</p>
+<p>请求内容不同。观察者广播链中的信息可以在传播中改变，但是责任链中的请求是不可改变的;</p>
+<p>处理逻辑不通。观察者广播链主要用于触发联动动作，而责任链则是对一个类型的请求按照既定的规 则进行处理。</p>
+
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="../../../../img/reward-alipay.jpg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="../../../../img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2019/04/03/13.Vue学习笔记/" class="pre-post btn btn-default" title='Vue学习笔记'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Vue学习笔记</span>
+        </a>
+    
+    
+        <a href="/2019/03/06/11.建造者模式/" class="next-post btn btn-default" title='建造者模式'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">建造者模式</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#角色"><span class="toc-text">角色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#场景"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#和观察者模式区别"><span class="toc-text">和观察者模式区别</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>

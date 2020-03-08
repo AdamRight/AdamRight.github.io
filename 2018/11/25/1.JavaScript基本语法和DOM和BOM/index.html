@@ -1,0 +1,905 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>JavaScript基本语法和DOM和BOM | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='John Doe'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 士不可以不弘毅，任重而道远 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Android/"><i class="fa "></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Web/"><i class="fa "></i>Web</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Java/"><i class="fa "></i>Java</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="JavaScript基本语法和DOM和BOM">
+            
+	            JavaScript基本语法和DOM和BOM
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Web">
+            Web
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/JavaScript" title='JavaScript'>
+                        JavaScript
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/11/25</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="JavaScript介绍"><a href="#JavaScript介绍" class="headerlink" title="JavaScript介绍"></a>JavaScript介绍</h2><p>js分为三个部分：ECMAScript标准（js的基本语法）、DOM（文档对象模型）、BOM（浏览器对象模型）。</p>
+<p>js是一种脚本语言，解释型语言。</p>
+<h2 id="JavaScript三种写法"><a href="#JavaScript三种写法" class="headerlink" title="JavaScript三种写法"></a>JavaScript三种写法</h2><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        alert(&quot;我是第一种写法&quot;);
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input type=&quot;button&quot; value=&quot;按钮&quot; onclick=&quot;alert(&apos;我是第二种写法&apos;)&quot;/&gt;
+    &lt;script language=&quot;JavaScript&quot; src=&quot;test.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>test.js</p>
+<pre><code>alert(&quot;我是第三种写法&quot;);
+</code></pre><h2 id="变量和数据类型"><a href="#变量和数据类型" class="headerlink" title="变量和数据类型"></a>变量和数据类型</h2><p>js中声明变量都用var，js中字符串可以使用单引号，也可以使用双引号。</p>
+<p>原始数据类型：</p>
+<pre><code>number、string、boolean、null、undefined、object
+</code></pre><p>获取变量的数据类型(注意，null获取的类型为object)</p>
+<pre><code>typeof 变量名;//或者
+typeof (变量名);
+</code></pre><p>判断是不是数字（不是数字返回true）</p>
+<pre><code>isNaN(变量名);
+</code></pre><p>判断字符串长度</p>
+<pre><code>字符串变量名.length
+</code></pre><p>其他类型转为数字，Number最严格</p>
+<pre><code>parseInt(&quot;10&quot;);
+parseFloat(&quot;10.02&quot;);
+Number(&quot;10&quot;);
+</code></pre><p>其他类型转为字符串</p>
+<pre><code>变量名.toString();//变量名一定要有意义
+String(变量名);
+</code></pre><p>其他类型转为布尔()</p>
+<pre><code>Boolean(变量);
+</code></pre><blockquote>
+<p>注意:<code>==</code>和<code>===</code>区别，<code>==</code>只进行值的比较，<code>===</code>对比值和类型。</p>
+</blockquote>
+<blockquote>
+<p>注意:运算符先后顺序，先<code>&amp;&amp;</code>，后<code>||</code>。</p>
+</blockquote>
+<h2 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h2><pre><code>if(条件){
+
+} else if(条件){
+
+} else {
+
+}
+</code></pre><h2 id="三元表达式"><a href="#三元表达式" class="headerlink" title="三元表达式"></a>三元表达式</h2><pre><code>var 变量 = 表达式1 ? 表达式2 : 表达式3;
+</code></pre><h2 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h2><pre><code>switch (表达式){
+    case 值1:
+        代码1;
+        break;
+    case 值2:
+        代码2;
+        break;
+    ...
+    default:
+        代码3;
+        break;
+}
+</code></pre><h2 id="while循环-有可能一次都不执行"><a href="#while循环-有可能一次都不执行" class="headerlink" title="while循环(有可能一次都不执行)"></a>while循环(有可能一次都不执行)</h2><pre><code>while(循环的条件){
+    循环体;
+    计数器++;
+}
+</code></pre><h2 id="do…while-至少执行一次"><a href="#do…while-至少执行一次" class="headerlink" title="do…while(至少执行一次)"></a>do…while(至少执行一次)</h2><pre><code>do{
+    //循环体
+}while(条件);
+</code></pre><h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><p>先执行表达式1，然后判断表达式2，如果不成立直接跳出循环。如果成立，执行循环体代码，结束后，跳到表达式3，然后判断表达式2。</p>
+<pre><code>for (表达式1; 表达式2; 表达式3) {
+    循环体;
+}
+
+for(var i = 0; i &lt; 10; i++){
+
+}
+</code></pre><h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><pre><code>alert();
+console.log();
+document.write(&quot;&quot;);
+</code></pre><p>代码调试</p>
+<p><img src="/2018/11/25/1.JavaScript基本语法和DOM和BOM/1.png" alt=""></p>
+<h2 id="break和continue"><a href="#break和continue" class="headerlink" title="break和continue"></a>break和continue</h2><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><pre><code>var arr1 = new Array();//空数组
+
+var arr2 = new Array(5);//长度为5，每个值是undefined
+
+var arr3 = [];//空数组
+
+var arr4 = new Array(10,20,40,55,35);//5个值
+
+var arr5 = [10,30,50,20,40];//5个值
+</code></pre><p>设置某个位置的值</p>
+<pre><code>数组名[下标] = 值;
+</code></pre><p>获取某个位置的值</p>
+<pre><code>var result = 数组名[下标];
+</code></pre><p>获取数组长度</p>
+<pre><code>数组名.length
+</code></pre><p>数组中存储的数据类型可以不一样。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>函数的定义</p>
+<pre><code>function 函数名(){
+    函数体
+}
+</code></pre><p>函数的调用</p>
+<pre><code>函数名();
+</code></pre><p>函数的参数</p>
+<pre><code>function 函数名(参数名){
+    函数体
+}
+</code></pre><blockquote>
+<p>注意:参数不需要定义var。形参指函数定义时小括号中的变量。实参指函数在调用时候小括号中传入的值。形参和实参个数可以不一致。</p>
+</blockquote>
+<p>函数的返回值</p>
+<pre><code>function getSum(x,y){
+    return x + y;
+}
+var result = getSum(10,30);
+</code></pre><p>函数的数据类型是function</p>
+<h2 id="arguments对象伪数组"><a href="#arguments对象伪数组" class="headerlink" title="arguments对象伪数组"></a>arguments对象伪数组</h2><p>arguments可以获取传入的每个参数的值</p>
+<pre><code>function f1(){
+    arguments.length;
+    console.log(arguments)
+}
+f1(10,20,30,50);
+</code></pre><h2 id="匿名函数（函数表达式）"><a href="#匿名函数（函数表达式）" class="headerlink" title="匿名函数（函数表达式）"></a>匿名函数（函数表达式）</h2><pre><code>var f1 = function (){
+    console.log(&quot;dsds&quot;);
+}
+//匿名函数不能直接调用
+f1();
+</code></pre><h2 id="函数的自调用（一次性）"><a href="#函数的自调用（一次性）" class="headerlink" title="函数的自调用（一次性）"></a>函数的自调用（一次性）</h2><pre><code>(function (){
+    console.log(&quot;ddddds&quot;);
+})();
+</code></pre><h2 id="函数作为参数（回调函数）"><a href="#函数作为参数（回调函数）" class="headerlink" title="函数作为参数（回调函数）"></a>函数作为参数（回调函数）</h2><p>注意f2不要加括号</p>
+<pre><code>function f1(fn){
+   fn();
+}
+function f2(){
+    console.log(&quot;原来这样&quot;);
+}
+f1(f2);
+</code></pre><h2 id="函数作为返回值"><a href="#函数作为返回值" class="headerlink" title="函数作为返回值"></a>函数作为返回值</h2><p>注意<code>ff();</code></p>
+<pre><code>function f1(){
+    console.log(&quot;原来&quot;);
+   return function (){
+       console.log(&quot;原来这样&quot;);
+   };
+}
+var ff = f1();
+ff();
+</code></pre><h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>全局变量：用var声明的。可以在页面的任何位置使用。页面不关闭，全局变量不会释放，会占空间，消耗内存。</p>
+<p>局部变量：函数function中定义的变量。外面不能使用。</p>
+<p>块级作用域：一对大括号中声明的变量。在js中，括号外面也能使用块级作用域中的变量。函数除外。</p>
+<p>全局作用域：全局变量的适用范围。</p>
+<p>局部作用域：局部变量的适用范围。</p>
+<p>隐式全局变量：声明变量没有用var。函数中声明的局部变量，函数外面不可以访问。函数中声明的隐式全局变量，函数外面可以访问。</p>
+<p>全局变量不能被删除，隐式全局变量可以被删除。使用var是不会被删除，没有var是可以删除。</p>
+<pre><code>var num1 = 10;
+num2 = 20;
+delete num1;
+delete num2;
+console.log(typeof num1);//number
+console.log(num1 + 10);//20
+console.log(typeof num2);//underfine
+</code></pre><h2 id="预解析"><a href="#预解析" class="headerlink" title="预解析"></a>预解析</h2><p>变量的声明和函数的声明被提前了。</p>
+<p>把变量的声明提前了。局部作用域中局部变量声明也会提前，只提前在局部作用域中。</p>
+<pre><code>console.log(num);//underfine
+var num = 10;
+</code></pre><p>函数的声明提前了。</p>
+<pre><code>f1();
+function f1(){
+    console.log(&quot;dd&quot;);//dd
+}
+</code></pre><blockquote>
+<p>注意：</p>
+</blockquote>
+<p>结果为<code>underfine</code></p>
+<pre><code>f1();
+var num = 20;
+function f1(){
+    console.log(num);//underfine
+}
+</code></pre><p>结果为20</p>
+<pre><code>var num = 20;
+function f1(){
+    console.log(num);//20
+}
+f1();
+</code></pre><p>结果为<code>underfine</code></p>
+<pre><code>var num = 20;
+function f1(){
+    console.log(num);//underfine
+    var num = 30;
+}
+f1();
+</code></pre><p>结果为一个报错，其余为9，因为b和c为隐式全局变量，a是局部变量。</p>
+<pre><code>f1();
+console.log(c);
+console.log(b);
+console.log(a);//报错
+function f1(){
+    var a = b = c = 9;
+    console.log(c);
+    console.log(b);
+    console.log(a);
+</code></pre><p>结果为<code>f1();</code>报错，预解析f1是变量，调用<code>f1();</code>报错。</p>
+<pre><code>f1();
+var f1 = function (){
+    console.log(a);
+    var a = 9;
+}
+</code></pre><h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p>1、调用系统的构造函数创建对象</p>
+<pre><code>var people = new Object();
+//添加属性
+people.name = &quot;小李&quot;;
+people.age = 18;
+//添加方法
+people.eat = function(){
+    console.log(&quot;吃&quot;);
+};
+//调用
+people.eat();
+</code></pre><p>获取变量或者对象属于什么类型</p>
+<pre><code>instanceof
+</code></pre><p>工厂模式创建对象</p>
+<pre><code>function createObject(name,age){
+    var obj = new Object();
+    obj.name = name;
+    obj.age = age;
+    obj.say = function (){
+      console.log(&quot;我叫&quot;+this.name+&quot;，今年&quot;+this.age);
+    };
+    return obj;
+}
+var person1 = createObject(&quot;小李&quot;,20);
+person1.say();
+</code></pre><p>2、自定义构造函数创建对象</p>
+<p>函数和构造函数区别，首字母是不是大写</p>
+<pre><code>function Person(name,age){
+    this.name = name;
+    this.age = age;
+    this.say = function (){
+        console.log(&quot;我叫&quot;+this.name+&quot;，今年&quot;+this.age);
+    };
+}
+var obj = new Person(&quot;小明&quot;,20);
+console.log(obj.age);
+obj.say();
+</code></pre><p>3、字面量的方式创建对象</p>
+<pre><code>var obj = {
+    name : &quot;jsop&quot;,
+    say : function (){
+        console.log(&quot;I am &quot; + this.name);
+    }
+};
+obj.say();
+</code></pre><h2 id="JSON格式的数据遍历"><a href="#JSON格式的数据遍历" class="headerlink" title="JSON格式的数据遍历"></a>JSON格式的数据遍历</h2><p>访问属性的另一种写法：<code>[&quot;&quot;]</code></p>
+<pre><code>var obj = {
+    name : &quot;jsop&quot;,
+    say : function (){
+        console.log(&quot;I am &quot; + this.name);
+    }
+};
+obj.say();
+</code></pre><p>遍历</p>
+<pre><code>var json = {
+    &quot;name&quot; : &quot;jsop&quot;,
+    &quot;age&quot; : 18
+};
+for(var key in json){
+    console.log(key);
+    console.log(json[key]);
+}
+</code></pre><h2 id="内置对象-系统提供的"><a href="#内置对象-系统提供的" class="headerlink" title="内置对象(系统提供的)"></a>内置对象(系统提供的)</h2><pre><code>https://developer.mozilla.org/zh-CN/
+</code></pre><p>Math</p>
+<pre><code>Math.random()//[0,1)范围
+</code></pre><p>Date</p>
+<pre><code>var dt = new Date();//当前时间
+console.log(dt.valueOf());//毫秒值
+</code></pre><p>String</p>
+<pre><code>.replace(&quot;原来的字符串&quot;,&quot;新的字符串&quot;);
+.slice(开始索引，结束索引)；//截取
+.split();//切割
+</code></pre><p>Array</p>
+<pre><code>.push(值);//给数组追加值，在最后添加，返回值是数组长度
+.unshift();//给数组追加值，在最前添加，返回值是数组长度
+.pop();//删除数组最后的值，返回删除的值
+.shift();//删除数组第一个的值，返回删除的值
+</code></pre><hr>
+<h2 id="DOM-文档对象模型"><a href="#DOM-文档对象模型" class="headerlink" title="DOM-文档对象模型"></a>DOM-文档对象模型</h2><p>文档：document</p>
+<p>元素element：页面中的每个标签，都是一个元素，每个元素都可以看成是一个对象。</p>
+<p>节点node：页面中所有的内容都是节点，包括标签，属性，文本。</p>
+<p>根元素：html标签。</p>
+<h2 id="获取元素对象"><a href="#获取元素对象" class="headerlink" title="获取元素对象"></a>获取元素对象</h2><p><code>document.getElementById(&quot;id&quot;)</code></p>
+<pre><code>&lt;body&gt;
+    &lt;input type=&quot;button&quot; value=&quot;显示&quot; id=&quot;btn&quot;&gt;
+&lt;script &gt;
+    document.getElementById(&quot;btn&quot;).onclick = function (){
+        alert(&quot;哈哈&quot;);
+    };
+&lt;/script&gt;
+&lt;/body&gt;
+</code></pre><p><code>document.getElementsByTagName(&quot;标签名&quot;)</code></p>
+<p>返回一个伪数组</p>
+<pre><code>var pObjs = document.getElementsByTagName(&quot;p&quot;)
+for (var i = 0; i &lt; pObjs.length;i++){
+    pObjs[i].innerText = &quot;哈哈哈&quot;;
+}
+</code></pre><p>和<code>document.getElementsByTagName</code>类似的有：<code>document.getElementsByName</code>获取的是<code>name</code>伪数组，<code>document.getElementsByClassName</code>获取的是<code>class</code>伪数组</p>
+<p><code>document.getElementsByTagName</code>–排他功能</p>
+<pre><code>&lt;input type=&quot;button&quot; value=&quot;显示&quot; &gt;
+&lt;input type=&quot;button&quot; value=&quot;显示&quot; &gt;
+&lt;input type=&quot;button&quot; value=&quot;显示&quot; &gt;
+&lt;input type=&quot;button&quot; value=&quot;显示&quot; &gt;
+&lt;input type=&quot;button&quot; value=&quot;显示&quot; &gt;
+&lt;input type=&quot;button&quot; value=&quot;显示&quot; &gt;
+&lt;script &gt;
+    var objs = document.getElementsByTagName(&quot;input&quot;)
+    for (var i = 0; i &lt; objs.length;i++){
+        objs[i].onclick = function () {
+            for (var j = 0; j &lt; objs.length;j++){
+                objs[j].value = &quot;显示&quot;;
+            }
+            this.value= &quot;点击&quot;;
+        };
+    }
+&lt;/script&gt;
+</code></pre><p>根据选择器的方式获取元素</p>
+<pre><code>&lt;input type=&quot;button&quot; value=&quot;show&quot; id=&quot;btn&quot; class=&quot;cls&quot;/&gt;
+&lt;script &gt;
+    document.querySelector(&quot;#btn&quot;).onclick = function(){
+      alert(&quot;哈哈&quot;);
+    };
+    var objs = document.querySelectorAll(&quot;cls&quot;);//伪数组
+&lt;/script&gt;
+</code></pre><p>小结</p>
+<pre><code>根据id属性的值获取元素，返回来的是一个元素对象document.getELementById(&quot;id属性的值&quot;);
+
+根据标签名字获取元素，返回来的是一个伪数组，里面保存了多个的DOM对象document.getELementsByTagName(&quot;标签名字&quot;);
+
+下面的几个，有的浏览器不支持
+
+根据name属性的值获取元素，返回来的是一个伪数组，里面保存了多个的DOM对象document.getELementsByName (&quot;name属性的值&quot;)
+
+根据类样式的名字来获取元素，返回来的是一个伪数组，里面保存了多个的DOM对象document.getELementsByClassName(&quot;类样式的名字&quot;)根据选择器获取元素，返回来的是一个元素对象document.querySelector( &quot;选择器的名字&quot;);
+</code></pre><h2 id="对象属性"><a href="#对象属性" class="headerlink" title="对象属性"></a>对象属性</h2><p><code>class</code>设置使用<code>className</code></p>
+<pre><code>document.getElementById(&quot;dd&quot;).className = &quot;cls&quot;;
+</code></pre><p>获取<code>body</code>、<code>title</code>、<code>html</code></p>
+<pre><code>document.body 
+document.title
+document.documentElement
+</code></pre><p>阻止超链接跳转</p>
+<pre><code>&lt;a href=&quot;http://www.baidu.com&quot; id=&quot;ak&quot;&gt;百度&lt;/a&gt;
+&lt;script &gt;
+    document.getElementById(&quot;ak&quot;).onclick = function (){
+        alert(&quot;哈啊哈&quot;);
+        return false;
+    };
+&lt;/script&gt;
+</code></pre><p>鼠标进入和离开</p>
+<pre><code>.onmouseover
+.onmouseout
+</code></pre><p>文本框获取焦点和失去焦点</p>
+<pre><code>.onfocus
+.onblur
+</code></pre><p>键盘弹起</p>
+<pre><code>.onkeyup
+</code></pre><p>获取输入框输入长度<code>value.length</code></p>
+<pre><code>&lt;input type=&quot;text&quot; value=&quot;&quot; id=&quot;txt&quot;/&gt;
+&lt;script &gt;
+    document.getElementById(&quot;txt&quot;).onblur = function(){
+      alert(this.value.length);
+    };
+&lt;/script&gt;
+</code></pre><h2 id="innerText和textContent、innerHTML"><a href="#innerText和textContent、innerHTML" class="headerlink" title="innerText和textContent、innerHTML"></a>innerText和textContent、innerHTML</h2><p>凡是成对的标签，设置文本内容，都使用<code>innerText</code>属性,同样，获取文本内容是<code>.innerText</code>。</p>
+<pre><code>document.getElementById(&quot;p1&quot;).innerText=&quot;这是设置文本p&quot;;
+</code></pre><p>单数不兼容。innerText：谷歌，火狐支持，IE8不支持；textContent：谷歌，火狐，IE8都支持。</p>
+<p>封装</p>
+<pre><code>//设置
+function setInnerText(element,text){
+    if(typeof element.textContent == &quot;underfined&quot;){//不支持
+        element.innerText = text;
+    } else{//支持
+        lement.textContent = text;
+    }
+}
+//获取
+function getInnerText(element){
+    if(typeof element.textContent == &quot;underfined&quot;) {//不支持
+        return element.innerText;
+    } else{//支持
+        return element.textContent;
+    }
+}
+</code></pre><p>innerText和innerHTML都可以设置设置文本，innerHTML还可以设置标签。</p>
+<p>innerText可以获取标签中的文本，但是标签中还有标签，那么最里面的标签文本内容也能获取。innerHTML可以获取标签中的所有文本，包括标签。</p>
+<pre><code>.innerHTML = &quot;haha&quot;;
+.innerHTML = &quot;&lt;p&gt;这是p&lt;/p&gt;&gt;&quot;;
+</code></pre><h2 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h2><p>自定义属性获取：getAttribute。自定义属性动态设置：setAttribute</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;style&gt;
+        ul{
+            list-style: none;
+            cursor: pointer;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;ul&gt;
+        &lt;li&gt;张三&lt;/li&gt;
+        &lt;li&gt;李四&lt;/li&gt;
+        &lt;li&gt;王五&lt;/li&gt;
+        &lt;li&gt;赵六&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;script &gt;
+        var list = document.getElementsByTagName(&quot;li&quot;);
+        for(var i = 0; i &lt; list.length; i ++){
+            list[i].setAttribute(&quot;score&quot;,(i+1)*10);
+            list[i].onclick = function(){
+              alert(this.getAttribute(&quot;score&quot;));
+            };
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>移除自定义属性</p>
+<pre><code>.removeAttribute(&quot;name&quot;)
+</code></pre><p>移除class</p>
+<pre><code>.removeAttribute(&quot;class&quot;);
+</code></pre><p>设置<code>backgroundImage</code></p>
+<pre><code>.style.backgroundImage = &quot;url(&quot; + src + &quot;)&quot;;
+</code></pre><h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><p>节点的类型</p>
+<pre><code>nodeType:1、标签，2、属性，3、文本。
+</code></pre><p>节点的名字</p>
+<pre><code>nodeName:标签节点：大写的标签名字；属性节点：小写的属性名字；文本节点：#text
+</code></pre><p>节点的值</p>
+<pre><code>nodeValue:标签节点：null;属性节点：属性值；文本节点：文本内容。
+</code></pre><p>获取父节点和父元素</p>
+<pre><code>.parentNode
+.parentElement
+</code></pre><p>子节点和子元素</p>
+<pre><code>.childNodes
+.children
+</code></pre><p>第一个子节点和子元素</p>
+<pre><code>.firstChild//IE8是元素
+.firstElementChild//IE8不支持
+</code></pre><p>最后一个子节点和子元素</p>
+<pre><code>.lastChild//IE8是元素
+.lastElementChild//IE8不支持
+</code></pre><p>某元素的前一个兄弟节点和元素</p>
+<pre><code>.previousSibling//IE8是元素
+.previousElementSlbling//IE8不支持
+</code></pre><p>某元素的后一个兄弟节点和元素</p>
+<pre><code>.nextSibling//IE8是元素
+.nextElementSlbling//IE8不支持
+</code></pre><p>获取节点</p>
+<pre><code>.getAttributeNode(&quot;属性名&quot;);
+</code></pre><h2 id="元素的创建"><a href="#元素的创建" class="headerlink" title="元素的创建"></a>元素的创建</h2><p>三种方式</p>
+<p>1、<code>document.write(&quot;标签的代码及内容&quot;)</code></p>
+<p>缺陷：如果是在页面加载完毕后，通过这种方式创建的，页面上存在的所有的内容全部被干掉。</p>
+<p>2、<code>对象.innerHTML = &quot;标签及代码&quot;</code></p>
+<p>3、<code>document.createElement(&quot;标签的名字&quot;)</code></p>
+<p>注意：要追加到父级元素，appendChild</p>
+<pre><code>&lt;input type=&quot;button&quot; value=&quot;追加&quot; id=&quot;btn&quot;/&gt;
+&lt;div id=&quot;dv&quot;&gt;&lt;/div&gt;
+&lt;script &gt;
+    document.getElementById(&quot;btn&quot;).onclick = function (){
+        var pObj = document.createElement(&quot;P&quot;);
+        pObj.innerText = &quot;这是p&quot;;
+        document.getElementById(&quot;dv&quot;).appendChild(pObj);
+    };
+&lt;/script&gt;
+</code></pre><p>把新的子元素插到第一个子元素前面</p>
+<pre><code>.insertBefore(新元素，旧元素);
+</code></pre><p>移除父级元素中的第一个元素</p>
+<pre><code>.removeChild(父元素对象.firstElementChild);
+</code></pre><p>移除父级元素中的所有元素</p>
+<pre><code>while(父元素对象.firstElementChild){
+    .removeChild(父元素对象.firstElementChild);
+}
+</code></pre><p><code>createElement</code>只创建一个元素</p>
+<pre><code>&lt;input type=&quot;button&quot; value=&quot;追加&quot; id=&quot;btn&quot;/&gt;
+&lt;div id=&quot;dv&quot;&gt;&lt;/div&gt;
+&lt;script &gt;
+    document.getElementById(&quot;btn&quot;).onclick = function (){
+        if(!document.getElementById(&quot;dv&quot;).firstElementChild){
+            var pObj = document.createElement(&quot;P&quot;);
+            pObj.innerText = &quot;这是p&quot;;
+            document.getElementById(&quot;dv&quot;).appendChild(pObj);
+        }
+    };
+&lt;/script&gt;
+</code></pre><h2 id="元素绑定多个事件-addEventListener和-attachEvent"><a href="#元素绑定多个事件-addEventListener和-attachEvent" class="headerlink" title="元素绑定多个事件.addEventListener和.attachEvent"></a>元素绑定多个事件<code>.addEventListener</code>和<code>.attachEvent</code></h2><pre><code>&lt;input type=&quot;button&quot; value=&quot;多个事件&quot; id=&quot;btn&quot;/&gt;
+&lt;script &gt;
+    document.getElementById(&quot;btn&quot;).addEventListener(&quot;click&quot;,function(){
+        console.log(&quot;哈哈&quot;);
+    },false);
+    document.getElementById(&quot;btn&quot;).addEventListener(&quot;click&quot;,function(){
+        console.log(&quot;嘻嘻&quot;);
+    },false);
+&lt;/script&gt;
+</code></pre><p>兼容性<code>.addEventListener</code>支持谷歌火狐，<code>.attachEvent</code>支持IE</p>
+<pre><code>function commonAddEventListener(element,type,fn){
+    if(element.addEventListener()){
+        element.addEventListener(type,fn,false);
+    } else if (element.attachEvent()){
+        element.attachEvent(&quot;on&quot; + type,fn);
+    } else{
+        element[&quot;on&quot; + type] = fn;
+    }
+}
+</code></pre><p><code>addEventListener</code>和<code>attachEvent</code>都可以为元素绑定事件。它们的不同点有：参数个数不一样；<code>addEventListener</code>中事件类型没有<code>on</code>,<code>attachEvent</code>中事件类型有<code>on</code>;<code>addEventListener</code>中<code>this</code>指当前绑定的事件，<code>attachEvent</code>中<code>this</code>指<code>window</code>。</p>
+<h2 id="元素解绑事件"><a href="#元素解绑事件" class="headerlink" title="元素解绑事件"></a>元素解绑事件</h2><p>解绑<code>onclick</code>、<code>addEventListener</code>、<code>attachEvent</code></p>
+<pre><code>.onclick = null;
+.removeEventListener(&quot;click&quot;,&quot;解绑函数名&quot;,false);
+.detachEvent(&quot;onclick&quot;,&quot;解绑函数名&quot;);
+</code></pre><h2 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h2><p>指多个元素嵌套，有层次关系，这些元素都注册了相同事件，如果里面的元素事件触发了，那么外面的元素的该事件自动的触发了。</p>
+<p>阻止事件冒泡</p>
+<pre><code>window.event.cancelBubble = true;//谷歌和IE支持，火狐不支持
+window.event.stopPropagation();//谷歌和火狐支持，IE不支持
+</code></pre><h2 id="事件的三个阶段"><a href="#事件的三个阶段" class="headerlink" title="事件的三个阶段"></a>事件的三个阶段</h2><p><code>addEventListener</code>第三个参数控制事件阶段的。</p>
+<p>1、事件的捕获阶段，从外向内。</p>
+<p>2、事件的目标阶段，</p>
+<pre><code>.eventPhase
+</code></pre><p>3、事件的冒泡阶段，从内向外。</p>
+<p>为同一个元素绑定多个不同事件，指定的是同一个事件处理函数</p>
+<pre><code>.onclick = f;
+.onmouseover = f;
+.onmouseout = f;
+function f (e){
+    switch (e.type){
+        case &quot;click&quot;:
+            break;
+        case &quot;mouseover&quot;:
+            break;
+        case &quot;mouseout&quot;:
+            break;
+    }
+}
+</code></pre><h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><p>浏览器对象模型。</p>
+<p>window:浏览器的顶级对象；</p>
+<p>document:页面中的顶级对象。</p>
+<p>页面中的所用内容都是属于浏览器的，页面中的内容也都是window的。</p>
+<pre><code>alert()
+prompt()
+confirm()
+</code></pre><h2 id="onload"><a href="#onload" class="headerlink" title="onload"></a>onload</h2><p><code>onload</code>使用</p>
+<pre><code>window.onload = function(){
+    document.getElementById(&quot;btn&quot;).onclick = function (){
+
+    };
+};
+</code></pre><p><code>onunload</code>页面关闭后触发的事件；<code>onbeforeunload</code>页面关闭前触发的事件(IE8支持)。</p>
+<h2 id="location"><a href="#location" class="headerlink" title="location"></a>location</h2><p>属性</p>
+<pre><code>window.location.hash//#及后面内容
+window.location.host//主机名及端口号
+window.location.hostname//主机名
+window.location.pathname//路径
+window.location.port//端口号
+window.location.protocol//协议，http
+window.location.search//？及后面内容
+</code></pre><p>方法</p>
+<pre><code>window.location.href = &quot;设置跳转页面地址&quot;;//可后退
+window.location.assign(&quot;设置跳转页面地址&quot;);//可后退
+window.location.reload();//刷新，重新加载
+window.location.replace(&quot;设置跳转页面地址&quot;);//不可后退
+</code></pre><h2 id="history"><a href="#history" class="headerlink" title="history"></a>history</h2><pre><code>window.history.back();
+window.history.forward();
+window.history.go();//整数和负数代表前进和后退
+</code></pre><h2 id="navigator"><a href="#navigator" class="headerlink" title="navigator"></a>navigator</h2><pre><code>window.navigator.platform//判断浏览器所在的系统平台类型
+window.navigator.userAgent
+</code></pre><h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><p>反复执行</p>
+<pre><code>var timeId = window.setInterval(function(){},1000);//设置定时
+window.clearInterval(timeId);//停止定时
+</code></pre><p>一次性定时器</p>
+<pre><code>var timeId = window.setTimeout(function(){},1000);
+clearTimeout(timeId);//清除定时缓存空间
+</code></pre><h2 id="offset"><a href="#offset" class="headerlink" title="offset"></a>offset</h2><p>获取元素的宽和高（包含边框）</p>
+<pre><code>.offsetWidth;//数字类型，没有px
+.offsetHeight;
+</code></pre><p>获取元素的left和top，</p>
+<pre><code>.offsetLeft;
+.offsetTop;
+</code></pre><p>注意：</p>
+<p>没有脱离文档流时，和父级元素的margin、padding、border，自己的margin，有关系。脱离文档流时，和自己的margin、left，有关系。</p>
+<h2 id="scroll"><a href="#scroll" class="headerlink" title="scroll"></a>scroll</h2><p>元素中内容实际的宽和高，不包含边框，没有内容，就是宽高</p>
+<pre><code>.scrollWidth;
+.scrollHeight;
+</code></pre><p>向左或者向上卷曲出去的距离</p>
+<pre><code>.scrollLeft;
+.scrollTop;
+</code></pre><p>滚动事件</p>
+<pre><code>.onscroll
+</code></pre><p>滚动距离计算</p>
+<pre><code>var top = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+var left = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+</code></pre><h2 id="client"><a href="#client" class="headerlink" title="client"></a>client</h2><p>可视区域（没有边框）边框内的宽高</p>
+<pre><code>.clientWidth;
+.clientHeight;
+</code></pre><p>左边框和上边框的宽度</p>
+<pre><code>.clientLeft;
+.clientTop;
+</code></pre><h2 id="获取元素的样式属性值"><a href="#获取元素的样式属性值" class="headerlink" title="获取元素的样式属性值"></a>获取元素的样式属性值</h2><pre><code>window.getComputedStyle(元素对象,null).属性;//谷歌，火狐
+元素对象.currentStyle.属性;//IE8
+</code></pre><p>兼容代码</p>
+<pre><code>function getStyle(element,attr){
+   if(window.getComputedStyle){
+       return window.getComputedStyle(element,attr)[attr];//谷歌，火狐
+   } else{
+       return element.currentStyle[attr];
+   }
+}
+</code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>透明度</p>
+<pre><code>.style.opacity = 
+</code></pre>
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="../../../../img/reward-alipay.jpg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="../../../../img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2018/12/01/2.html和css基础/" class="pre-post btn btn-default" title='HTML和CSS基础'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">HTML和CSS基础</span>
+        </a>
+    
+    
+</div>
+
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript介绍"><span class="toc-text">JavaScript介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript三种写法"><span class="toc-text">JavaScript三种写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量和数据类型"><span class="toc-text">变量和数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三元表达式"><span class="toc-text">三元表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#switch语句"><span class="toc-text">switch语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#while循环-有可能一次都不执行"><span class="toc-text">while循环(有可能一次都不执行)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#do…while-至少执行一次"><span class="toc-text">do…while(至少执行一次)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试"><span class="toc-text">调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#break和continue"><span class="toc-text">break和continue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#arguments对象伪数组"><span class="toc-text">arguments对象伪数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名函数（函数表达式）"><span class="toc-text">匿名函数（函数表达式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数的自调用（一次性）"><span class="toc-text">函数的自调用（一次性）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作为参数（回调函数）"><span class="toc-text">函数作为参数（回调函数）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作为返回值"><span class="toc-text">函数作为返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预解析"><span class="toc-text">预解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON格式的数据遍历"><span class="toc-text">JSON格式的数据遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置对象-系统提供的"><span class="toc-text">内置对象(系统提供的)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-文档对象模型"><span class="toc-text">DOM-文档对象模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取元素对象"><span class="toc-text">获取元素对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象属性"><span class="toc-text">对象属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#innerText和textContent、innerHTML"><span class="toc-text">innerText和textContent、innerHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义属性"><span class="toc-text">自定义属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节点"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素的创建"><span class="toc-text">元素的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素绑定多个事件-addEventListener和-attachEvent"><span class="toc-text">元素绑定多个事件.addEventListener和.attachEvent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素解绑事件"><span class="toc-text">元素解绑事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件冒泡"><span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件的三个阶段"><span class="toc-text">事件的三个阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BOM"><span class="toc-text">BOM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#onload"><span class="toc-text">onload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location"><span class="toc-text">location</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#history"><span class="toc-text">history</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#navigator"><span class="toc-text">navigator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定时器"><span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#offset"><span class="toc-text">offset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scroll"><span class="toc-text">scroll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#client"><span class="toc-text">client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取元素的样式属性值"><span class="toc-text">获取元素的样式属性值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>

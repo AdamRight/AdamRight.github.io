@@ -1,0 +1,369 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>JNI入门 | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='John Doe'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 士不可以不弘毅，任重而道远 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Android/"><i class="fa "></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Web/"><i class="fa "></i>Web</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Java/"><i class="fa "></i>Java</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="JNI入门">
+            
+	            JNI入门
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Android">
+            Android
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/JNI" title='JNI'>
+                        JNI
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2020/03/07</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>JNI含义:<code>java native interface</code></p>
+<p>JNI好处:</p>
+<p>1、JNI可以扩展java虚拟机的能力，让java代码可以调用驱动</p>
+<p>2、C/C++的效率要高，通过jni把耗时操作方法C/C++可以提高java运行效率</p>
+<p>3、java代码编译成的<code>.class</code>文件安全性较差, 可以通过jni把重要的业务逻辑放到c/c++去实现,c/c++反编译比较困难,安全性较高.</p>
+<h2 id="C基本语法"><a href="#C基本语法" class="headerlink" title="C基本语法"></a>C基本语法</h2><h3 id="1、C的基本数据类型"><a href="#1、C的基本数据类型" class="headerlink" title="1、C的基本数据类型"></a>1、C的基本数据类型</h3><p>java基本数据类型:boolean(1个字节),byte(1),char(2),short(2),int(4),long(8),float(4),double(8)  </p>
+<p>C的基本数据类型:char(1个字节), int(4), float(4), double(8), long(4), short(2), signed, unsigned, void</p>
+<p>signed:有符号数,可以表示负数;unsigned:无符号数,不可以表示负数。signed和unsigned只能用来修饰整形变量char、short、int、long。</p>
+<p>C没有boolean和byte，C用0和非0表示false和true。</p>
+<h3 id="2、占位符和字符串"><a href="#2、占位符和字符串" class="headerlink" title="2、占位符和字符串"></a>2、占位符和字符串</h3><p>占位符：</p>
+<pre><code>%d  -  int
+%ld – long int
+%lld - long long
+%hd – short
+%c  - char
+%f -  float
+%lf – double
+%u – 无符号数
+%x – 十六进制输出 int 或者long int 或者short int
+%o -  八进制输出
+%s – 字符串
+</code></pre><blockquote>
+<p>占位符不要乱用,要选择正确的对应类型,否则可能会损失精度。</p>
+</blockquote>
+<p>C没有String类型,C的字符串实际就是字符数组。C字符串两种定义方式：</p>
+<pre><code>//注意&apos;\0&apos;字符串结束符, []只能再变量名之后
+char str[] = {&apos;q&apos;,&apos;w&apos;,&apos;e&apos;,&apos;r&apos;,&apos;t&apos;,&apos;\0&apos;};
+
+//这种定义方式不用写结束符,可以表示汉字
+char str[] = &quot;你好&quot;; 
+</code></pre><blockquote>
+<p>C字符串不检查下标越界,使用时要注意。</p>
+</blockquote>
+<p>C的控制台输入</p>
+<pre><code>scanf(&quot;占位符&quot;, &amp;地址);//&amp; 取地址符
+</code></pre><h3 id="3、内存地址的概念"><a href="#3、内存地址的概念" class="headerlink" title="3、内存地址的概念"></a>3、内存地址的概念</h3><p>声明一个变量,就会立即为这个变量申请内存,一定会有一个对应的内存地址；没有地址的内存是无法使用的；内存的每一个字节都有一个对应的地址；内存地址用一个16进制数来表示；32位操作系统最大可以支持4G内存。</p>
+<h3 id="4、指针"><a href="#4、指针" class="headerlink" title="4、指针"></a>4、指针</h3><pre><code>int i = 123;
+//一般计算机中用16进制数来表示一个内存地址 
+printf(&quot;%#x\n&quot;,&amp;i); 
+//int* int类型的指针变量  pointer指针  指针变量只能用来保存内存地址
+//用取地址符&amp;i 把变量i的地址取出来 用指针变量pointer 保存了起来
+//此时我们可以说 指针pointer指向了 i的地址 
+int* pointer = &amp;i;   
+printf(&quot;pointer的值 = %#x\n&quot;,pointer);
+printf(&quot;*pointer的值%d\n&quot;,*pointer);
+*pointer = 456;
+printf(&quot;i的值是%d\n&quot;,i);
+system(&quot;pause&quot;); 
+</code></pre><p>未赋值的指针称为野指针。</p>
+<h3 id="5、指针交换两个数的值"><a href="#5、指针交换两个数的值" class="headerlink" title="5、指针交换两个数的值"></a>5、指针交换两个数的值</h3><p>所有传递其实本质都是值传递，引用传递本质是把地址传递过去，引用传递其实也是传递一个值，但是这个值是一个内存地址。</p>
+<pre><code>void swap(int* p, int* p2){
+    int temp = *p;
+    *p = *p2;
+    *p2 = temp;    
+}
+</code></pre><h3 id="6、数组和指针的关系"><a href="#6、数组和指针的关系" class="headerlink" title="6、数组和指针的关系"></a>6、数组和指针的关系</h3><p><strong>数组占用的内存空间是连续的</strong></p>
+<blockquote>
+<p>数组变量保存的地址，是第0个元素地址，也就是首地址。<code>&amp;array</code>和<code>&amp;array[0]</code>值一样。</p>
+</blockquote>
+<blockquote>
+<p><code>*(p + 1)</code>:指针位移一个单位，一个单位是多少个字节，取决于指针的类型。</p>
+</blockquote>
+<h3 id="7、指针的长度"><a href="#7、指针的长度" class="headerlink" title="7、指针的长度"></a>7、指针的长度</h3><p>不管变量的类型是什么，它的内存地址的长度一定是相同的；类型不同只决定变量占用的内存空间不同；32位环境下，内存地址长度都是4个字节，64位环境下，内存地址长度都是8个字节。</p>
+<h3 id="8、多级指针"><a href="#8、多级指针" class="headerlink" title="8、多级指针"></a>8、多级指针</h3><ul>
+<li>int* p; int 类型的一级指针 int** p2; int 类型的二级指针 </li>
+<li>二级指针变量只能保存一级指针变量的地址</li>
+<li>有几个<em> 就是几级指针 int**</em> 三级指针</li>
+<li><p>通过int类型三级指针 操作int类型变量的值 ***p</p>
+<pre><code>int i = 123;
+//int类型一级指针 
+int* p = &amp;i;
+//int 类型 二级指针 二级指针只能保存一级指针的地址 
+int** p2 = &amp;p;
+//int 类型 三级指针  三级指针只能保存二级指针的地址 
+int*** p3 = &amp;p2;
+//通过p3 取出 i的值
+printf(&quot;***p3 = %d\n&quot;, ***p3);
+</code></pre></li>
+<li><p>多级指针案例 取出子函数中临时变量的地址</p>
+</li>
+</ul>
+
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="../../../../img/reward-alipay.jpg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="../../../../img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2020/01/04/32.Android自定义控件入门与实战/" class="next-post btn btn-default" title='Android自定义控件入门与实战-读书笔记'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Android自定义控件入门与实战-读书笔记</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C基本语法"><span class="toc-text">C基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、C的基本数据类型"><span class="toc-text">1、C的基本数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、占位符和字符串"><span class="toc-text">2、占位符和字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、内存地址的概念"><span class="toc-text">3、内存地址的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、指针"><span class="toc-text">4、指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、指针交换两个数的值"><span class="toc-text">5、指针交换两个数的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、数组和指针的关系"><span class="toc-text">6、数组和指针的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、指针的长度"><span class="toc-text">7、指针的长度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、多级指针"><span class="toc-text">8、多级指针</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>

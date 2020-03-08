@@ -1,0 +1,415 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>手写实现Butterknife | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='John Doe'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 士不可以不弘毅，任重而道远 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Android/"><i class="fa "></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Web/"><i class="fa "></i>Web</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Java/"><i class="fa "></i>Java</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="手写实现Butterknife">
+            
+	            手写实现Butterknife
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Android">
+            Android
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/源码分析" title='源码分析'>
+                        源码分析
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/06/29</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Butterknife源码地址</p>
+<pre><code>https://github.com/JakeWharton/butterknife
+</code></pre><p>引入</p>
+<pre><code>implementation &apos;com.jakewharton:butterknife:8.5.1&apos;
+annotationProcessor &apos;com.jakewharton:butterknife-compiler:8.5.1&apos;
+</code></pre><p>主要是解决掉findViewById、setOnclick 、资源的注入等。反射造成大量的临时文件，造成gc，影响性能。<strong>而Butterknife采用编译时注解，即用APT mirror生成代码。</strong></p>
+<p>ButterKnife的工作原理:</p>
+<p>声明的注解的生命周期为CLASS。继承AbstractProcessor类，再调用AbstractProcessor的process方法。</p>
+<p>编译的时候扫描注解，调用javapoet库，生成java代码。</p>
+<p>调用<code>ButterKnife.bind(this);</code>方法的时候，将ID与对应的上下文绑定在一起。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>发现编译后生成<code>类名_ViewBinding</code>，那么我们手动实现Butterknife，先写下伪代码：</p>
+<p>新建<code>类名_ViewBinding</code>：</p>
+<pre><code>public class ButterknifeActivity_ViewBinding {
+
+    private ButterknifeActivity target;
+
+    @UiThread
+    public ButterknifeActivity_ViewBinding(ButterknifeActivity target) {
+        this.target = target;
+        target.textView = target.findViewById(R.id.tv);
+    }
+
+    @CallSuper
+    public void unbind() {
+        ButterknifeActivity target = this.target;
+        if (target == null) throw new IllegalStateException(&quot;Bindings already cleared.&quot;);
+        this.target = null;
+        target.textView = null;
+    }
+}
+</code></pre><p>在Activity中不需要再findViewById：</p>
+<pre><code>public class ButterknifeActivity extends AppCompatActivity {
+    public TextView textView;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_butterknife);
+
+        ButterknifeActivity_ViewBinding viewBinding = new ButterknifeActivity_ViewBinding(this);
+        textView.setText(&quot;我是伪代码&quot;);
+    }
+}
+</code></pre><p>所以，我们的思路就是用APT实现伪代码，就实现了手写Butterknife。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="前奏"><a href="#前奏" class="headerlink" title="前奏"></a>前奏</h3><p>新建Module-Library</p>
+<pre><code>Android Library:butterknife
+Java Library:butterknife-annotations(运行时的注解)和butterknife-compiler(编译，生成代码)
+</code></pre><p>配置</p>
+<p>app的build中引入</p>
+<pre><code>implementation project(&apos;:butterknife-annotations&apos;)
+implementation project(&apos;:butterknife&apos;)
+annotationProcessor project(&apos;:butterknife-compiler&apos;)
+</code></pre><p>butterknife-compiler中引入</p>
+<pre><code>implementation &apos;com.google.auto.service:auto-service:1.0-rc3&apos;//注解
+implementation &apos;com.squareup:javapoet:1.8.0&apos;//生成代码文件
+implementation project(&apos;:butterknife-annotations&apos;)//依赖butterknife-annotations
+</code></pre><blockquote>
+<p>注解处理器是（Annotation Processor）是javac的一个工具，用来在编译时扫描和编译和处理注解（Annotation）。在编译时把标记了注解的类，变量等作为输入内容，经过注解处理器处理，生成想要生成的java代码。处理器都是继承于<code>AbstractProcessor</code>。</p>
+</blockquote>
+<blockquote>
+<p>APT(Annotation Processing Tool)是一种处理注解的工具,它对源代码文件进行检测找出其中的Annotation，根据注解自动生成代码。 </p>
+</blockquote>
+<blockquote>
+<p>注解处理器在处理Annotation时可以根据源文件中的Annotation生成额外的源文件和其它的文件(文件具体内容由Annotation处理器的编写者决定),APT还会编译生成的源文件和原来的源文件，将它们一起生成class文件。</p>
+</blockquote>
+<pre><code>@AutoService(Processor.class)
+public class ButterKnifeProcessor extends AbstractProcessor {
+
+    @Override
+    public synchronized void init(ProcessingEnvironment processingEnvironment) {
+        //先进init
+    }
+
+    //用来指定支持的 SourceVersion
+    @Override
+    public SourceVersion getSupportedSourceVersion() {
+        return SourceVersion.latestSupported();
+    }
+
+    //用来指定支持的 AnnotationTypes
+    @Override
+    public Set&lt;String&gt; getSupportedAnnotationTypes() {
+        Set&lt;String&gt; types = new LinkedHashSet&lt;&gt;();
+        for (Class&lt;? extends Annotation&gt; annotation : getSupportedAnnotations()) {
+            types.add(annotation.getCanonicalName());
+        }
+        return types;
+    }
+
+    //绑定哪些注解
+    private Set&lt;Class&lt;? extends Annotation&gt;&gt; getSupportedAnnotations() {
+        Set&lt;Class&lt;? extends Annotation&gt;&gt; annotations = new LinkedHashSet&lt;&gt;();
+        annotations.add(BindView.class);
+        return annotations;
+    }
+
+    //编译时候执行,核心方法，有注解就都会进来这个方法，可以扫描，处理注解等，并且可以生成java代码。
+    @Override
+    public boolean process(Set&lt;? extends TypeElement&gt; set, RoundEnvironment roundEnvironment) {
+        return false;
+    }
+}
+</code></pre><p>APT流程：编译开始 → 拿到元素(添加指定的注解元素) → 处理分解元素以及注解信息 → 通过JAVAPOET拼装生成Java文件 → 交给编译器。</p>
+<p>AbstractProcessor中的init方法中的参数ProcessingEnvironment</p>
+<pre><code>public interface ProcessingEnvironment {
+    Map&lt;String, String&gt; getOptions();
+    Messager getMessager();
+    Filer getFiler();
+    Elements getElementUtils();
+    Types getTypeUtils();
+    SourceVersion getSourceVersion();
+    Locale getLocale();
+}
+</code></pre><p>ProcessingEnvironment提供了一些工具类，Filer用于创建文件，Elements获取所有源文件元素，Types获取源代码类型信息。</p>
+<h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><p>唯一使用反射的地方：</p>
+<p>不在class中写入</p>
+<pre><code>Class_ViewBinding viewBinding = new Class_ViewBinding(this);
+</code></pre><p>而是通过</p>
+<pre><code>ButterKnife.bind(this)//中对Class_ViewBinding进行有参构造反射
+</code></pre><h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><p>生成的类在/build/generated/source/apt/base/包名/ClassName_ViewBinding类。</p>
+<p>代码</p>
+<pre><code>https://github.com/AdamRight/TeaTool/tree/master/app/src/main/java/com/tea/teatool/teabutterknife
+https://github.com/AdamRight/TeaTool
+</code></pre>
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="../../../../img/reward-alipay.jpg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="../../../../img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2019/07/01/27.RecyclerView/" class="pre-post btn btn-default" title='RecyclerView'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">RecyclerView</span>
+        </a>
+    
+    
+        <a href="/2019/06/11/24.handler源码分析及手写handler/" class="next-post btn btn-default" title='handler源码分析及手写handler'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">handler源码分析及手写handler</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前奏"><span class="toc-text">前奏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反射"><span class="toc-text">反射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-1"><span class="toc-text">实现</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>工厂模式三兄弟 | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='John Doe'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 士不可以不弘毅，任重而道远 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Android/"><i class="fa "></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Web/"><i class="fa "></i>Web</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Java/"><i class="fa "></i>Java</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="工厂模式三兄弟">
+            
+	            工厂模式三兄弟
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Android">
+            Android
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/设计模式" title='设计模式'>
+                        设计模式
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/03/01</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h2><p>简单工厂模式：提供专门的工厂类用于创建对象，将对象的创建和对象的使用分离开。客户端只知道传入工厂类的参数，不需要关心具体的实现。它不属于GoF23种设计模式，但在软件开发中应用也较为频繁。</p>
+<p>实例</p>
+<pre><code>Bitmap bitmap = BitmapFatory.deresources(res,id);
+</code></pre><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>使用简单工厂模式设计一个可以创建圆形、方形和三角形的绘图工具。</p>
+<pre><code>//抽象类 
+public interface IPain {
+    void draw();
+}
+
+//具体产品类
+class Triangle implements IPain {
+    @Override
+    public void draw() {
+        System.out.println(&quot;画出三角形&quot;);
+    }
+}
+
+class Square implements IPain {
+    @Override
+    public void draw() {
+        System.out.println(&quot;画出正方形&quot;);
+    }
+}
+
+class Circle implements IPain {
+    @Override
+    public void draw() {
+        System.out.println(&quot;画出圆形&quot;);
+    }
+}
+//工厂类
+public class PainFactory {
+    //静态工厂方法
+    public static IPain create(int type){
+        switch (type) {
+        case 1:
+            return new Triangle();
+        case 2:
+            return new Square();
+        case 3:
+            return new Circle();
+        default:
+            return new Circle();
+        }
+    }
+}
+//客户端
+public class Client {
+    public static void main(String[] args) {
+        //通过静态工厂方法创建产品 
+        IPain mPain = PainFactory.create(2);
+        mPain.draw();
+    }
+}
+</code></pre><h3 id="在简单工厂模式包含如下几个角色："><a href="#在简单工厂模式包含如下几个角色：" class="headerlink" title="在简单工厂模式包含如下几个角色："></a>在简单工厂模式包含如下几个角色：</h3><ol>
+<li><p>工厂类，负责实现创建所有产品实例，在工厂类中提供了静态方法，可以被外界直接调用，返回抽象产品类Product。</p>
+</li>
+<li><p>Product抽象产品角色，它是工厂类所创建的所有对象的父类，封装了各种产品对象的公有方法，所有创建的具体产品对象都是其子类对象。</p>
+</li>
+<li><p>具体产品角色，都继承了抽象产品角色，需要实现在抽象产品中声明的抽象方法。</p>
+</li>
+</ol>
+<p>在简单工厂模式中，客户端通过工厂类来创建一个产品类的实例，而无须直接使用new关键字来创建对象。</p>
+<h2 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h2><p>简单工厂Factory Method Pattern，模式最大的缺点是当有新产品要加入到系统中时，必须修改工厂类。</p>
+<p>工厂方法模式中，不再提供一个统一的工厂类，而是针对不同的产品提供不同的工厂。提供一个抽象工厂接口来声明抽象工厂方法，其子类来具体实现工厂方法，创建具体的产品对象。即把对象的实现延迟到子类完成。</p>
+<p>实例：</p>
+<pre><code>//List:Factory抽象工厂，ArrayList:具体的工厂Factory
+//Iterator:抽象产品Product，ArrayListIterator:具体的产品
+List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+list.iterator();
+</code></pre><h3 id="场景-1"><a href="#场景-1" class="headerlink" title="场景"></a>场景</h3><p>玩具工厂生产动物玩具，发出不同叫声。</p>
+<pre><code>//抽象产品-玩具
+interface IToy {
+    void makeNoise(String string);
+}
+
+//具体产品
+class DogToy implements IToy {
+    public void makeNoise(String string) {
+        System.out.println(string + &quot;汪汪汪的叫。&quot; );
+    }
+}
+
+//具体产品
+class CatToy implements IToy {
+    public void makeNoise(String string) {
+        System.out.println(string + &quot;喵喵喵的叫。&quot;);
+    }
+}
+
+//抽象工厂
+abstract class IToyFactory {
+    abstract IToy createToy();
+}
+
+//具体工厂
+class DogFactory extends IToyFactory {
+    public IToy createToy() {
+        return new DogToy();
+    }
+}
+
+//具体工厂
+class CatFactory extends IToyFactory {
+    public IToy createToy() {
+        return new CatToy();
+    }
+}
+
+//客户端
+class Client {
+    public static void main(String args[]) {
+        IToyFactory factory = new CatFactory();
+        IToy toy = factory.createToy();
+        toy.makeNoise(&quot;我是cat。&quot;);
+        //factory.createToy().makeNoise(&quot;我是cat。&quot;);
+    }
+}
+</code></pre><h3 id="工厂方法模式的几个角色："><a href="#工厂方法模式的几个角色：" class="headerlink" title="工厂方法模式的几个角色："></a>工厂方法模式的几个角色：</h3><ol>
+<li><p>Product抽象产品角色和具体产品角色，和简单工厂模式类似，不再累述。</p>
+</li>
+<li><p>Factory（抽象工厂）：是工厂方法模式的核心，在抽象工厂类中，声明了抽象工厂方法，<strong>用于返回一个产品</strong>。可以是接口，也可以是抽象类或者具体类。</p>
+</li>
+<li><p>ConcreteFactory（具体工厂）：它是抽象工厂类的子类，实现了抽象工厂中的工厂方法，并可由客户端调用，<strong>返回一个具体产品类的实例</strong>。</p>
+</li>
+</ol>
+<p>在实际使用时，具体工厂类在实现工厂方法时除了创建具体产品对象之外，还可以负责产品对象的初始化工作以及一些资源和环境配置工作，例如连接数据库、创建文件等。</p>
+<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><p>抽象工厂模式Abstract Factory Pattern</p>
+<p>待更新</p>
+
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="../../../../img/reward-alipay.jpg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="../../../../img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2019/03/06/11.建造者模式/" class="pre-post btn btn-default" title='建造者模式'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">建造者模式</span>
+        </a>
+    
+    
+        <a href="/2019/02/17/9.微信小程序开发/" class="next-post btn btn-default" title='微信小程序开发'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">微信小程序开发</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单工厂模式"><span class="toc-text">简单工厂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#场景"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在简单工厂模式包含如下几个角色："><span class="toc-text">在简单工厂模式包含如下几个角色：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工厂方法模式"><span class="toc-text">工厂方法模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#场景-1"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工厂方法模式的几个角色："><span class="toc-text">工厂方法模式的几个角色：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象工厂模式"><span class="toc-text">抽象工厂模式</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>

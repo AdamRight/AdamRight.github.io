@@ -1,0 +1,558 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>OkHttp基本使用及网络封装 | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='John Doe'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 士不可以不弘毅，任重而道远 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Android/"><i class="fa "></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Web/"><i class="fa "></i>Web</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Java/"><i class="fa "></i>Java</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="OkHttp基本使用及网络封装">
+            
+	            OkHttp基本使用及网络封装
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Android">
+            Android
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/OkHttp" title='OkHttp'>
+                        OkHttp
+                    </a>
+                
+                    <a href="/tags/网络" title='网络'>
+                        网络
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/12/02</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h2><p>OSI的7层协议：从下到上分别是7-应用层、6-表示层、5-会话层、4-传输层、3-网络层、2-数据链路层、1-物理层。</p>
+<p>TCP三次握手（作用是建立连接）和四次挥手（作用是断开连接）—— 保证数据传输可靠性。</p>
+<h3 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h3><p>Http请求：通信是以<strong>报文</strong>的形式。</p>
+<p>客户端请求（Request）</p>
+<pre><code>请求报文 = 请求头 + 空行 + 请求数据
+Accept: 客户端可以处理的数据格式
+Cookie：服务端的之前给我们的Cookie
+</code></pre><p>服务端响应（Response）</p>
+<pre><code>响应报文 = 响应头 + 空行 + 响应数据
+Status Code 响应状态码
+Content-Type: 响应返回的类型 （文本，utf-8）图片等等
+Set-Cookie：服务端给我们的Cookie，要保存起来，下次带过去
+</code></pre><h3 id="Cookie-、Session和Token"><a href="#Cookie-、Session和Token" class="headerlink" title="Cookie 、Session和Token"></a>Cookie 、Session和Token</h3><p>Cookie 、Session、Token：都是用来做持久化处理的，目的就是让客户端和服务端相互认识。Http请求默认是不持久的没有状态的，谁也不认识谁。</p>
+<p>Cookie: 是存放在客户端的信息，这个信息是来自于服务器返回的信息，下次请求带过去，如果用户离开网站后，如果Cookie已过期一般是会被清除的。如果Cookie没过期下次访问网站还是会带过去。（相对危险）</p>
+<p>Session: 是存放在服务器上面的客户端临时信息，用户离开网站是会被清除的。（相对安全，耗资源）</p>
+<p>Token（App）”令牌”：用户身份的验证，有点类似于Cookie，相对来说更安全。</p>
+<h3 id="Http缓存"><a href="#Http缓存" class="headerlink" title="Http缓存"></a>Http缓存</h3><p>Cache-Control（缓存策略）：Public、private、no-cache、max-age 、no-store（不缓存）</p>
+<p>Expires（缓存的过期策略）：指名了缓存数据有效的绝对时间，告诉客户端到了这个时间点（比照客户端时间点）后本地缓存就作废了，在这个时间点内客户端可以认为缓存数据有效，可直接从缓存中加载展示。</p>
+<p>如果有缓存并且过期了那么发起请求，服务端会给我们数据？（不一定会给）服务器的数据没有变动就不会给，状态码会变为304，自己拿之前过期的缓存。</p>
+<h3 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h3><pre><code>1xx:  Infomational (信息状态码) ，接收的请求正在处理
+2xx:  Succeed(成功)，请求正常处理完毕,如 200
+3xx:  Redirection(重定向)，需要进行附加操作，一般是没有响应数据返回的，如 304（Not,modified）307 
+4xx:  Client Error (客户端的错误)，服务器无法处理请求，如 404
+5xx:  Server Error (服务端的错误)，服务器处理请求出错，如 500
+</code></pre><h3 id="Https"><a href="#Https" class="headerlink" title="Https"></a>Https</h3><p>Http和Https的区别：</p>
+<pre><code>Https = Http + 加密 + 验证身份 + 完整
+端口：Http (80)  Https (443)
+</code></pre><p>Http的缺点：数据是没有加密传输，可能遭遇窃听；不验证通信方的身份，可能会遭遇伪装；无法验证报文的完整性，可能会遭遇篡改。</p>
+<p>TLS/SSL协议：加密：对称加密（AES，DES）+ 非对称加密 (RSA，DSA)；证书：要钱（便宜），建立连接的速度会拖慢，TCP由3次握手变为8次握手。</p>
+<p>Http/1.1和Http/2.0的区别：</p>
+<p>Http/2.0采用二进制格式而非文本格式；Http/2.0支持完全的多路复用；Http/2.0使用报头压缩，降低开销Http/2.0让服务器将响应主动推送给客户端，（带内容推送，不带内容推送的通知）。</p>
+<h2 id="OkHttp"><a href="#OkHttp" class="headerlink" title="OkHttp"></a>OkHttp</h2><p><strong>异步和同步：跟线程没什么关系，打电话，同步：打电话 -&gt; 处理（没挂断） -&gt; 反馈；异步：打电话 -&gt; 处理（挂断）-&gt; 打回来</strong></p>
+<p>网络框架要怎么处理：网络是耗时的，因此需要开线程，用线程池；处理网络，HttpUrlConnection(简单) 或者输入流+Socket(麻烦)；网络请求头信息处理，缓存的处理，文件格式上传的方式（表单提交，拼格式）；路由的一些操作，Http/2.0复用等等。</p>
+<p>OkHttp要点——okio：原生的JavaIO+自定义封装，其实就是对于io的封装;Socket:连接；拦截器。</p>
+<p>OkHttp流程：</p>
+<p>1、Request里面封装了url，method，header等基本信息，然后通过<code>okhttpClient.newCall(request)</code>,将Request转化成了RealCall。</p>
+<p>2、RealCall里面有enqueue，通过<code>call.enqueue()</code>,转换成了AsyncCall。</p>
+<p>3、AsyncCall是RealCall的内部类，AsyncCall继承了Runnable。AsyncCall给了OKhttp的Dispatcher（线程池），executorService().execute(call); </p>
+<p>4、最终去执行了AsyncCall.execute()方法，执行getResponseWithInterceptorChain返回 Response。</p>
+<pre><code>synchronized void enqueue(AsyncCall call) {  
+    //判断当前正在执行的任务数量，最大是64，正在执行的任务中的host,最大是5   
+    if (runningAsyncCalls.size() &lt; maxRequests &amp;&amp; runningCallsForHost(call) &lt; maxRequestsPerHost) {
+        //加入到正在执行      
+        runningAsyncCalls.add(call);
+        // 线程池，     
+        executorService().execute(call);    
+    } else {
+        // 加入准备执行的集合，等待执行      
+        readyAsyncCalls.add(call);    
+    }  
+}
+</code></pre><h3 id="官网和导入"><a href="#官网和导入" class="headerlink" title="官网和导入"></a>官网和导入</h3><p>官网</p>
+<pre><code>http://square.github.io/okhttp/
+</code></pre><p>引入</p>
+<pre><code>compile &apos;com.squareup.okhttp3:okhttp:3.11.0&apos;
+</code></pre><h3 id="测试地址"><a href="#测试地址" class="headerlink" title="测试地址"></a>测试地址</h3><pre><code>http://httpbin.org/
+http://httpbin.org/get?id=123
+http://httpbin.org/post
+</code></pre><h3 id="get请求"><a href="#get请求" class="headerlink" title="get请求"></a>get请求</h3><p>同步请求</p>
+<pre><code>OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder().url(&quot;http://httpbin.org/get?id=123&quot;).build();
+try {
+    Response response = client.newCall(request).execute();
+    if (response.isSuccessful()) {
+        System.out.println(response.body().string());
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+</code></pre><p>异步请求</p>
+<pre><code>System.out.println(Thread.currentThread().getId());
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder().url(&quot;http://httpbin.org/get?id=123&quot;).build();
+client.newCall(request).enqueue(new Callback() {
+    @Override
+    public void onFailure(Call call, IOException e) {
+    }
+    @Override
+    public void onResponse(Call call, Response response) throws IOException {
+        if (response.isSuccessful()) {
+            System.out.println(Thread.currentThread().getId());
+        }
+    }
+});
+</code></pre><h3 id="post请求"><a href="#post请求" class="headerlink" title="post请求"></a>post请求</h3><p>同步请求，提交表单</p>
+<pre><code>OkHttpClient client = new OkHttpClient();
+FormBody body = new FormBody
+        .Builder()
+        .add(&quot;name&quot;, &quot;shuaige&quot;)
+        .add(&quot;age&quot;, &quot;19&quot;)
+        .build();
+Request request = new Request.Builder().url(&quot;http://httpbin.org/post&quot;).post(body).build();
+try {
+    Response response = client.newCall(request).execute();
+    if (response.isSuccessful()) {
+        System.out.println(response.body().string());
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+</code></pre><p>异步提交，提交json</p>
+<pre><code>OkHttpClient okHttpClient  = new OkHttpClient.Builder()
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10,TimeUnit.SECONDS)
+            .readTimeout(20, TimeUnit.SECONDS)
+            .build();
+
+Book book = new Book();
+book.setName(&quot;android&quot;);
+//使用Gson
+Gson gson = new Gson();
+//使用Gson将对象转换为json字符串
+String json = gson.toJson(book);
+//MediaType设置Content-Type 标头中包含的媒体类型值
+RequestBody requestBody = FormBody.create(MediaType.parse(&quot;application/json; charset=utf-8&quot;), json);
+Request request = new Request.Builder()
+        .url(&quot;http://172.20.192.168:8080/getbookByJson&quot;)//请求的url
+        .post(requestBody)
+        .build();
+//创建Call
+Call call = okHttpClient.newCall(request);
+//加入队列 异步操作
+call.enqueue(new Callback() {
+    //请求错误回调方法
+    @Override
+    public void onFailure(Call call, IOException e) {
+        System.out.println(&quot;连接失败&quot;);
+    }
+    @Override
+    public void onResponse(Call call, Response response) throws IOException {
+        System.out.println(response.body().string());
+    }
+</code></pre><h3 id="设置url参数-HttpUrl"><a href="#设置url参数-HttpUrl" class="headerlink" title="设置url参数-HttpUrl"></a>设置url参数-HttpUrl</h3><pre><code>OkHttpClient client = new OkHttpClient();
+HttpUrl httpUrl = HttpUrl.parse(&quot;http://httpbin.org/get&quot;).
+        newBuilder().
+        addQueryParameter(&quot;city&quot;, &quot;beijing&quot;).
+        addQueryParameter(&quot;id&quot;, &quot;123&quot;).
+        build();
+String url = httpUrl.toString();
+System.out.println(httpUrl.toString());// http://httpbin.org/get?city=beijing&amp;key=123
+Request request = new Request.Builder().url(url).build();
+try {
+    Response response = client.newCall(request).execute();
+    if (response.isSuccessful()) {
+        System.out.println(response.body().string());
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+</code></pre><h3 id="请求头的设置-addHeader"><a href="#请求头的设置-addHeader" class="headerlink" title="请求头的设置-addHeader"></a>请求头的设置-addHeader</h3><pre><code>OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder().
+        url(&quot;http://httpbin.org/get?id=123&quot;).
+        addHeader(&quot;User-Agent&quot;, &quot;this my head&quot;).
+        addHeader(&quot;Accept&quot;, &quot;text/plain, text/html&quot;).
+        build();
+try {
+    Response response = client.newCall(request).execute();
+    if (response.isSuccessful()) {
+        System.out.println(response.body().string());
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+</code></pre><h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><pre><code>RequestBody imageBody = RequestBody.create(MediaType.parse(&quot;image/jpeg&quot;), new File(&quot;文件路径+文件名&quot;));
+MultipartBody body = new MultipartBody.Builder()
+        .setType(MultipartBody.FORM)
+        .addFormDataPart(&quot;name&quot;, &quot;name&quot;)
+        .addFormDataPart(&quot;filename&quot;, &quot;文件名&quot;, imageBody).build();
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder().url(&quot;http://192.168.1.6:8080/web/UploadServlet&quot;).post(body).build();
+try {
+    Response response = client.newCall(request).execute();
+    if (response.isSuccessful()) {
+        System.out.println(response.body().string());
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+</code></pre><h3 id="定义拦截器"><a href="#定义拦截器" class="headerlink" title="定义拦截器"></a>定义拦截器</h3><pre><code>//定义拦截器
+Interceptor interceptor = new Interceptor() {
+    @Override
+    public Response intercept(Chain chain) throws IOException {
+        long start = System.currentTimeMillis();
+        Request request  = chain.request();
+        Response response = chain.proceed(request);
+        long end = System.currentTimeMillis();
+        System.out.println(&quot;interceptor: cost time = &quot; + (end - start));
+        return response;
+    }
+};
+// 创建 OkHttpClient 对象
+OkHttpClient client = new OkHttpClient.Builder()
+        .addInterceptor(interceptor)
+        .build();
+</code></pre><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p>使用缓存的前提是服务器支持缓存</p>
+<pre><code>// 创建缓存对象，缓存文件和缓存大小
+Cache cache = new Cache(new File(&quot;cache.cache&quot;), 1024 * 1024);
+// 创建 OkHttpClient 对象
+OkHttpClient client = new OkHttpClient.Builder()
+        .cache(cache)
+        .build();
+// 创建 Request 对象
+Request request = new Request.Builder()
+        .url(&quot;http://httpbin.org/get?id=id&quot;)
+        .cacheControl(CacheControl.FORCE_NETWORK)//只从网络读取
+        //.cacheControl(CacheControl.FORCE_CACHE)//只读取缓存
+        //.cacheControl(new CacheControl.Builder().noCache().build())//永远不使用缓存
+        //.cacheControl(new CacheControl.Builder().maxStale(365, TimeUnit.DAYS).build())//最大缓存时效365天
+        .build();
+// OkHttpClient 执行 Request
+try {
+    Response response = client.newCall(request).execute();
+    Response responseCache = response.cacheResponse();
+    Response responseNet = response.networkResponse();
+    if (responseCache != null) {
+        //从缓存响应
+        System.out.println(&quot;response from cache&quot;);
+    }
+    if (responseNet != null) {
+        //从网络响应
+        System.out.println(&quot;response from net&quot;);
+    }
+    System.out.println(&quot;response:&quot; + response.body().string());
+} catch (IOException e) {
+    e.printStackTrace();
+}
+</code></pre><p>在<code>CacheInterceptor</code>缓存拦截器中，根据缓存策略<code>CacheStrategy</code>分配。</p>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><p>Volley是基于HttpUrlConnection；OkHttp基于Okio(原生的JavaIO + 自定义封装) + Socket连接。</p>
+<p>2、拦截器</p>
+<p>RealCall类中的<code>getResponseWithInterceptorChain()</code>方法作用：将请求Request转变成响应Response。</p>
+<pre><code>Response getResponseWithInterceptorChain() throws IOException {
+    // 拦截器的一个集合
+    List&lt;Interceptor&gt; interceptors = new ArrayList&lt;&gt;();
+    // 客户端的所有自定义拦截器，可以添加自己定义的
+    interceptors.addAll(client.interceptors());
+    // OKhttp 5 个拦截器 ，责任链设计模式，每一个拦截器只处理与他相关的部分
+    interceptors.add(retryAndFollowUpInterceptor);// 重试
+    interceptors.add(new BridgeInterceptor(client.cookieJar()));// 基础
+    interceptors.add(new CacheInterceptor(client.internalCache()));// 缓存
+    interceptors.add(new ConnectInterceptor(client));// 建立连接,连接服务器
+    interceptors.add(new CallServerInterceptor(forWebSocket));// 写数据
+    Interceptor.Chain chain = new RealInterceptorChain(interceptors, null, null, null, 0,
+            originalRequest, this, eventListener, client.connectTimeoutMillis(),
+            client.readTimeoutMillis(), client.writeTimeoutMillis());
+
+    return chain.proceed(originalRequest);
+}
+</code></pre><p>2.1、RetryAndFollowUpInterceptor</p>
+<p>处理重试的一个拦截器，会去处理一些异常，只要不是致命的异常就会重新发起一次请求（把Request给下级），如果是致命的异常就会抛给上一级；<br>会处理一些重定向等等，比如 3XX 307、407 就会从头部中获取新的路径，生成一个新的请求交给下一级（重新发起一次请求）。</p>
+<p>2.2、BridgeInterceptor</p>
+<p>做一个简单的处理，设置一些通用的请求头，Content-Type、Connection、Content-Length、Cookie。做一些返回的处理，如果返回的数据被压缩了采用ZipSource, 保存 Cookie。</p>
+<p>2.3、CacheInterceptor</p>
+<p>在缓存可用的情况下，直接读取本地的缓存的数据，如果本地的缓存没有直接去服务器，如果本地的缓存有，首先判断有没有缓存策略，然后判断有没有过期，如果没有过期直接拿缓存，如果过期了需要添加一些之前头部信息如<code>If-Modified-Since</code>,这个时候后台有可能会返回304代表还是可以拿本地缓存，每次读取到新的响应后做一次缓存。</p>
+<p>2.4、ConnectInterceptor</p>
+<p>findHealthyConnection()找一个连接，首先判断有没有健康的，没有就创建（建立Scoket,握手连接），连接缓存得到一条结论：OkHttp是基于原生的Socket + okio（原生IO的封装）。封装HttpCodec里面封装了okio的Source（输入）和Sink(输出)，我们通过HttpCodec就可以操作 Socket的输入输出，我们就可以像服务器写数据和读取返回数据。</p>
+<p>2.5、CallServerInterceptor</p>
+<p>写数据和读取数据，写头部信息，写body表单信息等等。</p>
+<p>2.6、连接三个核心类（连接复用）</p>
+<p>RealConnection: 建立连接的一个对象的封装</p>
+<p>ConnectionPool：保存了连接</p>
+<p>StreamAllocation: 找一些连接，做一下封装</p>
+
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="../../../../img/reward-alipay.jpg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="../../../../img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2019/01/05/4.安卓自定义安全键盘/" class="pre-post btn btn-default" title='安卓自定义安全键盘'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">安卓自定义安全键盘</span>
+        </a>
+    
+    
+        <a href="/2018/12/01/2.html和css基础/" class="next-post btn btn-default" title='HTML和CSS基础'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">HTML和CSS基础</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络基础"><span class="toc-text">网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#请求和响应"><span class="toc-text">请求和响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie-、Session和Token"><span class="toc-text">Cookie 、Session和Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Http缓存"><span class="toc-text">Http缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP状态码"><span class="toc-text">HTTP状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Https"><span class="toc-text">Https</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OkHttp"><span class="toc-text">OkHttp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#官网和导入"><span class="toc-text">官网和导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试地址"><span class="toc-text">测试地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get请求"><span class="toc-text">get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#post请求"><span class="toc-text">post请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置url参数-HttpUrl"><span class="toc-text">设置url参数-HttpUrl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#请求头的设置-addHeader"><span class="toc-text">请求头的设置-addHeader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上传文件"><span class="toc-text">上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义拦截器"><span class="toc-text">定义拦截器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存"><span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码分析"><span class="toc-text">源码分析</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>

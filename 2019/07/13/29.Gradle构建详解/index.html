@@ -1,0 +1,1162 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Gradle构建详解 | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='John Doe'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 士不可以不弘毅，任重而道远 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Android/"><i class="fa "></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Web/"><i class="fa "></i>Web</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Java/"><i class="fa "></i>Java</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Gradle构建详解">
+            
+	            Gradle构建详解
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Android">
+            Android
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/gradle" title='gradle'>
+                        gradle
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/07/13</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="1、介绍和环境搭建"><a href="#1、介绍和环境搭建" class="headerlink" title="1、介绍和环境搭建"></a>1、介绍和环境搭建</h2><p>DSL(domain specific language)：领域特定语言，解决特定问题，包括Groovy，xml等等。</p>
+<p>Groovy是一种基于JVM的敏捷开发语言，可以使用java所用的库。</p>
+<p>Groovy官网</p>
+<pre><code>http://groovy-lang.org/
+</code></pre><p>下载最新稳定版本(the latest stable version of Groovy)-2.5.8版本。</p>
+<p>检查环境变量配置</p>
+<pre><code>groovy -version
+</code></pre><p>在Android studio中Tools - Groovy Console直接编写Groovy语言。</p>
+<pre><code>println &quot;hello groovy&quot;
+</code></pre><h2 id="2、语法"><a href="#2、语法" class="headerlink" title="2、语法"></a>2、语法</h2><h3 id="2-1、基础语法"><a href="#2-1、基础语法" class="headerlink" title="2.1、基础语法"></a>2.1、基础语法</h3><p>groovy变量的类型都是对象类型，没有基本类型，因为基本类型都会装箱成对象类型。</p>
+<p>变量的定义包括强类型定义和弱类型def定义。</p>
+<pre><code>def x = 10
+println x.class  //class java.lang.Integer
+</code></pre><p>字符串除了String还有GString，GString的常用三种定义方式</p>
+<pre><code>def s1 = &apos;a single \&apos;a\&apos; String&apos;
+println s1  //a single &apos;a&apos; String
+
+def s2 = &apos;&apos;&apos;\
+line one
+line two
+line three
+&apos;&apos;&apos;
+println s2  //line one
+            //line two
+            //line three
+
+def s3 = &quot;a common String&quot;
+def say = &quot;this is ${s3}&quot;   //花括号可扩展任意的表达式
+println say  //this is a common String
+println say.class  //class org.codehaus.groovy.runtime.GStringImpl
+</code></pre><p>新增常用操作符</p>
+<pre><code>def str = &quot;groovy&quot;
+//println str.center(9,&apos;a&apos;)   //agroovyaa
+//println str.padLeft(9,&apos;a&apos;)  //aaagroovy
+//println str.padRight(9,&apos;a&apos;)  //groovyaaa
+
+def str2 = &apos;Hello&apos;
+println str &gt; str2  //true
+
+println str[0]  //g
+println str[0..1]  //gr
+
+def str3 = &apos;gro&apos;
+println str.minus(str3) //ovy
+println str - str3 //ovy
+
+//println str.reverse()   //yvoorg
+println str.capitalize()   //Groovy
+println str.isNumber()   //false
+</code></pre><p>逻辑控制:</p>
+<p>switch</p>
+<pre><code>def x = 1.23
+def result
+switch (x){
+    case &quot;str&quot;:
+        result = &apos;str&apos;
+        break
+    case [4,6,7,&apos;inlist&apos;]:  //list
+        result = &apos;list&apos;
+        break
+    case 12..30:    //范围
+        result = &apos;range&apos;
+        break
+    case Integer:
+        result = &apos;Integer&apos;
+        break
+    case BigDecimal:
+        result = &apos;BigDecimal&apos;
+        break
+    default:result = &apos;default&apos;
+}
+println result  //BigDecimal
+</code></pre><p>for范围</p>
+<pre><code>def sum = 0
+for (i in 0..9){
+    sum += i
+}
+println sum //45
+</code></pre><p>list循环</p>
+<pre><code>def sum = 0
+for (i in [1,2,3,4,5,6,7,8,9]){
+    sum += i
+}
+println sum //45
+</code></pre><p>map循环</p>
+<pre><code>def sum = 0
+for (i in [&apos;wang&apos;:1,&apos;zhang&apos;:2,&apos;li&apos;:3]){
+    sum += i.value
+}
+println sum //6
+</code></pre><h3 id="2-2、闭包"><a href="#2-2、闭包" class="headerlink" title="2.2、闭包"></a>2.2、闭包</h3><p>类似于方法</p>
+<pre><code>def clouser = { println &quot;Hello groovy&quot;}
+clouser.call()  //调用方式一，Hello groovy
+clouser()  //调用方式二，Hello groovy
+</code></pre><p>有参数的闭包<code>-&gt;</code>前的是参数,也可以有多个参数</p>
+<pre><code>def clouser = {String name -&gt; println &quot;${name} Hello groovy&quot;}
+clouser.call(&quot;this is&quot;)  //调用方式一，this is Hello groovy
+clouser(&quot;this is&quot;)  //调用方式二，this is Hello groovy
+</code></pre><p>隐式的it参数,不需要定义参数</p>
+<pre><code>def clouser = {println &quot;Hello ${it}&quot;}
+clouser(&quot;groovy&quot;)  //Hello groovy
+</code></pre><p>返回值</p>
+<pre><code>def clouser = {String name -&gt; return  &quot;Hello ${name}&quot;}
+println clouser(&quot;groovy&quot;)  //Hello groovy
+</code></pre><p>基本类型和闭包结合使用</p>
+<pre><code>int x = cal(5)
+println x   
+//num的阶乘
+int fab(int number) {
+    int result = 1
+    1.upto(number, { num -&gt; result *= num })
+    return result
+}
+
+int fab2(int number) {
+    int result = 1
+    number.downto(1) {
+        num -&gt; result *= num
+    }
+    return result
+}
+
+//累加
+int cal(int number) {
+    int result = 0
+    number.times {
+        num -&gt; result += num
+    }
+    return result
+}
+</code></pre><p>字符串和闭包结合使用</p>
+<pre><code>String str = &apos;2 and 3 is 5&apos;
+
+//each遍历
+str.each {
+//    String temp -&gt; println temp.multiply(2)
+    String temp -&gt; println temp
+}
+
+//find查找符合条件的第一个,findAll查找所有符合条件的放到集合
+println str.find{
+    String s -&gt; s.isNumber()
+}
+
+def list = str.findAll{
+    String s -&gt; s.isNumber()
+}
+println list.toListString() //[2, 3, 5]
+
+def result = str.any {
+    String s -&gt; s.isNumber()    //有一项是数字就返回true
+}
+println result //true
+
+println str.every { //false
+    String s -&gt; s.isNumber()    //每一项都是数字就返回true
+}
+
+def list2 = str.collect{
+    it.toUpperCase()
+}
+println list2.toListString()    //[2,  , A, N, D,  , 3,  , I, S,  , 5]
+</code></pre><p>闭包进阶</p>
+<p>变量：this、owner、delegate</p>
+<pre><code>def scriptClouser = {
+    println &quot;this:&quot; + this  //代表闭包定义处的类
+    println &quot;owner:&quot; + owner    //代表闭包定义处的类或者对象
+    println &quot;delegate:&quot; + delegate  //代表任意对象，默认与owner一致
+}
+scriptClouser.call()
+
+class Person{//内部类
+    def classClouser = {
+        println &quot;classClouser this:&quot; + this  //代表闭包定义处的类
+        println &quot;classClouser owner:&quot; + owner    //代表闭包定义处的类或者对象
+        println &quot;classClouser delegate:&quot; + delegate  //代表任意对象，默认与owner一致
+    }
+
+    def say(){
+        def classClouser = {
+            println &quot;method classClouser this:&quot; + this  //代表闭包定义处的类
+            println &quot;method classClouser owner:&quot; + owner    //代表闭包定义处的类或者对象
+            println &quot;method classClouser delegate:&quot; + delegate  //代表任意对象，默认与owner一致
+        }
+        classClouser.call()
+    }
+}
+Person person = new Person()
+person.classClouser.call()
+person.say()
+
+def nextClouser = {
+    def innerClouser = {
+        println &quot;innerClouser this:&quot; + this  //代表闭包定义处的类
+        println &quot;innerClouser owner:&quot; + owner    //代表闭包定义处的类或者对象
+        println &quot;innerClouser delegate:&quot; + delegate  //代表任意对象，默认与owner一致
+    }
+    innerClouser.delegate = person  //修改delegate
+    innerClouser.call()
+}
+nextClouser.call()
+</code></pre><p>闭包委托策略</p>
+<pre><code>class Student {
+    String name
+    def pretty = {
+        &quot;My name is ${name}&quot;
+    }
+    String toSting(){
+        pretty.call()
+    }
+}
+class Teacher {
+    String name
+}
+
+def stu = new Student(name: &apos;Sarash&apos;)
+def tea = new Teacher(name: &apos;Qndroid&apos;)
+stu.pretty.delegate = tea
+stu.pretty.resolveStrategy = Closure.DELEGATE_FIRST//delegate优先
+println stu.toSting()   //My name is Qndroid
+</code></pre><h3 id="2-3、列表list"><a href="#2-3、列表list" class="headerlink" title="2.3、列表list"></a>2.3、列表list</h3><p>数组和列表定义方式</p>
+<pre><code>def array = [1, 2, 3, 4, 5, 6] as int[]
+int[] array2 = [1, 2, 3, 4, 5, 6]
+def list = [1, 2, 3, 4, 5, 6]
+</code></pre><p>主要介绍特有的</p>
+<pre><code>//排序
+def sortList = [1, -4, 5, -6, 2, 3]
+//Collections.sort(sortList)
+//println sortList    //[-6, -4, 1, 2, 3, 5]
+sortList.sort()
+println sortList    //[-6, -4, 1, 2, 3, 5]
+
+//自定义排序
+//Comparator mc = { a, b -&gt;
+//    a == b ? 0 : Math.abs(a) &lt; Math.abs(b) ? -1 : 1
+//}
+//Collections.sort(sortList, mc)
+//println sortList    //[1, 2, 3, -4, 5, -6]
+sortList.sort { a, b -&gt;
+    a == b ? 0 : Math.abs(a) &lt; Math.abs(b) ? -1 : 1
+}
+println sortList    //[1, 2, 3, -4, 5, -6]
+
+//字符串排序
+def sortStringList = [&apos;123&apos;, &apos;a&apos;, &apos;groovy&apos;]
+sortStringList.sort { it -&gt; return it.size() }
+println sortStringList  //[a, 123, groovy]
+
+//查找
+def findList = [-3, 8, -8, 12, 4, 7]
+int result = findList.find { return it % 2 == 0 }
+println result  //8
+def result2 = findList.findAll { return it % 2 == 0 }
+println result2.toListString()  //[8, -8, 12, 4]
+
+def result3 = findList.any { return it % 2 != 0 }
+println result3 //true
+def result4 = findList.every { return it % 2 != 0 }
+println result4 //false
+
+println findList.min()  //-8
+println findList.max()  //12
+
+def num = findList.count { return it % 2 == 0 } //符合条件的个数
+println num //4
+</code></pre><h3 id="2-4、映射map"><a href="#2-4、映射map" class="headerlink" title="2.4、映射map"></a>2.4、映射map</h3><p>定义和基本操作</p>
+<pre><code>def colors = [red: &apos;ff0000&apos;, green: &apos;00ff00&apos;, blue: &apos;0000ff&apos;]
+println colors.getClass()   //class java.util.LinkedHashMap
+//索引
+println colors[&apos;red&apos;]   //ff0000
+println colors.red  //ff0000
+//添加
+colors.yellow = &apos;ffff00&apos;
+println colors.toMapString()    //[red:ff0000, green:00ff00, blue:0000ff, yellow:ffff00]
+</code></pre><p>其他操作</p>
+<pre><code>def students = [
+        1: [number: &apos;0001&apos;, name: &apos;zhang&apos;, score: 55, sex: &apos;male&apos;],
+        2: [number: &apos;0002&apos;, name: &apos;li&apos;, score: 62, sex: &apos;female&apos;],
+        3: [number: &apos;0003&apos;, name: &apos;wang&apos;, score: 63, sex: &apos;female&apos;],
+        4: [number: &apos;0004&apos;, name: &apos;zhao&apos;, score: 66, sex: &apos;male&apos;]
+]
+//遍历
+students.each {
+    def student -&gt; println student.key + &quot;:&quot; + student.value
+}
+//带索引
+students.eachWithIndex {
+    def student, int index -&gt; println index + &apos;::&apos; + student.key + &quot;:&quot; + student.value
+}
+//直接遍历
+students.each {
+    key, value -&gt; println key + &quot;:&quot; + value
+}
+students.eachWithIndex {
+    key, value, index -&gt; println index + &apos;:::&apos; + key + &quot;:&quot; + value
+}
+//查找
+def entry = students.find { def student -&gt;
+    return student.value.score &gt;= 60
+}
+println entry   //2={number=0002, name=li, score=62, sex=female}
+
+def entry2 = students.findAll { def student -&gt;
+    return student.value.score &gt;= 60
+}
+println entry2
+//计数
+def count = students.count {
+    def student -&gt; return student.value.score &gt;= 60 &amp;&amp; student.value.sex == &apos;male&apos;
+}
+println count   //1
+//查找并筛选
+def names = students.findAll {
+    def student -&gt; return student.value.score &gt;= 60
+}.collect {
+    return it.value.name
+}
+println names   //[li, wang, zhao]
+//分组
+def group = students.groupBy {
+    def student -&gt; return student.value.score &gt;= 60 ? &apos;及格&apos; : &apos;不及格&apos;
+}
+println group.toMapString()
+//排序
+def sort = students.sort{
+    def stu1 ,def stu2-&gt;
+        Number num1 = stu1.value.score
+        Number num2 = stu2.value.score
+        return num1 == num2 ? 0 : num1 &lt; num2 ? -1 : 1
+}
+println sort.toMapString()
+</code></pre><h3 id="2-5、范围range"><a href="#2-5、范围range" class="headerlink" title="2.5、范围range"></a>2.5、范围range</h3><p>定义和使用</p>
+<pre><code>def range = 1..10
+println range[0]    //1
+println range.contains(10)    //true
+println range.from    //1
+println range.to    //10
+
+//遍历
+range.each {
+    println it
+}
+//switch中使用
+def result = getGrade(75)
+println result
+def getGrade(Number number){
+    def result
+    switch (number){
+        case 0..&lt;60:
+            result = &apos;不及格&apos;
+            break
+        case 60..&lt;70:
+            result = &apos;及格&apos;
+            break
+        case 70..&lt;80:
+            result = &apos;良好&apos;
+            break
+        case 80..100:
+            result = &apos;优秀&apos;
+            break
+    }
+    return result
+}
+</code></pre><h3 id="2-6、面向对象"><a href="#2-6、面向对象" class="headerlink" title="2.6、面向对象"></a>2.6、面向对象</h3><p>类、方法、接口</p>
+<pre><code>//groovy中默认都是public类型
+class Person implements Action{
+    String name
+    Integer age
+
+    def increasseAge(Integer years) {
+        this.age += years
+    }
+
+    @Override
+    void eat() {}
+    @Override
+    void drink() {}
+    @Override
+    void play() {}
+}
+
+def person = new Person(name: &quot;zhang&quot;, age: 26)
+println &quot;name:${person.name},age:${person.age}&quot;//name:zhang,age:26
+person.increasseAge(10)
+println &quot;name:${person.name},age:${person.age}&quot;//name:zhang,age:36
+
+interface Action{
+    void eat()
+    void drink()
+    void play()
+}
+
+trait DefaultAction{
+    abstract void eat()
+    void play(){
+        println &apos;i can play&apos;
+    }
+}
+</code></pre><p>元编程</p>
+<pre><code>class Person {
+    String name
+    Integer age
+
+    def increasseAge(Integer years) {
+        this.age += years
+    }
+
+    //一个方法找不到时候，用它代替
+    def invokeMethod(String name, Object args) {
+        return &quot;invokeMethod: ${name},${args}&quot;
+    }
+    //优先级高于invokeMethod
+    def methodMissing(String name, Object args) {
+        return &quot;methodMissing: ${name},${args}&quot;
+    }
+}
+
+def person = new Person(name: &apos;zhang&apos;, age: 26)
+println person.cry()
+
+//为类动态添加属性
+Person.metaClass.sex = &apos;male&apos;
+def person1 = new Person(name: &apos;zhang&apos;, age: 26)
+println person1.sex     //male
+//为类动态添加方法
+Person.metaClass.sexUpperCase = { -&gt; sex.toUpperCase() }
+def personn2 = new Person(name: &apos;zhang&apos;, age: 26)
+println personn2.sexUpperCase()     //MALE
+//添加静态方法
+Person.metaClass.static.createPerson = {
+    String name, int age -&gt; new Person(name: name, age: age)
+}
+def personn3 = Person.createPerson(&apos;li&apos;, 18)
+println personn3.name + personn3.age  //li18
+</code></pre><p>一次注入，应用程序其他方法都可以使用</p>
+<pre><code>ExpandoMetaClass.enableGlobally()
+</code></pre><h2 id="3、高级用法"><a href="#3、高级用法" class="headerlink" title="3、高级用法"></a>3、高级用法</h2><h3 id="3-1、json文件处理"><a href="#3-1、json文件处理" class="headerlink" title="3.1、json文件处理"></a>3.1、json文件处理</h3><p>转换成json</p>
+<pre><code>import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
+class Person {
+    String name
+    Integer age
+}
+//转换成Json
+def list = [new Person(name: &apos;zhang&apos;, age: 26),
+            new Person(name: &apos;li&apos;, age: 22)]
+def json = JsonOutput.toJson(list)
+println JsonOutput.prettyPrint(json)
+//转成实体对象
+def jsonSlpuer = new JsonSlurper()
+jsonSlpuer.parseText()
+</code></pre><p>get请求</p>
+<pre><code>import groovy.json.JsonSlurper
+
+def response = getNetworkData(&quot;http://httpbin.org/get?id=123&quot;)
+println response.args.id
+def getNetworkData(String url){
+    def connection = new URL(url).openConnection()
+    connection.setRequestMethod(&apos;GET&apos;)
+    connection.connect()
+    def response = connection.content.text
+    def jsonSlurper = new JsonSlurper()
+    return jsonSlurper.parseText(response)
+}
+</code></pre><h3 id="3-2、xml读取和生成"><a href="#3-2、xml读取和生成" class="headerlink" title="3.2、xml读取和生成"></a>3.2、xml读取和生成</h3><p>解析xml格式数据，创建xml格式数据，都不再详解</p>
+<h3 id="3-3、文件操作"><a href="#3-3、文件操作" class="headerlink" title="3.3、文件操作"></a>3.3、文件操作</h3><p>读取文件</p>
+<pre><code>def file = new File(&quot;目标文件&quot;)
+//方式一
+file.eachLine {
+    line -&gt; println line
+}
+//方式二
+def text = file.getText()
+println text
+//方式三
+def result = file.readLines()
+println result
+//方式四,读取部分内容
+def reader = file.withReader {
+    reader -&gt; char[] buffer = new char[100]
+        reader.read(buffer)
+        return buffer
+}
+println reader
+</code></pre><p>拷贝文件</p>
+<pre><code>def copy(String sourcePath, String destationPath) {
+    try {
+        def desFile = new File(destationPath)
+        if (!desFile.exists()) {
+            desFile.createNewFile()
+        }
+        new File(sourcePath).withReader {
+            reader -&gt;
+                def lines = reader.readLines()
+                desFile.withWriter {
+                    writer -&gt;
+                        lines.each {
+                            line -&gt; writer.append(line + &quot;\r\n&quot;)
+                        }
+                }
+        }
+        return true
+    } catch (Exception e) {
+
+    }
+}
+</code></pre><p>对象的读写</p>
+<pre><code>def saveObject(Object object, String path) {
+    try {
+        def desFile = new File(path)
+        if (!desFile.exists()) {
+            desFile.createNewFile()
+        }
+        desFile.withObjectOutputStream {
+            out -&gt; out.writeObject(object)
+        }
+        return true
+    } catch (Exception e) {
+
+    }
+    return false
+}
+
+def readObject(String path) {
+    def obj = null
+    try {
+        def file = new File(path)
+        if (file == null || !file.exists()) return null
+        file.withObjectInputStream {
+            input -&gt; obj = input.readObject()
+        }
+    } catch (Exception e) {
+
+    }
+    return obj
+}
+</code></pre><h2 id="4、Gradle介绍"><a href="#4、Gradle介绍" class="headerlink" title="4、Gradle介绍"></a>4、Gradle介绍</h2><p>Gradle用于构建应用程序，使用Groovy核心语法。</p>
+<p>在Terminal中执行</p>
+<pre><code>gradlew clean    //win
+gradlew build    //win
+
+./gradlew clean    //mac
+./gradlew build    //mac
+</code></pre><p>gradle的生命周期</p>
+<pre><code>initialization初始化阶段：根据settings.gradle解析整个工程中所有的Project，构建所有的Project对应的project对象。
+Configuration配置阶段：解析所有的projects对象中的task，构建好所有的task的拓扑图
+Excution执行阶段：执行具体的task及其依赖task
+</code></pre><p>生命周期监听</p>
+<pre><code>//配置阶段开始前的监听回调
+this.beforeEvaluate {
+    println &apos;------配置阶段开始------&apos;
+}
+//配置阶段完成以后的监听回调
+this.afterEvaluate {
+    println &apos;------配置阶段完成------&apos;
+}
+//gradle执行完毕后的回调监听
+this.gradle.buildFinished {
+    println &apos;------gradle执行完毕------&apos;
+}
+//等同beforeEvaluate
+this.gradle.beforeProject {}
+//等同afterEvaluate
+this.gradle.afterProject {}
+</code></pre><h2 id="5、Project"><a href="#5、Project" class="headerlink" title="5、Project"></a>5、Project</h2><p>查看Project的个数</p>
+<pre><code>gradlew projects
+./gradlew projects    //mac
+</code></pre><h3 id="5-1、Project相关API"><a href="#5-1、Project相关API" class="headerlink" title="5.1、Project相关API"></a>5.1、Project相关API</h3><p>在最外层的根的build.gradle中</p>
+<pre><code>this.getProjects()
+def getProjects(){
+    //只输全部projects
+    this.getAllprojects().eachWithIndex {
+        Project project, int index -&gt;
+        if (index ==0){
+            println &quot;this is Root project:${project.name}&quot;
+        } else {
+            println &quot;this is project:${project.name}&quot;
+        }
+    }
+    //只输出子projects
+    this.getSubprojects().eachWithIndex {
+        Project project, int index -&gt;
+            println &quot;this is project:${project.name}&quot;
+    }
+    //只输出根projects
+    println &quot;this is Root project:&quot; + this.getRootProject().name
+}
+</code></pre><p>在module的build.gradle中</p>
+<pre><code>//只输出父projects
+println &quot;this is parent project:&quot; + this.getParent().name
+</code></pre><p>根project中可以配置module的配置</p>
+<pre><code>//根project配置module为app的配置
+project(&apos;app&apos;) {
+    Project project -&gt;
+        println project.name    //app
+        apply plugin: &apos;com.android.application&apos;
+        group &apos;com.tea&apos;
+        version &apos;1.0.0-release&apos;
+        dependencies {}
+        android {}
+}
+</code></pre><p>配置当前节点工程和subproject的所有project</p>
+<pre><code>//配置当前节点工程和subproject的所有project
+allprojects {
+    group &apos;com.tea&apos;
+    version &apos;1.0.0-release&apos;
+}
+println project(&apos;app&apos;).group
+</code></pre><p>不包括当前节点工程，只包括他的subproject</p>
+<pre><code>//不包括当前节点工程，只包括他的subproject
+subprojects {
+    Project project -&gt;
+        if (project.plugins.hasPlugin(&apos;com.android.library&apos;)) {
+            apply from: &apos;../publistTOMaven.gradle&apos;
+        }
+}
+</code></pre><h3 id="5-2、属性相关API"><a href="#5-2、属性相关API" class="headerlink" title="5.2、属性相关API"></a>5.2、属性相关API</h3><p>定义扩展属性</p>
+<pre><code>ext{}
+</code></pre><p>所以提供扩展属性定义方式:</p>
+<p>方式一：</p>
+<p>可以在根build中定义</p>
+<pre><code>ext {
+    compileSdkVersion = 28
+    cardview = &apos;com.android.support:cardview-v7:28.0.0&apos;
+}
+</code></pre><p>然后在需要用的build中引用</p>
+<pre><code>compileSdkVersion this.rootProject.compileSdkVersion
+implementation this.cardview
+</code></pre><p>方式二：</p>
+<p>和根build同级定义common.gradle</p>
+<pre><code>ext {
+
+    android = [compileSdkVersion: 28,
+               buildToolsVersion: &apos;26.0.0&apos;,
+               applicationId    : &apos;com.tea&apos;,
+               minSdkVersion    : 16,
+               targetSdkVersion : 26,
+               versionCode      : 1,
+               versionName      : &apos;1.0.0&apos;,
+               multiDexEnabled  : true]
+
+    signConfigs = [&apos;storeFile&apos;    : &apos;tea.jks&apos;,
+                   &apos;storePassword&apos;: &apos;tea123456&apos;,
+                   &apos;keyAlias&apos;     : &apos;android&apos;,
+                   &apos;keyPassword&apos;  : &apos;tea123456&apos;]
+
+    java = [&apos;javaVersion&apos;: JavaVersion.VERSION_1_8]
+
+    dependence = [&apos;libCardview&apos; : &apos;com.android.support:cardview-v7:28.0.0&apos;,
+                  &apos;libAppcompat&apos;: &apos;com.android.support:appcompat-v7:28.0.0&apos;]
+}
+</code></pre><p>在根build中引入</p>
+<pre><code>apply from: this.file(&apos;common.gradle&apos;)
+</code></pre><p>在需要的build中使用</p>
+<pre><code>compileSdkVersion rootProject.ext.android.compileSdkVersion
+implementation rootProject.ext.dependence.libCardview
+</code></pre><p>方式三：</p>
+<p>在gradle.properties中定义<code>key:value</code>形式</p>
+<pre><code>mCompileSdkVersion = 28
+</code></pre><p>build中使用，默认都是字符串，需要转换</p>
+<pre><code>compileSdkVersion mCompileSdkVersion.toInteger()
+</code></pre><h3 id="5-3、file相关API"><a href="#5-3、file相关API" class="headerlink" title="5.3、file相关API"></a>5.3、file相关API</h3><p>文件路径获取</p>
+<pre><code>println getRootDir().absolutePath
+println getBuildDir().absolutePath
+println getProjectDir().absolutePath
+</code></pre><p>文件定位</p>
+<pre><code>apply from: this.file(&apos;common.gradle&apos;)
+
+println getContent(&apos;common.gradle&apos;)
+def getContent(String path){
+    try {
+        //路径是相对于当前project查找
+        def file = file(path)
+        return file.text
+    }catch (GradleException e){
+        println &quot;not found&quot;
+    }
+    return null
+}
+</code></pre><p>文件拷贝,在app的build中拷贝文件或者文件夹</p>
+<pre><code>copy {
+    from file(&apos;build/outputs/apk/&apos;)
+    into getRootProject().getBuildDir().path + &apos;/apk/&apos;
+    exclude {}//补拷贝的文件
+    rename {}//重命名
+}
+</code></pre><p>文件树</p>
+<pre><code>fileTree(&apos;src/main/assets/&apos;){FileTree fileTree -&gt;
+    fileTree.visit {FileTreeElement element -&gt;
+        println element.file.name
+        copy {
+            from element.file
+            into getRootProject().getBuildDir().path + &apos;/test/&apos;
+        }
+    }
+}
+</code></pre><h3 id="5-4、依赖相关API"><a href="#5-4、依赖相关API" class="headerlink" title="5.4、依赖相关API"></a>5.4、依赖相关API</h3><p>依赖</p>
+<pre><code>buildscript {    
+    //配置工程的仓库地址
+    repositories {    }
+    //配置工程的gradle插件依赖地址，app中的是项目的第三库依赖
+    dependencies {    }
+}
+</code></pre><p>依赖冲突常用解决办法</p>
+<pre><code>compile (&apos;rootProject.ext.dependence.libAutoScrollViewPager&apos;) {
+    exclude module: &apos;support-v4&apos;//排除依赖
+    exclude group: &apos;com.android.support&apos;
+    transitive false//禁止传递依赖
+}
+</code></pre><p>provided只在编译起作用，占位编译。</p>
+<h3 id="5-5、外部命令API"><a href="#5-5、外部命令API" class="headerlink" title="5.5、外部命令API"></a>5.5、外部命令API</h3><p>调用系统指令，执行<code>./gradlew apkcopy</code></p>
+<pre><code>task(name: &apos;apkcopy&apos;) {
+    doLast {
+        def srcPath = this.buildDir.path + &apos;/outputs/apk&apos;
+        def destPath = &apos;./target/apk&apos;
+        def command = &quot;mv -f ${srcPath} ${destPath}&quot;
+        exec {
+            try {
+                executable &apos;bash&apos;
+                args &apos;-c&apos;, command
+                println &apos;this command exec success&apos;
+            }catch(GradleException e){
+                println &apos;this command exec error&apos;
+            }
+        }
+    }
+}
+</code></pre><p>调用脚本</p>
+<pre><code>task stopTomcat(type:Exec) {
+    //dir
+    workingDir &apos;../tomcat/bin&apos;
+    //windows
+    commandLine &apos;cmd&apos;, &apos;/c&apos;, &apos;stop.bat&apos;
+    //linux
+    commandLine &apos;./stop.sh&apos;
+}
+</code></pre><h2 id="6、task"><a href="#6、task" class="headerlink" title="6、task"></a>6、task</h2><h3 id="两种定义方式"><a href="#两种定义方式" class="headerlink" title="两种定义方式"></a>两种定义方式</h3><pre><code>task helloTask (group: &apos;com.tea&apos;,description: &apos;study&apos;){
+    println &apos;---------helloTask&apos;
+}
+
+this.tasks.create(name : &apos;helloTask2&apos;){
+    setGroup(&apos;com.tea&apos;)
+    setDescription(&apos;study&apos;)
+    println &apos;---------helloTask2&apos;
+}
+</code></pre><h3 id="doFirst和doLast"><a href="#doFirst和doLast" class="headerlink" title="doFirst和doLast"></a>doFirst和doLast</h3><pre><code>task helloTask (group: &apos;com.tea&apos;,description: &apos;study&apos;){
+    println &apos;---------helloTask&apos;
+    doFirst {
+        println &apos;---------helloTask---doFirst&apos;
+    }
+}
+helloTask.doFirst{
+    println &apos;---------helloTask---doFirst2&apos;//比闭包的先执行
+}
+</code></pre><h3 id="统计Build时长"><a href="#统计Build时长" class="headerlink" title="统计Build时长"></a>统计Build时长</h3><pre><code>def startTime,endTime
+this.afterEvaluate {Project project -&gt;
+    def  preBuildTask = project.tasks.getByName(&apos;preBuild&apos;)
+    preBuildTask.doFirst {
+        startTime = System.currentTimeMillis()
+        println &quot;==============:&quot; + startTime
+    }
+    def buildTask = project.tasks.getByName(&apos;build&apos;)
+    buildTask.doLast {
+        endTime = System.currentTimeMillis()
+        println &quot;==============:&quot; + endTime
+        println &quot;==============:&quot; + (endTime - startTime)
+    }
+}
+</code></pre><h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><pre><code>task taskX {
+    doLast {
+        println &quot;taskX&quot;
+    }
+}
+task taskY {
+    doLast {
+        println &quot;taskY&quot;
+    }
+}
+//动态依赖
+task taskZ {
+    dependsOn this.tasks.findAll {
+        task -&gt;
+            println task.name
+            return task.name.startsWith(&apos;taskX&apos;)
+    }
+    doLast {
+        println &quot;taskZ&quot;
+    }
+}
+//静态依赖
+task taskZ(dependsOn: [taskX, taskY]) {
+    dependsOn this.tasks.findAll {
+        task -&gt; return task.name.startsWith(&apos;lib&apos;)
+    }
+    doLast {
+        println &quot;taskZ&quot;
+    }
+}
+//或者
+taskZ.dependsOn(taskX, taskY)
+</code></pre><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><pre><code>task writeTask{
+    //输入
+    inputs.property(&quot;key&quot;,&quot;value&quot;)
+    def data = inputs.getProperties()
+    //输出
+    outputs.file 文件
+    File file = outputs.getFiles().getSingleFile()
+}
+</code></pre><h3 id="执行顺序指定"><a href="#执行顺序指定" class="headerlink" title="执行顺序指定"></a>执行顺序指定</h3><pre><code>mustRunAfter
+</code></pre><h2 id="7、其他模块"><a href="#7、其他模块" class="headerlink" title="7、其他模块"></a>7、其他模块</h2><h3 id="7-1、SourceSet"><a href="#7-1、SourceSet" class="headerlink" title="7.1、SourceSet"></a>7.1、SourceSet</h3><p>修改资源路径</p>
+<pre><code>sourceSets {
+    main{
+        jniLibs.srcDirs = [&apos;libs&apos;]//修改so库文件位置
+    }
+}
+</code></pre><p>给res分模块分包</p>
+<pre><code>sourceSets {
+    main{
+        res.srcDirs = [&apos;src/main/res&apos;,
+                       &apos;src/main/res-ad&apos;,
+                       &apos;src/main/res-tea&apos;]
+    }
+}
+</code></pre><h3 id="7-2、自定义plugin"><a href="#7-2、自定义plugin" class="headerlink" title="7.2、自定义plugin"></a>7.2、自定义plugin</h3><p>main下的java替换成groovy，新建.groovy类：</p>
+<pre><code>class GradleStudyPlugin implements Plugin&lt;Project&gt;{
+    @Override
+    void apply (Project project){
+        project.extensions.create(&apos;comTea&apos;,xxx（groovy类）)    
+    }
+
+}
+</code></pre><p>自定义task的类</p>
+<pre><code>class xxxxx extend DefaultTask{
+    @TaskAction
+    void doAction(){
+        //执行于gradle执行阶段的代码
+    }
+}
+</code></pre><p>main/resources/META-INF.gradle/包名.properties:</p>
+<pre><code>implementation-class=包名.类名
+</code></pre><p>build.gradle为：</p>
+<pre><code>apply plugin: &apos;groovy&apos;
+sourceSets {
+    main{
+        groovy {
+            srcDir &apos;src/main/groovy&apos;
+        }
+        resources {
+            srcDir &apos;src/main/resources&apos;
+        }
+    }
+}
+</code></pre><p>引用和传参</p>
+<pre><code>apply plugin: &apos;包名&apos;
+
+comTea{
+    //传参
+}
+</code></pre><h3 id="7-3、修改apk名字"><a href="#7-3、修改apk名字" class="headerlink" title="7.3、修改apk名字"></a>7.3、修改apk名字</h3><p>app的build中</p>
+<pre><code>this.afterEvaluate {
+    this.android.applicationVariants.all { variant -&gt;
+        def output = variant.outputs.first()
+        def apkName = &quot;app-${variant.baseName}&quot; + &quot;-${variant.versionName}.apk&quot;
+        output.outputFile = new File(output.outputFile.parent,apkName)
+        println &quot;------------------&quot;
+    }
+} 
+</code></pre><h2 id="8、Jenkins"><a href="#8、Jenkins" class="headerlink" title="8、Jenkins"></a>8、Jenkins</h2><pre><code>java -jar jenkins.war 
+</code></pre>
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="../../../../img/reward-alipay.jpg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="../../../../img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2019/11/29/30.adb命令/" class="pre-post btn btn-default" title='adb命令'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">adb命令</span>
+        </a>
+    
+    
+        <a href="/2019/07/07/28.手写实现EventBus/" class="next-post btn btn-default" title='手写实现EventBus'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">手写实现EventBus</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、介绍和环境搭建"><span class="toc-text">1、介绍和环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、语法"><span class="toc-text">2、语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、基础语法"><span class="toc-text">2.1、基础语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、闭包"><span class="toc-text">2.2、闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、列表list"><span class="toc-text">2.3、列表list</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、映射map"><span class="toc-text">2.4、映射map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、范围range"><span class="toc-text">2.5、范围range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6、面向对象"><span class="toc-text">2.6、面向对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、高级用法"><span class="toc-text">3、高级用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1、json文件处理"><span class="toc-text">3.1、json文件处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2、xml读取和生成"><span class="toc-text">3.2、xml读取和生成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3、文件操作"><span class="toc-text">3.3、文件操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、Gradle介绍"><span class="toc-text">4、Gradle介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、Project"><span class="toc-text">5、Project</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1、Project相关API"><span class="toc-text">5.1、Project相关API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2、属性相关API"><span class="toc-text">5.2、属性相关API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3、file相关API"><span class="toc-text">5.3、file相关API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4、依赖相关API"><span class="toc-text">5.4、依赖相关API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5、外部命令API"><span class="toc-text">5.5、外部命令API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、task"><span class="toc-text">6、task</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两种定义方式"><span class="toc-text">两种定义方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#doFirst和doLast"><span class="toc-text">doFirst和doLast</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统计Build时长"><span class="toc-text">统计Build时长</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#依赖"><span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入输出"><span class="toc-text">输入输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行顺序指定"><span class="toc-text">执行顺序指定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、其他模块"><span class="toc-text">7、其他模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1、SourceSet"><span class="toc-text">7.1、SourceSet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2、自定义plugin"><span class="toc-text">7.2、自定义plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3、修改apk名字"><span class="toc-text">7.3、修改apk名字</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、Jenkins"><span class="toc-text">8、Jenkins</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
