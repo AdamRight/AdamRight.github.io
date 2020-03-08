@@ -237,25 +237,7 @@ system(&quot;pause&quot;);
 <p><code>*(p + 1)</code>:指针位移一个单位，一个单位是多少个字节，取决于指针的类型。</p>
 </blockquote>
 <h3 id="7、指针的长度"><a href="#7、指针的长度" class="headerlink" title="7、指针的长度"></a>7、指针的长度</h3><p>不管变量的类型是什么，它的内存地址的长度一定是相同的；类型不同只决定变量占用的内存空间不同；32位环境下，内存地址长度都是4个字节，64位环境下，内存地址长度都是8个字节。</p>
-<h3 id="8、多级指针"><a href="#8、多级指针" class="headerlink" title="8、多级指针"></a>8、多级指针</h3><ul>
-<li>int* p; int 类型的一级指针 int** p2; int 类型的二级指针 </li>
-<li>二级指针变量只能保存一级指针变量的地址</li>
-<li>有几个<em> 就是几级指针 int**</em> 三级指针</li>
-<li><p>通过int类型三级指针 操作int类型变量的值 ***p</p>
-<pre><code>int i = 123;
-//int类型一级指针 
-int* p = &amp;i;
-//int 类型 二级指针 二级指针只能保存一级指针的地址 
-int** p2 = &amp;p;
-//int 类型 三级指针  三级指针只能保存二级指针的地址 
-int*** p3 = &amp;p2;
-//通过p3 取出 i的值
-printf(&quot;***p3 = %d\n&quot;, ***p3);
-</code></pre></li>
-<li><p>多级指针案例 取出子函数中临时变量的地址</p>
-</li>
-</ul>
-
+<h3 id="8、多级指针"><a href="#8、多级指针" class="headerlink" title="8、多级指针"></a>8、多级指针</h3>
     </div>
     
         <div class="reward">
