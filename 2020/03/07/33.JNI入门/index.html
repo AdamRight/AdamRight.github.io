@@ -237,8 +237,252 @@ system(&quot;pause&quot;);
 <p><code>*(p + 1)</code>:指针位移一个单位，一个单位是多少个字节，取决于指针的类型。</p>
 </blockquote>
 <h3 id="7、指针的长度"><a href="#7、指针的长度" class="headerlink" title="7、指针的长度"></a>7、指针的长度</h3><p>不管变量的类型是什么，它的内存地址的长度一定是相同的；类型不同只决定变量占用的内存空间不同；32位环境下，内存地址长度都是4个字节，64位环境下，内存地址长度都是8个字节。</p>
-<h3 id="8、多级指针"><a href="#8、多级指针" class="headerlink" title="8、多级指针"></a>8、多级指针</h3><p>int* p; int 类型的一级指针 int** p2; int 类型的二级指针 </p>
+<h3 id="8、多级指针"><a href="#8、多级指针" class="headerlink" title="8、多级指针"></a>8、多级指针</h3><p>二级指针变量只能保存一级指针变量的地址，有几个<code>*</code>就是几级指针</p>
+<pre><code>int i = 123;
+//int类型一级指针 
+int* p = &amp;i;
+//int 类型 二级指针 二级指针只能保存一级指针的地址 
+int** p2 = &amp;p;
+//int 类型 三级指针  三级指针只能保存二级指针的地址 
+int*** p3 = &amp;p2;
+//通过p3 取出 i的值
+printf(&quot;***p3 = %d\n&quot;, ***p3);
+</code></pre><h3 id="9、堆、栈、静态内存、动态内存"><a href="#9、堆、栈、静态内存、动态内存" class="headerlink" title="9、堆、栈、静态内存、动态内存"></a>9、堆、栈、静态内存、动态内存</h3><p>栈内存:系统自动分配，系统自动销毁，连续的内存区域，向低地址扩展，大小固定，栈上分配的内存称为静态内存。</p>
+<p>静态内存分配：子函数执行完，子函数中的所有局部变量都会被销毁，内存释放，但内存地址不可能被销毁，只是地址上的值没了。</p>
+<p>堆内存：程序员手动分配（java：new，c：malloc），空间不连续，大小取决于系统的虚拟内存，C程序员手动回收free，java自动回收，堆上分配的内存称为动态内存。</p>
+<pre><code>#include&lt;stdio.h&gt;    
+#include&lt;stdlib.h&gt;    
+main(){ 
+   printf(&quot;请输入班级的人数:&quot;);
+   int count;
+   scanf(&quot;%d&quot;,&amp;count);
+   //申请一块堆内存
+   int* pointer = malloc(sizeof(int)*count);
+   int i;
+   for(i = 0;i&lt;count;i++){
+         printf(&quot;请输入第%d个学生的学号:&quot;,i+1);
+         scanf(&quot;%d&quot;, pointer+i);
+         }  
+   for(i = 0;i&lt;count;i++){
+         printf(&quot;第%d个学生的学号是:%d\n&quot;,i+1,*(pointer+i));  
+         } 
+   printf(&quot;请输入插班生的人数:&quot;);
+   //声明一个变量increment用来保存 插班生的人数 
+   int increment;
+   //接受用户的输入 
+   scanf(&quot;%d&quot;,&amp;increment);
+   //重新申请一块足够大的内存 
+   //如果 malloc申请到的内存后面还有足够的空间 realloc会在malloc申请的内存空间后继续申请足够大的内存空间
+   //如果 malloc申请到的内存后面没有足够的空间 realloc会找到一块足够大的堆内存 并且把 malloc申请到的内存中的值复制过来 
+  pointer = realloc(pointer,sizeof(int)*(count+increment));
+  for(i = count;i&lt;count+increment;i++){
+         printf(&quot;请输入第%d个学生的学号:&quot;,i+1);
+         scanf(&quot;%d&quot;, pointer+i);
+        }
+  for(i = count;i&lt;count+increment;i++){
+        printf(&quot;第%d个学生的学号是:%d\n&quot;,i+1,*(pointer+i));  
+        }
+   system(&quot;pause&quot;); 
+} 
+</code></pre><h3 id="10、结构体"><a href="#10、结构体" class="headerlink" title="10、结构体"></a>10、结构体</h3><p>结构体的大小大于等于结构体中每一变量的占字节数的和;结构体的大小是最大的那个变量所占字节数的整数倍。</p>
+<blockquote>
+<p>c结构体类似java的class。struct来声明c的结构体。C结构体中不能定义函数，可以定义函数指针 。 </p>
+</blockquote>
+<pre><code>#include&lt;stdio.h&gt;    
+#include&lt;stdlib.h&gt;    
+void study(){
+           printf(&quot;good good study!\n&quot;);
+           }
+typedef struct Student{
+      int age;  //8
+      int score;  // 4
+      char sex;   //1
+      void(*studypointer)();
+      } stud;
+main(){    
+ stud stu = {18,100,&apos;f&apos;};
+ stu.studypointer = &amp;study;
+ stu.studypointer();
+ struct Student* stuPointer = &amp;stu;
+ printf(&quot;*stuPointer.age = %d\n&quot;,(*stuPointer).age);
+ (*stuPointer).sex =&apos;m&apos;;
+ printf(&quot;stu.sex = %c\n&quot;,stu.sex);
+ printf(&quot;stuPointer-&gt;age = %d&quot;,stuPointer-&gt;age);
+ //printf(&quot;stu.age = %hd\n&quot;,stu.age);
+ //printf(&quot;stu.score = %d\n&quot;,stu.score);
+ //printf(&quot;stu.sex = %c\n&quot;,stu.sex);
+ // printf(&quot;结构体student占%d个字节\n&quot;,sizeof(stu));
+       system(&quot;pause&quot;); 
+} 
+</code></pre><h3 id="11、联合体"><a href="#11、联合体" class="headerlink" title="11、联合体"></a>11、联合体</h3><p><code>union</code>长度等于联合体中定义的变量当中最长的那个,联合体只能保存一个变量的值,联合体共用同一块内存</p>
+<h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><p>c++开发jni代码时 env不再是结构体Jninativeinterface的二级指针。<code>_JNIEnv</code>是C++的结构体，C++的结构体可以定义函数。<code>env</code>是<code>JNIEnv</code>的一级指针,也就是结构体<code>_JNIEnv</code>的一级指针。<code>env-&gt;</code>来调用结构体里的函数。</p>
+<h2 id="am命令"><a href="#am命令" class="headerlink" title="am命令"></a>am命令</h2><p>am命令:在adb shell里可以通过am命令进行一些操作如启动activity Service 启动浏览器等等。</p>
+<pre><code>#include &lt;jni.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;android/log.h&gt;
+    #define LOG_TAG &quot;System.out&quot;
+    #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
+int ppid;
+JNIEXPORT void JNICALL Java_com__cfork_demo_MainActivity_cfork
+  (JNIEnv * env, jobject obj){
+    int pid = fork();
+    //fork成功的分叉出一个子进程 会返回当前进程的id 但是只能在主进程中fork成功
+    //在子进程中运行fork 会返回0 但是不能再分叉出新的进程
+    //fork的返回值可能三种  &gt;0  == 0 &lt;0
+    FILE* file;
+    if(pid&gt;0){
+        LOGD(&quot;pid = %d&quot;,pid);
 
+    }else if(pid == 0){
+        //拿到父进程的进程编号
+
+        LOGD(&quot;pid == 0&quot;);
+        while(1){
+            ppid = getppid();
+            //如果父进程的进程编号为1 说明父进程被杀死了
+            if(ppid == 1){
+                LOGD(&quot;ppid =%d&quot;,ppid);
+                file = fopen(&quot;/data/data/com.cfork.demo&quot;,&quot;r&quot;);
+                if(file == NULL){
+                    //打开网页 调用am命令
+                    execlp(&quot;am&quot;, &quot;am&quot;, &quot;start&quot;, &quot;--user&quot;,&quot;0&quot;,&quot;-a&quot;, &quot;android.intent.action.VIEW&quot;, &quot;-d&quot;, &quot;http://www.baidu.com&quot;, (char *) NULL);
+                }else{
+                    execlp(&quot;am&quot;, &quot;am&quot;, &quot;start&quot;, &quot;--user&quot;,&quot;0&quot;, &quot;-n&quot; , &quot;com.cfork.demo/com.cfork.demo.MainActivity&quot;,(char *) NULL);
+
+                }
+                break;
+            }
+                    LOGD(&quot;sub process is running&quot;);
+                    sleep(2);
+        }
+    }else{
+        LOGD(&quot;pid&lt;0 &quot;);
+    }
+
+}
+</code></pre><h2 id="JNI"><a href="#JNI" class="headerlink" title="JNI"></a>JNI</h2><p>c本地函数命名规则:<code>Java_包名_类名_本地方法名</code>。</p>
+<p>参数<code>jobject thiz</code>：调用本地函数的java对象，在这个例子中，就是MainActivity的实例。</p>
+<p>参数<code>JNIEnv* env</code>：是结构体JNINativeInterface的二级指针。JNIEnv是结构体JNINativeInterface的一级指针，操作一级指针用<code>(*env)-&gt;</code>。JNINativeInterface结构体中定义了大量的函数指针，这些函数指针在jni开发中很常用。</p>
+<p>C代码</p>
+<pre><code>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;jni.h&gt;
+
+jstring Java_com_vcredit_cdemo_MainActivity_stringFromJNI(JNIEnv* env,jobject thiz){
+    char* cstr = &quot;hello from c!&quot;;
+    return (*env)-&gt;NewStringUTF(env,cstr);
+}
+</code></pre><p>C++代码</p>
+<pre><code>#include &lt;jni.h&gt;
+#include &lt;string&gt;
+
+extern &quot;C&quot; JNIEXPORT jstring JNICALL
+Java_com_vcredit_cdemo_MainActivity_stringFromJNI(
+        JNIEnv *env,
+        jobject /* this */) {
+    std::string hello = &quot;Hello from C++&quot;;
+    return env-&gt;NewStringUTF(hello.c_str());
+}
+</code></pre><h3 id="java传参数给c"><a href="#java传参数给c" class="headerlink" title="java传参数给c"></a>java传参数给c</h3><p>Java给C传递<code>int</code>，<code>String</code>和<code>int[]</code>，并且返回:</p>
+<pre><code>#include &lt;jni.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+//传递数字，并返回数字    
+JNIEXPORT jint JNICALL
+Java_com_vcredit_cdemo_MainActivity_intFromJNI(JNIEnv *env, jobject thiz, jint a, jint b) {
+    return a + b;
+}
+
+char *_JString2CStr(JNIEnv *env, jstring jstr) {
+    char *rtn = NULL;
+    jclass clsstring = (*env)-&gt;FindClass(env, &quot;java/lang/String&quot;);
+    jstring strencode = (*env)-&gt;NewStringUTF(env, &quot;GB2312&quot;);
+    jmethodID mid = (*env)-&gt;GetMethodID(env, clsstring, &quot;getBytes&quot;, &quot;(Ljava/lang/String;)[B&quot;);
+    jbyteArray barr = (jbyteArray) (*env)-&gt;CallObjectMethod(env, jstr, mid,
+                                                            strencode); // String .getByte(&quot;GB2312&quot;);
+    jsize alen = (*env)-&gt;GetArrayLength(env, barr);
+    jbyte *ba = (*env)-&gt;GetByteArrayElements(env, barr, JNI_FALSE);
+    if (alen &gt; 0) {
+        rtn = (char *) malloc(alen + 1); //&quot;\0&quot;
+        memcpy(rtn, ba, alen);
+        rtn[alen] = 0;
+    }
+    (*env)-&gt;ReleaseByteArrayElements(env, barr, ba, 0);
+    return rtn;
+}
+
+//传递字符串，并返回字符串
+JNIEXPORT jstring JNICALL
+Java_com_vcredit_cdemo_MainActivity_stringChange(JNIEnv *env, jobject thiz, jstring string) {
+    char *cstr = _JString2CStr(env, string);
+    int length = strlen(cstr);
+    int i;
+    for (i = 0; i &lt; length; i++) {
+        *(cstr + i) += 1;
+    }
+    return (*env)-&gt;NewStringUTF(env, cstr);
+}
+
+//传递int数组，并返回数组
+JNIEXPORT jintArray JNICALL
+Java_com_vcredit_cdemo_MainActivity_arrIncrease(JNIEnv *env, jobject thiz, jintArray jArray) {
+    jsize length = (*env)-&gt;GetArrayLength(env, jArray);
+    jint *arrayPointer = (*env)-&gt;GetIntArrayElements(env, jArray, NULL);
+    int i;
+    for (i = 0; i &lt; length; i++) {
+        *(arrayPointer + i) += 10;
+    }
+    (*env)-&gt;SetIntArrayRegion(env, jArray, 0, length, arrayPointer);
+    return jArray;
+}
+</code></pre><h3 id="在C中打印log"><a href="#在C中打印log" class="headerlink" title="在C中打印log"></a>在C中打印log</h3><pre><code>#include &lt;android/log.h&gt;
+#define LOG_TAG &quot;System.out&quot;
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
+
+//使用
+LOGD(&quot;length = %d&quot;,length);
+</code></pre><h3 id="c调用Java"><a href="#c调用Java" class="headerlink" title="c调用Java"></a>c调用Java</h3><p>C调用Java空参方法</p>
+<pre><code>JNIEXPORT void JNICALL
+Java_com_vcredit_cdemo_MainActivity_callbackvoidmethod(JNIEnv* env, jobject thiz) {
+    jclass claz = (*env)-&gt;FindClass(env, &quot;com/vcredit/cdemo/MainActivity&quot;);
+    jmethodID methodID = (*env)-&gt;GetMethodID(env, claz, &quot;helloFromJava&quot;, &quot;()V&quot;);
+    (*env)-&gt;CallVoidMethod(env, thiz, methodID);
+}
+
+public void helloFromJava() {
+    Log.d(&quot;-----rrrrr&quot;, &quot;hello from java&quot;);
+}
+</code></pre><blockquote>
+<p>注意FindClass路径用<code>/</code>。</p>
+</blockquote>
+<p>C调用Java有Int参数方法并返回</p>
+<pre><code>JNIEXPORT void JNICALL
+Java_com_vcredit_cdemo_MainActivity_callbackintmethod(JNIEnv *env, jobject thiz) {
+    jclass claz = (*env)-&gt;FindClass(env, &quot;com/vcredit/cdemo/MainActivity&quot;);
+    jmethodID methodID = (*env)-&gt;GetMethodID(env, claz, &quot;add&quot;, &quot;(II)I&quot;);
+    int result = (*env)-&gt;CallIntMethod(env, thiz, methodID, 6, 6);
+    LOGD(&quot;result = %d&quot;, result);
+}
+
+public int add(int x, int y) {
+    return x + y;
+}
+</code></pre><p>C调用Java有String参数方法</p>
+<pre><code>JNIEXPORT void JNICALL
+Java_com_vcredit_cdemo_MainActivity_callbackStringmethod(JNIEnv *env, jobject thiz) {
+    jclass claz = (*env)-&gt;FindClass(env, &quot;com/vcredit/cdemo/MainActivity&quot;);
+    jmethodID methodID = (*env)-&gt;GetMethodID(env, claz, &quot;printString&quot;, &quot;(Ljava/lang/String;)V&quot;);
+    jstring result = (*env)-&gt;NewStringUTF(env, &quot;hello from c&quot;);
+    (*env)-&gt;CallVoidMethod(env, thiz, methodID, result);
+}
+
+public void printString(String s) {
+    Log.d(&quot;-----rrrrr&quot;, s);
+}
+</code></pre>
     </div>
     
         <div class="reward">
@@ -294,7 +538,7 @@ system(&quot;pause&quot;);
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C基本语法"><span class="toc-text">C基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、C的基本数据类型"><span class="toc-text">1、C的基本数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、占位符和字符串"><span class="toc-text">2、占位符和字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、内存地址的概念"><span class="toc-text">3、内存地址的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、指针"><span class="toc-text">4、指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、指针交换两个数的值"><span class="toc-text">5、指针交换两个数的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、数组和指针的关系"><span class="toc-text">6、数组和指针的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、指针的长度"><span class="toc-text">7、指针的长度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、多级指针"><span class="toc-text">8、多级指针</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C基本语法"><span class="toc-text">C基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、C的基本数据类型"><span class="toc-text">1、C的基本数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、占位符和字符串"><span class="toc-text">2、占位符和字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、内存地址的概念"><span class="toc-text">3、内存地址的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、指针"><span class="toc-text">4、指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、指针交换两个数的值"><span class="toc-text">5、指针交换两个数的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、数组和指针的关系"><span class="toc-text">6、数组和指针的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、指针的长度"><span class="toc-text">7、指针的长度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、多级指针"><span class="toc-text">8、多级指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9、堆、栈、静态内存、动态内存"><span class="toc-text">9、堆、栈、静态内存、动态内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10、结构体"><span class="toc-text">10、结构体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11、联合体"><span class="toc-text">11、联合体</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c"><span class="toc-text">c++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#am命令"><span class="toc-text">am命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JNI"><span class="toc-text">JNI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#java传参数给c"><span class="toc-text">java传参数给c</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在C中打印log"><span class="toc-text">在C中打印log</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c调用Java"><span class="toc-text">c调用Java</span></a></li></ol></li></ol>
         
     </div>
 </aside>
