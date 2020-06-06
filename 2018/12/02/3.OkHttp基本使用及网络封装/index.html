@@ -409,7 +409,7 @@ try {
 }
 </code></pre><p><strong>Okhttp实现缓存方式：在<code>CacheInterceptor</code>缓存拦截器中，根据缓存策略<code>CacheStrategy</code>分配。<code>Cache</code>和<code>DiskLruCache</code>。</strong></p>
 <h3 id="2-10、文件下载"><a href="#2-10、文件下载" class="headerlink" title="2.10、文件下载"></a>2.10、文件下载</h3><pre><code>OkHttpClient client = new OkHttpClient();
-Request request = new Request.Builder().url(&quot;http://www.qq.com&quot;).
+Request request = new Request.Builder().url(&quot;文件地址&quot;).
         addHeader(&quot;Accept-Encoding&quot;,&quot;identity&quot;).
         addHeader(&quot;Range&quot;, &quot;bytes=0-&quot;).
         build();
