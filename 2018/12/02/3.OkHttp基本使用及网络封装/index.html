@@ -358,7 +358,8 @@ try {
 } catch (IOException e) {
     e.printStackTrace();
 }
-</code></pre><h3 id="2-8、定义拦截器"><a href="#2-8、定义拦截器" class="headerlink" title="2.8、定义拦截器"></a>2.8、定义拦截器</h3><pre><code>//定义拦截器
+</code></pre><p><strong>boundary</strong></p>
+<h3 id="2-8、定义拦截器"><a href="#2-8、定义拦截器" class="headerlink" title="2.8、定义拦截器"></a>2.8、定义拦截器</h3><pre><code>//定义拦截器
 Interceptor interceptor = new Interceptor() {
     @Override
     public Response intercept(Chain chain) throws IOException {
@@ -407,6 +408,24 @@ try {
     e.printStackTrace();
 }
 </code></pre><p><strong>Okhttp实现缓存方式：在<code>CacheInterceptor</code>缓存拦截器中，根据缓存策略<code>CacheStrategy</code>分配。<code>Cache</code>和<code>DiskLruCache</code>。</strong></p>
+<h3 id="2-10、文件下载"><a href="#2-10、文件下载" class="headerlink" title="2.10、文件下载"></a>2.10、文件下载</h3><pre><code>OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder().url(&quot;http://www.qq.com&quot;).
+        addHeader(&quot;Accept-Encoding&quot;,&quot;identity&quot;).
+        addHeader(&quot;Range&quot;, &quot;bytes=0-&quot;).
+        build();
+try {
+    Response response = client.newCall(request).execute();
+    System.out.println(&quot;content-length : &quot;+response.body().contentLength());
+    if (response.isSuccessful()) {
+        Headers headers = response.headers();
+        for (int i = 0; i &lt; headers.size(); i++) {
+            System.out.println(headers.name(i) + &quot; : &quot; + headers.value(i));
+        }
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+</code></pre><p><strong><code>content-length</code>和<code>Range</code>。</strong></p>
 <h2 id="3、源码分析"><a href="#3、源码分析" class="headerlink" title="3、源码分析"></a>3、源码分析</h2><p>Volley是基于HttpUrlConnection；OkHttp基于Okio(原生的JavaIO + 自定义封装) + Socket连接。</p>
 <p>2、拦截器</p>
 <p>RealCall类中的<code>getResponseWithInterceptorChain()</code>方法作用：将请求Request转变成响应Response。</p>
@@ -502,7 +521,7 @@ try {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、网络基础"><span class="toc-text">1、网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、请求和响应"><span class="toc-text">1.1、请求和响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、Cookie-、Session和Token"><span class="toc-text">1.2、Cookie 、Session和Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、Http缓存"><span class="toc-text">1.3、Http缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、HTTP状态码"><span class="toc-text">1.4、HTTP状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、Https"><span class="toc-text">1.5、Https</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、OkHttp"><span class="toc-text">2、OkHttp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、官网和导入"><span class="toc-text">2.1、官网和导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、测试地址"><span class="toc-text">2.2、测试地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、get请求"><span class="toc-text">2.3、get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、post请求"><span class="toc-text">2.4、post请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、设置url参数-HttpUrl"><span class="toc-text">2.5、设置url参数-HttpUrl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6、请求头的设置-addHeader"><span class="toc-text">2.6、请求头的设置-addHeader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7、上传文件"><span class="toc-text">2.7、上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8、定义拦截器"><span class="toc-text">2.8、定义拦截器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9、缓存"><span class="toc-text">2.9、缓存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、源码分析"><span class="toc-text">3、源码分析</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、网络基础"><span class="toc-text">1、网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、请求和响应"><span class="toc-text">1.1、请求和响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、Cookie-、Session和Token"><span class="toc-text">1.2、Cookie 、Session和Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、Http缓存"><span class="toc-text">1.3、Http缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、HTTP状态码"><span class="toc-text">1.4、HTTP状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、Https"><span class="toc-text">1.5、Https</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、OkHttp"><span class="toc-text">2、OkHttp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、官网和导入"><span class="toc-text">2.1、官网和导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、测试地址"><span class="toc-text">2.2、测试地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、get请求"><span class="toc-text">2.3、get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、post请求"><span class="toc-text">2.4、post请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、设置url参数-HttpUrl"><span class="toc-text">2.5、设置url参数-HttpUrl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6、请求头的设置-addHeader"><span class="toc-text">2.6、请求头的设置-addHeader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7、上传文件"><span class="toc-text">2.7、上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8、定义拦截器"><span class="toc-text">2.8、定义拦截器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9、缓存"><span class="toc-text">2.9、缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-10、文件下载"><span class="toc-text">2.10、文件下载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、源码分析"><span class="toc-text">3、源码分析</span></a></li></ol>
         
     </div>
 </aside>
