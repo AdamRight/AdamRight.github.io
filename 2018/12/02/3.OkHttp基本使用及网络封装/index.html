@@ -406,7 +406,7 @@ try {
 } catch (IOException e) {
     e.printStackTrace();
 }
-</code></pre><p><strong> Okhttp实现缓存方式：在<code>CacheInterceptor</code>缓存拦截器中，根据缓存策略<code>CacheStrategy</code>分配。<code>Cache</code>和<code>DiskLruCache</code>。</strong></p>
+</code></pre><p><strong>Okhttp实现缓存方式：在<code>CacheInterceptor</code>缓存拦截器中，根据缓存策略<code>CacheStrategy</code>分配。<code>Cache</code>和<code>DiskLruCache</code>。</strong></p>
 <h2 id="3、源码分析"><a href="#3、源码分析" class="headerlink" title="3、源码分析"></a>3、源码分析</h2><p>Volley是基于HttpUrlConnection；OkHttp基于Okio(原生的JavaIO + 自定义封装) + Socket连接。</p>
 <p>2、拦截器</p>
 <p>RealCall类中的<code>getResponseWithInterceptorChain()</code>方法作用：将请求Request转变成响应Response。</p>
