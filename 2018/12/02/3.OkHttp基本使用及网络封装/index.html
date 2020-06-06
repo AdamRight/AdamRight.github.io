@@ -190,6 +190,8 @@ Cookie：服务端的之前给我们的Cookie
 Status Code 响应状态码
 Content-Type: 响应返回的类型 （文本，utf-8）图片等等
 Set-Cookie：服务端给我们的Cookie，要保存起来，下次带过去
+</code></pre><p>请求头和响应头详细参考网站</p>
+<pre><code>http://tools.jb51.net/table/http_header
 </code></pre><h3 id="1-2、Cookie-、Session和Token"><a href="#1-2、Cookie-、Session和Token" class="headerlink" title="1.2、Cookie 、Session和Token"></a>1.2、Cookie 、Session和Token</h3><p>Cookie 、Session、Token：都是用来做持久化处理的，目的就是让客户端和服务端相互认识。Http请求默认是不持久的没有状态的，谁也不认识谁。</p>
 <p>Cookie: 是存放在客户端的信息，这个信息是来自于服务器返回的信息，下次请求带过去，如果用户离开网站后，如果Cookie已过期一般是会被清除的。如果Cookie没过期下次访问网站还是会带过去。（相对危险）</p>
 <p>Session: 是存放在服务器上面的客户端临时信息，用户离开网站是会被清除的。（相对安全，耗资源）</p>
@@ -404,7 +406,7 @@ try {
 } catch (IOException e) {
     e.printStackTrace();
 }
-</code></pre><p>在<code>CacheInterceptor</code>缓存拦截器中，根据缓存策略<code>CacheStrategy</code>分配。</p>
+</code></pre><p><strong> Okhttp实现缓存方式：在<code>CacheInterceptor</code>缓存拦截器中，根据缓存策略<code>CacheStrategy</code>分配。<code>Cache</code>和<code>DiskLruCache</code>。</strong></p>
 <h2 id="3、源码分析"><a href="#3、源码分析" class="headerlink" title="3、源码分析"></a>3、源码分析</h2><p>Volley是基于HttpUrlConnection；OkHttp基于Okio(原生的JavaIO + 自定义封装) + Socket连接。</p>
 <p>2、拦截器</p>
 <p>RealCall类中的<code>getResponseWithInterceptorChain()</code>方法作用：将请求Request转变成响应Response。</p>
