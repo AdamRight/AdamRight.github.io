@@ -276,7 +276,8 @@ new Thread(new Runnable() {
 <h3 id="workQueue的参数"><a href="#workQueue的参数" class="headerlink" title="workQueue的参数"></a>workQueue的参数</h3><pre><code>BlockingQueue: 先进先出的一个队列 FIFO（rxjava，AsyncTask）
 SynchronousQueue: 线程安全的队列，它里面是没有固定的缓存的（OKHttp所使用的）
 PriorityBlockingQueue: 无序的可以根据优先级进行排序，指定的对象要实现Comparable作比较
-</code></pre><p>PriorityBlockingQueue示例</p>
+</code></pre><p>有限队列<code>SynchronousQueue</code>和<code>ArrayBlockingQueue</code>；无限队列<code>LinkedBloackingQueue</code>。</p>
+<p>PriorityBlockingQueue示例</p>
 <pre><code>public class Request implements Runnable,Comparable&lt;Request&gt;{
     @Override
     public void run() {
