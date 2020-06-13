@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>Hexo</title>
+<title>HTTP和加密和HTTPS | Hexo</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -128,9 +128,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="">
+        <h1 id="HTTP和加密和HTTPS">
             
-	            NO Title!
+	            HTTP和加密和HTTPS
             
         </h1>
         <div class="post-meta">
@@ -138,8 +138,8 @@
     
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/ ">
-             
+        <a href="/categories/Android">
+            Android
         </a>
     </span>
     
@@ -149,6 +149,10 @@
         <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
+                
+                    <a href="/tags/HTTP" title='HTTP'>
+                        HTTP
+                    </a>
                 
             
         </span>
@@ -271,7 +275,26 @@ api.updateAvatar(id, avatarBody)
 <p>If-None-Match</p>
 <p>Cache-Control: private / public</p>
 <hr>
-<h2 id="2、加密"><a href="#2、加密" class="headerlink" title="2、加密"></a>2、加密</h2>
+<h2 id="2、加密"><a href="#2、加密" class="headerlink" title="2、加密"></a>2、加密</h2><h3 id="2-1、对称加密"><a href="#2-1、对称加密" class="headerlink" title="2.1、对称加密"></a>2.1、对称加密</h3><hr>
+<p>DES（56位密钥，密钥太短而逐渐被弃用）、AES（128位、192位、256位密钥，现在最流行）。</p>
+<hr>
+<h3 id="2-2、非对称加密"><a href="#2-2、非对称加密" class="headerlink" title="2.2、非对称加密"></a>2.2、非对称加密</h3><hr>
+<p>使用公钥对数据进行加密得到密文；使用私钥对数据进行解密得到原数据。</p>
+<p>缺点：双方公钥都暴漏，可能会伪造数据。</p>
+<p>如果用私钥对数据加密，使用公钥是可以解密得到原数据的。但是一般不要互换，签名和验证就是这样，传输数据包括原数据+签名数据。</p>
+<p>用非对称加密+签名来传输数据 -&gt; 密文 + 签名数据。 解决上面的缺点。</p>
+<p>经典算法：RSA（可用于加密和签名）、DSA（仅用于签名，但速度更快）。</p>
+<hr>
+<h3 id="2-3、Base64"><a href="#2-3、Base64" class="headerlink" title="2.3、Base64"></a>2.3、Base64</h3><hr>
+<p>将二进制数据转换成由64个字符组成的字符串的编码算法。64个字符：<code>a-z</code>、<code>A-Z</code>、<code>0-9</code>、<code>+</code>、<code>/</code>。</p>
+<p>作用：让原数据具有字符串所具有的特性，如可以放在URL中传输、可以保存到文本文件。</p>
+<p>Base64的缺点：因为自身的原理（6位变8位），因此每次Base64编码之后，数据都会增大约1/3，所以会影响存储和传输性能。</p>
+<p><strong>Base64并不是加密</strong>。</p>
+<p>Base58：比特币使用的编码方式，去掉了Base64中的数字<code>0</code>，字母大写<code>O</code>，字母大写<code>I</code>，和字母小写<code>l</code>，以及 “+” 和 “/“ 符号，用于比特币地址的表示。</p>
+<hr>
+<h3 id="2-4、URL-encoding"><a href="#2-4、URL-encoding" class="headerlink" title="2.4、URL encoding"></a>2.4、URL encoding</h3><hr>
+<hr>
+
     </div>
     
         <div class="reward">
@@ -317,33 +340,6 @@ api.updateAvatar(id, avatarBody)
 </div>
 
 
-    <div id="comments">
-        
-    
-    <div id="vcomments" class="valine"></div>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="/assets/valine.min.js"></script>
-
-    <script>
-        new Valine({
-            av: AV,
-            el: '#vcomments',
-            appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
-            appKey: 'erIpQac4azoCmgfBB7Dl9maa',
-            placeholder: '说点什么吧',
-            notify: false,
-            verify: false,
-            avatar: 'mm',
-            meta: 'nick,mail'.split(','),
-            pageSize: '10',
-            path: window.location.pathname,
-            lang: 'zh-CN'.toLowerCase()
-        })
-    </script>
-
-
-    </div>
-
 
 
 
@@ -354,7 +350,7 @@ api.updateAvatar(id, avatarBody)
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-text">HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、HTTP的概念"><span class="toc-text">1.1、HTTP的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、URL"><span class="toc-text">1.2、URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、报文"><span class="toc-text">1.3、报文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、请求方法"><span class="toc-text">1.4、请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、HTTP状态码"><span class="toc-text">1.5、HTTP状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、Content-Type"><span class="toc-text">1.5、Content-Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6、Header"><span class="toc-text">1.6、Header</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7、Range"><span class="toc-text">1.7、Range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8、Cache"><span class="toc-text">1.8、Cache</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、加密"><span class="toc-text">2、加密</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-text">HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、HTTP的概念"><span class="toc-text">1.1、HTTP的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、URL"><span class="toc-text">1.2、URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、报文"><span class="toc-text">1.3、报文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、请求方法"><span class="toc-text">1.4、请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、HTTP状态码"><span class="toc-text">1.5、HTTP状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、Content-Type"><span class="toc-text">1.5、Content-Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6、Header"><span class="toc-text">1.6、Header</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7、Range"><span class="toc-text">1.7、Range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8、Cache"><span class="toc-text">1.8、Cache</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、加密"><span class="toc-text">2、加密</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、对称加密"><span class="toc-text">2.1、对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、非对称加密"><span class="toc-text">2.2、非对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、Base64"><span class="toc-text">2.3、Base64</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、URL-encoding"><span class="toc-text">2.4、URL encoding</span></a></li></ol></li></ol>
         
     </div>
 </aside>
