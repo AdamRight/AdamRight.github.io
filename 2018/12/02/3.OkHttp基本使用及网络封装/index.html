@@ -178,33 +178,14 @@
     </div>
     
     <div class="post-body post-content">
-        <h2 id="1、网络基础"><a href="#1、网络基础" class="headerlink" title="1、网络基础"></a>1、网络基础</h2><p>OSI的7层协议：从下到上分别是7-应用层、6-表示层、5-会话层、4-传输层、3-网络层、2-数据链路层、1-物理层。</p>
-<p>TCP三次握手（作用是建立连接）和四次挥手（作用是断开连接）—— 保证数据传输可靠性。</p>
-<h3 id="1-1、请求和响应"><a href="#1-1、请求和响应" class="headerlink" title="1.1、请求和响应"></a>1.1、请求和响应</h3><p>Http请求：通信是以<strong>报文</strong>的形式。</p>
-<p>客户端请求（Request）</p>
-<pre><code>请求报文 = 请求头 + 空行 + 请求数据
-Accept: 客户端可以处理的数据格式
-Cookie：服务端的之前给我们的Cookie
-</code></pre><p>服务端响应（Response）</p>
-<pre><code>响应报文 = 响应头 + 空行 + 响应数据
-Status Code 响应状态码
-Content-Type: 响应返回的类型 （文本，utf-8）图片等等
-Set-Cookie：服务端给我们的Cookie，要保存起来，下次带过去
-</code></pre><p>请求头和响应头详细参考网站</p>
-<pre><code>http://tools.jb51.net/table/http_header
-</code></pre><h3 id="1-2、Cookie-、Session和Token"><a href="#1-2、Cookie-、Session和Token" class="headerlink" title="1.2、Cookie 、Session和Token"></a>1.2、Cookie 、Session和Token</h3><p>Cookie 、Session、Token：都是用来做持久化处理的，目的就是让客户端和服务端相互认识。Http请求默认是不持久的没有状态的，谁也不认识谁。</p>
+        <h2 id="1、网络基础"><a href="#1、网络基础" class="headerlink" title="1、网络基础"></a>1、网络基础</h2><h3 id="1-2、Cookie-、Session和Token"><a href="#1-2、Cookie-、Session和Token" class="headerlink" title="1.2、Cookie 、Session和Token"></a>1.2、Cookie 、Session和Token</h3><p>Cookie 、Session、Token：都是用来做持久化处理的，目的就是让客户端和服务端相互认识。Http请求默认是不持久的没有状态的，谁也不认识谁。</p>
 <p>Cookie: 是存放在客户端的信息，这个信息是来自于服务器返回的信息，下次请求带过去，如果用户离开网站后，如果Cookie已过期一般是会被清除的。如果Cookie没过期下次访问网站还是会带过去。（相对危险）</p>
 <p>Session: 是存放在服务器上面的客户端临时信息，用户离开网站是会被清除的。（相对安全，耗资源）</p>
 <p>Token（App）”令牌”：用户身份的验证，有点类似于Cookie，相对来说更安全。</p>
 <h3 id="1-3、Http缓存"><a href="#1-3、Http缓存" class="headerlink" title="1.3、Http缓存"></a>1.3、Http缓存</h3><p>Cache-Control（缓存策略）：Public、private、no-cache、max-age 、no-store（不缓存）</p>
 <p>Expires（缓存的过期策略）：指名了缓存数据有效的绝对时间，告诉客户端到了这个时间点（比照客户端时间点）后本地缓存就作废了，在这个时间点内客户端可以认为缓存数据有效，可直接从缓存中加载展示。</p>
 <p>如果有缓存并且过期了那么发起请求，服务端会给我们数据？（不一定会给）服务器的数据没有变动就不会给，状态码会变为304，自己拿之前过期的缓存。</p>
-<h3 id="1-4、HTTP状态码"><a href="#1-4、HTTP状态码" class="headerlink" title="1.4、HTTP状态码"></a>1.4、HTTP状态码</h3><pre><code>1xx:  Infomational (信息状态码) ，接收的请求正在处理
-2xx:  Succeed(成功)，请求正常处理完毕,如 200
-3xx:  Redirection(重定向)，需要进行附加操作，一般是没有响应数据返回的，如 304（Not,modified）307 
-4xx:  Client Error (客户端的错误)，服务器无法处理请求，如 404
-5xx:  Server Error (服务端的错误)，服务器处理请求出错，如 500
-</code></pre><h3 id="1-5、Https"><a href="#1-5、Https" class="headerlink" title="1.5、Https"></a>1.5、Https</h3><p>Http和Https的区别：</p>
+<h3 id="1-5、Https"><a href="#1-5、Https" class="headerlink" title="1.5、Https"></a>1.5、Https</h3><p>Http和Https的区别：</p>
 <pre><code>Https = Http + 加密 + 验证身份 + 完整
 端口：Http (80)  Https (443)
 </code></pre><p>Http的缺点：数据是没有加密传输，可能遭遇窃听；不验证通信方的身份，可能会遭遇伪装；无法验证报文的完整性，可能会遭遇篡改。</p>
@@ -521,7 +502,7 @@ try {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、网络基础"><span class="toc-text">1、网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、请求和响应"><span class="toc-text">1.1、请求和响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、Cookie-、Session和Token"><span class="toc-text">1.2、Cookie 、Session和Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、Http缓存"><span class="toc-text">1.3、Http缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、HTTP状态码"><span class="toc-text">1.4、HTTP状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、Https"><span class="toc-text">1.5、Https</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、OkHttp"><span class="toc-text">2、OkHttp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、官网和导入"><span class="toc-text">2.1、官网和导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、测试地址"><span class="toc-text">2.2、测试地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、get请求"><span class="toc-text">2.3、get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、post请求"><span class="toc-text">2.4、post请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、设置url参数-HttpUrl"><span class="toc-text">2.5、设置url参数-HttpUrl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6、请求头的设置-addHeader"><span class="toc-text">2.6、请求头的设置-addHeader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7、上传文件"><span class="toc-text">2.7、上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8、定义拦截器"><span class="toc-text">2.8、定义拦截器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9、缓存"><span class="toc-text">2.9、缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-10、文件下载"><span class="toc-text">2.10、文件下载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、源码分析"><span class="toc-text">3、源码分析</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、网络基础"><span class="toc-text">1、网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、Cookie-、Session和Token"><span class="toc-text">1.2、Cookie 、Session和Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、Http缓存"><span class="toc-text">1.3、Http缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、Https"><span class="toc-text">1.5、Https</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、OkHttp"><span class="toc-text">2、OkHttp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、官网和导入"><span class="toc-text">2.1、官网和导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、测试地址"><span class="toc-text">2.2、测试地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、get请求"><span class="toc-text">2.3、get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、post请求"><span class="toc-text">2.4、post请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、设置url参数-HttpUrl"><span class="toc-text">2.5、设置url参数-HttpUrl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6、请求头的设置-addHeader"><span class="toc-text">2.6、请求头的设置-addHeader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7、上传文件"><span class="toc-text">2.7、上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8、定义拦截器"><span class="toc-text">2.8、定义拦截器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9、缓存"><span class="toc-text">2.9、缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-10、文件下载"><span class="toc-text">2.10、文件下载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、源码分析"><span class="toc-text">3、源码分析</span></a></li></ol>
         
     </div>
 </aside>
