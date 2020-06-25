@@ -325,7 +325,31 @@ api.updateAvatar(id, avatarBody)
 <p>Hash是单向过程，往往是不可逆的，无法进行逆向恢复操作，因此<strong>Hash不属于编码</strong>。</p>
 <p>Hash是单向过程，无法进行逆向回复操作，因此<strong>Hash不属于加密。（MD5不是加密！）</strong></p>
 <hr>
-<h2 id="3、HTTPS"><a href="#3、HTTPS" class="headerlink" title="3、HTTPS"></a>3、HTTPS</h2>
+<h2 id="3、HTTPS"><a href="#3、HTTPS" class="headerlink" title="3、HTTPS"></a>3、HTTPS</h2><h3 id="3-1、TCP-IP协议"><a href="#3-1、TCP-IP协议" class="headerlink" title="3.1、TCP/IP协议"></a>3.1、TCP/IP协议</h3><hr>
+<p>具体分层：</p>
+<p><code>Application Layer</code>应用层：HTTP、FTP、DNS。</p>
+<p><code>Transport Layer</code>传输层：TCP、UDP。</p>
+<p><code>Internet Layer</code>网络层：IP。</p>
+<p><code>Link Layer</code>数据链路层：以太网、Wi-Fi。</p>
+<p>长连接：因为移动网络并不在<code>Internet</code>中，而是在运营商的内网，并不具有真正的公网 <code>IP</code>，因此当某个 <code>TCP</code>连接在一段时间不通信之后，网关会出于网络性能考虑而关闭这条 <code>TCP</code> 连接和公网的连接通道，导致这个 <code>TCP</code> 端口不再能收到外部通信消息，即 <code>TCP</code> 连接被动关闭。</p>
+<p>长连接的实现方式：心跳。即在一定间隔时间内，使用 TCP 连接发送超短无意义消息来让网关不能将自己定义为「空闲连接」，从而防止网关将自己的连接关闭。</p>
+<hr>
+<h3 id="3-2、HTTPS"><a href="#3-2、HTTPS" class="headerlink" title="3.2、HTTPS"></a>3.2、HTTPS</h3><hr>
+<p>定义：HTTP在SSL（或 TLS）上工作。 简单说就是加密通信的HTTP。</p>
+<p>工作原理：在客户端和服务器之间协商出一套对称密钥，每次发送信息之前将内容加密，收到之后解密，达到内容的加密传输。</p>
+<p>为什么不直接用非对称加密？非对称加密由于使用了复杂了数学原理，因此计算相当复杂，如果完全使用非对称加密来加密通信内容，会严重影响网络通信的性能。</p>
+<p>HTTPS 连接建⽴的过程</p>
+<pre><code>客户端请求建立连接Client Hello
+服务端Server Hello
+服务器发送证书（非对称加密的公钥、签名等）- 信任建立
+客户端发给服务器Pre-master Secret（非对称加密随机数）
+客户端通知：将使用加密通信
+客户端发送：Finished
+服务器通知：将使用加密通信
+服务器发送：Finished
+</code></pre><p>客户端加密密钥（客户端发送消息）、服务端加密密钥（服务端发送消息）、客户端MAC Secret（验证身份）、服务端MAC Secret（验证身份）。</p>
+<hr>
+
     </div>
     
         <div class="reward">
@@ -381,7 +405,7 @@ api.updateAvatar(id, avatarBody)
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-text">HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、HTTP的概念"><span class="toc-text">1.1、HTTP的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、URL"><span class="toc-text">1.2、URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、报文"><span class="toc-text">1.3、报文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、请求方法"><span class="toc-text">1.4、请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、HTTP状态码"><span class="toc-text">1.5、HTTP状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、Content-Type"><span class="toc-text">1.5、Content-Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6、Header"><span class="toc-text">1.6、Header</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7、Range"><span class="toc-text">1.7、Range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8、Cache"><span class="toc-text">1.8、Cache</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、加密"><span class="toc-text">2、加密</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、对称加密"><span class="toc-text">2.1、对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、非对称加密"><span class="toc-text">2.2、非对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、Base64"><span class="toc-text">2.3、Base64</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、序列化"><span class="toc-text">2.4、序列化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、Hash"><span class="toc-text">2.5、Hash</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、HTTPS"><span class="toc-text">3、HTTPS</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-text">HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、HTTP的概念"><span class="toc-text">1.1、HTTP的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、URL"><span class="toc-text">1.2、URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、报文"><span class="toc-text">1.3、报文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、请求方法"><span class="toc-text">1.4、请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、HTTP状态码"><span class="toc-text">1.5、HTTP状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、Content-Type"><span class="toc-text">1.5、Content-Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6、Header"><span class="toc-text">1.6、Header</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7、Range"><span class="toc-text">1.7、Range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8、Cache"><span class="toc-text">1.8、Cache</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、加密"><span class="toc-text">2、加密</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、对称加密"><span class="toc-text">2.1、对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、非对称加密"><span class="toc-text">2.2、非对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、Base64"><span class="toc-text">2.3、Base64</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、序列化"><span class="toc-text">2.4、序列化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、Hash"><span class="toc-text">2.5、Hash</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、HTTPS"><span class="toc-text">3、HTTPS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1、TCP-IP协议"><span class="toc-text">3.1、TCP/IP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2、HTTPS"><span class="toc-text">3.2、HTTPS</span></a></li></ol></li></ol>
         
     </div>
 </aside>
