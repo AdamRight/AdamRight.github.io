@@ -384,8 +384,7 @@ Android Framework 层的 Binder 驱动
                     // method:就是我们调用的具体的方法(例如：login方法) 去解析方法属性和参数属性吧？
                     ServiceMethod serviceMethod = loadServiceMethod(method);
                     // 解析完成之后，调用OKHttp框架执行请求
-                    OkHttpCall okHttpCall = new OkHttpCall&lt;&gt;(serviceMethod,
-                            args);
+                    OkHttpCall okHttpCall = new OkHttpCall&lt;&gt;(serviceMethod, args);
                     // 这个最终是 ExecutorCallAdapterFactory 里面的 CallAdapter 所以最终返回的是 ExecutorCallbackCall
                     return serviceMethod.callAdapter.adapt(okHttpCall);
                 }
@@ -408,7 +407,20 @@ Android Framework 层的 Binder 驱动
                 }
             });
 }
-</code></pre>
+</code></pre><p>通过<code>Retrofit.create(class)</code>方法创建出Service interface的实例，从而使得Service中配置的方法变得可用，这是Retrofit代码结构的核心。</p>
+<p><code>Retrofit.create(class)</code>方法内部，使用<code>Proxy.newProxyInstance()</code>方法创建Service实例。create方法会为参数中的interface创建一个对象，这个对象实现了interface中的每一个方法，并且每个方法的实现都是类似的：调用对象实例内部的一个<code>InvocationHandler</code>成员变量的<code>invoke()</code>方法，并把自己的方法信息传递进去。实质上就是动态代理：interface中的方法全部由一个另外设定的<code>InvocationHandler</code>对象来进行代理操作。并且，这些方法的具体实现是在运行时生成interface实例时才确定的，而不是在编译时。</p>
+<p><code>invoke()</code>方法中创建interface实例，有三行关键代码：</p>
+<p>1、ServiceMethod的创建：</p>
+<pre><code>ServiceMethod&lt;Object, Object&gt; serviceMethod = （ServiceMethod&lt;Object, Object&gt;）loadServiceMethod(method);
+</code></pre><p>这行代码负责读取interface中原方法的信息，包括返回值、方法注解、参数类型、参数注解，并将这些信息做初步分支。</p>
+<p>2、OkHttpCall的创建</p>
+<pre><code>OkHttpCall&lt;Object&gt; okHttpCall = new OkHttpCall&lt;&gt;(serviceMethod, args);
+</code></pre><p>OkHttpCall是<code>retrofit2.Call</code>的子类。这行代码负责将ServiceMethod封装进<code>retrofit2.Call</code>对象，这个对象可以在需要的时候，例如<code>enqueue()</code>方法被调用的时候，利用ServiceMethod中包含的信息来创建一个<code>okhttp3.Call</code>对象，并调用这个<code>okhttp3.Call</code>对象来进行网络请求的发起，然后对结果进行预处理，如类型转换。</p>
+<p>3、<code>adapt()</code>方法</p>
+<pre><code>return serviceMethod.callAdapter.adapt(okHttpCall);
+</code></pre><p>这个方法会使用ServiceMethod中的callAdapter对象来把okHttpCall对象进行转换,生成一个新的<code>retrofit2.Call</code>对象，在这个新的Call对象中，后台线程发起的请求，会在相应返回后，从主线程中调用回调方法，实现线程的自动切换。</p>
+<p>另外这个方法不止可以生成新的<code>retrofit2.Call</code>对象，也可以生成别的类型对象，例如RaJava的Obervable，来让Retrofit可以和RaJava结合使用。</p>
+
     </div>
     
         <div class="reward">
