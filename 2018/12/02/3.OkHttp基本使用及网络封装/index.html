@@ -408,8 +408,77 @@ try {
 }
 </code></pre><p><strong><code>content-length</code>和<code>Range</code>。</strong></p>
 <h2 id="3、源码分析"><a href="#3、源码分析" class="headerlink" title="3、源码分析"></a>3、源码分析</h2><p>Volley是基于HttpUrlConnection；OkHttp基于Okio(原生的JavaIO + 自定义封装) + Socket连接。</p>
-<p>2、拦截器</p>
-<p>RealCall类中的<code>getResponseWithInterceptorChain()</code>方法作用：将请求Request转变成响应Response。</p>
+<h3 id="3-1、OkHttpClient"><a href="#3-1、OkHttpClient" class="headerlink" title="3.1、OkHttpClient"></a>3.1、OkHttpClient</h3><hr>
+<p>OkHttpClient相当于配置中心，所有的请求都会共享这些配置，比如出错是否重试、共享的连接池。主要配置有：</p>
+<pre><code>//调度器，主要管理线程，用于调度后台发起的网络请求，有后台总请求数和单主机总请求数的控制。
+//private int maxRequests = 64;private int maxRequestsPerHost = 5;
+final Dispatcher dispatcher;
+
+//支持的应用层协议，即HTTP/1.1、HTTP/2等
+final List&lt;Protocol&gt; protocols;
+
+//应用层支持的Socket设置，即使用明文传输（HTTP）还是某个版本的TLS（用于HTTPS）。
+final List&lt;ConnectionSpec&gt; connectionSpecs;
+
+//自己定义的拦截器配置
+final List&lt;Interceptor&gt; interceptors;
+
+//自己定义的和网络请求交互的Interceptor配置。
+final List&lt;Interceptor&gt; networkInterceptors;
+
+//管理CooKie的控制器
+final CookieJar cookieJar;
+
+//Cache存储的配置。默认没有，如果要用，需要自己配置存储的文件位置和存储空间上线
+final @Nullable Cache cache;
+
+//验证HTTPS握手过程中下载到的证书所属者是否和自己要访问的主机名一致
+final HostnameVerifier hostnameVerifier;
+
+//一般用于防止网站证书被人仿制，开发者可以做自签名
+final CertificatePinner certificatePinner;
+
+//自动重新认证。配置后，如果401，会直接调用authenticator
+final Authenticator authenticator;
+
+//遇到重定向，是否自动follow在HTTP和HTTPS之间切换重定向
+final boolean followSslRedirects;
+
+//遇到重定向，是否自动follow
+final boolean followRedirects;
+
+//请求失败是否重试。重试只适用于同一个域名的多个IP切换重试、Socket失效重试等
+final boolean retryOnConnectionFailure;
+
+//建立连接的超时时间
+final int connectTimeout;
+
+//发起请求到读到响应数据的超时时间
+final int readTimeout;
+
+//发起请求并被目标服务器接受的超时时间
+final int writeTimeout;
+</code></pre><p>CertificatePinner的配置公钥示例：</p>
+<pre><code>String hostname = &quot;publicobject.com&quot;;
+CertificatePinner certificatePinner = new CertificatePinner.Builder()
+.add(hostname, &quot;sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=&quot;)
+.build();
+OkHttpClient client = OkHttpClient.Builder()
+.certificatePinner(certificatePinner)
+.build();
+Request request = new Request.Builder()
+.url(&quot;https://&quot; + hostname)
+.build();
+client.newCall(request).execute();
+</code></pre><hr>
+<h3 id="3-2、RealCall"><a href="#3-2、RealCall" class="headerlink" title="3.2、RealCall"></a>3.2、RealCall</h3><hr>
+<p>newCall(Request)方法会返回一个RealCall对象，它是Call接口的实现。</p>
+<pre><code>final class RealCall implements Call {
+</code></pre><p>当调用RealCall.execute()的时候，getResponseWithInterceptorChain()会被调用，它会发起网络请求并拿到返回的响应，装进一个Response对象并作为返回值返回。</p>
+<pre><code>Response result = getResponseWithInterceptorChain();
+</code></pre><p>RealCall.enqueue()被调用的时候大同小异，区别在于enqueue会使用Dispatcher的线程池来把请求放在后台线程进行，但实质上使用的同样也是getResponseWithInterceptorChain()方法。</p>
+<p>getResponseWithInterceptorChain()方法里做的事：把所有配置好的Interceptor放在一个List里，然后作为参数，创建一个RealInterceptorChain对象，并调用chain.proceed(request)发起请求和获取响应。</p>
+<p>RealCall类中的<code>getResponseWithInterceptorChain()</code>方法作用：<strong>将请求Request转变成响应Response</strong>。</p>
 <pre><code>Response getResponseWithInterceptorChain() throws IOException {
     // 拦截器的一个集合
     List&lt;Interceptor&gt; interceptors = new ArrayList&lt;&gt;();
@@ -427,17 +496,26 @@ try {
 
     return chain.proceed(originalRequest);
 }
-</code></pre><p>2.1、RetryAndFollowUpInterceptor</p>
+</code></pre><hr>
+<h3 id="3-3、拦截器"><a href="#3-3、拦截器" class="headerlink" title="3.3、拦截器"></a>3.3、拦截器</h3><p>在RealInterceptorChain中，多个Interceptor会依次调用自己的intercepter方法，方法会做三件事情</p>
+<p>1、对请求进行预处理</p>
+<p>2、预处理之后，重新调用RealInterceptorChain.proceed()把请求交给下一个Interceptor。</p>
+<p>3、在下一个Interceptor处理完成并返回之后，拿到Response进行后续处理</p>
+<p>从上到下，每级Interceptor：</p>
+<p>1、首先是开发者自己设置的addInterceptor(Interceptor)，在所有其他Interceptor处理之前，进行最早的预处理工作，以及收到Response之后，做最后的善后工作。如果有统一的header要添加，可以在这里设置。</p>
+<p>2、RetryAndFollowUpInterceptor：</p>
 <p>处理重试的一个拦截器，会去处理一些异常，只要不是致命的异常就会重新发起一次请求（把Request给下级），如果是致命的异常就会抛给上一级；<br>会处理一些重定向等等，比如 3XX 307、407 就会从头部中获取新的路径，生成一个新的请求交给下一级（重新发起一次请求）。</p>
-<p>2.2、BridgeInterceptor</p>
-<p>做一个简单的处理，设置一些通用的请求头，Content-Type、Connection、Content-Length、Cookie。做一些返回的处理，如果返回的数据被压缩了采用ZipSource, 保存 Cookie。</p>
-<p>2.3、CacheInterceptor</p>
+<p>3、BridgeInterceptor</p>
+<p>做一个简单的处理，设置一些通用的请求头，Content-Type、Connection、Content-Length的计算和添加、Cookie。做一些返回的处理，如果返回的数据被压缩了采用ZipSource, 保存 Cookie。</p>
+<p>4、CacheInterceptor</p>
 <p>在缓存可用的情况下，直接读取本地的缓存的数据，如果本地的缓存没有直接去服务器，如果本地的缓存有，首先判断有没有缓存策略，然后判断有没有过期，如果没有过期直接拿缓存，如果过期了需要添加一些之前头部信息如<code>If-Modified-Since</code>,这个时候后台有可能会返回304代表还是可以拿本地缓存，每次读取到新的响应后做一次缓存。</p>
-<p>2.4、ConnectInterceptor</p>
+<p>5、ConnectInterceptor</p>
 <p>findHealthyConnection()找一个连接，首先判断有没有健康的，没有就创建（建立Scoket,握手连接），连接缓存得到一条结论：OkHttp是基于原生的Socket + okio（原生IO的封装）。封装HttpCodec里面封装了okio的Source（输入）和Sink(输出)，我们通过HttpCodec就可以操作 Socket的输入输出，我们就可以像服务器写数据和读取返回数据。</p>
-<p>2.5、CallServerInterceptor</p>
-<p>写数据和读取数据，写头部信息，写body表单信息等等。</p>
-<p>2.6、连接三个核心类（连接复用）</p>
+<p>TCP连接（如果是HTTP）或者是建立在TCP连接之上的TLS连接（如果是HTTPS），并且会创建出对应的HttpCodec对象（用于编码解码HTTP请求）。</p>
+<p>6、addNetworkInterceptor：开发者自己设置的，这里设置的Interceptor会看到每个请求和响应的数据（包括重定向以及重试的一些中间请求和响应），并且看到的是完整原始数据，而不死没加Content-Length的请求数据，或者Body还没有被gzip解压的响应数据。</p>
+<p>7、CallServerInterceptor</p>
+<p>它负责实质的请求和响应的I/O操作，即往Socket里写入请求数据和从Socket里读取响应数据。Socket就是TCP的端口。</p>
+<p>连接三个核心类（连接复用）</p>
 <p>RealConnection: 建立连接的一个对象的封装</p>
 <p>ConnectionPool：保存了连接</p>
 <p>StreamAllocation: 找一些连接，做一下封装</p>
@@ -502,7 +580,7 @@ try {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、网络基础"><span class="toc-text">1、网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、Cookie-、Session和Token"><span class="toc-text">1.2、Cookie 、Session和Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、Http缓存"><span class="toc-text">1.3、Http缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、Https"><span class="toc-text">1.5、Https</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、OkHttp"><span class="toc-text">2、OkHttp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、官网和导入"><span class="toc-text">2.1、官网和导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、测试地址"><span class="toc-text">2.2、测试地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、get请求"><span class="toc-text">2.3、get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、post请求"><span class="toc-text">2.4、post请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、设置url参数-HttpUrl"><span class="toc-text">2.5、设置url参数-HttpUrl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6、请求头的设置-addHeader"><span class="toc-text">2.6、请求头的设置-addHeader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7、上传文件"><span class="toc-text">2.7、上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8、定义拦截器"><span class="toc-text">2.8、定义拦截器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9、缓存"><span class="toc-text">2.9、缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-10、文件下载"><span class="toc-text">2.10、文件下载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、源码分析"><span class="toc-text">3、源码分析</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、网络基础"><span class="toc-text">1、网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、Cookie-、Session和Token"><span class="toc-text">1.2、Cookie 、Session和Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、Http缓存"><span class="toc-text">1.3、Http缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、Https"><span class="toc-text">1.5、Https</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、OkHttp"><span class="toc-text">2、OkHttp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、官网和导入"><span class="toc-text">2.1、官网和导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、测试地址"><span class="toc-text">2.2、测试地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、get请求"><span class="toc-text">2.3、get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、post请求"><span class="toc-text">2.4、post请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、设置url参数-HttpUrl"><span class="toc-text">2.5、设置url参数-HttpUrl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6、请求头的设置-addHeader"><span class="toc-text">2.6、请求头的设置-addHeader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7、上传文件"><span class="toc-text">2.7、上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8、定义拦截器"><span class="toc-text">2.8、定义拦截器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9、缓存"><span class="toc-text">2.9、缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-10、文件下载"><span class="toc-text">2.10、文件下载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、源码分析"><span class="toc-text">3、源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1、OkHttpClient"><span class="toc-text">3.1、OkHttpClient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2、RealCall"><span class="toc-text">3.2、RealCall</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3、拦截器"><span class="toc-text">3.3、拦截器</span></a></li></ol></li></ol>
         
     </div>
 </aside>
