@@ -174,25 +174,34 @@
     </div>
     
     <div class="post-body post-content">
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><h3 id="1、数据结构分类"><a href="#1、数据结构分类" class="headerlink" title="1、数据结构分类"></a>1、数据结构分类</h3><p>数据结构就是把数据元素按照一定的关系组织起来的集合，用来组织和存储数据。</p>
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><h3 id="1、数据结构分类"><a href="#1、数据结构分类" class="headerlink" title="1、数据结构分类"></a>1、数据结构分类</h3><hr>
+<p>数据结构就是把数据元素按照一定的关系组织起来的集合，用来组织和存储数据。</p>
 <p>把数据结构分为逻辑结构和物理结构两大类。</p>
 <p>逻辑结构分类：集合结构、线性结构、树形结构、图形结构。</p>
 <p>物理结构：顺序存储结构、链式存储结构。</p>
 <p>顺序存储结构：把数据元素放到地址连续的存储单元里面，其数据间的逻辑关系和物理关系是一致的 ，比如我们常用的<strong>数组就是顺序存储结构</strong>。<strong>查找快、插入删除慢</strong>。</p>
 <p>链式存储结构：是把数据元素存放在任意的存储单元里面，这组存储单元可以是连续的也可以是不连续的。此时，数据元素之间并不能反映元素间的逻辑关系，因此在链式存储结构中引进了一个指针存放数据元素的地址，这样通过地址就可以找到相关联数据元素的位置。<strong>查找慢，增删快</strong>。</p>
-<h3 id="2、算法介绍"><a href="#2、算法介绍" class="headerlink" title="2、算法介绍"></a>2、算法介绍</h3><p>算法是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用系统的方法解决问题的策略机制。也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。<strong>根据一定的条件，对一些数据进行计算，得到需要的结果</strong>。</p>
+<hr>
+<h3 id="2、算法介绍"><a href="#2、算法介绍" class="headerlink" title="2、算法介绍"></a>2、算法介绍</h3><hr>
+<p>算法是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用系统的方法解决问题的策略机制。也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。<strong>根据一定的条件，对一些数据进行计算，得到需要的结果</strong>。</p>
 <p>一个优秀的算法追求以下两个目标：1.花最少的时间完成需求；2.占用最少的内存空间完成需求。</p>
-<h3 id="3、算法的时间复杂度"><a href="#3、算法的时间复杂度" class="headerlink" title="3、算法的时间复杂度"></a>3、算法的时间复杂度</h3><p>算法的时间复杂度分析</p>
+<hr>
+<h3 id="3、算法的时间复杂度"><a href="#3、算法的时间复杂度" class="headerlink" title="3、算法的时间复杂度"></a>3、算法的时间复杂度</h3><hr>
+<p>算法的时间复杂度分析</p>
 <p>事后分析估算方法：计算方法执行时间<code>System.currentTimeMillis()</code>。</p>
 <p>事前分析估算方法：算法采用的策略和方案；问题的输入规模(所谓的问题输入规模就是输入量的多少)。最重要的就是把核心操作的次数和输入规模关联起来。</p>
 <p>总结：随着输入规模的增大，算法的常数操作可以忽略不计。随着输入规模的增大，与最高次项相乘的常数可以忽略。最高次项的指数大的，随着n的增长，结果也会变得增长特别快。算法函数中n最高次幂越小，算法效率越高。</p>
-<h3 id="4、时间复杂度大O记法"><a href="#4、时间复杂度大O记法" class="headerlink" title="4、时间复杂度大O记法"></a>4、时间复杂度大O记法</h3><p>执行次数=执行时间。用大写O()来体现算法时间复杂度的记法，我们称之为大O记法。</p>
+<hr>
+<h3 id="4、时间复杂度大O记法"><a href="#4、时间复杂度大O记法" class="headerlink" title="4、时间复杂度大O记法"></a>4、时间复杂度大O记法</h3><hr>
+<p>执行次数=执行时间。用大写O()来体现算法时间复杂度的记法，我们称之为大O记法。</p>
 <p>大O阶的表示法有以下几个规则可以使用：</p>
 <p>1.用常数1取代运行时间中的所有加法常数；</p>
 <p>2.在修改后的运行次数中，只保留高阶项；</p>
 <p>3.如果最高阶项存在，且常数因子不为1，则去除与这个项相乘的常数。</p>
 <p>复杂程度从低到高依次为：O(1)&lt;O(logn)&lt;O(n)&lt;O(nlogn)&lt;O(n^2)&lt;O(n^3)。</p>
-<h3 id="4、算法的空间复杂度"><a href="#4、算法的空间复杂度" class="headerlink" title="4、算法的空间复杂度"></a>4、算法的空间复杂度</h3><p>数据类型 内存占用字节数：byte 1、short 2、int 4、long 8、float 4、double 8、boolean 1、char 2。</p>
+<hr>
+<h3 id="5、算法的空间复杂度"><a href="#5、算法的空间复杂度" class="headerlink" title="5、算法的空间复杂度"></a>5、算法的空间复杂度</h3><hr>
+<p>数据类型 内存占用字节数：byte 1、short 2、int 4、long 8、float 4、double 8、boolean 1、char 2。</p>
 <p>计算机访问内存的方式都是一次一个字节。</p>
 <p>一个引用（机器地址）需要8个字节表示：</p>
 <pre><code>Date date = new Date()；//则date这个变量需要占用8个字节来表示
@@ -200,7 +209,9 @@
 <p>一般内存的使用，如果不够8个字节，都会被自动填充为8字节。</p>
 <p>java中数组被被限定为对象，他们一般都会因为记录长度而需要额外的内存，一个原始数据类型的数组一般需要24字节的头信息(16个自己的对象开销，4字节用于保存长度以及4个填充字节)再加上保存值所需的内存。</p>
 <pre><code>int[] temp=new int[n];//申请n*4个字节+数组自身头信息开销24个字节
-</code></pre><h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h3 id="1、Comparable接口"><a href="#1、Comparable接口" class="headerlink" title="1、Comparable接口"></a>1、Comparable接口</h3><pre><code>public class Student implements Comparable&lt;Student&gt;{
+</code></pre><hr>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h3 id="1、Comparable接口"><a href="#1、Comparable接口" class="headerlink" title="1、Comparable接口"></a>1、Comparable接口</h3><hr>
+<pre><code>public class Student implements Comparable&lt;Student&gt;{
     private String username;
     private int age;
 
@@ -262,7 +273,9 @@ public class TestComparable {
         }
     }
 }
-</code></pre><h3 id="2、冒泡排序"><a href="#2、冒泡排序" class="headerlink" title="2、冒泡排序"></a>2、冒泡排序</h3><p>比较相邻的元素。如果前一个元素比后一个元素大，就交换这两个元素的位置。最终最后位置的元素就是最大值。</p>
+</code></pre><hr>
+<h3 id="2、冒泡排序"><a href="#2、冒泡排序" class="headerlink" title="2、冒泡排序"></a>2、冒泡排序</h3><hr>
+<p>比较相邻的元素。如果前一个元素比后一个元素大，就交换这两个元素的位置。最终最后位置的元素就是最大值。</p>
 <pre><code>public class Bubble {
     /*
      *  对数组的元素进行排序
@@ -305,7 +318,9 @@ public class BubbleTest {
     }
 }
 </code></pre><p>冒泡排序的时间复杂度为O(N^2)。</p>
-<h3 id="3、选择排序"><a href="#3、选择排序" class="headerlink" title="3、选择排序"></a>3、选择排序</h3><p>每一次遍历的过程中，都假定第一个索引处的元素是最小值，和其他索引处的值依次进行比较，如果当前索引处的值大于其他某个索引处的值，则假定其他某个索引出的值为最小值，最后可以找到最小值所在的索引。然后交换第一个索引处和最小值所在的索引处的值。</p>
+<hr>
+<h3 id="3、选择排序"><a href="#3、选择排序" class="headerlink" title="3、选择排序"></a>3、选择排序</h3><hr>
+<p>每一次遍历的过程中，都假定第一个索引处的元素是最小值，和其他索引处的值依次进行比较，如果当前索引处的值大于其他某个索引处的值，则假定其他某个索引出的值为最小值，最后可以找到最小值所在的索引。然后交换第一个索引处和最小值所在的索引处的值。</p>
 <pre><code>public class Selection {
     /*
        对数组中的元素进行排序
@@ -352,7 +367,9 @@ public class SelectionTest {
     }
 }
 </code></pre><p>时间复杂度为O(N^2)。</p>
-<h3 id="4、插入排序"><a href="#4、插入排序" class="headerlink" title="4、插入排序"></a>4、插入排序</h3><p>把所有的元素分为两组，已经排序的和未排序的；找到未排序的组中的第一个元素，向已经排序的组中进行插入；倒叙遍历已经排序的元素，依次和待插入的元素进行比较，直到找到一个元素小于等于待插入元素，那么就把待插入元素放到这个位置，其他的元素向后移动一位。类似打扑克牌时，新牌往手里牌的排序。</p>
+<hr>
+<h3 id="4、插入排序"><a href="#4、插入排序" class="headerlink" title="4、插入排序"></a>4、插入排序</h3><hr>
+<p>把所有的元素分为两组，已经排序的和未排序的；找到未排序的组中的第一个元素，向已经排序的组中进行插入；倒叙遍历已经排序的元素，依次和待插入的元素进行比较，直到找到一个元素小于等于待插入元素，那么就把待插入元素放到这个位置，其他的元素向后移动一位。类似打扑克牌时，新牌往手里牌的排序。</p>
 <pre><code>public class Insertion {
     /*
        对数组a中的元素进行排序
@@ -399,7 +416,9 @@ public class InsertionTest {
     }
 }
 </code></pre><p>时间复杂度为O(N^2)。</p>
-<h3 id="5、希尔排序"><a href="#5、希尔排序" class="headerlink" title="5、希尔排序"></a>5、希尔排序</h3><p>选定一个增长量h，按照增长量h作为数据分组的依据，对数据进行分组；对分好组的每一组数据完成插入排序；减小增长量，最小减为1，重复第二步操作。</p>
+<hr>
+<h3 id="5、希尔排序"><a href="#5、希尔排序" class="headerlink" title="5、希尔排序"></a>5、希尔排序</h3><hr>
+<p>选定一个增长量h，按照增长量h作为数据分组的依据，对数据进行分组；对分好组的每一组数据完成插入排序；减小增长量，最小减为1，重复第二步操作。</p>
 <p>增长量h的确定：</p>
 <pre><code>int h=1
 while(h&lt;(数组长度/2)){
@@ -468,7 +487,9 @@ public class ShellTest {
         System.out.println(Arrays.toString(a));//{1,2,3,4,5,5,6,7,8,9}
     }
 }
-</code></pre><h3 id="6、归并排序"><a href="#6、归并排序" class="headerlink" title="6、归并排序"></a>6、归并排序</h3><p>尽可能的一组数据拆分成两个元素相等的子组，并对每一个子组继续拆分，直到拆分后的每个子组的元素个数是1为止。将相邻的两个子组进行合并成一个有序的大组；不断的重复步骤2，直到最终只有一个组为止。</p>
+</code></pre><hr>
+<h3 id="6、归并排序"><a href="#6、归并排序" class="headerlink" title="6、归并排序"></a>6、归并排序</h3><hr>
+<p>尽可能的一组数据拆分成两个元素相等的子组，并对每一个子组继续拆分，直到拆分后的每个子组的元素个数是1为止。将相邻的两个子组进行合并成一个有序的大组；不断的重复步骤2，直到最终只有一个组为止。</p>
 <pre><code>public class Merge {
     //归并所需要的辅助数组
     private static Comparable[] assist;
@@ -567,7 +588,9 @@ public class MergeTest {
     }
 }
 </code></pre><p>归并排序的时间复杂度为O(nlogn)。归并排序的缺点：需要申请额外的数组空间，导致空间复杂度提升，是典型的以空间换时间的操作。</p>
-<h3 id="7、快速排序"><a href="#7、快速排序" class="headerlink" title="7、快速排序"></a>7、快速排序</h3><p>首先设定一个分界值，通过该分界值将数组分成左右两部分；将大于或等于分界值的数据放到到数组右边，小于分界值的数据放到数组的左边。此时左边部分中各元素都小于或等于分界值，而右边部分中各元素都大于或等于分界值；</p>
+<hr>
+<h3 id="7、快速排序"><a href="#7、快速排序" class="headerlink" title="7、快速排序"></a>7、快速排序</h3><hr>
+<p>首先设定一个分界值，通过该分界值将数组分成左右两部分；将大于或等于分界值的数据放到到数组右边，小于分界值的数据放到数组的左边。此时左边部分中各元素都小于或等于分界值，而右边部分中各元素都大于或等于分界值；</p>
 <p>然后，左边和右边的数据可以独立排序。对于左侧的数组数据，又可以取一个分界值，将该部分数据分成左右两部分，同样在左边放置较小值，右边放置较大值。右侧的数组数据也可以做类似处理。</p>
 <p>重复上述过程，可以看出，这是一个递归定义。通过递归将左侧部分排好序后，再递归排好右侧部分的顺序。当左侧和右侧两个部分的数据排完序后，整个数组的排序也就完成了。</p>
 <p>切分原理：把一个数组切分成两个子数组的基本思想：</p>
@@ -665,10 +688,13 @@ public class QuickTest {
 }
 </code></pre><p>快速排序和归并排序是互补的：归并排序将数组分成两个子数组分别排序，并将有序的子数组归并从而将整个数组排序，而快速排序的方式则是当两个数组都有序时，整个数组自然就有序了。在归并排序中，一个数组被等分为两半，归并调用发生在处理整个数组之前，在快速排序中，切分数组的位置取决于数组的内容，递归调用发生在处理整个数组之后。</p>
 <p>快速排序的时间复杂度为O(nlogn)。</p>
-<h3 id="8、排序的稳定性"><a href="#8、排序的稳定性" class="headerlink" title="8、排序的稳定性"></a>8、排序的稳定性</h3><p>数组arr中有若干元素，其中A元素和B元素相等，并且A元素在B元素前面，如果使用某种排序算法排序后，能够保证A元素依然在B元素的前面，可以说这个该算法是稳定的。</p>
+<hr>
+<h3 id="8、排序的稳定性"><a href="#8、排序的稳定性" class="headerlink" title="8、排序的稳定性"></a>8、排序的稳定性</h3><hr>
+<p>数组arr中有若干元素，其中A元素和B元素相等，并且A元素在B元素前面，如果使用某种排序算法排序后，能够保证A元素依然在B元素的前面，可以说这个该算法是稳定的。</p>
 <p>如果一组数据只需要一次排序，则稳定性一般是没有意义的，如果一组数据需要多次排序，稳定性是有意义的。例如要排序的内容是一组商品对象，第一次排序按照价格由低到高排序，第二次排序按照销量由高到低排序，如果第二次排序使用稳定性算法，就可以使得相同销量的对象依旧保持着价格高低的顺序展现，只有销量不同的对象才需要重新排序。这样既可以保持第一次排序的原有意义，而且可以减少系统开销。</p>
 <p>稳定排序算法：冒泡排序、插入排序、归并排序。</p>
 <p>不稳定的排序算法：选择排序、希尔排序、快速排序。</p>
+<hr>
 
     </div>
     
@@ -725,7 +751,7 @@ public class QuickTest {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、算法的空间复杂度"><span class="toc-text">4、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li></ol>
         
     </div>
 </aside>
