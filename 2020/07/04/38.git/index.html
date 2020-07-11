@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>Android性能分析与优化 | Hexo</title>
+<title>Git | Hexo</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -128,9 +128,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="Android性能分析与优化">
+        <h1 id="Git">
             
-	            Android性能分析与优化
+	            Git
             
         </h1>
         <div class="post-meta">
@@ -150,8 +150,8 @@
         <span class="tags-meta">
             
                 
-                    <a href="/tags/性能" title='性能'>
-                        性能
+                    <a href="/tags/Git" title='Git'>
+                        Git
                     </a>
                 
             
@@ -163,7 +163,7 @@
         
         <span class="fa-wrap">
             <i class="fa fa-clock-o"></i>
-            <span class="date-meta">2020/06/26</span>
+            <span class="date-meta">2020/07/04</span>
         </span>
         
     
@@ -174,108 +174,85 @@
     </div>
     
     <div class="post-body post-content">
-        <h2 id="1、启动优化"><a href="#1、启动优化" class="headerlink" title="1、启动优化"></a>1、启动优化</h2><h3 id="1-1、启动类型"><a href="#1-1、启动类型" class="headerlink" title="1.1、启动类型"></a>1.1、启动类型</h3><hr>
-<p>冷启动流程：用户点击 -&gt; IPC -&gt; Process.start创建进程 -&gt; ActivityThread(单独进程的入口) -&gt; bindApplication(创建Application) -&gt; LifeCycle(Activity) -&gt; ViewRootImpl界面绘制</p>
-<p>冷启动之前会进行的操作：启动App，加载空白Window，创建进程。随后会创建Application，启动主线程，创建Activity，加载布局，布置屏幕，首帧绘制。主要对Application和Activity生命周期进行优化。</p>
-<p>热启动：后台切换到前台。</p>
-<p>温启动：只会重走Activity的生命周期。</p>
-<hr>
-<h3 id="1-2、启动时间"><a href="#1-2、启动时间" class="headerlink" title="1.2、启动时间"></a>1.2、启动时间</h3><hr>
-<p>1、adb方式：</p>
-<pre><code>adb shell am start -W 包名/包名.首屏Activity
+        <h2 id="创建和回退"><a href="#创建和回退" class="headerlink" title="创建和回退"></a>创建和回退</h2><hr>
+<p>下载地址</p>
+<pre><code>https://git-scm.com/download
+</code></pre><p>git分为工作区、暂存区、版本库。</p>
+<p>使用如下命令可以查看版本记录：</p>
+<pre><code>git log
+//简短log
+git log --pretty=oneline
 
-ThisTime:最后一个Activity启动耗时
-TotalTime：所有Activity启动耗时
-WaitTime：AMS启动Activity的总耗时
-</code></pre><p>2、手动打点方式：启动时埋点，可以线上使用</p>
-<p>开始时间Application</p>
-<pre><code>@Override
-protected void attachBaseContext(Context base) {
-    super.attachBaseContext(base);
-    //开始计时
-}
-</code></pre><p>结束计时</p>
-<pre><code>//Activity中
-@Override
-public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    //结束计时
-}
+git log --pretty=oneline --graph
+</code></pre><p>查看我们的操作记录，查看版本号：</p>
+<pre><code>git reflog
+</code></pre><p>使用如下命令查看当前工作树的状态：</p>
+<pre><code>git status
+</code></pre><p>创建仓库执行命令：</p>
+<pre><code>git init
+</code></pre><p>使用如下两条命令可以创建一个版本：</p>
+<pre><code>git add 文件名.格式
+git commit –m &apos;版本提交说明1&apos;
+</code></pre><p>撤销工作区修改可以使用(没使用add)： </p>
+<pre><code>git checkout -- 文件名.格式
+</code></pre><p>把暂存区的修改撤销掉，重新放回工作区(使用了add，没使用commit):</p>
+<pre><code>git reset HEAD 文件名.格式
+</code></pre><p>现在若想回到某一个版本，可以使用如下命令(使用了commit)：</p>
+<pre><code>git reset --hard HEAD^
 
-//或者Adapter
-@Override
-public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-    if (position == 0 &amp;&amp; !mHasRecorded) {
-        mHasRecorded = true;
-        holder.layout.getViewTreeObserver()
-                .addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                    @Override
-                    public boolean onPreDraw() {
-                        //结束计时
-                        return true;
-                    }
-                });
-    }
-}
+//或者回退1个/100个版本
+git reset --hard HEAD~1
+git reset --hard HEAD~100
+</code></pre><p>假如我们现在又想回到回退前的版本，可以使用如下命令：</p>
+<pre><code>git reset --hard 版本号
+</code></pre><p>对比工作区和某个版本文件的不同：</p>
+<pre><code>git diff HEAD -- 文件名.格式
+</code></pre><p>对比两个版本间文件的不同：</p>
+<pre><code>git diff HEAD HEAD^ -- 文件名.格式
+</code></pre><p>删错了，可以直接使用(还在工作区，没使用add):</p>
+<pre><code>git checkout –- 文件名.格式
+</code></pre><p>确实要从版本库中删除文件:</p>
+<pre><code>git rm 文件名.格式
+git commit –m &apos;版本提交说明&apos;
 </code></pre><hr>
-<h3 id="1-3、工具"><a href="#1-3、工具" class="headerlink" title="1.3、工具"></a>1.3、工具</h3><hr>
-<p>traceview:图形展示执行时间、调用栈；包含所有线程。缺点：运行变慢。</p>
-<pre><code>android.os.Debug.startMethodTracing();//也可以调用startMethodTracing(String traceName) 设置trace文件的文件名
-android.os.Debug.stopMethodTracing();//放在结束调试的地方
-生成文件在：Android/data/包名/files
-</code></pre><p>systrace：结合Android内核的数据，生成Html报告。轻量级，开销小。直接反应cpu利用率。</p>
-<pre><code>//b:大小，t:时间，o：生成文件名字
-python systrace.py -b 32768 -t 5 -a 包名 -o html文件 sched gfx view wm am app
-
-//项目代码
-TraceCompat.beginSection(mTask.getClass().getSimpleName());
-TraceCompat.endSection();
-</code></pre><p><strong>cputime代码消耗cpu的时间（重要指标）；walltime：代码执行时间。</strong></p>
-<hr>
-<h3 id="1-4、统计方法消耗时间"><a href="#1-4、统计方法消耗时间" class="headerlink" title="1.4、统计方法消耗时间"></a>1.4、统计方法消耗时间</h3><hr>
-<p>AOP：针对同一类问题统一处理。</p>
-<p>AspectJ</p>
-<pre><code>https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx
-
-classpath &apos;com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.0&apos;
-apply plugin: &apos;android-aspectjx&apos;
-implementation &apos;org.aspectj:aspectjrt:1.8.+&apos;
-
-例如PerformanceAop类
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><hr>
+<p>截止到目前只有一条时间线，在git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交0的，所以，HEAD指向的就是当前分支。</p>
+<p>查看当前有几个分支并且看到在哪个分支下工作：</p>
+<pre><code>git branch
+</code></pre><p>创建一个分支dev,并切换到其上进行工作:</p>
+<pre><code>git checkout -b dev
+//只创建分支
+git branch dev
+</code></pre><p>切换回master分支：</p>
+<pre><code>git checkout master
+</code></pre><p>当前在master分支，把dev分支的工作成果合并到master分支上：</p>
+<pre><code>git merge dev
+//情况一：Fast-forward,这次合并是“快进模式”，也就是直接把master指向dev的当前提交，所以合并速度非常快
+//情况二：冲突了，先处理冲突文件，在add、commit提交冲突文件。
+//情况三：快速合并不能成功而且合并时没有冲突，这个时候会合并之后并做一次新的提交，ctrl+x
+</code></pre><p>强制禁用<code>fast-forward</code>模式:</p>
+<pre><code>git merge --no-ff -m &apos;版本提交说明&apos; dev
+</code></pre><p>合并完成后，就可以放心地删除dev分支:</p>
+<pre><code>git branch -d dev
+</code></pre><p>想把当前分支“储藏”起来，切换到别的分支：</p>
+<pre><code>git stash
+//切换回来后
+//git stash list
+git stash pop //恢复工作现场
 </code></pre><hr>
-<h3 id="1-4、Theme小技巧"><a href="#1-4、Theme小技巧" class="headerlink" title="1.4、Theme小技巧"></a>1.4、Theme小技巧</h3><hr>
-<p>Theme切换：感觉上更快。</p>
-<p>drawable下创建.xml</p>
-<pre><code>&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; android:opacity=&quot;opaque&quot;&gt;
-    &lt;!-- The background color, preferably the same as your normal theme --&gt;
-    &lt;item android:drawable=&quot;@android:color/white&quot;/&gt;
-    &lt;!-- Your product logo - 144dp color version of your app icon --&gt;
-    &lt;item&gt;
-        &lt;bitmap
-            android:src=&quot;@mipmap/splash&quot;
-            android:gravity=&quot;fill&quot;/&gt;
-    &lt;/item&gt;
-&lt;/layer-list&gt;
-</code></pre><p>styles中设置</p>
-<pre><code>&lt;item name=&quot;android:windowBackground&quot;&gt;@drawable/lanucher&lt;/item&gt;
-</code></pre><p>首屏Activity引用</p>
-<pre><code>android:theme=&quot;@style/Theme.Splash&quot;
-</code></pre><p>Activity中</p>
-<pre><code>setTheme(R.style.AppTheme);
-//super.onCreate之前切换真正的style
-super.onCreate(savedInstanceState);
+<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><hr>
+<p>克隆项目</p>
+<pre><code>git clone ...ssh...
+</code></pre><p>推送分支，就是把该分支上的所有本地提交推送到远程库:</p>
+<pre><code>git push origin 分支名称
+</code></pre><p>将本地分支跟踪服务器分支:</p>
+<pre><code>git branch --set-upstream-to=origin/远程分支名称 本地分支名称
+</code></pre><p>推送分支，就是把该分支上的所有本地提交推送到远程库:</p>
+<pre><code>git push
+git push origin 分支名称
+</code></pre><p>从远程分支上拉取代码：</p>
+<pre><code>git pull orgin 分支名称
 </code></pre><hr>
-<h3 id="1-5、异步解决方案-启动器"><a href="#1-5、异步解决方案-启动器" class="headerlink" title="1.5、异步解决方案-启动器"></a>1.5、异步解决方案-启动器</h3><hr>
-<p>异步优化：子线程分担主线程任务。</p>
-<p>Application中的sdk初始化如果不需要再主线程中执行，那么就异步执行。CountDownLatch。</p>
-<p>线程池创建线程数，根据手机cup</p>
-<pre><code>private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
-private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
-</code></pre><p>启动器：充分利用cpu多核，自动梳理任务顺序</p>
-<p>代码Task化，启动逻辑抽象为Task。根据任务依赖关系排序生成一个有向无环图。多线程按照排序后的优先级依次执行。</p>
-<p>工具类：TaskDispatcher，例子：主线程Task：InitWeexTask；子线程Task：InitAMapTask；等待Task：InitJPushTask。</p>
-<p>延迟初始化：在MainActivity的onFeedShow方法中调用DelayInitDispatcher利用addIdleHandler</p>
-<hr>
 
     </div>
     
@@ -313,15 +290,15 @@ private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4)
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2020/07/04/38.git/" class="pre-post btn btn-default" title='Git'>
+        <a href="/2020/07/04/36.代理模式/" class="pre-post btn btn-default" title='代理模式'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">Git</span>
+            <span class="hidden-xs">代理模式</span>
         </a>
     
     
-        <a href="/2020/06/13/34.HTTP和加密和HTTPS/" class="next-post btn btn-default" title='HTTP和加密和HTTPS'>
+        <a href="/2020/06/26/35.Android性能分析与优化/" class="next-post btn btn-default" title='Android性能分析与优化'>
             <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">HTTP和加密和HTTPS</span><i class="fa fa-angle-right fa-fw"></i>
+            <span class="hidden-xs">Android性能分析与优化</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
     
 </div>
@@ -337,7 +314,7 @@ private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4)
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、启动优化"><span class="toc-text">1、启动优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、启动类型"><span class="toc-text">1.1、启动类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、启动时间"><span class="toc-text">1.2、启动时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、工具"><span class="toc-text">1.3、工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、统计方法消耗时间"><span class="toc-text">1.4、统计方法消耗时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、Theme小技巧"><span class="toc-text">1.4、Theme小技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、异步解决方案-启动器"><span class="toc-text">1.5、异步解决方案-启动器</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建和回退"><span class="toc-text">创建和回退</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支管理"><span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#github"><span class="toc-text">github</span></a></li></ol>
         
     </div>
 </aside>
