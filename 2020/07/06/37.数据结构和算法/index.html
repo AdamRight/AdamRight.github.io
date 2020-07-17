@@ -695,6 +695,845 @@ public class QuickTest {
 <p>稳定排序算法：冒泡排序、插入排序、归并排序。</p>
 <p>不稳定的排序算法：选择排序、希尔排序、快速排序。</p>
 <hr>
+<h2 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h2><hr>
+<p>若A元素在B元素的前面，则称A为B的前驱元素。若B元素在A元素的后面，则称B为A的后继元素。</p>
+<p>第一个数据元素没有前驱，这个数据元素被称为头结点；最后一个数据元素没有后继，这个数据元素被称为尾结点；除了第一个和最后一个数据元素外，其他数据元素有且仅有一个前驱和一个后继。</p>
+<p>线性表中数据存储的方式可以是顺序存储，也可以是链式存储，按照数据的存储方式不同，可以把线性表分为顺序表和链表。</p>
+<hr>
+<h3 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h3><hr>
+<p>顺序表是在计算机内存中以数组的形式保存的线性表，线性表的顺序存储是指用一组地址连续的存储单元，依次存储线性表中的各个元素、使得线性表中再逻辑结构上响铃的数据元素存储在相邻的物理存储单元中，即通过数据元素物理存储的相邻关系来反映数据元素之间逻辑上的相邻关系。</p>
+<p>基本API、扩容、缩容、SequenceList能支持foreach循环，则需要做如下操作：让SequenceList实现Iterable接口，重写iterator方法；在SequenceList内部提供一个内部类SIterator,实现Iterator接口，重写hasNext方法和next方法。</p>
+<pre><code>public class SequenceList&lt;T&gt; implements Iterable&lt;T&gt;{
+    //存储元素的数组
+    private T[] eles;
+    //记录当前顺序表中的元素个数
+    private int N;
+
+    //构造方法
+    public SequenceList(int capacity){
+        //初始化数组
+        this.eles=(T[])new Object[capacity];
+        //初始化长度
+        this.N=0;
+    }
+
+    //将一个线性表置为空表
+    public void clear(){
+        this.N=0;
+    }
+
+    //判断当前线性表是否为空表
+    public boolean isEmpty(){
+       return N==0;
+    }
+
+    //获取线性表的长度
+    public int length(){
+        return N;
+    }
+
+    //获取指定位置的元素
+    public T get(int i){
+        return eles[i];
+    }
+
+    //向线型表中添加元素t
+    public void insert(T t){
+        if (N==eles.length){
+            resize(2*eles.length);
+        }
+
+        eles[N++]=t;
+    }
+
+    //在i元素处插入元素t
+    public void insert(int i,T t){
+        if (N==eles.length){
+            resize(2*eles.length);
+        }
+
+        //先把i索引处的元素及其后面的元素依次向后移动一位
+        for(int index=N;index&gt;i;index--){
+            eles[index]=eles[index-1];
+        }
+        //再把t元素放到i索引处即可
+        eles[i]=t;
+
+        //元素个数+1
+        N++;
+    }
+
+    //删除指定位置i处的元素，并返回该元素
+    public T remove(int i){
+        //记录索引i处的值
+        T current = eles[i];
+        //索引i后面元素依次向前移动一位即可
+        for(int index=i;index&lt;N-1;index++){
+            eles[index]=eles[index+1];
+        }
+        //元素个数-1
+        N--;
+
+        if (N&lt;eles.length/4){
+            resize(eles.length/2);
+        }
+
+        return current;
+    }
+
+    //查找t元素第一次出现的位置
+    public int indexOf(T t){
+        for(int i=0;i&lt;N;i++){
+            if (eles[i].equals(t)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    //根据参数newSize，重置eles的大小
+    public void resize(int newSize){
+        //定义一个临时数组，指向原数组
+        T[] temp=eles;
+        //创建新数组
+        eles=(T[])new Object[newSize];
+        //把原数组的数据拷贝到新数组即可
+        for(int i=0;i&lt;N;i++){
+            eles[i]=temp[i];
+        }
+    }
+
+    @Override
+    public Iterator&lt;T&gt; iterator() {
+        return new SIterator();
+    }
+
+    private class SIterator implements Iterator{
+        private int cusor;
+        public SIterator(){
+            this.cusor=0;
+        }
+        @Override
+        public boolean hasNext() {
+            return cusor&lt;N;
+        }
+
+        @Override
+        public Object next() {
+            return eles[cusor++];
+        }
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class SequenceListTest {
+    public static void main(String[] args) {
+        //创建顺序表对象
+        SequenceList&lt;String&gt; sl = new SequenceList&lt;&gt;(10);
+        //测试插入
+        sl.insert(&quot;姚明&quot;);
+        sl.insert(&quot;科比&quot;);
+        sl.insert(&quot;麦迪&quot;);
+        sl.insert(1,&quot;詹姆斯&quot;);
+
+        for (String s : sl) {
+            System.out.println(s);
+        }
+        System.out.println(&quot;------------------------------------------&quot;);
+
+        //测试获取
+        String getResult = sl.get(1);
+        System.out.println(&quot;获取索引1处的结果为：&quot;+getResult);
+        //测试删除
+        String removeResult = sl.remove(0);
+        System.out.println(&quot;删除的元素是：&quot;+removeResult);
+        //测试清空
+        sl.clear();
+        System.out.println(&quot;清空后的线性表中的元素个数为:&quot;+sl.length());
+    }
+}
+</code></pre><p>由于顺序表的底层由数组实现，数组的长度是固定的，所以在操作的过程中涉及到了容器扩容操作。这样会导致顺序表在使用过程中的时间复杂度不是线性的，在某些需要扩容的结点处，耗时会突增，尤其是元素越多，这个问题越明显。</p>
+<p><strong>java中ArrayList集合的底层也是一种顺序表，使用数组实现，同样提供了增删改查、扩容、遍历等功能。</strong></p>
+<hr>
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><hr>
+<p>链表由一系列的结点（链表中的每一个元素称为结点）组成，结点可以在运行时动态生成。</p>
+<pre><code>public class Node&lt;T&gt; {
+    //存储元素
+    public T item;
+    //指向下一个结点
+    public Node next;
+
+    public Node(T item, Node next) {
+        this.item = item;
+        this.next = next;
+    }
+}
+public static void main(String[] args) throws Exception {
+    //构建结点
+    Node&lt;Integer&gt; first = new Node&lt;Integer&gt;(11, null);
+    Node&lt;Integer&gt; second = new Node&lt;Integer&gt;(13, null);
+    Node&lt;Integer&gt; third = new Node&lt;Integer&gt;(12, null);
+    Node&lt;Integer&gt; fourth = new Node&lt;Integer&gt;(8, null);
+    Node&lt;Integer&gt; fifth = new Node&lt;Integer&gt;(9, null);
+    //生成链表
+    first.next = second;
+    second.next = third;
+    third.next = fourth;
+    fourth.next = fifth;
+}
+</code></pre><hr>
+<h3 id="单向链表"><a href="#单向链表" class="headerlink" title="单向链表"></a>单向链表</h3><hr>
+<p>单向链表是链表的一种，它由多个结点组成，每个结点都由一个数据域和一个指针域组成，数据域用来存储数据，指针域用来指向其后继结点。链表的头结点的数据域不存储数据，指针域指向第一个真正存储数据的结点。</p>
+<p>实现基本API、遍历、链表的反转。</p>
+<pre><code>public class LinkList&lt;T&gt; implements Iterable&lt;T&gt;{
+    //记录头结点
+    private Node head;
+    //记录链表的长度
+    private int N;
+    //结点类
+    private class Node {
+        //存储数据
+        T item;
+        //下一个结点
+        Node next;
+        public Node(T item, Node next) {
+            this.item = item;
+            this.next = next;
+        }
+    }
+
+    public LinkList() {
+        //初始化头结点、
+        this.head = new Node(null,null);
+        //初始化元素个数
+        this.N=0;
+    }
+
+    //清空链表
+    public void clear() {
+        head.next=null;
+        this.N=0;
+    }
+
+    //获取链表的长度
+    public int length() {
+        return N;
+    }
+
+    //判断链表是否为空
+    public boolean isEmpty() {
+        return N==0;
+    }
+
+    //获取指定位置i出的元素
+    public T get(int i) {
+        //通过循环,从头结点开始往后找，依次找i次，就可以找到对应的元素
+        Node n = head.next;
+        for(int index=0;index&lt;i;index++){
+            n=n.next;
+        }
+        return n.item;
+    }
+
+    //向链表中添加元素t
+    public void insert(T t) {
+        //找到当前最后一个结点
+        Node n = head;
+        while(n.next!=null){
+            n=n.next;
+        }
+        //创建新结点，保存元素t
+        Node newNode = new Node(t, null);
+        //让当前最后一个结点指向新结点
+        n.next=newNode;
+        //元素的个数+1
+        N++;
+    }
+
+    //向指定位置i出，添加元素t
+    public void insert(int i, T t) {
+        //找到i位置前一个结点
+        Node pre = head;
+        for(int index=0;index&lt;=i-1;index++){
+            pre=pre.next;
+        }
+        //找到i位置的结点
+        Node curr = pre.next;
+        //创建新结点，并且新结点需要指向原来i位置的结点
+        Node newNode = new Node(t, curr);
+        //原来i位置的前一个节点指向新结点即可
+        pre.next=newNode;
+        //元素的个数+1
+        N++;
+    }
+
+    //删除指定位置i处的元素，并返回被删除的元素
+    public T remove(int i) {
+        //找到i位置的前一个节点
+        Node pre = head;
+        for(int index=0;index&lt;=i-1;i++){
+            pre=pre.next;
+        }
+        //要找到i位置的结点
+        Node curr = pre.next;
+        //找到i位置的下一个结点
+        Node nextNode = curr.next;
+        //前一个结点指向下一个结点
+        pre.next=nextNode;
+        //元素个数-1
+        N--;
+        return curr.item;
+    }
+
+    //查找元素t在链表中第一次出现的位置
+    public int indexOf(T t) {
+        //从头结点开始，依次找到每一个结点，取出item，和t比较，如果相同，就找到了
+        Node n = head;
+        for(int i=0;n.next!=null;i++){
+            n=n.next;
+            if (n.item.equals(t)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public Iterator&lt;T&gt; iterator() {
+        return new LIterator();
+    }
+
+    private class LIterator implements Iterator{
+        private Node n;
+        public LIterator(){
+            this.n=head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return n.next!=null;
+        }
+
+        @Override
+        public Object next() {
+            n = n.next;
+            return n.item;
+        }
+    }
+
+    //用来反转整个链表
+    public void reverse(){
+        //判断当前链表是否为空链表，如果是空链表，则结束运行，如果不是，则调用重载的reverse方法完成反转
+        if (isEmpty()){
+            return;
+        }
+        reverse(head.next);
+    }
+
+    //反转指定的结点curr，并把反转后的结点返回
+    public Node reverse(Node curr){
+        if (curr.next==null){
+            head.next=curr;
+            return curr;
+        }
+        //递归的反转当前结点curr的下一个结点；返回值就是链表反转后，当前结点的上一个结点
+        Node pre = reverse(curr.next);
+        //让返回的结点的下一个结点变为当前结点curr；
+        pre.next=curr;
+        //把当前结点的下一个结点变为null
+        curr.next=null;
+        return curr;
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class LinkListTest {
+    public static void main(String[] args) {
+        //创建顺序表对象
+        LinkList&lt;String&gt; sl = new LinkList&lt;&gt;();
+        //测试插入
+        sl.insert(&quot;姚明&quot;);
+        sl.insert(&quot;科比&quot;);
+        sl.insert(&quot;麦迪&quot;);
+        sl.insert(1,&quot;詹姆斯&quot;);
+        for (String s : sl) {
+            System.out.println(s);
+        }
+        System.out.println(&quot;------------------------------------------&quot;);
+
+        //测试获取
+        String getResult = sl.get(1);
+        System.out.println(&quot;获取索引1处的结果为：&quot;+getResult);
+        //测试删除
+        String removeResult = sl.remove(0);
+        System.out.println(&quot;删除的元素是：&quot;+removeResult);
+        //测试清空
+        sl.clear();
+        System.out.println(&quot;清空后的线性表中的元素个数为:&quot;+sl.length());
+    }
+}
+</code></pre><hr>
+<h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><hr>
+<p>双向链表也叫双向表，是链表的一种，它由多个结点组成，每个结点都由一个数据域和两个指针域组成，数据域用来存储数据，其中一个指针域用来指向其后继结点，另一个指针域用来指向前驱结点。链表的头结点的数据域不存储数据，指向前驱结点的指针域值为null，指向后继结点的指针域指向第一个真正存储数据的结点。</p>
+<p>实现基本API、遍历。</p>
+<pre><code>public class TowWayLinkList&lt;T&gt; implements Iterable&lt;T&gt; {
+    //首结点
+    private Node head;
+    //最后一个结点
+    private Node last;
+    //链表的长度
+    private int N;
+    //结点类
+    private class Node{
+        public Node(T item, Node pre, Node next) {
+            this.item = item;
+            this.pre = pre;
+            this.next = next;
+        }
+        //存储数据
+        public T item;
+        //指向上一个结点
+        public Node pre;
+        //指向下一个结点
+        public Node next;
+    }
+
+    public TowWayLinkList() {
+       //初始化头结点和尾结点
+        this.head = new Node(null,null,null);
+        this.last=null;
+        //初始化元素个数
+        this.N=0;
+    }
+
+    //清空链表
+    public void clear(){
+        this.head.next=null;
+        this.head.pre=null;
+        this.head.item=null;
+        this.last=null;
+        this.N=0;
+    }
+
+    //获取链表长度
+    public int length(){
+        return N;
+    }
+
+    //判断链表是否为空
+    public boolean isEmpty(){
+        return N==0;
+    }
+
+    //获取第一个元素
+    public T getFirst(){
+        if (isEmpty()){
+            return null;
+        }
+        return head.next.item;
+    }
+
+    //获取最后一个元素
+    public T getLast(){
+        if (isEmpty()){
+            return null;
+        }
+        return last.item;
+    }
+
+    //插入元素t
+    public void insert(T t){
+        if (isEmpty()){
+            //如果链表为空：
+            //创建新的结点
+            Node newNode = new Node(t,head, null);
+            //让新结点称为尾结点
+            last=newNode;
+            //让头结点指向尾结点
+            head.next=last;
+        }else {
+            //如果链表不为空
+            Node oldLast = last;
+            //创建新的结点
+            Node newNode = new Node(t, oldLast, null);
+            //让当前的尾结点指向新结点
+            oldLast.next=newNode;
+            //让新结点称为尾结点
+            last = newNode;
+        }
+        //元素个数+1
+        N++;
+    }
+
+    //向指定位置i处插入元素t
+    public void insert(int i,T t){
+        //找到i位置的前一个结点
+        Node pre = head;
+        for(int index=0;index&lt;i;index++){
+            pre=pre.next;
+        }
+        //找到i位置的结点
+        Node curr = pre.next;
+        //创建新结点
+        Node newNode = new Node(t, pre, curr);
+        //让i位置的前一个结点的下一个结点变为新结点
+        pre.next=newNode;
+        //让i位置的前一个结点变为新结点
+        curr.pre=newNode;
+        //元素个数+1
+        N++;
+    }
+
+    //获取指定位置i处的元素
+    public T get(int i){
+        Node n = head.next;
+        for(int index=0;index&lt;i;index++){
+            n=n.next;
+        }
+        return n.item;
+    }
+
+    //找到元素t在链表中第一次出现的位置
+    public int indexOf(T t){
+        Node n = head;
+        for(int i=0;n.next!=null;i++){
+            n=n.next;
+            if (n.next.equals(t)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    //删除位置i处的元素，并返回该元素
+    public T remove(int i){
+        //找到i位置的前一个结点
+        Node pre = head;
+        for(int index=0;index&lt;i;index++){
+            pre=pre.next;
+        }
+        //找到i位置的结点
+        Node curr = pre.next;
+        //找到i位置的下一个结点
+        Node nextNode= curr.next;
+        //让i位置的前一个结点的下一个结点变为i位置的下一个结点
+        pre.next=nextNode;
+        //让i位置的下一个结点的上一个结点变为i位置的前一个结点
+        nextNode.pre=pre;
+        //元素的个数-1
+        N--;
+        return curr.item;
+    }
+
+    @Override
+    public Iterator&lt;T&gt; iterator() {
+        return new TIterator();
+    }
+
+    private class TIterator implements Iterator{
+        private Node n;
+        public TIterator(){
+            this.n=head;
+        }
+        @Override
+        public boolean hasNext() {
+            return n.next!=null;
+        }
+
+        @Override
+        public Object next() {
+            n=n.next;
+            return n.item;
+        }
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class TowWayLinkListTest {
+    public static void main(String[] args) {
+        //创建双向链表对象
+        TowWayLinkList&lt;String&gt; sl = new TowWayLinkList&lt;&gt;();
+        //测试插入
+        sl.insert(&quot;姚明&quot;);
+        sl.insert(&quot;科比&quot;);
+        sl.insert(&quot;麦迪&quot;);
+        sl.insert(1,&quot;詹姆斯&quot;);
+        for (String s : sl) {
+            System.out.println(s);
+        }
+        System.out.println(&quot;--------------------------------------&quot;);
+        System.out.println(&quot;第一个元素是：&quot;+sl.getFirst());
+        System.out.println(&quot;最后一个元素是：&quot;+sl.getLast());
+        System.out.println(&quot;------------------------------------------&quot;);
+        //测试获取
+        String getResult = sl.get(1);
+        System.out.println(&quot;获取索引1处的结果为：&quot;+getResult);
+        //测试删除
+        String removeResult = sl.remove(0);
+        System.out.println(&quot;删除的元素是：&quot;+removeResult);
+        //测试清空
+        sl.clear();
+        System.out.println(&quot;清空后的线性表中的元素个数为:&quot;+sl.length());
+    }
+}
+</code></pre><p><strong>java中LinkedList集合也是使用双向链表实现，结点类有三个域，并提供了增删改查等相关方法。</strong></p>
+<p>链表的物理地址是不连续的，它不需要预先指定存储空间大小，或者在存储过程中涉及到扩容等操作,同时它并没有涉及的元素的交换。</p>
+<p>相比较顺序表，链表的查询操作性能会比较低。因此，如果我们的程序中查询操作比较多，建议使用顺序表，增删操作比较多，建议使用链表。</p>
+<hr>
+<h3 id="快慢指针"><a href="#快慢指针" class="headerlink" title="快慢指针"></a>快慢指针</h3><hr>
+<p>快慢指针获取中间值。slow与fast指针都指向链表第一个节点，然后slow每次移动一个指针，fast每次移动两个指针。</p>
+<pre><code>public class FastSlowTest {
+    public static void main(String[] args) throws Exception {
+        //创建结点
+        Node&lt;String&gt; first = new Node&lt;String&gt;(&quot;aa&quot;, null);
+        Node&lt;String&gt; second = new Node&lt;String&gt;(&quot;bb&quot;, null);
+        Node&lt;String&gt; third = new Node&lt;String&gt;(&quot;cc&quot;, null);
+        Node&lt;String&gt; fourth = new Node&lt;String&gt;(&quot;dd&quot;, null);
+        Node&lt;String&gt; fifth = new Node&lt;String&gt;(&quot;ee&quot;, null);
+        Node&lt;String&gt; six = new Node&lt;String&gt;(&quot;ff&quot;, null);
+        Node&lt;String&gt; seven = new Node&lt;String&gt;(&quot;gg&quot;, null);
+
+        //完成结点之间的指向
+        first.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = fifth;
+        fifth.next = six;
+        six.next = seven;
+        //查找中间值
+        String mid = getMid(first);
+        System.out.println(&quot;中间值为：&quot;+mid);
+    }
+
+    /**
+     * @param first 链表的首结点
+     * @return 链表的中间结点的值
+     */
+    public static String getMid(Node&lt;String&gt; first) {
+        //定义两个指针
+        Node&lt;String&gt; fast = first;
+        Node&lt;String&gt; slow = first;
+        //使用两个指针遍历链表，当快指针指向的结点没有下一个结点了，就可以结束了，结束之后，慢指针指向的结点就是中间值
+        while(fast!=null &amp;&amp;fast.next!=null){
+            //变化fast的值和slow的值
+            fast = fast.next.next;
+            slow=slow.next;
+        }
+
+        return slow.item;
+    }
+
+    //结点类
+    private static class Node&lt;T&gt; {
+        //存储数据
+        T item;
+        //下一个结点
+        Node next;
+
+        public Node(T item, Node next) {
+            this.item = item;
+            this.next = next;
+        }
+    }
+}
+</code></pre><p>快慢指针检查是否有环。两个指针有速度差，那么迟早两个指针会相遇，只要相遇那么就说明有环。</p>
+<pre><code>public class CircleListCheckTest {
+    public static void main(String[] args) throws Exception {
+        //创建结点
+        Node&lt;String&gt; first = new Node&lt;String&gt;(&quot;aa&quot;, null);
+        Node&lt;String&gt; second = new Node&lt;String&gt;(&quot;bb&quot;, null);
+        Node&lt;String&gt; third = new Node&lt;String&gt;(&quot;cc&quot;, null);
+        Node&lt;String&gt; fourth = new Node&lt;String&gt;(&quot;dd&quot;, null);
+        Node&lt;String&gt; fifth = new Node&lt;String&gt;(&quot;ee&quot;, null);
+        Node&lt;String&gt; six = new Node&lt;String&gt;(&quot;ff&quot;, null);
+        Node&lt;String&gt; seven = new Node&lt;String&gt;(&quot;gg&quot;, null);
+
+        //完成结点之间的指向
+        first.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = fifth;
+        fifth.next = six;
+        six.next = seven;
+//        //产生环
+//        seven.next = third;
+
+        //判断链表是否有环
+        boolean circle = isCircle(first);
+        System.out.println(&quot;first链表中是否有环：&quot;+circle);
+    }
+
+    /**
+     * 判断链表中是否有环
+     * @param first 链表首结点
+     * @return ture为有环，false为无环
+     */
+    public static boolean isCircle(Node&lt;String&gt; first) {
+        //定义快慢指针
+        Node&lt;String&gt; fast = first;
+        Node&lt;String&gt; slow = first;
+        //遍历链表，如果快慢指针指向了同一个结点，那么证明有环
+        while(fast!=null &amp;&amp; fast.next!=null){
+            //变换fast和slow
+            fast = fast.next.next;
+            slow = slow.next;
+
+            if (fast.equals(slow)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //结点类
+    private static class Node&lt;T&gt; {
+        //存储数据
+        T item;
+        //下一个结点
+        Node next;
+
+        public Node(T item, Node next) {
+            this.item = item;
+            this.next = next;
+        }
+    }
+}
+</code></pre><p>快慢指针查找有环链表入口。当快慢指针相遇时，我们可以判断到链表中有环，这时重新设定一个新指针指向链表的起点，且步长与慢指针一样为1，则慢指针与“新”指针相遇的地方就是环的入口。</p>
+<pre><code>public class CircleListInTest {
+    public static void main(String[] args) throws Exception {
+        Node&lt;String&gt; first = new Node&lt;String&gt;(&quot;aa&quot;, null);
+        Node&lt;String&gt; second = new Node&lt;String&gt;(&quot;bb&quot;, null);
+        Node&lt;String&gt; third = new Node&lt;String&gt;(&quot;cc&quot;, null);
+        Node&lt;String&gt; fourth = new Node&lt;String&gt;(&quot;dd&quot;, null);
+        Node&lt;String&gt; fifth = new Node&lt;String&gt;(&quot;ee&quot;, null);
+        Node&lt;String&gt; six = new Node&lt;String&gt;(&quot;ff&quot;, null);
+        Node&lt;String&gt; seven = new Node&lt;String&gt;(&quot;gg&quot;, null);
+
+        //完成结点之间的指向
+        first.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = fifth;
+        fifth.next = six;
+        six.next = seven;
+        //产生环
+        seven.next = third;
+        //查找环的入口结点
+        Node&lt;String&gt; entrance = getEntrance(first);
+        System.out.println(&quot;first链表中环的入口结点元素为：&quot;+entrance.item);
+    }
+
+    /**
+     * 查找有环链表中环的入口结点
+     * @param first 链表首结点
+     * @return 环的入口结点
+     */
+    public static Node getEntrance(Node&lt;String&gt; first) {
+        //定义快慢指针
+        Node&lt;String&gt; fast = first;
+        Node&lt;String&gt; slow = first;
+        Node&lt;String&gt; temp = null;
+        //遍历链表，先找到环(快慢指针相遇),准备一个临时指针，指向链表的首结点，继续遍历，直到慢指针和临时指针相遇，那么相遇时所指向的结点就是环的入口
+        while(fast!=null &amp;&amp; fast.next!=null){
+            //变换快慢指针
+            fast = fast.next.next;
+            slow = slow.next;
+            //判断快慢指针是否相遇
+            if (fast.equals(slow)){
+                temp = first;
+                continue;
+            }
+            //让临时结点变换
+            if (temp!=null){
+                temp = temp.next;
+                //判断临时指针是否和慢指针相遇
+                if (temp.equals(slow)){
+                    break;
+                }
+            }
+        }
+        return temp;
+    }
+    //结点类
+    private static class Node&lt;T&gt; {
+        //存储数据
+        T item;
+        //下一个结点
+        Node next;
+        public Node(T item, Node next) {
+            this.item = item;
+            this.next = next;
+        }
+    }
+}
+</code></pre><hr>
+<h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><hr>
+<p>在单向链表中，最后一个节点的指针为null，不指向任何结点，因为没有下一个元素了。要实现循环链表，我们只需要让单向链表的最后一个节点的指针指向头结点即可。</p>
+<hr>
+<h3 id="约瑟夫问题"><a href="#约瑟夫问题" class="headerlink" title="约瑟夫问题"></a>约瑟夫问题</h3><hr>
+<p>构建含有41个结点的单向循环链表，分别存储1~41的值，分别代表这41个人；使用计数器count，记录当前报数的值；遍历链表，每循环一次，count++；判断count的值，如果是3，则从链表中删除这个结点并打印结点的值，把count重置为0。</p>
+<pre><code>public class JosephTest {
+    public static void main(String[] args) {
+        //解决约瑟夫问题
+        //1.构建循环链表，包含41个结点，分别存储1~41之间的值
+        //用来就首结点
+        Node&lt;Integer&gt; first = null;
+        //用来记录前一个结点
+        Node&lt;Integer&gt; pre = null;
+        for(int i = 1;i&lt;=41;i++){
+            //如果是第一个结点
+            if (i==1){
+                first = new Node&lt;&gt;(i,null);
+                pre = first;
+                continue;
+            }
+            //如果不是第一个结点
+            Node&lt;Integer&gt; newNode = new Node&lt;&gt;(i, null);
+            pre.next=newNode;
+            pre=newNode;
+            //如果是最后一个结点，那么需要让最后一个结点的下一个结点变为first,变为循环链表了
+            if (i==41){
+                pre.next=first;
+            }
+        }
+
+        //2.需要count计数器，模拟报数
+        int count=0;
+        //3.遍历循环链表
+        //记录每次遍历拿到的结点，默认从首结点开始
+        Node&lt;Integer&gt; n = first;
+        //记录当前结点的上一个结点
+        Node&lt;Integer&gt; before = null;
+        while(n!=n.next){
+            //模拟报数
+            count++;
+            //判断当前报数是不是为3
+            if (count==3){
+                //如果是3，则把当前结点删除调用，打印当前结点，重置count=0，让当前结点n后移
+                before.next=n.next;
+                System.out.print(n.item+&quot;,&quot;);
+                count=0;
+                n=n.next;
+            }else{
+                //如果不是3，让before变为当前结点，让当前结点后移；
+                before=n;
+                n=n.next;
+            }
+        }
+        //打印最后一个元素
+        System.out.println(n.item);
+    }
+
+    //结点类
+    private static class Node&lt;T&gt; {
+        //存储数据
+        T item;
+        //下一个结点
+        Node next;
+        public Node(T item, Node next) {
+            this.item = item;
+            this.next = next;
+        }
+    }
+}
+</code></pre><hr>
 
     </div>
     
@@ -751,7 +1590,7 @@ public class QuickTest {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序表"><span class="toc-text">顺序表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向链表"><span class="toc-text">单向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向链表"><span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约瑟夫问题"><span class="toc-text">约瑟夫问题</span></a></li></ol></li></ol>
         
     </div>
 </aside>
