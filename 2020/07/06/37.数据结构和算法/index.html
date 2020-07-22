@@ -1538,6 +1538,962 @@ public static void main(String[] args) throws Exception {
     }
 }
 </code></pre><hr>
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><hr>
+<p>栈是一种基于先进后出(FILO)的数据结构，是一种只能在一端进行插入和删除操作的特殊线性表。它按照先进后出的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据（最后一个数据被第一个读出来）。</p>
+<p>我们称数据进入到栈的动作为压栈，数据从栈中出去的动作为弹栈。</p>
+<hr>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><hr>
+<p>压栈、弹栈、遍历。</p>
+<pre><code>public class Stack&lt;T&gt; implements Iterable&lt;T&gt;{
+    //记录首结点
+    private Node head;
+    //栈中元素的个数
+    private int N;
+    private class Node{
+        public T item;
+        public Node next;
+        public Node(T item, Node next) {
+            this.item = item;
+            this.next = next;
+        }
+    }
+
+    public Stack() {
+        this.head = new Node(null,null);
+        this.N=0;
+    }
+
+    //判断当前栈中元素个数是否为0
+    public boolean isEmpty(){
+        return N==0;
+    }
+
+    //获取栈中元素的个数
+    public int size(){
+        return N;
+    }
+
+    //把t元素压入栈
+    public void push(T t){
+        //找到首结点指向的第一个结点
+        Node oldFirst = head.next;
+        //创建新结点
+        Node newNode = new Node(t, null);
+        //让首结点指向新结点
+        head.next = newNode;
+        //让新结点指向原来的第一个结点
+        newNode.next=oldFirst;
+        //元素个数+1；
+        N++;
+    }
+
+    //弹出栈顶元素
+    public T pop(){
+        //找到首结点指向的第一个结点
+        Node oldFirst = head.next;
+        if (oldFirst==null){
+            return null;
+        }
+        //让首结点指向原来第一个结点的下一个结点
+        head.next=oldFirst.next;
+        //元素个数-1；
+        N--;
+        return oldFirst.item;
+    }
+
+    @Override
+    public Iterator&lt;T&gt; iterator() {
+        return new SIterator();
+    }
+
+    private class SIterator implements Iterator{
+        private Node n;
+        public SIterator(){
+            this.n=head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return n.next!=null;
+        }
+
+        @Override
+        public Object next() {
+            n = n.next;
+            return n.item;
+        }
+    }
+}-
+</code></pre><p>测试</p>
+<pre><code>public class StackTest {
+    public static void main(String[] args) {
+        //创建栈对象
+        Stack&lt;String&gt; stack = new Stack&lt;&gt;();
+        //测试压栈
+        stack.push(&quot;a&quot;);
+        stack.push(&quot;b&quot;);
+        stack.push(&quot;c&quot;);
+        stack.push(&quot;d&quot;);
+        for (String item : stack) {
+            System.out.println(item);
+        }
+        System.out.println(&quot;------------------------------&quot;);
+        //测试弹栈
+        String result = stack.pop();
+        System.out.println(&quot;弹出的元素是：&quot;+result);
+        System.out.println(&quot;剩余的元素个数：&quot;+stack.size());
+    }
+}
+</code></pre><hr>
+<h3 id="括号匹配问题"><a href="#括号匹配问题" class="headerlink" title="括号匹配问题"></a>括号匹配问题</h3><hr>
+<p>给定一个字符串，里边可能包含”()”小括号和其他字符，请编写程序检查该字符串的中的小括号是否成对出现。</p>
+<p>创建一个栈用来存储左括号；从左往右遍历字符串，拿到每一个字符；判断该字符是不是左括号，如果是，放入栈中存储；判断该字符是不是右括号，如果不是，继续下一次循环；如果该字符是右括号，则从栈中弹出一个元素t；判断元素t是否为null，如果不是，则证明有对应的左括号，如果不是，则证明没有对应的左括号；循环结束后，判断栈中还有没有剩余的左括号，如果有，则不匹配，如果没有，则匹配。</p>
+<pre><code>public class BracketsMatchTest {
+    public static void main(String[] args) {
+        String str = &quot;上海(长安)())&quot;;
+        boolean match = isMatch(str);
+        System.out.println(str+&quot;中的括号是否匹配：&quot;+match);
+    }
+
+    /**
+     * 判断str中的括号是否匹配
+     * @param str 括号组成的字符串
+     * @return 如果匹配，返回true，如果不匹配，返回false
+     */
+    public static boolean isMatch(String str){
+        //1.创建栈对象，用来存储左括号
+        Stack&lt;String&gt; chars = new Stack&lt;&gt;();
+        //2.从左往右遍历字符串
+        for (int i = 0; i &lt; str.length(); i++) {
+            String currChar = str.charAt(i)+ &quot;&quot;;
+
+            //3.判断当前字符是否为左括号，如果是，则把字符放入到栈中
+            if (currChar.equals(&quot;(&quot;)){
+                chars.push(currChar);
+            }else if(currChar.equals(&quot;)&quot;)){
+                //4.继续判断当前字符是否是有括号，如果是，则从栈中弹出一个左括号，并判断弹出的结果是否为null,如果为null证明没有匹配的左括号，如果不为null，则证明有匹配的左括号
+                String pop = chars.pop();
+                if (pop==null){
+                    return false;
+                }
+            }
+
+        }
+        //5.判断栈中还有没有剩余的左括号，如果有，则证明括号不匹配
+        if (chars.size()==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+</code></pre><hr>
+<h3 id="逆波兰表达式求值"><a href="#逆波兰表达式求值" class="headerlink" title="逆波兰表达式求值"></a>逆波兰表达式求值</h3><hr>
+<p>创建一个栈对象oprands存储操作数；从左往右遍历逆波兰表达式，得到每一个字符串；判断该字符串是不是运算符，如果不是，把该该操作数压入oprands栈中；如果是运算符，则从oprands栈中弹出两个操作数o1,o2；使用该运算符计算o1和o2，得到结果result；把该结果压入oprands栈中 ；遍历结束后，拿出栈中最终的结果返回。</p>
+<pre><code>public class ReversePolishNotationTest {
+
+    public static void main(String[] args) {
+        //中缀表达式 3*（17-15）+18/6 的逆波兰表达式如下 6+3=9
+        String[] notation = {&quot;3&quot;, &quot;17&quot;, &quot;15&quot;, &quot;-&quot;, &quot;*&quot;, &quot;18&quot;, &quot;6&quot;, &quot;/&quot;, &quot;+&quot;};
+        int result = caculate(notation);
+        System.out.println(&quot;逆波兰表达式的结果为：&quot; + result);
+    }
+
+    /**
+     * @param notaion 逆波兰表达式的数组表示方式
+     * @return 逆波兰表达式的计算结果
+     */
+    public static int caculate(String[] notaion) {
+        //1.定义一个栈，用来存储操作数
+        Stack&lt;Integer&gt; oprands = new Stack&lt;&gt;();
+        //2.从左往右遍历逆波兰表达式，得到每一个元素
+        for (int i = 0; i &lt; notaion.length; i++) {
+            String curr = notaion[i];
+            //3.判断当前元素是运算符还是操作数
+            Integer o1;
+            Integer o2;
+            Integer result;
+            switch (curr) {
+                case &quot;+&quot;:
+                    //4.运算符，从栈中弹出两个操作数，完成运算，运算完的结果再压入栈中
+                    o1 = oprands.pop();
+                    o2 = oprands.pop();
+                    result = o2 + o1;
+                    oprands.push(result);
+                    break;
+                case &quot;-&quot;:
+                    //4.运算符，从栈中弹出两个操作数，完成运算，运算完的结果再压入栈中
+                    o1 = oprands.pop();
+                    o2 = oprands.pop();
+                    result = o2 - o1;
+                    oprands.push(result);
+                    break;
+                case &quot;*&quot;:
+                    //4.运算符，从栈中弹出两个操作数，完成运算，运算完的结果再压入栈中
+                    o1 = oprands.pop();
+                    o2 = oprands.pop();
+                    result = o2 * o1;
+                    oprands.push(result);
+                    break;
+                case &quot;/&quot;:
+                    //4.运算符，从栈中弹出两个操作数，完成运算，运算完的结果再压入栈中
+                    o1 = oprands.pop();
+                    o2 = oprands.pop();
+                    result = o2 / o1;
+                    oprands.push(result);
+
+                    break;
+                default:
+                    //5.操作数，把该操作数放入到栈中；
+                    oprands.push(Integer.parseInt(curr));
+                    break;
+            }
+        }
+        //6.得到栈中最后一个元素，就是逆波兰表达式的结果
+        int result = oprands.pop();
+        return result;
+    }
+}
+</code></pre><hr>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><hr>
+<p>队列是一种基于先进先出(FIFO)的数据结构，是一种只能在一端进行插入,在另一端进行删除操作的特殊线性表，它按照先进先出的原则存储数据，先进入的数据，在读取数据时先读被读出来。</p>
+<hr>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><hr>
+<p>插入、删除、遍历。</p>
+<pre><code>public class Queue&lt;T&gt; implements Iterable&lt;T&gt;{
+    //记录首结点
+    private Node head;
+    //记录最后一个结点
+    private Node last;
+    //记录队列中元素的个数
+    private int N;
+    private class Node{
+        public T item;
+        public Node next;
+        public Node(T item, Node next) {
+            this.item = item;
+            this.next = next;
+        }
+    }
+    public Queue() {
+        this.head = new Node(null,null);
+        this.last=null;
+        this.N=0;
+    }
+
+    //判断队列是否为空
+    public boolean isEmpty(){
+        return N==0;
+    }
+
+    //返回队列中元素的个数
+    public int size(){
+        return N;
+    }
+
+    //向队列中插入元素t
+    public void enqueue(T t){
+        if (last==null){
+            //当前尾结点last为null
+            last= new Node(t,null);
+            head.next=last;
+        } else {
+            //当前尾结点last不为null
+            Node oldLast = last;
+            last = new Node(t, null);
+            oldLast.next=last;
+        }
+        //元素个数+1
+        N++;
+    }
+
+    //从队列中拿出一个元素
+    public T dequeue(){
+        if (isEmpty()){
+            return null;
+        }
+        Node oldFirst = head.next;
+        head.next = oldFirst.next;
+        N--;
+        //因为出队列其实是在删除元素，因此如果队列中的元素被删除完了，需要重置last=null;
+        if (isEmpty()){
+            last=null;
+        }
+        return oldFirst.item;
+    }
+
+    @Override
+    public Iterator&lt;T&gt; iterator() {
+        return new QIterator();
+    }
+
+    private class QIterator implements Iterator{
+        private Node n;
+
+        public QIterator(){
+            this.n=head;
+        }
+        @Override
+        public boolean hasNext() {
+            return n.next!=null;
+        }
+
+        @Override
+        public Object next() {
+            n = n.next;
+            return n.item;
+        }
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class QueueTest {
+    public static void main(String[] args) {
+        //创建队列对象
+        Queue&lt;String&gt; q = new Queue&lt;&gt;();
+        //测试队列的enqueue方法
+        q.enqueue(&quot;a&quot;);
+        q.enqueue(&quot;b&quot;);
+        q.enqueue(&quot;c&quot;);
+        q.enqueue(&quot;d&quot;);
+        for (String str : q) {
+            System.out.println(str);
+        }
+        System.out.println(&quot;-------------------------------&quot;);
+        //测试队列的dequeue方法
+        String result = q.dequeue();
+        System.out.println(&quot;出队列的元素是：&quot;+result);
+        System.out.println(&quot;剩余的元素个数：&quot;+q.size());
+    }
+}
+</code></pre><hr>
+<h2 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h2><hr>
+<p>符号表最主要的目的就是将一个键和一个值联系起来，符号表能够将存储的数据元素是一个键和一个值共同组成的键值对数据，我们可以根据键来查找对应的值。<strong>符号表中，键具有唯一性</strong>。</p>
+<hr>
+<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><hr>
+<pre><code>public class SymbolTable&lt;Key,Value&gt; {
+    //记录首结点
+    private Node head;
+    //记录符号表中元素的个数
+    private int N;
+    private class Node{
+        //键
+        public Key key;
+        //值
+        public Value value;
+        //下一个结点
+        public Node next;
+        public Node(Key key, Value value, Node next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+    public SymbolTable() {
+        this.head = new Node(null,null,null);
+        this.N=0;
+    }
+
+    //获取符号表中键值对的个数
+    public int size(){
+        return N;
+    }
+
+    //往符号表中插入键值对
+    public void put(Key key,Value value){
+        //符号表中已经存在了键为key的键值对，那么只需要找到该结点，替换值为value即可
+        Node n = head;
+        while(n.next!=null){
+            //变换n
+            n = n.next;
+            //判断n结点存储的键是否为key，如果是，则替换n结点的值
+            if (n.key.equals(key)){
+                n.value = value;
+                return;
+            }
+        }
+
+        //如果符号表中不存在键为key的键值对，只需要创建新的结点，保存要插入的键值对，把新结点插入到链表的头部  head.next=新结点即可
+        Node newNode = new Node(key, value, null);
+        Node oldFirst = head.next;
+        newNode.next = oldFirst;
+        head.next = newNode;
+        //元素个数+1；
+        N++;
+    }
+    //删除符号表中键为key的键值对
+    public void delete(Key key){
+        //找到键为key的结点，把该结点从链表中删除
+        Node n = head;
+        while(n.next!=null){
+            //判断n结点的下一个结点的键是否为key，如果是，就删除该结点
+            if (n.next.key.equals(key)){
+                n.next = n.next.next;
+                N--;
+                return;
+            }
+            //变换n
+            n = n.next;
+        }
+    }
+
+    //从符号表中获取key对应的值
+    public Value get(Key key){
+        //找到键为key的结点
+        Node n = head;
+        while(n.next!=null){
+            //变换n
+            n = n.next;
+            if (n.key.equals(key)){
+                return n.value;
+            }
+        }
+        return null;
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class SymbolTableTest {
+    public static void main(String[] args) {
+        //创建符号表对象
+        SymbolTable&lt;Integer, String&gt; symbolTable = new SymbolTable&lt;&gt;();
+        //测试put方法（插入,替换）
+        symbolTable.put(1,&quot;乔峰&quot;);
+        symbolTable.put(2,&quot;虚竹&quot;);
+        symbolTable.put(3,&quot;段誉&quot;);
+        System.out.println(&quot;插入完毕后，元素的个数为:&quot;+symbolTable.size());
+
+        symbolTable.put(2, &quot;慕容复&quot;);
+        System.out.println(&quot;替换完毕后的元素的个数为:&quot;+symbolTable.size());
+
+        //测试get方法
+        System.out.println(&quot;替换完毕后，键2对应的值为:&quot;+symbolTable.get(2));
+
+        //测试删除方法
+        symbolTable.delete(2);
+        System.out.println(&quot;删除完毕后，元素的个数:&quot;+symbolTable.size());
+    }
+}
+</code></pre><hr>
+<h3 id="有序符号表"><a href="#有序符号表" class="headerlink" title="有序符号表"></a>有序符号表</h3><hr>
+<p>要根据键的大小进行排序，插入数据时要考虑顺序。</p>
+<pre><code>public class OrderSymbolTable&lt;Key extends Comparable&lt;Key&gt;,Value&gt; {
+    //记录首结点
+    private Node head;
+    //记录符号表中元素的个数
+    private int N;
+    private class Node{
+        //键
+        public Key key;
+        //值
+        public Value value;
+        //下一个结点
+        public Node next;
+        public Node(Key key, Value value, Node next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+    public OrderSymbolTable() {
+        this.head = new Node(null,null,null);
+        this.N=0;
+    }
+
+    //获取符号表中键值对的个数
+    public int size(){
+        return N;
+    }
+
+    //往符号表中插入键值对
+    public void put(Key key,Value value){
+        //定义两个Node变量，分别记录当前结点和当前结点的上一个结点
+        Node curr = head.next;
+        Node pre = head;
+        while(curr!=null &amp;&amp; key.compareTo(curr.key)&gt;0){
+            //变换当前结点和前一个结点即可
+            pre = curr;
+            curr = curr.next;
+        }
+        //如果当前结点curr的键和要插入的key一样，则替换
+        if (curr!=null &amp;&amp; key.compareTo(curr.key)==0){
+            curr.value = value;
+            return;
+        }
+        //如果当前结点curr的键和要插入的key不一样，把新的结点插入到curr之前
+        Node newNode = new Node(key, value, curr);
+        pre.next = newNode;
+        //元素的个数+1；
+        N++;
+
+    }
+    //删除符号表中键为key的键值对
+    public void delete(Key key){
+        //找到键为key的结点，把该结点从链表中删除
+
+        Node n = head;
+        while(n.next!=null){
+            //判断n结点的下一个结点的键是否为key，如果是，就删除该结点
+            if (n.next.key.equals(key)){
+                n.next = n.next.next;
+                N--;
+                return;
+            }
+            //变换n
+            n = n.next;
+        }
+    }
+
+    //从符号表中获取key对应的值
+    public Value get(Key key){
+        //找到键为key的结点
+        Node n = head;
+        while(n.next!=null){
+            //变换n
+            n = n.next;
+            if (n.key.equals(key)){
+                return n.value;
+            }
+        }
+        return null;
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class OrderSymbolTableTest {
+    public static void main(String[] args) {
+        //创建有序符号表对象
+        OrderSymbolTable&lt;Integer, String&gt; table = new OrderSymbolTable&lt;&gt;();
+        table.put(1,&quot;张三&quot;);
+        table.put(2,&quot;李四&quot;);
+        table.put(4,&quot;赵六&quot;);
+        table.put(7,&quot;田七&quot;);
+        table.put(3,&quot;王五&quot;);
+    }
+}
+</code></pre><hr>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><hr>
+<p>树是由n（n&gt;=1）个有限结点组成一个具有层次关系的集合。树具有以下特点：每个结点有零个或多个子结点；没有父结点的结点为根结点；每一个非根结点只有一个父结点；每个结点及其后代结点整体上可以看做是一棵树，称为当前结点的父结点的一个子树。</p>
+<p>结点的度：一个结点含有的子树的个数称为该结点的度。</p>
+<p>叶结点：度为0的结点称为叶结点，也可以叫做终端结点。</p>
+<p>分支结点：度不为0的结点称为分支结点，也可以叫做非终端结点。</p>
+<p>结点的层次：从根结点开始，根结点的层次为1，根的直接后继层次为2，以此类推。</p>
+<p>结点的层序编号：将树中的结点，按照从上层到下层，同层从左到右的次序排成一个线性序列，把他们编成连续的自然数。</p>
+<p>树的度：树中所有结点的度的最大值。</p>
+<p>树的高度(深度)：树中结点的最大层次。</p>
+<p>森林：m（m&gt;=0）个互不相交的树的集合，将一颗非空树的根结点删去，树就变成一个森林；给森林增加一个统一的根结点，森林就变成一棵树。</p>
+<p>孩子结点：一个结点的直接后继结点称为该结点的孩子结点。</p>
+<p>双亲结点(父结点)：一个结点的直接前驱称为该结点的双亲结点。</p>
+<p>兄弟结点：同一双亲结点的孩子结点间互称兄弟结点。</p>
+<p><strong>二叉树</strong>就是度不超过2的树(每个结点最多有两个子结点)。</p>
+<p>一个二叉树，如果每一个层的结点树都达到最大值，则这个二叉树就是<strong>满二叉树</strong>。</p>
+<p><strong>完全二叉树</strong>：叶节点只能出现在最下层和次下层，并且最下面一层的结点都集中在该层最左边的若干位置的二叉树。</p>
+<hr>
+<h3 id="二叉查找树基于链表的实现"><a href="#二叉查找树基于链表的实现" class="headerlink" title="二叉查找树基于链表的实现"></a>二叉查找树基于链表的实现</h3><hr>
+<p><strong>插入</strong>方法put实现思想：如果当前树中没有任何一个结点，则直接把新结点当做根结点使用。如果当前树不为空，则从根结点开始：如果新结点的key小于当前结点的key，则继续找当前结点的左子结点；如果新结点的key大于当前结点的key，则继续找当前结点的右子结点；如果新结点的key等于当前结点的key，则树中已经存在这样的结点，替换该结点的value值即可。</p>
+<p><strong>查询</strong>方法get实现思想：从根节点开始：如果要查询的key小于当前结点的key，则继续找当前结点的左子结点；如果要查询的key大于当前结点的key，则继续找当前结点的右子结点；如果要查询的key等于当前结点的key，则树中返回当前结点的value。</p>
+<p><strong>删除</strong>方法delete实现思想：找到被删除结点；找到被删除结点右子树中的最小结点minNode；删除右子树中的最小结点；让被删除结点的左子树称为最小结点minNode的左子树，让被删除结点的右子树称为最小结点minNode的右子树；让被删除结点的父节点指向最小结点minNode。</p>
+<p>查找<strong>最小键</strong>、查找<strong>最大键</strong>。</p>
+<p>把树由一个根节点、一个左子树、一个右子树组成，那么按照根节点什么时候被访问，我们可以把二叉树的遍历分为以下三种方式：</p>
+<p><strong>前序遍历</strong>：先访问根结点，然后再访问左子树，最后访问右子树。<strong>中序遍历</strong>：先访问左子树，中间访问根节点，最后访问右子树。<strong>后序遍历</strong>：先访问左子树，再访问右子树，最后访问根节点。</p>
+<p>前序遍历步骤：把当前结点的key放入到队列中;找到当前结点的左子树，如果不为空，递归遍历左子树；找到当前结点的右子树，如果不为空，递归遍历右子树。</p>
+<p>中序遍历实现步骤：找到当前结点的左子树，如果不为空，递归遍历左子树；把当前结点的key放入到队列中;找到当前结点的右子树，如果不为空，递归遍历右子树。</p>
+<p>后序遍历实现步骤：找到当前结点的左子树，如果不为空，递归遍历左子树；找到当前结点的右子树，如果不为空，递归遍历右子树；把当前结点的key放入到队列中。</p>
+<p><strong>层序遍历</strong>，就是从根节点（第一层）开始，依次向下，获取每一层所有结点的值。实现步骤：创建队列，存储每一层的结点；使用循环从队列中弹出一个结点：获取当前结点的key；如果当前结点的左子结点不为空，则把左子结点放入到队列中；如果当前结点的右子结点不为空，则把右子结点放入到队列中。</p>
+<pre><code>public class BinaryTree&lt;Key extends Comparable&lt;Key&gt;, Value&gt; {
+    //记录根结点
+    private Node root;
+    //记录树中元素的个数
+    private int N;
+    private class Node {
+        //存储键
+        public Key key;
+        //存储值
+        private Value value;
+        //记录左子结点
+        public Node left;
+        //记录右子结点
+        public Node right;
+        public Node(Key key, Value value, Node left, Node right) {
+            this.key = key;
+            this.value = value;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    //获取树中元素的个数
+    public int size() {
+        return N;
+    }
+
+    //向树中添加元素key-value
+    public void put(Key key, Value value) {
+        root = put(root, key, value);
+    }
+
+    //向指定的树x中添加key-value,并返回添加元素后新的树
+    private Node put(Node x, Key key, Value value) {
+        //如果x子树为空，
+        if (x==null){
+            N++;
+            return new Node(key,value, null,null);
+        }
+        //如果x子树不为空
+        //比较x结点的键和key的大小：
+        int cmp = key.compareTo(x.key);
+        if (cmp&gt;0){
+            //如果key大于x结点的键，则继续找x结点的右子树
+            x.right = put(x.right,key,value);
+        }else if(cmp&lt;0){
+            //如果key小于x结点的键，则继续找x结点的左子树
+            x.left = put(x.left,key,value);
+        }else{
+            //如果key等于x结点的键，则替换x结点的值为value即可
+            x.value = value;
+        }
+        return x;
+    }
+
+    //查询树中指定key对应的value
+    public Value get(Key key) {
+        return get(root,key);
+    }
+
+    //从指定的树x中，查找key对应的值
+    public Value get(Node x, Key key) {
+        //x树为null
+        if (x==null){
+            return null;
+        }
+        //x树不为null
+        //比较key和x结点的键的大小
+        int cmp = key.compareTo(x.key);
+        if (cmp&gt;0){
+            //如果key大于x结点的键，则继续找x结点的右子树
+            return get(x.right,key);
+        }else if(cmp&lt;0){
+            //如果key小于x结点的键，则继续找x结点的左子树
+            return get(x.left,key);
+        }else{
+            //如果key等于x结点的键，就找到了键为key的结点，只需要返回x结点的值即可
+            return x.value;
+        }
+    }
+
+    //删除树中key对应的value
+    public void delete(Key key) {
+        delete(root, key);
+    }
+
+    //删除指定树x中的key对应的value，并返回删除后的新树
+    public Node delete(Node x, Key key) {
+        //x树为null
+        if (x==null){
+            return null;
+        }
+        //x树不为null
+        int cmp = key.compareTo(x.key);
+        if (cmp&gt;0){
+            //如果key大于x结点的键，则继续找x结点的右子树
+            x.right = delete(x.right,key);
+        }else if(cmp&lt;0){
+            //如果key小于x结点的键，则继续找x结点的左子树
+            x.left = delete(x.left,key);
+        }else{
+            //如果key等于x结点的键，完成真正的删除结点动作，要删除的结点就是x；
+            //让元素个数-1
+            N--;
+            //得找到右子树中最小的结点
+            if (x.right==null){
+                return x.left;
+            }
+            if (x.left==null){
+                return x.right;
+            }
+            Node minNode = x.right;
+            while(minNode.left!=null){
+                minNode = minNode.left;
+            }
+            //删除右子树中最小的结点
+            Node n = x.right;
+            while(n.left!=null){
+                if (n.left.left==null){
+                    n.left=null;
+                }else{
+                    //变换n结点即可
+                    n = n.left;
+                }
+            }
+            //让x结点的左子树成为minNode的左子树
+            minNode.left = x.left;
+            //让x结点的右子树成为minNode的右子树
+            minNode.right = x.right;
+            //让x结点的父结点指向minNode
+            x = minNode;
+        }
+        return x;
+    }
+
+    //查找整个树中最小的键
+    public Key min(){
+        return min(root).key;
+    }
+
+    //在指定树x中找出最小键所在的结点
+    private Node min(Node x){
+        //需要判断x还有没有左子结点，如果有，则继续向左找，如果没有，则x就是最小键所在的结点
+        if (x.left!=null){
+            return min(x.left);
+        }else{
+            return x;
+        }
+    }
+
+    //在整个树中找到最大的键
+    public Key max(){
+        return max(root).key;
+    }
+
+    //在指定的树x中，找到最大的键所在的结点
+    public Node max(Node x){
+        //判断x还有没有右子结点，如果有，则继续向右查找，如果没有，则x就是最大键所在的结点
+        if (x.right!=null){
+            return max(x.right);
+        }else{
+            return x;
+        }
+    }
+
+    //获取整个树中所有的键
+    public Queue&lt;Key&gt; preErgodic(){
+        Queue&lt;Key&gt; keys = new Queue&lt;&gt;();
+        preErgodic(root, keys);
+        return keys;
+    }
+
+    //获取指定树x的所有键，并放到keys队列中
+    private void preErgodic(Node x,Queue&lt;Key&gt; keys){
+        if (x==null){
+            return;
+        }
+        //把x结点的key放入到keys中
+        keys.enqueue(x.key);
+        //递归遍历x结点的左子树
+        if (x.left!=null){
+            preErgodic(x.left,keys);
+        }
+        //递归遍历x结点的右子树
+        if (x.right!=null){
+            preErgodic(x.right,keys);
+        }
+    }
+
+    //使用中序遍历获取树中所有的键
+    public Queue&lt;Key&gt; midErgodic(){
+        Queue&lt;Key&gt; keys = new Queue&lt;&gt;();
+        midErgodic(root,keys);
+        return keys;
+    }
+
+    //使用中序遍历，获取指定树x中所有的键，并存放到key中
+    private void midErgodic(Node x,Queue&lt;Key&gt; keys){
+        if (x==null){
+            return;
+        }
+        //先递归，把左子树中的键放到keys中
+        if (x.left!=null){
+            midErgodic(x.left,keys);
+        }
+        //把当前结点x的键放到keys中
+        keys.enqueue(x.key);
+        //在递归，把右子树中的键放到keys中
+        if(x.right!=null){
+            midErgodic(x.right,keys);
+        }
+    }
+
+    //使用后序遍历，把整个树中所有的键返回
+    public Queue&lt;Key&gt; afterErgodic(){
+        Queue&lt;Key&gt; keys = new Queue&lt;&gt;();
+        afterErgodic(root,keys);
+        return keys;
+    }
+
+    //使用后序遍历，把指定树x中所有的键放入到keys中
+    private void afterErgodic(Node x,Queue&lt;Key&gt; keys){
+        if (x==null){
+            return ;
+        }
+        //通过递归把左子树中所有的键放入到keys中
+        if (x.left!=null){
+            afterErgodic(x.left,keys);
+        }
+        //通过递归把右子树中所有的键放入到keys中
+        if (x.right!=null){
+            afterErgodic(x.right,keys);
+        }
+        //把x结点的键放入到keys中
+        keys.enqueue(x.key);
+    }
+
+    //使用层序遍历，获取整个树中所有的键
+    public Queue&lt;Key&gt; layerErgodic(){
+        //定义两个队列，分别存储树中的键和树中的结点
+        Queue&lt;Key&gt; keys = new Queue&lt;&gt;();
+        Queue&lt;Node&gt; nodes = new Queue&lt;&gt;();
+        //默认，往队列中放入根结点
+        nodes.enqueue(root);
+        while(!nodes.isEmpty()){
+            //从队列中弹出一个结点，把key放入到keys中
+            Node n = nodes.dequeue();
+            keys.enqueue(n.key);
+            //判断当前结点还有没有左子结点，如果有，则放入到nodes中
+            if (n.left!=null){
+                nodes.enqueue(n.left);
+            }
+            //判断当前结点还有没有右子结点，如果有，则放入到nodes中
+            if (n.right!=null){
+                nodes.enqueue(n.right);
+            }
+        }
+        return keys;
+    }
+
+    //获取整个树的最大深度
+    public int maxDepth(){
+        return maxDepth(root);
+    }
+
+    //获取指定树x的最大深度
+    private int maxDepth(Node x){
+        if (x==null){
+            return 0;
+        }
+        //x的最大深度
+        int max=0;
+        //左子树的最大深度
+        int maxL=0;
+        //右子树的最大深度
+        int maxR=0;
+        //计算x结点左子树的最大深度
+        if (x.left!=null){
+            maxL = maxDepth(x.left);
+        }
+        //计算x结点右子树的最大深度
+        if (x.right!=null){
+            maxR = maxDepth(x.right);
+        }
+        //比较左子树最大深度和右子树最大深度，取较大值+1即可
+        max = maxL&gt;maxR?maxL+1:maxR+1;
+        return max;
+    }
+}
+</code></pre><p>代码测试</p>
+<pre><code>public class BinaryTreeTest {
+    public static void main(String[] args) {
+        //创建二叉查找树对象
+        BinaryTree&lt;Integer, String&gt; tree = new BinaryTree&lt;&gt;();
+        //测试插入
+        tree.put(1,&quot;张三&quot;);
+        tree.put(2,&quot;李四&quot;);
+        tree.put(3,&quot;王五&quot;);
+        System.out.println(&quot;插入完毕后元素的个数：&quot;+tree.size());
+        //测试获取
+        System.out.println(&quot;键2对应的元素是：&quot;+tree.get(2));
+        //测试删除
+        tree.delete(3);
+        System.out.println(&quot;删除后的元素个数：&quot;+tree.size());
+        System.out.println(&quot;删除后键3对应的元素:&quot;+tree.get(3));
+    }
+}
+</code></pre><p>遍历测试</p>
+<pre><code>public class BinaryTreeErgodicTest {
+
+    /*//测试前序遍历
+    public static void main(String[] args) {
+        //创建树对象
+        BinaryTree&lt;String, String&gt; tree = new BinaryTree&lt;&gt;();
+        //往树中添加数据
+        tree.put(&quot;E&quot;, &quot;5&quot;);
+        tree.put(&quot;B&quot;, &quot;2&quot;);
+        tree.put(&quot;G&quot;, &quot;7&quot;);
+        tree.put(&quot;A&quot;, &quot;1&quot;);
+        tree.put(&quot;D&quot;, &quot;4&quot;);
+        tree.put(&quot;F&quot;, &quot;6&quot;);
+        tree.put(&quot;H&quot;, &quot;8&quot;);
+        tree.put(&quot;C&quot;, &quot;3&quot;);
+        //遍历
+        Queue&lt;String&gt; keys = tree.preErgodic();
+        for (String key : keys) {
+            String value = tree.get(key);
+            System.out.println(key+&quot;----&quot;+value);
+        }
+    }*/
+
+    //测试中序遍历
+   /* public static void main(String[] args) {
+        //创建树对象
+        BinaryTree&lt;String, String&gt; tree = new BinaryTree&lt;&gt;();
+        //往树中添加数据
+        tree.put(&quot;E&quot;, &quot;5&quot;);
+        tree.put(&quot;B&quot;, &quot;2&quot;);
+        tree.put(&quot;G&quot;, &quot;7&quot;);
+        tree.put(&quot;A&quot;, &quot;1&quot;);
+        tree.put(&quot;D&quot;, &quot;4&quot;);
+        tree.put(&quot;F&quot;, &quot;6&quot;);
+        tree.put(&quot;H&quot;, &quot;8&quot;);
+        tree.put(&quot;C&quot;, &quot;3&quot;);
+        //遍历
+        Queue&lt;String&gt; keys = tree.midErgodic();
+        for (String key : keys) {
+            String value = tree.get(key);
+            System.out.println(key+&quot;----&quot;+value);
+        }
+    }*/
+
+    //测试后序遍历
+    /*public static void main(String[] args) {
+        //创建树对象
+        BinaryTree&lt;String, String&gt; tree = new BinaryTree&lt;&gt;();
+        //往树中添加数据
+        tree.put(&quot;E&quot;, &quot;5&quot;);
+        tree.put(&quot;B&quot;, &quot;2&quot;);
+        tree.put(&quot;G&quot;, &quot;7&quot;);
+        tree.put(&quot;A&quot;, &quot;1&quot;);
+        tree.put(&quot;D&quot;, &quot;4&quot;);
+        tree.put(&quot;F&quot;, &quot;6&quot;);
+        tree.put(&quot;H&quot;, &quot;8&quot;);
+        tree.put(&quot;C&quot;, &quot;3&quot;);
+        //遍历
+        Queue&lt;String&gt; keys = tree.afterErgodic();
+        for (String key : keys) {
+            String value = tree.get(key);
+            System.out.println(key+&quot;----&quot;+value);
+        }
+    }*/
+
+    //测试层序遍历
+    public static void main(String[] args) {
+        //创建树对象
+        BinaryTree&lt;String, String&gt; tree = new BinaryTree&lt;&gt;();
+        //往树中添加数据
+        tree.put(&quot;E&quot;, &quot;5&quot;);
+        tree.put(&quot;B&quot;, &quot;2&quot;);
+        tree.put(&quot;G&quot;, &quot;7&quot;);
+        tree.put(&quot;A&quot;, &quot;1&quot;);
+        tree.put(&quot;D&quot;, &quot;4&quot;);
+        tree.put(&quot;F&quot;, &quot;6&quot;);
+        tree.put(&quot;H&quot;, &quot;8&quot;);
+        tree.put(&quot;C&quot;, &quot;3&quot;);
+        //遍历
+        Queue&lt;String&gt; keys = tree.layerErgodic();
+        for (String key : keys) {
+            String value = tree.get(key);
+            System.out.println(key+&quot;----&quot;+value);
+        }
+    }
+}
+</code></pre><hr>
 
     </div>
     
@@ -1594,7 +2550,7 @@ public static void main(String[] args) throws Exception {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序表"><span class="toc-text">顺序表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向链表"><span class="toc-text">单向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向链表"><span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约瑟夫问题"><span class="toc-text">约瑟夫问题</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序表"><span class="toc-text">顺序表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向链表"><span class="toc-text">单向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向链表"><span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约瑟夫问题"><span class="toc-text">约瑟夫问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈"><span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号匹配问题"><span class="toc-text">括号匹配问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆波兰表达式求值"><span class="toc-text">逆波兰表达式求值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#队列"><span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#符号表"><span class="toc-text">符号表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-1"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序符号表"><span class="toc-text">有序符号表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树"><span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉查找树基于链表的实现"><span class="toc-text">二叉查找树基于链表的实现</span></a></li></ol></li></ol>
         
     </div>
 </aside>
