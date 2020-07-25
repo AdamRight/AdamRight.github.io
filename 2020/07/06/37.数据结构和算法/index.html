@@ -2099,6 +2099,7 @@ public static void main(String[] args) throws Exception {
 <p>中序遍历实现步骤：找到当前结点的左子树，如果不为空，递归遍历左子树；把当前结点的key放入到队列中;找到当前结点的右子树，如果不为空，递归遍历右子树。</p>
 <p>后序遍历实现步骤：找到当前结点的左子树，如果不为空，递归遍历左子树；找到当前结点的右子树，如果不为空，递归遍历右子树；把当前结点的key放入到队列中。</p>
 <p><strong>层序遍历</strong>，就是从根节点（第一层）开始，依次向下，获取每一层所有结点的值。实现步骤：创建队列，存储每一层的结点；使用循环从队列中弹出一个结点：获取当前结点的key；如果当前结点的左子结点不为空，则把左子结点放入到队列中；如果当前结点的右子结点不为空，则把右子结点放入到队列中。</p>
+<p><strong>最大深度</strong>：如果根结点为空，则最大深度为0；计算左子树的最大深度；计算右子树的最大深度；当前树的最大深度=左子树的最大深度和右子树的最大深度中的较大者+1。</p>
 <pre><code>public class BinaryTree&lt;Key extends Comparable&lt;Key&gt;, Value&gt; {
     //记录根结点
     private Node root;
@@ -2493,6 +2494,230 @@ public static void main(String[] args) throws Exception {
         }
     }
 }
+</code></pre><p>最大深度测试</p>
+<pre><code>public class BinaryTreeMaxDepthTest {
+    public static void main(String[] args) {
+        //创建树对象
+        BinaryTree&lt;String, String&gt; tree = new BinaryTree&lt;&gt;();
+        //往树中添加数据
+        tree.put(&quot;E&quot;, &quot;5&quot;);
+        tree.put(&quot;B&quot;, &quot;2&quot;);
+        tree.put(&quot;G&quot;, &quot;7&quot;);
+        tree.put(&quot;A&quot;, &quot;1&quot;);
+        tree.put(&quot;D&quot;, &quot;4&quot;);
+        tree.put(&quot;F&quot;, &quot;6&quot;);
+        tree.put(&quot;H&quot;, &quot;8&quot;);
+        tree.put(&quot;C&quot;, &quot;3&quot;);
+        int maxDepth = tree.maxDepth();
+        System.out.println(maxDepth);
+    }
+}
+</code></pre><hr>
+<h3 id="折纸问题"><a href="#折纸问题" class="headerlink" title="折纸问题"></a>折纸问题</h3><hr>
+<p>纸条对折1次，压出折痕后展开。此时 折痕是凹下去的，即折痕突起的方向指向纸条的背面。如果从纸条的下边向上方连续对折2次，压出折痕后展开，此时有三条折痕，从上到下依次是下折痕、下折痕和上折痕。连续对折N次，请从上到下打印所有折痕的方向 例如：N=1时，打印： down；N=2时，打印： down down up。</p>
+<p>根结点为下折痕；每一个结点的左子结点为下折痕；每一个结点的右子结点为上折痕。</p>
+<pre><code>public class PagerFoldingTest {
+
+    public static void main(String[] args) {
+        //模拟这只过程，产生树
+        Node&lt;String&gt; tree = createTree(2);
+        //遍历树，打印每个结点
+        printTree(tree);
+    }
+
+    //通过模拟对折N次纸，产生树
+    public static Node&lt;String&gt; createTree(int N){
+        //定义根结点
+        Node&lt;String&gt; root=null;
+        for (int i = 0; i &lt; N; i++) {
+            //1.当前是第一次对折
+            if (i==0){
+                root = new Node&lt;&gt;(&quot;down&quot;,null,null);
+                continue;
+            }
+            //2.当前不是第一次对折
+            //定义一个辅助队列，通过层序遍历的思想，找到叶子结点，叶子结点添加子节点
+            Queue&lt;Node&gt; queue = new Queue&lt;&gt;();
+            queue.enqueue(root);
+            //循环遍历队列
+            while(!queue.isEmpty()){
+                //从队列中弹出一个结点
+                Node&lt;String&gt; tmp = queue.dequeue();
+                //如果有左子结点，则把左子结点放入到队列中
+                if (tmp.left!=null){
+                    queue.enqueue(tmp.left);
+                }
+                //如果有右子结点，则把右子结点放入到队列中
+                if (tmp.right!=null){
+                    queue.enqueue(tmp.right);
+                }
+                //如果同时没有左子结点和右子结点，那么证明该节点是叶子结点，只需要给该节点添加左子结点和右子结点即可
+                if (tmp.left==null &amp;&amp; tmp.right==null){
+                    tmp.left = new Node&lt;String&gt;(&quot;down&quot;, null,null);
+                    tmp.right = new Node&lt;String&gt;(&quot;up&quot;,null,null);
+                }
+            }
+        }
+        return root;
+    }
+
+    //打印树中每个结点到控制台
+    public static void printTree(Node&lt;String&gt; root){
+        //需要使用中序遍历完成
+        if (root==null){
+            return;
+        }
+        //打印左子树的每个结点
+        if (root.left!=null){
+            printTree(root.left);
+        }
+        //打印当前结点
+        System.out.print(root.item+&quot; &quot;);
+        //打印右子树的每个结点
+        if (root.right!=null){
+            printTree(root.right);
+        }
+    }
+
+    //结点类
+    private static class Node&lt;T&gt;{
+        public T item;//存储元素
+        public Node left;
+        public Node right;
+        public Node(T item, Node left, Node right) {
+            this.item = item;
+            this.left = left;
+            this.right = right;
+        }
+    }
+}
+</code></pre><hr>
+<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><hr>
+<p>堆通常可以被看做是一棵<strong>完全二叉树</strong>的<strong>数组对象</strong>。</p>
+<p>完全二叉树，除了树的最后一层结点不需要是满的，其它的每一层从左到右都是满的，如果最后一层结点不是满的，那么要求左满右不满。</p>
+<p>二叉树的结点按照层级顺序放入数组中，<strong>根结点在位置1</strong>，它的子结点在位置2和3，而子结点的子结点则分别在位置4,5,6和7，以此类推。</p>
+<p><strong>如果一个结点的位置为k，则它的父结点的位置为[k/2],而它的两个子结点的位置则分别为2k和2k+1。</strong></p>
+<p><strong>每个结点都大于等于它的两个子结点</strong>。这里要注意堆中仅仅规定了每个结点大于等于它的两个子结点，但这两个子结点的顺序并没有做规定，跟之前的二叉查找树是有区别的。</p>
+<hr>
+<h3 id="API实现"><a href="#API实现" class="headerlink" title="API实现"></a>API实现</h3><hr>
+<p>如果往堆中新插入元素，我们只需要不断的比较新结点a[k]和它的父结点a[k/2]的大小，然后根据结果完成数据元素的交换，就可以完成堆的有序调整。</p>
+<p>当删除掉最大元素后，只需要将最后一个元素放到索引1处，并不断的拿着当前结点a[k]与它的子结点a[2k]和a[2k+1]中的较大者交换位置，即可完成堆的有序调整。</p>
+<pre><code>public class Heap&lt;T extends Comparable&lt;T&gt;&gt; {
+    //存储堆中的元素
+    private T[] items;
+    //记录堆中元素的个数
+    private int N;
+
+    public Heap(int capacity) {
+        this.items= (T[]) new Comparable[capacity+1];
+        this.N=0;
+    }
+
+    //判断堆中索引i处的元素是否小于索引j处的元素
+    private boolean less(int i,int j){
+        return items[i].compareTo(items[j])&lt;0;
+    }
+
+    //交换堆中i索引和j索引处的值
+    private void exch(int i,int j){
+        T temp = items[i];
+        items[i] = items[j];
+        items[j] = temp;
+    }
+
+    //往堆中插入一个元素
+    public void insert(T t){
+        items[++N]=t;
+        swim(N);
+    }
+
+    //使用上浮算法，使索引k处的元素能在堆中处于一个正确的位置
+    private void swim(int k){
+        //通过循环，不断的比较当前结点的值和其父结点的值，如果发现父结点的值比当前结点的值小，则交换位置
+        while(k&gt;1){
+            //比较当前结点和其父结点
+            if (less(k/2,k)){
+                exch(k/2,k);
+            }
+            k = k/2;
+        }
+    }
+
+    //删除堆中最大的元素,并返回这个最大元素
+    public T delMax(){
+        T max = items[1];
+        //交换索引1处的元素和最大索引处的元素，让完全二叉树中最右侧的元素变为临时根结点
+        exch(1,N);
+        //最大索引处的元素删除掉
+        items[N]=null;
+        //元素个数-1
+        N--;
+        //通过下沉调整堆，让堆重新有序
+        sink(1);
+        return max;
+    }
+
+    //使用下沉算法，使索引k处的元素能在堆中处于一个正确的位置
+    private void sink(int k){
+        //通过循环不断的对比当前k结点和其左子结点2*k以及右子结点2k+1处中的较大值的元素大小，如果当前结点小，则需要交换位置
+        while(2*k&lt;=N){
+            //获取当前结点的子结点中的较大结点
+            int max;//记录较大结点所在的索引
+            if (2*k+1&lt;=N){
+                if (less(2*k,2*k+1)){
+                    max=2*k+1;
+                }else{
+                    max=2*k;
+                }
+            }else {
+                max = 2*k;
+            }
+            //比较当前结点和较大结点的值
+            if (!less(k,max)){
+                break;
+            }
+            //交换k索引处的值和max索引处的值
+            exch(k,max);
+            //变换k的值
+            k = max;
+        }
+    }
+
+    public static void main(String[] args) {
+        Heap&lt;String&gt; heap = new Heap&lt;String&gt;(20);
+        heap.insert(&quot;A&quot;);
+        heap.insert(&quot;B&quot;);
+        heap.insert(&quot;C&quot;);
+        heap.insert(&quot;D&quot;);
+        heap.insert(&quot;E&quot;);
+        heap.insert(&quot;F&quot;);
+        heap.insert(&quot;G&quot;);
+        String del;
+        while((del=heap.delMax())!=null){
+            System.out.print(del+&quot;,&quot;);
+        }
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class HeapTest {
+    public static void main(String[] args) {
+        //创建堆对象
+        Heap&lt;String&gt; heap = new Heap&lt;&gt;(10);
+        //往堆中存入字符串数据
+        heap.insert(&quot;A&quot;);
+        heap.insert(&quot;B&quot;);
+        heap.insert(&quot;C&quot;);
+        heap.insert(&quot;D&quot;);
+        heap.insert(&quot;E&quot;);
+        heap.insert(&quot;F&quot;);
+        heap.insert(&quot;G&quot;);
+        //通过循环从堆中删除数据
+        String result = null;
+        while((result = heap.delMax())!=null){
+            System.out.print(result+&quot; &quot;);
+        }
+    }
+}
 </code></pre><hr>
 
     </div>
@@ -2550,7 +2775,7 @@ public static void main(String[] args) throws Exception {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序表"><span class="toc-text">顺序表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向链表"><span class="toc-text">单向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向链表"><span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约瑟夫问题"><span class="toc-text">约瑟夫问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈"><span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号匹配问题"><span class="toc-text">括号匹配问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆波兰表达式求值"><span class="toc-text">逆波兰表达式求值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#队列"><span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#符号表"><span class="toc-text">符号表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-1"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序符号表"><span class="toc-text">有序符号表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树"><span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉查找树基于链表的实现"><span class="toc-text">二叉查找树基于链表的实现</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序表"><span class="toc-text">顺序表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向链表"><span class="toc-text">单向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向链表"><span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约瑟夫问题"><span class="toc-text">约瑟夫问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈"><span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号匹配问题"><span class="toc-text">括号匹配问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆波兰表达式求值"><span class="toc-text">逆波兰表达式求值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#队列"><span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#符号表"><span class="toc-text">符号表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-1"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序符号表"><span class="toc-text">有序符号表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树"><span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉查找树基于链表的实现"><span class="toc-text">二叉查找树基于链表的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#折纸问题"><span class="toc-text">折纸问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆"><span class="toc-text">堆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API实现"><span class="toc-text">API实现</span></a></li></ol></li></ol>
         
     </div>
 </aside>
