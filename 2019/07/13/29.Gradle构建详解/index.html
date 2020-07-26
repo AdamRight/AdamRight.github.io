@@ -1002,7 +1002,8 @@ taskZ.dependsOn(taskX, taskY)
                        &apos;src/main/res-tea&apos;]
     }
 }
-</code></pre><h3 id="7-2、自定义plugin"><a href="#7-2、自定义plugin" class="headerlink" title="7.2、自定义plugin"></a>7.2、自定义plugin</h3><p>main下的java替换成groovy，新建.groovy类：</p>
+</code></pre><h3 id="7-2、自定义plugin"><a href="#7-2、自定义plugin" class="headerlink" title="7.2、自定义plugin"></a>7.2、自定义plugin</h3><hr>
+<p>main下的java替换成groovy，新建.groovy类：</p>
 <pre><code>class GradleStudyPlugin implements Plugin&lt;Project&gt;{
     @Override
     void apply (Project project){
@@ -1037,7 +1038,8 @@ sourceSets {
 comTea{
     //传参
 }
-</code></pre><h3 id="7-3、修改apk名字"><a href="#7-3、修改apk名字" class="headerlink" title="7.3、修改apk名字"></a>7.3、修改apk名字</h3><p>app的build中</p>
+</code></pre><hr>
+<h3 id="7-3、修改apk名字"><a href="#7-3、修改apk名字" class="headerlink" title="7.3、修改apk名字"></a>7.3、修改apk名字</h3><p>app的build中</p>
 <pre><code>this.afterEvaluate {
     this.android.applicationVariants.all { variant -&gt;
         def output = variant.outputs.first()
@@ -1047,7 +1049,115 @@ comTea{
     }
 } 
 </code></pre><h2 id="8、Jenkins"><a href="#8、Jenkins" class="headerlink" title="8、Jenkins"></a>8、Jenkins</h2><pre><code>java -jar jenkins.war 
-</code></pre>
+</code></pre><h2 id="Android实战应用"><a href="#Android实战应用" class="headerlink" title="Android实战应用"></a>Android实战应用</h2><h3 id="buildTypes和productFlavors"><a href="#buildTypes和productFlavors" class="headerlink" title="buildTypes和productFlavors"></a>buildTypes和productFlavors</h3><hr>
+<p>和main同级别，同包名，创建文件，区别使用debug还是release。可以用来实现类似gradle调用java类。</p>
+<hr>
+<h3 id="implementation"><a href="#implementation" class="headerlink" title="implementation"></a>implementation</h3><hr>
+<p>implementation：不会传递依赖；compile / api：会传递依赖；api 是 compile 的替代品。当依赖被传递时，二级依赖的改动会导致0级项目重新编译；当依赖不传递时，二级依赖的改动不会导致 0 级项目重新编译。</p>
+<hr>
+<h3 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h3><hr>
+<p><code>android{}</code>的内容就是对<code>apply plugin: &#39;com.android.application&#39;</code>的配置。</p>
+<p>参考上述<code>7.2、自定义plugin</code>。</p>
+<p>新建Module-<code>Java Library</code>-buildSrc模块</p>
+<p>创建目录<code>\buildSrc\src\main\resources\META-INF\gradle-plugins</code>，创建文件xxx.properties</p>
+<pre><code>implementation-class=com.plugin.demo.PluginDemo
+</code></pre><p>目录<code>buildSrc\src\main\groovy\com\plugin\demo</code>创建文件PluginDemo.groovy</p>
+<pre><code>import com.android.build.gradle.BaseExtension
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+public class PluginDemo implements Plugin&lt;Project&gt; {
+    @Override
+    public void apply(Project project) {
+        def extension = project.extensions.create(&apos;yyyy&apos;, ExtensionDemo)
+        project.afterEvaluate {
+            println &quot;Hello ${extension.name}!&quot;//Hello zzzzz
+        }
+        //def transform = new TransformDemo()
+        //def baseExtension = project.extensions.getByType(BaseExtension)
+        //baseExtension.registerTransform(transform)
+    }
+}
+</code></pre><p>创建文件ExtensionDemo.groovy</p>
+<pre><code>public class ExtensionDemo {
+    def name = &quot;Author&quot;;
+}
+</code></pre><p>在app的build中使用plugin</p>
+<pre><code>apply plugin: &apos;xxx&apos;
+
+yyyy {
+    name &apos;zzzzz&apos;
+}
+</code></pre><p>关于 buildSrc 目录：这是 gradle 的一个特殊目录，这个目录的 build.gradle 会自动被执行，即使不配配置进<code>settings.gradle</code>。buildSrc 的执行早于任何一个 project，也早于 settings.gradle。它是一个独立的存在。 buildSrc 所配置出来的 Plugin 会被自动添加到编译过程中的每一个 project 的 classpath，因此它们才可以直接使用 <code>apply plugin: &#39;xxx&#39;</code>的方式来便捷应用这些 plugin。</p>
+<p>settings.gradle 中如果配置了 ‘:buildSrc’ ，buildSrc 目录就会被当做是子 Project ，因此会被执行两遍。所以在 settings.gradle 里面应该删掉 <code>:buildSrc</code> 的配置。</p>
+<hr>
+<h3 id="Transform"><a href="#Transform" class="headerlink" title="Transform"></a>Transform</h3><hr>
+<p>Transform是由 Android 提供的，在项目构建过程中把编译后的文件（jar文件和 class文件）添加自定义的中间处理过程的工具。下面代码只是把编译完的内容原封不动搬运到目标位置，没有实际用处。要修改字节码，需要引入其他工具，例如 javassist。</p>
+<p>新建TransformDemo.groovy</p>
+<pre><code>import com.android.build.api.transform.Format
+import com.android.build.api.transform.QualifiedContent
+import com.android.build.api.transform.Transform
+import com.android.build.api.transform.TransformException
+import com.android.build.api.transform.TransformInvocation
+import com.android.build.gradle.internal.pipeline.TransformManager
+import com.android.utils.FileUtils;
+
+public class TransformDemo extends Transform {
+    @Override
+    String getName() {
+        return &quot;hencoderTransform&quot;
+    }
+
+    @Override
+    Set&lt;QualifiedContent.ContentType&gt; getInputTypes() {
+        return TransformManager.CONTENT_CLASS
+    }
+
+    @Override
+    Set&lt;? super QualifiedContent.Scope&gt; getScopes() {
+        return TransformManager.SCOPE_FULL_PROJECT
+    }
+
+    @Override
+    boolean isIncremental() {
+        return false
+    }
+
+    @Override
+    void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
+
+        def inputs = transformInvocation.inputs
+        def outputProvider = transformInvocation.outputProvider
+
+        inputs.each {
+            it.jarInputs.each {
+                File dest = outputProvider.getContentLocation(it.name, it.contentTypes, it.scopes, Format.JAR)
+                FileUtils.copyFile(it.file, dest)
+            }
+
+            it.directoryInputs.each {
+                File dest = outputProvider.getContentLocation(it.name, it.contentTypes, it.scopes, Format.DIRECTORY)
+                FileUtils.copyDirectory(it.file, dest)
+            }
+        }
+    }
+}
+</code></pre><p>buildSrc-build中改为：</p>
+<pre><code>repositories {
+    google()
+    jcenter()
+}
+
+dependencies {
+    implementation &apos;com.android.tools.build:gradle:3.2.1&apos;
+}
+</code></pre><p>PluginDemo.groovy中添加代码</p>
+<pre><code>def transform = new TransformDemo()
+def baseExtension = project.extensions.getByType(BaseExtension)
+baseExtension.registerTransform(transform)
+</code></pre><p>修改app-build中的plugin放在android{}之后。</p>
+<p>示例：<a href="https://github.com/liangzhitao/consuming-collector" target="_blank" rel="noopener">https://github.com/liangzhitao/consuming-collector</a></p>
+<hr>
+
     </div>
     
         <div class="reward">
@@ -1108,7 +1218,7 @@ comTea{
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、介绍和环境搭建"><span class="toc-text">1、介绍和环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、语法"><span class="toc-text">2、语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、基础语法"><span class="toc-text">2.1、基础语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、闭包"><span class="toc-text">2.2、闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、列表list"><span class="toc-text">2.3、列表list</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、映射map"><span class="toc-text">2.4、映射map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、范围range"><span class="toc-text">2.5、范围range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6、面向对象"><span class="toc-text">2.6、面向对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、高级用法"><span class="toc-text">3、高级用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1、json文件处理"><span class="toc-text">3.1、json文件处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2、xml读取和生成"><span class="toc-text">3.2、xml读取和生成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3、文件操作"><span class="toc-text">3.3、文件操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、Gradle介绍"><span class="toc-text">4、Gradle介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、Project"><span class="toc-text">5、Project</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1、Project相关API"><span class="toc-text">5.1、Project相关API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2、属性相关API"><span class="toc-text">5.2、属性相关API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3、file相关API"><span class="toc-text">5.3、file相关API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4、依赖相关API"><span class="toc-text">5.4、依赖相关API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5、外部命令API"><span class="toc-text">5.5、外部命令API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、task"><span class="toc-text">6、task</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两种定义方式"><span class="toc-text">两种定义方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#doFirst和doLast"><span class="toc-text">doFirst和doLast</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统计Build时长"><span class="toc-text">统计Build时长</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#依赖"><span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入输出"><span class="toc-text">输入输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行顺序指定"><span class="toc-text">执行顺序指定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、其他模块"><span class="toc-text">7、其他模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1、SourceSet"><span class="toc-text">7.1、SourceSet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2、自定义plugin"><span class="toc-text">7.2、自定义plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3、修改apk名字"><span class="toc-text">7.3、修改apk名字</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、Jenkins"><span class="toc-text">8、Jenkins</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、介绍和环境搭建"><span class="toc-text">1、介绍和环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、语法"><span class="toc-text">2、语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、基础语法"><span class="toc-text">2.1、基础语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、闭包"><span class="toc-text">2.2、闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、列表list"><span class="toc-text">2.3、列表list</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、映射map"><span class="toc-text">2.4、映射map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、范围range"><span class="toc-text">2.5、范围range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6、面向对象"><span class="toc-text">2.6、面向对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、高级用法"><span class="toc-text">3、高级用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1、json文件处理"><span class="toc-text">3.1、json文件处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2、xml读取和生成"><span class="toc-text">3.2、xml读取和生成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3、文件操作"><span class="toc-text">3.3、文件操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、Gradle介绍"><span class="toc-text">4、Gradle介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、Project"><span class="toc-text">5、Project</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1、Project相关API"><span class="toc-text">5.1、Project相关API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2、属性相关API"><span class="toc-text">5.2、属性相关API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3、file相关API"><span class="toc-text">5.3、file相关API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4、依赖相关API"><span class="toc-text">5.4、依赖相关API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5、外部命令API"><span class="toc-text">5.5、外部命令API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、task"><span class="toc-text">6、task</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两种定义方式"><span class="toc-text">两种定义方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#doFirst和doLast"><span class="toc-text">doFirst和doLast</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统计Build时长"><span class="toc-text">统计Build时长</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#依赖"><span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入输出"><span class="toc-text">输入输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行顺序指定"><span class="toc-text">执行顺序指定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、其他模块"><span class="toc-text">7、其他模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1、SourceSet"><span class="toc-text">7.1、SourceSet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2、自定义plugin"><span class="toc-text">7.2、自定义plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3、修改apk名字"><span class="toc-text">7.3、修改apk名字</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、Jenkins"><span class="toc-text">8、Jenkins</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android实战应用"><span class="toc-text">Android实战应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#buildTypes和productFlavors"><span class="toc-text">buildTypes和productFlavors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#implementation"><span class="toc-text">implementation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#plugin"><span class="toc-text">plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transform"><span class="toc-text">Transform</span></a></li></ol></li></ol>
         
     </div>
 </aside>
