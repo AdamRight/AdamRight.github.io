@@ -3419,6 +3419,289 @@ public static void main(String[] args) throws Exception {
 <p>B树的优点在于：由于B树的每一个节点都包含key和value，因此我们根据key查找value时，只需要找到key所在的位置，就能找到value，但B+树只有叶子结点存储数据，索引每一次查找，都必须一次一次，一直找到树的最大深度处，也就是叶子结点的深度，才能找到value。</p>
 <p>在数据库的操作中，查询操作可以说是最频繁的一种操作，因此在设计数据库时，必须要考虑到查询的效率问题，<strong>在很多数据库中，都是用到了B+树来提高查询的效率</strong>；在操作数据库时，我们为了提高查询效率，可以基于某张表的某个字段建立索引，就可以提高查询效率，那其实这个索引就是B+树这种数据结构实现的。</p>
 <hr>
+<h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h2><hr>
+<p>并查集也是一种树型结构，跟二叉树、红黑树、B树等都不一样，这种树的要求比较简单：每个元素都唯一的对应一个结点；每一组数据中的多个元素都在同一颗树中；一个组中的数据对应的树和另外一个组中的数据对应的树之间没有任何联系；元素在树中并没有子父级关系的硬性要求。</p>
+<hr>
+<h3 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h3><hr>
+<p>初始情况下，并查集中的数据默认分为N个组；初始化数组eleAndGroup；把eleAndGroup数组的索引看做是每个结点存储的元素，把eleAndGroup数组每个索引处的值看做是该结点所在的分组，那么初始化情况下，i索引处存储的值就是i。</p>
+<p>如果p和q已经在同一个分组中，则无需合并；如果p和q不在同一个分组，则只需要将p元素所在组的所有的元素的组标识符修改为q元素所在组的标识符即可；分组数量-1。</p>
+<pre><code>public class UF {
+    //记录结点元素和该元素所在分组的标识
+    private int[] eleAndGroup;
+    //记录并查集中数据的分组个数
+    private int count;
+    //初始化并查集
+    public UF(int N){
+        //初始化分组的数量,默认情况下，有N个分组
+        this.count = N;
+        //初始化eleAndGroup数组
+        this.eleAndGroup = new int[N];
+        //初始化eleAndGroup中的元素及其所在的组的标识符,让eleAndGroup数组的索引作为并查集的每个结点的元素，并且让每个索引处的值(该元素所在的组的标识符)就是该索引
+        for (int i = 0; i &lt; eleAndGroup.length; i++) {
+            eleAndGroup[i] = i;
+        }
+    }
+
+    //获取当前并查集中的数据有多少个分组
+    public int count(){
+        return count;
+    }
+
+    //元素p所在分组的标识符
+    public int find(int p){
+        return eleAndGroup[p];
+    }
+
+    //判断并查集中元素p和元素q是否在同一分组中
+    public boolean connected(int p,int q){
+        return find(p) == find(q);
+    }
+
+    //把p元素所在分组和q元素所在分组合并
+    public void union(int p,int q){
+        //判断元素q和p是否已经在同一分组中，如果已经在同一分组中，则结束方法就可以了
+        if (connected(p,q)){
+            return;
+        }
+        //找到p所在分组的标识符
+        int pGroup = find(p);
+        //找到q所在分组的标识符
+        int qGroup = find(q);
+        //合并组：让p所在组的所有元素的组标识符变为q所在分组的标识符
+        for (int i = 0; i &lt; eleAndGroup.length; i++) {
+            if (eleAndGroup[i]==pGroup){
+                eleAndGroup[i] = qGroup;
+            }
+        }
+        //分组个数-1
+        this.count--;
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class UFTest {
+    public static void main(String[] args) {
+        //创建并查集对象
+        UF uf = new UF(5);
+        System.out.println(&quot;默认情况下，并查集中有：&quot;+uf.count()+&quot;个分组&quot;);
+        //从控制台录入两个要合并的元素，调用union方法合并，观察合并后并查集中的分组是否减少
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            System.out.println(&quot;请输入第一个要合并的元素：&quot;);
+            int p = sc.nextInt();
+            System.out.println(&quot;请输入第二个要合并的元素：&quot;);
+            int q = sc.nextInt();
+            //判断这两个元素是否已经在同一组了
+            if (uf.connected(p,q)){
+                System.out.println(p+&quot;元素和&quot;+q+&quot;元素已经在同一个组中了&quot;);
+                continue;
+            }
+            uf.union(p,q);
+            System.out.println(&quot;当前并查集中还有：&quot;+uf.count()+&quot;个分组&quot;);
+        }
+    }
+}
+</code></pre><hr>
+<h3 id="UF-Tree算法优化"><a href="#UF-Tree算法优化" class="headerlink" title="UF_Tree算法优化"></a>UF_Tree算法优化</h3><hr>
+<p>我们仍然让eleAndGroup数组的索引作为某个结点的元素；eleAndGroup[i]的值不再是当前结点所在的分组标识，而是该结点的父结点。</p>
+<pre><code>public class UF_Tree {
+    //记录结点元素和该元素所在分组的标识
+    private int[] eleAndGroup;
+    //记录并查集中数据的分组个数
+    private int count;
+    //初始化并查集
+    public UF_Tree(int N){
+        //初始化分组的数量,默认情况下，有N个分组
+        this.count = N;
+        //初始化eleAndGroup数组
+        this.eleAndGroup = new int[N];
+        //初始化eleAndGroup中的元素及其所在的组的标识符,让eleAndGroup数组的索引作为并查集的每个结点的元素，并且让每个索引处的值(该元素所在的组的标识符)就是该索引
+        for (int i = 0; i &lt; eleAndGroup.length; i++) {
+            eleAndGroup[i] = i;
+        }
+    }
+
+    //获取当前并查集中的数据有多少个分组
+    public int count(){
+        return count;
+    }
+
+    //判断并查集中元素p和元素q是否在同一分组中
+    public boolean connected(int p,int q){
+        return find(p) == find(q);
+    }
+
+    //元素p所在分组的标识符
+    public int find(int p){
+        while(true){
+            if (p == eleAndGroup[p]){
+                return p;
+            }
+            p = eleAndGroup[p];
+        }
+
+    }
+
+    //把p元素所在分组和q元素所在分组合并
+    public void union(int p,int q){
+        //找到p元素和q元素所在组对应的树的根结点
+        int pRoot = find(p);
+        int qRoot = find(q);
+        //如果p和q已经在同一分组，则不需要合并了
+        if (pRoot==qRoot){
+            return;
+        }
+        //让p所在的树的根结点的父结点为q所在树的根结点即可
+        eleAndGroup[pRoot] = qRoot;
+        //组的数量-1
+        this.count--;
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class UFTeeTest {
+    public static void main(String[] args) {
+        //创建并查集对象
+        UF_Tree uf = new UF_Tree(5);
+        System.out.println(&quot;默认情况下，并查集中有：&quot;+uf.count()+&quot;个分组&quot;);
+        //从控制台录入两个要合并的元素，调用union方法合并，观察合并后并查集中的分组是否减少
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            System.out.println(&quot;请输入第一个要合并的元素：&quot;);
+            int p = sc.nextInt();
+            System.out.println(&quot;请输入第二个要合并的元素：&quot;);
+            int q = sc.nextInt();
+            //判断这两个元素是否已经在同一组了
+            if (uf.connected(p,q)){
+                System.out.println(p+&quot;元素和&quot;+q+&quot;元素已经在同一个组中了&quot;);
+                continue;
+            }
+            uf.union(p,q);
+            System.out.println(&quot;当前并查集中还有：&quot;+uf.count()+&quot;个分组&quot;);
+        }
+    }
+}
+</code></pre><hr>
+<h3 id="路径压缩优化"><a href="#路径压缩优化" class="headerlink" title="路径压缩优化"></a>路径压缩优化</h3><hr>
+<p>在每次合并树的时候，把较小的树连接到较大的树上，就可以减小树的深度。</p>
+<pre><code>public class UF_Tree_Weighted {
+    //记录结点元素和该元素所在分组的标识
+    private int[] eleAndGroup;
+    //记录并查集中数据的分组个数
+    private int count;
+    //用来存储每一个根结点对应的树中保存的结点的个数
+    private int[] sz;
+    //初始化并查集
+    public UF_Tree_Weighted(int N){
+        //初始化分组的数量,默认情况下，有N个分组
+        this.count = N;
+        //初始化eleAndGroup数组
+        this.eleAndGroup = new int[N];
+        //初始化eleAndGroup中的元素及其所在的组的标识符,让eleAndGroup数组的索引作为并查集的每个结点的元素，并且让每个索引处的值(该元素所在的组的标识符)就是该索引
+        for (int i = 0; i &lt; eleAndGroup.length; i++) {
+            eleAndGroup[i] = i;
+        }
+        this.sz = new int[N];
+        //默认情况下，sz中每个索引处的值都是1
+        for (int i = 0; i &lt; sz.length; i++) {
+            sz[i] = 1;
+        } 
+    }
+
+    //获取当前并查集中的数据有多少个分组
+    public int count(){
+        return count;
+    }
+
+    //判断并查集中元素p和元素q是否在同一分组中
+    public boolean connected(int p,int q){
+        return find(p) == find(q);
+    }
+
+    //元素p所在分组的标识符
+    public int find(int p){
+        while(true){
+            if (p == eleAndGroup[p]){
+                return p;
+            }
+            p = eleAndGroup[p];
+        }
+    }
+
+    //把p元素所在分组和q元素所在分组合并
+    public void union(int p,int q){
+        //找到p元素和q元素所在组对应的树的根结点
+        int pRoot = find(p);
+        int qRoot = find(q);
+        //如果p和q已经在同一分组，则不需要合并了
+        if (pRoot==qRoot){
+            return;
+        }
+        //判断proot对应的树大还是qroot对应的树大，最终需要把较小的树合并到较大的树中
+        if (sz[pRoot]&lt;sz[qRoot]){
+            eleAndGroup[pRoot] = qRoot;
+            sz[qRoot]+=sz[pRoot];
+        }else{
+            eleAndGroup[qRoot] = pRoot;
+            sz[pRoot]+= sz[qRoot];
+        }
+        //组的数量-1
+        this.count--;
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class UFTeeWeightedTest {
+    public static void main(String[] args) {
+        //创建并查集对象
+        UF_Tree_Weighted uf = new UF_Tree_Weighted(5);
+        System.out.println(&quot;默认情况下，并查集中有：&quot;+uf.count()+&quot;个分组&quot;);
+        //从控制台录入两个要合并的元素，调用union方法合并，观察合并后并查集中的分组是否减少
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            System.out.println(&quot;请输入第一个要合并的元素：&quot;);
+            int p = sc.nextInt();
+            System.out.println(&quot;请输入第二个要合并的元素：&quot;);
+            int q = sc.nextInt();
+            //判断这两个元素是否已经在同一组了
+            if (uf.connected(p,q)){
+                System.out.println(p+&quot;元素和&quot;+q+&quot;元素已经在同一个组中了&quot;);
+                continue;
+            }
+            uf.union(p,q);
+            System.out.println(&quot;当前并查集中还有：&quot;+uf.count()+&quot;个分组&quot;);
+        }
+    }
+}
+</code></pre><hr>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><hr>
+<pre><code>public class Traffic_Project_Test {
+
+    public static void main(String[] args) throws Exception{
+        //构建一个缓冲读取流BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(Traffic_Project_Test.class.getClassLoader().getResourceAsStream(&quot;traffic_project.txt&quot;)));
+        //读取第一行数据20
+        int totalNumber = Integer.parseInt(br.readLine());
+        //构建一个并查集对象
+        UF_Tree_Weighted uf = new UF_Tree_Weighted(totalNumber);
+        //读取第二行数据7
+        int roadNumber = Integer.parseInt(br.readLine());
+        //循环读取7条道路
+        for (int i=1;i&lt;=roadNumber;i++){
+            String line = br.readLine();//0 1
+            String[] str = line.split(&quot; &quot;);
+            int p = Integer.parseInt(str[0]);
+            int q = Integer.parseInt(str[1]);
+
+            //调用并查集对象的union方法让两个城市相通
+            uf.union(p,q);
+        }
+        //获取当前并查集中分组的数量-1就可以得到还需要修建的道路的数目
+        int roads = uf.count()-1;
+        System.out.println(&quot;还需要修建&quot;+roads+&quot;条道路，才能实现畅通工程&quot;);
+    }
+}
+</code></pre><hr>
+<h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><hr>
+<p>图是由一组顶点和一组能够将两个顶点相连的边组成的。按照连接两个顶点的边的不同，可以把图分为以下两种：无向图：边仅仅连接两个顶点，没有其他含义；有向图：边不仅连接两个顶点，并且具有方向。</p>
+<hr>
 
     </div>
     
@@ -3475,7 +3758,7 @@ public static void main(String[] args) throws Exception {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序表"><span class="toc-text">顺序表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向链表"><span class="toc-text">单向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向链表"><span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约瑟夫问题"><span class="toc-text">约瑟夫问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈"><span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号匹配问题"><span class="toc-text">括号匹配问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆波兰表达式求值"><span class="toc-text">逆波兰表达式求值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#队列"><span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#符号表"><span class="toc-text">符号表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-1"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序符号表"><span class="toc-text">有序符号表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树"><span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉查找树基于链表的实现"><span class="toc-text">二叉查找树基于链表的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#折纸问题"><span class="toc-text">折纸问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆"><span class="toc-text">堆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API实现"><span class="toc-text">API实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用堆进行排序"><span class="toc-text">利用堆进行排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优先队列"><span class="toc-text">优先队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最大优先队列"><span class="toc-text">最大优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最小优先队列"><span class="toc-text">最小优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#索引优先队列"><span class="toc-text">索引优先队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平衡树"><span class="toc-text">平衡树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3查找树"><span class="toc-text">2-3查找树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#红黑树"><span class="toc-text">红黑树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B树和B-树"><span class="toc-text">B树和B+树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B树"><span class="toc-text">B树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-树"><span class="toc-text">B+树</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序表"><span class="toc-text">顺序表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向链表"><span class="toc-text">单向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向链表"><span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约瑟夫问题"><span class="toc-text">约瑟夫问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈"><span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号匹配问题"><span class="toc-text">括号匹配问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆波兰表达式求值"><span class="toc-text">逆波兰表达式求值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#队列"><span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#符号表"><span class="toc-text">符号表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-1"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序符号表"><span class="toc-text">有序符号表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树"><span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉查找树基于链表的实现"><span class="toc-text">二叉查找树基于链表的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#折纸问题"><span class="toc-text">折纸问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆"><span class="toc-text">堆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API实现"><span class="toc-text">API实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用堆进行排序"><span class="toc-text">利用堆进行排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优先队列"><span class="toc-text">优先队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最大优先队列"><span class="toc-text">最大优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最小优先队列"><span class="toc-text">最小优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#索引优先队列"><span class="toc-text">索引优先队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平衡树"><span class="toc-text">平衡树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3查找树"><span class="toc-text">2-3查找树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#红黑树"><span class="toc-text">红黑树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B树和B-树"><span class="toc-text">B树和B+树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B树"><span class="toc-text">B树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-树"><span class="toc-text">B+树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并查集"><span class="toc-text">并查集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-2"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UF-Tree算法优化"><span class="toc-text">UF_Tree算法优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径压缩优化"><span class="toc-text">路径压缩优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例"><span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图"><span class="toc-text">图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li></ol></li></ol>
         
     </div>
 </aside>
