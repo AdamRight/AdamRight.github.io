@@ -2719,6 +2719,706 @@ public static void main(String[] args) throws Exception {
     }
 }
 </code></pre><hr>
+<h3 id="利用堆进行排序"><a href="#利用堆进行排序" class="headerlink" title="利用堆进行排序"></a>利用堆进行排序</h3><hr>
+<p>构造堆；得到堆顶元素，这个值就是最大值；交换堆顶元素和数组中的最后一个元素，此时所有元素中的最大元素已经放到合适的位置；对堆进行调整，重新让除了最后一个元素的剩余元素中的最大值放到堆顶；重复上述步骤，直到堆中剩一个元素为止。</p>
+<p>堆构造过程：创建一个新数组，把原数组0~length-1的数据拷贝到新数组的1~length处，再从新数组长度的一半处开始往1索引处扫描（从右往左），然后对扫描到的每一个元素做下沉调整即可。</p>
+<p>堆排序过程：对构造好的堆，我们只需要做类似于堆的删除操作，就可以完成排序。将堆顶元素和堆中最后一个元素交换位置；通过对堆顶元素下沉调整堆，把最大的元素放到堆顶(此时最后一个元素不参与堆的调整，因为最大的数据已经到了数组的最右边)；重复上面步骤，直到堆中剩最后一个元素。</p>
+<p>实现：</p>
+<pre><code>public class HeapSort {
+    //判断heap堆中索引i处的元素是否小于索引j处的元素
+    private static  boolean less(Comparable[] heap, int i, int j) {
+        return heap[i].compareTo(heap[j])&lt;0;
+    }
+
+    //交换heap堆中i索引和j索引处的值
+    private static  void exch(Comparable[] heap, int i, int j) {
+        Comparable tmp = heap[i];
+        heap[i] = heap[j];
+        heap[j] = tmp;
+    }
+
+    //根据原数组source，构造出堆heap
+    private static void createHeap(Comparable[] source, Comparable[] heap) {
+        //把source中的元素拷贝到heap中，heap中的元素就形成一个无序的堆
+        System.arraycopy(source,0,heap,1,source.length);
+        //对堆中的元素做下沉调整(从长度的一半处开始，往索引1处扫描)
+        for (int i = (heap.length)/2;i&gt;0;i--){
+            sink(heap,i,heap.length-1);
+        }
+    }
+
+    //对source数组中的数据从小到大排序
+    public static  void sort(Comparable[] source) {
+        //构建堆
+        Comparable[] heap = new Comparable[source.length+1];
+        createHeap(source,heap);
+        //定义一个变量，记录未排序的元素中最大的索引
+        int N = heap.length-1;
+        //通过循环，交换1索引处的元素和排序的元素中最大的索引处的元素
+        while(N!=1){
+            //交换元素
+            exch(heap,1,N);
+            //排序交换后最大元素所在的索引，让它不要参与堆的下沉调整
+            N--;
+            //需要对索引1处的元素进行对的下沉调整
+            sink(heap,1, N);
+        }
+        //把heap中的数据复制到原数组source中
+        System.arraycopy(heap,1,source,0,source.length);
+    }
+
+    //在heap堆中，对target处的元素做下沉，范围是0~range
+    private static void sink(Comparable[] heap, int target, int range){
+        while(2*target&lt;=range){
+            //1.找出当前结点的较大的子结点
+            int max;
+            if (2*target+1&lt;=range){
+                if (less(heap,2*target,2*target+1)){
+                    max = 2*target+1;
+                }else{
+                    max = 2*target;
+                }
+            }else{
+                max = 2*target;
+            }
+            //2.比较当前结点的值和较大子结点的值
+            if (!less(heap,target,max)){
+                break;
+            }
+            exch(heap,target,max);
+            target = max;
+        }
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class HeapSortTest {
+    public static void main(String[] args) {
+        //待排序数组
+        String[] arr = {&quot;S&quot;,&quot;O&quot;,&quot;R&quot;,&quot;T&quot;,&quot;E&quot;,&quot;X&quot;,&quot;A&quot;,&quot;M&quot;,&quot;P&quot;,&quot;L&quot;,&quot;E&quot;};
+        //通过HeapSort对数组中的元素进行排序
+        HeapSort.sort(arr);
+        //打印排序后数组中的元素
+        System.out.println(Arrays.toString(arr));
+    }
+}
+</code></pre><hr>
+<h2 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h2><h3 id="最大优先队列"><a href="#最大优先队列" class="headerlink" title="最大优先队列"></a>最大优先队列</h3><hr>
+<p>可以获取并删除队列中最大的值。基于堆区实现最大优先队列。</p>
+<pre><code>public class MaxPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; {
+    //存储堆中的元素
+    private T[] items;
+    //记录堆中元素的个数
+    private int N;
+
+    public MaxPriorityQueue(int capacity) {
+        this.items = (T[]) new Comparable[capacity+1];
+        this.N= 0;
+    }
+
+    //获取队列中元素的个数
+    public int size() {
+        return N;
+    }
+
+    //判断队列是否为空
+    public boolean isEmpty() {
+        return N==0;
+    }
+
+    //判断堆中索引i处的元素是否小于索引j处的元素
+    private boolean less(int i, int j) {
+        return items[i].compareTo(items[j])&lt;0;
+    }
+
+    //交换堆中i索引和j索引处的值
+    private void exch(int i, int j) {
+        T tmp = items[i];
+        items[i] = items[j];
+        items[j] = tmp;
+    }
+
+    //往堆中插入一个元素
+    public void insert(T t) {
+        items[++N] = t;
+        swim(N);
+    }
+
+    //删除堆中最大的元素,并返回这个最大元素
+    public T delMax() {
+        T max = items[1];
+        exch(1,N);
+        N--;
+        sink(1);
+        return max;
+    }
+
+    //使用上浮算法，使索引k处的元素能在堆中处于一个正确的位置
+    private void swim(int k) {
+        while(k&gt;1){
+            if (less(k/2,k)){
+                exch(k/2,k);
+            }
+            k = k/2;
+        }
+    }
+
+    //使用下沉算法，使索引k处的元素能在堆中处于一个正确的位置
+    private void sink(int k) {
+        while(2*k&lt;=N){
+            int max;
+            if (2*k+1&lt;=N){
+                if (less(2*k,2*k+1)){
+                    max=2*k+1;
+                }else{
+                    max = 2*k;
+                }
+            }else {
+                max = 2*k;
+            }
+            if (!less(k,max)){
+                break;
+            }
+            exch(k,max);
+            k = max;
+        }
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class MaxPriorityQueueTest {
+    public static void main(String[] args) {
+        //创建优先队列
+        MaxPriorityQueue&lt;String&gt; queue = new MaxPriorityQueue&lt;&gt;(10);
+        //往队列中存储元素
+        queue.insert(&quot;A&quot;);
+        queue.insert(&quot;B&quot;);
+        queue.insert(&quot;C&quot;);
+        queue.insert(&quot;D&quot;);
+        queue.insert(&quot;E&quot;);
+        queue.insert(&quot;F&quot;);
+        queue.insert(&quot;G&quot;);
+        //通过循环从队列中获取最大的元素
+        while(!queue.isEmpty()){
+            String max = queue.delMax();
+            System.out.print(max+&quot; &quot;);
+        }
+    }
+}
+</code></pre><hr>
+<h3 id="最小优先队列"><a href="#最小优先队列" class="headerlink" title="最小优先队列"></a>最小优先队列</h3><hr>
+<p>可以获取并删除队列中最小的值。基于堆来完成最小优先队列：最小的元素放在数组的索引1处；每个结点的数据总是小于等于它的两个子结点的数据。</p>
+<pre><code>public class MinPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; {
+    //存储堆中的元素
+    private T[] items;
+    //记录堆中元素的个数
+    private int N;
+
+    public MinPriorityQueue(int capacity) {
+        this.items = (T[]) new Comparable[capacity+1];
+        this.N=0;
+    }
+
+    //获取队列中元素的个数
+    public int size() {
+        return N;
+    }
+
+    //判断队列是否为空
+    public boolean isEmpty() {
+        return N==0;
+    }
+
+    //判断堆中索引i处的元素是否小于索引j处的元素
+    private boolean less(int i, int j) {
+        return items[i].compareTo(items[j])&lt;0;
+    }
+
+    //交换堆中i索引和j索引处的值
+    private void exch(int i, int j) {
+        T tmp = items[i];
+        items[i] = items[j];
+        items[j] = tmp;
+    }
+
+    //往堆中插入一个元素
+    public void insert(T t) {
+        items[++N] = t;
+        swim(N);
+    }
+
+    //删除堆中最小的元素,并返回这个最小元素
+    public T delMin() {
+        T min = items[1];
+        exch(1,N);
+        N--;
+        sink(1);
+        return min;
+    }
+
+    //使用上浮算法，使索引k处的元素能在堆中处于一个正确的位置
+    private void swim(int k) {
+        //通过循环比较当前结点和其父结点的大小
+        while(k&gt;1){
+            if (less(k,k/2)){
+                exch(k,k/2);
+            }
+            k = k/2;
+        }
+    }
+
+    //使用下沉算法，使索引k处的元素能在堆中处于一个正确的位置
+    private void sink(int k) {
+        //通过循环比较当前结点和其子结点中的较小值
+        while(2*k&lt;=N){
+            //1.找到子结点中的较小值
+            int min;
+            if (2*k+1&lt;=N){
+                if (less(2*k, 2*k+1)){
+                    min = 2*k;
+                }else{
+                    min = 2*k+1;
+                }
+            }else{
+                min = 2*k;
+            }
+            //2.判断当前结点和较小值的大小
+            if (less(k,min)){
+                break;
+            }
+            exch(k,min);
+            k = min;
+        }
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class MinPriorityQueueTest {
+    public static void main(String[] args) {
+        //创建最小优先队列对象
+        MinPriorityQueue&lt;String&gt; queue = new MinPriorityQueue&lt;String&gt;(10);
+        //往队列中存数据
+        queue.insert(&quot;G&quot;);
+        queue.insert(&quot;F&quot;);
+        queue.insert(&quot;E&quot;);
+        queue.insert(&quot;D&quot;);
+        queue.insert(&quot;C&quot;);
+        queue.insert(&quot;B&quot;);
+        queue.insert(&quot;A&quot;);
+        //通过循环获取最小优先队列中的元素
+        while(!queue.isEmpty()){
+            String min = queue.delMin();
+            System.out.print(min+&quot; &quot;);
+        }
+    }
+}
+</code></pre><hr>
+<h3 id="索引优先队列"><a href="#索引优先队列" class="headerlink" title="索引优先队列"></a>索引优先队列</h3><hr>
+<p>存储数据时，给每一个数据元素关联一个整数，例如insert(int k,T t),我们可以看做k是t关联的整数，那么我们的实现需要通过k这个值，快速获取到队列中t这个元素，此时有个k这个值需要具有唯一性。</p>
+<p>用一个<code>T[] items</code>数组来保存数据元素，在insert(int k,T t)完成插入时，可以把k看做是items数组的索引，把t元素放到items数组的索引k处，这样我们再根据k获取元素t时就很方便了，直接就可以拿到items[k]即可。</p>
+<p>数组<code>int[]pq</code>,来保存每个元素在items数组中的索引，pq数组需要堆有序，也就是说，pq[1]对应的数据元素items[pq[1]]要小于等于pq[2]和pq[3]对应的数据元素items[pq[2]]和items[pq[3]]。</p>
+<p>数组<code>int[] qp</code>,用来存储pq的逆序。例如：在pq数组中：pq[1]=6;那么在qp数组中，把6作为索引，1作为值，结果是：qp[6]=1。</p>
+<p>代码实现</p>
+<pre><code>public class IndexMinPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; {
+    //存储堆中的元素
+    private T[] items;
+    //保存每个元素在items数组中的索引，pq数组需要堆有序
+    private int[] pq;
+    //保存qp的逆序，pq的值作为索引，pq的索引作为值
+    private int[] qp;
+    //记录堆中元素的个数
+    private int N;
+    public IndexMinPriorityQueue(int capacity) {
+        this.items = (T[]) new Comparable[capacity+1];
+        this.pq = new int[capacity+1];
+        this.qp= new int[capacity+1];
+        this.N = 0;
+
+        //默认情况下，队列中没有存储任何数据，让qp中的元素都为-1；
+        for (int i = 0; i &lt; qp.length; i++) {
+            qp[i]=-1;
+        }
+    }
+
+    //获取队列中元素的个数
+    public int size() {
+        return N;
+    }
+
+    //判断队列是否为空
+    public boolean isEmpty() {
+        return N==0;
+    }
+
+    //判断堆中索引i处的元素是否小于索引j处的元素
+    private boolean less(int i, int j) {
+        return items[pq[i]].compareTo(items[pq[j]])&lt;0;
+    }
+
+    //交换堆中i索引和j索引处的值
+    private void exch(int i, int j) {
+        //交换pq中的数据
+        int tmp = pq[i];
+        pq[i] = pq[j];
+        pq[j] = tmp;
+        //更新qp中的数据
+        qp[pq[i]]=i;
+        qp[pq[j]] =j;
+    }
+
+    //判断k对应的元素是否存在
+    public boolean contains(int k) {
+        return qp[k] !=-1;
+    }
+
+    //最小元素关联的索引
+    public int minIndex() {
+        return pq[1];
+    }
+
+
+    //往队列中插入一个元素,并关联索引i
+    public void insert(int i, T t) {
+        //判断i是否已经被关联，如果已经被关联，则不让插入
+        if (contains(i)){
+            return;
+        }
+        //元素个数+1
+        N++;
+        //把数据存储到items对应的i位置处
+        items[i] = t;
+        //把i存储到pq中
+        pq[N] = i;
+        //通过qp来记录pq中的i
+        qp[i]=N;
+        //通过堆上浮完成堆的调整
+        swim(N);
+    }
+
+    //删除队列中最小的元素,并返回该元素关联的索引
+    public int delMin() {
+        //获取最小元素关联的索引
+        int minIndex = pq[1];
+        //交换pq中索引1处和最大索引处的元素
+        exch(1,N);
+        //删除qp中对应的内容
+        qp[pq[N]] = -1;
+        //删除pq最大索引处的内容
+        pq[N]=-1;
+        //删除items中对应的内容
+        items[minIndex] = null;
+        //元素个数-1
+        N--;
+        //下沉调整
+        sink(1);
+        return minIndex;
+    }
+
+    //删除索引i关联的元素
+    public void delete(int i) {
+        //找到i在pq中的索引
+        int k = qp[i];
+        //交换pq中索引k处的值和索引N处的值
+        exch(k,N);
+        //删除qp中的内容
+        qp[pq[N]] = -1;
+        //删除pq中的内容
+        pq[N]=-1;
+        //删除items中的内容
+        items[k]=null;
+        //元素的数量-1
+        N--;
+        //堆的调整
+        sink(k);
+        swim(k);
+    }
+
+    //把与索引i关联的元素修改为为t
+    public void changeItem(int i, T t) {
+        //修改items数组中i位置的元素为t
+        items[i] = t;
+        //找到i在pq中出现的位置
+        int k = qp[i];
+        //堆调整
+        sink(k);
+        swim(k);
+    }
+
+    //使用上浮算法，使索引k处的元素能在堆中处于一个正确的位置
+    private void swim(int k) {
+        while(k&gt;1){
+            if (less(k,k/2)){
+                exch(k,k/2);
+            }
+            k = k/2;
+        }
+    }
+
+    //使用下沉算法，使索引k处的元素能在堆中处于一个正确的位置
+    private void sink(int k) {
+        while(2*k&lt;=N){
+            //找到子结点中的较小值
+            int min;
+            if (2*k+1&lt;=N){
+                if (less(2*k,2*k+1)){
+                    min = 2*k;
+                }else{
+                    min = 2*k+1;
+                }
+            }else{
+                min = 2*k;
+            }
+            //比较当前结点和较小值
+            if (less(k,min)){
+                break;
+            }
+            exch(k,min);
+            k = min;
+        }
+    }
+}
+</code></pre><p>测试代码</p>
+<pre><code>public class IndexMinPriorityQueueTest {
+    public static void main(String[] args) {
+        //创建索引最小优先队列对象
+        IndexMinPriorityQueue&lt;String&gt; queue = new IndexMinPriorityQueue&lt;&gt;(10);
+        //往队列中添加元素
+        queue.insert(0,&quot;A&quot;);
+        queue.insert(1,&quot;C&quot;);
+        queue.insert(2,&quot;F&quot;);
+        //测试修改
+        queue.changeItem(2,&quot;B&quot;);
+        //测试删除
+        while(!queue.isEmpty()){
+            int index = queue.delMin();
+            System.out.print(index+&quot; &quot;);
+        }
+    }
+}
+</code></pre><hr>
+<h2 id="平衡树"><a href="#平衡树" class="headerlink" title="平衡树"></a>平衡树</h2><h3 id="2-3查找树"><a href="#2-3查找树" class="headerlink" title="2-3查找树"></a>2-3查找树</h3><hr>
+<p>2-结点：含有一个键(及其对应的值)和两条链，左链接指向2-3树中的键都小于该结点，右链接指向的2-3树中的键都大于该结点。</p>
+<p>3-结点：含有两个键(及其对应的值)和三条链，左链接指向的2-3树中的键都小于该结点，中链接指向的2-3树中的键都位于该结点的两个键之间，右链接指向的2-3树中的键都大于该结点。</p>
+<p>查找：要判断一个键是否在树中，我们先将它和根结点中的键比较。如果它和其中任意一个相等，查找命中；否则我们就根据比较的结果找到指向相应区间的连接，并在其指向的子树中递归地继续查找。如果这个是空链接，查找未命中。</p>
+<p>向2-结点中插入新键：查找后未找到的节点是一个2-结点，我们只需要将新的元素放到这个2-结点里面使其变成一个3-结点即可。</p>
+<p>一棵完全平衡的2-3树具有以下性质：任意空链接到根结点的路径长度都是相等的。4-结点变换为3-结点时，树的高度不会发生变化，只有当根结点是临时的4-结点，分解根结点时，树高+1。2-3树与普通二叉查找树最大的区别在于，普通的二叉查找树是自顶向下生长，而2-3树是自底向上生长。</p>
+<p>直接实现2-3树比较复杂，但是2-3查找树作为一种比较重要的概念和思路对于红黑树、B树和B+树非常重要。</p>
+<hr>
+<h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><hr>
+<p>红黑树主要是对2-3树进行编码，红黑树背后的基本思想是用标准的二叉查找树(完全由2-结点构成)和一些额外的信息(替换3-结点)来表示2-3树。</p>
+<p>我们将树中的链接分为两种类型：红链接：将两个2-结点连接起来构成一个3-结点。黑链接：则是2-3树中的普通链接。</p>
+<p>确切的说，我们将3-结点表示为由一条左斜的红色链接(两个2-结点其中之一是另一个的左子结点)相连的两个2-结点。这种表示法的一个优点是，我们无需修改就可以直接使用标准的二叉查找树的get方法。</p>
+<p><strong>红黑树是含有红黑链接并满足下列条件的二叉查找树：红链接均为左链接；没有任何一个结点同时和两条红链接相连；该树是完美黑色平衡的，即任意空链接到根结点的路径上的黑链接数量相同。</strong></p>
+<p>在对红黑树进行一些增删改查的操作后，很有可能会出现红色的右链接或者两条连续红色的链接，而这些都不满足红黑树的定义，所以我们需要对这些情况通过旋转进行修复，让<strong>红黑树保持平衡</strong>。</p>
+<p><strong>左旋</strong>：当某个结点的左子结点为黑色，右子结点为红色，此时需要左旋。前提：当前结点为h，它的右子结点为x。左旋过程：让x的左子结点变为h的右子结点：h.right=x.left;让h成为x的左子结点：x.left=h;让h的color属性变为x的color属性值：x.color=h.color;让h的color属性变为RED：h.color=true。</p>
+<p><strong>右旋</strong>：当某个结点的左子结点是红色，且左子结点的左子结点也是红色，需要右旋。前提：当前结点为h，它的左子结点为x。右旋过程：让x的右子结点成为h的左子结点：h.left = x.right;让h成为x的右子结点：x.right=h;让x的color变为h的color属性值：x.color = h.color;让h的color为RED。</p>
+<p><strong>颜色反转</strong>：当一个结点的左子结点和右子结点的color都为RED时，也就是出现了临时的4-结点，此时只需要把左子结点和右子结点的颜色变为BLACK，同时让当前结点的颜色变为RED即可。</p>
+<p>由于根结点不存在父结点，所以每次插入操作后，我们都需要把根结点的颜色设置为黑色。</p>
+<p>代码实现</p>
+<pre><code>public class RedBlackTree&lt;Key extends Comparable&lt;Key&gt;, Value&gt; {
+    //根节点
+    private Node root;
+    //记录树中元素的个数
+    private int N;
+    //红色链接
+    private static final boolean RED = true;
+    //黑色链接
+    private static final boolean BLACK = false;
+
+    //结点类
+    private class Node {
+        //存储键
+        public Key key;
+        //存储值
+        private Value value;
+        //记录左子结点
+        public Node left;
+        //记录右子结点
+        public Node right;
+        //由其父结点指向它的链接的颜色
+        public boolean color;
+        public Node(Key key, Value value, Node left, Node right, boolean color) {
+            this.key = key;
+            this.value = value;
+            this.left = left;
+            this.right = right;
+            this.color = color;
+        }
+    }
+
+    //获取树中元素的个数
+    public int size() {
+        return N;
+    }
+
+    /**
+     * 判断当前节点的父指向链接是否为红色
+     *
+     * @param x
+     * @return
+     */
+    private boolean isRed(Node x) {
+        if (x==null){
+            return false;
+        }
+        return x.color==RED;
+    }
+
+    /**
+     * 左旋转
+     *
+     * @param h
+     * @return
+     */
+    private Node rotateLeft(Node h) {
+        //找到h结点的右子结点x
+        Node x = h.right;
+        //找到x结点的左子结点，让x结点的左子结点称为h结点的右子结点
+        h.right = x.left;
+        //让h结点称为x结点的左子结点
+        x.left = h;
+        //让x结点的color属性变为h结点的color属性
+        x.color = h.color;
+        //让h结点的color属性变为RED
+        h.color = RED;
+        return x;
+    }
+
+    /**
+     * 右旋
+     *
+     * @param h
+     * @return
+     */
+    private Node rotateRight(Node h) {
+        //找到h结点的左子结点 x
+        Node x = h.left;
+        //让x结点的右子结点成为h结点的左子结点
+        h.left = x.right;
+        //让h结点成为x结点的右子结点
+        x.right = h;
+        //让x结点的color属性变为h结点的color属性
+        x.color = h.color;
+        //让h结点的color属性为RED
+        h.color = RED;
+        return x;
+    }
+
+    /**
+     * 颜色反转,相当于完成拆分4-节点
+     *
+     * @param h
+     */
+    private void flipColors(Node h) {
+        //当前结点变为红色
+        h.color = RED;
+        //左子结点和右子结点变为黑色
+        h.left.color=BLACK;
+        h.right.color = BLACK;
+    }
+
+    /**
+     * 在整个树上完成插入操作
+     *
+     * @param key
+     * @param val
+     */
+    public void put(Key key, Value val) {
+        root = put(root,key,val);
+        //根结点的颜色总是黑色
+        root.color = BLACK;
+    }
+
+    /**
+     * 在指定树中，完成插入操作,并返回添加元素后新的树
+     *
+     * @param h
+     * @param key
+     * @param val
+     */
+    private Node put(Node h, Key key, Value val) {
+        //判断h是否为空，如果为空则直接返回一个红色的结点就可以了
+        if (h == null){
+            //数量+1
+            N++;
+            return new Node(key,val,null,null,BLACK);
+        }
+        //比较h结点的键和key的大小
+        int cmp = key.compareTo(h.key);
+        if (cmp&lt;0){
+            //继续往左
+            h.left = put(h.left,key,val);
+        }else if (cmp&gt;0){
+            //继续往右
+            h.right = put(h.right,key,val);
+        }else{
+            //发生值的替换
+            h.value = val;
+        }
+        //进行左旋:当当前结点h的左子结点为黑色，右子结点为红色，需要左旋
+        if (isRed(h.right) &amp;&amp; !isRed(h.left)){
+            h = rotateLeft(h);
+        }
+
+        //进行右旋：当当前结点h的左子结点和左子结点的左子结点都为红色，需要右旋
+        if (isRed(h.left) &amp;&amp; isRed(h.left.left)){
+            rotateRight(h);
+        }
+        //颜色反转：当前结点的左子结点和右子结点都为红色时，需要颜色反转
+        if (isRed(h.left) &amp;&amp; isRed(h.right)){
+            flipColors(h);
+        }
+        return h;
+    }
+
+    //根据key，从树中找出对应的值
+    public Value get(Key key) {
+        return get(root,key);
+    }
+
+    //从指定的树x中，查找key对应的值
+    public Value get(Node x, Key key) {
+        if (x == null){
+            return null;
+        }
+        //比较x结点的键和key的大小
+        int cmp = key.compareTo(x.key);
+        if (cmp&lt;0){
+            return get(x.left,key);
+        }else if (cmp&gt;0){
+            return get(x.right,key);
+        }else{
+           return x.value;
+        }
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class RedBlackTreeTest {
+    public static void main(String[] args) {
+        //创建红黑树
+        RedBlackTree&lt;String, String&gt; tree = new RedBlackTree&lt;&gt;();
+        //往树中插入元素
+        tree.put(&quot;1&quot;,&quot;张三&quot;);
+        tree.put(&quot;2&quot;,&quot;李四&quot;);
+        tree.put(&quot;3&quot;,&quot;王五&quot;);
+        //从树中获取元素
+        String r1 = tree.get(&quot;1&quot;);
+        System.out.println(r1);
+        String r2 = tree.get(&quot;2&quot;);
+        System.out.println(r2);
+        String r3 = tree.get(&quot;3&quot;);
+        System.out.println(r3);
+    }
+}
+</code></pre><hr>
+<h2 id="B树和B-树"><a href="#B树和B-树" class="headerlink" title="B树和B+树"></a>B树和B+树</h2><h3 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h3><hr>
+<p>B树中允许一个结点中包含多个key，可以是3个、4个、5个甚至更多，并不确定，需要看具体的实现。现在我们选择一个参数M，来构造一个B树，我们可以把它称作是M阶的B树，那么该树会具有如下特点：每个结点最多有M-1个key，并且以升序排列；每个结点最多能有M个子结点；根结点至少有两个子结点。</p>
+<p>在实际应用中B树的阶数一般都比较大（通常大于100），所以，即使存储大量的数据，B树的高度仍然比较小，这样在某些应用场景下，就可以体现出它的优势。</p>
+<p>在我们的程序中，不可避免的需要通过IO操作文件，而我们的文件是存储在磁盘上的。计算机操作磁盘上的文件是通过文件系统进行操作的，在文件系统中就使用到了B树这种数据结构。</p>
+<hr>
+<h3 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h3><hr>
+<p>B+树是对B树的一种变形树，它与B树的差异在于：非叶结点仅具有索引作用，也就是说，非叶子结点只存储key，不存储value；树的所有叶结点构成一个有序链表，可以按照key排序的次序遍历全部数据。</p>
+<p>B+ 树的优点在于：由于B+树在非叶子结点上不包含真正的数据，只当做索引使用，因此在内存相同的情况下，能够存放更多的key。B+树的叶子结点都是相连的，因此对整棵树的遍历只需要一次线性遍历叶子结点即可。而且由于数据顺序排列并且相连，所以便于区间查找和搜索。而B树则需要进行每一层的递归遍历。</p>
+<p>B树的优点在于：由于B树的每一个节点都包含key和value，因此我们根据key查找value时，只需要找到key所在的位置，就能找到value，但B+树只有叶子结点存储数据，索引每一次查找，都必须一次一次，一直找到树的最大深度处，也就是叶子结点的深度，才能找到value。</p>
+<p>在数据库的操作中，查询操作可以说是最频繁的一种操作，因此在设计数据库时，必须要考虑到查询的效率问题，<strong>在很多数据库中，都是用到了B+树来提高查询的效率</strong>；在操作数据库时，我们为了提高查询效率，可以基于某张表的某个字段建立索引，就可以提高查询效率，那其实这个索引就是B+树这种数据结构实现的。</p>
+<hr>
 
     </div>
     
@@ -2775,7 +3475,7 @@ public static void main(String[] args) throws Exception {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序表"><span class="toc-text">顺序表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向链表"><span class="toc-text">单向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向链表"><span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约瑟夫问题"><span class="toc-text">约瑟夫问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈"><span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号匹配问题"><span class="toc-text">括号匹配问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆波兰表达式求值"><span class="toc-text">逆波兰表达式求值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#队列"><span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#符号表"><span class="toc-text">符号表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-1"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序符号表"><span class="toc-text">有序符号表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树"><span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉查找树基于链表的实现"><span class="toc-text">二叉查找树基于链表的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#折纸问题"><span class="toc-text">折纸问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆"><span class="toc-text">堆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API实现"><span class="toc-text">API实现</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序表"><span class="toc-text">顺序表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向链表"><span class="toc-text">单向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向链表"><span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约瑟夫问题"><span class="toc-text">约瑟夫问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈"><span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号匹配问题"><span class="toc-text">括号匹配问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆波兰表达式求值"><span class="toc-text">逆波兰表达式求值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#队列"><span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#符号表"><span class="toc-text">符号表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-1"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序符号表"><span class="toc-text">有序符号表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树"><span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉查找树基于链表的实现"><span class="toc-text">二叉查找树基于链表的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#折纸问题"><span class="toc-text">折纸问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆"><span class="toc-text">堆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API实现"><span class="toc-text">API实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用堆进行排序"><span class="toc-text">利用堆进行排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优先队列"><span class="toc-text">优先队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最大优先队列"><span class="toc-text">最大优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最小优先队列"><span class="toc-text">最小优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#索引优先队列"><span class="toc-text">索引优先队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平衡树"><span class="toc-text">平衡树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3查找树"><span class="toc-text">2-3查找树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#红黑树"><span class="toc-text">红黑树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B树和B-树"><span class="toc-text">B树和B+树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B树"><span class="toc-text">B树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-树"><span class="toc-text">B+树</span></a></li></ol></li></ol>
         
     </div>
 </aside>
