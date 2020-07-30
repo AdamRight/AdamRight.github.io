@@ -3699,9 +3699,1072 @@ public static void main(String[] args) throws Exception {
     }
 }
 </code></pre><hr>
-<h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><hr>
+<h2 id="无向图"><a href="#无向图" class="headerlink" title="无向图"></a>无向图</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><hr>
 <p>图是由一组顶点和一组能够将两个顶点相连的边组成的。按照连接两个顶点的边的不同，可以把图分为以下两种：无向图：边仅仅连接两个顶点，没有其他含义；有向图：边不仅连接两个顶点，并且具有方向。</p>
+<p>相邻顶点：当两个顶点通过一条边相连时，我们称这两个顶点是相邻的，并且称这条边依附于这两个顶点。</p>
+<p>度：某个顶点的度就是依附于该顶点的边的个数。</p>
+<p>子图：是一幅图的所有边的子集(包含这些边依附的顶点)组成的图。</p>
+<p>路径：是由边顺序连接的一系列的顶点组成。</p>
+<p>环：是一条至少含有一条边且终点和起点相同的路径。</p>
+<p>连通图：如果图中任意一个顶点都存在一条路径到达另外一个顶点，那么这幅图就称之为连通图。</p>
+<p>连通子图：一个非连通图由若干连通的部分组成，每一个连通的部分都可以称为该图的连通子图。</p>
 <hr>
+<h3 id="图的存储结构"><a href="#图的存储结构" class="headerlink" title="图的存储结构"></a>图的存储结构</h3><hr>
+<p>只需要表示清楚以下两部分内容即可：图中所有的顶点；所有连接顶点的边。</p>
+<p>常见的图的存储结构有两种：邻接矩阵和邻接表</p>
+<p>邻接矩阵：使用一个 <code>V*V</code> 的二维数组<code>int[V][V] adj</code>,把索引的值看做是顶点；如果顶点v和顶点w相连，我们只需要将<code>adj[v][w]</code>和<code>adj[w][v]</code>的值设置为1,否则设置为0即可。邻接矩阵这种存储方式的空间复杂度是<code>V^2</code>的。</p>
+<p>邻接表：使用一个大小为V的数组 <code>Queue[V] adj</code>，把索引看做是顶点；每个索引处<code>adj[v]</code>存储了一个队列，该队列中存储的是所有与该顶点相邻的其他顶点。</p>
+<hr>
+<h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><hr>
+<pre><code>public class Graph {
+    //顶点数目
+    private final int V;
+    //边的数目
+    private int E;
+    //邻接表
+    private Queue&lt;Integer&gt;[] adj;
+
+    public Graph(int V){
+        //初始化顶点数量
+        this.V = V;
+        //初始化边的数量
+        this.E = 0;
+        //初始化邻接表
+        this.adj = new Queue[V];
+        for (int i = 0; i &lt; adj.length; i++) {
+            adj[i] = new Queue&lt;Integer&gt;();
+        }
+    }
+
+    //获取顶点数目
+    public int V(){
+        return V;
+    }
+
+    //获取边的数目
+    public int E(){
+        return E;
+    }
+
+    //向图中添加一条边 v-w
+    public void addEdge(int v, int w) {
+        //在无向图中，边是没有方向的，所以该边既可以说是从v到w的边，又可以说是从w到v的边，因此，需要让w出现在v的邻接表中，并且还要让v出现在w的邻接表中
+        adj[v].enqueue(w);
+        adj[w].enqueue(v);
+        //边的数量+1
+        E++;
+    }
+
+    //获取和顶点v相邻的所有顶点
+    public Queue&lt;Integer&gt; adj(int v){
+        return adj[v];
+    }
+}
+</code></pre><hr>
+<h3 id="图的搜索"><a href="#图的搜索" class="headerlink" title="图的搜索"></a>图的搜索</h3><hr>
+<p><strong>深度优先搜索</strong>：在搜索时，如果遇到一个结点既有子结点，又有兄弟结点，那么先找子结点，然后找兄弟结点。</p>
+<pre><code>public class DepthFirstSearch {
+    //索引代表顶点，值表示当前顶点是否已经被搜索
+    private boolean[] marked;
+    //记录有多少个顶点与s顶点相通
+    private int count;
+
+    //构造深度优先搜索对象，使用深度优先搜索找出G图中s顶点的所有相邻顶点
+    public DepthFirstSearch(Graph G,int s){
+        //初始化marked数组
+        this.marked = new boolean[G.V()];
+        //初始化跟顶点s相通的顶点的数量
+        this.count=0;
+        dfs(G,s);
+    }
+
+    //使用深度优先搜索找出G图中v顶点的所有相通顶点
+    private void dfs(Graph G, int v){
+        //把v顶点标识为已搜索
+        marked[v] = true;
+        for (Integer w : G.adj(v)) {
+            //判断当前w顶点有没有被搜索过，如果没有被搜索过，则递归调用dfs方法进行深度搜索
+            if (!marked[w]){
+                dfs(G,w);
+            }
+        }
+        //相通顶点数量+1
+        count++;
+    }
+
+    //判断w顶点与s顶点是否相通
+    public boolean marked(int w){
+       return marked[w];
+    }
+
+    //获取与顶点s相通的所有顶点的总数
+    public int count(){
+        return count;
+    }
+}
+</code></pre><p>测试深度优先搜索</p>
+<pre><code>public class DepthFirstSearchTest {
+    public static void main(String[] args) {
+        //准备Graph对象
+        Graph G = new Graph(13);
+        G.addEdge(0,5);
+        G.addEdge(0,1);
+        G.addEdge(0,2);
+        G.addEdge(0,6);
+        G.addEdge(5,3);
+        G.addEdge(5,4);
+        G.addEdge(3,4);
+        G.addEdge(4,6);
+        G.addEdge(7,8);
+        G.addEdge(9,11);
+        G.addEdge(9,10);
+        G.addEdge(9,12);
+        G.addEdge(11,12);
+        //准备深度优先搜索对象
+        DepthFirstSearch search = new DepthFirstSearch(G, 0);
+        //测试与某个顶点相通的顶点数量
+        int count = search.count();
+        System.out.println(&quot;与起点0相通的顶点的数量为:&quot;+count);
+        //测试某个顶点与起点是否相同
+        boolean marked1 = search.marked(5);
+        System.out.println(&quot;顶点5和顶点0是否相通：&quot;+marked1);
+        boolean marked2 = search.marked(7);
+        System.out.println(&quot;顶点7和顶点0是否相通：&quot;+marked2);
+    }
+}
+</code></pre><p><strong>广度优先搜索</strong>:在搜索时，如果遇到一个结点既有子结点，又有兄弟结点，那么先找兄弟结点，然后找子结点。</p>
+<p>实现代码</p>
+<pre><code>public class BreadthFirstSearch {
+    //索引代表顶点，值表示当前顶点是否已经被搜索
+    private boolean[] marked;
+    //记录有多少个顶点与s顶点相通
+    private int count;
+    //用来存储待搜索邻接表的点
+    private Queue&lt;Integer&gt; waitSearch;
+
+    //构造广度优先搜索对象，使用广度优先搜索找出G图中s顶点的所有相邻顶点
+    public BreadthFirstSearch(Graph G, int s) {
+        this.marked = new boolean[G.V()];
+        this.count=0;
+        this.waitSearch = new Queue&lt;Integer&gt;();
+        bfs(G,s);
+    }
+
+    //使用广度优先搜索找出G图中v顶点的所有相邻顶点
+    private void bfs(Graph G, int v) {
+        //把当前顶点v标识为已搜索
+        marked[v] = true;
+        //让顶点v进入队列，待搜索
+        waitSearch.enqueue(v);
+        //通过循环，如果队列不为空，则从队列中弹出一个待搜索的顶点进行搜索
+        while(!waitSearch.isEmpty()){
+            //弹出一个待搜索的顶点
+            Integer wait = waitSearch.dequeue();
+            //遍历wait顶点的邻接表
+            for (Integer w : G.adj(wait)) {
+                if (!marked[w]){
+                    bfs(G,w);
+                }
+            }
+        }
+        //让相通的顶点+1；
+        count++;
+    }
+
+    //判断w顶点与s顶点是否相通
+    public boolean marked(int w) {
+        return marked[w];
+    }
+
+    //获取与顶点s相通的所有顶点的总数
+    public int count() {
+        return count;
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class BreadthFirstSearchTest {
+    public static void main(String[] args) {
+        //准备Graph对象
+        Graph G = new Graph(13);
+        G.addEdge(0,5);
+        G.addEdge(0,1);
+        G.addEdge(0,2);
+        G.addEdge(0,6);
+        G.addEdge(5,3);
+        G.addEdge(5,4);
+        G.addEdge(3,4);
+        G.addEdge(4,6);
+        G.addEdge(7,8);
+        G.addEdge(9,11);
+        G.addEdge(9,10);
+        G.addEdge(9,12);
+        G.addEdge(11,12);
+        //准备广度优先搜索对象
+        BreadthFirstSearch search = new BreadthFirstSearch(G, 0);
+        //测试与某个顶点相通的顶点数量
+        int count = search.count();
+        System.out.println(&quot;与起点0相通的顶点的数量为:&quot;+count);
+        //测试某个顶点与起点是否相同
+        boolean marked1 = search.marked(5);
+        System.out.println(&quot;顶点5和顶点0是否相通：&quot;+marked1);
+        boolean marked2 = search.marked(7);
+        System.out.println(&quot;顶点7和顶点0是否相通：&quot;+marked2);
+    }
+}
+</code></pre><hr>
+<h3 id="案例-1"><a href="#案例-1" class="headerlink" title="案例"></a>案例</h3><hr>
+<pre><code>public class Traffic_Project_Test2 {
+
+    public static void main(String[] args) throws Exception{
+        //构建一个缓冲读取流BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(Traffic_Project_Test2.class.getClassLoader().getResourceAsStream(&quot;traffic_project.txt&quot;)));
+        //读取第一行数据20
+        int totalNumber = Integer.parseInt(br.readLine());
+        //构建一个Graph对象
+        Graph G = new Graph(totalNumber);
+        //读取第二行数据7
+        int roadNumber = Integer.parseInt(br.readLine());
+        //循环读取有限次(7)，读取已经修建好的道路
+        for (int i = 1;i&lt;=roadNumber;i++){
+            String road = br.readLine();//&quot;0 1&quot;
+            String[] str = road.split(&quot; &quot;);
+            int v = Integer.parseInt(str[0]);
+            int w = Integer.parseInt(str[1]);
+            //调用图的addEdge方法，把边添加到图中，表示已经修建好的道路
+            G.addEdge(v,w);
+        }
+
+        //构建一个深度优先搜索对象，起点设置为顶点9
+        DepthFirstSearch search = new DepthFirstSearch(G, 9);
+        //调用marked方法，判断8顶点和10顶点是否与起点9相通
+        System.out.println(&quot;顶点8和顶点9是否相通：&quot;+search.marked(8));
+        System.out.println(&quot;顶点10和顶点9是否相通：&quot;+search.marked(10));
+    }
+}
+</code></pre><hr>
+<h3 id="路径查找"><a href="#路径查找" class="headerlink" title="路径查找"></a>路径查找</h3><hr>
+<pre><code>public class DepthFirstPaths {
+    //索引代表顶点，值表示当前顶点是否已经被搜索
+    private boolean[] marked;
+    //起点
+    private int s;
+    //索引代表顶点，值代表从起点s到当前顶点路径上的最后一个顶点
+    private int[] edgeTo;
+
+    //构造深度优先搜索对象，使用深度优先搜索找出G图中起点为s的所有路径
+    public DepthFirstPaths(Graph G, int s){
+        //初始化marked数组
+        this.marked = new boolean[G.V()];
+        //初始化起点
+        this.s = s;
+        //初始化edgeTo数组
+        this.edgeTo = new int[G.V()];
+        dfs(G,s);
+    }
+
+    //使用深度优先搜索找出G图中v顶点的所有相邻顶点
+    private void dfs(Graph G, int v){
+        //把v表示为已搜索
+        marked[v] = true;
+        //遍历顶点v的邻接表，拿到每一个相邻的顶点，继续递归搜索
+        for (Integer w : G.adj(v)) {
+            //如果顶点w没有被搜索，则继续递归搜索
+            if (!marked[w]){
+                edgeTo[w] = v;//到达顶点w的路径上的最后一个顶点是v
+                dfs(G,w);
+            }
+        }
+    }
+
+    //判断w顶点与s顶点是否存在路径
+    public boolean hasPathTo(int v){
+        return marked[v];
+    }
+
+    //找出从起点s到顶点v的路径(就是该路径经过的顶点)
+    public Stack&lt;Integer&gt; pathTo(int v){
+        if (!hasPathTo(v)){
+            return null;
+        }
+        //创建栈对象，保存路径中的所有顶点
+        Stack&lt;Integer&gt; path = new Stack&lt;&gt;();
+        //通过循环，从顶点v开始，一直往前找，到找到起点为止
+        for (int x = v; x!=s;x = edgeTo[x]){
+            path.push(x);
+        }
+        //把起点s放到栈中
+        path.push(s);
+        return path;
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class DepthFirstPathsTest {
+    public static void main(String[] args) throws Exception{
+        //构建缓冲读取流BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(DepthFirstPathsTest.class.getClassLoader().getResourceAsStream(&quot;road_find.txt&quot;)));
+        //读取第一行数据6
+        int total = Integer.parseInt(br.readLine());
+        //根据第一行数据构建一副图Graph
+        Graph G = new Graph(total);
+        //读取第二行数据8
+        int edgeNumbers = Integer.parseInt(br.readLine());
+        //继续通过循环读取每一条边关联的两个顶点，调用addEdge方法，添加边
+        for (int i = 1;i&lt;=edgeNumbers;i++){
+            String edge = br.readLine();//0 1
+            String[] str = edge.split(&quot; &quot;);
+            int v = Integer.parseInt(str[0]);
+            int w = Integer.parseInt(str[1]);
+            G.addEdge(v,w);
+        }
+        //构建路径查找对象，并设置起点为0
+        DepthFirstPaths paths = new DepthFirstPaths(G, 0);
+        //调用 pathTo(4)，找到从起点0到终点4的路径，返回Stack
+        Stack&lt;Integer&gt; path = paths.pathTo(4);
+        StringBuilder sb = new StringBuilder();
+        //遍历栈对象
+        for (Integer v : path) {
+            sb.append(v+&quot;-&quot;);
+        }
+        sb.deleteCharAt(sb.length()-1);
+        System.out.println(sb);
+    }
+}
+</code></pre><hr>
+<h3 id="有向图定义"><a href="#有向图定义" class="headerlink" title="有向图定义"></a>有向图定义</h3><hr>
+<p>有向图是一副具有方向性的图，是由一组顶点和一组有方向的边组成的，每条方向的边都连着一对有序的顶点。</p>
+<p>出度：由某个顶点指出的边的个数称为该顶点的出度。</p>
+<p>入度：指向某个顶点的边的个数称为该顶点的入度。</p>
+<p>有向路径：由一系列顶点组成，对于其中的每个顶点都存在一条有向边，从它指向序列中的下一个顶点。</p>
+<p>有向环：一条至少含有一条边，且起点和终点相同的有向路径。</p>
+<p>一副有向图中两个顶点v和w可能存在以下四种关系：没有边相连；存在从v到w的边v—&gt;w;存在从w到v的边w—&gt;v;既存在w到v的边，也存在v到w的边，即双向连接。</p>
+<hr>
+<h3 id="有向图实现"><a href="#有向图实现" class="headerlink" title="有向图实现"></a>有向图实现</h3><hr>
+<pre><code>public class Digraph {
+    //顶点数目
+    private final int V;
+    //边的数目
+    private int E;
+    //邻接表
+    private Queue&lt;Integer&gt;[] adj;
+
+    public Digraph(int V){
+        //初始化顶点数量
+        this.V = V;
+        //初始化边的数量
+        this.E = 0;
+        //初始化邻接表
+        this.adj = new Queue[V];
+        for (int i = 0; i &lt; adj.length; i++) {
+            adj[i] = new Queue&lt;Integer&gt;();
+        }
+    }
+
+
+    //获取顶点数目
+    public int V(){
+        return V;
+    }
+
+    //获取边的数目
+    public int E(){
+        return E;
+    }
+
+    //向有向图中添加一条边 v-&gt;w
+    public void addEdge(int v, int w) {
+        //只需要让顶点w出现在顶点v的邻接表中，因为边是有方向的，最终，顶点v的邻接表中存储的相邻顶点的含义是：  v-&gt;其他顶点
+        adj[v].enqueue(w);
+        E++;
+    }
+
+    //获取由v指出的边所连接的所有顶点
+    public Queue&lt;Integer&gt; adj(int v){
+        return adj[v];
+    }
+
+    //该图的反向图
+    private Digraph reverse(){
+        //创建有向图对象
+        Digraph r = new Digraph(V);
+        for (int v = 0;v&lt;V;v++){
+            //获取由该顶点v指出的所有边
+            for (Integer w : adj[v]) {//原图中表示的是由顶点v-&gt;w的边
+                r.addEdge(w,v);//w-&gt;v
+            }
+        }
+        return r;
+    }
+}
+</code></pre><hr>
+<h3 id="拓扑排序-检测有向图中的环"><a href="#拓扑排序-检测有向图中的环" class="headerlink" title="拓扑排序-检测有向图中的环"></a>拓扑排序-检测有向图中的环</h3><hr>
+<p>拓扑排序：给定一副有向图，将所有的顶点排序，使得所有的有向边均从排在前面的元素指向排在后面的元素，此时就可以明确的表示出每个顶点的优先级。</p>
+<p>如果我们要使用拓扑排序解决优先级问题，首先得保证图中没有环的存在。</p>
+<p><code>onStack[]</code> 布尔数组，索引为图的顶点，当我们深度搜索时：在如果当前顶点正在搜索，则把对应的onStack数组中的值改为true，标识进栈；如果当前顶点搜索完毕，则把对应的onStack数组中的值改为false，标识出栈；如果即将要搜索某个顶点，但该顶点已经在栈中，则图中有环。</p>
+<p>代码实现</p>
+<pre><code>public class DirectedCycle {
+    //索引代表顶点，值表示当前顶点是否已经被搜索
+    private boolean[] marked;
+    //记录图中是否有环
+    private boolean hasCycle;
+    //索引代表顶点，使用栈的思想，记录当前顶点有没有已经处于正在搜索的有向路径上
+    private boolean[] onStack;
+
+    //创建一个检测环对象，检测图G中是否有环
+    public DirectedCycle(Digraph G){
+        //初始化marked数组
+        this.marked = new boolean[G.V()];
+        //初始化hasCycle
+        this.hasCycle = false;
+        //初始化onStack数组
+        this.onStack = new boolean[G.V()];
+        //找到图中每一个顶点，让每一个顶点作为入口，调用一次dfs进行搜索
+        for (int v =0; v&lt;G.V();v++){
+            //判断如果当前顶点还没有搜索过，则调用dfs进行搜索
+            if (!marked[v]){
+                dfs(G,v);
+            }
+        }
+    }
+
+    //基于深度优先搜索，检测图G中是否有环
+    private void dfs(Digraph G, int v){
+        //把顶点v表示为已搜索
+        marked[v] = true;
+        //把当前顶点进栈
+        onStack[v] = true;
+        //进行深度搜索
+        for (Integer w : G.adj(v)) {
+            //判断如果当前顶点w没有被搜索过，则继续递归调用dfs方法完成深度优先搜索
+            if (!marked[w]){
+                dfs(G,w);
+            }
+            //判断当前顶点w是否已经在栈中，如果已经在栈中，证明当前顶点之前处于正在搜索的状态，那么现在又要搜索一次，证明检测到环了
+            if (onStack[w]){
+                hasCycle = true;
+                return;
+            }
+        }
+        //把当前顶点出栈
+        onStack[v] = false;
+    }
+
+    //判断当前有向图G中是否有环
+    public boolean hasCycle(){
+        return hasCycle;
+    }
+}
+</code></pre><hr>
+<h3 id="拓扑排序-基于深度优先的顶点排序"><a href="#拓扑排序-基于深度优先的顶点排序" class="headerlink" title="拓扑排序-基于深度优先的顶点排序"></a>拓扑排序-基于深度优先的顶点排序</h3><hr>
+<p>栈reversePost用来存储顶点，当我们深度搜索图时，每搜索完毕一个顶点，把该顶点放入到reversePost中，这样就可以实现顶点排序。</p>
+<p>代码实现：</p>
+<pre><code>public class DepthFirstOrder {
+    //索引代表顶点，值表示当前顶点是否已经被搜索
+    private boolean[] marked;
+    //使用栈，存储顶点序列
+    private Stack&lt;Integer&gt; reversePost;
+
+    //创建一个检测环对象，检测图G中是否有环
+    public DepthFirstOrder(Digraph G){
+        //初始化marked数组
+        this.marked = new boolean[G.V()];
+        //初始化reversePost栈
+        this.reversePost = new Stack&lt;Integer&gt;();
+        //遍历图中的每一个顶点，让每个顶点作为入口，完成一次深度优先搜索
+        for (int v = 0;v&lt;G.V();v++){
+            if (!marked[v]){
+                dfs(G,v);
+            }
+        }
+    }
+
+    //基于深度优先搜索，把顶点排序
+    private void dfs(Digraph G, int v){
+        //标记当前v已经被搜索
+        marked[v] = true;
+        //通过循环深度搜索顶点v
+        for (Integer w : G.adj(v)) {
+            //如果当前顶点w没有搜索，则递归调用dfs进行搜索
+            if (!marked[w]){
+                dfs(G,w);
+            }
+        }
+        //让顶点v进栈
+        reversePost.push(v);
+    }
+
+    //获取顶点线性序列
+    public Stack&lt;Integer&gt;  reversePost(){
+        return reversePost;
+    }
+}
+</code></pre><hr>
+<h3 id="拓扑排序实现"><a href="#拓扑排序实现" class="headerlink" title="拓扑排序实现"></a>拓扑排序实现</h3><hr>
+<pre><code>public class TopoLogical {
+    //顶点的拓扑排序
+    private Stack&lt;Integer&gt; order;
+
+    //构造拓扑排序对象
+    public TopoLogical(Digraph G) {
+        //创建一个检测有向环的对象
+        DirectedCycle cycle = new DirectedCycle(G);
+        //判断G图中有没有环，如果没有环，则进行顶点排序：创建一个顶点排序对象
+        if (!cycle.hasCycle()){
+            DepthFirstOrder depthFirstOrder = new DepthFirstOrder(G);
+            order = depthFirstOrder.reversePost();
+        }
+    }
+
+    //判断图G是否有环
+    private boolean isCycle(){
+        return order==null;
+    }
+
+    //获取拓扑排序的所有顶点
+    public Stack&lt;Integer&gt;  order(){
+        return order;
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class TopoLogicalTest {
+    public static void main(String[] args) {
+        //准备有向图
+        Digraph digraph = new Digraph(6);
+        digraph.addEdge(0,2);
+        digraph.addEdge(0,3);
+        digraph.addEdge(2,4);
+        digraph.addEdge(3,4);
+        digraph.addEdge(4,5);
+        digraph.addEdge(1,3);
+        //通过TopoLogical对象堆有向图中的顶点进行排序
+        TopoLogical topoLogical = new TopoLogical(digraph);
+        //获取顶点的线性序列进行打印
+        Stack&lt;Integer&gt; order = topoLogical.order();
+        StringBuilder sb = new StringBuilder();
+        for (Integer w : order) {
+            sb.append(w+&quot;-&gt;&quot;);
+        }
+        String str = sb.toString();
+        int index = str.lastIndexOf(&quot;-&gt;&quot;);
+        str = str.substring(0,index);
+        System.out.println(str);
+    }
+}
+</code></pre><hr>
+<h3 id="加权无向图"><a href="#加权无向图" class="headerlink" title="加权无向图"></a>加权无向图</h3><hr>
+<p>加权无向图中的边我们就不能简单的使用v-w两个顶点表示了，而必须要给边关联一个权重值，因此我们可以使用对象来描述一条边。</p>
+<p>边的实现：</p>
+<pre><code>public class Edge implements Comparable&lt;Edge&gt; {
+    private final int v;//顶点一
+    private final int w;//顶点二
+    private final double weight;//当前边的权重
+
+    //通过顶点v和w，以及权重weight值构造一个边对象
+    public Edge(int v, int w, double weight) {
+        this.v = v;
+        this.w = w;
+        this.weight = weight;
+    }
+
+    //获取边的权重值
+    public double weight(){
+        return weight;
+    }
+
+    //获取边上的一个点
+    public int either(){
+        return v;
+    }
+
+    //获取边上除了顶点vertex外的另外一个顶点
+    public int other(int vertex){
+        if (vertex==v){
+            return w;
+        }else{
+            return v;
+        }
+    }
+
+    @Override
+    public int compareTo(Edge that) {
+        //使用一个遍历记录比较的结果
+        int cmp;
+        if (this.weight()&gt;that.weight()){
+            //如果当前边的权重值大，则让cmp=1；
+            cmp = 1;
+        }else if (this.weight()&lt;that.weight()){
+            //如果当前边的权重值小，则让cmp=-1；
+            cmp=-1;
+        }else{
+            //如果当前边的权重值和that边的权重值一样大，则让cmp=0
+            cmp = 0;
+        }
+        return cmp;
+    }
+}
+</code></pre><p>加权无向图的实现</p>
+<pre><code>public class EdgeWeightedGraph {
+    //顶点总数
+    private final int V;
+    //边的总数
+    private int E;
+    //邻接表
+    private Queue&lt;Edge&gt;[] adj;
+
+    //创建一个含有V个顶点的空加权无向图
+    public EdgeWeightedGraph(int V) {
+        //初始化顶点数量
+        this.V = V;
+        //初始化边的数量
+        this.E = 0;
+        //初始化邻接表
+        this.adj = new Queue[V];
+        for (int i = 0; i &lt; adj.length; i++) {
+            adj[i] = new Queue&lt;Edge&gt;();
+        }
+
+    }
+
+    //获取图中顶点的数量
+    public int V() {
+        return V;
+    }
+
+    //获取图中边的数量
+    public int E() {
+        return E;
+    }
+
+    //向加权无向图中添加一条边e
+    public void addEdge(Edge e) {
+        //需要让边e同时出现在e这个边的两个顶点的邻接表中
+        int v = e.either();
+        int w = e.other(v);
+        adj[v].enqueue(e);
+        adj[w].enqueue(e);
+        //边的数量+1
+        E++;
+    }
+
+    //获取和顶点v关联的所有边
+    public Queue&lt;Edge&gt; adj(int v) {
+        return adj[v];
+    }
+
+    //获取加权无向图的所有边
+    public Queue&lt;Edge&gt; edges() {
+        //创建一个队列对象，存储所有的边
+        Queue&lt;Edge&gt; allEdges = new Queue&lt;&gt;();
+        //遍历图中的每一个顶点，找到该顶点的邻接表，邻接表中存储了该顶点关联的每一条边
+        //因为这是无向图，所以同一条边同时出现在了它关联的两个顶点的邻接表中，需要让一条边只记录一次；
+        for(int v =0;v&lt;V;v++){
+            //遍历v顶点的邻接表，找到每一条和v关联的边
+            for (Edge e : adj(v)) {
+                if (e.other(v)&lt;v){
+                    allEdges.enqueue(e);
+                }
+            }
+        }
+        return allEdges;
+    }
+}
+</code></pre><hr>
+<h3 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h3><hr>
+<p>图的生成树是它的一棵含有其所有顶点的无环连通子图，一副加权无向图的最小生成树它的一棵权值(树中所有边的权重之和)最小的生成树。</p>
+<p>树的性质：用一条边接树中的任意两个顶点都会产生一个新的环；从树中删除任意一条边，将会得到两棵独立的树。</p>
+<p>切分：将图的所有顶点按照某些规则分为两个非空且没有交集的集合。</p>
+<p>横切边：连接两个属于不同集合的顶点的边称之为横切边。</p>
+<p>切分定理：在一副加权图中，给定任意的切分，它的横切边中的权重最小者必然属于图中的最小生成树。注意:一次切分产生的多个横切边中，权重最小的边不一定是所有横切边中唯一属于图的最小生成树的边。</p>
+<p><strong>贪心算法</strong>是计算图的最小生成树的基础算法，它的基本原理就是切分定理，使用切分定理找到最小生成树的一条边，不断的重复直到找到最小生成树的所有边。如果图有V个顶点，那么需要找到V-1条边，就可以表示该图的最小生成树。</p>
+<hr>
+<h3 id="最小生成树Prim算法"><a href="#最小生成树Prim算法" class="headerlink" title="最小生成树Prim算法"></a>最小生成树Prim算法</h3><hr>
+<p><strong>Prim算法</strong>的切分规则：把最小生成树中的顶点看做是一个集合，把不在最小生成树中的顶点看做是另外一个集合。实现：</p>
+<pre><code>public class PrimMST {
+    //索引代表顶点，值表示当前顶点和最小生成树之间的最短边
+    private Edge[] edgeTo;
+    //索引代表顶点，值表示当前顶点和最小生成树之间的最短边的权重
+    private double[] distTo;
+    //索引代表顶点，如果当前顶点已经在树中，则值为true，否则为false
+    private boolean[] marked;
+    //存放树中顶点与非树中顶点之间的有效横切边
+    private IndexMinPriorityQueue&lt;Double&gt; pq;
+
+    //根据一副加权无向图，创建最小生成树计算对象
+    public PrimMST(EdgeWeightedGraph G) {
+       //初始化edgeTo
+        this.edgeTo = new Edge[G.V()];
+        //初始化distTo
+        this.distTo = new double[G.V()];
+        for (int i = 0; i &lt; distTo.length; i++) {
+            distTo[i] = Double.POSITIVE_INFINITY;
+        }
+        //初始化marked
+        this.marked = new boolean[G.V()];
+        //初始化pq
+        pq = new IndexMinPriorityQueue&lt;Double&gt;(G.V());
+        //默认让顶点0进入到树中，但是树中只有一个顶点0，因此，0顶点默认没有和其他的顶点相连，所以让distTo对应位置处的值存储0.0
+        distTo[0] = 0.0;
+        pq.insert(0,0.0);
+        //遍历索引最小优先队列，拿到最小和N切边对应的顶点，把该顶点加入到最小生成树中
+        while (!pq.isEmpty()){
+            visit(G,pq.delMin());
+        }
+    }
+
+    //将顶点v添加到最小生成树中，并且更新数据
+    private void visit(EdgeWeightedGraph G, int v) {
+        //把顶点v添加到最小生成树中
+        marked[v] = true;
+        //更新数据
+        for (Edge e : G.adj(v)) {
+            //获取e边的另外一个顶点(当前顶点是v)
+            int w = e.other(v);
+            //判断另外一个顶点是不是已经在树中，如果在树中，则不做任何处理，如果不再树中，更新数据
+            if (marked[w]){
+                continue;
+            }
+            //判断边e的权重是否小于从w顶点到树中已经存在的最小边的权重；
+            if (e.weight()&lt;distTo[w]){
+                //更新数据
+                edgeTo[w] = e;
+                distTo[w] = e.weight();
+                if (pq.contains(w)){
+                    pq.changeItem(w,e.weight());
+                }else{
+                    pq.insert(w,e.weight());
+                }
+            }
+        }
+    }
+
+    //获取最小生成树的所有边
+    public Queue&lt;Edge&gt; edges() {
+        //创建队列对象
+        Queue&lt;Edge&gt; allEdges = new Queue&lt;&gt;();
+        //遍历edgeTo数组，拿到每一条边，如果不为null，则添加到队列中
+        for (int i = 0; i &lt; edgeTo.length; i++) {
+            if (edgeTo[i]!=null){
+                allEdges.enqueue(edgeTo[i]);
+            }
+        }
+        return allEdges;
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class PrimMSTTest {
+    public static void main(String[] args) throws Exception{
+        //准备一副加权无向图
+        BufferedReader br = new BufferedReader(new InputStreamReader(PrimMSTTest.class.getClassLoader().getResourceAsStream(&quot;min_create_tree_test.txt&quot;)));
+        int total = Integer.parseInt(br.readLine());
+        EdgeWeightedGraph G = new EdgeWeightedGraph(total);
+        int edgeNumbers = Integer.parseInt(br.readLine());
+        for (int e = 1;e&lt;=edgeNumbers;e++){
+            String line = br.readLine();//4 5 0.35
+            String[] strs = line.split(&quot; &quot;);
+            int v = Integer.parseInt(strs[0]);
+            int w = Integer.parseInt(strs[1]);
+            double weight = Double.parseDouble(strs[2]);
+            //构建加权无向边
+            Edge edge = new Edge(v, w, weight);
+            G.addEdge(edge);
+        }
+
+        //创建一个PrimMST对象，计算加权无向图中的最小生成树
+        PrimMST primMST = new PrimMST(G);
+        //获取最小生成树中的所有边
+        Queue&lt;Edge&gt; edges = primMST.edges();
+        //遍历打印所有的边
+        for (Edge e : edges) {
+            int v = e.either();
+            int w = e.other(v);
+            double weight = e.weight();
+            System.out.println(v+&quot;-&quot;+w+&quot; :: &quot;+weight);
+        }
+    }
+}
+</code></pre><hr>
+<h3 id="最小生成树kruskal算法"><a href="#最小生成树kruskal算法" class="headerlink" title="最小生成树kruskal算法"></a>最小生成树kruskal算法</h3><hr>
+<p><strong>kruskal算法</strong>是按照边的权重(从小到大)处理它们，将边加入最小生成树中，加入的边不会与已经加入最小生成树的边构成环，直到树中含有V-1条边为止。</p>
+<p>kruskal算法和prim算法的区别：Prim算法是一条边一条边的构造最小生成树，每一步都为一棵树添加一条边。kruskal算法构造最小生成树的时候<br>也是一条边一条边地构造，但它的切分规则是不一样的。它每一次寻找的边会连接一片森林中的两棵树。如果一副加权无向图由V个顶点组成，初始化情况下每个顶点都构成一棵独立的树，则V个顶点对应V棵树，组成一片森林，kruskal算法每一次处理都会将两棵树合并为一棵树，直到整个森林中只剩一棵树为止。</p>
+<p>取出权重最小的边，并得到该边关联的两个顶点v和w，通过uf.connect(v,w)判断v和w是否已经连通，如果连通，则证明这两个顶点在同一棵树中，那么就不能再把这条边添加到最小生成树中，因为在一棵树的任意两个顶点上添加一条边，都会形成环，而最小生成树不能有环的存在，如果不连通，则通过uf.connect(v,w)把顶点v所在的树和顶点w所在的树合并成一棵树，并把这条边加入到mst队列中，这样如果把所有的边处理完，最终mst中存储的就是最小生树的所有边。</p>
+<p><strong>kruskal算法</strong>实现:</p>
+<pre><code>public class KruskalMST {
+    //保存最小生成树的所有边
+    private Queue&lt;Edge&gt; mst;
+    //索引代表顶点，使用uf.connect(v,w)可以判断顶点v和顶点w是否在同一颗树中，使用uf.union(v,w)可以把顶点v所在的树和顶点w所在的树合并
+    private UF_Tree_Weighted uf;
+    //存储图中所有的边，使用最小优先队列，对边按照权重进行排序
+    private MinPriorityQueue&lt;Edge&gt; pq;
+
+    //根据一副加权无向图，创建最小生成树计算对象
+    public KruskalMST(EdgeWeightedGraph G) {
+        //初始化mst
+        this.mst = new Queue&lt;Edge&gt;();
+        //初始化uf
+        this.uf = new UF_Tree_Weighted(G.V());
+        //初始化pq
+        this.pq = new MinPriorityQueue&lt;&gt;(G.E()+1);
+        //把图中所有的边存储到pq中
+        for (Edge e : G.edges()) {
+            pq.insert(e);
+        }
+
+        //遍历pq队列，拿到最小权重的边，进行处理
+        while(!pq.isEmpty() &amp;&amp; mst.size()&lt;G.V()-1){
+            //找到权重最小的边
+            Edge e = pq.delMin();
+            //找到该边的两个顶点
+            int v = e.either();
+            int w = e.other(v);
+            //判断这两个顶点是否已经在同一颗树中，如果在同一颗树中，则不对该边做处理，如果不在一棵树中，则让这两个顶点属于的两棵树合并成一棵树
+            if (uf.connected(v,w)){
+                continue;
+            }
+            uf.union(v,w);
+            //让边e进入到mst队列中
+            mst.enqueue(e);
+        }
+    }
+
+    //获取最小生成树的所有边
+    public Queue&lt;Edge&gt; edges() {
+        return mst;
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class KruskalMSTTest {
+
+    public static void main(String[] args) throws Exception{
+        //准备一副加权无向图
+        BufferedReader br = new BufferedReader(new InputStreamReader(KruskalMSTTest.class.getClassLoader().getResourceAsStream(&quot;min_create_tree_test.txt&quot;)));
+        int total = Integer.parseInt(br.readLine());
+        EdgeWeightedGraph G = new EdgeWeightedGraph(total);
+        int edgeNumbers = Integer.parseInt(br.readLine());
+        for (int e = 1;e&lt;=edgeNumbers;e++){
+            String line = br.readLine();//4 5 0.35
+            String[] strs = line.split(&quot; &quot;);
+            int v = Integer.parseInt(strs[0]);
+            int w = Integer.parseInt(strs[1]);
+            double weight = Double.parseDouble(strs[2]);
+            //构建加权无向边
+            Edge edge = new Edge(v, w, weight);
+            G.addEdge(edge);
+        }
+
+        //创建一个KruskalMST对象，计算加权无向图中的最小生成树
+        KruskalMST primMST = new KruskalMST(G);
+        //获取最小生成树中的所有边
+        Queue&lt;Edge&gt; edges = primMST.edges();
+        //遍历打印所有的边
+        for (Edge e : edges) {
+            int v = e.either();
+            int w = e.other(v);
+            double weight = e.weight();
+            System.out.println(v+&quot;-&quot;+w+&quot; :: &quot;+weight);
+        }
+    }
+}
+</code></pre><hr>
+<h3 id="加权有向图"><a href="#加权有向图" class="headerlink" title="加权有向图"></a>加权有向图</h3><hr>
+<p>有向图边的表示：</p>
+<pre><code>public class DirectedEdge {
+    private final int v;//起点
+    private final int w;//终点
+    private final double weight;//当前边的权重
+
+    //通过顶点v和w，以及权重weight值构造一个边对象
+    public DirectedEdge(int v, int w, double weight) {
+        this.v = v;
+        this.w = w;
+        this.weight = weight;
+    }
+
+    //获取边的权重值
+    public double weight(){
+        return weight;
+    }
+
+    //获取有向边的起点
+    public int from(){
+        return v;
+    }
+
+    //获取有向边的终点
+    public int to(){
+        return w;
+    }
+}
+</code></pre><p>有向图的实现：</p>
+<pre><code>public class EdgeWeightedDigraph {
+    //顶点总数
+    private final int V;
+    //边的总数
+    private int E;
+    //邻接表
+    private Queue&lt;DirectedEdge&gt;[] adj;
+
+    //创建一个含有V个顶点的空加权有向图
+    public EdgeWeightedDigraph(int V) {
+        //初始化顶点数量
+        this.V = V;
+        //初始化边的数量
+        this.E = 0;
+        //初始化邻接表
+        this.adj = new Queue[V];
+        for (int i = 0; i &lt; adj.length; i++) {
+            adj[i] = new Queue&lt;DirectedEdge&gt;();
+        }
+    }
+
+    //获取图中顶点的数量
+    public int V() {
+        return V;
+    }
+
+    //获取图中边的数量
+    public int E() {
+        return E;
+    }
+
+    //向加权有向图中添加一条边e
+    public void addEdge(DirectedEdge e) {
+        //边e是有方向的，所以只需要让e出现在起点的邻接表中即可
+        int v = e.from();
+        adj[v].enqueue(e);
+        E++;
+    }
+
+    //获取由顶点v指出的所有的边
+    public Queue&lt;DirectedEdge&gt; adj(int v) {
+        return adj[v];
+    }
+
+    //获取加权有向图的所有边
+    public Queue&lt;DirectedEdge&gt; edges() {
+        //遍历图中的每一个顶点，得到该顶点的邻接表，遍历得到每一条边，添加到队列中返回即可
+        Queue&lt;DirectedEdge&gt; allEdges = new Queue&lt;&gt;();
+        for (int v = 0;v&lt;V;v++){
+            for (DirectedEdge edge : adj[v]) {
+                allEdges.enqueue(edge);
+            }
+        }
+        return allEdges;
+    }
+}
+</code></pre><hr>
+<h3 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h3><hr>
+<p>最短路径定义及性质定义：在一副加权有向图中，从顶点s到顶点t的最短路径是所有从顶点s到顶点t的路径中总权重最小的那条路径。</p>
+<p>最短路径树：给定一副加权有向图和一个顶点s，以s为起点的一棵最短路径树是图的一副子图，它包含顶点s以及从s可达的所有顶点。这棵有向树的根结点为s，树的每条路径都是有向图中的一条最短路径。</p>
+<p>边的松弛：放松边v-&gt;w意味着检查从s到w的最短路径是否先从s到v，然后再从v到w。</p>
+<p>顶点的松弛：顶点的松弛是基于边的松弛完成的，只需要把某个顶点指出的所有边松弛，那么该顶点就松弛完毕。例如要松弛顶点v，只需要遍历v的邻接表，把每一条边都松弛，那么顶点v就松弛了。</p>
+<p>Disjstra算法的实现和Prim算法很类似，构造最短路径树的每一步都是向这棵树中添加一条新的边，而这条新的边是有效横切边pq队列中的权重最小的边。</p>
+<pre><code>public class DijkstraSP {
+    //索引代表顶点，值表示从顶点s到当前顶点的最短路径上的最后一条边
+    private DirectedEdge[] edgeTo;
+    //索引代表顶点，值从顶点s到当前顶点的最短路径的总权重
+    private double[] distTo;
+    //存放树中顶点与非树中顶点之间的有效横切边
+    private IndexMinPriorityQueue&lt;Double&gt; pq;
+
+    //根据一副加权有向图G和顶点s，创建一个计算顶点为s的最短路径树对象
+    public DijkstraSP(EdgeWeightedDigraph G, int s){
+        //初始化edgeTo
+        this.edgeTo = new DirectedEdge[G.V()];
+        //初始化distTo
+        this.distTo = new double[G.V()];
+        for (int i = 0; i &lt; distTo.length; i++) {
+            distTo[i] = Double.POSITIVE_INFINITY;
+        }
+        //初始化pq
+        this.pq = new IndexMinPriorityQueue&lt;&gt;(G.V());
+        //找到图G中以顶点s为起点的最短路径树
+        //默认让顶点s进入到最短路径树中
+        distTo[s] = 0.0;
+        pq.insert(s,0.0);
+        //遍历pq
+        while(!pq.isEmpty()){
+            relax(G,pq.delMin());
+        }
+    }
+
+    //松弛图G中的顶点v
+    private void relax(EdgeWeightedDigraph G, int v){
+        for (DirectedEdge edge : G.adj(v)) {
+            //获取到该边的终点w
+            int w = edge.to();
+            //通过松弛技术，判断从起点s到顶点w的最短路径是否需要先从顶点s到顶点v，然后再由顶点v到顶点w
+            if (distTo(v)+edge.weight()&lt;distTo(w)){
+                distTo[w] = distTo[v]+edge.weight();
+                edgeTo[w] = edge;
+                //判断pq中是否已经存在顶点w，如果存在，则更新权重，如果不存在，则直接添加
+                if (pq.contains(w)){
+                    pq.changeItem(w,distTo(w));
+                }else{
+                    pq.insert(w,distTo(w));
+                }
+            }
+        }
+
+    }
+
+    //获取从顶点s到顶点v的最短路径的总权重
+    public double distTo(int v){
+        return distTo[v];
+    }
+
+    //判断从顶点s到顶点v是否可达
+    public boolean hasPathTo(int v){
+        return distTo[v]&lt;Double.POSITIVE_INFINITY;
+    }
+
+    //查询从起点s到顶点v的最短路径中所有的边
+    public Queue&lt;DirectedEdge&gt; pathTo(int v){
+        //判断从顶点s到顶点v是否可达，如果不可达，直接返回null
+        if (!hasPathTo(v)){
+            return null;
+        }
+
+        //创建队列对象
+        Queue&lt;DirectedEdge&gt; allEdges = new Queue&lt;&gt;();
+        while (true){
+            DirectedEdge e = edgeTo[v];
+            if (e==null){
+                break;
+            }
+            allEdges.enqueue(e);
+            v = e.from();
+        }
+        return allEdges;
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class DijkstraSPTest {
+
+    public static void main(String[] args) throws Exception{
+        //创建一副加权有向图
+        BufferedReader br = new BufferedReader(new InputStreamReader(DijkstraSPTest.class.getClassLoader().getResourceAsStream(&quot;min_route_test.txt&quot;)));
+        int total = Integer.parseInt(br.readLine());
+        EdgeWeightedDigraph G = new EdgeWeightedDigraph(total);
+        int edgeNumbers = Integer.parseInt(br.readLine());
+        for(int i=1;i&lt;=edgeNumbers;i++){
+            String line = br.readLine();//4 5 0.35
+            String[] strs = line.split(&quot; &quot;);
+            int v = Integer.parseInt(strs[0]);
+            int w = Integer.parseInt(strs[1]);
+            double weight = Double.parseDouble(strs[2]);
+            DirectedEdge e = new DirectedEdge(v, w, weight);
+            G.addEdge(e);
+        }
+        //创建DijkstraSP对象，查找最短路径树
+        DijkstraSP dijkstraSP = new DijkstraSP(G, 0);
+        //查找最短路径,0-&gt;6的最短路径
+        Queue&lt;DirectedEdge&gt; edges = dijkstraSP.pathTo(6);
+        //遍历打印
+        for (DirectedEdge edge : edges) {
+            System.out.println(edge.from()+&quot;-&gt;&quot;+edge.to()+&quot; ：： &quot;+edge.weight());
+        }
+    }
+}
+</code></pre><hr>
 
     </div>
     
@@ -3758,7 +4821,7 @@ public static void main(String[] args) throws Exception {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序表"><span class="toc-text">顺序表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向链表"><span class="toc-text">单向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向链表"><span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约瑟夫问题"><span class="toc-text">约瑟夫问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈"><span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号匹配问题"><span class="toc-text">括号匹配问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆波兰表达式求值"><span class="toc-text">逆波兰表达式求值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#队列"><span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#符号表"><span class="toc-text">符号表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-1"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序符号表"><span class="toc-text">有序符号表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树"><span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉查找树基于链表的实现"><span class="toc-text">二叉查找树基于链表的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#折纸问题"><span class="toc-text">折纸问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆"><span class="toc-text">堆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API实现"><span class="toc-text">API实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用堆进行排序"><span class="toc-text">利用堆进行排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优先队列"><span class="toc-text">优先队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最大优先队列"><span class="toc-text">最大优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最小优先队列"><span class="toc-text">最小优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#索引优先队列"><span class="toc-text">索引优先队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平衡树"><span class="toc-text">平衡树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3查找树"><span class="toc-text">2-3查找树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#红黑树"><span class="toc-text">红黑树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B树和B-树"><span class="toc-text">B树和B+树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B树"><span class="toc-text">B树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-树"><span class="toc-text">B+树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并查集"><span class="toc-text">并查集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-2"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UF-Tree算法优化"><span class="toc-text">UF_Tree算法优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径压缩优化"><span class="toc-text">路径压缩优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例"><span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图"><span class="toc-text">图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序表"><span class="toc-text">顺序表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向链表"><span class="toc-text">单向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向链表"><span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约瑟夫问题"><span class="toc-text">约瑟夫问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈"><span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号匹配问题"><span class="toc-text">括号匹配问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆波兰表达式求值"><span class="toc-text">逆波兰表达式求值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#队列"><span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#符号表"><span class="toc-text">符号表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-1"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序符号表"><span class="toc-text">有序符号表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树"><span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉查找树基于链表的实现"><span class="toc-text">二叉查找树基于链表的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#折纸问题"><span class="toc-text">折纸问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆"><span class="toc-text">堆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API实现"><span class="toc-text">API实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用堆进行排序"><span class="toc-text">利用堆进行排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优先队列"><span class="toc-text">优先队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最大优先队列"><span class="toc-text">最大优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最小优先队列"><span class="toc-text">最小优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#索引优先队列"><span class="toc-text">索引优先队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平衡树"><span class="toc-text">平衡树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3查找树"><span class="toc-text">2-3查找树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#红黑树"><span class="toc-text">红黑树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B树和B-树"><span class="toc-text">B树和B+树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B树"><span class="toc-text">B树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-树"><span class="toc-text">B+树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并查集"><span class="toc-text">并查集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-2"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UF-Tree算法优化"><span class="toc-text">UF_Tree算法优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径压缩优化"><span class="toc-text">路径压缩优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例"><span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无向图"><span class="toc-text">无向图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图的存储结构"><span class="toc-text">图的存储结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现-1"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图的搜索"><span class="toc-text">图的搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例-1"><span class="toc-text">案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径查找"><span class="toc-text">路径查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有向图定义"><span class="toc-text">有向图定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有向图实现"><span class="toc-text">有向图实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓扑排序-检测有向图中的环"><span class="toc-text">拓扑排序-检测有向图中的环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓扑排序-基于深度优先的顶点排序"><span class="toc-text">拓扑排序-基于深度优先的顶点排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓扑排序实现"><span class="toc-text">拓扑排序实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加权无向图"><span class="toc-text">加权无向图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最小生成树"><span class="toc-text">最小生成树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最小生成树Prim算法"><span class="toc-text">最小生成树Prim算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最小生成树kruskal算法"><span class="toc-text">最小生成树kruskal算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加权有向图"><span class="toc-text">加权有向图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最短路径"><span class="toc-text">最短路径</span></a></li></ol></li></ol>
         
     </div>
 </aside>
