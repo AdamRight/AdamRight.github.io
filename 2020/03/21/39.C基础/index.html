@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>C和C++ | Hexo</title>
+<title>C基础 | Hexo</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -132,9 +132,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="C和C++">
+        <h1 id="C基础">
             
-	            C和C++
+	            C基础
             
         </h1>
         <div class="post-meta">
@@ -458,13 +458,20 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 <p>Xshell：是一个Windows平台下的SSH、TELNET和RLOGIN终端软件。它使得用户能轻松和安全地在Windows平台上访问Unix/Linux 主机。</p>
 <p>Xftp：是一个应用于 Windows 平台的 FTP 和 SFTP 文件传输程序。Xftp能安全地在Unix/Linux 和 Windows 平台之间传输文件。</p>
 <hr>
-<h2 id="C语言"><a href="#C语言" class="headerlink" title="C语言"></a>C语言</h2><h3 id="概述和HelloWorld"><a href="#概述和HelloWorld" class="headerlink" title="概述和HelloWorld"></a>概述和HelloWorld</h3><h3 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h3><pre><code>#include &lt;stdio.h&gt;
+<h2 id="C语言"><a href="#C语言" class="headerlink" title="C语言"></a>C语言</h2><h3 id="概述和HelloWorld"><a href="#概述和HelloWorld" class="headerlink" title="概述和HelloWorld"></a>概述和HelloWorld</h3><p><img src="/2020/03/21/39.C基础/1.png" alt=""></p>
+<p><img src="/2020/03/21/39.C基础/2.png" alt=""></p>
+<p><img src="/2020/03/21/39.C基础/3.png" alt=""></p>
+<h3 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h3><pre><code>#include &lt;stdio.h&gt;
 int main(int argc, const char * argv[]) 
 {
     printf(&quot;Hello, World!\n&quot;);
     return 0;
 }
-</code></pre><p><code>.c</code>是C语言的源代码文件。编译:把源代码翻译成0、1,生成一个<code>.o</code>目标文件。链接:把目标文件和库函数进行整合生成一个<code>.out</code>可执行文件。</p>
+</code></pre><p>C代码编译成可执行程序经过4步<code>.c</code>：</p>
+<p>预处理：宏定义展开、头文件展开、条件编译等，同时将代码中的注释删除，这里并不会检查语法（<code>.i</code>）</p>
+<p>编译：检查语法，将预处理后文件编译生成汇编文件(<code>.s</code>)</p>
+<p>汇编：将汇编文件生成目标文件(二进制文件)(<code>.o</code>)</p>
+<p>链接：C语言写的程序是需要依赖各种库的，所以编译之后还需要把库链接到最终的可执行程序中去()</p>
 
     </div>
     
