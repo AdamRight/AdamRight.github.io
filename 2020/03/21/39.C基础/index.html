@@ -458,20 +458,763 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 <p>Xshell：是一个Windows平台下的SSH、TELNET和RLOGIN终端软件。它使得用户能轻松和安全地在Windows平台上访问Unix/Linux 主机。</p>
 <p>Xftp：是一个应用于 Windows 平台的 FTP 和 SFTP 文件传输程序。Xftp能安全地在Unix/Linux 和 Windows 平台之间传输文件。</p>
 <hr>
-<h2 id="C语言"><a href="#C语言" class="headerlink" title="C语言"></a>C语言</h2><h3 id="概述和HelloWorld"><a href="#概述和HelloWorld" class="headerlink" title="概述和HelloWorld"></a>概述和HelloWorld</h3><p><img src="/2020/03/21/39.C基础/1.png" alt=""></p>
-<p><img src="/2020/03/21/39.C基础/2.png" alt=""></p>
+<h2 id="C语言"><a href="#C语言" class="headerlink" title="C语言"></a>C语言</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><hr>
+<p><img src="/2020/03/21/39.C基础/1.png" alt=""></p>
 <p><img src="/2020/03/21/39.C基础/3.png" alt=""></p>
-<h3 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h3><pre><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main(int argc, const char * argv[]) 
 {
     printf(&quot;Hello, World!\n&quot;);
     return 0;
 }
+</code></pre><p>return</p>
+<pre><code>return代表函数执行完毕，返回return代表函数的终止
+如果main定义的时候前面是int，那么return后面就需要写一个整数；如果main定义的时候前面是void，那么return后面什么也不需要写
+在main函数中return 0代表程序执行成功，return -1代表程序执行失败
+int main()和void main()在C语言中是一样的，但C++只接受int main这种定义方式
+</code></pre><p>include</p>
+<pre><code>#include的意思是头文件包含，#include &lt;stdio.h&gt;代表包含stdio.h这个头文件
+使用C语言库函数需要提前包含库函数对应的头文件，如这里使用了printf()函数，需要包含stdio.h头文件
+#include&lt; &gt; 与 #include &quot;&quot;的区别：
+&lt; &gt; 表示系统直接按系统指定的目录检索
+&quot;&quot; 表示系统先在 &quot;&quot; 指定的路径(没写路径代表当前路径)查找头文件，如果找不到，再按系统指定的目录检索
 </code></pre><p>C代码编译成可执行程序经过4步<code>.c</code>：</p>
 <p>预处理：宏定义展开、头文件展开、条件编译等，同时将代码中的注释删除，这里并不会检查语法（<code>.i</code>）</p>
 <p>编译：检查语法，将预处理后文件编译生成汇编文件(<code>.s</code>)</p>
 <p>汇编：将汇编文件生成目标文件(二进制文件)(<code>.o</code>)</p>
 <p>链接：C语言写的程序是需要依赖各种库的，所以编译之后还需要把库链接到最终的可执行程序中去()</p>
+<p>32个关键字</p>
+<pre><code>数据类型关键字（12个）
+char、short、int、long、float、double、unsigned、signed、struct、union、enum、void
+
+控制语句关键字（12个）
+if、else、switch、case、default、for、do、while、break、continue、goto、return
+
+存储类关键字（5个）
+auto、extern、register、static、constant
+
+其他关键字（3个）
+sizeof、typedef、volatile
+</code></pre><hr>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><hr>
+<p><strong>声明变量</strong>不需要建立存储空间，如：<code>extern int a;</code>。<strong>定义变量</strong>需要建立存储空间，如：<code>int b;</code>。</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main(int argc, const char* argv[])
+{
+    {
+        //extern 关键字只做声明，不能做任何定义
+        //声明一个变量a，a在这里没有建立存储空间
+        extern int a;
+        //a = 10;    //err, 没有空间，就不可以赋值
+        int b = 10;    //定义一个变量b，b的类型为int，b赋值为10
+        return 0;
+    }
+}
+</code></pre><p>define、const</p>
+<pre><code>#include &lt;stdio.h&gt;
+#define MAX 10 //声明了一个常量，名字叫MAX，值是10，常量的值一旦初始化不可改
+int main()
+{
+    int a;    //定义了一个变量，其类型为int，名字叫a
+    const int b = 10; //定义一个const常量，名为叫b，值为10
+    //b = 11; //err,常量的值不能改变
+    //MAX = 100;    //err,常量的值不能改变
+    a = MAX;//将abc的值设置为MAX的值
+    a = 123;
+    printf(&quot;%d\n&quot;, a); //打印变量a的值
+    return 0;
+}
+</code></pre><p><strong>通过 <code>#define</code> 定义的常量,是根据值来匹配数据类型的。const修饰的常量是不安全，可以通过指针来修改。</strong></p>
+<hr>
+<h3 id="进制"><a href="#进制" class="headerlink" title="进制"></a>进制</h3><hr>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    int a = 123;        //十进制方式赋值
+    int b = 0123;        //八进制方式赋值， 以数字0开头
+    int c = 0xABC;    //十六进制方式赋值
+    //如果在printf中输出一个十进制数那么用%d，八进制用%o，十六进制是%x
+    printf(&quot;十进制：%d\n&quot;, a);
+    printf(&quot;八进制：%o\n&quot;, b);    //%o,为字母o,不是数字
+    printf(&quot;十六进制：%x\n&quot;, c);
+    return 0;
+}
+</code></pre><hr>
+<h3 id="sizeof"><a href="#sizeof" class="headerlink" title="sizeof"></a>sizeof</h3><hr>
+<p>sizeof不是函数，所以不需要包含任何头文件，它的功能是计算一个数据类型的大小，单位为字节。sizeof的返回值为size_t。size_t类型在32位操作系统下是unsigned int，是一个无符号的整数。</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    int a;
+    int b = sizeof(a);//sizeof得到指定值占用内存的大小，单位：字节
+    printf(&quot;b = %d\n&quot;, b);
+    size_t c = sizeof(a);
+    printf(&quot;c = %u\n&quot;, c);//用无符号数的方式输出c的值
+    return 0;
+}
+</code></pre><hr>
+<h3 id="int"><a href="#int" class="headerlink" title="int"></a>int</h3><hr>
+<p>打印格式</p>
+<pre><code>%hd    输出short类型
+%d    输出int类型
+%l    输出long类型
+%ll    输出long long类型
+%hu    输出unsigned short类型
+%u    输出unsigned int类型
+%lu    输出unsigned long类型
+%llu    输出unsigned long long类型
+</code></pre><p>代码</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    short a = 10;
+    int b = 10;
+    long c = 10l; //或者10L
+    long long d = 10ll; //或者10LL
+    printf(&quot;sizeof(a) = %u\n&quot;, sizeof(a));
+    printf(&quot;sizeof(b) = %u\n&quot;, sizeof(b));
+    printf(&quot;sizeof(c) = %u\n&quot;, sizeof(c));
+    printf(&quot;sizeof(c) = %u\n&quot;, sizeof(d));
+
+    printf(&quot;short a = %hd\n&quot;, a);
+    printf(&quot;int b = %d\n&quot;, b);
+    printf(&quot;long c = %ld\n&quot;, c);
+    printf(&quot;long long d = %lld\n&quot;, d);
+
+    unsigned short a2 = 20u;
+    unsigned int b2 = 20u;
+    unsigned long c2 = 20ul;
+    unsigned long long d2 = 20ull;
+
+    printf(&quot;unsigned short a = %hu\n&quot;, a2);
+    printf(&quot;unsigned int b = %u\n&quot;, b2);
+    printf(&quot;unsigned long c = %lu\n&quot;, c2);
+    printf(&quot;unsigned long long d = %llu\n&quot;, d2);
+    return 0;
+}
+</code></pre><p><strong>有符号数</strong>是最高位为符号位，0代表正数，1代表负数。</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    signed int a = -1089474374; //定义有符号整型变量a
+    printf(&quot;%X\n&quot;, a); //结果为 BF0FF0BA
+    //B       F      0        F       F     0        B          A
+    //1011 1111 0000 1111 1111 0000 1011 1010
+    return 0;
+}
+</code></pre><p><strong>无符号数</strong>最高位不是符号位，而就是数的一部分，无符号数不可能是负数。无符号数，可以增大数的表达最大值。</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    unsigned int a = 3236958022; //定义无符号整型变量a
+    printf(&quot;%X\n&quot;, a); //结果为 C0F00F46
+    return 0;
+}
+</code></pre><hr>
+<h3 id="char"><a href="#char" class="headerlink" title="char"></a>char</h3><hr>
+<p>字符变量实际上并不是把该字符本身放到变量的内存单元中去，而是将该字符对应的ASCII编码放到变量的存储单元中。<strong>char的本质就是一个1字节大小的整型</strong>。</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    char ch = &apos;a&apos;;
+    printf(&quot;sizeof(ch) = %u\n&quot;, sizeof(ch));
+    printf(&quot;ch[%%c] = %c\n&quot;, ch); //打印字符
+    printf(&quot;ch[%%d] = %d\n&quot;, ch); //打印‘a’ ASCII的值
+
+    char A = &apos;A&apos;;
+    char a = &apos;a&apos;;
+    printf(&quot;a = %d\n&quot;, a);        //97
+    printf(&quot;A = %d\n&quot;, A);    //65
+    printf(&quot;A = %c\n&quot;, &apos;a&apos; - 32); //小写a转大写A
+    printf(&quot;a = %c\n&quot;, &apos;A&apos; + 32); //大写A转小写a
+
+    ch = &apos; &apos;;
+    printf(&quot;空字符：%d\n&quot;, ch); //空字符ASCII的值为32
+    printf(&quot;A = %c\n&quot;, &apos;a&apos; - &apos; &apos;); //小写a转大写A
+    printf(&quot;a = %c\n&quot;, &apos;A&apos; + &apos; &apos;); //大写A转小写a
+    return 0;
+}
+</code></pre><hr>
+<h3 id="float、double"><a href="#float、double" class="headerlink" title="float、double"></a>float、double</h3><hr>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    //传统方式赋值
+    float a = 3.14f; //或3.14F
+    double b = 3.14;
+    printf(&quot;a = %f\n&quot;, a);
+    printf(&quot;b = %lf\n&quot;, b);
+
+    //科学法赋值,e3相当于1000，e-3相当于0.001
+    a = 3.2e3f; //3.2*1000 = 32000，e可以写E
+    printf(&quot;a1 = %f\n&quot;, a);
+    a = 100e-3f; //100*0.001 = 0.1
+    printf(&quot;a2 = %f\n&quot;, a);
+    a = 3.1415926f;
+    printf(&quot;a3 = %f\n&quot;, a); //结果为3.141593
+    return 0;
+}
+</code></pre><p>类型限定符</p>
+<pre><code>//extern:声明一个变量，extern声明的变量没有建立存储空间
+extern int a;
+//const:定义一个常量，常量的值不能修改。
+const int a = 10;
+//volatile    防止编译器优化代码
+//register    定义寄存器变量，提高效率。register是建议型的指令，而不是命令型的指令，如果CPU有空闲寄存器，那么register就生效，如果没有空闲寄存器，那么register无效。
+</code></pre><hr>
+<h3 id="字符串常量"><a href="#字符串常量" class="headerlink" title="字符串常量"></a>字符串常量</h3><hr>
+<p>字符串是内存中一段连续的char空间，以<code>&#39;\0&#39;</code>(数字0)结尾。</p>
+<p>每个字符串的结尾，编译器会自动的添加一个结束标志位<code>&#39;\0&#39;</code>，即 <code>&quot;a&quot;</code> 包含两个字符<code>&#39;a&#39;</code>和<code>&#39;\0&#39;</code>。</p>
+<hr>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><hr>
+<p>C语言的比较运算中，“真”用数字“1”来表示，“假”用数字“0”来表示。</p>
+<pre><code>-&gt;    对象指针-&gt;成员名    //成员选择（指针）
+&amp;    &amp;变量名    //取地址运算符
+</code></pre><hr>
+<h3 id="三目运算符"><a href="#三目运算符" class="headerlink" title="三目运算符"></a>三目运算符</h3><hr>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    int a = 10;
+    int b = 20;
+    int c;
+    c = (a &gt; b ? a : b);
+    printf(&quot;c = %d\n&quot;, c);
+    return 0;
+}
+</code></pre><hr>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><hr>
+<pre><code>#define _CRT_SECURE_NO_WARNINGS
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+#include&lt;stdlib.h&gt;
+int main()
+{
+    int arr[10] = { 7,4,2,3,5,8,9,6,1,10 };
+    int len = sizeof(arr) / sizeof(arr[0]) - 1;
+    //冒泡排序   从小到大
+    for (int i = 0; i &lt;= len; i++)
+    {
+        for (int j = 0; j &lt; len - i; j++)
+        {
+            if (arr[j] &lt; arr[j + 1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    for (int i = 0; i &lt; 10; i++)
+    {
+        printf(&quot;%d\n&quot;, arr[i]);
+    }
+    system(&quot;pause&quot;);
+    return EXIT_SUCCESS;
+}
+</code></pre><hr>
+<h3 id="goto语句"><a href="#goto语句" class="headerlink" title="goto语句"></a>goto语句</h3><hr>
+<p>无条件跳转，尽量少用。</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    goto End; //无条件跳转到End的标识
+    printf(&quot;aaaaaaaaa\n&quot;);
+End:
+    printf(&quot;bbbbbbbb\n&quot;);
+    return 0;
+}
+</code></pre><hr>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><hr>
+<p><strong>数组就是在内存中连续的相同类型的变量空间</strong>。同一个数组所有的成员都是相同的数据类型，同时所有的成员在内存中的地址是连续的。</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    int a[10];//定义了一个数组，名字叫a，有10个成员，每个成员都是int类型
+    //a[0]…… a[9]，没有a[10]
+    //没有a这个变量，a是数组的名字，但不是变量名，它是常量
+    int i = 0;
+    for (i = 0; i &lt; 10; i++)
+    {
+        a[i] = i; //给数组赋值
+    }
+    //遍历数组，并输出每个成员的值
+    for (i = 0; i &lt; 10; i++)
+    {
+        printf(&quot;%d &quot;, a[i]);
+    }
+    printf(&quot;\n&quot;);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="一维数组的初始化"><a href="#一维数组的初始化" class="headerlink" title="一维数组的初始化"></a>一维数组的初始化</h4><hr>
+<p>在定义数组的同时进行赋值，称为初始化。全局数组若不初始化，编译器将其初始化为零。局部数组若不初始化，内容为随机值。</p>
+<pre><code>int a[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };//定义一个数组，同时初始化所有成员变量
+int a[10] = { 1, 2, 3 };//初始化前三个成员，后面所有元素都设置为0
+int a[10] = { 0 };//所有的成员都设置为0
+
+//[]中不定义元素个数，定义时必须初始化
+int a[] = { 1, 2, 3, 4, 5 };//定义了一个数组，有5个成员
+</code></pre><hr>
+<h4 id="数组名"><a href="#数组名" class="headerlink" title="数组名"></a>数组名</h4><hr>
+<p><strong>数组名是一个地址的常量，代表数组中首元素的地址</strong>。</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    int a[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };//定义一个数组，同时初始化所有成员变量
+    printf(&quot;a = %p\n&quot;, a);
+    printf(&quot;&amp;a[0] = %p\n&quot;, &amp;a[0]);//相等的
+
+    int n = sizeof(a); //数组占用内存的大小，10个int类型，10 * 4  = 40
+    int n0 = sizeof(a[0]);//数组第0个元素占用内存大小，第0个元素为int，4
+
+    //遍历数组
+    int i = 0;
+    for (i = 0; i &lt; sizeof(a) / sizeof(a[0]); i++)
+    {
+        printf(&quot;%d &quot;, a[i]);
+    }
+    printf(&quot;\n&quot;);
+    return 0;
+}
+</code></pre><p><strong>数组元素个数</strong>：</p>
+<pre><code>int （size_t） unsigned int 个数  = sizeof(数组名)/sizeof(数组元素 | 数组数据类型) 
+</code></pre><p><strong>数组地址</strong></p>
+<pre><code>int a[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };//定义一个数组，同时初始化所有成员变量
+printf(&quot;a = %p\n&quot;, a);
+printf(&quot;&amp;a[0] = %p\n&quot;, &amp;a[0]);
+</code></pre><hr>
+<h4 id="一维数组的最值"><a href="#一维数组的最值" class="headerlink" title="一维数组的最值"></a>一维数组的最值</h4><hr>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    int a[] = { 1, -2, 3,-4, 5, -6, 7, -8, -9, 10 };//定义一个数组，同时初始化所有成员变量
+    int i = 0;
+    int max = a[0];
+    for (i = 0; i &lt; sizeof(a) / sizeof(a[0]); i++)
+    {
+        if (a[i] &gt; max)
+        {
+            max = a[i];
+        }
+    }
+    printf(&quot;数组中最大值为：%d\n&quot;, max);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="一维数组的逆置"><a href="#一维数组的逆置" class="headerlink" title="一维数组的逆置"></a>一维数组的逆置</h4><hr>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    int a[] = { 1, -2, 3,-4, 5, -6, 7, -8, -9, 10 };//定义一个数组，同时初始化所有成员变量
+    int i = 0;
+    int j = sizeof(a) / sizeof(a[0]) - 1;
+    int tmp;
+    while (i &lt; j)
+    {
+        tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
+        i++;
+        j--;
+    }
+    for (i = 0; i &lt; sizeof(a) / sizeof(a[0]); i++)
+    {
+        printf(&quot;%d &quot;, a[i]);//10 -9 -8 7 -6 5 -4 3 -2 1
+    }
+    printf(&quot;\n&quot;);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="冒泡法排序"><a href="#冒泡法排序" class="headerlink" title="冒泡法排序"></a>冒泡法排序</h4><hr>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    int a[] = { 1, -2, 3,-4, 5, -6, 7, -8, -9, 10 };//定义一个数组，同时初始化所有成员变量
+    int i = 0;
+    int j = 0;
+    int n = sizeof(a) / sizeof(a[0]);
+    int tmp;
+    for (i = 0; i &lt; n - 1; i++)
+    {
+        for (j = 0; j &lt; n - i - 1; j++)//内循环的目的是比较相邻的元素，把大的放到后面
+        {
+            if (a[j] &gt; a[j + 1])
+            {
+                tmp = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = tmp;
+            }
+        }
+    }
+
+    for (i = 0; i &lt; n; i++)
+    {
+        printf(&quot;%d &quot;, a[i]);
+    }
+    printf(&quot;\n&quot;);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h4><hr>
+<pre><code>//常量表达式1表示第一维下标的长度，常量表达式2表示第二维下标的长度。
+类型说明符 数组名[常量表达式1][常量表达式2]
+</code></pre><p>在内存中并不存在二维数组，二维数组实际的硬件存储器是连续编址的，也就是说内存中只有一维数组，即放完一行之后顺次放入第二行，和一维数组存放方式是一样的。</p>
+<p>实现</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    //定义了一个二维数组，名字叫a
+    //由3个一维数组组成，这个一维数组是int [4]
+    //这3个一维数组的数组名分别为a[0],a[1],a[2]
+    int a[3][4];
+    //给数组每个元素赋值
+    int i = 0;
+    int j = 0;
+    int num = 0;
+    for (i = 0; i &lt; 3; i++)
+    {
+        for (j = 0; j &lt; 4; j++)
+        {
+            a[i][j] = num++;
+        }
+    }
+
+    //遍历数组，并输出每个成员的值
+    for (i = 0; i &lt; 3; i++)
+    {
+        for (j = 0; j &lt; 4; j++)
+        {
+            printf(&quot;%d, &quot;, a[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+    return 0;
+}
+</code></pre><hr>
+<h4 id="二维数组的初始化"><a href="#二维数组的初始化" class="headerlink" title="二维数组的初始化"></a>二维数组的初始化</h4><hr>
+<pre><code>//分段赋值     
+int a[3][4] = {{ 1, 2, 3, 4 },{ 5, 6, 7, 8, },{ 9, 10, 11, 12 }};
+
+//连续赋值
+int a[3][4] = { 1, 2, 3, 4 , 5, 6, 7, 8, 9, 10, 11, 12};
+
+//可以只给部分元素赋初值，未初始化则为0
+int a[3][4] = { 1, 2, 3, 4};
+
+//所有的成员都设置为0
+int a[3][4] = {0};
+
+//[]中不定义元素个数，定义时必须初始化
+int a[][4] = { 1, 2, 3, 4, 5, 6, 7, 8};
+</code></pre><hr>
+<h4 id="数组名-1"><a href="#数组名-1" class="headerlink" title="数组名"></a>数组名</h4><hr>
+<p>数组名是一个地址的常量，代表数组中首元素的地址。</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    //定义了一个二维数组，名字叫a。二维数组是本质上还是一维数组，此一维数组有3个元素。每个元素又是一个一维数组int[4]
+    int a[3][4] = { 1, 2, 3, 4 , 5, 6, 7, 8, 9, 10, 11, 12 };
+    //数组名为数组首元素地址，二维数组的第0个元素为一维数组。第0个一维数组的数组名为a[0]
+    printf(&quot;a = %p\n&quot;, a);
+    printf(&quot;a[0] = %p\n&quot;, a[0]);//二者相等
+
+    //测二维数组所占内存空间，有3个一维数组，每个一维数组的空间为4*4。sizeof(a) = 3 * 4 * 4 = 48
+    printf(&quot;sizeof(a) = %d\n&quot;, sizeof(a));
+
+    //测第0个元素所占内存空间，a[0]为第0个一维数组int[4]的数组名，4*4=16
+    printf(&quot;sizeof(a[0]) = %d\n&quot;, sizeof(a[0]));
+
+    //测第0行0列元素所占内存空间，第0行0列元素为一个int类型，4字节
+    printf(&quot;sizeof(a[0][0]) = %d\n&quot;, sizeof(a[0][0]));
+
+    //求二维数组行数，3
+    printf(&quot;i = %d\n&quot;, sizeof(a) / sizeof(a[0]));
+
+    // 求二维数组列数，4
+    printf(&quot;j = %d\n&quot;, sizeof(a[0]) / sizeof(a[0][0]));
+
+    //求二维数组行*列总数，12
+    printf(&quot;n = %d\n&quot;, sizeof(a) / sizeof(a[0][0]));
+    return 0;
+}
+</code></pre><hr>
+<h3 id="字符数组与字符串"><a href="#字符数组与字符串" class="headerlink" title="字符数组与字符串"></a>字符数组与字符串</h3><hr>
+<p><strong>C语言中没有字符串这种数据类型</strong>，可以通过char的数组来替代；字符串一定是一个char的数组，但char的数组未必是字符串；<strong>数字0(和字符‘\0’等价)结尾的char数组就是一个字符串</strong>，但如果char数组没有以数字0结尾，那么就不是一个字符串，只是普通字符数组，所以字符串是一种特殊的char的数组。</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    char c1[] = { &apos;c&apos;, &apos; &apos;, &apos;p&apos;, &apos;r&apos;, &apos;o&apos;, &apos;g&apos; }; //普通字符数组
+    printf(&quot;c1 = %s\n&quot;, c1); //乱码，因为没有’\0’结束符
+
+    //以‘\0’(‘\0’就是数字0)结尾的字符数组是字符串
+    char c2[] = { &apos;c&apos;, &apos; &apos;, &apos;p&apos;, &apos;r&apos;, &apos;o&apos;, &apos;g&apos;, &apos;\0&apos; };
+    printf(&quot;c2 = %s\n&quot;, c2);
+
+    //字符串处理以‘\0’(数字0)作为结束符，后面的&apos;h&apos;, &apos;l&apos;, &apos;l&apos;, &apos;e&apos;, &apos;o&apos;不会输出
+    char c3[] = { &apos;c&apos;, &apos; &apos;, &apos;p&apos;, &apos;r&apos;, &apos;o&apos;, &apos;g&apos;, &apos;\0&apos;, &apos;h&apos;, &apos;l&apos;, &apos;l&apos;, &apos;e&apos;, &apos;o&apos;, &apos;\0&apos; };
+    printf(&quot;c3 = %s\n&quot;, c3);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="字符串初始化"><a href="#字符串初始化" class="headerlink" title="字符串初始化"></a>字符串初始化</h4><hr>
+<pre><code>#include &lt;stdio.h&gt;
+
+// C语言没有字符串类型，通过字符数组模拟
+// C语言字符串，以字符‘\0’, 数字0
+int main()
+{
+    //不指定长度, 没有0结束符，有多少个元素就有多长
+    char buf[] = { &apos;a&apos;, &apos;b&apos;, &apos;c&apos; };
+    printf(&quot;buf = %s\n&quot;, buf);    //乱码
+
+    //指定长度，后面没有赋值的元素，自动补0
+    char buf2[100] = { &apos;a&apos;, &apos;b&apos;, &apos;c&apos; };
+    printf(&quot;buf2 = %s\n&quot;, buf2);//buf2 = abc
+
+    //所有元素赋值为0
+    char buf3[100] = { 0 };
+
+    //char buf4[2] = { &apos;1&apos;, &apos;2&apos;, &apos;3&apos; };//数组越界
+
+    char buf5[50] = { &apos;1&apos;, &apos;a&apos;, &apos;b&apos;, &apos;0&apos;, &apos;7&apos; };
+    printf(&quot;buf5 = %s\n&quot;, buf5);//buf5 = 1ab07
+
+    char buf6[50] = { &apos;1&apos;, &apos;a&apos;, &apos;b&apos;, 0, &apos;7&apos; };
+    printf(&quot;buf6 = %s\n&quot;, buf6);// 1ab
+
+    char buf7[50] = { &apos;1&apos;, &apos;a&apos;, &apos;b&apos;, &apos;\0&apos;, &apos;7&apos; };
+    printf(&quot;buf7 = %s\n&quot;, buf7);// 1ab
+
+    //使用字符串初始化，编译器自动在后面补0，常用
+    char buf8[] = &quot;agjdslgjlsdjg&quot;;
+
+    //&apos;\0&apos;后面最好不要连着数字，有可能几个数字连起来刚好是一个转义字符
+    //&apos;\ddd&apos;八进制字义字符，&apos;\xdd&apos;十六进制转移字符
+    // \012相当于\n
+    char str[] = &quot;\012abc&quot;;
+    printf(&quot;str == %s\n&quot;, str);
+
+    return 0;
+}
+</code></pre><hr>
+<h4 id="字符串追加拼接"><a href="#字符串追加拼接" class="headerlink" title="字符串追加拼接"></a>字符串追加拼接</h4><hr>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str1[] = &quot;abcdef&quot;;
+    char str2[] = &quot;123456&quot;;
+    char dst[100];
+
+    int i = 0;
+    while (str1[i] != 0)
+    {
+        dst[i] = str1[i];
+        i++;
+    }
+
+    int j = 0;
+    while (str2[j] != 0)
+    {
+        dst[i + j] = str2[j];
+        j++;
+    }
+    dst[i + j] = 0; //字符串结束符
+    printf(&quot;dst = %s\n&quot;, dst);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h4><hr>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main()
+{
+    time_t tm = time(NULL);//得到系统时间
+    srand((unsigned int)tm);//随机种子只需要设置一次即可
+    int r = rand();
+    printf(&quot;r = %d\n&quot;, r);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="strlen"><a href="#strlen" class="headerlink" title="strlen()"></a>strlen()</h4><hr>
+<p><code>#include &lt;string.h&gt;</code>计算指定指定字符串的长度，不包含字符串结束符<code>‘\0’</code>。</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main()
+{
+    char str[] = &quot;abcdefg&quot;;
+    int n = strlen(str);
+    printf(&quot;n = %d\n&quot;, n);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="strcpy-s"><a href="#strcpy-s" class="headerlink" title="strcpy_s"></a>strcpy_s</h4><hr>
+<p><code>include &lt;string.h&gt;    char *strcpy_s(char *dest, const char *src);</code></p>
+<p>功能：把src所指向的字符串复制到dest所指向的空间中，’\0’也会拷贝过去。返回值：成功：返回dest字符串的首地址；失败：NULL。</p>
+<p>注意：如果参数dest所指的内存空间不够大，可能会造成缓冲溢出的错误情况。</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main()
+{
+    char dest[20] = &quot;123456789&quot;;
+    char src[] = &quot;hello world&quot;;
+    strcpy_s(dest, src);
+    printf(&quot;%s\n&quot;, dest);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="strncpy-s"><a href="#strncpy-s" class="headerlink" title="strncpy_s"></a>strncpy_s</h4><hr>
+<p><code>#include &lt;string.h&gt;    char *strncpy_s(char *dest, const char *src, size_t n);</code>把src指向字符串的前n个字符复制到dest所指向的空间中，是否拷贝结束符看指定的长度是否包含’\0’。返回值：成功：返回dest字符串的首地址;失败：NULL。</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main()
+{
+    char dest[20];
+    char src[] = &quot;hello world&quot;;
+
+    strncpy_s(dest, src, 5);
+    printf(&quot;%s\n&quot;, dest);
+
+    dest[5] = &apos;\0&apos;;
+    printf(&quot;%s\n&quot;, dest);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="strcat-s"><a href="#strcat-s" class="headerlink" title="strcat_s"></a>strcat_s</h4><hr>
+<p><code>#include &lt;string.h&gt;  char *strcat_s(char *dest, const char *src);</code>将src字符串连接到dest的尾部，<code>‘\0’</code>也会追加过去。返回值：成功：返回dest字符串的首地址；失败：NULL。</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main()
+{
+    char str[20] = &quot;123&quot;;
+    char src[] = &quot;hello world&quot;;
+    strcat_s(str, src);
+    printf(&quot;%s\n&quot;, str);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="strncat-s"><a href="#strncat-s" class="headerlink" title="strncat_s"></a>strncat_s</h4><hr>
+<p><code>#include &lt;string.h&gt;  char *strncat(char *dest, const char *src, size_t n);</code>将src字符串前n个字符连接到dest的尾部，‘\0’也会追加过去。返回值：成功：返回dest字符串的首地址；失败：NULL。</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main()
+{
+    char str[20] = &quot;123&quot;;
+    char src[] = &quot;hello world&quot;;
+    strncat_s(str, src,5);
+    printf(&quot;%s\n&quot;, str);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="strcmp和strncmp"><a href="#strcmp和strncmp" class="headerlink" title="strcmp和strncmp"></a>strcmp和strncmp</h4><hr>
+<p>比较 s1 和 s2 的大小，比较的是字符ASCII码大小。返回值：相等：0; 大于：&gt;0; 小于：&lt;0。</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main()
+{
+    char str1[] = &quot;hello world&quot;;
+    char str2[] = &quot;hello mike&quot;;
+
+    if (strcmp(str1, str2) == 0)
+    {
+        printf(&quot;str1==str2\n&quot;);
+    }
+    else if (strcmp(str1, str2) &gt; 0)
+    {
+        printf(&quot;str1&gt;str2\n&quot;);
+    }
+    else
+    {
+        printf(&quot;str1&lt;str2\n&quot;);
+    }
+    return 0;
+}
+
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main()
+{
+    char str1[] = &quot;hello world&quot;;
+    char str2[] = &quot;hello mike&quot;;
+
+    if (strncmp(str1, str2, 5) == 0)
+    {
+        printf(&quot;str1==str2\n&quot;);
+    }
+    else if (strncmp(str1, str2, 5) &gt; 0)
+    {
+        printf(&quot;str1&gt;str2\n&quot;);
+    }
+    else
+    {
+        printf(&quot;str1&lt;str2\n&quot;);
+    }
+    return 0;
+}
+</code></pre><hr>
+<h4 id="sprintf-s"><a href="#sprintf-s" class="headerlink" title="sprintf_s"></a>sprintf_s</h4><hr>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    char dst[100] = { 0 };
+    int a = 10;
+    char src[] = &quot;hello world&quot;;
+    printf(&quot;a = %d, src = %s&quot;, a, src);
+    printf(&quot;\n&quot;);
+
+    int len = sprintf_s(dst, &quot;a = %d, src = %s&quot;, a, src);
+    printf(&quot;dst = \&quot; %s\&quot;\n&quot;, dst);// dst = &quot; a = 10, src = hello world&quot;
+    printf(&quot;len = %d\n&quot;, len);//25
+    return 0;
+}
+</code></pre><hr>
+<h4 id="strchr"><a href="#strchr" class="headerlink" title="strchr"></a>strchr</h4><hr>
+<p><code>#include &lt;string.h&gt;  char *strchr(const char *s, int c);</code>在字符串s中查找字母c出现的位置。返回值：成功：返回第一次出现的c地址；失败：NULL。</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main()
+{
+    char src[] = &quot;ddda123abcd&quot;;
+    char* p = strchr(src, &apos;a&apos;);
+    printf(&quot;p = %s\n&quot;, p);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="strstr"><a href="#strstr" class="headerlink" title="strstr"></a>strstr</h4><hr>
+<p><code>#include &lt;string.h&gt;  char *strstr(const char *haystack, const char *needle);</code>在字符串haystack中查找字符串needle出现的位置。返回值：成功：返回第一次出现的needle地址；失败：NULL。</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main()
+{
+    char src[] = &quot;ddddabcd123abcd333abcd&quot;;
+    char* p = strstr(src, &quot;abcd&quot;);
+    printf(&quot;p = %s\n&quot;, p);//p = abcd123abcd333abcd
+    return 0;
+}
+</code></pre><hr>
+<h4 id="strstr-1"><a href="#strstr-1" class="headerlink" title="strstr"></a>strstr</h4><hr>
+<p><code>#include &lt;stdlib.h&gt; int atoi(const char *nptr);</code>atoi()会扫描nptr字符串，跳过前面的空格字符，直到遇到数字或正负号才开始做转换，而遇到非数字或字符串结束符(‘\0’)才结束转换，并将结果返回返回值。返回值：成功转换后整数</p>
+<p>类似的函数有：atof()：把一个小数形式的字符串转化为一个浮点数。atol()：将一个字符串转化为long类型。</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int main()
+{
+    char str1[] = &quot;-10&quot;;
+    int num1 = atoi(str1);
+    printf(&quot;num1 = %d\n&quot;, num1);//num1 = -10
+
+    char str2[] = &quot;0.123&quot;;
+    double num2 = atof(str2);
+    printf(&quot;num2 = %lf\n&quot;, num2);//num2 = 0.123000
+    return 0;
+}
+</code></pre><hr>
 
     </div>
     
@@ -533,7 +1276,7 @@ int main(int argc, const char * argv[])
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux主要目录速查表"><span class="toc-text">Linux主要目录速查表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件"><span class="toc-text">文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件权限"><span class="toc-text">文件权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用Linux命令"><span class="toc-text">常用Linux命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户、权限管理"><span class="toc-text">用户、权限管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统管理"><span class="toc-text">系统管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VI"><span class="toc-text">VI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH"><span class="toc-text">SSH</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C语言"><span class="toc-text">C语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述和HelloWorld"><span class="toc-text">概述和HelloWorld</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HelloWorld"><span class="toc-text">HelloWorld</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux主要目录速查表"><span class="toc-text">Linux主要目录速查表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件"><span class="toc-text">文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件权限"><span class="toc-text">文件权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用Linux命令"><span class="toc-text">常用Linux命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户、权限管理"><span class="toc-text">用户、权限管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统管理"><span class="toc-text">系统管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VI"><span class="toc-text">VI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH"><span class="toc-text">SSH</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C语言"><span class="toc-text">C语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进制"><span class="toc-text">进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sizeof"><span class="toc-text">sizeof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int"><span class="toc-text">int</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#char"><span class="toc-text">char</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#float、double"><span class="toc-text">float、double</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串常量"><span class="toc-text">字符串常量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三目运算符"><span class="toc-text">三目运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序"><span class="toc-text">冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#goto语句"><span class="toc-text">goto语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一维数组的初始化"><span class="toc-text">一维数组的初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组名"><span class="toc-text">数组名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一维数组的最值"><span class="toc-text">一维数组的最值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一维数组的逆置"><span class="toc-text">一维数组的逆置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#冒泡法排序"><span class="toc-text">冒泡法排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二维数组"><span class="toc-text">二维数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二维数组的初始化"><span class="toc-text">二维数组的初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组名-1"><span class="toc-text">数组名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符数组与字符串"><span class="toc-text">字符数组与字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串初始化"><span class="toc-text">字符串初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串追加拼接"><span class="toc-text">字符串追加拼接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#随机数"><span class="toc-text">随机数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strlen"><span class="toc-text">strlen()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strcpy-s"><span class="toc-text">strcpy_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strncpy-s"><span class="toc-text">strncpy_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strcat-s"><span class="toc-text">strcat_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strncat-s"><span class="toc-text">strncat_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strcmp和strncmp"><span class="toc-text">strcmp和strncmp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sprintf-s"><span class="toc-text">sprintf_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strchr"><span class="toc-text">strchr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strstr"><span class="toc-text">strstr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strstr-1"><span class="toc-text">strstr</span></a></li></ol></li></ol></li></ol>
         
     </div>
 </aside>
