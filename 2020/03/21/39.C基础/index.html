@@ -1215,6 +1215,72 @@ int main()
     return 0;
 }
 </code></pre><hr>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h4><hr>
+<p>函数定义的一般形式：</p>
+<pre><code>返回类型 函数名(形式参数列表)
+{
+    数据定义部分;
+    执行语句部分;
+}
+</code></pre><p><strong>如果没有形参，圆括号内容为空，或写一个void关键字</strong>。</p>
+<hr>
+<h4 id="函数的形参和实参"><a href="#函数的形参和实参" class="headerlink" title="函数的形参和实参"></a>函数的形参和实参</h4><hr>
+<p>形参出现在函数定义中，在整个函数体内都可以使用，离开该函数则不能使用。<strong>实参出现在主调函数中</strong>，进入被调函数后，实参也不能使用。单向传递，<strong>只由实参传给形参，而不能由形参传回来给实参</strong>。在调用函数时，编译系统临时给形参分配存储单元。调用结束后，形参单元被释放。实参单元与形参单元是不同的单元。调用结束后，形参单元被释放，函数调用结束返回主调函数后则不能再使用该形参变量。实参单元仍保留并维持原值。因此，<strong>在执行一个被调用函数时，形参的值如果发生改变，并不会改变主调函数中实参的值</strong>。</p>
+<p>实参可以是常量、变量或表达式。</p>
+<hr>
+<h4 id="函数的声明"><a href="#函数的声明" class="headerlink" title="函数的声明"></a>函数的声明</h4><hr>
+<p>函数定义的位置在主调函数之后，则必须在调用此函数之前对被调用的函数作声明。</p>
+<p>所谓函数声明，就是在函数尚在未定义的情况下，事先将该函数的有关信息通知编译系统，相当于告诉编译器，函数在后面定义，以便使编译能正常进行。注意：一个函数只能被定义一次，但可以声明多次。</p>
+<pre><code>#include &lt;stdio.h&gt;
+int max(int x, int y); // 函数的声明，分号不能省略
+// int max(int, int); // 另一种方式
+
+int main()
+{
+    int a = 10, b = 25, num_max = 0;
+    num_max = max(a, b); // 函数的调用
+    printf(&quot;num_max = %d\n&quot;, num_max);
+    return 0;
+}
+
+// 函数的定义
+int max(int x, int y)
+{
+    return x &gt; y ? x : y;
+}
+</code></pre><hr>
+<h4 id="exit"><a href="#exit" class="headerlink" title="exit"></a>exit</h4><hr>
+<p>在main函数中调用exit和return结果是一样的，但在子函数中调用return只是代表子函数终止了，在子函数中调用exit，那么程序终止。</p>
+<hr>
+<h4 id="分文件编程"><a href="#分文件编程" class="headerlink" title="分文件编程"></a>分文件编程</h4><hr>
+<p>max.h文件</p>
+<pre><code>extern int max(int a, int b);
+</code></pre><p>max.c文件</p>
+<pre><code>int max(int x, int y)
+{
+    return x &gt; y ? x : y;
+}
+</code></pre><p>main.c文件</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &quot;max.h&quot;
+int main()
+{
+    int a = 10, b = 25, num_max = 0;
+    num_max = max(a, b); // 函数的调用
+    printf(&quot;num_max = %d\n&quot;, num_max);
+    return 0;
+}
+</code></pre><hr>
+<h4 id="防止头文件重复包含"><a href="#防止头文件重复包含" class="headerlink" title="防止头文件重复包含"></a>防止头文件重复包含</h4><hr>
+<p>方法一：</p>
+<pre><code>#ifndef __SOMEFILE_H__
+#define __SOMEFILE_H__
+// 声明语句
+#endif
+</code></pre><p>方法二：</p>
+<pre><code>#pragma once
+// 声明语句
+</code></pre><hr>
 
     </div>
     
@@ -1276,7 +1342,7 @@ int main()
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux主要目录速查表"><span class="toc-text">Linux主要目录速查表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件"><span class="toc-text">文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件权限"><span class="toc-text">文件权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用Linux命令"><span class="toc-text">常用Linux命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户、权限管理"><span class="toc-text">用户、权限管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统管理"><span class="toc-text">系统管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VI"><span class="toc-text">VI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH"><span class="toc-text">SSH</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C语言"><span class="toc-text">C语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进制"><span class="toc-text">进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sizeof"><span class="toc-text">sizeof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int"><span class="toc-text">int</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#char"><span class="toc-text">char</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#float、double"><span class="toc-text">float、double</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串常量"><span class="toc-text">字符串常量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三目运算符"><span class="toc-text">三目运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序"><span class="toc-text">冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#goto语句"><span class="toc-text">goto语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一维数组的初始化"><span class="toc-text">一维数组的初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组名"><span class="toc-text">数组名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一维数组的最值"><span class="toc-text">一维数组的最值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一维数组的逆置"><span class="toc-text">一维数组的逆置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#冒泡法排序"><span class="toc-text">冒泡法排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二维数组"><span class="toc-text">二维数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二维数组的初始化"><span class="toc-text">二维数组的初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组名-1"><span class="toc-text">数组名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符数组与字符串"><span class="toc-text">字符数组与字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串初始化"><span class="toc-text">字符串初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串追加拼接"><span class="toc-text">字符串追加拼接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#随机数"><span class="toc-text">随机数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strlen"><span class="toc-text">strlen()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strcpy-s"><span class="toc-text">strcpy_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strncpy-s"><span class="toc-text">strncpy_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strcat-s"><span class="toc-text">strcat_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strncat-s"><span class="toc-text">strncat_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strcmp和strncmp"><span class="toc-text">strcmp和strncmp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sprintf-s"><span class="toc-text">sprintf_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strchr"><span class="toc-text">strchr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strstr"><span class="toc-text">strstr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strstr-1"><span class="toc-text">strstr</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux主要目录速查表"><span class="toc-text">Linux主要目录速查表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件"><span class="toc-text">文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件权限"><span class="toc-text">文件权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用Linux命令"><span class="toc-text">常用Linux命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户、权限管理"><span class="toc-text">用户、权限管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统管理"><span class="toc-text">系统管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VI"><span class="toc-text">VI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH"><span class="toc-text">SSH</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C语言"><span class="toc-text">C语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进制"><span class="toc-text">进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sizeof"><span class="toc-text">sizeof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int"><span class="toc-text">int</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#char"><span class="toc-text">char</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#float、double"><span class="toc-text">float、double</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串常量"><span class="toc-text">字符串常量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三目运算符"><span class="toc-text">三目运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序"><span class="toc-text">冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#goto语句"><span class="toc-text">goto语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一维数组的初始化"><span class="toc-text">一维数组的初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组名"><span class="toc-text">数组名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一维数组的最值"><span class="toc-text">一维数组的最值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一维数组的逆置"><span class="toc-text">一维数组的逆置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#冒泡法排序"><span class="toc-text">冒泡法排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二维数组"><span class="toc-text">二维数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二维数组的初始化"><span class="toc-text">二维数组的初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组名-1"><span class="toc-text">数组名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符数组与字符串"><span class="toc-text">字符数组与字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串初始化"><span class="toc-text">字符串初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串追加拼接"><span class="toc-text">字符串追加拼接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#随机数"><span class="toc-text">随机数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strlen"><span class="toc-text">strlen()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strcpy-s"><span class="toc-text">strcpy_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strncpy-s"><span class="toc-text">strncpy_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strcat-s"><span class="toc-text">strcat_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strncat-s"><span class="toc-text">strncat_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strcmp和strncmp"><span class="toc-text">strcmp和strncmp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sprintf-s"><span class="toc-text">sprintf_s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strchr"><span class="toc-text">strchr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strstr"><span class="toc-text">strstr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strstr-1"><span class="toc-text">strstr</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#函数的定义"><span class="toc-text">函数的定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数的形参和实参"><span class="toc-text">函数的形参和实参</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数的声明"><span class="toc-text">函数的声明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#exit"><span class="toc-text">exit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分文件编程"><span class="toc-text">分文件编程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#防止头文件重复包含"><span class="toc-text">防止头文件重复包含</span></a></li></ol></li></ol></li></ol>
         
     </div>
 </aside>
