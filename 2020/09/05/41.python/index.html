@@ -527,6 +527,54 @@ print(a or b)  # 1
 print(a or c)  # 2
 print(b or c)  # 1
 </code></pre><hr>
+<h2 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><hr>
+<p>语法：</p>
+<pre><code>if 条件1:
+    代码...
+    ......
+elif 条件2：
+    代码
+    ......
+......
+else:
+    以上条件都不成立执行执行的代码
+</code></pre><p>实例：</p>
+<pre><code>age = int(input(&apos;请输入您的年龄：&apos;))
+if age &lt; 18:
+    print(f&apos;您的年龄是{age},童工一枚&apos;)
+elif (age &gt;= 18) and (age &lt;= 60):
+    print(f&apos;您的年龄是{age},合法工龄&apos;)
+elif age &gt; 60:
+    print(f&apos;您的年龄是{age},可以退休&apos;)
+</code></pre><hr>
+<h3 id="猜拳游戏"><a href="#猜拳游戏" class="headerlink" title="猜拳游戏"></a>猜拳游戏</h3><hr>
+<pre><code># 导入random模块
+import random
+
+# 计算电脑出拳的随机数字
+computer = random.randint(0, 2)
+print(computer)
+
+player = int(input(&apos;请出拳：0-石头，1-剪刀，2-布：&apos;))
+
+# 玩家胜利 p0:c1 或 p1:c2 或 p2:c0
+if (player == 0 and computer == 1) or (player == 1 and computer == 2) or (player == 2 and computer == 0):
+    print(&apos;玩家获胜&apos;)
+# 平局：玩家 == 电脑
+elif player == computer:
+    print(&apos;平局&apos;)
+else:
+    print(&apos;电脑获胜&apos;)
+</code></pre><hr>
+<h3 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h3><hr>
+<p>语法：</p>
+<pre><code>值1 if 条件 else 值2
+
+a = 1
+b = 2
+c = a if a &gt; b else b
+print(c)
+</code></pre><hr>
 
     </div>
     
@@ -583,7 +631,7 @@ print(b or c)  # 1
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#猜拳游戏"><span class="toc-text">猜拳游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三元运算符"><span class="toc-text">三元运算符</span></a></li></ol></li></ol>
         
     </div>
 </aside>
