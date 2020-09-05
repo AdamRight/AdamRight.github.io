@@ -186,14 +186,17 @@
     </div>
     
     <div class="post-body post-content">
-        <h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>数据都是临时存储在内存中，为了更快速的查找或使用这个数据，通常我们把这个数据在内存中存储之后定义一个名称，这个名称就是变量。</p>
+        <h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><hr>
+<p>数据都是临时存储在内存中，为了更快速的查找或使用这个数据，通常我们把这个数据在内存中存储之后定义一个名称，这个名称就是变量。</p>
 <p>变量就是一个存储数据的时候当前数据所在的内存地址的名字而已。</p>
 <p>定义变量：</p>
 <pre><code>变量名 = 值
 
 my_name = &apos;TOM&apos;
 print(my_name)#TOM
-</code></pre><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>数据类型</p>
+</code></pre><hr>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><hr>
+<p>数据类型</p>
 <ul>
 <li>整型：int</li>
 <li>浮点型：float</li>
@@ -230,7 +233,9 @@ print(type(h))  # &lt;class &apos;set&apos;&gt; -- 集合
 
 g = {&apos;name&apos;: &apos;TOM&apos;, &apos;age&apos;: 20}
 print(type(g))  # &lt;class &apos;dict&apos;&gt; -- 字典
-</code></pre><h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><table>
+</code></pre><hr>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><hr>
+<table>
 <thead>
 <tr>
 <th style="text-align:center">格式符号</th>
@@ -316,13 +321,17 @@ print(&apos;我的名字是%s，明年%d岁了&apos; % (name, age + 1))
 print(f&apos;我的名字是{name}, 明年{age + 1}岁了&apos;)
 </code></pre></li>
 </ul>
-<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><pre><code>input(&quot;提示信息&quot;)
+<hr>
+<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><hr>
+<pre><code>input(&quot;提示信息&quot;)
 </code></pre><p>在Python中，<code>input</code>会把接收到的任意用户输入的数据都当做字符串处理。</p>
 <pre><code>password = input(&apos;请输入您的密码：&apos;)
 print(f&apos;您输入的密码是{password}&apos;)
 # &lt;class &apos;str&apos;&gt;
 print(type(password))
-</code></pre><h2 id="转换数据类型"><a href="#转换数据类型" class="headerlink" title="转换数据类型"></a>转换数据类型</h2><table>
+</code></pre><hr>
+<h2 id="转换数据类型"><a href="#转换数据类型" class="headerlink" title="转换数据类型"></a>转换数据类型</h2><hr>
+<table>
 <thead>
 <tr>
 <th style="text-align:center">函数</th>
@@ -410,7 +419,61 @@ str3 = &apos;(1000, 2000, 3000)&apos;
 print(type(eval(str1)))
 print(type(eval(str2)))
 print(type(eval(str3)))
-</code></pre>
+</code></pre><hr>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><hr>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">加</td>
+<td>1 + 1 输出结果为 2</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">减</td>
+<td>1-1 输出结果为 0</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">乘</td>
+<td>2 * 2 输出结果为 4</td>
+</tr>
+<tr>
+<td style="text-align:center">/</td>
+<td style="text-align:center">除</td>
+<td>10 / 2 输出结果为 5</td>
+</tr>
+<tr>
+<td style="text-align:center">//</td>
+<td style="text-align:center">整除</td>
+<td>9 // 4 输出结果为2</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">取余</td>
+<td>9 % 4 输出结果为 1</td>
+</tr>
+<tr>
+<td style="text-align:center">**</td>
+<td style="text-align:center">指数</td>
+<td>2 *<em> 4 输出结果为 16，即 2 </em> 2 <em> 2 </em> 2</td>
+</tr>
+<tr>
+<td style="text-align:center">()</td>
+<td style="text-align:center">小括号</td>
+<td>小括号用来提高运算优先级，即 (1 + 2) * 3 输出结果为 9</td>
+</tr>
+</tbody>
+</table>
+<hr>
+
     </div>
     
         <div class="reward">
@@ -466,7 +529,7 @@ print(type(eval(str3)))
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li></ol>
         
     </div>
 </aside>
