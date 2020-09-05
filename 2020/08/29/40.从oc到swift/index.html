@@ -203,6 +203,23 @@
 }
 </code></pre><p>面向对象设计四个个主要特征: 抽象性、 封装性、 多态性、 继承性。 </p>
 <hr>
+<h3 id="NSLog"><a href="#NSLog" class="headerlink" title="NSLog"></a>NSLog</h3><hr>
+<p>NSLog 是printf函数的增强版 </p>
+<pre><code>NSLog(@&quot;Hello World!&quot;); 
+</code></pre><p><code>@&quot;&quot;</code>这个符号表示将一个C的字符串转化为OC中的字符串对象NSString。</p>
+<p>OC字符串必须使用@符号开头。<code>@</code>符号放置的位置在双引号外面。在打印OC字符串的时候使用格式控制符<code>%@</code> 。NSString类型的指针变量只能存储OC字符串常量的地址。</p>
+<p>OC中大部分的关键字都是以<code>@</code>开头的,比如<code>@interface</code>,<code>@implementation</code>,<code>@end</code>。</p>
+<hr>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><hr>
+<p><code>.h</code>文件为类的声明文件，用于声明成员变量、方法。类的声明使用关键字 <code>@interface</code>和<code>@end</code>。<code>.h</code>中的方法只是做一个声明，并不对方法进行实现。</p>
+<p><code>.m</code>：类的实现文件，用于实现<code>.h</code>中声明的方法。类的实现使用关键字 <code>@implementation</code>和<code>@end</code>。</p>
+<p>方法的声明和实现，都必须以<code>+</code> 或者 <code>-</code> 开头。 <code>+</code>表示类方法（静态方法）, <code>-</code>表示对象方法（动态方法）。</p>
+<p>在<code>.h</code>中声明的所有方法作用域都是public类型，不能更改。</p>
+<p>成员变量的常用作用域有3种:</p>
+<pre><code>@public 全局都可以访问 
+@protected    只能在类内部和子类中访问 
+@private 只能在类内部访问
+</code></pre><hr>
 
     </div>
     
@@ -259,7 +276,7 @@
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Objective-C"><span class="toc-text">Objective-C</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Objective-C"><span class="toc-text">Objective-C</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSLog"><span class="toc-text">NSLog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类"><span class="toc-text">类</span></a></li></ol></li></ol>
         
     </div>
 </aside>
