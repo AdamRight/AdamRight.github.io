@@ -220,6 +220,37 @@
 @protected    只能在类内部和子类中访问 
 @private 只能在类内部访问
 </code></pre><hr>
+<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><hr>
+<p>创建对象的写法 </p>
+<pre><code>类名 * 对象名 = [类名 new]; 
+</code></pre><p>只要是用new操作符定义的实体就会在堆内存中开辟一个新的空间。1）在堆中开辟一段存储空间 2）初始化成员变量（写在类声明大括号中的属性就叫做成员变量，也叫做实例变量） 3）返回开辟空间的首地址。</p>
+<p>访问对象的属性可以用： </p>
+<pre><code>对象-&gt;对象成员；
+</code></pre><hr>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><hr>
+<p>oc没有严格的方法重载. 在oc中方法名不允许相同。 </p>
+<p>OC中的方法分为：对象方法和类方法。</p>
+<p>对象方法：对象方法以<code>-</code>开头如<code>-（void）xx</code> ;对象方法只能由对象来调用;对象方法中可以访问当前对象的成员变量;调用格式<code>[对象名    对象方法名]</code> 。凡事类型都用()括起来。</p>
+<p>类方法：以<code>+</code>开头如<code>+（void）xxx</code>;类方法只能由类来调用;类方法中不能访问实例变量(成员变量)，因为类方法由类来调用，并没有创建存储空间来存储类中的成员变量;调用格式：<code>[类名  类方法名]</code>。</p>
+<p>有参方法，冒号也是方法名的一部分</p>
+<pre><code>//返回值类型 void ; 方法名run: : :，参数有3个，都是int型的，参数的参数名 steps  km times
+ - (void)run:(int)steps :(int)km :(int)times;
+
+// 声明三个带参数的方法，方法名是 runWith: andWith: andWith:
+ - (void)runWith:(int)steps andWith:(int)km andWith:(int)times;
+</code></pre><p>有参方法的调用：</p>
+<pre><code>//[对象名 方法名 参数]
+[zhansgan eat:@&quot;辣条&quot;];
+
+// [对象名 方法名:参数:参数];
+[zhansgan run:3 :10 :5];
+
+[zhansgan runWith:5 andWith:20 andWith:2];
+</code></pre><hr>
+<h3 id="对象的存储"><a href="#对象的存储" class="headerlink" title="对象的存储"></a>对象的存储</h3><hr>
+<p>类创建对象，每个对象在内存中都占据一定的存储空间，每个对象都有一份属于自己的单独的成员变量，所有的对象公用类的成员方法，方法在整个内存中只有一份，类本身在内存中占据一份存储空间，类的方法存储于此。</p>
+<p>每一个对象都包含一个isa指针，这个指针指向当前对象所属的类。 当调用方法的时候如<code>[p eat]</code> 表示给p所指向的对象发送一条eat消息，表示要调用对象的eat方法，此时对象会顺着内部的isa指针找到存储于类中的方法，开始执行，此时方法所修改的所有的信息，都是对应的对象的。</p>
+<hr>
 
     </div>
     
@@ -276,7 +307,7 @@
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Objective-C"><span class="toc-text">Objective-C</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSLog"><span class="toc-text">NSLog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类"><span class="toc-text">类</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Objective-C"><span class="toc-text">Objective-C</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSLog"><span class="toc-text">NSLog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类"><span class="toc-text">类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象的存储"><span class="toc-text">对象的存储</span></a></li></ol></li></ol>
         
     </div>
 </aside>
