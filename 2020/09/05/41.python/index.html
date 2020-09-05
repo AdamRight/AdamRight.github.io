@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>python | Hexo</title>
+<title>python基础 | Hexo</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -140,9 +140,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="python">
+        <h1 id="python基础">
             
-	            python
+	            python基础
             
         </h1>
         <div class="post-meta">
@@ -622,6 +622,217 @@ else:
 <p>break终止循环不会执行else下方缩进的代码。continue退出循环的方式，执行else下方缩进的代码。</p>
 </blockquote>
 <hr>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="三引号字符串"><a href="#三引号字符串" class="headerlink" title="三引号字符串"></a>三引号字符串</h3><hr>
+<pre><code>name3 = &apos;&apos;&apos; Tom &apos;&apos;&apos;
+name4 = &quot;&quot;&quot; Rose &quot;&quot;&quot;
+a = &apos;&apos;&apos; i am Tom, 
+        nice to meet you! &apos;&apos;&apos;
+
+b = &quot;&quot;&quot; i am Rose, 
+        nice to meet you! &quot;&quot;&quot;
+</code></pre><blockquote>
+<p>注意：三引号形式的字符串支持换行。</p>
+</blockquote>
+<hr>
+<h3 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h3><hr>
+<blockquote>
+<p>注意：字符串下标从0开始。</p>
+</blockquote>
+<p>切片语法</p>
+<pre><code>序列[开始位置下标:结束位置下标:步长]
+</code></pre><blockquote>
+<p>注意:不包含结束位置下标对应的数据， 正负整数均可；步长是选取间隔，正负整数均可，默认步长为1。</p>
+</blockquote>
+<pre><code>name = &quot;abcdefg&quot;
+
+print(name[2:5:1])  # cde
+print(name[2:5])  # cde
+print(name[:5])  # abcde
+print(name[1:])  # bcdefg
+print(name[:])  # abcdefg
+print(name[::2])  # aceg
+print(name[:-1])  # abcdef, 负1表示倒数第一个数据
+print(name[-4:-1])  # def
+print(name[::-1])  # gfedcba
+</code></pre><hr>
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><hr>
+<p>检测某个子串是否包含在这个字符串中，如果在返回这个子串开始的位置下标，否则则返回-1。</p>
+<pre><code>//开始和结束位置下标可以省略，表示在整个字符串序列中查找
+字符串序列.find(子串, 开始位置下标, 结束位置下标)
+
+mystr = &quot;hello world and Python&quot;
+print(mystr.find(&apos;and&apos;))  # 12
+print(mystr.find(&apos;and&apos;, 15, 30))  # -1
+print(mystr.find(&apos;ands&apos;))  # -1
+</code></pre><p>rfind()和find()功能相同，但查找方向为右侧开始。</p>
+<hr>
+<h3 id="index"><a href="#index" class="headerlink" title="index"></a>index</h3><hr>
+<p>检测某个子串是否包含在这个字符串中，如果在返回这个子串开始的位置下标，否则则报异常。</p>
+<pre><code>//开始和结束位置下标可以省略，表示在整个字符串序列中查找。
+字符串序列.index(子串, 开始位置下标, 结束位置下标)
+
+mystr = &quot;hello world and Python&quot;
+print(mystr.index(&apos;and&apos;))  # 12
+print(mystr.index(&apos;ands&apos;))  # 报错
+</code></pre><p>rindex()index()功能相同，但查找方向为右侧开始。</p>
+<hr>
+<h3 id="count"><a href="#count" class="headerlink" title="count"></a>count</h3><hr>
+<p>返回某个子串在字符串中出现的次数。</p>
+<pre><code>//开始和结束位置下标可以省略，表示在整个字符串序列中查找。
+字符串序列.count(子串, 开始位置下标, 结束位置下标)
+
+mystr = &quot;hello world and Python&quot;
+print(mystr.count(&apos;and&apos;))  # 1
+print(mystr.count(&apos;ands&apos;))  # 0
+</code></pre><hr>
+<h3 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h3><hr>
+<p>替换</p>
+<pre><code>//替换次数如果查出子串出现次数，则替换次数为该子串出现次数。
+字符串序列.replace(旧子串, 新子串, 替换次数)
+
+mystr = &quot;hello world and Python and&quot;
+
+# 结果：hello world he Python he
+print(mystr.replace(&apos;and&apos;, &apos;he&apos;))
+# 结果：hello world he Python he
+print(mystr.replace(&apos;and&apos;, &apos;he&apos;, 10))
+# 结果：hello world and Python and
+print(mystr)
+</code></pre><blockquote>
+<p>注意：数据按照是否能直接修改分为可变类型和不可变类型两种。字符串类型的数据修改的时候不能改变原有字符串，属于不能直接修改数据的类型即是不可变类型。</p>
+</blockquote>
+<hr>
+<h3 id="split"><a href="#split" class="headerlink" title="split"></a>split</h3><hr>
+<p>按照指定字符分割字符串。</p>
+<pre><code>字符串序列.split(分割字符, num)
+</code></pre><blockquote>
+<p>注意：num表示的是分割字符出现的次数，即将来返回数据个数为num+1个。</p>
+</blockquote>
+<pre><code>mystr = &quot;hello world and Python and it&quot;
+
+# [&apos;hello world &apos;, &apos; Python &apos;, &apos; it&apos;]
+print(mystr.split(&apos;and&apos;))
+# [&apos;hello world &apos;, &apos; Python &apos;, &apos; it&apos;]
+print(mystr.split(&apos;and&apos;, 2))
+# [&apos;hello&apos;, &apos;world&apos;, &apos;and&apos;, &apos;Python&apos;, &apos;and&apos;, &apos;it&apos;]
+print(mystr.split(&apos; &apos;))
+# [&apos;hello&apos;, &apos;world&apos;, &apos;and Python and it&apos;]
+print(mystr.split(&apos; &apos;, 2))
+</code></pre><blockquote>
+<p>注意：如果分割字符是原有字符串中的子串，分割后则丢失该子串。</p>
+</blockquote>
+<hr>
+<h3 id="join"><a href="#join" class="headerlink" title="join"></a>join</h3><hr>
+<p>用一个字符或子串合并字符串，即是将多个字符串合并为一个新的字符串。</p>
+<pre><code>字符或子串.join(多字符串组成的序列)
+
+list1 = [&apos;mm&apos;, &apos;nn&apos;, &apos;bb&apos;, &apos;vv&apos;]
+t1 = (&apos;aa&apos;, &apos;b&apos;, &apos;cc&apos;, &apos;ddd&apos;)
+# 结果：mm_nn_bb_vv
+print(&apos;_&apos;.join(list1))
+# 结果：aa...b...cc...ddd
+print(&apos;...&apos;.join(t1))
+</code></pre><hr>
+<h3 id="capitalize"><a href="#capitalize" class="headerlink" title="capitalize"></a>capitalize</h3><hr>
+<p>将字符串第一个字符转换成大写。</p>
+<pre><code>mystr = &quot;hello world and Python and it&quot;
+# 结果：Hello world and python and it
+print(mystr.capitalize())
+</code></pre><blockquote>
+<p>注意：capitalize()函数转换后，只字符串第一个字符大写，其他的字符全都小写。</p>
+</blockquote>
+<hr>
+<h3 id="title"><a href="#title" class="headerlink" title="title"></a>title</h3><hr>
+<p>将字符串每个单词首字母转换成大写。</p>
+<pre><code>mystr = &quot;hello world and Python and it&quot;
+# 结果：Hello World And Python And It
+print(mystr.title())
+</code></pre><hr>
+<h3 id="lower和upper"><a href="#lower和upper" class="headerlink" title="lower和upper"></a>lower和upper</h3><hr>
+<p>lower()：将字符串中大写转小写。</p>
+<pre><code>mystr = &quot;hello world and Python and it&quot;
+# 结果：hello world and python and it
+print(mystr.lower())
+</code></pre><p>upper()：将字符串中小写转大写。</p>
+<pre><code>mystr = &quot;hello world and Python and it&quot;
+# 结果：HELLO WORLD AND PYTHON AND IT
+print(mystr.upper())
+</code></pre><hr>
+<h3 id="lstrip和rstrip和strip"><a href="#lstrip和rstrip和strip" class="headerlink" title="lstrip和rstrip和strip"></a>lstrip和rstrip和strip</h3><hr>
+<p>lstrip()：删除字符串左侧空白字符。</p>
+<p>rstrip()：删除字符串右侧空白字符。</p>
+<p>strip()：删除字符串两侧空白字符。</p>
+<hr>
+<h3 id="ljust和rjust和center"><a href="#ljust和rjust和center" class="headerlink" title="ljust和rjust和center"></a>ljust和rjust和center</h3><hr>
+<p>ljust()：返回一个原字符串左对齐,并使用指定字符(默认空格)填充至对应长度 的新字符串。</p>
+<p>rjust()：返回一个原字符串右对齐,并使用指定字符(默认空格)填充至对应长度 的新字符串，语法和ljust()相同。</p>
+<p>center()：返回一个原字符串居中对齐,并使用指定字符(默认空格)填充至对应长度 的新字符串，语法和ljust()相同。</p>
+<pre><code>mystr = &quot;hello world and Python and it&quot;
+# 结果：hello world and Python and it.......
+print(mystr.ljust(36,&apos;.&apos;))
+# 结果：.......hello world and Python and it
+print(mystr.rjust(36,&apos;.&apos;))
+# 结果：...hello world and Python and it....
+print(mystr.center(36,&apos;.&apos;))
+</code></pre><hr>
+<h3 id="startswith和endswith"><a href="#startswith和endswith" class="headerlink" title="startswith和endswith"></a>startswith和endswith</h3><hr>
+<p>startswith()：检查字符串是否是以指定子串开头，是则返回True，否则返回False。如果设置开始和结束位置下标，则在指定范围内检查。</p>
+<pre><code>字符串序列.startswith(子串, 开始位置下标, 结束位置下标)
+
+mystr = &quot;hello world and Python and it&quot;
+# 结果：True
+print(mystr.startswith(&apos;hello&apos;))
+# 结果False
+print(mystr.startswith(&apos;hello&apos;, 5, 20))
+</code></pre><p>endswith()：检查字符串是否是以指定子串结尾，是则返回True，否则返回False。如果设置开始和结束位置下标，则在指定范围内检查。</p>
+<pre><code>字符串序列.endswith(子串, 开始位置下标, 结束位置下标)
+
+mystr = &quot;hello world and Python and it&quot;
+# 结果：True
+print(mystr.endswith(&apos;it&apos;))
+# 结果：False
+print(mystr.endswith(&apos;Python&apos;, 2, 20))
+</code></pre><hr>
+<h3 id="isalpha"><a href="#isalpha" class="headerlink" title="isalpha"></a>isalpha</h3><hr>
+<p>如果字符串至少有一个字符并且所有字符都是字母则返回True, 否则返回 False。</p>
+<pre><code>mystr1 = &apos;hello&apos;
+mystr2 = &apos;hello12345&apos;
+
+# 结果：True
+print(mystr1.isalpha())
+# 结果：False
+print(mystr2.isalpha())
+</code></pre><hr>
+<h3 id="isdigit"><a href="#isdigit" class="headerlink" title="isdigit"></a>isdigit</h3><hr>
+<p>如果字符串只包含数字则返回True否则返回 False。</p>
+<pre><code>mystr1 = &apos;aaa12345&apos;
+mystr2 = &apos;12345&apos;
+
+# 结果： False
+print(mystr1.isdigit())
+# 结果：False
+print(mystr2.isdigit())
+</code></pre><hr>
+<h3 id="isalnum"><a href="#isalnum" class="headerlink" title="isalnum"></a>isalnum</h3><hr>
+<p>如果字符串至少有一个字符并且所有字符都是字母或数字则返回True,否则返回False。</p>
+<pre><code>mystr1 = &apos;aaa12345&apos;
+mystr2 = &apos;12345-&apos;
+
+# 结果：True
+print(mystr1.isalnum())
+# 结果：False
+print(mystr2.isalnum())
+</code></pre><hr>
+<h3 id="isspace"><a href="#isspace" class="headerlink" title="isspace"></a>isspace</h3><hr>
+<p>如果字符串中只包含空白，则返回True，否则返回False。</p>
+<pre><code>mystr1 = &apos;1 2 3 4 5&apos;
+mystr2 = &apos;     &apos;
+
+# 结果：False
+print(mystr1.isspace())
+# 结果：True
+print(mystr2.isspace())
+</code></pre><hr>
 
     </div>
     
@@ -678,7 +889,7 @@ else:
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#猜拳游戏"><span class="toc-text">猜拳游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三元运算符"><span class="toc-text">三元运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环"><span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while…else"><span class="toc-text">while…else</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for…else"><span class="toc-text">for…else</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#猜拳游戏"><span class="toc-text">猜拳游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三元运算符"><span class="toc-text">三元运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环"><span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while…else"><span class="toc-text">while…else</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for…else"><span class="toc-text">for…else</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#三引号字符串"><span class="toc-text">三引号字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切片"><span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find"><span class="toc-text">find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace"><span class="toc-text">replace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#split"><span class="toc-text">split</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-text">join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capitalize"><span class="toc-text">capitalize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#title"><span class="toc-text">title</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lower和upper"><span class="toc-text">lower和upper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lstrip和rstrip和strip"><span class="toc-text">lstrip和rstrip和strip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ljust和rjust和center"><span class="toc-text">ljust和rjust和center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#startswith和endswith"><span class="toc-text">startswith和endswith</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalpha"><span class="toc-text">isalpha</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isdigit"><span class="toc-text">isdigit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalnum"><span class="toc-text">isalnum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isspace"><span class="toc-text">isspace</span></a></li></ol></li></ol>
         
     </div>
 </aside>
