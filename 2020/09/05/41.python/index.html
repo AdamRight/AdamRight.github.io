@@ -575,6 +575,53 @@ b = 2
 c = a if a &gt; b else b
 print(c)
 </code></pre><hr>
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><hr>
+<p>while的语法</p>
+<pre><code>while 条件:
+    代码
+    ......
+</code></pre><p>计算1-100累加和：</p>
+<pre><code>i = 1
+result = 0
+while i &lt;= 100:
+    result += i
+    i += 1
+print(result)#5050
+</code></pre><hr>
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><hr>
+<p>语法</p>
+<pre><code>for 临时变量 in 序列:
+    代码
+    ......
+</code></pre><p>使用</p>
+<pre><code>str1 = &apos;HelloWorld&apos;
+for i in str1:
+    print(i)
+</code></pre><hr>
+<h3 id="while…else"><a href="#while…else" class="headerlink" title="while…else"></a>while…else</h3><hr>
+<p>语法</p>
+<pre><code>while 条件:
+    代码
+else:
+    循环正常结束之后要执行的代码
+</code></pre><blockquote>
+<p>所谓else指的是循环正常结束之后要执行的代码，即如果是break终止循环的情况，else下方缩进的代码将不执行。</p>
+</blockquote>
+<blockquote>
+<p>因为continue是退出当前一次循环，继续下一次循环，所以该循环在continue控制下是可以正常结束的，当循环结束后，则执行了else缩进的代码。</p>
+</blockquote>
+<hr>
+<h3 id="for…else"><a href="#for…else" class="headerlink" title="for…else"></a>for…else</h3><hr>
+<p>语法</p>
+<pre><code>for 临时变量 in 序列:
+    代码
+    ...
+else:
+    循环正常结束之后要执行的代码
+</code></pre><blockquote>
+<p>break终止循环不会执行else下方缩进的代码。continue退出循环的方式，执行else下方缩进的代码。</p>
+</blockquote>
+<hr>
 
     </div>
     
@@ -631,7 +678,7 @@ print(c)
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#猜拳游戏"><span class="toc-text">猜拳游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三元运算符"><span class="toc-text">三元运算符</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#猜拳游戏"><span class="toc-text">猜拳游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三元运算符"><span class="toc-text">三元运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环"><span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while…else"><span class="toc-text">while…else</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for…else"><span class="toc-text">for…else</span></a></li></ol></li></ol>
         
     </div>
 </aside>
