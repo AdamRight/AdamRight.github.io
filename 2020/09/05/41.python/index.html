@@ -1037,6 +1037,95 @@ print(tuple2[2])  # 访问到列表
 tuple2[2][0] = &apos;aaaaa&apos;
 print(tuple2)
 </code></pre><hr>
+<h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><hr>
+<p>字典里面的数据是以键值对形式出现，字典数据和数据顺序没有关系，即字典不支持下标，后期无论数据如何变化，只需要按照对应的键的名字查找数据即可。</p>
+<p>字典特点：符号为大括号；数据为键值对形式出现；各个键值对之间用逗号隔开。</p>
+<pre><code># 有数据字典
+dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+# 空字典
+dict2 = {}
+</code></pre><p>一般称冒号前面的为键(key)，简称k；冒号后面的为值(value)，简称v。</p>
+<hr>
+<h3 id="增和改"><a href="#增和改" class="headerlink" title="增和改"></a>增和改</h3><hr>
+<p>写法：字典序列[key] = 值</p>
+<blockquote>
+<p>注意：如果key存在则修改这个key对应的值；如果key不存在则新增此键值对。</p>
+</blockquote>
+<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+
+dict1[&apos;name&apos;] = &apos;Rose&apos;
+# 结果：{&apos;name&apos;: &apos;Rose&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+print(dict1)
+
+dict1[&apos;id&apos;] = 110
+# {&apos;name&apos;: &apos;Rose&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;, &apos;id&apos;: 110}
+print(dict1)
+</code></pre><blockquote>
+<p>注意：<strong>字典为可变类型</strong>。</p>
+</blockquote>
+<hr>
+<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><hr>
+<p>del()/del：删除字典或删除字典中指定键值对。</p>
+<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+
+del dict1[&apos;gender&apos;]
+# 结果：{&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20}
+print(dict1)
+</code></pre><p>clear()：清空字典</p>
+<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+dict1.clear()
+print(dict1)  # {}
+</code></pre><hr>
+<h3 id="key值查找"><a href="#key值查找" class="headerlink" title="key值查找"></a>key值查找</h3><hr>
+<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+print(dict1[&apos;name&apos;])  # Tom
+print(dict1[&apos;id&apos;])  # 报错
+</code></pre><blockquote>
+<p>如果当前查找的key存在，则返回对应的值；否则则报错。</p>
+</blockquote>
+<hr>
+<h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><hr>
+<pre><code>字典序列.get(key, 默认值)
+</code></pre><blockquote>
+<p>注意：如果当前查找的key不存在则返回第二个参数(默认值)，如果省略第二个参数，则返回None。</p>
+</blockquote>
+<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+print(dict1.get(&apos;name&apos;))  # Tom
+print(dict1.get(&apos;id&apos;, 110))  # 110
+print(dict1.get(&apos;id&apos;))  # None
+</code></pre><hr>
+<h3 id="keys"><a href="#keys" class="headerlink" title="keys"></a>keys</h3><hr>
+<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+print(dict1.keys())  # dict_keys([&apos;name&apos;, &apos;age&apos;, &apos;gender&apos;])
+</code></pre><hr>
+<h3 id="values"><a href="#values" class="headerlink" title="values"></a>values</h3><hr>
+<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+print(dict1.values())  # dict_values([&apos;Tom&apos;, 20, &apos;男&apos;])
+</code></pre><hr>
+<h3 id="items"><a href="#items" class="headerlink" title="items"></a>items</h3><hr>
+<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+print(dict1.items())  # dict_items([(&apos;name&apos;, &apos;Tom&apos;), (&apos;age&apos;, 20), (&apos;gender&apos;, &apos;男&apos;)])
+</code></pre><hr>
+<h3 id="遍历字典的key"><a href="#遍历字典的key" class="headerlink" title="遍历字典的key"></a>遍历字典的key</h3><hr>
+<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+for key in dict1.keys():
+    print(key)
+</code></pre><hr>
+<h3 id="遍历字典的value"><a href="#遍历字典的value" class="headerlink" title="遍历字典的value"></a>遍历字典的value</h3><hr>
+<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+for value in dict1.values():
+    print(value)
+</code></pre><hr>
+<h3 id="遍历字典的元素"><a href="#遍历字典的元素" class="headerlink" title="遍历字典的元素"></a>遍历字典的元素</h3><hr>
+<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+for item in dict1.items():
+    print(item)
+</code></pre><hr>
+<h3 id="遍历字典的键值对"><a href="#遍历字典的键值对" class="headerlink" title="遍历字典的键值对"></a>遍历字典的键值对</h3><hr>
+<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+for key, value in dict1.items():
+    print(f&apos;{key} = {value}&apos;)
+</code></pre><hr>
 
     </div>
     
@@ -1093,7 +1182,7 @@ print(tuple2)
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#猜拳游戏"><span class="toc-text">猜拳游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三元运算符"><span class="toc-text">三元运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环"><span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while…else"><span class="toc-text">while…else</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for…else"><span class="toc-text">for…else</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#三引号字符串"><span class="toc-text">三引号字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切片"><span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find"><span class="toc-text">find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace"><span class="toc-text">replace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#split"><span class="toc-text">split</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-text">join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capitalize"><span class="toc-text">capitalize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#title"><span class="toc-text">title</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lower和upper"><span class="toc-text">lower和upper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lstrip和rstrip和strip"><span class="toc-text">lstrip和rstrip和strip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ljust和rjust和center"><span class="toc-text">ljust和rjust和center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#startswith和endswith"><span class="toc-text">startswith和endswith</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalpha"><span class="toc-text">isalpha</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isdigit"><span class="toc-text">isdigit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalnum"><span class="toc-text">isalnum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isspace"><span class="toc-text">isspace</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下标"><span class="toc-text">下标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-1"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count-1"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#len"><span class="toc-text">len</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#in和not-in"><span class="toc-text">in和not in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#append"><span class="toc-text">append</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extend"><span class="toc-text">extend</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert"><span class="toc-text">insert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#del"><span class="toc-text">del</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pop"><span class="toc-text">pop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#remove"><span class="toc-text">remove</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clear"><span class="toc-text">clear</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改指定下标数据"><span class="toc-text">修改指定下标数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆置reverse"><span class="toc-text">逆置reverse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序sort"><span class="toc-text">排序sort</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制copy"><span class="toc-text">复制copy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while遍历列表"><span class="toc-text">while遍历列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for遍历列表"><span class="toc-text">for遍历列表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元组"><span class="toc-text">元组</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#猜拳游戏"><span class="toc-text">猜拳游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三元运算符"><span class="toc-text">三元运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环"><span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while…else"><span class="toc-text">while…else</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for…else"><span class="toc-text">for…else</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#三引号字符串"><span class="toc-text">三引号字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切片"><span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find"><span class="toc-text">find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace"><span class="toc-text">replace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#split"><span class="toc-text">split</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-text">join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capitalize"><span class="toc-text">capitalize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#title"><span class="toc-text">title</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lower和upper"><span class="toc-text">lower和upper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lstrip和rstrip和strip"><span class="toc-text">lstrip和rstrip和strip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ljust和rjust和center"><span class="toc-text">ljust和rjust和center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#startswith和endswith"><span class="toc-text">startswith和endswith</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalpha"><span class="toc-text">isalpha</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isdigit"><span class="toc-text">isdigit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalnum"><span class="toc-text">isalnum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isspace"><span class="toc-text">isspace</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下标"><span class="toc-text">下标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-1"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count-1"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#len"><span class="toc-text">len</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#in和not-in"><span class="toc-text">in和not in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#append"><span class="toc-text">append</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extend"><span class="toc-text">extend</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert"><span class="toc-text">insert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#del"><span class="toc-text">del</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pop"><span class="toc-text">pop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#remove"><span class="toc-text">remove</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clear"><span class="toc-text">clear</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改指定下标数据"><span class="toc-text">修改指定下标数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆置reverse"><span class="toc-text">逆置reverse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序sort"><span class="toc-text">排序sort</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制copy"><span class="toc-text">复制copy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while遍历列表"><span class="toc-text">while遍历列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for遍历列表"><span class="toc-text">for遍历列表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元组"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字典"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增和改"><span class="toc-text">增和改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删"><span class="toc-text">删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key值查找"><span class="toc-text">key值查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get"><span class="toc-text">get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keys"><span class="toc-text">keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#values"><span class="toc-text">values</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#items"><span class="toc-text">items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的key"><span class="toc-text">遍历字典的key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的value"><span class="toc-text">遍历字典的value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的元素"><span class="toc-text">遍历字典的元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的键值对"><span class="toc-text">遍历字典的键值对</span></a></li></ol></li></ol>
         
     </div>
 </aside>
