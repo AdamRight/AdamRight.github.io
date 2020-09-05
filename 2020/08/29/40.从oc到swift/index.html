@@ -306,6 +306,333 @@ Phone *_phone;
 + (void)square : (int)num;
 </code></pre><p><strong>类方法使用注意事项： 1. 类方法中不能访问成员变量。 2. 类方法和对象方法可以同名。 3. 类方法中不能通过self调用同名方法，会死循环。 4. 对象方法当中可以通过类名直接调用类方法。 5. 在没有属性时，建议使用类方法。</strong></p>
 <hr>
+<h3 id="匿名对象"><a href="#匿名对象" class="headerlink" title="匿名对象"></a>匿名对象</h3><p>没有名字的对象。 </p>
+<h3 id="self关键字"><a href="#self关键字" class="headerlink" title="self关键字"></a>self关键字</h3><hr>
+<p>self是一个指针变量，用于在方法中指向调用该方法的对象。 </p>
+<p>self的应用场景 1）用在类方法中，代表当前类。 2）用在对象方法中，代表当前对象。 3）访问成员变量：<code>self-&gt;成员变量</code>。 </p>
+<p>self使用注意</p>
+<pre><code>在对象方法中
+【self 对象方法】；  // 死循环 
+
+在类方法中
+【self 对象方法】；  // 死循环
+</code></pre><hr>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>封装:把复杂的数据或者操作进行隐藏,只操作数据或者方法的接口。封装的好处:隐藏成员变量，不让外部直接访问，提高安全性。控制外界访问成员权限。</p>
+<h4 id="set方法"><a href="#set方法" class="headerlink" title="set方法"></a>set方法</h4><hr>
+<p>命名规范：方法名必须以set开头。set后面跟成员变量名称，成员变量的首字母必须大写。返回值一定是void。一定要接收一个参数，而且参数类型跟成员变量类型一致。形参的名称不能跟成员变量名一样。</p>
+<pre><code>- (void)set成员变量名 (首字母大写，去掉下划线) : (成员变量类型)成员变量名称 （去掉下划线）；
+- (void)setAge:(int)age;
+</code></pre><hr>
+<h4 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h4><hr>
+<p>命名规范：肯定有返回值，返回值类型肯定与成员变量类型一致。方法名跟成员变量名一样。不需要接收任何参数</p>
+<p>格式： </p>
+<pre><code>- （成员变量类型）成员变量名称（去掉下划线）; 
+- (int) age;
+</code></pre><p>使用</p>
+<pre><code>// Student类的声明
+@interface Student : NSObject
+{
+   int _age;
+}
+- (void)setAge:(int)newAge;//set方法
+- (int)age;//get方法
+
+@end
+
+//Student类实现:
+@implementation Student //setter方法实现
+
+- (void)setAge:(int)newAge
+{
+_age = newAge;
+}
+//getter方法
+- (int)age
+{
+return _age;
+}
+@end
+
+调用:
+Student *s = [Student new];
+
+// 设置age的值
+[s setAge:10];
+
+// 取出age的值
+int age = [s age];
+
+// 输出
+NSLog(@&quot;age is %d&quot;, age);
+</code></pre><hr>
+<h3 id="类的继承和派生"><a href="#类的继承和派生" class="headerlink" title="类的继承和派生"></a>类的继承和派生</h3><hr>
+<p><strong>OC中的继承是单继承:也就是说一个类只能一个父类,不能继承多个父类。子类不能定义和父类同名的成员变量,但是可以继承父类的变量。</strong></p>
+<p>基类的私有属性<code>@private</code>能被继承,不能被使用。<code>@public</code>公有成员能被继承,也能被外部方法访问。<code>@protected</code>保护成员能够被继承、在子类中使用,但不能够被外部函数访问。在<code>@interface @end</code>之间声明的成员变量如果不做特别的说明,那么其默认是 protected的。</p>
+<p>在类的实现即<code>.m</code>文件，<code>@implementation</code>中也可以声明成员变量,是<code>@private</code>的。</p>
+<p>方法的重写：从父类继承的方法,可能这个方法并不适合子类,可以在子类中重写父类的方法。</p>
+<pre><code>@interface Animal : NSObject
+{
+  int _tuiNum; //腿的个数
+  int _eyeNum; //眼睛个数
+}
+-(void)setTuiNum:(int)tuiNum;
+-(int)tuiNum;
+
+-(void)setEyeNum:(int)eyeNum;
+-(int)eyeNum;
+
+-(void)eat;
+-(void)run;
+@end
+
+#import &quot;Animal.h&quot;
+@interface Dog : Animal
+{
+
+}
+-(void)eat; //覆盖父类的eat的方法
+@end
+</code></pre><p>重写之后,父类的对象调用父类的方法;子类的对象,调用子类的方法,不会引起冲突。从父类继承的方法,不适用于子类时,可以直接声明父类的同名方法,并定义。不用考虑父类中,方法已存在的问题。</p>
+<p>重写后,子类可以通过super调用父类的方法。</p>
+<pre><code>- （void）eat
+{
+ [super eat];
+}
+</code></pre><hr>
+<h3 id="私有方法"><a href="#私有方法" class="headerlink" title="私有方法"></a>私有方法</h3><hr>
+<p>OC中并没有像Java中提供的私有方法,OC中的私有,可以理解为相对私有。</p>
+<p>方法在<code>.m</code>中实现,不在<code>.h</code>中声明,此时该方法被称为私有方法:私有方法不可以被子类继承</p>
+<pre><code>@interface MyClass
+{
+// 添加变量
+}
+- (void)PublicMethod;//公共方法,可以被继承类继承
+@end
+
+// 而在类的.m文件中,直接实现的方法：
+- (void)PrivateMethod
+{
+ ////
+}
+
+@end
+</code></pre><hr>
+<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><hr>
+<p>多态:同一种行为,对于不同的事物具有不同的表现形式。多态的条件:有继承关系、有方法重写。</p>
+<p><strong>父类的声明变量指向子类对象。如果存在多态,父类是可以访问子类特有的方法。</strong></p>
+<hr>
+<h3 id="类对象的用法"><a href="#类对象的用法" class="headerlink" title="类对象的用法"></a>类对象的用法</h3><hr>
+<p>可以用来调用方法</p>
+<pre><code>Dog *d = [Dog new];
+Dog *d1 = [Dog new];
+Class c = [d1 class];
+
+// 用类名调用类方法
+[Dog test];
+[c test];
+</code></pre><p>可以用来初始化对象</p>
+<pre><code>Class c = [Dog class];
+[c test];
+
+// 用类对象创建对象
+Dog *d = [c new];
+[d eat];
+</code></pre><hr>
+<h3 id="SEL方法选择器"><a href="#SEL方法选择器" class="headerlink" title="SEL方法选择器"></a>SEL方法选择器</h3><hr>
+<p>SEL类型作用:可以定义变量；可以用来作为方法的形参；可以用来作为方法的实参。</p>
+<hr>
+<h4 id="Static关键"><a href="#Static关键" class="headerlink" title="Static关键"></a>Static关键</h4><hr>
+<p>static修饰局部变量:延长布局变量的生命周期。</p>
+<p>static修饰全局变量:当前变量只能在当前文件中使用。</p>
+<p>static修饰函数:函数只能在当前文件中使用。</p>
+<p>使用static修饰实例变量是不被允许的。</p>
+<p>使用static修饰方法也是不被允许的。</p>
+<p>使用static<code>@interface和@end</code>之间是不被允许的（写局部变量本来就不被允许）。</p>
+<pre><code>//狗类的声明
+static int m=10; //此句话也可以放到.m中
+@interface Dog:NSObject
+{
+  int _speed;
+}
+-(void)run;
+@end
+
+// Dog.m文件内容
+#import &quot;Dog.h&quot;
+#pragma mark 狗类的实现
+@implementation Dog
+
+-(void)run{
+//定义局部静态变量 m
+static int m=10;
+NSLog(@&quot;m = %d&quot;,m);
+m++;
+}
+@end
+</code></pre><p>注意Static型全局变量的可见性,局限于当前.m文件，其他的文件中的类,无法访问到该变量。</p>
+<hr>
+<h3 id="点语法"><a href="#点语法" class="headerlink" title="点语法"></a>点语法</h3><hr>
+<p>点语法是编译器特性，当编译器看到对象使用点语法，会自动把点语法转换为调用set或get方法的形式。</p>
+<pre><code>Student *stu = [Student new];
+
+// 设置age的值
+stu.age = 10; // 等价于[stu setAge:10];
+
+// 取出age的值
+int age = stu.age; // 等价于int age = [stu age];
+
+// 输出
+NSLog(@&quot;age is %i&quot;, age);
+</code></pre><p>self在set方法中使用</p>
+<pre><code>- (void)setAge:(int)age
+{
+self.age = age;
+}
+错误用法，会死循环。
+上面的代码相当于：
+- (void)setAge:(int)age
+{
+[self setAge:age];
+}
+</code></pre><p>self在get方法中使用</p>
+<pre><code>- (int)age
+{
+return self.age;
+}
+
+错误用法：死循环。
+相当于：
+- (int)age
+{
+return [self age];
+}
+</code></pre><hr>
+<h3 id="property关键字"><a href="#property关键字" class="headerlink" title="property关键字"></a>property关键字</h3><hr>
+<p><code>@property</code>是编译器的指令。它告诉编译器,声明属性的set、get方法。好处是:免去我们手工书写get和set方法繁琐的代码。</p>
+<p>格式：</p>
+<pre><code>@property 类型 方法名
+@property int age;
+
+//相当于进行了age的set和get方法的声明
+-(void)setAge:(int)age;
+-(int)age;
+</code></pre><hr>
+<h3 id="synthesize关键字"><a href="#synthesize关键字" class="headerlink" title="synthesize关键字"></a>synthesize关键字</h3><hr>
+<p>如果<code>@synthesize</code>变量名要先在<code>.h</code>文件中声明</p>
+<pre><code>@property int age;
+.h
+-(void)setAge:(int)age;
+-(int)age;
+
+.m
+@synthesize age;展开形式如下:
+-(void)setAge:(int)age
+{
+self-&gt;age = age;
+}
+-(int)age
+{
+return age;
+}
+</code></pre><p><strong>@property和@synthesize搭配使用,用于简化set和get方法的定义和实现。</strong></p>
+<hr>
+<h3 id="id类型"><a href="#id类型" class="headerlink" title="id类型"></a>id类型</h3><hr>
+<p>id类型应用场景</p>
+<pre><code>//狗的类,狗继承自动物
+Dog *dog = [Dog new];
+[dog run];
+
+//定义多态类型
+NSObjcet *dog1 = [Dog new];
+[(Dog *)dog run];
+
+//定义id类型
+id dog2 = [Dog new];
+[obj run];
+</code></pre><p>id作为成员变量</p>
+<pre><code>// 类的声明
+@interface Person : NSObject
+@property int age;
+@property id obj; // 可以接收任何对象
+@end
+
+// 类的实现
+@implementation Person
+@end
+
+// main函数
+int main()
+{
+   Person *p = [Person new];
+   [p setObj:@&quot;小王子&quot;];
+   NSLog(@&quot;%d&quot;,[p obj]);
+   return 0;
+}
+</code></pre><hr>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><hr>
+<p>构造方法:用来初始化对象实例变量值的方法,是个对象方法,<code>-</code>开头。</p>
+<p>完整的创建一个可用的对象:</p>
+<pre><code>Person *p=[Person new];
+</code></pre><p>new方法的内部会分别调用两个方法来完成3件事情:使用alloc方法来分配存储空间(返回分配的对象);使用init方法来对对象进行初始化；返回对象的首地址。</p>
+<p>可以把new方法拆开如下:调用类方法+alloc分配存储空间,返回未经初始化的对象 </p>
+<pre><code>Person *p1=[Person alloc];
+</code></pre><p>调用对象方法-init进行初始化,返回对象本身</p>
+<pre><code>Person *p2=[p1 init];
+</code></pre><p>以上两个过程整合为一句:</p>
+<pre><code>Person *p=[[Person alloc] init];
+</code></pre><p>init方法就是构造方法,是用来初始化对象的方法,注意这是一个对象方法,以减号开头。默认初始化完毕后,所有成员变量的值都为0。</p>
+<p><strong>自定义构造方法的代码实现</strong></p>
+<p>问题1：给Hero类定义一个构造方法,自定义名字信息。</p>
+<pre><code>// 声明
+@property NSString *name;
+
+- (instancetype)initWithName:(NSString *)name；
+
+// 实现
+- (instancetype)initWithName:(NSString *)name
+{
+    if (self = [super init])
+    {
+        _name = name;
+    }
+    return self;
+}
+@end
+</code></pre><p>问题2：给Hero类定义一个构造方法,自定义名字信息和年龄。</p>
+<pre><code>// 声明
+@property NSString *name;
+@property int age;
+
+- (instancetype)initWithName:(NSString *)name andAge:(int)age；
+
+// 实现
+- (instancetype)initWithName:(NSString *)name andAge:(int)age
+{
+    if (self = [super init])
+    {
+        _name = name;
+        _age = age;
+    }
+    return self;
+}
+@end
+</code></pre><hr>
+<h3 id="NSMutableArray"><a href="#NSMutableArray" class="headerlink" title="NSMutableArray"></a>NSMutableArray</h3><hr>
+<p>数组长度不固定，可以随便往里面添加或者删除元素。</p>
+<p>创建可变数组</p>
+<pre><code>NSMutableArray *arrayM = [NSMutableArray array];
+</code></pre><p>数组添加成员</p>
+<pre><code>- (void)addObject:(ObjectType)object;
+</code></pre><p>删除数组成员</p>
+<pre><code>// 用成员名进行删除
+- (void)removeObject:(ObjectType)object;
+
+// 删除指定位置的元素
+- (void)removeObjectAtIndex:(NSUInteger)index;
+</code></pre><hr>
+<hr>
+<p>iOS</p>
+<p><a href="https://github.com/dequan1331/HybridPageKit" target="_blank" rel="noopener">https://github.com/dequan1331/HybridPageKit</a></p>
 
     </div>
     
@@ -362,7 +689,7 @@ Phone *_phone;
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Objective-C"><span class="toc-text">Objective-C</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSLog"><span class="toc-text">NSLog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类"><span class="toc-text">类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象的存储"><span class="toc-text">对象的存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pragma-mark"><span class="toc-text">pragma mark</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见错误"><span class="toc-text">常见错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSString"><span class="toc-text">NSString</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象与对象之间的关系"><span class="toc-text">对象与对象之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面向对象设计原则"><span class="toc-text">面向对象设计原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类方法"><span class="toc-text">类方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对象方法"><span class="toc-text">对象方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类方法-1"><span class="toc-text">类方法</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Objective-C"><span class="toc-text">Objective-C</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSLog"><span class="toc-text">NSLog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类"><span class="toc-text">类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象的存储"><span class="toc-text">对象的存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pragma-mark"><span class="toc-text">pragma mark</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见错误"><span class="toc-text">常见错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSString"><span class="toc-text">NSString</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象与对象之间的关系"><span class="toc-text">对象与对象之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面向对象设计原则"><span class="toc-text">面向对象设计原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类方法"><span class="toc-text">类方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对象方法"><span class="toc-text">对象方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类方法-1"><span class="toc-text">类方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名对象"><span class="toc-text">匿名对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#self关键字"><span class="toc-text">self关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装"><span class="toc-text">封装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#set方法"><span class="toc-text">set方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#get方法"><span class="toc-text">get方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类的继承和派生"><span class="toc-text">类的继承和派生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有方法"><span class="toc-text">私有方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多态"><span class="toc-text">多态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类对象的用法"><span class="toc-text">类对象的用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SEL方法选择器"><span class="toc-text">SEL方法选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Static关键"><span class="toc-text">Static关键</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#点语法"><span class="toc-text">点语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#property关键字"><span class="toc-text">property关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#synthesize关键字"><span class="toc-text">synthesize关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#id类型"><span class="toc-text">id类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造方法"><span class="toc-text">构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSMutableArray"><span class="toc-text">NSMutableArray</span></a></li></ol></li></ol>
         
     </div>
 </aside>
