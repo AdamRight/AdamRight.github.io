@@ -472,7 +472,61 @@ print(type(eval(str3)))
 </tr>
 </tbody>
 </table>
-<hr>
+<p>多个变量赋值</p>
+<pre><code>num1, float1, str1 = 10, 0.5, &apos;hello world&apos;
+print(num1)
+print(float1)
+print(str1)
+</code></pre><p>多变量赋相同值</p>
+<pre><code>a = b = 10
+print(a)
+print(b)
+</code></pre><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>逻辑表达式</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>and</td>
+<td>x and y</td>
+<td>布尔”与”：如果 x 为 False，x and y 返回 False，否则它返回 y 的值。</td>
+<td>True and False， 返回 False。</td>
+</tr>
+<tr>
+<td>or</td>
+<td>x or y</td>
+<td>布尔”或”：如果 x 是 True，它返回 True，否则它返回 y 的值。</td>
+<td>False or True， 返回 True。</td>
+</tr>
+<tr>
+<td>not</td>
+<td>not x</td>
+<td>布尔”非”：如果 x 为 True，返回 False 。如果 x 为 False，它返回 True。</td>
+<td>not True 返回 False, not False 返回 True</td>
+</tr>
+</tbody>
+</table>
+<p>数字之间的逻辑运算</p>
+<pre><code>a = 0
+b = 1
+c = 2
+
+# and运算符，只要有一个值为0，则结果为0，否则结果为最后一个非0数字
+print(a and b)  # 0
+print(b and a)  # 0
+print(b and c)  # 2
+print(c and b)  # 1
+
+# or运算符，只有所有值为0结果才为0，否则结果为第一个非0数字
+print(a or b)  # 1
+print(a or c)  # 2
+print(b or c)  # 1
+</code></pre><hr>
 
     </div>
     
