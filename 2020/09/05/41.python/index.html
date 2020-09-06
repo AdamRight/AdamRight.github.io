@@ -1794,6 +1794,185 @@ result = filter(func, list1)
 print(result)  # &lt;filter object at 0x0000017AF9DC3198&gt;
 print(list(result))  # [2, 4, 6, 8, 10]
 </code></pre><hr>
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><hr>
+<p>文件操作的作用就是把一些内容(数据)存储存放起来，可以让程序下一次执行的时候直接使用，而不必重新制作一份，省时省力。</p>
+<p>关闭文件 <code>f.close()</code>。</p>
+<p>打开一个已经存在的文件，或者创建一个新文件，语法如下：</p>
+<pre><code>open(name, mode)
+#name：是要打开的目标文件名的字符串(可以包含文件所在的具体路径)。
+#mode：设置打开文件的模式(访问模式)：只读、写入、追加等。
+</code></pre><p>打开文件模式</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">r</td>
+<td>以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。</td>
+</tr>
+<tr>
+<td style="text-align:center">rb</td>
+<td>以二进制格式打开一个文件用于只读。文件指针将会放在文件的开头。这是默认模式。</td>
+</tr>
+<tr>
+<td style="text-align:center">r+</td>
+<td>打开一个文件用于读写。文件指针将会放在文件的开头。</td>
+</tr>
+<tr>
+<td style="text-align:center">rb+</td>
+<td>以二进制格式打开一个文件用于读写。文件指针将会放在文件的开头。</td>
+</tr>
+<tr>
+<td style="text-align:center">w</td>
+<td>打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
+</tr>
+<tr>
+<td style="text-align:center">wb</td>
+<td>以二进制格式打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
+</tr>
+<tr>
+<td style="text-align:center">w+</td>
+<td>打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
+</tr>
+<tr>
+<td style="text-align:center">wb+</td>
+<td>以二进制格式打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
+</tr>
+<tr>
+<td style="text-align:center">a</td>
+<td>打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</td>
+</tr>
+<tr>
+<td style="text-align:center">ab</td>
+<td>以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</td>
+</tr>
+<tr>
+<td style="text-align:center">a+</td>
+<td>打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。</td>
+</tr>
+<tr>
+<td style="text-align:center">ab+</td>
+<td>以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。如果该文件不存在，创建新文件用于读写。</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>写:</p>
+<pre><code>#语法
+对象对象.write(&apos;内容&apos;)
+
+# 1. 打开文件
+f = open(&apos;test.txt&apos;, &apos;w&apos;)
+# 2.文件写入
+f.write(&apos;hello world&apos;)
+# 3. 关闭文件
+f.close()
+</code></pre><blockquote>
+<p>注意：<code>w</code>和<code>a</code>模式：如果文件不存在则创建该文件；如果文件存在，<code>w</code>模式先清空再写入，<code>a</code>模式直接末尾追加。<code>r</code>模式：如果文件不存在则报错。</p>
+</blockquote>
+<hr>
+<p>读：</p>
+<p>read()</p>
+<pre><code>文件对象.read(num)
+</code></pre><blockquote>
+<p>num表示要从文件中读取的数据的长度（单位是字节），如果没有传入num，那么就表示读取文件中所有的数据。</p>
+</blockquote>
+<p>readlines()：可以按照行的方式把整个文件中的内容进行一次性读取，并且返回的是一个列表，其中每一行的数据为一个元素。</p>
+<pre><code>f = open(&apos;test.txt&apos;)
+content = f.readlines()
+# [&apos;hello world\n&apos;, &apos;abcdefg\n&apos;, &apos;aaa\n&apos;, &apos;bbb\n&apos;, &apos;ccc&apos;]
+print(content)
+# 关闭文件
+f.close()
+</code></pre><p>readline()一次读取一行内容。</p>
+<pre><code>f = open(&apos;test.txt&apos;)
+content = f.readline()
+print(f&apos;第一行：{content}&apos;)
+content = f.readline()
+print(f&apos;第二行：{content}&apos;)
+</code></pre><p>seek()：用来移动文件指针。</p>
+<pre><code>文件对象.seek(偏移量, 起始位置)
+#起始位置：0：文件开头；1：当前位置；2：文件结尾
+</code></pre><hr>
+<p>文件备份：用户输入当前目录下任意文件名，程序完成对该文件的备份功能(备份文件名为xx[备份]后缀，例如：test[备份].txt)。</p>
+<pre><code>old_name = input(&apos;请输入您要备份的文件名：&apos;)
+
+# 提取文件后缀点的下标
+index = old_name.rfind(&apos;.&apos;)
+# print(index)  # 后缀中.的下标
+# print(old_name[:index])  # 源文件名（无后缀）
+# 组织新文件名 旧文件名 + [备份] + 后缀
+new_name = old_name[:index] + &apos;[备份]&apos; + old_name[index:]
+# 打印新文件名（带后缀）
+# print(new_name)
+
+# 打开文件
+old_f = open(old_name, &apos;rb&apos;)
+new_f = open(new_name, &apos;wb&apos;)
+# 将源文件数据写入备份文件
+while True:
+    con = old_f.read(1024)
+    if len(con) == 0:
+        break
+    new_f.write(con)
+
+# 关闭文件
+old_f.close()
+new_f.close()
+</code></pre><hr>
+<p>文件和文件夹的操作:在Python中文件和文件夹的操作要借助os模块里面的相关功能，具体步骤如下：</p>
+<pre><code>#导入os模块
+import os
+
+#使用os模块相关功能
+os.函数名()
+</code></pre><p>文件重命名</p>
+<pre><code>os.rename(目标文件名, 新文件名)
+</code></pre><p>删除文件</p>
+<pre><code>os.remove(目标文件名)
+</code></pre><p>创建文件夹</p>
+<pre><code>os.mkdir(文件夹名字)
+</code></pre><p>删除文件夹</p>
+<pre><code>os.rmdir(文件夹名字)
+</code></pre><p>获取当前目录</p>
+<pre><code>os.getcwd()
+</code></pre><p>改变默认目录</p>
+<pre><code>os.chdir(目录)
+</code></pre><p>获取目录列表</p>
+<pre><code>os.listdir(目录)
+</code></pre><hr>
+<p>批量修改文件名，既可添加指定字符串，又能删除指定字符串。</p>
+<pre><code>import os
+
+# 设置重命名标识：如果为1则添加指定字符，flag取值为2则删除指定字符
+flag = 1
+# 获取指定目录
+dir_name = &apos;./&apos;
+
+# 获取指定目录的文件列表
+file_list = os.listdir(dir_name)
+# print(file_list)
+
+# 遍历文件列表内的文件
+for name in file_list:
+    # 添加指定字符
+    if flag == 1:
+        new_name = &apos;Python-&apos; + name
+    # 删除指定字符
+    elif flag == 2:
+        num = len(&apos;Python-&apos;)
+        new_name = name[num:]
+
+    # 打印新文件名，测试程序正确性
+    print(new_name)
+
+    # 重命名
+    os.rename(dir_name+name, dir_name+new_name)
+</code></pre><hr>
 
     </div>
     
@@ -1850,7 +2029,7 @@ print(list(result))  # [2, 4, 6, 8, 10]
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#猜拳游戏"><span class="toc-text">猜拳游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三元运算符"><span class="toc-text">三元运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环"><span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while…else"><span class="toc-text">while…else</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for…else"><span class="toc-text">for…else</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#三引号字符串"><span class="toc-text">三引号字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切片"><span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find"><span class="toc-text">find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace"><span class="toc-text">replace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#split"><span class="toc-text">split</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-text">join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capitalize"><span class="toc-text">capitalize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#title"><span class="toc-text">title</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lower和upper"><span class="toc-text">lower和upper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lstrip和rstrip和strip"><span class="toc-text">lstrip和rstrip和strip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ljust和rjust和center"><span class="toc-text">ljust和rjust和center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#startswith和endswith"><span class="toc-text">startswith和endswith</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalpha"><span class="toc-text">isalpha</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isdigit"><span class="toc-text">isdigit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalnum"><span class="toc-text">isalnum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isspace"><span class="toc-text">isspace</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下标"><span class="toc-text">下标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-1"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count-1"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#len"><span class="toc-text">len</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#in和not-in"><span class="toc-text">in和not in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#append"><span class="toc-text">append</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extend"><span class="toc-text">extend</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert"><span class="toc-text">insert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#del"><span class="toc-text">del</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pop"><span class="toc-text">pop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#remove"><span class="toc-text">remove</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clear"><span class="toc-text">clear</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改指定下标数据"><span class="toc-text">修改指定下标数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆置reverse"><span class="toc-text">逆置reverse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序sort"><span class="toc-text">排序sort</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制copy"><span class="toc-text">复制copy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while遍历列表"><span class="toc-text">while遍历列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for遍历列表"><span class="toc-text">for遍历列表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元组"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字典"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增和改"><span class="toc-text">增和改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删"><span class="toc-text">删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key值查找"><span class="toc-text">key值查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get"><span class="toc-text">get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keys"><span class="toc-text">keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#values"><span class="toc-text">values</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#items"><span class="toc-text">items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的key"><span class="toc-text">遍历字典的key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的value"><span class="toc-text">遍历字典的value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的元素"><span class="toc-text">遍历字典的元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的键值对"><span class="toc-text">遍历字典的键值对</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增加数据"><span class="toc-text">增加数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除数据"><span class="toc-text">删除数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找数据"><span class="toc-text">查找数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公共操作"><span class="toc-text">公共操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#运算符-1"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公共方法"><span class="toc-text">公共方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容器类型转换"><span class="toc-text">容器类型转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推导式"><span class="toc-text">推导式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#列表推导式"><span class="toc-text">列表推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典推导式"><span class="toc-text">字典推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合推导式"><span class="toc-text">集合推导式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数基础"><span class="toc-text">函数基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数提高"><span class="toc-text">函数提高</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量作用域"><span class="toc-text">变量作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数的返回值"><span class="toc-text">函数的返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拆包和交换变量值"><span class="toc-text">拆包和交换变量值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用"><span class="toc-text">引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可变和不可变类型"><span class="toc-text">可变和不可变类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#递归"><span class="toc-text">递归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lambda表达式"><span class="toc-text">lambda表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高阶函数"><span class="toc-text">高阶函数</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#猜拳游戏"><span class="toc-text">猜拳游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三元运算符"><span class="toc-text">三元运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环"><span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while…else"><span class="toc-text">while…else</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for…else"><span class="toc-text">for…else</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#三引号字符串"><span class="toc-text">三引号字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切片"><span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find"><span class="toc-text">find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace"><span class="toc-text">replace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#split"><span class="toc-text">split</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-text">join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capitalize"><span class="toc-text">capitalize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#title"><span class="toc-text">title</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lower和upper"><span class="toc-text">lower和upper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lstrip和rstrip和strip"><span class="toc-text">lstrip和rstrip和strip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ljust和rjust和center"><span class="toc-text">ljust和rjust和center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#startswith和endswith"><span class="toc-text">startswith和endswith</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalpha"><span class="toc-text">isalpha</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isdigit"><span class="toc-text">isdigit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalnum"><span class="toc-text">isalnum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isspace"><span class="toc-text">isspace</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下标"><span class="toc-text">下标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-1"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count-1"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#len"><span class="toc-text">len</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#in和not-in"><span class="toc-text">in和not in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#append"><span class="toc-text">append</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extend"><span class="toc-text">extend</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert"><span class="toc-text">insert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#del"><span class="toc-text">del</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pop"><span class="toc-text">pop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#remove"><span class="toc-text">remove</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clear"><span class="toc-text">clear</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改指定下标数据"><span class="toc-text">修改指定下标数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆置reverse"><span class="toc-text">逆置reverse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序sort"><span class="toc-text">排序sort</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制copy"><span class="toc-text">复制copy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while遍历列表"><span class="toc-text">while遍历列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for遍历列表"><span class="toc-text">for遍历列表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元组"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字典"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增和改"><span class="toc-text">增和改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删"><span class="toc-text">删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key值查找"><span class="toc-text">key值查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get"><span class="toc-text">get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keys"><span class="toc-text">keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#values"><span class="toc-text">values</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#items"><span class="toc-text">items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的key"><span class="toc-text">遍历字典的key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的value"><span class="toc-text">遍历字典的value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的元素"><span class="toc-text">遍历字典的元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的键值对"><span class="toc-text">遍历字典的键值对</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增加数据"><span class="toc-text">增加数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除数据"><span class="toc-text">删除数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找数据"><span class="toc-text">查找数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公共操作"><span class="toc-text">公共操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#运算符-1"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公共方法"><span class="toc-text">公共方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容器类型转换"><span class="toc-text">容器类型转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推导式"><span class="toc-text">推导式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#列表推导式"><span class="toc-text">列表推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典推导式"><span class="toc-text">字典推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合推导式"><span class="toc-text">集合推导式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数基础"><span class="toc-text">函数基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数提高"><span class="toc-text">函数提高</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量作用域"><span class="toc-text">变量作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数的返回值"><span class="toc-text">函数的返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拆包和交换变量值"><span class="toc-text">拆包和交换变量值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用"><span class="toc-text">引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可变和不可变类型"><span class="toc-text">可变和不可变类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#递归"><span class="toc-text">递归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lambda表达式"><span class="toc-text">lambda表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高阶函数"><span class="toc-text">高阶函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件操作"><span class="toc-text">文件操作</span></a></li></ol>
         
     </div>
 </aside>
