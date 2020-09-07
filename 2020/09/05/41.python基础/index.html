@@ -1973,6 +1973,517 @@ for name in file_list:
     # 重命名
     os.rename(dir_name+name, dir_name+new_name)
 </code></pre><hr>
+<h2 id="面向对象基础"><a href="#面向对象基础" class="headerlink" title="面向对象基础"></a>面向对象基础</h2><hr>
+<p>面向对象就是将编程当成是一个事物，对外界来说，事物是直接使用的，不用去管他内部的情况。而编程就是设置事物能够做什么事。</p>
+<p>类和对象的关系：用类去创建一个对象。</p>
+<hr>
+<p>定义类:Python2中类分为：经典类 和 新式类。</p>
+<pre><code>class 类名():
+    代码
+    ......
+
+class Washer():
+    def wash(self):
+        print(&apos;我会洗衣服&apos;)
+</code></pre><blockquote>
+<p>注意：类名要满足标识符命名规则，同时遵循大驼峰命名习惯。</p>
+</blockquote>
+<p>经典类：不由任意内置类型派生出的类，称之为经典类</p>
+<pre><code>class 类名:
+    代码
+    ......
+</code></pre><hr>
+<p>创建对象：对象又名实例。</p>
+<pre><code>对象名 = 类名()
+
+# 创建对象
+haier1 = Washer()
+
+# &lt;__main__.Washer object at 0x0000018B7B224240&gt;
+print(haier1)
+
+# haier对象调用实例方法
+haier1.wash()
+</code></pre><blockquote>
+<p>注意：创建对象的过程也叫实例化对象。</p>
+</blockquote>
+<hr>
+<p>self指的是调用该函数的对象。</p>
+<pre><code># 1. 定义类
+class Washer():
+    def wash(self):
+        print(&apos;我会洗衣服&apos;)
+        # &lt;__main__.Washer object at 0x0000024BA2B34240&gt;
+        print(self)
+
+# 2. 创建对象
+haier1 = Washer()
+# &lt;__main__.Washer object at 0x0000018B7B224240&gt;
+print(haier1)
+# haier1对象调用实例方法
+haier1.wash()
+
+haier2 = Washer()
+# &lt;__main__.Washer object at 0x0000022005857EF0&gt;
+print(haier2)
+</code></pre><blockquote>
+<p>注意：打印对象和self得到的结果是一致的，都是当前对象的内存中存储地址。</p>
+</blockquote>
+<hr>
+<p>类外面添加对象属性</p>
+<pre><code>对象名.属性名 = 值
+
+haier1.width = 500
+haier1.height = 800
+</code></pre><p>类外面获取对象属性</p>
+<pre><code>对象名.属性名
+
+print(f&apos;haier1洗衣机的宽度是{haier1.width}&apos;)
+print(f&apos;haier1洗衣机的高度是{haier1.height}&apos;)
+</code></pre><p>类里面获取对象属性</p>
+<pre><code>self.属性名
+
+# 定义类
+class Washer():
+    def print_info(self):
+        # 类里面获取实例属性
+        print(f&apos;haier1洗衣机的宽度是{self.width}&apos;)
+        print(f&apos;haier1洗衣机的高度是{self.height}&apos;)
+
+# 创建对象
+haier1 = Washer()
+
+# 添加实例属性
+haier1.width = 500
+haier1.height = 800
+haier1.print_info()
+</code></pre><hr>
+<h3 id="魔法方法"><a href="#魔法方法" class="headerlink" title="魔法方法"></a>魔法方法</h3><hr>
+<p>在Python中，<code>__xx__()</code>的函数叫做魔法方法，指的是具有特殊功能的函数。</p>
+<hr>
+<p><code>__init__()</code>方法的作用：初始化对象。</p>
+<pre><code>class Washer():
+
+    # 定义初始化功能的函数
+    def __init__(self):
+        # 添加实例属性
+        self.width = 500
+        self.height = 800
+
+    def print_info(self):
+        # 类里面调用实例属性
+        print(f&apos;洗衣机的宽度是{self.width}, 高度是{self.height}&apos;)
+
+haier1 = Washer()
+haier1.print_info()
+</code></pre><blockquote>
+<p>注意：<code>__init__()</code>方法，在创建一个对象时默认被调用，不需要手动调用。<code>__init__(self)</code>中的self参数，不需要开发者传递，python解释器会自动把当前的对象引用传递过去。</p>
+</blockquote>
+<hr>
+<p>带参数的<code>__init__()</code>：</p>
+<pre><code>class Washer():
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def print_info(self):
+        print(f&apos;洗衣机的宽度是{self.width}&apos;)
+        print(f&apos;洗衣机的高度是{self.height}&apos;)
+
+haier1 = Washer(10, 20)
+haier1.print_info()
+
+haier2 = Washer(30, 40)
+haier2.print_info()
+</code></pre><hr>
+<p> <code>__str__()</code>：当使用print输出对象的时候，默认打印对象的内存地址。如果类定义了<code>__str__</code>方法，那么就会打印从在这个方法中return的数据。</p>
+<pre><code>class Washer():
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def __str__(self):
+        return &apos;这是海尔洗衣机的说明书&apos;
+
+
+haier1 = Washer(10, 20)
+# 这是海尔洗衣机的说明书
+print(haier1)
+</code></pre><hr>
+<p><code>__del__()</code>：当删除对象时，python解释器也会默认调用<code>__del__()</code>方法。</p>
+<pre><code>class Washer():
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def __del__(self):
+        print(f&apos;{self}对象已经被删除&apos;)
+
+haier1 = Washer(10, 20)
+# &lt;__main__.Washer object at 0x0000026118223278&gt;对象已经被删除
+del haier1
+</code></pre><hr>
+<h2 id="面向对象之继承"><a href="#面向对象之继承" class="headerlink" title="面向对象之继承"></a>面向对象之继承</h2><hr>
+<p>经典类或旧式类：不由任意内置类型派生出的类，称之为经典类。</p>
+<pre><code>class 类名:
+    代码
+    ......
+</code></pre><p>新式类</p>
+<pre><code>class 类名(object):
+  代码
+</code></pre><p>Python面向对象的继承指的是多个类之间的所属关系，即子类默认继承父类的所有属性和方法，具体如下：</p>
+<pre><code># 父类A
+class A(object):
+    def __init__(self):
+        self.num = 1
+
+    def info_print(self):
+        print(self.num)
+
+# 子类B
+class B(A):
+    pass
+
+result = B()
+result.info_print()  # 1
+</code></pre><blockquote>
+<p>在Python中，所有类默认继承object类，object类是顶级类或基类；其他子类叫做派生类。</p>
+</blockquote>
+<hr>
+<p>单继承:</p>
+<pre><code># 1. 师父类
+class Master(object):
+    def __init__(self):
+        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+# 2. 徒弟类
+class Prentice(Master):
+    pass
+
+# 3. 创建对象daqiu
+daqiu = Prentice()
+# 4. 对象访问实例属性
+print(daqiu.kongfu)
+# 5. 对象调用实例方法
+daqiu.make_cake()
+</code></pre><hr>
+<p>多继承:所谓多继承意思就是一个类同时继承了多个父类。</p>
+<pre><code>class Master(object):
+    def __init__(self):
+        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+# 创建学校类
+class School(object):
+    def __init__(self):
+        self.kongfu = &apos;[school煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+class Prentice(School, Master):
+    pass
+
+daqiu = Prentice()
+print(daqiu.kongfu)
+daqiu.make_cake()
+</code></pre><blockquote>
+<p>注意：当一个类有多个父类的时候，默认使用第一个父类的同名属性和方法。</p>
+</blockquote>
+<hr>
+<p>子类重写父类同名方法和属性</p>
+<pre><code>class Master(object):
+    def __init__(self):
+        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+class School(object):
+    def __init__(self):
+        self.kongfu = &apos;[school煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+# 独创配方
+class Prentice(School, Master):
+    def __init__(self):
+        self.kongfu = &apos;[独创煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+daqiu = Prentice()
+print(daqiu.kongfu)
+daqiu.make_cake()
+print(Prentice.__mro__)
+</code></pre><blockquote>
+<p>子类和父类具有同名属性和方法，默认使用子类的同名属性和方法。</p>
+</blockquote>
+<hr>
+<p>子类调用父类的同名方法和属性</p>
+<pre><code>class Master(object):
+    def __init__(self):
+        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+class School(object):
+    def __init__(self):
+        self.kongfu = &apos;[school煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+class Prentice(School, Master):
+    def __init__(self):
+        self.kongfu = &apos;[独创煎饼果子配方]&apos;
+
+    def make_cake(self):
+        # 如果是先调用了父类的属性和方法，父类属性会覆盖子类属性，故在调用属性前，先调用自己子类的初始化
+        self.__init__()
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+    # 调用父类方法，但是为保证调用到的也是父类的属性，必须在调用方法前调用父类的初始化
+    def make_master_cake(self):
+        Master.__init__(self)
+        Master.make_cake(self)
+
+    def make_school_cake(self):
+        School.__init__(self)
+        School.make_cake(self)
+
+daqiu = Prentice()
+daqiu.make_cake()
+daqiu.make_master_cake()
+daqiu.make_school_cake()
+daqiu.make_cake()
+</code></pre><hr>
+<p>多层继承</p>
+<pre><code>class Master(object):
+    def __init__(self):
+        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+class School(object):
+    def __init__(self):
+        self.kongfu = &apos;[school煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+class Prentice(School, Master):
+    def __init__(self):
+        self.kongfu = &apos;[独创煎饼果子配方]&apos;
+
+    def make_cake(self):
+        self.__init__()
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+    def make_master_cake(self):
+        Master.__init__(self)
+        Master.make_cake(self)
+
+    def make_school_cake(self):
+        School.__init__(self)
+        School.make_cake(self)
+
+# 徒孙类
+class Tusun(Prentice):
+    pass
+
+xiaoqiu = Tusun()
+xiaoqiu.make_cake()
+xiaoqiu.make_school_cake()
+xiaoqiu.make_master_cake()
+</code></pre><hr>
+<p>super()调用父类方法</p>
+<pre><code>class Master(object):
+    def __init__(self):
+        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+class School(Master):
+    def __init__(self):
+        self.kongfu = &apos;[school煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+        # 方法2.1
+        # super(School, self).__init__()
+        # super(School, self).make_cake()
+
+        # 方法2.2
+        super().__init__()
+        super().make_cake()
+
+class Prentice(School):
+    def __init__(self):
+        self.kongfu = &apos;[独创煎饼果子技术]&apos;
+
+    def make_cake(self):
+        self.__init__()
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+    # 子类调用父类的同名方法和属性：把父类的同名属性和方法再次封装
+    def make_master_cake(self):
+        Master.__init__(self)
+        Master.make_cake(self)
+
+    def make_school_cake(self):
+        School.__init__(self)
+        School.make_cake(self)
+
+    # 一次性调用父类的同名属性和方法
+    def make_old_cake(self):
+        # 方法一：代码冗余；父类类名如果变化，这里代码需要频繁修改
+        # Master.__init__(self)
+        # Master.make_cake(self)
+        # School.__init__(self)
+        # School.make_cake(self)
+
+        # 方法二: super()
+        # 方法2.1 super(当前类名, self).函数()
+        # super(Prentice, self).__init__()
+        # super(Prentice, self).make_cake()
+
+        # 方法2.2 super().函数()
+        super().__init__()
+        super().make_cake()
+
+daqiu = Prentice()
+daqiu.make_old_cake()
+</code></pre><blockquote>
+<p>注意：使用super() 可以自动查找父类。调用顺序遵循 <code>__mro__</code> 类属性的顺序。比较适合单继承使用。</p>
+</blockquote>
+<hr>
+<h3 id="私有权限"><a href="#私有权限" class="headerlink" title="私有权限"></a>私有权限</h3><hr>
+<p>定义私有属性和方法</p>
+<p>在Python中，可以为实例属性和方法设置私有权限，即设置某个实例属性或实例方法不继承给子类。</p>
+<p>设置私有权限的方法：在属性名和方法名前面加上两个下划线__。</p>
+<pre><code>class Master(object):
+    def __init__(self):
+        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+class School(object):
+    def __init__(self):
+        self.kongfu = &apos;[school煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+class Prentice(School, Master):
+    def __init__(self):
+        self.kongfu = &apos;[独创煎饼果子配方]&apos;
+        # 定义私有属性
+        self.__money = 2000000
+
+    # 定义私有方法
+    def __info_print(self):
+        print(self.kongfu)
+        print(self.__money)
+
+    def make_cake(self):
+        self.__init__()
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+    def make_master_cake(self):
+        Master.__init__(self)
+        Master.make_cake(self)
+
+    def make_school_cake(self):
+        School.__init__(self)
+        School.make_cake(self)
+
+# 徒孙类
+class Tusun(Prentice):
+    pass
+
+daqiu = Prentice()
+# 对象不能访问私有属性和私有方法
+# print(daqiu.__money)
+# daqiu.__info_print()
+
+xiaoqiu = Tusun()
+# 子类无法继承父类的私有属性和私有方法
+# print(xiaoqiu.__money)  # 无法访问实例属性__money
+# xiaoqiu.__info_print()
+</code></pre><blockquote>
+<p>注意：私有属性和私有方法只能在类里面访问和修改。</p>
+</blockquote>
+<hr>
+<p>获取和修改私有属性值</p>
+<p>在Python中，一般定义函数名<code>get_xx</code>用来获取私有属性，定义<code>set_xx</code>用来修改私有属性值。</p>
+<pre><code>class Master(object):
+    def __init__(self):
+        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+class School(object):
+    def __init__(self):
+        self.kongfu = &apos;[school煎饼果子配方]&apos;
+
+    def make_cake(self):
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+class Prentice(School, Master):
+    def __init__(self):
+        self.kongfu = &apos;[独创煎饼果子配方]&apos;
+        self.__money = 2000000
+
+    # 获取私有属性
+    def get_money(self):
+        return self.__money
+
+    # 修改私有属性
+    def set_money(self):
+        self.__money = 500
+
+    def __info_print(self):
+        print(self.kongfu)
+        print(self.__money)
+
+    def make_cake(self):
+        self.__init__()
+        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+
+    def make_master_cake(self):
+        Master.__init__(self)
+        Master.make_cake(self)
+
+    def make_school_cake(self):
+        School.__init__(self)
+        School.make_cake(self)
+
+# 徒孙类
+class Tusun(Prentice):
+    pass
+
+daqiu = Prentice()
+xiaoqiu = Tusun()
+# 调用get_money函数获取私有属性money的值
+print(xiaoqiu.get_money())
+# 调用set_money函数修改私有属性money的值
+xiaoqiu.set_money()
+print(xiaoqiu.get_money())
+</code></pre><hr>
 
     </div>
     
@@ -2029,7 +2540,7 @@ for name in file_list:
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#猜拳游戏"><span class="toc-text">猜拳游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三元运算符"><span class="toc-text">三元运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环"><span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while…else"><span class="toc-text">while…else</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for…else"><span class="toc-text">for…else</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#三引号字符串"><span class="toc-text">三引号字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切片"><span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find"><span class="toc-text">find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace"><span class="toc-text">replace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#split"><span class="toc-text">split</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-text">join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capitalize"><span class="toc-text">capitalize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#title"><span class="toc-text">title</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lower和upper"><span class="toc-text">lower和upper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lstrip和rstrip和strip"><span class="toc-text">lstrip和rstrip和strip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ljust和rjust和center"><span class="toc-text">ljust和rjust和center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#startswith和endswith"><span class="toc-text">startswith和endswith</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalpha"><span class="toc-text">isalpha</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isdigit"><span class="toc-text">isdigit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalnum"><span class="toc-text">isalnum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isspace"><span class="toc-text">isspace</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下标"><span class="toc-text">下标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-1"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count-1"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#len"><span class="toc-text">len</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#in和not-in"><span class="toc-text">in和not in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#append"><span class="toc-text">append</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extend"><span class="toc-text">extend</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert"><span class="toc-text">insert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#del"><span class="toc-text">del</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pop"><span class="toc-text">pop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#remove"><span class="toc-text">remove</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clear"><span class="toc-text">clear</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改指定下标数据"><span class="toc-text">修改指定下标数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆置reverse"><span class="toc-text">逆置reverse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序sort"><span class="toc-text">排序sort</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制copy"><span class="toc-text">复制copy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while遍历列表"><span class="toc-text">while遍历列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for遍历列表"><span class="toc-text">for遍历列表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元组"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字典"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增和改"><span class="toc-text">增和改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删"><span class="toc-text">删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key值查找"><span class="toc-text">key值查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get"><span class="toc-text">get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keys"><span class="toc-text">keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#values"><span class="toc-text">values</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#items"><span class="toc-text">items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的key"><span class="toc-text">遍历字典的key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的value"><span class="toc-text">遍历字典的value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的元素"><span class="toc-text">遍历字典的元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的键值对"><span class="toc-text">遍历字典的键值对</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增加数据"><span class="toc-text">增加数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除数据"><span class="toc-text">删除数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找数据"><span class="toc-text">查找数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公共操作"><span class="toc-text">公共操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#运算符-1"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公共方法"><span class="toc-text">公共方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容器类型转换"><span class="toc-text">容器类型转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推导式"><span class="toc-text">推导式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#列表推导式"><span class="toc-text">列表推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典推导式"><span class="toc-text">字典推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合推导式"><span class="toc-text">集合推导式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数基础"><span class="toc-text">函数基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数提高"><span class="toc-text">函数提高</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量作用域"><span class="toc-text">变量作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数的返回值"><span class="toc-text">函数的返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拆包和交换变量值"><span class="toc-text">拆包和交换变量值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用"><span class="toc-text">引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可变和不可变类型"><span class="toc-text">可变和不可变类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#递归"><span class="toc-text">递归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lambda表达式"><span class="toc-text">lambda表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高阶函数"><span class="toc-text">高阶函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件操作"><span class="toc-text">文件操作</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#猜拳游戏"><span class="toc-text">猜拳游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三元运算符"><span class="toc-text">三元运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环"><span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while…else"><span class="toc-text">while…else</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for…else"><span class="toc-text">for…else</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#三引号字符串"><span class="toc-text">三引号字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切片"><span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find"><span class="toc-text">find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace"><span class="toc-text">replace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#split"><span class="toc-text">split</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-text">join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capitalize"><span class="toc-text">capitalize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#title"><span class="toc-text">title</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lower和upper"><span class="toc-text">lower和upper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lstrip和rstrip和strip"><span class="toc-text">lstrip和rstrip和strip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ljust和rjust和center"><span class="toc-text">ljust和rjust和center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#startswith和endswith"><span class="toc-text">startswith和endswith</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalpha"><span class="toc-text">isalpha</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isdigit"><span class="toc-text">isdigit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalnum"><span class="toc-text">isalnum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isspace"><span class="toc-text">isspace</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下标"><span class="toc-text">下标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-1"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count-1"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#len"><span class="toc-text">len</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#in和not-in"><span class="toc-text">in和not in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#append"><span class="toc-text">append</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extend"><span class="toc-text">extend</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert"><span class="toc-text">insert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#del"><span class="toc-text">del</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pop"><span class="toc-text">pop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#remove"><span class="toc-text">remove</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clear"><span class="toc-text">clear</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改指定下标数据"><span class="toc-text">修改指定下标数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆置reverse"><span class="toc-text">逆置reverse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序sort"><span class="toc-text">排序sort</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制copy"><span class="toc-text">复制copy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while遍历列表"><span class="toc-text">while遍历列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for遍历列表"><span class="toc-text">for遍历列表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元组"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字典"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增和改"><span class="toc-text">增和改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删"><span class="toc-text">删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key值查找"><span class="toc-text">key值查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get"><span class="toc-text">get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keys"><span class="toc-text">keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#values"><span class="toc-text">values</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#items"><span class="toc-text">items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的key"><span class="toc-text">遍历字典的key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的value"><span class="toc-text">遍历字典的value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的元素"><span class="toc-text">遍历字典的元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的键值对"><span class="toc-text">遍历字典的键值对</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增加数据"><span class="toc-text">增加数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除数据"><span class="toc-text">删除数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找数据"><span class="toc-text">查找数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公共操作"><span class="toc-text">公共操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#运算符-1"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公共方法"><span class="toc-text">公共方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容器类型转换"><span class="toc-text">容器类型转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推导式"><span class="toc-text">推导式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#列表推导式"><span class="toc-text">列表推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典推导式"><span class="toc-text">字典推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合推导式"><span class="toc-text">集合推导式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数基础"><span class="toc-text">函数基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数提高"><span class="toc-text">函数提高</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量作用域"><span class="toc-text">变量作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数的返回值"><span class="toc-text">函数的返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拆包和交换变量值"><span class="toc-text">拆包和交换变量值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用"><span class="toc-text">引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可变和不可变类型"><span class="toc-text">可变和不可变类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#递归"><span class="toc-text">递归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lambda表达式"><span class="toc-text">lambda表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高阶函数"><span class="toc-text">高阶函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件操作"><span class="toc-text">文件操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象基础"><span class="toc-text">面向对象基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#魔法方法"><span class="toc-text">魔法方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象之继承"><span class="toc-text">面向对象之继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#私有权限"><span class="toc-text">私有权限</span></a></li></ol></li></ol>
         
     </div>
 </aside>
