@@ -186,9 +186,12 @@
     </div>
     
     <div class="post-body post-content">
-        <h2 id="JavaScript介绍"><a href="#JavaScript介绍" class="headerlink" title="JavaScript介绍"></a>JavaScript介绍</h2><p>js分为三个部分：ECMAScript标准（js的基本语法）、DOM（文档对象模型）、BOM（浏览器对象模型）。</p>
+        <h2 id="JavaScript介绍"><a href="#JavaScript介绍" class="headerlink" title="JavaScript介绍"></a>JavaScript介绍</h2><hr>
+<p>js分为三个部分：ECMAScript标准（js的基本语法）、DOM（文档对象模型）、BOM（浏览器对象模型）。</p>
 <p>js是一种脚本语言，解释型语言。</p>
-<h2 id="JavaScript三种写法"><a href="#JavaScript三种写法" class="headerlink" title="JavaScript三种写法"></a>JavaScript三种写法</h2><pre><code>&lt;!DOCTYPE html&gt;
+<hr>
+<h2 id="JavaScript三种写法"><a href="#JavaScript三种写法" class="headerlink" title="JavaScript三种写法"></a>JavaScript三种写法</h2><hr>
+<pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -204,7 +207,9 @@
 &lt;/html&gt;
 </code></pre><p>test.js</p>
 <pre><code>alert(&quot;我是第三种写法&quot;);
-</code></pre><h2 id="变量和数据类型"><a href="#变量和数据类型" class="headerlink" title="变量和数据类型"></a>变量和数据类型</h2><p>js中声明变量都用var，js中字符串可以使用单引号，也可以使用双引号。</p>
+</code></pre><hr>
+<h2 id="变量和数据类型"><a href="#变量和数据类型" class="headerlink" title="变量和数据类型"></a>变量和数据类型</h2><hr>
+<p>js中声明变量都用var，js中字符串可以使用单引号，也可以使用双引号。</p>
 <p>原始数据类型：</p>
 <pre><code>number、string、boolean、null、undefined、object
 </code></pre><p>获取变量的数据类型(注意，null获取的类型为object)</p>
@@ -229,15 +234,21 @@ String(变量名);
 <blockquote>
 <p>注意:运算符先后顺序，先<code>&amp;&amp;</code>，后<code>||</code>。</p>
 </blockquote>
-<h2 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h2><pre><code>if(条件){
+<hr>
+<h2 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h2><hr>
+<pre><code>if(条件){
 
 } else if(条件){
 
 } else {
 
 }
-</code></pre><h2 id="三元表达式"><a href="#三元表达式" class="headerlink" title="三元表达式"></a>三元表达式</h2><pre><code>var 变量 = 表达式1 ? 表达式2 : 表达式3;
-</code></pre><h2 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h2><pre><code>switch (表达式){
+</code></pre><hr>
+<h2 id="三元表达式"><a href="#三元表达式" class="headerlink" title="三元表达式"></a>三元表达式</h2><hr>
+<pre><code>var 变量 = 表达式1 ? 表达式2 : 表达式3;
+</code></pre><hr>
+<h2 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h2><hr>
+<pre><code>switch (表达式){
     case 值1:
         代码1;
         break;
@@ -249,14 +260,20 @@ String(变量名);
         代码3;
         break;
 }
-</code></pre><h2 id="while循环-有可能一次都不执行"><a href="#while循环-有可能一次都不执行" class="headerlink" title="while循环(有可能一次都不执行)"></a>while循环(有可能一次都不执行)</h2><pre><code>while(循环的条件){
+</code></pre><hr>
+<h2 id="while循环-有可能一次都不执行"><a href="#while循环-有可能一次都不执行" class="headerlink" title="while循环(有可能一次都不执行)"></a>while循环(有可能一次都不执行)</h2><hr>
+<pre><code>while(循环的条件){
     循环体;
     计数器++;
 }
-</code></pre><h2 id="do…while-至少执行一次"><a href="#do…while-至少执行一次" class="headerlink" title="do…while(至少执行一次)"></a>do…while(至少执行一次)</h2><pre><code>do{
+</code></pre><hr>
+<h2 id="do…while-至少执行一次"><a href="#do…while-至少执行一次" class="headerlink" title="do…while(至少执行一次)"></a>do…while(至少执行一次)</h2><hr>
+<pre><code>do{
     //循环体
 }while(条件);
-</code></pre><h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><p>先执行表达式1，然后判断表达式2，如果不成立直接跳出循环。如果成立，执行循环体代码，结束后，跳到表达式3，然后判断表达式2。</p>
+</code></pre><hr>
+<h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><hr>
+<p>先执行表达式1，然后判断表达式2，如果不成立直接跳出循环。如果成立，执行循环体代码，结束后，跳到表达式3，然后判断表达式2。</p>
 <pre><code>for (表达式1; 表达式2; 表达式3) {
     循环体;
 }
@@ -264,12 +281,16 @@ String(变量名);
 for(var i = 0; i &lt; 10; i++){
 
 }
-</code></pre><h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><pre><code>alert();
+</code></pre><hr>
+<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><hr>
+<pre><code>alert();
 console.log();
 document.write(&quot;&quot;);
 </code></pre><p>代码调试</p>
 <p><img src="/2018/11/25/1.JavaScript基本语法和DOM和BOM/1.png" alt=""></p>
-<h2 id="break和continue"><a href="#break和continue" class="headerlink" title="break和continue"></a>break和continue</h2><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><pre><code>var arr1 = new Array();//空数组
+<hr>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><hr>
+<pre><code>var arr1 = new Array();//空数组
 
 var arr2 = new Array(5);//长度为5，每个值是undefined
 
@@ -285,7 +306,28 @@ var arr5 = [10,30,50,20,40];//5个值
 </code></pre><p>获取数组长度</p>
 <pre><code>数组名.length
 </code></pre><p>数组中存储的数据类型可以不一样。</p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>函数的定义</p>
+<p>从数组最后添加和删除数据：</p>
+<pre><code>var aList = [1,2,3,4];
+aList.push(5);
+alert(aList); //弹出1,2,3,4,5
+aList.pop();
+alert(aList); // 弹出1,2,3,4
+</code></pre><p>根据下标添加和删除元素</p>
+<pre><code>arr.splice(start,num,element1,.....,elementN)
+</code></pre><p>参数解析：start：必需，开始删除的索引。num：可选，删除数组元素的个数。elementN：可选，在start索引位置要插入的新元素。</p>
+<p>此方法会删除从start索引开始的num个元素，并将elementN参数插入到start索引位置。</p>
+<pre><code>var colors = [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;];
+colors.splice(0,1);  //删除第一项
+alert(colors);  //green,blue
+
+colors.splice(1, 0, &quot;yellow&quot;, &quot;orange&quot;);  //从第一个索引位置插入两项数据
+alert(colors);  //green,yellow,organge,blue
+
+colors.splice(1, 1, &quot;red&quot;, &quot;purple&quot;);  //删除一项，插入两项数据
+alert(colors);  //green,red,purple,orange,blue
+</code></pre><hr>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><hr>
+<p>函数的定义</p>
 <pre><code>function 函数名(){
     函数体
 }
@@ -304,6 +346,7 @@ var arr5 = [10,30,50,20,40];//5个值
 }
 var result = getSum(10,30);
 </code></pre><p>函数的数据类型是function</p>
+<hr>
 <h2 id="arguments对象伪数组"><a href="#arguments对象伪数组" class="headerlink" title="arguments对象伪数组"></a>arguments对象伪数组</h2><p>arguments可以获取传入的每个参数的值</p>
 <pre><code>function f1(){
     arguments.length;
@@ -478,7 +521,9 @@ console.log(dt.valueOf());//毫秒值
 <p>元素element：页面中的每个标签，都是一个元素，每个元素都可以看成是一个对象。</p>
 <p>节点node：页面中所有的内容都是节点，包括标签，属性，文本。</p>
 <p>根元素：html标签。</p>
-<h2 id="获取元素对象"><a href="#获取元素对象" class="headerlink" title="获取元素对象"></a>获取元素对象</h2><p><code>document.getElementById(&quot;id&quot;)</code></p>
+<hr>
+<h2 id="获取元素对象"><a href="#获取元素对象" class="headerlink" title="获取元素对象"></a>获取元素对象</h2><hr>
+<p><code>document.getElementById(&quot;id&quot;)</code></p>
 <pre><code>&lt;body&gt;
     &lt;input type=&quot;button&quot; value=&quot;显示&quot; id=&quot;btn&quot;&gt;
 &lt;script &gt;
@@ -530,7 +575,8 @@ for (var i = 0; i &lt; pObjs.length;i++){
 根据name属性的值获取元素，返回来的是一个伪数组，里面保存了多个的DOM对象document.getELementsByName (&quot;name属性的值&quot;)
 
 根据类样式的名字来获取元素，返回来的是一个伪数组，里面保存了多个的DOM对象document.getELementsByClassName(&quot;类样式的名字&quot;)根据选择器获取元素，返回来的是一个元素对象document.querySelector( &quot;选择器的名字&quot;);
-</code></pre><h2 id="对象属性"><a href="#对象属性" class="headerlink" title="对象属性"></a>对象属性</h2><p><code>class</code>设置使用<code>className</code></p>
+</code></pre><hr>
+<h2 id="对象属性"><a href="#对象属性" class="headerlink" title="对象属性"></a>对象属性</h2><p><code>class</code>设置使用<code>className</code></p>
 <pre><code>document.getElementById(&quot;dd&quot;).className = &quot;cls&quot;;
 </code></pre><p>获取<code>body</code>、<code>title</code>、<code>html</code></p>
 <pre><code>document.body 
@@ -760,13 +806,24 @@ window.history.forward();
 window.history.go();//整数和负数代表前进和后退
 </code></pre><h2 id="navigator"><a href="#navigator" class="headerlink" title="navigator"></a>navigator</h2><pre><code>window.navigator.platform//判断浏览器所在的系统平台类型
 window.navigator.userAgent
-</code></pre><h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><p>反复执行</p>
+</code></pre><hr>
+<h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><hr>
+<p>js 定时器有两种创建方式：setTimeout和setInterval。</p>
+<pre><code>//以指定的时间间隔（以毫秒计）调用一次函数的定时器
+setTimeout(func[, delay, param1, param2, ...])
+
+//以指定的时间间隔（以毫秒计）重复调用一个函数的定时器
+setInterval(func[, delay, param1, param2, ...])
+</code></pre><p>setTimeout函数的参数说明:func, 表示定时器要执行的函数名；delay, 表示时间间隔，默认是0，单位是毫秒；param1, 表示定时器执行函数的第一个参数，一次类推传入多个执行函数对应的参数。</p>
+<p>setInterval函数的参数说明:func , 表示定时器要执行的函数名;delay, 表示时间间隔，默认是0，单位是毫秒;param1, 表示定时器执行函数的第一个参数，一次类推传入多个执行函数对应的参数。</p>
+<p>反复执行</p>
 <pre><code>var timeId = window.setInterval(function(){},1000);//设置定时
 window.clearInterval(timeId);//停止定时
 </code></pre><p>一次性定时器</p>
 <pre><code>var timeId = window.setTimeout(function(){},1000);
 clearTimeout(timeId);//清除定时缓存空间
-</code></pre><h2 id="offset"><a href="#offset" class="headerlink" title="offset"></a>offset</h2><p>获取元素的宽和高（包含边框）</p>
+</code></pre><hr>
+<h2 id="offset"><a href="#offset" class="headerlink" title="offset"></a>offset</h2><p>获取元素的宽和高（包含边框）</p>
 <pre><code>.offsetWidth;//数字类型，没有px
 .offsetHeight;
 </code></pre><p>获取元素的left和top，</p>
@@ -859,7 +916,7 @@ var left = window.pageXOffset || document.documentElement.scrollLeft || document
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript介绍"><span class="toc-text">JavaScript介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript三种写法"><span class="toc-text">JavaScript三种写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量和数据类型"><span class="toc-text">变量和数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三元表达式"><span class="toc-text">三元表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#switch语句"><span class="toc-text">switch语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#while循环-有可能一次都不执行"><span class="toc-text">while循环(有可能一次都不执行)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#do…while-至少执行一次"><span class="toc-text">do…while(至少执行一次)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试"><span class="toc-text">调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#break和continue"><span class="toc-text">break和continue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#arguments对象伪数组"><span class="toc-text">arguments对象伪数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名函数（函数表达式）"><span class="toc-text">匿名函数（函数表达式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数的自调用（一次性）"><span class="toc-text">函数的自调用（一次性）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作为参数（回调函数）"><span class="toc-text">函数作为参数（回调函数）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作为返回值"><span class="toc-text">函数作为返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预解析"><span class="toc-text">预解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON格式的数据遍历"><span class="toc-text">JSON格式的数据遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置对象-系统提供的"><span class="toc-text">内置对象(系统提供的)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-文档对象模型"><span class="toc-text">DOM-文档对象模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取元素对象"><span class="toc-text">获取元素对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象属性"><span class="toc-text">对象属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#innerText和textContent、innerHTML"><span class="toc-text">innerText和textContent、innerHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义属性"><span class="toc-text">自定义属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节点"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素的创建"><span class="toc-text">元素的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素绑定多个事件-addEventListener和-attachEvent"><span class="toc-text">元素绑定多个事件.addEventListener和.attachEvent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素解绑事件"><span class="toc-text">元素解绑事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件冒泡"><span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件的三个阶段"><span class="toc-text">事件的三个阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BOM"><span class="toc-text">BOM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#onload"><span class="toc-text">onload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location"><span class="toc-text">location</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#history"><span class="toc-text">history</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#navigator"><span class="toc-text">navigator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定时器"><span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#offset"><span class="toc-text">offset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scroll"><span class="toc-text">scroll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#client"><span class="toc-text">client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取元素的样式属性值"><span class="toc-text">获取元素的样式属性值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript介绍"><span class="toc-text">JavaScript介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript三种写法"><span class="toc-text">JavaScript三种写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量和数据类型"><span class="toc-text">变量和数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三元表达式"><span class="toc-text">三元表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#switch语句"><span class="toc-text">switch语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#while循环-有可能一次都不执行"><span class="toc-text">while循环(有可能一次都不执行)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#do…while-至少执行一次"><span class="toc-text">do…while(至少执行一次)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试"><span class="toc-text">调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#arguments对象伪数组"><span class="toc-text">arguments对象伪数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名函数（函数表达式）"><span class="toc-text">匿名函数（函数表达式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数的自调用（一次性）"><span class="toc-text">函数的自调用（一次性）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作为参数（回调函数）"><span class="toc-text">函数作为参数（回调函数）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作为返回值"><span class="toc-text">函数作为返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预解析"><span class="toc-text">预解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON格式的数据遍历"><span class="toc-text">JSON格式的数据遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置对象-系统提供的"><span class="toc-text">内置对象(系统提供的)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-文档对象模型"><span class="toc-text">DOM-文档对象模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取元素对象"><span class="toc-text">获取元素对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象属性"><span class="toc-text">对象属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#innerText和textContent、innerHTML"><span class="toc-text">innerText和textContent、innerHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义属性"><span class="toc-text">自定义属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节点"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素的创建"><span class="toc-text">元素的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素绑定多个事件-addEventListener和-attachEvent"><span class="toc-text">元素绑定多个事件.addEventListener和.attachEvent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素解绑事件"><span class="toc-text">元素解绑事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件冒泡"><span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件的三个阶段"><span class="toc-text">事件的三个阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BOM"><span class="toc-text">BOM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#onload"><span class="toc-text">onload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location"><span class="toc-text">location</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#history"><span class="toc-text">history</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#navigator"><span class="toc-text">navigator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定时器"><span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#offset"><span class="toc-text">offset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scroll"><span class="toc-text">scroll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#client"><span class="toc-text">client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取元素的样式属性值"><span class="toc-text">获取元素的样式属性值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol>
         
     </div>
 </aside>
