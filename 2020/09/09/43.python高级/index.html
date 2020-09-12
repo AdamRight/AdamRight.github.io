@@ -801,8 +801,404 @@ if __name__ == &apos;__main__&apos;:
 <p>recv原理剖析：recv是不是直接从客户端接收数据?不是，应用软件是无法直接通过网卡接收数据的，它需要调用操作系统接口，由操作系统通过网卡接收数据，把接收的数据写入到接收缓冲区(内存中的一片空间），应用程序再从接收缓存区获取客户端发送的数据。</p>
 <p>不管是recv还是send都不是直接接收到对方的数据和发送数据到对方，发送数据会写入到发送缓冲区，接收数据是从接收缓冲区来读取，发送数据和接收数据最终是由操作系统控制网卡来完成。</p>
 <hr>
-<h2 id="静态Web服务器"><a href="#静态Web服务器" class="headerlink" title="静态Web服务器"></a>静态Web服务器</h2><h3 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h3><hr>
+<h2 id="静态Web服务器"><a href="#静态Web服务器" class="headerlink" title="静态Web服务器"></a>静态Web服务器</h2><h3 id="启动python自带静态Web服务"><a href="#启动python自带静态Web服务" class="headerlink" title="启动python自带静态Web服务"></a>启动python自带静态Web服务</h3><hr>
+<p>静态Web服务器：可以为发出请求的浏览器提供静态文档的程序。</p>
+<p>搭建Python自带的静态Web服务器</p>
+<pre><code>python -m http.server 端口号
+</code></pre><p>-m表示运行包里面的模块，执行这个命令的时候，需要进入你自己指定静态文件的目录，然后通过浏览器就能访问对应的html文件了，这样一个静态的web服务器就搭建好了。</p>
 <hr>
+<h3 id="开发自己的静态Web服务器"><a href="#开发自己的静态Web服务器" class="headerlink" title="开发自己的静态Web服务器"></a>开发自己的静态Web服务器</h3><hr>
+<p>实现步骤:编写一个TCP服务端程序、获取浏览器发送的http请求报文数据、读取固定页面数据，把页面数据组装成HTTP响应报文数据发送给浏览器。HTTP响应报文数据发送完成以后，关闭服务于客户端的套接字。</p>
+<p>示例代码：</p>
+<pre><code>import socket
+
+if __name__ == &apos;__main__&apos;:
+    # 创建tcp服务端套接字
+    tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # 设置端口号复用, 程序退出端口立即释放
+    tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+    # 绑定端口号
+    tcp_server_socket.bind((&quot;&quot;, 9000))
+    # 设置监听
+    tcp_server_socket.listen(128)
+    while True:
+        # 等待接受客户端的连接请求
+        new_socket, ip_port = tcp_server_socket.accept()
+        # 代码执行到此，说明连接建立成功
+        recv_client_data = new_socket.recv(4096)
+        # 对二进制数据进行解码
+        recv_client_content = recv_client_data.decode(&quot;utf-8&quot;)
+        print(recv_client_content)
+        with open(&quot;static/index.html&quot;, &quot;rb&quot;) as file:
+            # 读取文件数据
+            file_data = file.read()
+        # 响应行
+        response_line = &quot;HTTP/1.1 200 OK\r\n&quot;
+        # 响应头
+        response_header = &quot;Server: PWS1.0\r\n&quot;
+        # 响应体
+        response_body = file_data
+        # 拼接响应报文
+        response_data = (response_line + response_header + &quot;\r\n&quot;).encode(&quot;utf-8&quot;) + response_body
+        # 发送数据
+        new_socket.send(response_data)
+        # 关闭服务与客户端的套接字
+        new_socket.close()
+</code></pre><hr>
+<h3 id="开发自己的静态Web服务器返回指定页面数据"><a href="#开发自己的静态Web服务器返回指定页面数据" class="headerlink" title="开发自己的静态Web服务器返回指定页面数据"></a>开发自己的静态Web服务器返回指定页面数据</h3><hr>
+<p>返回指定页面数据的实现步骤:获取用户请求资源的路径；根据请求资源的路径，读取指定文件的数据；组装指定文件数据的响应报文，发送给浏览器；判断请求的文件在服务端不存在，组装404状态的响应报文，发送给浏览器。</p>
+<pre><code>import socket
+
+def main():
+    # 创建tcp服务端套接字
+    tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # 设置端口号复用, 程序退出端口立即释放
+    tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+    # 绑定端口号
+    tcp_server_socket.bind((&quot;&quot;, 9000))
+    # 设置监听
+    tcp_server_socket.listen(128)
+    while True:
+        # 等待接受客户端的连接请求
+        new_socket, ip_port = tcp_server_socket.accept()
+        # 代码执行到此，说明连接建立成功
+        recv_client_data = new_socket.recv(4096)
+        if len(recv_client_data) == 0:
+            print(&quot;关闭浏览器了&quot;)
+            new_socket.close()
+            return
+        # 对二进制数据进行解码
+        recv_client_content = recv_client_data.decode(&quot;utf-8&quot;)
+        print(recv_client_content)
+        # 根据指定字符串进行分割， 最大分割次数指定2
+        request_list = recv_client_content.split(&quot; &quot;, maxsplit=2)
+        # 获取请求资源路径
+        request_path = request_list[1]
+        print(request_path)
+        # 判断请求的是否是根目录，如果条件成立，指定首页数据返回
+        if request_path == &quot;/&quot;:
+            request_path = &quot;/index.html&quot;
+        try:
+            # 动态打开指定文件
+            with open(&quot;static&quot; + request_path, &quot;rb&quot;) as file:
+                # 读取文件数据
+                file_data = file.read()
+        except Exception as e:
+            # 请求资源不存在，返回404数据
+            # 响应行
+            response_line = &quot;HTTP/1.1 404 Not Found\r\n&quot;
+            # 响应头
+            response_header = &quot;Server: PWS1.0\r\n&quot;
+            with open(&quot;static/error.html&quot;, &quot;rb&quot;) as file:
+                file_data = file.read()
+            # 响应体
+            response_body = file_data
+            # 拼接响应报文
+            response_data = (response_line + response_header + &quot;\r\n&quot;).encode(&quot;utf-8&quot;) + response_body
+            # 发送数据
+            new_socket.send(response_data)
+        else:
+            # 响应行
+            response_line = &quot;HTTP/1.1 200 OK\r\n&quot;
+            # 响应头
+            response_header = &quot;Server: PWS1.0\r\n&quot;
+            # 响应体
+            response_body = file_data
+            # 拼接响应报文
+            response_data = (response_line + response_header + &quot;\r\n&quot;).encode(&quot;utf-8&quot;) + response_body
+            # 发送数据
+            new_socket.send(response_data)
+        finally:
+            # 关闭服务与客户端的套接字
+            new_socket.close()
+
+if __name__ == &apos;__main__&apos;:
+    main()
+</code></pre><hr>
+<h3 id="静态Web服务器-多任务版"><a href="#静态Web服务器-多任务版" class="headerlink" title="静态Web服务器-多任务版"></a>静态Web服务器-多任务版</h3><hr>
+<p>多任务版web服务器程序的实现步骤:当客户端和服务端建立连接成功，创建子线程，使用子线程专门处理客户端的请求，防止主线程阻塞。把创建的子线程设置成为守护主线程，防止主线程无法退出。</p>
+<pre><code>import socket
+import threading
+
+# 处理客户端的请求
+def handle_client_request(new_socket):
+    # 代码执行到此，说明连接建立成功
+    recv_client_data = new_socket.recv(4096)
+    if len(recv_client_data) == 0:
+        print(&quot;关闭浏览器了&quot;)
+        new_socket.close()
+        return
+    # 对二进制数据进行解码
+    recv_client_content = recv_client_data.decode(&quot;utf-8&quot;)
+    print(recv_client_content)
+    # 根据指定字符串进行分割， 最大分割次数指定2
+    request_list = recv_client_content.split(&quot; &quot;, maxsplit=2)
+    # 获取请求资源路径
+    request_path = request_list[1]
+    print(request_path)
+    # 判断请求的是否是根目录，如果条件成立，指定首页数据返回
+    if request_path == &quot;/&quot;:
+        request_path = &quot;/index.html&quot;
+    try:
+        # 动态打开指定文件
+        with open(&quot;static&quot; + request_path, &quot;rb&quot;) as file:
+            # 读取文件数据
+            file_data = file.read()
+    except Exception as e:
+        # 请求资源不存在，返回404数据
+        # 响应行
+        response_line = &quot;HTTP/1.1 404 Not Found\r\n&quot;
+        # 响应头
+        response_header = &quot;Server: PWS1.0\r\n&quot;
+        with open(&quot;static/error.html&quot;, &quot;rb&quot;) as file:
+            file_data = file.read()
+        # 响应体
+        response_body = file_data
+        # 拼接响应报文
+        response_data = (response_line + response_header + &quot;\r\n&quot;).encode(&quot;utf-8&quot;) + response_body
+        # 发送数据
+        new_socket.send(response_data)
+    else:
+        # 响应行
+        response_line = &quot;HTTP/1.1 200 OK\r\n&quot;
+        # 响应头
+        response_header = &quot;Server: PWS1.0\r\n&quot;
+        # 响应体
+        response_body = file_data
+        # 拼接响应报文
+        response_data = (response_line + response_header + &quot;\r\n&quot;).encode(&quot;utf-8&quot;) + response_body
+        # 发送数据
+        new_socket.send(response_data)
+    finally:
+        # 关闭服务与客户端的套接字
+        new_socket.close()
+
+# 程序入口函数
+def main():
+    # 创建tcp服务端套接字
+    tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # 设置端口号复用, 程序退出端口立即释放
+    tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+    # 绑定端口号
+    tcp_server_socket.bind((&quot;&quot;, 9000))
+    # 设置监听
+    tcp_server_socket.listen(128)
+    while True:
+        # 等待接受客户端的连接请求
+        new_socket, ip_port = tcp_server_socket.accept()
+        print(ip_port)
+        # 当客户端和服务器建立连接程，创建子线程
+        sub_thread = threading.Thread(target=handle_client_request, args=(new_socket,))
+        # 设置守护主线程
+        sub_thread.setDaemon(True)
+        # 启动子线程执行对应的任务
+        sub_thread.start()
+
+if __name__ == &apos;__main__&apos;:
+    main()
+</code></pre><hr>
+<h3 id="静态Web服务器-面向对象开发"><a href="#静态Web服务器-面向对象开发" class="headerlink" title="静态Web服务器-面向对象开发"></a>静态Web服务器-面向对象开发</h3><hr>
+<p>实现步骤:把提供服务的Web服务器抽象成一个类(HTTPWebServer)；提供Web服务器的初始化方法，在初始化方法里面创建socket对象；提供一个开启Web服务器的方法，让Web服务器处理客户端请求操作。</p>
+<pre><code>import socket
+import threading
+
+# 定义web服务器类
+class HttpWebServer(object):
+    def __init__(self):
+        # 创建tcp服务端套接字
+        tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # 设置端口号复用, 程序退出端口立即释放
+        tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+        # 绑定端口号
+        tcp_server_socket.bind((&quot;&quot;, 9000))
+        # 设置监听
+        tcp_server_socket.listen(128)
+        # 保存创建成功的服务器套接字
+        self.tcp_server_socket = tcp_server_socket
+
+    # 处理客户端的请求
+    @staticmethod
+    def handle_client_request(new_socket):
+        # 代码执行到此，说明连接建立成功
+        recv_client_data = new_socket.recv(4096)
+        if len(recv_client_data) == 0:
+            print(&quot;关闭浏览器了&quot;)
+            new_socket.close()
+            return
+        # 对二进制数据进行解码
+        recv_client_content = recv_client_data.decode(&quot;utf-8&quot;)
+        print(recv_client_content)
+        # 根据指定字符串进行分割， 最大分割次数指定2
+        request_list = recv_client_content.split(&quot; &quot;, maxsplit=2)
+        # 获取请求资源路径
+        request_path = request_list[1]
+        print(request_path)
+        # 判断请求的是否是根目录，如果条件成立，指定首页数据返回
+        if request_path == &quot;/&quot;:
+            request_path = &quot;/index.html&quot;
+        try:
+            # 动态打开指定文件
+            with open(&quot;static&quot; + request_path, &quot;rb&quot;) as file:
+                # 读取文件数据
+                file_data = file.read()
+        except Exception as e:
+            # 请求资源不存在，返回404数据
+            # 响应行
+            response_line = &quot;HTTP/1.1 404 Not Found\r\n&quot;
+            # 响应头
+            response_header = &quot;Server: PWS1.0\r\n&quot;
+            with open(&quot;static/error.html&quot;, &quot;rb&quot;) as file:
+                file_data = file.read()
+            # 响应体
+            response_body = file_data
+            # 拼接响应报文
+            response_data = (response_line + response_header + &quot;\r\n&quot;).encode(&quot;utf-8&quot;) + response_body
+            # 发送数据
+            new_socket.send(response_data)
+        else:
+            # 响应行
+            response_line = &quot;HTTP/1.1 200 OK\r\n&quot;
+            # 响应头
+            response_header = &quot;Server: PWS1.0\r\n&quot;
+            # 响应体
+            response_body = file_data
+            # 拼接响应报文
+            response_data = (response_line + response_header + &quot;\r\n&quot;).encode(&quot;utf-8&quot;) + response_body
+            # 发送数据
+            new_socket.send(response_data)
+        finally:
+            # 关闭服务与客户端的套接字
+            new_socket.close()
+
+    # 启动web服务器进行工作
+    def start(self):
+        while True:
+            # 等待接受客户端的连接请求
+            new_socket, ip_port = self.tcp_server_socket.accept()
+            # 当客户端和服务器建立连接程，创建子线程
+            sub_thread = threading.Thread(target=self.handle_client_request, args=(new_socket,))
+            # 设置守护主线程
+            sub_thread.setDaemon(True)
+            # 启动子线程执行对应的任务
+            sub_thread.start()
+
+# 程序入口函数
+def main():
+    # 创建web服务器对象
+    web_server = HttpWebServer()
+    # 启动web服务器进行工作
+    web_server.start()
+
+if __name__ == &apos;__main__&apos;:
+    main()
+</code></pre><hr>
+<h3 id="命令行启动动态绑定端口号"><a href="#命令行启动动态绑定端口号" class="headerlink" title="命令行启动动态绑定端口号"></a>命令行启动动态绑定端口号</h3><hr>
+<p>实现步骤:获取执行python程序的终端命令行参数;判断参数的类型，设置端口号必须是整型;给Web服务器类的初始化方法添加一个端口号参数，用于绑定端口号。</p>
+<pre><code>import socket
+import threading
+import sys
+
+# 定义web服务器类
+class HttpWebServer(object):
+    def __init__(self, port):
+        # 创建tcp服务端套接字
+        tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # 设置端口号复用, 程序退出端口立即释放
+        tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+        # 绑定端口号
+        tcp_server_socket.bind((&quot;&quot;, port))
+        # 设置监听
+        tcp_server_socket.listen(128)
+        # 保存创建成功的服务器套接字
+        self.tcp_server_socket = tcp_server_socket
+
+    # 处理客户端的请求
+    @staticmethod
+    def handle_client_request(new_socket):
+        # 代码执行到此，说明连接建立成功
+        recv_client_data = new_socket.recv(4096)
+        if len(recv_client_data) == 0:
+            print(&quot;关闭浏览器了&quot;)
+            new_socket.close()
+            return
+        # 对二进制数据进行解码
+        recv_client_content = recv_client_data.decode(&quot;utf-8&quot;)
+        print(recv_client_content)
+        # 根据指定字符串进行分割， 最大分割次数指定2
+        request_list = recv_client_content.split(&quot; &quot;, maxsplit=2)
+        # 获取请求资源路径
+        request_path = request_list[1]
+        print(request_path)
+        # 判断请求的是否是根目录，如果条件成立，指定首页数据返回
+        if request_path == &quot;/&quot;:
+            request_path = &quot;/index.html&quot;
+        try:
+            # 动态打开指定文件
+            with open(&quot;static&quot; + request_path, &quot;rb&quot;) as file:
+                # 读取文件数据
+                file_data = file.read()
+        except Exception as e:
+            # 请求资源不存在，返回404数据
+            # 响应行
+            response_line = &quot;HTTP/1.1 404 Not Found\r\n&quot;
+            # 响应头
+            response_header = &quot;Server: PWS1.0\r\n&quot;
+            with open(&quot;static/error.html&quot;, &quot;rb&quot;) as file:
+                file_data = file.read()
+            # 响应体
+            response_body = file_data
+            # 拼接响应报文
+            response_data = (response_line + response_header + &quot;\r\n&quot;).encode(&quot;utf-8&quot;) + response_body
+            # 发送数据
+            new_socket.send(response_data)
+        else:
+            # 响应行
+            response_line = &quot;HTTP/1.1 200 OK\r\n&quot;
+            # 响应头
+            response_header = &quot;Server: PWS1.0\r\n&quot;
+            # 响应体
+            response_body = file_data
+            # 拼接响应报文
+            response_data = (response_line + response_header + &quot;\r\n&quot;).encode(&quot;utf-8&quot;) + response_body
+            # 发送数据
+            new_socket.send(response_data)
+        finally:
+            # 关闭服务与客户端的套接字
+            new_socket.close()
+
+    # 启动web服务器进行工作
+    def start(self):
+        while True:
+            # 等待接受客户端的连接请求
+            new_socket, ip_port = self.tcp_server_socket.accept()
+            # 当客户端和服务器建立连接程，创建子线程
+            sub_thread = threading.Thread(target=self.handle_client_request, args=(new_socket,))
+            # 设置守护主线程
+            sub_thread.setDaemon(True)
+            # 启动子线程执行对应的任务
+            sub_thread.start()
+
+# 程序入口函数
+def main():
+    print(sys.argv)
+    # 判断命令行参数是否等于2,
+    if len(sys.argv) != 2:
+        print(&quot;执行命令如下: python3 xxx.py 8000&quot;)
+        return
+    # 判断字符串是否都是数字组成
+    if not sys.argv[1].isdigit():
+        print(&quot;执行命令如下: python3 xxx.py 8000&quot;)
+        return
+    # 获取终端命令行参数
+    port = int(sys.argv[1])
+    # 创建web服务器对象
+    web_server = HttpWebServer(port)
+    # 启动web服务器进行工作
+    web_server.start()
+
+if __name__ == &apos;__main__&apos;:
+    main()
+</code></pre><hr>
 
     </div>
     
@@ -859,7 +1255,7 @@ if __name__ == &apos;__main__&apos;:
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#多任务编程"><span class="toc-text">多任务编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多进程"><span class="toc-text">多进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程编号"><span class="toc-text">进程编号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程执行带有参数的任务"><span class="toc-text">进程执行带有参数的任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的注意点"><span class="toc-text">进程的注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程的使用"><span class="toc-text">多线程的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程执行带有参数的任务"><span class="toc-text">线程执行带有参数的任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程的注意点"><span class="toc-text">线程的注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#互斥锁"><span class="toc-text">互斥锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#死锁"><span class="toc-text">死锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程和线程的对比"><span class="toc-text">进程和线程的对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络编程"><span class="toc-text">网络编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP客户端程序开发"><span class="toc-text">TCP客户端程序开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP服务端程序开发"><span class="toc-text">TCP服务端程序开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP网络应用程序的注意点"><span class="toc-text">TCP网络应用程序的注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多任务版TCP服务端程序开发"><span class="toc-text">多任务版TCP服务端程序开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#socket之send和recv原理剖析"><span class="toc-text">socket之send和recv原理剖析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态Web服务器"><span class="toc-text">静态Web服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建"><span class="toc-text">搭建</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#多任务编程"><span class="toc-text">多任务编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多进程"><span class="toc-text">多进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程编号"><span class="toc-text">进程编号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程执行带有参数的任务"><span class="toc-text">进程执行带有参数的任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的注意点"><span class="toc-text">进程的注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程的使用"><span class="toc-text">多线程的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程执行带有参数的任务"><span class="toc-text">线程执行带有参数的任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程的注意点"><span class="toc-text">线程的注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#互斥锁"><span class="toc-text">互斥锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#死锁"><span class="toc-text">死锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程和线程的对比"><span class="toc-text">进程和线程的对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络编程"><span class="toc-text">网络编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP客户端程序开发"><span class="toc-text">TCP客户端程序开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP服务端程序开发"><span class="toc-text">TCP服务端程序开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP网络应用程序的注意点"><span class="toc-text">TCP网络应用程序的注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多任务版TCP服务端程序开发"><span class="toc-text">多任务版TCP服务端程序开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#socket之send和recv原理剖析"><span class="toc-text">socket之send和recv原理剖析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态Web服务器"><span class="toc-text">静态Web服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动python自带静态Web服务"><span class="toc-text">启动python自带静态Web服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发自己的静态Web服务器"><span class="toc-text">开发自己的静态Web服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发自己的静态Web服务器返回指定页面数据"><span class="toc-text">开发自己的静态Web服务器返回指定页面数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态Web服务器-多任务版"><span class="toc-text">静态Web服务器-多任务版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态Web服务器-面向对象开发"><span class="toc-text">静态Web服务器-面向对象开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令行启动动态绑定端口号"><span class="toc-text">命令行启动动态绑定端口号</span></a></li></ol></li></ol>
         
     </div>
 </aside>
