@@ -1199,6 +1199,92 @@ def main():
 if __name__ == &apos;__main__&apos;:
     main()
 </code></pre><hr>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><hr>
+<p>数据库就是存储和管理数据的仓库，数据按照一定的格式进行存储，用户可以对数据库中的数据进行增加、修改、删除、查询等操作。</p>
+<p>数据库的分类：关系型数据库和非关系型数据库。</p>
+<p>关系型数据库:是指采用了关系模型来组织数据的数据库，简单来说，关系模型指的就是二维表格模型。</p>
+<p>关系型数据库中核心元素：数据行、数据列、数据表、数据库(数据表的集合)。</p>
+<p>常用的关系型数据库:Oracle、Microsoft SQL Server、MySQL、SQLite。</p>
+<p>非关系型数据库，又被称为NoSQL（Not Only SQL )，意为不仅仅是SQL，对NoSQL最普遍的定义是“非关联型的”，强调 Key-Value 的方式存储数据。</p>
+<p>常用的非关系型数据库:MongoDB、Redis。</p>
+<p>数据库管理系统（英语全拼：Relational Database Management System，简称RDBMS）是为管理关系型数据库而设计的软件系统，如果大家想要使用关系型数据库就需要安装数据库管理系统，其实就是一个应用软件。</p>
+<p>SQL(Structured Query Language)是结构化查询语言，是一种用来操作RDBMS的数据库的语言。也就是说通过 SQL 可以操作 oracle,sql server,mysql,sqlite 等关系型的数据库。</p>
+<p>SQL的作用是实现数据库客户端和数据库服务端之间的通信，SQL就是通信的桥梁。</p>
+<p>SQL语言主要分为：</p>
+<pre><code>DQL：数据查询语言，用于对数据进行查询，如select
+DML：数据操作语言，对数据进行增加、修改、删除，如insert、update、delete
+TPL：事务处理语言，对事务进行处理，包括begin transaction、commit、rollback
+DCL：数据控制语言，进行授权与权限回收，如grant、revoke
+DDL：数据定义语言，进行数据库、表的管理等，如create、drop
+</code></pre><p>对于程序员来讲，重点是数据的增、删、改、查，必须熟练编写DQL、DML，能够编写DDL完成数据库、表的操作，其它操作如TPL、DCL了解即可。SQL语言不区分大小写。</p>
+<hr>
+<h3 id="数据类型和约束"><a href="#数据类型和约束" class="headerlink" title="数据类型和约束"></a>数据类型和约束</h3><hr>
+<p>数据库中的数据保存在数据表中，在表中为了更加准确的存储数据，保证数据的正确有效，可以在创建表的时候，为表添加一些强制性的验证，比如:数据类型和约束。</p>
+<p>数据类型是指在创建表的时候为表中字段指定数据类型，只有数据符合类型要求才能存储起来，使用数据类型的原则是:够用就行，尽量使用取值范围小的，而不用大的，这样可以更多的节省存储空间。</p>
+<p>常用数据类型如下:</p>
+<pre><code>整数：int，bit
+小数：decimal
+字符串：varchar,char
+日期时间: date, time, datetime
+枚举类型(enum)
+</code></pre><ol>
+<li>decimal表示浮点数，如 decimal(5, 2) 表示共存5位数，小数占 2 位.</li>
+<li>char表示固定长度的字符串，如char(3)，如果填充’ab’时会补一个空格为’ab ‘，3表示字符数</li>
+<li>varchar表示可变长度的字符串，如varchar(3)，填充’ab’时就会存储’ab’，3表示字符数</li>
+<li>对于图片、音频、视频等文件，不存储在数据库中，而是上传到某个服务器上，然后在表中存储这个文件的保存路径.</li>
+<li>字符串 text 表示存储大文本，当字符大于 4000 时推荐使用, 比如技术博客</li>
+</ol>
+<p>数据约束<br>约束是指数据在数据类型限定的基础上额外增加的要求.</p>
+<p>常见的约束如下:</p>
+<pre><code>主键 primary key: 物理上存储的顺序. MySQL 建议所有表的主键字段都叫 id, 类型为 int unsigned.
+非空 not null: 此字段不允许填写空值.
+惟一 unique: 此字段的值不允许重复.
+默认 default: 当不填写字段对应的值会使用默认值，如果填写时以填写为准.
+外键 foreign key: 对关系字段进行约束, 当为关系字段填写值时, 会到关联的表中查询此值是否存在, 如果存在则填写成功, 如果不存在则填写失败并抛出异常.
+</code></pre><p>整数类型</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>字节大小</th>
+<th>有符号范围(Signed)</th>
+<th>无符号范围(Unsigned)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TINYINT</td>
+<td>1</td>
+<td>-128 ~ 127</td>
+<td>0 ~ 255</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>2</td>
+<td>-32768 ~ 32767</td>
+<td>0 ~ 65535</td>
+</tr>
+<tr>
+<td>MEDIUMINT</td>
+<td>3</td>
+<td>-8388608 ~ 8388607</td>
+<td>0 ~ 16777215</td>
+</tr>
+<tr>
+<td>INT/INTEGER</td>
+<td>4</td>
+<td>-2147483648 ~2147483647</td>
+<td>0 ~ 4294967295</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>8</td>
+<td>-9223372036854775808 ~ 9223372036854775807</td>
+<td>0 ~ 18446744073709551615</td>
+</tr>
+</tbody>
+</table>
+<hr>
 
     </div>
     
@@ -1255,7 +1341,7 @@ if __name__ == &apos;__main__&apos;:
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#多任务编程"><span class="toc-text">多任务编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多进程"><span class="toc-text">多进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程编号"><span class="toc-text">进程编号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程执行带有参数的任务"><span class="toc-text">进程执行带有参数的任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的注意点"><span class="toc-text">进程的注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程的使用"><span class="toc-text">多线程的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程执行带有参数的任务"><span class="toc-text">线程执行带有参数的任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程的注意点"><span class="toc-text">线程的注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#互斥锁"><span class="toc-text">互斥锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#死锁"><span class="toc-text">死锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程和线程的对比"><span class="toc-text">进程和线程的对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络编程"><span class="toc-text">网络编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP客户端程序开发"><span class="toc-text">TCP客户端程序开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP服务端程序开发"><span class="toc-text">TCP服务端程序开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP网络应用程序的注意点"><span class="toc-text">TCP网络应用程序的注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多任务版TCP服务端程序开发"><span class="toc-text">多任务版TCP服务端程序开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#socket之send和recv原理剖析"><span class="toc-text">socket之send和recv原理剖析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态Web服务器"><span class="toc-text">静态Web服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动python自带静态Web服务"><span class="toc-text">启动python自带静态Web服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发自己的静态Web服务器"><span class="toc-text">开发自己的静态Web服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发自己的静态Web服务器返回指定页面数据"><span class="toc-text">开发自己的静态Web服务器返回指定页面数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态Web服务器-多任务版"><span class="toc-text">静态Web服务器-多任务版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态Web服务器-面向对象开发"><span class="toc-text">静态Web服务器-面向对象开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令行启动动态绑定端口号"><span class="toc-text">命令行启动动态绑定端口号</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#多任务编程"><span class="toc-text">多任务编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多进程"><span class="toc-text">多进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程编号"><span class="toc-text">进程编号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程执行带有参数的任务"><span class="toc-text">进程执行带有参数的任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的注意点"><span class="toc-text">进程的注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程的使用"><span class="toc-text">多线程的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程执行带有参数的任务"><span class="toc-text">线程执行带有参数的任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程的注意点"><span class="toc-text">线程的注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#互斥锁"><span class="toc-text">互斥锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#死锁"><span class="toc-text">死锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程和线程的对比"><span class="toc-text">进程和线程的对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络编程"><span class="toc-text">网络编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP客户端程序开发"><span class="toc-text">TCP客户端程序开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP服务端程序开发"><span class="toc-text">TCP服务端程序开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP网络应用程序的注意点"><span class="toc-text">TCP网络应用程序的注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多任务版TCP服务端程序开发"><span class="toc-text">多任务版TCP服务端程序开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#socket之send和recv原理剖析"><span class="toc-text">socket之send和recv原理剖析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态Web服务器"><span class="toc-text">静态Web服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动python自带静态Web服务"><span class="toc-text">启动python自带静态Web服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发自己的静态Web服务器"><span class="toc-text">开发自己的静态Web服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发自己的静态Web服务器返回指定页面数据"><span class="toc-text">开发自己的静态Web服务器返回指定页面数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态Web服务器-多任务版"><span class="toc-text">静态Web服务器-多任务版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态Web服务器-面向对象开发"><span class="toc-text">静态Web服务器-面向对象开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令行启动动态绑定端口号"><span class="toc-text">命令行启动动态绑定端口号</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库"><span class="toc-text">数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据类型和约束"><span class="toc-text">数据类型和约束</span></a></li></ol></li></ol>
         
     </div>
 </aside>
