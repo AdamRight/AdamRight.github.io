@@ -196,22 +196,54 @@
 https://jingyan.baidu.com/article/925f8cb8dedc12c0dce05674.html
 
 https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
-</code></pre><h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><pre><code>&lt;h1&gt;&lt;/h1&gt;
-&lt;h2&gt;&lt;/h2&gt;
-&lt;h3&gt;&lt;/h3&gt;
-&lt;h4&gt;&lt;/h4&gt;
-&lt;h5&gt;&lt;/h5&gt;
-&lt;h6&gt;&lt;/h6&gt;
-</code></pre><p>段落</p>
-<pre><code>&lt;p&gt;&lt;/p&gt;
-</code></pre><p>换行</p>
-<pre><code>&lt;hr/&gt;
-</code></pre><p>分割线</p>
-<pre><code>&lt;br /&gt;
-</code></pre><p>块</p>
-<pre><code>&lt;div&gt;&lt;/div&gt;    
-&lt;span&gt;&lt;/span&gt;
-</code></pre><p>加粗</p>
+</code></pre><hr>
+<p>HTML的全称为：<code>HyperText Mark-up Language</code>, 指的是超文本标记语言。 标记：就是标签，标签大多数都是成对出现的。</p>
+<p>所谓超文本，有两层含义:因为网页中还可以图片、视频、音频等内容(超越文本限制);它还可以在网页中跳转到另一个网页，与世界各地主机的网页链接(超链接文本)。</p>
+<hr>
+<p>html的基本结构</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;            
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;title&gt;网页标题&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+          网页显示内容
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><hr>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><h3 id="常用的html标签"><a href="#常用的html标签" class="headerlink" title="常用的html标签"></a>常用的html标签</h3><hr>
+<pre><code>&lt;!-- 1、成对出现的标签：--&gt;
+&lt;h1&gt;h1标题&lt;/h1&gt;
+&lt;h2&gt;h2标题&lt;/h2&gt;
+&lt;h3&gt;h3标题&lt;/h3&gt;
+&lt;h4&gt;h4标题&lt;/h4&gt;
+&lt;h5&gt;h5标题&lt;/h5&gt;
+&lt;h6&gt;h6标题&lt;/h6&gt;
+
+&lt;div&gt;这是一个div标签&lt;/div&gt;
+
+&lt;p&gt;这个一个段落标签&lt;/p&gt;
+
+&lt;span&gt;这是一个span标签&lt;/span&gt;
+
+&lt;!-- 2、单个出现的标签： --&gt;
+&lt;br /&gt;    //换行
+&lt;img src=&quot;&quot; alt=&quot;&quot; title=&quot;&quot; border=&quot;&quot; width=&quot;&quot; height=&quot;&quot; /&gt;
+&lt;hr /&gt;    //分割线
+
+&lt;!-- 3、带属性的标签，如src、alt 和 href等都是属性 --&gt;
+&lt;img src=&quot;images/pic.jpg&quot; alt=&quot;图片&quot;&gt;
+&lt;a href=&quot;http://www.baidu.com&quot;&gt;百度网&lt;/a&gt;
+
+&lt;!-- 4、标签的嵌套 --&gt;
+&lt;div&gt;
+    &lt;img src=&quot;images/pic.jpg&quot; alt=&quot;图片&quot;&gt;
+    &lt;a href=&quot;http://www.baidu.com&quot;&gt;百度网&lt;/a&gt;
+&lt;/div&gt;
+</code></pre><hr>
+<h3 id="其他标签"><a href="#其他标签" class="headerlink" title="其他标签"></a>其他标签</h3><hr>
+<p>加粗</p>
 <pre><code>&lt;strong&gt;&lt;/strong&gt;
 &lt;b&gt;&lt;/b&gt;
 </code></pre><p>倾斜</p>
@@ -223,8 +255,6 @@ https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
 </code></pre><p>下划线</p>
 <pre><code>&lt;u&gt;&lt;/u&gt;
 &lt;ins&gt;&lt;/ins&gt;
-</code></pre><p>图片</p>
-<pre><code>&lt;img src=&quot;&quot; alt=&quot;&quot; title=&quot;&quot; border=&quot;&quot; width=&quot;&quot; height=&quot;&quot; /&gt;
 </code></pre><p>链接</p>
 <pre><code>&lt;a href=&quot;&quot; target=&quot;&quot;&gt;&lt;/a&gt;
 </code></pre><p>锚点定位（跳转）</p>
@@ -308,6 +338,8 @@ https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
 </tr>
 </tbody>
 </table>
+<hr>
+<h3 id="列表标签"><a href="#列表标签" class="headerlink" title="列表标签"></a>列表标签</h3><hr>
 <p>无序列表</p>
 <pre><code>&lt;ul&gt;
     &lt;li&gt;&lt;/li&gt;
@@ -325,7 +357,9 @@ https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
     &lt;dd&gt;&lt;/dd&gt;
     &lt;dd&gt;&lt;/dd&gt;
 &lt;/dl&gt;
-</code></pre><h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><pre><code>&lt;table width=&quot;&quot; border=&quot;&quot; align=&quot;&quot; cellpadding=&quot;&quot; cellspacing=&quot;&quot;&gt;
+</code></pre><hr>
+<h3 id="表格标签"><a href="#表格标签" class="headerlink" title="表格标签"></a>表格标签</h3><hr>
+<pre><code>&lt;table width=&quot;&quot; border=&quot;&quot; align=&quot;&quot; cellpadding=&quot;&quot; cellspacing=&quot;&quot;&gt;
     &lt;caption&gt;表格标题&lt;/caption&gt;
     &lt;thead&gt;
         &lt;tr&gt;
@@ -403,6 +437,8 @@ https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
 &lt;/table&gt;
 </code></pre><p>效果</p>
 <p><img src="/2018/12/01/2.html和css基础/3.png" alt=""></p>
+<hr>
+<h3 id="表单标签"><a href="#表单标签" class="headerlink" title="表单标签"></a>表单标签</h3><hr>
 <blockquote>
 <p>input表单</p>
 </blockquote>
@@ -1155,7 +1191,7 @@ text-overflow: ellipsis;/* 超出部分显示省略号 */
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#标签"><span class="toc-text">标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表格"><span class="toc-text">表格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引入CSS样式表"><span class="toc-text">引入CSS样式表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS选择器之基本选择器"><span class="toc-text">CSS选择器之基本选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS选择器之复合选择器"><span class="toc-text">CSS选择器之复合选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS字体属性"><span class="toc-text">CSS字体属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS外观属性"><span class="toc-text">CSS外观属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background"><span class="toc-text">background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标签显示模式"><span class="toc-text">标签显示模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS三大特性"><span class="toc-text">CSS三大特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#盒子模型"><span class="toc-text">盒子模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#圆角边框和盒子阴影"><span class="toc-text">圆角边框和盒子阴影</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浮动"><span class="toc-text">浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#清除浮动"><span class="toc-text">清除浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定位"><span class="toc-text">定位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示与隐藏"><span class="toc-text">显示与隐藏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#鼠标样式、轮廓线、防止拖拽文本域"><span class="toc-text">鼠标样式、轮廓线、防止拖拽文本域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vertical-align"><span class="toc-text">vertical-align</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#溢出文字隐藏"><span class="toc-text">溢出文字隐藏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sprites"><span class="toc-text">Sprites</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#滑动门"><span class="toc-text">滑动门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字体图标"><span class="toc-text">字体图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sublime快捷键"><span class="toc-text">sublime快捷键</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#标签"><span class="toc-text">标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的html标签"><span class="toc-text">常用的html标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他标签"><span class="toc-text">其他标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列表标签"><span class="toc-text">列表标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表格标签"><span class="toc-text">表格标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表单标签"><span class="toc-text">表单标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引入CSS样式表"><span class="toc-text">引入CSS样式表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS选择器之基本选择器"><span class="toc-text">CSS选择器之基本选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS选择器之复合选择器"><span class="toc-text">CSS选择器之复合选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS字体属性"><span class="toc-text">CSS字体属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS外观属性"><span class="toc-text">CSS外观属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background"><span class="toc-text">background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标签显示模式"><span class="toc-text">标签显示模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS三大特性"><span class="toc-text">CSS三大特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#盒子模型"><span class="toc-text">盒子模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#圆角边框和盒子阴影"><span class="toc-text">圆角边框和盒子阴影</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浮动"><span class="toc-text">浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#清除浮动"><span class="toc-text">清除浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定位"><span class="toc-text">定位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示与隐藏"><span class="toc-text">显示与隐藏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#鼠标样式、轮廓线、防止拖拽文本域"><span class="toc-text">鼠标样式、轮廓线、防止拖拽文本域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vertical-align"><span class="toc-text">vertical-align</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#溢出文字隐藏"><span class="toc-text">溢出文字隐藏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sprites"><span class="toc-text">Sprites</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#滑动门"><span class="toc-text">滑动门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字体图标"><span class="toc-text">字体图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sublime快捷键"><span class="toc-text">sublime快捷键</span></a></li></ol>
         
     </div>
 </aside>
