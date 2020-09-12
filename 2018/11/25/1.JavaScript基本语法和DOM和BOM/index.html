@@ -860,7 +860,394 @@ var left = window.pageXOffset || document.documentElement.scrollLeft || document
 }
 </code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>透明度</p>
 <pre><code>.style.opacity = 
-</code></pre>
+</code></pre><hr>
+<h2 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><hr>
+<p>jQuery是对JavaScript的封装，它是免费、开源的JavaScript函数库，jQuery极大地简化了JavaScript编程。</p>
+<p>jQuery的作用和JavaScript一样，都是负责网页和用户的交互效果。jQuery的优点就是兼容主流浏览器，代码编写更加简单。</p>
+<hr>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><hr>
+<p>引入</p>
+<pre><code>&lt;script src=&quot;js/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>使用js获取标签元素，需要页面加载完成以后再获取，我们通过给onload事件属性设置了一个函数来获取标签元素，而jquery提供了ready函数来解决这个问题，保证获取标签元素没有问题，它的速度比原生的 <code>window.onload</code> 更快。</p>
+<p>入口函数示例代码:</p>
+<pre><code>&lt;script src=&quot;js/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    window.onload = function(){
+        var oDiv = document.getElementById(&apos;div01&apos;);
+        alert(&apos;原生就是获取的div：&apos; + oDiv);
+    };
+    $(document).ready(function(){
+        var $div = $(&apos;#div01&apos;);
+        alert(&apos;jquery获取的div：&apos; + $div);
+    });
+&lt;/script&gt;
+
+&lt;div id=&quot;div01&quot;&gt;这是一个div&lt;/div&gt;
+</code></pre><p>入口函数的简写示例代码:</p>
+<pre><code>// 上面ready的写法可以简写成下面的形式：
+$(function(){
+    var $div = $(&apos;#div01&apos;);
+    alert(&apos;jquery获取的div：&apos; + $div);
+}); 
+</code></pre><hr>
+<h3 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h3><hr>
+<p>选择器就是快速选择标签元素，获取标签的，选择规则和css样式一样。</p>
+<p>标签选择器、类选择器、id选择器、层级选择器、属性选择器，示例代码:</p>
+<pre><code>$(&apos;#myId&apos;) //选择id为myId的标签
+$(&apos;.myClass&apos;) // 选择class为myClass的标签
+$(&apos;li&apos;) //选择所有的li标签
+$(&apos;#ul1 li span&apos;) //选择id为ul1标签下的所有li标签下的span标签
+$(&apos;input[name=first]&apos;) // 选择name属性等于first的input标签
+</code></pre><p>可以使用length属性来判断标签是否选择成功, 如果length大于0表示选择成功，否则选择失败。</p>
+<pre><code>$(function(){
+    result = $(&quot;div&quot;).length;
+    alert(result);
+});
+</code></pre><hr>
+<h3 id="选择集过滤"><a href="#选择集过滤" class="headerlink" title="选择集过滤"></a>选择集过滤</h3><hr>
+<p>选择集过滤就是在选择标签的集合里面过滤自己需要的标签。</p>
+<p>选择集过滤的操作：has(选择器名称)方法，表示选取包含指定选择器的标签；eq(索引)方法，表示选取指定索引的标签。</p>
+<p>has方法的示例代码:</p>
+<pre><code>&lt;script&gt;
+    $(function(){
+        //  has方法的使用
+        var $div = $(&quot;div&quot;).has(&quot;#mytext&quot;);
+        //  设置样式
+        $div.css({&quot;background&quot;:&quot;red&quot;});
+    });
+&lt;/script&gt;
+&lt;div&gt;
+    这是第一个div
+    &lt;input type=&quot;text&quot; id=&quot;mytext&quot;&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    这是第二个div
+    &lt;input type=&quot;text&quot;&gt;
+    &lt;input type=&quot;button&quot;&gt;
+&lt;/div&gt;
+</code></pre><p>eq方法的示例代码:</p>
+<pre><code>&lt;script&gt;
+    $(function(){
+        //  has方法的使用
+        var $div = $(&quot;div&quot;).has(&quot;#mytext&quot;);
+        //  设置样式
+        $div.css({&quot;background&quot;:&quot;red&quot;});
+        //  eq方法的使用
+        var $div = $(&quot;div&quot;).eq(1);
+        //  设置样式
+        $div.css({&quot;background&quot;:&quot;yellow&quot;});
+    });
+&lt;/script&gt;
+
+&lt;div&gt;
+    这是第一个div
+    &lt;input type=&quot;text&quot; id=&quot;mytext&quot;&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    这是第二个div
+    &lt;input type=&quot;text&quot;&gt;
+    &lt;input type=&quot;button&quot;&gt;
+&lt;/div&gt;
+</code></pre><hr>
+<h3 id="选择集转移"><a href="#选择集转移" class="headerlink" title="选择集转移"></a>选择集转移</h3><hr>
+<p>选择集转移就是以选择的标签为参照，然后获取转移后的标签。</p>
+<p>选择集转移操作：</p>
+<pre><code>$(&apos;#box&apos;).prev(); 表示选择id是box元素的上一个的同级元素
+$(&apos;#box&apos;).prevAll(); 表示选择id是box元素的上面所有的同级元素
+$(&apos;#box&apos;).next(); 表示选择id是box元素的下一个的同级元素
+$(&apos;#box&apos;).nextAll(); 表示选择id是box元素的下面所有的同级元素
+$(&apos;#box&apos;).parent(); 表示选择id是box元素的父元素
+$(&apos;#box&apos;).children(); 表示选择id是box元素的所有子元素
+$(&apos;#box&apos;).siblings(); 表示选择id是box元素的其它同级元素
+$(&apos;#box&apos;).find(&apos;.myClass&apos;); 表示选择id是box元素的class等于myClass的元素
+</code></pre><hr>
+<h3 id="获取和设置元素内容"><a href="#获取和设置元素内容" class="headerlink" title="获取和设置元素内容"></a>获取和设置元素内容</h3><hr>
+<p>jquery中的html方法可以获取和设置标签的html内容。</p>
+<pre><code>&lt;script&gt;
+    $(function(){
+
+        var $div = $(&quot;#div1&quot;);
+        //  获取标签的html内容
+        var result = $div.html();
+        alert(result);
+        //  设置标签的html内容，之前的内容会清除
+        $div.html(&quot;&lt;span style=&apos;color:red&apos;&gt;你好&lt;/span&gt;&quot;);
+        //  追加html内容
+        $div.append(&quot;&lt;span style=&apos;color:red&apos;&gt;你好&lt;/span&gt;&quot;);
+    });
+&lt;/script&gt;
+
+&lt;div id=&quot;div1&quot;&gt;
+    &lt;p&gt;hello&lt;/p&gt;
+&lt;/div&gt;
+</code></pre><hr>
+<h3 id="获取和设置元素属性"><a href="#获取和设置元素属性" class="headerlink" title="获取和设置元素属性"></a>获取和设置元素属性</h3><hr>
+<p>使用css方法可以给标签设置样式属性，那么设置标签的其它属性可以使用prop方法了。</p>
+<pre><code>&lt;style&gt;
+    .a01{
+        color:red;
+    }
+&lt;/style&gt;
+
+&lt;script&gt;
+    $(function(){
+        var $a = $(&quot;#link01&quot;);
+        var $input = $(&apos;#input01&apos;)
+
+        // 获取元素属性
+        var sId = $a.prop(&quot;id&quot;);
+        alert(sId);
+
+        // 设置元素属性
+        $a.prop({&quot;href&quot;:&quot;http://www.baidu.com&quot;,&quot;title&quot;:&apos;这是去到百度的链接&apos;,&quot;class&quot;:&quot;a01&quot;});
+
+        //  获取value属性
+        // var sValue = $input.prop(&quot;value&quot;);
+        // alert(sValue);
+
+        // 获取value属性使用val()方法的简写方式
+        var sValue = $input.val();
+        alert(sValue);
+        // 设置value值
+        $input.val(&quot;222222&quot;);
+    })
+&lt;/script&gt;
+
+&lt;a id=&quot;link01&quot;&gt;这是一个链接&lt;/a&gt;
+&lt;input type=&quot;text&quot; id=&quot;input01&quot; value=&quot;111111&quot;&gt;
+</code></pre><hr>
+<h3 id="jQuery事件"><a href="#jQuery事件" class="headerlink" title="jQuery事件"></a>jQuery事件</h3><hr>
+<p>常用事件</p>
+<pre><code>click() 鼠标单击
+blur() 元素失去焦点
+focus() 元素获得焦点
+mouseover() 鼠标进入（进入子元素也触发）
+mouseout() 鼠标离开（离开子元素也触发）
+ready() DOM加载完成
+</code></pre><p>示例代码:</p>
+<pre><code>&lt;script&gt;
+    $(function(){
+        var $li = $(&apos;.list li&apos;);
+        var $button = $(&apos;#button1&apos;)
+        var $text = $(&quot;#text1&quot;);
+        var $div = $(&quot;#div1&quot;)
+
+        //  鼠标点击
+        $li.click(function(){             
+            // this指的是当前发生事件的对象，但是它是一个原生js对象
+            // this.style.background = &apos;red&apos;;
+
+            // $(this) 指的是当前发生事件的jquery对象
+            $(this).css({&apos;background&apos;:&apos;gold&apos;});
+            // 获取jquery对象的索引值,通过index() 方法
+            alert($(this).index());
+        });
+
+        //  一般和按钮配合使用
+        $button.click(function(){
+            alert($text.val());
+        });
+
+        //  获取焦点
+        $text.focus(function(){
+            $(this).css({&apos;background&apos;:&apos;red&apos;});
+
+        });
+
+        //  失去焦点
+        $text.blur(function(){
+            $(this).css({&apos;background&apos;:&apos;white&apos;});
+
+        });
+
+        //  鼠标进入
+        $div.mouseover(function(){
+            $(this).css({&apos;background&apos;:&apos;gold&apos;});
+
+        });
+
+        //  鼠标离开
+        $div.mouseout(function() {
+            $(this).css({&apos;background&apos;:&apos;white&apos;});
+        });
+    });
+&lt;/script&gt;
+
+&lt;div id=&quot;div1&quot;&gt;
+    &lt;ul class=&quot;list&quot;&gt;
+        &lt;li&gt;列表文字&lt;/li&gt;
+        &lt;li&gt;列表文字&lt;/li&gt;
+        &lt;li&gt;列表文字&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;input type=&quot;text&quot; id=&quot;text1&quot;&gt;
+    &lt;input type=&quot;button&quot; id=&quot;button1&quot; value=&quot;点击&quot;&gt;
+&lt;/div&gt;
+</code></pre><hr>
+<h3 id="事件代理"><a href="#事件代理" class="headerlink" title="事件代理"></a>事件代理</h3><hr>
+<p>事件代理就是利用事件冒泡的原理(事件冒泡就是事件会向它的父级一级一级传递),把事件加到父级上，通过判断事件来源，执行相应的子元素的操作，事件代理首先可以极大减少事件绑定次数，提高性能；其次可以让新加入的子元素也可以拥有相同的操作。</p>
+<p>事件冒泡代码:当点击子元素div，它的点击事件会向它父元素传递，也会触发了父元素的点击事件，这就是事件冒泡。</p>
+<pre><code>&lt;script&gt;
+    $(function(){
+        var $div1 = $(&apos;#div1&apos;);
+        var $div2 = $(&apos;#div2&apos;);
+
+        $div1.click(function(){
+            alert($(this).html());
+        }); 
+
+        $div2.click(function(){
+            alert($(this).html());
+        }); 
+    });
+&lt;/script&gt;
+
+ &lt;div id=&quot;div1&quot; style=&quot;width:200px; height:200px; background: red;&quot;&gt;
+    &lt;div id=&quot;div2&quot; style=&quot;width:100px; height:100px;background: yellow;&quot;&gt;
+        哈哈
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>事件代理的使用，一般绑定事件的写法:</p>
+<pre><code>$(function(){
+    $ali = $(&apos;#list li&apos;);
+    $ali.click(function() {
+        $(this).css({background:&apos;red&apos;});
+    });
+})
+
+&lt;ul id=&quot;list&quot;&gt;
+    &lt;li&gt;1&lt;/li&gt;
+    &lt;li&gt;2&lt;/li&gt;
+    &lt;li&gt;3&lt;/li&gt;
+    &lt;li&gt;4&lt;/li&gt;
+    &lt;li&gt;5&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><p>事件代理的写法</p>
+<pre><code>$(function(){
+    $list = $(&apos;#list&apos;);
+    // 父元素ul 来代理 子元素li的点击事件
+    $list.delegate(&apos;li&apos;, &apos;click&apos;, function() {
+        // $(this)表示当前点击的子元素对象
+        $(this).css({background:&apos;red&apos;});
+    });
+})
+
+&lt;ul id=&quot;list&quot;&gt;
+    &lt;li&gt;1&lt;/li&gt;
+    &lt;li&gt;2&lt;/li&gt;
+    &lt;li&gt;3&lt;/li&gt;
+    &lt;li&gt;4&lt;/li&gt;
+    &lt;li&gt;5&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><p>delegate方法参数说明:</p>
+<pre><code>delegate(childSelector,event,function)
+//childSelector: 子元素的选择器
+//event: 事件名称，比如: &apos;click&apos;
+//function: 当事件触发执行的函数
+</code></pre><hr>
+<h3 id="JavaScript对象"><a href="#JavaScript对象" class="headerlink" title="JavaScript对象"></a>JavaScript对象</h3><hr>
+<p>JavaScript中的所有事物都是对象：字符串、数值、数组、函数等都可以认为是对象，此外，JavaScript 允许自定义对象，对象可以拥有属性和方法。</p>
+<p>创建自定义javascript对象有两种方式:通过顶级Object类型来实例化一个对象;通过对象字面量创建一个对象。</p>
+<p>Object类创建对象的示例代码:</p>
+<pre><code>&lt;script&gt;
+    var person = new Object();
+    // 添加属性：
+    person.name = &apos;tom&apos;;
+    person.age = &apos;25&apos;;
+
+    // 添加方法：
+    person.sayName = function(){
+        alert(this.name);
+    }
+
+    // 调用属性和方法：
+    alert(person.age);
+    person.sayName();
+&lt;/script&gt;
+</code></pre><p>对象字面量创建对象的示例代码:</p>
+<pre><code>&lt;script&gt;
+    var person2 = {
+        name:&apos;Rose&apos;,
+        age: 18,
+        sayName:function(){
+            alert(&apos;My name is&apos; + this.name);
+        }
+    }
+
+    // 调用属性和方法：
+    alert(person2.age);
+    person2.sayName();
+&lt;/script&gt;
+</code></pre><hr>
+<h3 id="json数据"><a href="#json数据" class="headerlink" title="json数据"></a>json数据</h3><hr>
+<p>json本质上是字符串，如果在js中操作json数据，可以将json字符串转化为JavaScript对象。</p>
+<p>示例代码:</p>
+<pre><code>var sJson = &apos;{&quot;name&quot;:&quot;tom&quot;,&quot;age&quot;:18}&apos;;
+var oPerson = JSON.parse(sJson);
+// 操作属性
+alert(oPerson.name);
+alert(oPerson.age);
+</code></pre><hr>
+<h3 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h3><hr>
+<p>ajax 是 <code>Asynchronous JavaScript and XML</code>的简写，ajax一个前后台配合的技术，它可以让 javascript 发送异步的 http 请求，与后台通信进行数据的获取，ajax 最大的优点是实现局部刷新，ajax可以发送http请求，当获取到后台数据的时候更新页面显示数据实现局部刷新，当前端页面想和后台服务器进行数据交互就可以使用ajax了。</p>
+<p>jquery将它封装成了一个方法<code>$.ajax()</code>，我们可以直接用这个方法来执行ajax请求。</p>
+<p>示例代码:</p>
+<pre><code>&lt;script&gt;
+    $.ajax({
+    // 1.url 请求地址
+    url:&apos;http://t.weather.sojson.com/api/weather/city/101010100&apos;,
+    // 2.type 请求方式，默认是&apos;GET&apos;，常用的还有&apos;POST&apos;
+    type:&apos;GET&apos;,
+    // 3.dataType 设置返回的数据格式，常用的是&apos;json&apos;格式
+    dataType:&apos;JSON&apos;,
+    // 4.data 设置发送给服务器的数据, 没有参数不需要设置​
+    // 5.success 设置请求成功后的回调函数
+    success:function (response) {
+        console.log(response);    
+    },
+    // 6.error 设置请求失败后的回调函数
+    error:function () {
+        alert(&quot;请求失败,请稍后再试!&quot;);
+    },
+    // 7.async 设置是否异步，默认值是&apos;true&apos;，表示异步，一般不用写
+    async:true
+});
+&lt;/script&gt;
+</code></pre><p>同步和异步说明：同步是一个ajax请求完成另外一个才可以请求，需要等待上一个ajax请求完成，好比线程同步。异步是多个ajax同时请求，不需要等待其它ajax请求完成，好比线程异步。</p>
+<p><code>$.ajax</code>按照请求方式可以简写成<code>$.get</code>或者<code>$.post</code>方式。示例代码:</p>
+<pre><code>&lt;script&gt;
+    $(function(){
+        /*
+         1. url 请求地址
+         2. data 设置发送给服务器的数据, 没有参数不需要设置
+         3. success 设置请求成功后的回调函数
+         4. dataType 设置返回的数据格式，常用的是&apos;json&apos;格式, 默认智能判断数据格式
+        */ 
+        $.get(&quot;http://t.weather.sojson.com/api/weather/city/101010100&quot;, function(dat,status){
+            console.log(dat);
+            console.log(status);
+            alert(dat);
+        }).error(function(){
+            alert(&quot;网络异常&quot;);
+        });
+
+        /*
+         1. url 请求地址
+         2. data 设置发送给服务器的数据, 没有参数不需要设置
+         3. success 设置请求成功后的回调函数
+         4. dataType 设置返回的数据格式，常用的是&apos;json&apos;格式, 默认智能判断数据格式
+        */ 
+        $.post(&quot;test.php&quot;, {&quot;func&quot;: &quot;getNameAndTime&quot;}, function(data){
+            alert(data.name); 
+            console.log(data.time); 
+        }, &quot;json&quot;).error(function(){
+            alert(&quot;网络异常&quot;);
+        }); 
+    });
+&lt;/script&gt;
+</code></pre><hr>
+
     </div>
     
         <div class="reward">
@@ -916,7 +1303,7 @@ var left = window.pageXOffset || document.documentElement.scrollLeft || document
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript介绍"><span class="toc-text">JavaScript介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript三种写法"><span class="toc-text">JavaScript三种写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量和数据类型"><span class="toc-text">变量和数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三元表达式"><span class="toc-text">三元表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#switch语句"><span class="toc-text">switch语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#while循环-有可能一次都不执行"><span class="toc-text">while循环(有可能一次都不执行)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#do…while-至少执行一次"><span class="toc-text">do…while(至少执行一次)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试"><span class="toc-text">调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#arguments对象伪数组"><span class="toc-text">arguments对象伪数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名函数（函数表达式）"><span class="toc-text">匿名函数（函数表达式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数的自调用（一次性）"><span class="toc-text">函数的自调用（一次性）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作为参数（回调函数）"><span class="toc-text">函数作为参数（回调函数）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作为返回值"><span class="toc-text">函数作为返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预解析"><span class="toc-text">预解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON格式的数据遍历"><span class="toc-text">JSON格式的数据遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置对象-系统提供的"><span class="toc-text">内置对象(系统提供的)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-文档对象模型"><span class="toc-text">DOM-文档对象模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取元素对象"><span class="toc-text">获取元素对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象属性"><span class="toc-text">对象属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#innerText和textContent、innerHTML"><span class="toc-text">innerText和textContent、innerHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义属性"><span class="toc-text">自定义属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节点"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素的创建"><span class="toc-text">元素的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素绑定多个事件-addEventListener和-attachEvent"><span class="toc-text">元素绑定多个事件.addEventListener和.attachEvent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素解绑事件"><span class="toc-text">元素解绑事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件冒泡"><span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件的三个阶段"><span class="toc-text">事件的三个阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BOM"><span class="toc-text">BOM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#onload"><span class="toc-text">onload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location"><span class="toc-text">location</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#history"><span class="toc-text">history</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#navigator"><span class="toc-text">navigator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定时器"><span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#offset"><span class="toc-text">offset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scroll"><span class="toc-text">scroll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#client"><span class="toc-text">client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取元素的样式属性值"><span class="toc-text">获取元素的样式属性值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript介绍"><span class="toc-text">JavaScript介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript三种写法"><span class="toc-text">JavaScript三种写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量和数据类型"><span class="toc-text">变量和数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三元表达式"><span class="toc-text">三元表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#switch语句"><span class="toc-text">switch语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#while循环-有可能一次都不执行"><span class="toc-text">while循环(有可能一次都不执行)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#do…while-至少执行一次"><span class="toc-text">do…while(至少执行一次)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试"><span class="toc-text">调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#arguments对象伪数组"><span class="toc-text">arguments对象伪数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名函数（函数表达式）"><span class="toc-text">匿名函数（函数表达式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数的自调用（一次性）"><span class="toc-text">函数的自调用（一次性）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作为参数（回调函数）"><span class="toc-text">函数作为参数（回调函数）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作为返回值"><span class="toc-text">函数作为返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预解析"><span class="toc-text">预解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON格式的数据遍历"><span class="toc-text">JSON格式的数据遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置对象-系统提供的"><span class="toc-text">内置对象(系统提供的)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-文档对象模型"><span class="toc-text">DOM-文档对象模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取元素对象"><span class="toc-text">获取元素对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象属性"><span class="toc-text">对象属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#innerText和textContent、innerHTML"><span class="toc-text">innerText和textContent、innerHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义属性"><span class="toc-text">自定义属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节点"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素的创建"><span class="toc-text">元素的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素绑定多个事件-addEventListener和-attachEvent"><span class="toc-text">元素绑定多个事件.addEventListener和.attachEvent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素解绑事件"><span class="toc-text">元素解绑事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件冒泡"><span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件的三个阶段"><span class="toc-text">事件的三个阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BOM"><span class="toc-text">BOM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#onload"><span class="toc-text">onload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location"><span class="toc-text">location</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#history"><span class="toc-text">history</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#navigator"><span class="toc-text">navigator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定时器"><span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#offset"><span class="toc-text">offset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scroll"><span class="toc-text">scroll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#client"><span class="toc-text">client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取元素的样式属性值"><span class="toc-text">获取元素的样式属性值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jQuery"><span class="toc-text">jQuery</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用法"><span class="toc-text">用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择器"><span class="toc-text">选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择集过滤"><span class="toc-text">选择集过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择集转移"><span class="toc-text">选择集转移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取和设置元素内容"><span class="toc-text">获取和设置元素内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取和设置元素属性"><span class="toc-text">获取和设置元素属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jQuery事件"><span class="toc-text">jQuery事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件代理"><span class="toc-text">事件代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript对象"><span class="toc-text">JavaScript对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#json数据"><span class="toc-text">json数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ajax"><span class="toc-text">ajax</span></a></li></ol></li></ol>
         
     </div>
 </aside>
