@@ -796,6 +796,30 @@ active /*选定的链接*/
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><hr>
+<h2 id="CSS属性"><a href="#CSS属性" class="headerlink" title="CSS属性"></a>CSS属性</h2><h3 id="布局常用样式属性"><a href="#布局常用样式属性" class="headerlink" title="布局常用样式属性"></a>布局常用样式属性</h3><hr>
+<pre><code>width 设置元素(标签)的宽度，如：width:100px;
+height 设置元素(标签)的高度，如：height:200px;
+background 设置元素背景色或者背景图片，如：background:gold; 设置元素的背景色, background: url(images/logo.png); 设置元素的背景图片。
+border 设置元素四周的边框，如：border:1px solid black; 设置元素四周边框是1像素宽的黑色实线
+以上也可以拆分成四个边的写法，分别设置四个边的：
+border-top 设置顶边边框，如：border-top:10px solid red;
+border-left 设置左边边框，如：border-left:10px solid blue;
+border-right 设置右边边框，如：border-right:10px solid green;
+border-bottom 设置底边边框，如：border-bottom:10px solid pink;
+padding 设置元素包含的内容和元素边框的距离，也叫内边距，如padding:20px;padding是同时设置4个边的，也可以像border一样拆分成分别设置四个边:padding-top、padding-left、padding-right、padding-bottom。
+margin 设置元素和外界的距离，也叫外边距，如margin:20px;margin是同时设置4个边的，也可以像border一样拆分成分别设置四个边:margin-top、margin-left、margin-right、margin-bottom。
+float 设置元素浮动，浮动可以让块元素排列在一行，浮动分为左浮动：float:left; 右浮动：float:right;
+</code></pre><hr>
+<h3 id="文本常用样式属性"><a href="#文本常用样式属性" class="headerlink" title="文本常用样式属性"></a>文本常用样式属性</h3><hr>
+<pre><code>color 设置文字的颜色，如： color:red;
+font-size 设置文字的大小，如：font-size:12px;
+font-family 设置文字的字体，如：font-family:&apos;微软雅黑&apos;;为了避免中文字不兼容，一般写成：font-family:&apos;Microsoft Yahei&apos;;
+font-weight 设置文字是否加粗，如：font-weight:bold; 设置加粗 font-weight:normal 设置不加粗
+line-height 设置文字的行高，如：line-height:24px; 表示文字高度加上文字上下的间距是24px，也就是每一行占有的高度是24px
+text-decoration 设置文字的下划线，如：text-decoration:none; 将文字下划线去掉
+text-align 设置文字水平对齐方式，如text-align:center 设置文字水平居中
+text-indent 设置文字首行缩进，如：text-indent:24px; 设置文字首行缩进24px
+</code></pre><hr>
 <h2 id="CSS字体属性"><a href="#CSS字体属性" class="headerlink" title="CSS字体属性"></a>CSS字体属性</h2><hr>
 <p>font-size字号大小（px、em）、font-family字体 、font-weight字体粗细 、font-style字体风格（倾斜） </p>
 <pre><code>font-size: 18px;
@@ -862,7 +886,16 @@ span {
 <p>注意</p>
 </blockquote>
 <p>权重相同，就近原则；权重会叠加；</p>
-<h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><p>1、盒子边框(border)</p>
+<h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><hr>
+<p>盒子模型的5个主要样式属性</p>
+<pre><code>width：内容的宽度(不是盒子的宽度)
+height：内容的高度(不是盒子的高度)
+padding：内边距。
+border：边框。
+margin：外边距
+</code></pre><p>盒子的真实尺寸只会受到宽度、高度、边框、内边距四个属性的影响，不会受到外边距属性的影响。</p>
+<hr>
+<h3 id="盒子边框-border"><a href="#盒子边框-border" class="headerlink" title="盒子边框(border)"></a>盒子边框(border)</h3><hr>
 <p><code>border-width、border-style、border-color</code></p>
 <pre><code>border-width: 1px;
 border-color: red;
@@ -880,7 +913,9 @@ border-bottom: 1px solid green;
 td {
     border-collapse: collapse;
 }
-</code></pre><p>2、内边框(padding)，padding会撑开带width和height盒子。</p>
+</code></pre><hr>
+<h3 id="内边框-padding"><a href="#内边框-padding" class="headerlink" title="内边框(padding)"></a>内边框(padding)</h3><hr>
+<p>padding会撑开带width和height盒子。</p>
 <pre><code>padding: 10px;
 padding-left: 10dp;
 padding: 10px 20px; /* 上下分别10和左右分别20 */
@@ -889,7 +924,8 @@ padding: 10px 20px 30px 40px; /* 顺时针，上右下左 */
 </code></pre><blockquote>
 <p>注意：如果盒子没有给定宽高，padding不会影响盒子大小。</p>
 </blockquote>
-<p>3、外边距(margin)</p>
+<hr>
+<h3 id="外边距-margin"><a href="#外边距-margin" class="headerlink" title="外边距(margin)"></a>外边距(margin)</h3><hr>
 <p>清除元素内外边距</p>
 <pre><code>* {
     margin: 0;
@@ -916,7 +952,8 @@ margin-top: 50px;
 <pre><code>border-top: 1px solid red;
 padding-top: 1px;
 overflow: hidden;
-</code></pre><h2 id="圆角边框和盒子阴影"><a href="#圆角边框和盒子阴影" class="headerlink" title="圆角边框和盒子阴影"></a>圆角边框和盒子阴影</h2><p>圆角边框</p>
+</code></pre><hr>
+<h2 id="圆角边框和盒子阴影"><a href="#圆角边框和盒子阴影" class="headerlink" title="圆角边框和盒子阴影"></a>圆角边框和盒子阴影</h2><p>圆角边框</p>
 <pre><code>border-radius: 10px;/* 圆角 */
 border-radius: 50%;/* 正方形变成圆 */
 border-radius: 10px 20px 30px 40px;/* 左上开始顺时针 */
@@ -1102,14 +1139,6 @@ top: 0;
 <p>z-index默认为0，取值越大，越居上，如果取值相同，后来者居上。</p>
 <p>只有定位的盒子才有z-index。</p>
 <p>没有单位。</p>
-<h2 id="显示与隐藏"><a href="#显示与隐藏" class="headerlink" title="显示与隐藏"></a>显示与隐藏</h2><pre><code>display: none;/* 隐藏 */
-display: block;/* 显示 */
-</code></pre><p>display隐藏后不保留位置。</p>
-<pre><code>visibility: visible;/* 显示 */
-visibility: hidden;/* 隐藏 */
-</code></pre><p>visibility隐藏后保留位置。</p>
-<pre><code>overflow: hidden;
-</code></pre><p>overflow四个属性<code>auto; scroll; hidden; visible;</code></p>
 <h2 id="鼠标样式、轮廓线、防止拖拽文本域"><a href="#鼠标样式、轮廓线、防止拖拽文本域" class="headerlink" title="鼠标样式、轮廓线、防止拖拽文本域"></a>鼠标样式、轮廓线、防止拖拽文本域</h2><p>鼠标样式</p>
 <pre><code>cursor: default;/*default: 默认、 pointer： 小手、 text： 选择、move： 移动*/
 </code></pre><p>轮廓线</p>
@@ -1126,12 +1155,27 @@ visibility: hidden;/* 隐藏 */
 <pre><code>img {
     vertical-align: middle;/* top、bottom */
 }
-</code></pre><h2 id="溢出文字隐藏"><a href="#溢出文字隐藏" class="headerlink" title="溢出文字隐藏"></a>溢出文字隐藏</h2><pre><code>white-space: nowrap;/* 强制在同一行内显示所有文本，直到文本结束或者br */
+</code></pre><hr>
+<h2 id="显示与隐藏"><a href="#显示与隐藏" class="headerlink" title="显示与隐藏"></a>显示与隐藏</h2><hr>
+<pre><code>display: none;/* 隐藏 */
+display: block;/* 显示 */
+</code></pre><p>display隐藏后不保留位置。</p>
+<pre><code>visibility: visible;/* 显示 */
+visibility: hidden;/* 隐藏 */
+</code></pre><p>visibility隐藏后保留位置。</p>
+<pre><code>overflow: hidden;
+</code></pre><p>overflow四个属性<code>auto; scroll; hidden; visible;</code></p>
+<hr>
+<h2 id="溢出文字隐藏"><a href="#溢出文字隐藏" class="headerlink" title="溢出文字隐藏"></a>溢出文字隐藏</h2><hr>
+<p>当子元素(标签)的尺寸超过父元素(标签)的尺寸时，此时需要设置父元素显示溢出的子元素的方式，设置的方法是通过overflow属性来完成。</p>
+<p>overflow的设置项：visible 默认值, 显示子标签溢出部分。hidden 隐藏子标签溢出部分。auto 如果子标签溢出，则可以滚动查看其余的内容。</p>
+<pre><code>white-space: nowrap;/* 强制在同一行内显示所有文本，直到文本结束或者br */
 overflow: hidden;/* 超出部分隐藏 */
 text-overflow: ellipsis;/* 超出部分显示省略号 */
 </code></pre><blockquote>
 <p>注意：做省略号效果，上面三句都需要。</p>
 </blockquote>
+<hr>
 <h2 id="Sprites"><a href="#Sprites" class="headerlink" title="Sprites"></a>Sprites</h2><p>为了有效地减少服务器接收和发送请求次数，提高页面加载速度。</p>
 <p>CSS精灵是一种处理网页背景图像的方式。</p>
 <h2 id="滑动门"><a href="#滑动门" class="headerlink" title="滑动门"></a>滑动门</h2><h2 id="字体图标"><a href="#字体图标" class="headerlink" title="字体图标"></a>字体图标</h2><p>icomoon字库</p>
@@ -1205,7 +1249,7 @@ text-overflow: ellipsis;/* 超出部分显示省略号 */
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#标签"><span class="toc-text">标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的html标签"><span class="toc-text">常用的html标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他标签"><span class="toc-text">其他标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列表标签"><span class="toc-text">列表标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表格标签"><span class="toc-text">表格标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表单标签"><span class="toc-text">表单标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表单提交"><span class="toc-text">表单提交</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引入CSS样式表"><span class="toc-text">引入CSS样式表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS选择器之基本选择器"><span class="toc-text">CSS选择器之基本选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#标签选择器（元素选择器）"><span class="toc-text">标签选择器（元素选择器）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类选择器"><span class="toc-text">类选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#id选择器"><span class="toc-text">id选择器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS选择器之复合选择器"><span class="toc-text">CSS选择器之复合选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#后代选择器"><span class="toc-text">后代选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子代选择器-选择亲儿子"><span class="toc-text">子代选择器-选择亲儿子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并集选择器"><span class="toc-text">并集选择器 **</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交集选择器-即-又"><span class="toc-text">交集选择器(即..又..)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伪类选择器"><span class="toc-text">伪类选择器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS字体属性"><span class="toc-text">CSS字体属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS外观属性"><span class="toc-text">CSS外观属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background"><span class="toc-text">background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标签显示模式"><span class="toc-text">标签显示模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS三大特性"><span class="toc-text">CSS三大特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#盒子模型"><span class="toc-text">盒子模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#圆角边框和盒子阴影"><span class="toc-text">圆角边框和盒子阴影</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浮动"><span class="toc-text">浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#清除浮动"><span class="toc-text">清除浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定位"><span class="toc-text">定位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示与隐藏"><span class="toc-text">显示与隐藏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#鼠标样式、轮廓线、防止拖拽文本域"><span class="toc-text">鼠标样式、轮廓线、防止拖拽文本域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vertical-align"><span class="toc-text">vertical-align</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#溢出文字隐藏"><span class="toc-text">溢出文字隐藏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sprites"><span class="toc-text">Sprites</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#滑动门"><span class="toc-text">滑动门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字体图标"><span class="toc-text">字体图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sublime快捷键"><span class="toc-text">sublime快捷键</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#标签"><span class="toc-text">标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的html标签"><span class="toc-text">常用的html标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他标签"><span class="toc-text">其他标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列表标签"><span class="toc-text">列表标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表格标签"><span class="toc-text">表格标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表单标签"><span class="toc-text">表单标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表单提交"><span class="toc-text">表单提交</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引入CSS样式表"><span class="toc-text">引入CSS样式表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS选择器之基本选择器"><span class="toc-text">CSS选择器之基本选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#标签选择器（元素选择器）"><span class="toc-text">标签选择器（元素选择器）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类选择器"><span class="toc-text">类选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#id选择器"><span class="toc-text">id选择器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS选择器之复合选择器"><span class="toc-text">CSS选择器之复合选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#后代选择器"><span class="toc-text">后代选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子代选择器-选择亲儿子"><span class="toc-text">子代选择器-选择亲儿子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并集选择器"><span class="toc-text">并集选择器 **</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交集选择器-即-又"><span class="toc-text">交集选择器(即..又..)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伪类选择器"><span class="toc-text">伪类选择器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS属性"><span class="toc-text">CSS属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#布局常用样式属性"><span class="toc-text">布局常用样式属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文本常用样式属性"><span class="toc-text">文本常用样式属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS字体属性"><span class="toc-text">CSS字体属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS外观属性"><span class="toc-text">CSS外观属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background"><span class="toc-text">background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标签显示模式"><span class="toc-text">标签显示模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS三大特性"><span class="toc-text">CSS三大特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#盒子模型"><span class="toc-text">盒子模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#盒子边框-border"><span class="toc-text">盒子边框(border)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内边框-padding"><span class="toc-text">内边框(padding)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#外边距-margin"><span class="toc-text">外边距(margin)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#圆角边框和盒子阴影"><span class="toc-text">圆角边框和盒子阴影</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浮动"><span class="toc-text">浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#清除浮动"><span class="toc-text">清除浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定位"><span class="toc-text">定位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#鼠标样式、轮廓线、防止拖拽文本域"><span class="toc-text">鼠标样式、轮廓线、防止拖拽文本域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vertical-align"><span class="toc-text">vertical-align</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示与隐藏"><span class="toc-text">显示与隐藏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#溢出文字隐藏"><span class="toc-text">溢出文字隐藏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sprites"><span class="toc-text">Sprites</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#滑动门"><span class="toc-text">滑动门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字体图标"><span class="toc-text">字体图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sublime快捷键"><span class="toc-text">sublime快捷键</span></a></li></ol>
         
     </div>
 </aside>
