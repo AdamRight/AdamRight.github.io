@@ -808,14 +808,17 @@ print(mappedNumbers)//[60, 57, 21, 36]
 <p>给<code>Image View</code>重新设置Assets资源图片：</p>
 <pre><code>@IBOutlet weak var leftImage: UIImageView!
 leftImage.image = UIImage(named: &quot;show2&quot;)
-</code></pre><p>摇晃手机结束：</p>
+</code></pre><hr>
+<p>摇晃手机结束：</p>
 <pre><code>override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {  
 }
-</code></pre><p>设置view的tag，然后同一个方法中区分：</p>
+</code></pre><hr>
+<p>设置view的tag，然后同一个方法中区分：</p>
 <pre><code>@IBAction func tagBtn(_ sender: UIButton) {
     print(sender.tag)
 }
-</code></pre><p>播放音频：</p>
+</code></pre><hr>
+<p>播放音频：</p>
 <pre><code>import AVFoundation
 var player: AVAudioPlayer!
 func palyAV() {
@@ -827,13 +830,15 @@ func palyAV() {
 
     }
 }
-</code></pre><p>弹出框：</p>
+</code></pre><hr>
+<p>弹出框：</p>
 <pre><code>let alter = UIAlertController(title: &quot;title&quot;, message: &quot;message&quot;, preferredStyle: .alert)
 alter.addAction(UIAlertAction(title: &quot;ok&quot;, style: .default, handler: {(_) in
     print(&quot;点击了ok&quot;)
 }))
 present(alter,animated: true,completion: nil)
-</code></pre><p>动态设置宽度：</p>
+</code></pre><hr>
+<p>动态设置宽度：</p>
 <pre><code>rightImage.frame.size.width = view.frame.width / 10
 </code></pre><hr>
 <h2 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h2><hr>
