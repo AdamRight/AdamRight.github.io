@@ -630,9 +630,234 @@ int main()
 // 删除指定位置的元素
 - (void)removeObjectAtIndex:(NSUInteger)index;
 </code></pre><hr>
+<p>##swift</p>
+<h3 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h3><hr>
+<p>使用<code>let</code>来声明常量，使用<code>var</code>来声明变量。</p>
+<p>int转String</p>
+<pre><code>let label = &quot;The width is&quot;
+let width = 94
+let widthLabel = label + String(width)
+</code></pre><p>或者</p>
+<pre><code>let apples = 3
+let appleSummary = &quot;I have \(apples) apples.&quot;
+</code></pre><p>使用方括号<code>[]</code>来创建数组和字典。数组添加元素用<code>append</code>。</p>
+<p>初始化一个空数组或者空字典：</p>
+<pre><code>let emptyArray = [String]()
+let emptyDictionary = [String: Float]()
+</code></pre><p>使用 <code>for-in</code>、<code>while</code> 和 <code>repeat-while</code> 来进行循环。</p>
+<p>处理值缺失的情况：</p>
+<pre><code>var optionalName: String? = &quot;John Appleseed&quot;
+var greeting = &quot;Hello!&quot;
+//如果不是 nil，会将值解包并赋给 let 后面的常量
+if let name = optionalName {
+    greeting = &quot;Hello, \(name)&quot;
+}
+print(greeting)//Hello, John Appleseed
+</code></pre><p><code>??</code>前面的变量为<code>nil</code>，则用<code>??</code>后面的变量；<code>??</code>前面的不为<code>nil</code>，则用<code>??</code>前面的变量。</p>
+<pre><code>let nickName: String? = nil
+let fullName: String = &quot;John Appleseed&quot;
+let informalGreeting = &quot;Hi \(nickName ?? fullName)&quot;
+print(informalGreeting)//Hi John Appleseed
+</code></pre><p>switch：不需要在每个子句结尾写 break。</p>
+<pre><code>let vegetable = &quot;red pepper&quot;
+switch vegetable {
+case &quot;celery&quot;:
+    print(&quot;Add some raisins and make ants on a log.&quot;)
+case &quot;cucumber&quot;, &quot;watercress&quot;:
+    print(&quot;That would make a good tea sandwich.&quot;)
+case let x where x.hasSuffix(&quot;pepper&quot;):
+    print(&quot;Is it a spicy \(x)?&quot;)
+default:
+    print(&quot;Everything tastes good in soup.&quot;)
+}
+</code></pre><p>字典是一个无序的集合，所以他们的键和值以任意顺序迭代结束。</p>
+<pre><code>let interestingNumbers = [
+    &quot;Prime&quot;: [2, 3, 5, 7, 11, 13],
+    &quot;Fibonacci&quot;: [1, 1, 2, 3, 5, 8],
+    &quot;Square&quot;: [1, 4, 9, 16, 25],
+]
+var largest = 0
+for (kind, numbers) in interestingNumbers {
+    for number in numbers {
+        if number &gt; largest {
+            largest = number
+        }
+    }
+}
+print(largest)
+</code></pre><p>while</p>
+<pre><code>var n = 2
+while n &lt; 100 {
+    n *= 2
+}
+print(n)//128
+
+var m = 2
+repeat {
+    m *= 2
+} while m &lt; 100
+print(m)//128
+</code></pre><p><code>..&lt;</code>来表示下标范围,不包含上界。如果想包含的话需要使用 <code>...</code>：</p>
+<pre><code>var total = 0
+for i in 0..&lt;4 {
+    total += i
+}
+print(total)//6
+</code></pre><p>条件循环：</p>
+<pre><code>for i in 1...10 where i % 2 == 0{
+    print(i)
+}
+</code></pre><p>倒叙遍历：</p>
+<pre><code>for i in (1...10).reversed(){
+    print(i)
+}
+</code></pre><p>生成随机数：</p>
+<pre><code>Int.random(in: 1...6)//1-6之间随机数
+</code></pre><p>四舍五入double，返回double：</p>
+<pre><code>round(4.44) //4.0
+</code></pre><p>使用<code>func</code>来声明一个函数，使用<code>-&gt;</code>来指定函数返回值的类型。</p>
+<pre><code>func greet(person: String, day: String) -&gt; String {
+    return &quot;Hello \(person), today is \(day).&quot;
+}
+print(greet(person:&quot;Bob&quot;, day: &quot;Tuesday&quot;))//Hello Bob, today is Tuesday.
+</code></pre><p>使用元组来生成复合值，比如让一个函数返回多个值。该元组的元素可以用名称或数字来获取:</p>
+<pre><code>func calculateStatistics(scores: [Int]) -&gt; (min: Int, max: Int, sum: Int) {
+    var min = scores[0]
+    var max = scores[0]
+    var sum = 0
+
+    for score in scores {
+        if score &gt; max {
+            max = score
+        } else if score &lt; min {
+            min = score
+        }
+        sum += score
+    }
+
+    return (min, max, sum)
+}
+let statistics = calculateStatistics(scores:[5, 3, 100, 3, 9])
+print(statistics.sum)//120
+print(statistics.2)//120
+</code></pre><p>两个参数名时候的外部参数和内部参数：</p>
+<pre><code>func numSun(wai nei : Int) {
+    print(nei)
+}
+numSun(wai: 3)
+
+func numSun(_ nei : Int) {
+    print(nei)
+}
+numSun(3)
+</code></pre><p>函数可以嵌套。</p>
+<p>函数可以作为另一个函数的返回值:</p>
+<pre><code>func makeIncrementer() -&gt; ((Int) -&gt; Int) {
+    func addOne(number: Int) -&gt; Int {
+        return 1 + number
+    }
+    return addOne
+}
+var increment = makeIncrementer()
+increment(7)//8
+</code></pre><p>函数也可以当做参数传入另一个函数:</p>
+<pre><code>func hasAnyMatches(list: [Int], condition: (Int) -&gt; Bool) -&gt; Bool {
+    for item in list {
+        if condition(item) {
+            return true
+        }
+    }
+    return false
+}
+func lessThanTen(number: Int) -&gt; Bool {
+    return number &lt; 10
+}
+var numbers = [20, 19, 7, 12]
+var bol = hasAnyMatches(list: numbers, condition: lessThanTen)
+print(&quot;\(bol)&quot;)
+</code></pre><p>闭包:</p>
+<pre><code>numbers.map({
+    (number: Int) -&gt; Int in
+    let result = 3 * number
+    return result
+})
+//或者
+var numbers = [20, 19, 7, 12]
+let mappedNumbers = numbers.map({ number in 3 * number })
+print(mappedNumbers)//[60, 57, 21, 36]
+</code></pre><p>使用 class 和类名来创建一个类。</p>
+<p>要创建一个类的实例，在类名后面加上括号。使用点语法来访问实例的属性和方法。</p>
+<p>使用 init 来创建一个构造器。</p>
+<pre><code>class NamedShape {
+    var numberOfSides: Int = 0
+    var name: String
+
+    init(name: String) {
+        self.name = name
+    }
+
+    func simpleDescription() -&gt; String {
+        return &quot;A shape with \(numberOfSides) sides.&quot;
+    }
+}
+</code></pre><p>如果需要在对象释放之前进行一些清理工作，使用 deinit 创建一个析构函数。</p>
+<p>使用 enum 来创建一个枚举。</p>
+<p>使用 struct 来创建一个结构体。结构体是传值，类是传引用。</p>
+<p>使用 protocol 来声明一个协议。mutating。extension。</p>
 <hr>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><hr>
+<p>给<code>Image View</code>重新设置Assets资源图片：</p>
+<pre><code>@IBOutlet weak var leftImage: UIImageView!
+leftImage.image = UIImage(named: &quot;show2&quot;)
+</code></pre><p>摇晃手机结束：</p>
+<pre><code>override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {  
+}
+</code></pre><p>设置view的tag，然后同一个方法中区分：</p>
+<pre><code>@IBAction func tagBtn(_ sender: UIButton) {
+    print(sender.tag)
+}
+</code></pre><p>播放音频：</p>
+<pre><code>import AVFoundation
+var player: AVAudioPlayer!
+func palyAV() {
+    let url = Bundle.main.url(forResource: &quot;文件名&quot;, withExtension: &quot;格式名&quot;)
+    do{
+        player = try AVAudioPlayer(contentsOf: url!)
+        player.play()
+    } catch {
+
+    }
+}
+</code></pre><p>弹出框：</p>
+<pre><code>let alter = UIAlertController(title: &quot;title&quot;, message: &quot;message&quot;, preferredStyle: .alert)
+alter.addAction(UIAlertAction(title: &quot;ok&quot;, style: .default, handler: {(_) in
+    print(&quot;点击了ok&quot;)
+}))
+present(alter,animated: true,completion: nil)
+</code></pre><p>动态设置宽度：</p>
+<pre><code>rightImage.frame.size.width = view.frame.width / 10
+</code></pre><hr>
+<h2 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h2><hr>
+<p>control拖拽控件，可以选择Outlet和Action。</p>
+<p>Autoresizing:设置上下左右宽高六个属性。</p>
+<p>stackview</p>
+<hr>
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><hr>
+<p>图标制作网站：</p>
+<pre><code>https://appicon.co/
+</code></pre><p>快捷键</p>
+<pre><code>command + R        编译运行
+command + m        最小化
+command + z        撤销
+
+command + d        复制粘贴出来一个选中的ui控件
+command + 删除键    光标在一行的最后位置，删除整行/删除光标前的内容
+</code></pre><p>局域网真机调试：</p>
+<pre><code>Window-Devices and Simulators
+</code></pre><hr>
 <p>iOS</p>
 <p><a href="https://github.com/dequan1331/HybridPageKit" target="_blank" rel="noopener">https://github.com/dequan1331/HybridPageKit</a></p>
+<hr>
 
     </div>
     
@@ -694,7 +919,7 @@ int main()
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Objective-C"><span class="toc-text">Objective-C</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSLog"><span class="toc-text">NSLog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类"><span class="toc-text">类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象的存储"><span class="toc-text">对象的存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pragma-mark"><span class="toc-text">pragma mark</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见错误"><span class="toc-text">常见错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSString"><span class="toc-text">NSString</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象与对象之间的关系"><span class="toc-text">对象与对象之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面向对象设计原则"><span class="toc-text">面向对象设计原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类方法"><span class="toc-text">类方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对象方法"><span class="toc-text">对象方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类方法-1"><span class="toc-text">类方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名对象"><span class="toc-text">匿名对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#self关键字"><span class="toc-text">self关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装"><span class="toc-text">封装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#set方法"><span class="toc-text">set方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#get方法"><span class="toc-text">get方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类的继承和派生"><span class="toc-text">类的继承和派生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有方法"><span class="toc-text">私有方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多态"><span class="toc-text">多态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类对象的用法"><span class="toc-text">类对象的用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SEL方法选择器"><span class="toc-text">SEL方法选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Static关键"><span class="toc-text">Static关键</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#点语法"><span class="toc-text">点语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#property关键字"><span class="toc-text">property关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#synthesize关键字"><span class="toc-text">synthesize关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#id类型"><span class="toc-text">id类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造方法"><span class="toc-text">构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSMutableArray"><span class="toc-text">NSMutableArray</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Objective-C"><span class="toc-text">Objective-C</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSLog"><span class="toc-text">NSLog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类"><span class="toc-text">类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象的存储"><span class="toc-text">对象的存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pragma-mark"><span class="toc-text">pragma mark</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见错误"><span class="toc-text">常见错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSString"><span class="toc-text">NSString</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象与对象之间的关系"><span class="toc-text">对象与对象之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面向对象设计原则"><span class="toc-text">面向对象设计原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类方法"><span class="toc-text">类方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对象方法"><span class="toc-text">对象方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类方法-1"><span class="toc-text">类方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名对象"><span class="toc-text">匿名对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#self关键字"><span class="toc-text">self关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装"><span class="toc-text">封装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#set方法"><span class="toc-text">set方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#get方法"><span class="toc-text">get方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类的继承和派生"><span class="toc-text">类的继承和派生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有方法"><span class="toc-text">私有方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多态"><span class="toc-text">多态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类对象的用法"><span class="toc-text">类对象的用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SEL方法选择器"><span class="toc-text">SEL方法选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Static关键"><span class="toc-text">Static关键</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#点语法"><span class="toc-text">点语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#property关键字"><span class="toc-text">property关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#synthesize关键字"><span class="toc-text">synthesize关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#id类型"><span class="toc-text">id类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造方法"><span class="toc-text">构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSMutableArray"><span class="toc-text">NSMutableArray</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速上手"><span class="toc-text">快速上手</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UI"><span class="toc-text">UI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#技巧"><span class="toc-text">技巧</span></a></li></ol>
         
     </div>
 </aside>
