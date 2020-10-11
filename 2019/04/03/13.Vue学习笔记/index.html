@@ -186,10 +186,14 @@
     </div>
     
     <div class="post-body post-content">
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Vue.js是一套构建用户界面的框架，只关注视图层。可以减少不必要的DOM操作，提高渲染效率。</p>
-<p>打包工具：WebPack和Gulp</p>
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><hr>
+<p>Vue.js是一套构建用户界面的框架，只关注视图层。可以减少不必要的DOM操作，提高渲染效率。</p>
+<p>打包工具：WebPack和Gulp。</p>
+<p>在Vue中，一个核心的概念，就是让用户不再操作DOM元素，解放了用户的双手，让程序员可以更多的时间去关注业务逻辑。</p>
 <p>框架：一套完整的技术解决方案，对项目侵入性较大；库（插件）：提供某一小功能，侵入性小。</p>
-<p>MVVM是前端视图层的概念，主要关注于视图层分离，把前端的视图层分为三部分，Model、View、VM ViewModel。</p>
+<hr>
+<h3 id="mvvm"><a href="#mvvm" class="headerlink" title="mvvm"></a>mvvm</h3><hr>
+<p><strong>MVVM是前端视图层的概念，主要关注于视图层分离，把前端的视图层分为三部分，Model(数据)、View(每个页面的HTML结构)、ViewModel(调度者，数据双向绑定，可以理解为View和Model的通信桥梁)。</strong></p>
 <p>引入</p>
 <pre><code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
 </code></pre><p>实例</p>
@@ -202,13 +206,18 @@
 
 &lt;/head&gt;
 &lt;body&gt;
+      &lt;!-- Vue 实例所控制的这个元素区域，就是我们的V  --&gt;
     &lt;div id=&quot;vue_det&quot;&gt;
         &lt;h1&gt;url : {{url}}&lt;/h1&gt;
         &lt;h1&gt;{{details()}}&lt;/h1&gt;
     &lt;/div&gt;
     &lt;script type=&quot;text/javascript&quot;&gt;
+        // new 出来的这个 vm 对象，就是我们 MVVM中的 VM调度者
         var vm = new Vue({
+            // 表示new 的这个 Vue 实例，要控制页面上的哪个区域
             el: &apos;#vue_det&apos;,
+
+            // 这里的 data 就是 MVVM中的 M，专门用来保存 每个页面的数据的
             data: {
                 url: &quot;http://www.baidu.com&quot;
             },
@@ -218,61 +227,79 @@
                 }
             }
         })
-
         document.write(vm.url)
-
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><p>文本插值使用双大括号:</p>
 <pre><code>{{}}
-</code></pre><h2 id="Vue调试"><a href="#Vue调试" class="headerlink" title="Vue调试"></a>Vue调试</h2><p>谷歌应用商店搜索<code>Vue.js devtools</code></p>
-<h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><pre><code>https://cn.vuejs.org/v2/guide/
+</code></pre><hr>
+<h3 id="Vue调试"><a href="#Vue调试" class="headerlink" title="Vue调试"></a>Vue调试</h3><p>谷歌应用商店搜索<code>Vue.js devtools</code></p>
+<hr>
+<h3 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h3><pre><code>https://cn.vuejs.org/v2/guide/
 https://github.com/pagekit/vue-resource
 http://cubic-bezier.com/#.17,.67,.83,.67
-</code></pre><h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p>指令是带有 v- 前缀的特殊属性。指令用于在表达式的值改变时，将某些行为应用到 DOM 上。</p>
+</code></pre><hr>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><hr>
+<p>指令是带有 <code>v-</code> 前缀的特殊属性。指令用于在表达式的值改变时，将某些行为应用到 <code>DOM</code> 上。</p>
+<hr>
 <h3 id="v-cloak"><a href="#v-cloak" class="headerlink" title="v-cloak"></a>v-cloak</h3><p>解决插值表达式闪烁问题，只替换占位符。</p>
 <h3 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h3><p>v-text默认没有闪烁问题，替换内容时会把整个元素替换。</p>
 <h3 id="v-html"><a href="#v-html" class="headerlink" title="v-html"></a>v-html</h3><p>用于输出html格式的，也会替换全部内容。</p>
-<h3 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h3><p>绑定属性的指令，用于监听DOM事件。<code>v-bind:</code>可以省略为<code>:</code>。变量加常量的效果可以实现。</p>
-<h3 id="v-on"><a href="#v-on" class="headerlink" title="v-on"></a>v-on</h3><p>事件绑定机制。<code>v-on:</code>可以省略为<code>@</code>。</p>
-<p>代码：</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
+<h3 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h3><p><strong>绑定属性的指令</strong>，用于监听DOM事件。<code>v-bind:</code>可以省略为<code>:</code>。变量加常量的效果可以实现。</p>
+<h3 id="v-on"><a href="#v-on" class="headerlink" title="v-on"></a>v-on</h3><p><strong>事件绑定机制</strong>。<code>v-on:</code>可以省略为<code>@</code>。</p>
+<pre><code>代码：
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; xmlns:v-bind=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;&lt;/title&gt;
-    &lt;script src=&quot;lib/vue.js&quot;&gt;&lt;/script&gt;
-
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
     &lt;style&gt;
-        [v-cloak]{
+        [v-cloak] {
             display: none;
         }
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;div id=&quot;app&quot;&gt;
-        &lt;p v-cloak&gt;hh{{msg}}dd&lt;/p&gt;
-        &lt;p v-text=&quot;msg&quot;&gt;fff&lt;/p&gt;
-        &lt;div v-html=&quot;msg2&quot;&gt;&lt;/div&gt;
-        &lt;!--&lt;input type=&quot;button&quot; value=&quot;按钮&quot; v-bind:title=&quot;mytitle+&apos;补充信息&apos;&quot;/&gt;--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;按钮&quot; :title=&quot;mytitle+&apos;补充信息&apos;&quot; v-on:click=&quot;show&quot;/&gt;
-    &lt;/div&gt;
-    &lt;script&gt;
-        var vm = new Vue({
-            el: &quot;#app&quot;,
-            data: {
-                msg: &apos;欢迎学习Vue&apos;,
-                msg2: &apos;&lt;h1&gt;哈哈哈哈&lt;/h1&gt;&apos;,
-                mytitle:&apos;这是我的title&apos;
-            },
-            methods:{
-                show:function(){
-                    alert(&quot;我是弹窗&quot;)
-                }
+&lt;div id=&quot;app&quot;&gt;
+    &lt;!-- 使用 v-cloak 能够解决 插值表达式闪烁的问题 --&gt;
+    &lt;p v-cloak&gt;++++++++ {{ msg }} ----------&lt;/p&gt;
+    &lt;!-- 默认 v-text 是没有闪烁问题的 --&gt;
+    &lt;!-- v-text会覆盖元素中原本的内容，但是 插值表达式  只会替换自己的这个占位符，不会把 整个元素的内容清空 --&gt;
+    &lt;h4 v-text=&quot;msg&quot;&gt;==================&lt;/h4&gt;
+
+    &lt;div&gt;{{msg2}}&lt;/div&gt;
+    &lt;div v-text=&quot;msg2&quot;&gt;&lt;/div&gt;
+    &lt;div v-html=&quot;msg2&quot;&gt;1212112&lt;/div&gt;
+
+    &lt;!-- v-bind: 是 Vue中，提供的用于绑定属性的指令 --&gt;
+    &lt;input type=&quot;button&quot; value=&quot;按钮&quot; v-bind:title=&quot;mytitle + &apos;123&apos;&quot;&gt;
+    &lt;!-- 注意： v-bind: 指令可以被简写为 :要绑定的属性 --&gt;
+    &lt;!-- v-bind 中，可以写合法的JS表达式 --&gt;
+
+    &lt;!-- Vue 中提供了 v-on: 事件绑定机制 --&gt;
+    &lt;input type=&quot;button&quot; value=&quot;按钮&quot; @click=&quot;show&quot;&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var vm = new Vue({
+        el: &apos;#app&apos;,
+        data: {
+            msg: &apos;123&apos;,
+            msg2: &apos;&lt;h1&gt;哈哈，我是一个大大的H1， 我大，我骄傲&lt;/h1&gt;&apos;,
+            mytitle: &apos;这是一个自己定义的title&apos;
+        },
+        methods: { // 这个 methods属性中定义了当前Vue实例所有可用的方法
+            show: function () {
+                alert(&apos;Hello&apos;)
             }
-        })
-    &lt;/script&gt;
+        }
+    })
+&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><h3 id="示例之跑马灯"><a href="#示例之跑马灯" class="headerlink" title="示例之跑马灯"></a>示例之跑马灯</h3><pre><code>&lt;!DOCTYPE html&gt;
@@ -2030,7 +2057,7 @@ module.exports = {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue调试"><span class="toc-text">Vue调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#教程"><span class="toc-text">教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指令"><span class="toc-text">指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#v-cloak"><span class="toc-text">v-cloak</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-text"><span class="toc-text">v-text</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-html"><span class="toc-text">v-html</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-bind"><span class="toc-text">v-bind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-on"><span class="toc-text">v-on</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例之跑马灯"><span class="toc-text">示例之跑马灯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-model"><span class="toc-text">v-model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-for"><span class="toc-text">v-for</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-if和v-show"><span class="toc-text">v-if和v-show</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#时间修饰符"><span class="toc-text">时间修饰符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#stop"><span class="toc-text">.stop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#prevent"><span class="toc-text">.prevent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capture"><span class="toc-text">.capture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#self"><span class="toc-text">.self</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#once"><span class="toc-text">.once</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#样式"><span class="toc-text">样式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#class样式"><span class="toc-text">class样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内联样式"><span class="toc-text">内联样式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过滤器"><span class="toc-text">过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义键盘修饰符"><span class="toc-text">自定义键盘修饰符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义指令"><span class="toc-text">自定义指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue实例的生命周期"><span class="toc-text">vue实例的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-resource实现网络请求"><span class="toc-text">vue-resource实现网络请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#品牌案例"><span class="toc-text">品牌案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue中的动画"><span class="toc-text">Vue中的动画</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义v-前缀"><span class="toc-text">自定义v-前缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用第三方animate-css类库实现动画"><span class="toc-text">使用第三方animate.css类库实现动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动画钩子"><span class="toc-text">动画钩子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-for的列表过渡"><span class="toc-text">v-for的列表过渡</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件"><span class="toc-text">组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全局组件定义的三种方式"><span class="toc-text">全局组件定义的三种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有组件定义"><span class="toc-text">私有组件定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件中的data和methods"><span class="toc-text">组件中的data和methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件切换"><span class="toc-text">组件切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父组件向子组件传值"><span class="toc-text">父组件向子组件传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父组件向子组件传方法"><span class="toc-text">父组件向子组件传方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件案例-评论功能实现"><span class="toc-text">组件案例-评论功能实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过refs获取元素和组件"><span class="toc-text">通过refs获取元素和组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由"><span class="toc-text">路由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#router-link"><span class="toc-text">router-link</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向"><span class="toc-text">重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选中路由高亮"><span class="toc-text">选中路由高亮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由传参"><span class="toc-text">路由传参</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由嵌套"><span class="toc-text">路由嵌套</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命名视图实现经典布局"><span class="toc-text">命名视图实现经典布局</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#watch"><span class="toc-text">watch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#computed计算属性"><span class="toc-text">computed计算属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack安装的两种方式"><span class="toc-text">webpack安装的两种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件打包命令"><span class="toc-text">配置文件打包命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack-dev-server实时打包构建"><span class="toc-text">webpack-dev-server实时打包构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置package-json"><span class="toc-text">配置package.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置webpack-config-js"><span class="toc-text">配置webpack.config.js</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mvvm"><span class="toc-text">mvvm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue调试"><span class="toc-text">Vue调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#教程"><span class="toc-text">教程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指令"><span class="toc-text">指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#v-cloak"><span class="toc-text">v-cloak</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-text"><span class="toc-text">v-text</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-html"><span class="toc-text">v-html</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-bind"><span class="toc-text">v-bind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-on"><span class="toc-text">v-on</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例之跑马灯"><span class="toc-text">示例之跑马灯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-model"><span class="toc-text">v-model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-for"><span class="toc-text">v-for</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-if和v-show"><span class="toc-text">v-if和v-show</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#时间修饰符"><span class="toc-text">时间修饰符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#stop"><span class="toc-text">.stop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#prevent"><span class="toc-text">.prevent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capture"><span class="toc-text">.capture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#self"><span class="toc-text">.self</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#once"><span class="toc-text">.once</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#样式"><span class="toc-text">样式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#class样式"><span class="toc-text">class样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内联样式"><span class="toc-text">内联样式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过滤器"><span class="toc-text">过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义键盘修饰符"><span class="toc-text">自定义键盘修饰符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义指令"><span class="toc-text">自定义指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue实例的生命周期"><span class="toc-text">vue实例的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-resource实现网络请求"><span class="toc-text">vue-resource实现网络请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#品牌案例"><span class="toc-text">品牌案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue中的动画"><span class="toc-text">Vue中的动画</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义v-前缀"><span class="toc-text">自定义v-前缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用第三方animate-css类库实现动画"><span class="toc-text">使用第三方animate.css类库实现动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动画钩子"><span class="toc-text">动画钩子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-for的列表过渡"><span class="toc-text">v-for的列表过渡</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件"><span class="toc-text">组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全局组件定义的三种方式"><span class="toc-text">全局组件定义的三种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有组件定义"><span class="toc-text">私有组件定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件中的data和methods"><span class="toc-text">组件中的data和methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件切换"><span class="toc-text">组件切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父组件向子组件传值"><span class="toc-text">父组件向子组件传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父组件向子组件传方法"><span class="toc-text">父组件向子组件传方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件案例-评论功能实现"><span class="toc-text">组件案例-评论功能实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过refs获取元素和组件"><span class="toc-text">通过refs获取元素和组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由"><span class="toc-text">路由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#router-link"><span class="toc-text">router-link</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向"><span class="toc-text">重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选中路由高亮"><span class="toc-text">选中路由高亮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由传参"><span class="toc-text">路由传参</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由嵌套"><span class="toc-text">路由嵌套</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命名视图实现经典布局"><span class="toc-text">命名视图实现经典布局</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#watch"><span class="toc-text">watch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#computed计算属性"><span class="toc-text">computed计算属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack安装的两种方式"><span class="toc-text">webpack安装的两种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件打包命令"><span class="toc-text">配置文件打包命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack-dev-server实时打包构建"><span class="toc-text">webpack-dev-server实时打包构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置package-json"><span class="toc-text">配置package.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置webpack-config-js"><span class="toc-text">配置webpack.config.js</span></a></li></ol></li></ol>
         
     </div>
 </aside>
