@@ -409,12 +409,13 @@ http://cubic-bezier.com/#.17,.67,.83,.67
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><hr>
-<h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a><code>v-for</code></h3><p>v-for 指令需要以<code>site in sites</code>形式的特殊语法， sites是源数据数组并且site是数组元素迭代的别名。</p>
+<h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a><code>v-for</code></h3><hr>
+<p>v-for 指令需要以<code>site in sites</code>形式的特殊语法， sites是源数据数组并且site是数组元素迭代的别名。</p>
 <p>循环普通数组；循环对象数组；循环对象，包含key，value，和索引；迭代数字，从1开始。</p>
 <pre><code>&lt;div id=&quot;app&quot;&gt;
     &lt;!--循环普通数组--&gt;
     &lt;p v-for=&quot;item in list&quot;&gt;{{item}}&lt;/p&gt;
-    &lt;p v-for=&quot;(item,i) in list&quot;&gt;索引值是{{i}}&lt;/p&gt;
+    &lt;p v-for=&quot;(item,i) in list&quot;&gt;索引值是{{i}}，每一项是{{item}}&lt;/p&gt;
     &lt;!--循环对象数组--&gt;
     &lt;p v-for=&quot;item in list2&quot;&gt;{{item.id}}和{{item.name}}&lt;/p&gt;
     &lt;p v-for=&quot;(item,i) in list2&quot;&gt;索引值是{{i}}&lt;/p&gt;
@@ -445,11 +446,13 @@ http://cubic-bezier.com/#.17,.67,.83,.67
         }
     })
 &lt;/script&gt;
-</code></pre><p>注意：在2.2.0+的版本里，当在组件中使用<code>v-for</code>时，key是必须的。key属性只能使用number或者string，必须使用v-bind属性绑定的形式，指定key的值。</p>
+</code></pre><p>注意：在2.2.0+的版本里，当在组件中使用<code>v-for</code>时，key是必须的。<strong>key属性只能使用number或者string，必须使用v-bind属性绑定的形式，指定key的值。</strong></p>
 <pre><code>&lt;p v-for=&quot;item in list&quot; :key=&quot;item.id&quot;&gt;
 
 &lt;/p&gt;
-</code></pre><h3 id="v-if和v-show"><a href="#v-if和v-show" class="headerlink" title="v-if和v-show"></a><code>v-if</code>和<code>v-show</code></h3><p>根据表达式的值来决定是否插入元素。</p>
+</code></pre><hr>
+<h3 id="v-if和v-show"><a href="#v-if和v-show" class="headerlink" title="v-if和v-show"></a><code>v-if</code>和<code>v-show</code></h3><hr>
+<p>根据表达式的值来决定是否插入元素。</p>
 <p><code>v-if</code>每次都会重新删除或者创建元素，切换消耗性能；<code>v-show</code>只是切换了元素<code>display:none</code>样式，较高的初始渲染消耗。</p>
 <pre><code>&lt;div id=&quot;app&quot;&gt;
     &lt;input type=&quot;button&quot; @click=&quot;flag=!flag&quot; value=&quot;toggle&quot;/&gt;
@@ -497,7 +500,8 @@ http://cubic-bezier.com/#.17,.67,.83,.67
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h2 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h2><hr>
+</code></pre><hr>
+<h2 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h2><hr>
 <p>修饰符是以半角句号<code>.</code>指明的特殊后缀，用于指出一个指令应该以特殊方式绑定。</p>
 <h3 id="stop"><a href="#stop" class="headerlink" title=".stop"></a><code>.stop</code></h3><p>阻止事件冒泡</p>
 <h3 id="prevent"><a href="#prevent" class="headerlink" title=".prevent"></a><code>.prevent</code></h3><p>阻止默认事件</p>
@@ -637,7 +641,8 @@ http://cubic-bezier.com/#.17,.67,.83,.67
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><hr>
-<h3 id="内联样式"><a href="#内联样式" class="headerlink" title="内联样式"></a>内联样式</h3><pre><code>&lt;div id=&quot;app&quot;&gt;
+<h3 id="内联样式"><a href="#内联样式" class="headerlink" title="内联样式"></a>内联样式</h3><hr>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
     &lt;!--直接绑定--&gt;
     &lt;h1 :style=&quot;{color:&apos;red&apos;,&apos;font-weight&apos;:200}&quot;&gt;哈哈哈&lt;/h1&gt;
     &lt;!--data--&gt;
@@ -655,7 +660,8 @@ http://cubic-bezier.com/#.17,.67,.83,.67
         }
     })
 &lt;/script&gt;
-</code></pre><h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><p>Vue允许你自定义过滤器，被用作一些常见的文本格式化。过滤器可以用在<strong>两个地方：双括号插值和<code>v-bind</code>表达式</strong>，过滤器应该被添加在js表达式的尾部，由管道符(<code>|</code>)提示。</p>
+</code></pre><hr>
+<h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><p>Vue允许你自定义过滤器，被用作一些常见的文本格式化。过滤器可以用在<strong>两个地方：双括号插值和<code>v-bind</code>表达式</strong>，过滤器应该被添加在js表达式的尾部，由管道符(<code>|</code>)提示。</p>
 <p>过滤器中function第一个参数已经被规定死了：永远是管道符前面传递过来的数据。</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
