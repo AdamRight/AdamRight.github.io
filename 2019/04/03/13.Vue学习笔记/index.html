@@ -662,6 +662,7 @@ http://cubic-bezier.com/#.17,.67,.83,.67
 &lt;/script&gt;
 </code></pre><hr>
 <h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><hr>
+<p>Vue允许你自定义过滤器，被用作一些常见的文本格式化。过滤器可以用在两个地方：双括号插值和<code>v-bind</code>表达式，过滤器应该被添加在js表达式的尾部，由管道符(<code>|</code>)提示。</p>
 <p>过滤器中function第一个参数已经被规定死了：永远是管道符前面传递过来的数据。</p>
 <p>全局过滤器和私有过滤器：</p>
 <pre><code>&lt;!DOCTYPE html&gt;
