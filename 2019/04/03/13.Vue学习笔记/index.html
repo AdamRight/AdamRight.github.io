@@ -1282,10 +1282,13 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><p>组件：以不同的组件，来划分不同的功能模块，将来我们需要什么样的功能，就可以去调用对应的组件即可。</p>
+</code></pre><h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><hr>
+<p>组件：以不同的组件，来划分不同的功能模块，将来我们需要什么样的功能，就可以去调用对应的组件即可。</p>
 <p>组件化：是从UI界面的角度进行划分的；前端的组件化，方便UI组件的重用；</p>
 <p>模块化：是从代码逻辑的角度进行划分的；方便代码分层开发，保证每个功能模块的职能单一。</p>
-<h3 id="全局组件定义的三种方式"><a href="#全局组件定义的三种方式" class="headerlink" title="全局组件定义的三种方式"></a>全局组件定义的三种方式</h3><pre><code>&lt;!DOCTYPE html&gt;
+<hr>
+<h3 id="全局组件定义的三种方式"><a href="#全局组件定义的三种方式" class="headerlink" title="全局组件定义的三种方式"></a>全局组件定义的三种方式</h3><hr>
+<pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1344,7 +1347,9 @@ Vue.http.options.emulateJSON = true;
 </code></pre><blockquote>
 <p>注意:不论是哪种方式创建出来的组件,组件的template属性指向的模板内容,必须有且只能有唯一的一个根元素。</p>
 </blockquote>
-<h3 id="私有组件定义"><a href="#私有组件定义" class="headerlink" title="私有组件定义"></a>私有组件定义</h3><p>通过<code>components</code>定义私有组件：</p>
+<hr>
+<h3 id="私有组件定义"><a href="#私有组件定义" class="headerlink" title="私有组件定义"></a>私有组件定义</h3><hr>
+<p>通过<code>components</code>定义私有组件：</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -1374,7 +1379,9 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h3 id="组件中的data和methods"><a href="#组件中的data和methods" class="headerlink" title="组件中的data和methods"></a>组件中的data和methods</h3><p> 组件可以有自己的data数据，实例中的data可以为一个对象,但是组件中的data必须是一个方法，这个方法内部,还必须返回一个对象才行。组件中 的data数据,使用方式,和实例中的data使用方式完全一样。</p>
+</code></pre><hr>
+<h3 id="组件中的data和methods"><a href="#组件中的data和methods" class="headerlink" title="组件中的data和methods"></a>组件中的data和methods</h3><hr>
+<p>组件可以有自己的data数据，实例中的data可以为一个对象,但是组件中的data必须是一个方法，这个方法内部,还必须返回一个对象才行。组件中 的data数据,使用方式,和实例中的data使用方式完全一样。</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -1414,7 +1421,9 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h3 id="组件切换"><a href="#组件切换" class="headerlink" title="组件切换"></a>组件切换</h3><p>v-if方式切换：</p>
+</code></pre><hr>
+<h3 id="组件切换"><a href="#组件切换" class="headerlink" title="组件切换"></a>组件切换</h3><hr>
+<p>v-if方式切换：</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -1523,7 +1532,8 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h3 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h3><p>组件中，默认无法访问到父组件中的data上的数据和methods中的方法。父组件可以在引用子组件的时候，通过属性绑定<code>v-bind:</code>的形式, 把需要传递给子组件的数据，以属性绑定的形式，传递到子组件内部，供子组件使用。组件中的所有props中的数据，都是通过父组件传递给子组件的。</p>
+</code></pre><hr>
+<h3 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h3><p>组件中，默认无法访问到父组件中的data上的数据和methods中的方法。父组件可以在引用子组件的时候，通过属性绑定<code>v-bind:</code>的形式, 把需要传递给子组件的数据，以属性绑定的形式，传递到子组件内部，供子组件使用。组件中的所有props中的数据，都是通过父组件传递给子组件的。</p>
 <blockquote>
 <p>注意：props中的数据，都是只读的，无法重新赋值。</p>
 </blockquote>
