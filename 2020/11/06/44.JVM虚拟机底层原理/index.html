@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>标签: 线程池 | Hexo</title>
+<title>JVM虚拟机底层原理 | Hexo</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -136,53 +136,111 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    <h3>
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="JVM虚拟机底层原理">
+            
+	            JVM虚拟机底层原理
+            
+        </h1>
+        <div class="post-meta">
     
-        线程池
     
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Java">
+            Java
+        </a>
+    </span>
     
-</h3>
 
-    <article class="post">
-        
-            <div class="post-media">
-                <a href="/2019/05/13/21.线程和线程池/">
-                    <img class="img-ajax" src="/img/loading.gif"  data-src="/img/21.png"  alt="线程和线程池">
-                </a>
-            </div>
-        
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title">
-                    <a href="/2019/05/13/21.线程和线程池/">线程和线程池</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime="" title="">
-                        2019年05月13日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
                 
-                    创建线程两种方法：
-
-
-继承Thread类
-实现Runnable接口
-
-
-共同点：都要用start()开启线程
-创建子线程方式1：
-Thread thread = new Thread() {
-    @Override
-    pu...
+                    <a href="/tags/jvm" title='jvm'>
+                        jvm
+                    </a>
                 
-            </p>
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2020/11/06</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><hr>
+<p>JVM概念：<code>Java Virtual Machine</code>:java程序的运行环境（java二进制字节码的运行环境）。</p>
+<p>区别：</p>
+<pre><code>JVM + 基础类库 = JRE
+
+JVM + 基础类库 + 编译归工具 = JDK
+</code></pre><p><img src="/2020/11/06/44.JVM虚拟机底层原理/1.png" alt=""></p>
+<p>类加载器：ClassLoader</p>
+<p>JVM内存结构：方法区（Method Area）、堆（Heap）、虚拟机栈（JVM Stacks）、程序计数器（PC Register）、本地方法栈（Nataive Method Stacks）。</p>
+<p>执行引擎：解释器（Interpreter）、即时编译器（JIT Compiler）、垃圾回收（GC）。</p>
+<hr>
+
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="../../../../img/reward-alipay.jpg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="../../../../img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
         </div>
-    </article>
- 
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
 
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2020/09/09/43.python高级/" class="next-post btn btn-default" title='python高级'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">python高级</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
 
 
 
@@ -191,65 +249,14 @@ Thread thread = new Thread() {
 
                 </main>
                 
-                    
-    <aside class="col-md-4 sidebar">
-        
-        
+                    <aside id="article-toc" role="navigation" class="col-md-4">
     <div class="widget">
-        <h3 class="title">网站公告</h3>
-        <div class="notification">
-            <p>
-    我的博客地址：<a href="http://adamright.github.io" title="fork me" target="_blank">博客</a> <br/>
-</p>
-        </div>
-    </div>
-
+        <h3 class="title">文章目录</h3>
         
-        
-    <div class="widget">
-      <h3 class="title">社交</h3> 
-        <div class="content social">
-            
-	            <a href="//github.com/adamright" rel="external nofollow" title="Github" target="_blank">
-			    	<i class="git fa fa-git"></i>
-			    </a>
-            
-        </div>
-    </div>
-
-
-        
-        
-  <div class="widget">
-    <h3 class="title">标签云</h3>
-    <div class="content tag-cloud">
-        
-            <a href="/tags/C/" style="font-size: 15px;">C</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/ConstraintLayout/" style="font-size: 10px;">ConstraintLayout</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/HTML标签/" style="font-size: 10px;">HTML标签</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/IconFont/" style="font-size: 10px;">IconFont</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/OkHttp/" style="font-size: 10px;">OkHttp</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/charles/" style="font-size: 10px;">charles</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/jvm/" style="font-size: 10px;">jvm</a> <a href="/tags/kotlin/" style="font-size: 10px;">kotlin</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/view/" style="font-size: 10px;">view</a> <a href="/tags/小程序/" style="font-size: 10px;">小程序</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/源码分析/" style="font-size: 20px;">源码分析</a> <a href="/tags/移动web/" style="font-size: 10px;">移动web</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a> <a href="/tags/自定义/" style="font-size: 10px;">自定义</a> <a href="/tags/自定义控件/" style="font-size: 10px;">自定义控件</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li></ol>
         
     </div>
-  </div>
-
-
-        
-        
-    <div class="widget">
-        <h3 class="title">友链</h3>
-        <div class="content friends-link">
-        
-            <a href="https://hexo.io/zh-cn/" class="fa" target="_blank">Hexo官网</a>
-        
-            <a href="http://www.wanandroid.com/" class="fa" target="_blank">玩Android</a>
-        
-            <a href="http://jikedaohang.com/" class="fa" target="_blank">极客导航</a>
-        
-            <a href="https://tinypng.com/" class="fa" target="_blank">tinypng</a>
-        
-        </div>
-    </div>
-
-
-        
-    </aside>
+</aside>
 
                 
             </div>
@@ -292,8 +299,6 @@ Thread thread = new Thread() {
     </div>
 </div>
 
-
-	<script src="/js/search.js?rev=@@hash"></script>
 
 
 
