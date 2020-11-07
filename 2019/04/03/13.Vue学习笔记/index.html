@@ -1533,7 +1533,8 @@ Vue.http.options.emulateJSON = true;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><hr>
-<h3 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h3><p>组件中，默认无法访问到父组件中的data上的数据和methods中的方法。父组件可以在引用子组件的时候，通过属性绑定<code>v-bind:</code>的形式, 把需要传递给子组件的数据，以属性绑定的形式，传递到子组件内部，供子组件使用。组件中的所有props中的数据，都是通过父组件传递给子组件的。</p>
+<h3 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h3><hr>
+<p>组件中，默认无法访问到父组件中的data上的数据和methods中的方法。父组件可以在引用子组件的时候，通过属性绑定<code>v-bind:</code>的形式, 把需要传递给子组件的数据，以属性绑定的形式，传递到子组件内部，供子组件使用。组件中的所有props中的数据，都是通过父组件传递给子组件的。</p>
 <blockquote>
 <p>注意：props中的数据，都是只读的，无法重新赋值。</p>
 </blockquote>
@@ -1564,7 +1565,8 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h3 id="父组件向子组件传方法"><a href="#父组件向子组件传方法" class="headerlink" title="父组件向子组件传方法"></a>父组件向子组件传方法</h3><p>父组件向子组件传递方法，使用的是事件绑定机制：v-on, 当我们自定义了一个事件属性之后，那么子组件就能够通过某些方式，来调用传递进去的 这个方法了。子组件通过<code>$emit</code>调用父组件方法。</p>
+</code></pre><hr>
+<h3 id="父组件向子组件传方法"><a href="#父组件向子组件传方法" class="headerlink" title="父组件向子组件传方法"></a>父组件向子组件传方法</h3><p>父组件向子组件传递方法，使用的是事件绑定机制：v-on, 当我们自定义了一个事件属性之后，那么子组件就能够通过某些方式，来调用传递进去的 这个方法了。子组件通过<code>$emit</code>调用父组件方法。</p>
 <p>子组件调用父组件的方法，并传值：</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
