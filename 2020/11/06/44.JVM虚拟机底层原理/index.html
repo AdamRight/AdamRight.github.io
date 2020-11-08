@@ -247,6 +247,58 @@ public static StringBuilder m3() {
 <p>方法区在虚拟机启动时候就被创建了。方法区也会内存溢出。</p>
 <p>常量池：就是一张表，虚拟机指令根据这张常量表找到要执行的类名、方法名、参数类型、字面量等信息 </p>
 <p>运行时常量池：常量池是<code>*.class</code>文件中的，当该类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址。</p>
+<p>常量池中的信息，都会被加载到运行时常量池中。</p>
+<hr>
+<h3 id="StringTable"><a href="#StringTable" class="headerlink" title="StringTable"></a>StringTable</h3><hr>
+<p>JVM1.6中StringTable存放在永久代方法区中；1.8中将StringTable存放在堆中了。</p>
+<p>StringTable是hashtable结构，不能扩容。</p>
+<pre><code>String s1 = &quot;a&quot;; // 懒惰的
+String s2 = &quot;b&quot;;
+String s3 = &quot;ab&quot;;
+String s4 = s1 + s2; // new StringBuilder().append(&quot;a&quot;).append(&quot;b&quot;).toString() -&gt; new String(&quot;ab&quot;)
+String s5 = &quot;a&quot; + &quot;b&quot;;  // javac 在编译期间的优化，结果已经在编译期确定为ab
+
+System.out.println(s3 == s4);//false，s3在串池中，s4在堆中
+System.out.println(s3 == s5);//true
+</code></pre><p><code>intern()</code>:将字符串对象尝试放入串池，如果有则并不会放入，如果没有则放入串池，会把串池中的对象返回。</p>
+<pre><code>String x = &quot;ab&quot;;
+String s = new String(&quot;a&quot;) + new String(&quot;b&quot;);// 堆
+String s2 = s.intern();
+
+System.out.println( s2 == x);//true
+System.out.println( s == x );//false
+</code></pre><p>面试题</p>
+<pre><code>String s1 = &quot;a&quot;;
+String s2 = &quot;b&quot;;
+String s3 = &quot;a&quot; + &quot;b&quot;; // ab
+String s4 = s1 + s2;   // new String(&quot;ab&quot;)
+String s5 = &quot;ab&quot;;
+String s6 = s4.intern();
+
+// 问
+System.out.println(s3 == s4); // false
+System.out.println(s3 == s5); // true
+System.out.println(s3 == s6); // true
+
+String x2 = new String(&quot;c&quot;) + new String(&quot;d&quot;); // new String(&quot;cd&quot;)
+String x1 = &quot;cd&quot;;
+x2.intern();//x2入池失败
+System.out.println(x1 == x2);//false
+
+// 调换了位置
+String x2 = new String(&quot;c&quot;) + new String(&quot;d&quot;); // new String(&quot;cd&quot;)
+x2.intern();//x2入池成功
+String x1 = &quot;cd&quot;;
+System.out.println(x1 == x2);//true
+</code></pre><p>StringTable 特性：</p>
+<pre><code>常量池中的字符串仅是符号，第一次用到时才变为对象 
+利用串池的机制，来避免重复创建字符串对象 
+字符串变量拼接的原理是 StringBuilder （1.8） 
+字符串常量拼接的原理是编译期优化 
+可以使用 intern 方法，主动将串池中还没有的字符串对象放入串池 
+1.8 将这个字符串对象尝试放入串池，如果有则并不会放入，如果没有则放入串池，会把串池中的对象返回 
+1.6 将这个字符串对象尝试放入串池，如果有则并不会放入，如果没有会把此对象复制一份，放入串池，会把串池中的对象返回
+</code></pre><p>StringTable会GC垃圾回收。 </p>
 <hr>
 
     </div>
@@ -304,7 +356,7 @@ public static StringBuilder m3() {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM内存结构"><span class="toc-text">JVM内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之程序计数器"><span class="toc-text">JVM内存结构之程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之虚拟机栈"><span class="toc-text">JVM内存结构之虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之本地方法栈"><span class="toc-text">JVM内存结构之本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之堆"><span class="toc-text">JVM内存结构之堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之方法区"><span class="toc-text">JVM内存结构之方法区</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM内存结构"><span class="toc-text">JVM内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之程序计数器"><span class="toc-text">JVM内存结构之程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之虚拟机栈"><span class="toc-text">JVM内存结构之虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之本地方法栈"><span class="toc-text">JVM内存结构之本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之堆"><span class="toc-text">JVM内存结构之堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之方法区"><span class="toc-text">JVM内存结构之方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StringTable"><span class="toc-text">StringTable</span></a></li></ol></li></ol>
         
     </div>
 </aside>
