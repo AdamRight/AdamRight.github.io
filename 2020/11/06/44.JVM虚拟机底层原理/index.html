@@ -386,7 +386,7 @@ public static void main(String[] args) {
 <p><code>Mark Compact</code>:优点：不会产生内存碎片，缺点：速度慢。</p>
 <hr>
 <h3 id="垃圾回收算法之复制"><a href="#垃圾回收算法之复制" class="headerlink" title="垃圾回收算法之复制"></a>垃圾回收算法之复制</h3><hr>
-<p><code>Copy</code>:内存空间划分为FROM和TO两个区域。在FROM垃圾回收后，复制到TO区域，不会有内存碎片，然后TO变成了FROM。需要占用双倍内存空间</p>
+<p><code>Copy</code>:内存空间划分为<code>FROM</code>和<code>TO</code>两个区域。在FROM垃圾回收后，复制到TO区域，不会有内存碎片，然后TO变成了FROM。需要占用双倍内存空间。</p>
 <hr>
 <h3 id="分代垃圾回收"><a href="#分代垃圾回收" class="headerlink" title="分代垃圾回收"></a>分代垃圾回收</h3><hr>
 <p>堆内存分为：老年代（长时间使用的内存区域）和新生代（分为：伊甸园、幸存区From、幸存区To）。</p>
@@ -395,7 +395,55 @@ public static void main(String[] args) {
 <p>对象首先分配在伊甸园区域。新生代空间不足时，触发 <code>minor gc</code>，使用<code>复制垃圾回收算法</code>，将<code>伊甸园</code>和<code>from</code>存活的对象使用 <code>copy</code> 复制到 <code>to</code> 中，存活的对象年龄<code>加1</code>并且交换 <code>from</code> <code>to</code>。</p>
 <p><code>minor gc</code> 会引发 <code>stop the world</code>，暂停其它用户的线程（因为对象地址会改变），等垃圾回收结束，用户线程才恢复运行。</p>
 <p>当新生代中的对象年龄超过阈值时，会晋升至老年代，最大寿命是15（4bit）。</p>
-<p>当老年代空间不足，会先尝试触发 <code>minor gc</code>，如果之后空间仍不足，那么触发 <code>full gc</code>，STW的时间更长。</p>
+<p>当老年代空间不足，会先尝试触发 <code>minor gc</code>，如果之后空间仍不足，那么触发 <code>full gc</code>，<code>stop the world</code>的时间更长。老年代垃圾回收的算法是标记清除或者标记整理。</p>
+<p>相关VM参数：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">堆初始大小</td>
+<td style="text-align:center">-Xms</td>
+</tr>
+<tr>
+<td style="text-align:center">堆最大大小</td>
+<td style="text-align:center">-Xmx 或 -XX:MaxHeapSize=size</td>
+</tr>
+<tr>
+<td style="text-align:center">新生代大小</td>
+<td style="text-align:center">-Xmn 或 (-XX:NewSize=size + -XX:MaxNewSize=size )</td>
+</tr>
+<tr>
+<td style="text-align:center">幸存区比例（动态）</td>
+<td style="text-align:center">-XX:InitialSurvivorRatio=ratio 和 -XX:+UseAdaptiveSizePolicy</td>
+</tr>
+<tr>
+<td style="text-align:center">幸存区比例</td>
+<td style="text-align:center">-XX:SurvivorRatio=ratio</td>
+</tr>
+<tr>
+<td style="text-align:center">晋升阈值</td>
+<td style="text-align:center">-XX:MaxTenuringThreshold=threshold</td>
+</tr>
+<tr>
+<td style="text-align:center">晋升详情</td>
+<td style="text-align:center">-XX:+PrintTenuringDistribution</td>
+</tr>
+<tr>
+<td style="text-align:center">GC详情</td>
+<td style="text-align:center">-XX:+PrintGCDetails -verbose:gc</td>
+</tr>
+<tr>
+<td style="text-align:center">FullGC 前 MinorGC</td>
+<td style="text-align:center">-XX:+ScavengeBeforeFullGC</td>
+</tr>
+</tbody>
+</table>
 <hr>
 
     </div>
