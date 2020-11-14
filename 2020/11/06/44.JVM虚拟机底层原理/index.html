@@ -300,15 +300,21 @@ System.out.println(x1 == x2);//true
 1.6 将这个字符串对象尝试放入串池，如果有则并不会放入，如果没有会把此对象复制一份，放入串池，会把串池中的对象返回
 </code></pre><p>StringTable会GC垃圾回收。 </p>
 <hr>
-<h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><h3 id="判断对象是否可以回收之引用计数法"><a href="#判断对象是否可以回收之引用计数法" class="headerlink" title="判断对象是否可以回收之引用计数法"></a>判断对象是否可以回收之引用计数法</h3><p>被引用几次就计数几，当计数零时候就没有引用的了，可以回收。弊端：两个对象相互引用，就无法回收。</p>
-<h3 id="判断对象是否可以回收之可达性分析算法"><a href="#判断对象是否可以回收之可达性分析算法" class="headerlink" title="判断对象是否可以回收之可达性分析算法"></a>判断对象是否可以回收之可达性分析算法</h3><p>Java虚拟机中的垃圾回收器采用<strong>可达性分析</strong>来探索所有存活的对象。</p>
+<h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><h3 id="判断对象是否可以回收之引用计数法"><a href="#判断对象是否可以回收之引用计数法" class="headerlink" title="判断对象是否可以回收之引用计数法"></a>判断对象是否可以回收之引用计数法</h3><hr>
+<p>被引用几次就计数几，当计数零时候就没有引用的了，可以回收。弊端：两个对象相互引用，就无法回收。</p>
+<hr>
+<h3 id="判断对象是否可以回收之可达性分析算法"><a href="#判断对象是否可以回收之可达性分析算法" class="headerlink" title="判断对象是否可以回收之可达性分析算法"></a>判断对象是否可以回收之可达性分析算法</h3><hr>
+<p>Java虚拟机中的垃圾回收器采用<strong>可达性分析</strong>来探索所有存活的对象。</p>
 <p>根对象（GC Root）：肯定不能当成垃圾被回收的对象称为根对象。一个对象没有被根对象直接或者间接引用，就可以被回收。</p>
 <p>扫描堆中的对象，看是否能够沿着<code>GC Root</code>对象为起点的引用链找到该对象，找不到，表示可以回收该对象。</p>
-<h3 id="五种引用"><a href="#五种引用" class="headerlink" title="五种引用"></a>五种引用</h3><p><strong>强引用</strong>：只有所有 <code>GC Roots</code> 对象都不通过<code>强引用</code>引用该对象，该对象才能被垃圾回收。</p>
+<hr>
+<h3 id="五种引用"><a href="#五种引用" class="headerlink" title="五种引用"></a>五种引用</h3><hr>
+<p><strong>强引用</strong>：只有所有 <code>GC Roots</code> 对象都不通过<code>强引用</code>引用该对象，该对象才能被垃圾回收。</p>
 <p><strong>软引用</strong>（SoftReference）：仅有软引用引用该对象时，在垃圾回收后，<strong>内存仍不足时</strong>会再次出发垃圾回收，回收软引用对象；可以配合<strong>引用队列</strong>来释放软引用自身。</p>
 <p><strong>弱引用</strong>（WeakReference）：仅有弱引用引用该对象时，在垃圾回收时，无论内存是否充足，都会回收弱引用对象。可以配合<strong>引用队列</strong>来释放弱引用自身。</p>
 <p><strong>虚引用</strong>（PhantomReference）：必须配合引用队列使用，主要配合 <code>ByteBuffer</code> 使用，被引用对象回收时，会将虚引用入队，由<code>Reference Handler</code> 线程调用虚引用相关方法释放<strong>直接内存</strong>。</p>
 <p><strong>终结器引用</strong>（FinalReference）:无需手动编码，但其内部配合引用队列使用，在垃圾回收时，终结器引用入队（被引用对象暂时没有被回收），再由 <code>Finalizer</code> 线程通过终结器引用找到被引用对象并调用它的 <code>finalize</code> 方法，第二次GC时才能回收被引用对象。</p>
+<hr>
 <p>强引用和软引用代码：</p>
 <pre><code>private static final int _4MB = 4 * 1024 * 1024;
 
@@ -330,7 +336,8 @@ System.out.println(&quot;循环结束：&quot; + list.size());
 for (SoftReference&lt;byte[]&gt; ref : list) {
     System.out.println(ref.get());
 }
-</code></pre><p>软引用配合<strong>引用队列</strong>使用，自动清除无用的软引用：</p>
+</code></pre><hr>
+<p>软引用配合<strong>引用队列</strong>使用，自动清除无用的软引用：</p>
 <pre><code>private static final int _4MB = 4 * 1024 * 1024;
 public static void main(String[] args) {
     List&lt;SoftReference&lt;byte[]&gt;&gt; list = new ArrayList&lt;&gt;();
@@ -355,7 +362,8 @@ public static void main(String[] args) {
         System.out.println(reference.get());
     }
 }
-</code></pre><p>弱引用演示代码：</p>
+</code></pre><hr>
+<p>弱引用演示代码：</p>
 <pre><code>private static final int _4MB = 4 * 1024 * 1024;
 public static void main(String[] args) {
     //  list --&gt; WeakReference --&gt; byte[]
@@ -370,7 +378,26 @@ public static void main(String[] args) {
     }
     System.out.println(&quot;循环结束：&quot; + list.size());
 }
-</code></pre>
+</code></pre><hr>
+<h3 id="垃圾回收算法之标记清除"><a href="#垃圾回收算法之标记清除" class="headerlink" title="垃圾回收算法之标记清除"></a>垃圾回收算法之标记清除</h3><hr>
+<p><code>Mark Sweep</code>:先标记垃圾，再清除垃圾。优点：速度快。缺点：空间不连续，产生内存碎片。</p>
+<hr>
+<h3 id="垃圾回收算法之标记整理"><a href="#垃圾回收算法之标记整理" class="headerlink" title="垃圾回收算法之标记整理"></a>垃圾回收算法之标记整理</h3><hr>
+<p><code>Mark Compact</code>:优点：不会产生内存碎片，缺点：速度慢。</p>
+<hr>
+<h3 id="垃圾回收算法之复制"><a href="#垃圾回收算法之复制" class="headerlink" title="垃圾回收算法之复制"></a>垃圾回收算法之复制</h3><hr>
+<p><code>Copy</code>:内存空间划分为FROM和TO两个区域。在FROM垃圾回收后，复制到TO区域，不会有内存碎片，然后TO变成了FROM。需要占用双倍内存空间</p>
+<hr>
+<h3 id="分代垃圾回收"><a href="#分代垃圾回收" class="headerlink" title="分代垃圾回收"></a>分代垃圾回收</h3><hr>
+<p>堆内存分为：老年代（长时间使用的内存区域）和新生代（分为：伊甸园、幸存区From、幸存区To）。</p>
+<p>新生代垃圾回收：<code>Minor GC</code>。</p>
+<p>老年代垃圾回收：<code>Full GC</code>。</p>
+<p>对象首先分配在伊甸园区域。新生代空间不足时，触发 <code>minor gc</code>，使用<code>复制垃圾回收算法</code>，将<code>伊甸园</code>和<code>from</code>存活的对象使用 <code>copy</code> 复制到 <code>to</code> 中，存活的对象年龄<code>加1</code>并且交换 <code>from</code> <code>to</code>。</p>
+<p><code>minor gc</code> 会引发 <code>stop the world</code>，暂停其它用户的线程（因为对象地址会改变），等垃圾回收结束，用户线程才恢复运行。</p>
+<p>当新生代中的对象年龄超过阈值时，会晋升至老年代，最大寿命是15（4bit）。</p>
+<p>当老年代空间不足，会先尝试触发 <code>minor gc</code>，如果之后空间仍不足，那么触发 <code>full gc</code>，STW的时间更长。</p>
+<hr>
+
     </div>
     
         <div class="reward">
@@ -426,7 +453,7 @@ public static void main(String[] args) {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM内存结构"><span class="toc-text">JVM内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之程序计数器"><span class="toc-text">JVM内存结构之程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之虚拟机栈"><span class="toc-text">JVM内存结构之虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之本地方法栈"><span class="toc-text">JVM内存结构之本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之堆"><span class="toc-text">JVM内存结构之堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之方法区"><span class="toc-text">JVM内存结构之方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StringTable"><span class="toc-text">StringTable</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收"><span class="toc-text">垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#判断对象是否可以回收之引用计数法"><span class="toc-text">判断对象是否可以回收之引用计数法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#判断对象是否可以回收之可达性分析算法"><span class="toc-text">判断对象是否可以回收之可达性分析算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五种引用"><span class="toc-text">五种引用</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM内存结构"><span class="toc-text">JVM内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之程序计数器"><span class="toc-text">JVM内存结构之程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之虚拟机栈"><span class="toc-text">JVM内存结构之虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之本地方法栈"><span class="toc-text">JVM内存结构之本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之堆"><span class="toc-text">JVM内存结构之堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之方法区"><span class="toc-text">JVM内存结构之方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StringTable"><span class="toc-text">StringTable</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收"><span class="toc-text">垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#判断对象是否可以回收之引用计数法"><span class="toc-text">判断对象是否可以回收之引用计数法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#判断对象是否可以回收之可达性分析算法"><span class="toc-text">判断对象是否可以回收之可达性分析算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五种引用"><span class="toc-text">五种引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法之标记清除"><span class="toc-text">垃圾回收算法之标记清除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法之标记整理"><span class="toc-text">垃圾回收算法之标记整理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法之复制"><span class="toc-text">垃圾回收算法之复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分代垃圾回收"><span class="toc-text">分代垃圾回收</span></a></li></ol></li></ol>
         
     </div>
 </aside>
