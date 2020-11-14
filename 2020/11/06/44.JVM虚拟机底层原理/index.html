@@ -300,7 +300,77 @@ System.out.println(x1 == x2);//true
 1.6 将这个字符串对象尝试放入串池，如果有则并不会放入，如果没有会把此对象复制一份，放入串池，会把串池中的对象返回
 </code></pre><p>StringTable会GC垃圾回收。 </p>
 <hr>
+<h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><h3 id="判断对象是否可以回收之引用计数法"><a href="#判断对象是否可以回收之引用计数法" class="headerlink" title="判断对象是否可以回收之引用计数法"></a>判断对象是否可以回收之引用计数法</h3><p>被引用几次就计数几，当计数零时候就没有引用的了，可以回收。弊端：两个对象相互引用，就无法回收。</p>
+<h3 id="判断对象是否可以回收之可达性分析算法"><a href="#判断对象是否可以回收之可达性分析算法" class="headerlink" title="判断对象是否可以回收之可达性分析算法"></a>判断对象是否可以回收之可达性分析算法</h3><p>Java虚拟机中的垃圾回收器采用<strong>可达性分析</strong>来探索所有存活的对象。</p>
+<p>根对象（GC Root）：肯定不能当成垃圾被回收的对象称为根对象。一个对象没有被根对象直接或者间接引用，就可以被回收。</p>
+<p>扫描堆中的对象，看是否能够沿着<code>GC Root</code>对象为起点的引用链找到该对象，找不到，表示可以回收该对象。</p>
+<h3 id="五种引用"><a href="#五种引用" class="headerlink" title="五种引用"></a>五种引用</h3><p><strong>强引用</strong>：只有所有 <code>GC Roots</code> 对象都不通过<code>强引用</code>引用该对象，该对象才能被垃圾回收。</p>
+<p><strong>软引用</strong>（SoftReference）：仅有软引用引用该对象时，在垃圾回收后，<strong>内存仍不足时</strong>会再次出发垃圾回收，回收软引用对象；可以配合<strong>引用队列</strong>来释放软引用自身。</p>
+<p><strong>弱引用</strong>（WeakReference）：仅有弱引用引用该对象时，在垃圾回收时，无论内存是否充足，都会回收弱引用对象。可以配合<strong>引用队列</strong>来释放弱引用自身。</p>
+<p><strong>虚引用</strong>（PhantomReference）：必须配合引用队列使用，主要配合 <code>ByteBuffer</code> 使用，被引用对象回收时，会将虚引用入队，由<code>Reference Handler</code> 线程调用虚引用相关方法释放<strong>直接内存</strong>。</p>
+<p><strong>终结器引用</strong>（FinalReference）:无需手动编码，但其内部配合引用队列使用，在垃圾回收时，终结器引用入队（被引用对象暂时没有被回收），再由 <code>Finalizer</code> 线程通过终结器引用找到被引用对象并调用它的 <code>finalize</code> 方法，第二次GC时才能回收被引用对象。</p>
+<p>强引用和软引用代码：</p>
+<pre><code>private static final int _4MB = 4 * 1024 * 1024;
 
+List&lt;byte[]&gt; list = new ArrayList&lt;&gt;();
+for (int i = 0; i &lt; 5; i++) {
+    list.add(new byte[_4MB]);
+}
+System.in.read();
+
+// 软引用：list --&gt; SoftReference --&gt; byte[]
+List&lt;SoftReference&lt;byte[]&gt;&gt; list = new ArrayList&lt;&gt;();
+for (int i = 0; i &lt; 5; i++) {
+    SoftReference&lt;byte[]&gt; ref = new SoftReference&lt;&gt;(new byte[_4MB]);
+    System.out.println(ref.get());
+    list.add(ref);
+    System.out.println(list.size());
+}
+System.out.println(&quot;循环结束：&quot; + list.size());
+for (SoftReference&lt;byte[]&gt; ref : list) {
+    System.out.println(ref.get());
+}
+</code></pre><p>软引用配合<strong>引用队列</strong>使用，自动清除无用的软引用：</p>
+<pre><code>private static final int _4MB = 4 * 1024 * 1024;
+public static void main(String[] args) {
+    List&lt;SoftReference&lt;byte[]&gt;&gt; list = new ArrayList&lt;&gt;();
+    // 引用队列
+    ReferenceQueue&lt;byte[]&gt; queue = new ReferenceQueue&lt;&gt;();
+    for (int i = 0; i &lt; 5; i++) {
+        // 关联了引用队列， 当软引用所关联的 byte[]被回收时，软引用自己会加入到 queue 中去
+        SoftReference&lt;byte[]&gt; ref = new SoftReference&lt;&gt;(new byte[_4MB], queue);
+        System.out.println(ref.get());
+        list.add(ref);
+        System.out.println(list.size());
+    }
+
+    // 从队列中获取无用的 软引用对象，并移除
+    Reference&lt;? extends byte[]&gt; poll = queue.poll();
+    while( poll != null) {
+        list.remove(poll);
+        poll = queue.poll();
+    }
+    System.out.println(&quot;===========================&quot;);
+    for (SoftReference&lt;byte[]&gt; reference : list) {
+        System.out.println(reference.get());
+    }
+}
+</code></pre><p>弱引用演示代码：</p>
+<pre><code>private static final int _4MB = 4 * 1024 * 1024;
+public static void main(String[] args) {
+    //  list --&gt; WeakReference --&gt; byte[]
+    List&lt;WeakReference&lt;byte[]&gt;&gt; list = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; 10; i++) {
+        WeakReference&lt;byte[]&gt; ref = new WeakReference&lt;&gt;(new byte[_4MB]);
+        list.add(ref);
+        for (WeakReference&lt;byte[]&gt; w : list) {
+            System.out.print(w.get()+&quot; &quot;);
+        }
+        System.out.println();
+    }
+    System.out.println(&quot;循环结束：&quot; + list.size());
+}
+</code></pre>
     </div>
     
         <div class="reward">
@@ -356,7 +426,7 @@ System.out.println(x1 == x2);//true
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM内存结构"><span class="toc-text">JVM内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之程序计数器"><span class="toc-text">JVM内存结构之程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之虚拟机栈"><span class="toc-text">JVM内存结构之虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之本地方法栈"><span class="toc-text">JVM内存结构之本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之堆"><span class="toc-text">JVM内存结构之堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之方法区"><span class="toc-text">JVM内存结构之方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StringTable"><span class="toc-text">StringTable</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM内存结构"><span class="toc-text">JVM内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之程序计数器"><span class="toc-text">JVM内存结构之程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之虚拟机栈"><span class="toc-text">JVM内存结构之虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之本地方法栈"><span class="toc-text">JVM内存结构之本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之堆"><span class="toc-text">JVM内存结构之堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之方法区"><span class="toc-text">JVM内存结构之方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StringTable"><span class="toc-text">StringTable</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收"><span class="toc-text">垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#判断对象是否可以回收之引用计数法"><span class="toc-text">判断对象是否可以回收之引用计数法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#判断对象是否可以回收之可达性分析算法"><span class="toc-text">判断对象是否可以回收之可达性分析算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五种引用"><span class="toc-text">五种引用</span></a></li></ol></li></ol>
         
     </div>
 </aside>
