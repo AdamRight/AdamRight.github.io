@@ -389,13 +389,15 @@ public static void main(String[] args) {
 <p><code>Copy</code>:内存空间划分为<code>FROM</code>和<code>TO</code>两个区域。在FROM垃圾回收后，复制到TO区域，不会有内存碎片，然后TO变成了FROM。需要占用双倍内存空间。</p>
 <hr>
 <h3 id="分代垃圾回收"><a href="#分代垃圾回收" class="headerlink" title="分代垃圾回收"></a>分代垃圾回收</h3><hr>
-<p>堆内存分为：老年代（长时间使用的内存区域）和新生代（分为：伊甸园、幸存区From、幸存区To）。</p>
-<p>新生代垃圾回收：<code>Minor GC</code>。</p>
-<p>老年代垃圾回收：<code>Full GC</code>。</p>
-<p>对象首先分配在伊甸园区域。新生代空间不足时，触发 <code>minor gc</code>，使用<code>复制垃圾回收算法</code>，将<code>伊甸园</code>和<code>from</code>存活的对象使用 <code>copy</code> 复制到 <code>to</code> 中，存活的对象年龄<code>加1</code>并且交换 <code>from</code> <code>to</code>。</p>
+<p>堆内存分为：老年代（长时间使用的内存区域）和新生代（分为：伊甸园eden、幸存区From、幸存区To）。</p>
+<p>新生代<code>new generation</code>垃圾回收：<code>Minor GC</code>。</p>
+<p>老年代<code>tenured generation</code>垃圾回收：<code>Full GC</code>。</p>
+<p>对象首先分配在伊甸园eden区域。新生代空间不足时，触发 <code>minor gc</code>，使用<code>复制垃圾回收算法</code>，将<code>伊甸园</code>和<code>from</code>存活的对象使用 <code>copy</code> 复制到 <code>to</code> 中，存活的对象年龄<code>加1</code>并且交换 <code>from</code> <code>to</code>。</p>
 <p><code>minor gc</code> 会引发 <code>stop the world</code>，暂停其它用户的线程（因为对象地址会改变），等垃圾回收结束，用户线程才恢复运行。</p>
 <p>当新生代中的对象年龄超过阈值时，会晋升至老年代，最大寿命是15（4bit）。</p>
 <p>当老年代空间不足，会先尝试触发 <code>minor gc</code>，如果之后空间仍不足，那么触发 <code>full gc</code>，<code>stop the world</code>的时间更长。老年代垃圾回收的算法是标记清除或者标记整理。</p>
+<p>首次存储一个新对象：如果新生代空间不足，老年代充足，会直接存储在老年代中；如果新生代空间不足，老年代空间也不足，会OOM。</p>
+<p>子线程的OOM不会导致主线程的结束。</p>
 <p>相关VM参数：</p>
 <table>
 <thead>
@@ -443,6 +445,21 @@ public static void main(String[] args) {
 </tr>
 </tbody>
 </table>
+<hr>
+<h3 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h3><hr>
+<p>串行：单线程，堆内存较小，适合个人电脑。<code>XX:+UseSerialGC = Serial（新生代-复制算法） + SerialOld（老年代-标记整理算法）</code>。</p>
+<p>吞吐量优先：多线程，堆内存较大，多核cpu。让单位时间内，STW 的时间最短 0.2 0.2 = 0.4，垃圾回收时间占比最低，这样就称吞吐量高。</p>
+<pre><code>-XX:+UseParallelGC ~ -XX:+UseParallelOldGC
+-XX:GCTimeRatio=ratio
+-XX:MaxGCPauseMillis=ms
+-XX:ParallelGCThreads=n
+</code></pre><p>响应时间优先：多线程，堆内存较大，多核cpu。尽可能让单次 STW 的时间最短 0.1 0.1 0.1 0.1 0.1 = 0.5。</p>
+<pre><code>-XX:+UseConcMarkSweepGC ~ -XX:+UseParNewGC ~ SerialOld
+-XX:ParallelGCThreads=n ~ -XX:ConcGCThreads=threads
+-XX:CMSInitiatingOccupancyFraction=percent
+-XX:+CMSScavengeBeforeRemark
+</code></pre><hr>
+<h3 id="Garbage-First"><a href="#Garbage-First" class="headerlink" title="Garbage First"></a>Garbage First</h3><hr>
 <hr>
 
     </div>
@@ -500,7 +517,7 @@ public static void main(String[] args) {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM内存结构"><span class="toc-text">JVM内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之程序计数器"><span class="toc-text">JVM内存结构之程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之虚拟机栈"><span class="toc-text">JVM内存结构之虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之本地方法栈"><span class="toc-text">JVM内存结构之本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之堆"><span class="toc-text">JVM内存结构之堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之方法区"><span class="toc-text">JVM内存结构之方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StringTable"><span class="toc-text">StringTable</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收"><span class="toc-text">垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#判断对象是否可以回收之引用计数法"><span class="toc-text">判断对象是否可以回收之引用计数法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#判断对象是否可以回收之可达性分析算法"><span class="toc-text">判断对象是否可以回收之可达性分析算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五种引用"><span class="toc-text">五种引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法之标记清除"><span class="toc-text">垃圾回收算法之标记清除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法之标记整理"><span class="toc-text">垃圾回收算法之标记整理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法之复制"><span class="toc-text">垃圾回收算法之复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分代垃圾回收"><span class="toc-text">分代垃圾回收</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM内存结构"><span class="toc-text">JVM内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之程序计数器"><span class="toc-text">JVM内存结构之程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之虚拟机栈"><span class="toc-text">JVM内存结构之虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之本地方法栈"><span class="toc-text">JVM内存结构之本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之堆"><span class="toc-text">JVM内存结构之堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之方法区"><span class="toc-text">JVM内存结构之方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StringTable"><span class="toc-text">StringTable</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收"><span class="toc-text">垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#判断对象是否可以回收之引用计数法"><span class="toc-text">判断对象是否可以回收之引用计数法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#判断对象是否可以回收之可达性分析算法"><span class="toc-text">判断对象是否可以回收之可达性分析算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五种引用"><span class="toc-text">五种引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法之标记清除"><span class="toc-text">垃圾回收算法之标记清除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法之标记整理"><span class="toc-text">垃圾回收算法之标记整理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法之复制"><span class="toc-text">垃圾回收算法之复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分代垃圾回收"><span class="toc-text">分代垃圾回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收器"><span class="toc-text">垃圾回收器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Garbage-First"><span class="toc-text">Garbage First</span></a></li></ol></li></ol>
         
     </div>
 </aside>
