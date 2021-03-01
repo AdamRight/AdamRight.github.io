@@ -191,6 +191,8 @@
 <p>依赖管理：就是对jar包的管理。通过导入maven坐标，就相当于将仓库中的jar包导入了当前项目中。</p>
 <p>项目构建：通过maven的一个命令就可以完成项目从清理、编译、测试、报告、打包，部署整个过程。</p>
 <p>maven常用命令：clean(清理)、compile(编译)、test(测试)、package(打包)、install(安装)。</p>
+<hr>
+<h2 id="maven的依赖范围"><a href="#maven的依赖范围" class="headerlink" title="maven的依赖范围"></a>maven的依赖范围</h2><hr>
 <p>maven的依赖范围：</p>
 <table>
 <thead>
@@ -240,7 +242,58 @@
 </tr>
 </tbody>
 </table>
-<hr>
+<p>通过<code>scope</code>指定依赖范围，默认是<code>compile</code>：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.12&lt;/version&gt;
+    &lt;scope&gt;compile&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre><hr>
+<h2 id="maven的依赖冲突"><a href="#maven的依赖冲突" class="headerlink" title="maven的依赖冲突"></a>maven的依赖冲突</h2><hr>
+<p>排除依赖：可以使用<code>exclusions</code>标签将传递过来的依赖排除出去。</p>
+<pre><code>&lt;exclusions&gt;
+    &lt;exclusion&gt;
+    ....
+    &lt;/exclusion&gt;
+&lt;/exclusions&gt;
+</code></pre><p>版本锁定:采用直接锁定版本的方法确定依赖jar包的版本，版本锁定后则不考虑依赖的声明顺序或依赖的路径，以锁定的版本为准添加到工程中，此方法在企业开发中经常使用。</p>
+<p>版本锁定的使用方式：第一步：在dependencyManagement标签中锁定依赖的版本;第二步：在dependencies标签中声明需要导入的maven坐标。</p>
+<pre><code>&lt;!--锁定jar包的版本--&gt;
+&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+            &lt;version&gt;5.0.5.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+            &lt;version&gt;5.0.5.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.12&lt;/version&gt;
+        &lt;scope&gt;compile&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
+        &lt;version&gt;4.2.4.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+
+&lt;/dependencies&gt;
+</code></pre><hr>
 
     </div>
     
@@ -297,7 +350,7 @@
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#maven的依赖范围"><span class="toc-text">maven的依赖范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#maven的依赖冲突"><span class="toc-text">maven的依赖冲突</span></a></li></ol>
         
     </div>
 </aside>
