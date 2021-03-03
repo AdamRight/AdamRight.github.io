@@ -294,6 +294,27 @@
 
 &lt;/dependencies&gt;
 </code></pre><hr>
+<h2 id="maven分模块构建"><a href="#maven分模块构建" class="headerlink" title="maven分模块构建"></a>maven分模块构建</h2><hr>
+<p>分模块父工程的打包方式必须为pom：</p>
+<pre><code>&lt;!--父工程的打包方式必须为pom--&gt;
+&lt;packaging&gt;pom&lt;/packaging&gt;
+</code></pre><p>子工程：</p>
+<pre><code>&lt;!--表示当前maven工程继承了maven_parent父工程--&gt;
+&lt;parent&gt;
+    &lt;artifactId&gt;maven_parent&lt;/artifactId&gt;
+    &lt;groupId&gt;com.study&lt;/groupId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+&lt;/parent&gt;
+</code></pre><p>当前子工程依赖 子工程maven_dao：</p>
+<pre><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.study&lt;/groupId&gt;
+        &lt;artifactId&gt;maven_dao&lt;/artifactId&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre><p>maven工程的聚合：在maven工程的<code>pom.xml</code>文件中可以使用<code>&lt;modules&gt;</code>标签将其他maven工程聚合到一起，聚合的目的是为了进行统一操作。例如拆分后的maven工程有多个，如果要进行打包，就需要针对每个工程分别执行打包命令，操作起来非常繁琐。这时就可以使用<code>&lt;modules&gt;</code>标签将这些工程统一聚合到maven工程中，需要打包的时候，只需要在此工程中执行一次打包命令，其下被聚合的工程就都会被打包了。</p>
+<hr>
 
     </div>
     
@@ -350,7 +371,7 @@
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#maven的依赖范围"><span class="toc-text">maven的依赖范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#maven的依赖冲突"><span class="toc-text">maven的依赖冲突</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#maven的依赖范围"><span class="toc-text">maven的依赖范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#maven的依赖冲突"><span class="toc-text">maven的依赖冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#maven分模块构建"><span class="toc-text">maven分模块构建</span></a></li></ol>
         
     </div>
 </aside>
