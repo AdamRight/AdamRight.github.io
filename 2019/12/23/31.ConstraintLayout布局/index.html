@@ -186,7 +186,8 @@
     </div>
     
     <div class="post-body post-content">
-        <h2 id="相对位置"><a href="#相对位置" class="headerlink" title="相对位置"></a>相对位置</h2><p>下面是<code>ConstraintLayout</code>确定位置的属性：</p>
+        <h2 id="ConstraintLayout"><a href="#ConstraintLayout" class="headerlink" title="ConstraintLayout"></a>ConstraintLayout</h2><h3 id="相对位置"><a href="#相对位置" class="headerlink" title="相对位置"></a>相对位置</h3><hr>
+<p>下面是<code>ConstraintLayout</code>确定位置的属性：</p>
 <pre><code>layout_constraintLeft_toLeftOf
 
 layout_constraintLeft_toRightOf
@@ -203,21 +204,81 @@ layout_constraintBottom_toTopOf
 
 layout_constraintBottom_toBottomOf
 
-# 底部对齐
-layout_constraintBaseline_toBaselineOf
-
 ＃ 与left\right相似
 layout_constraintStart_toEndOf
 layout_constraintStart_toStartOf
 layout_constraintEnd_toStartOf
 layout_constraintEnd_toEndOf
-</code></pre><p>这些属性的值即可以是<code>parent</code>，也可以是某个<code>view</code>的<code>id</code>。</p>
-<p>居中显示</p>
-<pre><code>app:layout_constraintLeft_toLeftOf=&quot;parent&quot;
-app:layout_constraintRight_toRightOf=&quot;parent&quot;
-</code></pre><h2 id="尺寸约束"><a href="#尺寸约束" class="headerlink" title="尺寸约束"></a>尺寸约束</h2><p><code>ConstraintLayout</code> 中不支持 <code>MATCH_PARENT</code> 这个值，如果需要实现跟<code>MATCH_PARENT</code>同样的效果，可以使用<code>0dp</code>来代替，其表示<code>MATCH_CONSTRAINT</code>,即适应约束。其跟<code>MATCH_PARENT</code>还是有区别的。</p>
+</code></pre><hr>
+<h3 id="尺寸约束0dp"><a href="#尺寸约束0dp" class="headerlink" title="尺寸约束0dp"></a>尺寸约束0dp</h3><hr>
+<p><code>ConstraintLayout</code> 中不支持 <code>MATCH_PARENT</code> 这个值，如果需要实现跟<code>MATCH_PARENT</code>同样的效果，可以使用<code>0dp</code>来代替，其表示<code>MATCH_CONSTRAINT</code>,即适应约束。其跟<code>MATCH_PARENT</code>还是有区别的。</p>
 <pre><code>android:layout_width=&quot;0dp&quot;
-</code></pre><h2 id="宽高比"><a href="#宽高比" class="headerlink" title="宽高比"></a>宽高比</h2><p>在<code>ConstraintLayout</code>中，还可以将宽定义成高的一个比例或者高定义成宽的比率。首先，需要将宽或者高设置为<code>0dp</code>（即<code>MATCH_CONSTRAINT</code>），即要适应约束条件。然后通过<code>layout_constraintDimensionRatio</code>属性设置一个比率即可。这个比率可以是一个浮点数，表示宽度和高度之间的比率；也可以是“宽度：高度”形式的比率。</p>
+</code></pre><hr>
+<h3 id="权重weight"><a href="#权重weight" class="headerlink" title="权重weight"></a>权重weight</h3><hr>
+<p>通过设置以下两个属性：</p>
+<pre><code>app:layout_constraintHorizontal_weight //水平权重
+app:layout_constraintVertical_weight //竖直权重
+</code></pre><p>比如</p>
+<pre><code>&lt;View
+    android:background=&quot;@color/black&quot;
+    android:id=&quot;@+id/view1&quot;
+    android:layout_width=&quot;0dp&quot;
+    android:layout_height=&quot;50dp&quot;
+    app:layout_constraintEnd_toStartOf=&quot;@+id/view2&quot;
+    app:layout_constraintHorizontal_weight=&quot;1&quot;
+    app:layout_constraintStart_toStartOf=&quot;parent&quot;
+    app:layout_constraintTop_toTopOf=&quot;parent&quot; /&gt;
+
+&lt;View
+    android:background=&quot;@color/purple_200&quot;
+    android:id=&quot;@+id/view2&quot;
+    android:layout_width=&quot;0dp&quot;
+    android:layout_height=&quot;50dp&quot;
+    app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+    app:layout_constraintHorizontal_weight=&quot;2&quot;
+    app:layout_constraintStart_toEndOf=&quot;@+id/view1&quot;
+    app:layout_constraintTop_toTopOf=&quot;parent&quot; /&gt;
+</code></pre><hr>
+<h3 id="文字基准线对齐"><a href="#文字基准线对齐" class="headerlink" title="文字基准线对齐"></a>文字基准线对齐</h3><hr>
+<pre><code># 底部对齐
+layout_constraintBaseline_toBaselineOf
+</code></pre><p>主要用于和文字底部对齐样式，<code>app:layout_constraintBaseline_toBaselineOf</code>主要和 <code>app:layout_constraintBottom_toBottomOf</code>做区分。</p>
+<pre><code>&lt;TextView
+    android:id=&quot;@+id/textView1&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_marginTop=&quot;80dp&quot;
+    android:background=&quot;@color/design_default_color_primary_variant&quot;
+    android:text=&quot;99&quot;
+    android:textSize=&quot;128sp&quot;
+    app:layout_constraintStart_toStartOf=&quot;parent&quot;
+    app:layout_constraintTop_toTopOf=&quot;parent&quot; /&gt;
+
+&lt;TextView
+    android:id=&quot;@+id/textView2&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;%&quot;
+    android:textSize=&quot;26sp&quot;
+    app:layout_constraintBaseline_toBaselineOf=&quot;@+id/textView1&quot;
+    app:layout_constraintStart_toEndOf=&quot;@+id/textView1&quot; /&gt;
+
+&lt;TextView
+    android:id=&quot;@+id/textView4&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;%&quot;
+    android:textSize=&quot;26sp&quot;
+    app:layout_constraintBottom_toBottomOf=&quot;@+id/textView1&quot;
+    app:layout_constraintStart_toEndOf=&quot;@+id/textView1&quot; /&gt;
+</code></pre><hr>
+<h3 id="圆形定位-角度布局"><a href="#圆形定位-角度布局" class="headerlink" title="圆形定位-角度布局"></a>圆形定位-角度布局</h3><hr>
+<p>三个属性确定位置：以谁为圆心，半径，角度：</p>
+<pre><code>app:layout_constraintCircleAngle
+app:layout_constraintCircleRadius
+app:layout_constraintCircle
+</code></pre><hr>
+<h2 id="宽高比"><a href="#宽高比" class="headerlink" title="宽高比"></a>宽高比</h2><p>在<code>ConstraintLayout</code>中，还可以将宽定义成高的一个比例或者高定义成宽的比率。首先，需要将宽或者高设置为<code>0dp</code>（即<code>MATCH_CONSTRAINT</code>），即要适应约束条件。然后通过<code>layout_constraintDimensionRatio</code>属性设置一个比率即可。这个比率可以是一个浮点数，表示宽度和高度之间的比率；也可以是“宽度：高度”形式的比率。</p>
 <pre><code>&lt;Button
     android:layout_width=&quot;wrap_content&quot;
     android:layout_height=&quot;0dp&quot;
@@ -260,28 +321,7 @@ layout_constraintVertical_bias  //竖直偏向
     android:text=&quot;左边偏向30%&quot;
     app:layout_constraintHorizontal_bias=&quot;0.3&quot;
     app:layout_constraintLeft_toLeftOf=&quot;parent&quot;
-    app:layout_constraintRight_toRightOf=&quot;parent&quot;/&gt;
-</code></pre><h2 id="权重"><a href="#权重" class="headerlink" title="权重"></a>权重</h2><p>通过设置以下两个属性：</p>
-<pre><code>app:layout_constraintHorizontal_weight //水平权重
-app:layout_constraintVertical_weight //竖直权重
-</code></pre><p>举个栗子</p>
-<pre><code>&lt;Button
-    android:id=&quot;@+id/btn_1&quot;
-    android:layout_width=&quot;0dp&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;权重为1&quot;
-    app:layout_constraintHorizontal_weight=&quot;1&quot;
-    app:layout_constraintLeft_toLeftOf=&quot;parent&quot;
-    app:layout_constraintRight_toLeftOf=&quot;@id/btn_2&quot;/&gt;
-
-&lt;Button
-    android:id=&quot;@+id/btn_2&quot;
-    android:layout_width=&quot;0dp&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;权重为2&quot;
-    app:layout_constraintHorizontal_weight=&quot;2&quot;
-    app:layout_constraintLeft_toRightOf=&quot;@id/btn_1&quot;
-    app:layout_constraintRight_toRightOf=&quot;parent&quot;/&gt;
+    app:layout_constraintRight_toRightOf=&quot;parent&quot;/&gt;   
 </code></pre><h2 id="链"><a href="#链" class="headerlink" title="链"></a>链</h2><p><img src="/2019/12/23/31.ConstraintLayout布局/img/ConstraintLayout/1.png" alt="Image text"></p>
 <p>设置链样式的属性是：</p>
 <pre><code>app:layout_constraintHorizontal_chainStyle=&quot;spread|spread_inside|packed&quot;
@@ -316,9 +356,7 @@ app:layout_constraintGuide_percent=&quot;0.5&quot;
     android:layout_width=&quot;wrap_content&quot;
     android:layout_height=&quot;wrap_content&quot;
     android:text=&quot;辅助线定位&quot;/&gt;
-</code></pre><p>参考</p>
-<p><a href="https://blog.csdn.net/wangjiang_qianmo/article/details/78254326" target="_blank" rel="noopener">https://blog.csdn.net/wangjiang_qianmo/article/details/78254326</a></p>
-
+</code></pre>
     </div>
     
         <div class="reward">
@@ -379,7 +417,7 @@ app:layout_constraintGuide_percent=&quot;0.5&quot;
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#相对位置"><span class="toc-text">相对位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#尺寸约束"><span class="toc-text">尺寸约束</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#宽高比"><span class="toc-text">宽高比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#百分比宽高"><span class="toc-text">百分比宽高</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#位置偏向"><span class="toc-text">位置偏向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#权重"><span class="toc-text">权重</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链"><span class="toc-text">链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Guideline辅助线"><span class="toc-text">Guideline辅助线</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ConstraintLayout"><span class="toc-text">ConstraintLayout</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相对位置"><span class="toc-text">相对位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#尺寸约束0dp"><span class="toc-text">尺寸约束0dp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#权重weight"><span class="toc-text">权重weight</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文字基准线对齐"><span class="toc-text">文字基准线对齐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#圆形定位-角度布局"><span class="toc-text">圆形定位-角度布局</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#宽高比"><span class="toc-text">宽高比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#百分比宽高"><span class="toc-text">百分比宽高</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#位置偏向"><span class="toc-text">位置偏向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链"><span class="toc-text">链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Guideline辅助线"><span class="toc-text">Guideline辅助线</span></a></li></ol>
         
     </div>
 </aside>
