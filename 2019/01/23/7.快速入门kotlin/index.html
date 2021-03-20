@@ -220,7 +220,7 @@ var int = 5
 </code></pre><p>基本数据类型的定义可以加类型，也可以不加。</p>
 <p><strong><code>lateinit</code>延迟初始化成员变量，先不赋值</strong></p>
 <pre><code>private lateinit var string : String
-</code></pre><p><strong>val延迟初始化用lazy，使用的时候再赋值</strong></p>
+</code></pre><p><strong>val延迟初始化用lazy，使用的时候再赋值,值只在第一次访问的时候计算</strong></p>
 <pre><code>val ss : String by lazy { 
     &quot;赋值&quot;
 }
@@ -502,12 +502,16 @@ class People1(child: Child,parent: Parent) : Child by child, Parent by parent
         }
     }
 }
-</code></pre><h4 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h4><p>方法重载可以用方法上的默认参数代替，想给java用可以加上<code>@JvmOverloads</code>。</p>
+</code></pre><h4 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h4><hr>
+<p>方法重载可以用方法上的默认参数代替，想给java用可以加上<code>@JvmOverloads</code>。</p>
 <pre><code>@JvmOverloads
 fun sum(a: Int = 2, b: Int): Int {
     return a + b
 }
-</code></pre><h4 id="data-class类"><a href="#data-class类" class="headerlink" title="data class类"></a><code>data class</code>类</h4><p>可以定义javabean，自动toString了。</p>
+</code></pre><hr>
+<h4 id="data-class类"><a href="#data-class类" class="headerlink" title="data class类"></a><code>data class</code>类</h4><hr>
+<p>可以定义javabean，自动有了 <code>toString()</code>、<code>hashCode()</code>、<code>equals()</code>、<code>copy()</code>、<code>componentN()</code>这些方法。</p>
+<hr>
 <p>填坑：</p>
 <pre><code>apply plugin: &apos;kotlin-noarg&apos;
 apply plugin: &apos;kotlin-allopen&apos;
@@ -556,7 +560,8 @@ joinToString
 <pre><code>fun num1Andnum2(num1: Int, num2: Int, operation: (Int, Int) -&gt; Int): Int {
     return operation(num1, num2)
 }
-</code></pre><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="1、静态函数和属性"><a href="#1、静态函数和属性" class="headerlink" title="1、静态函数和属性"></a>1、静态函数和属性</h3><h4 id="1-1-顶层函数"><a href="#1-1-顶层函数" class="headerlink" title="1.1 顶层函数"></a>1.1 顶层函数</h4><hr>
+</code></pre><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>代码：<a href="https://github.com/AdamRight/Android2021Code/tree/master/app/src/main/java/com/android/code/kotlin" target="_blank" rel="noopener">https://github.com/AdamRight/Android2021Code/tree/master/app/src/main/java/com/android/code/kotlin</a></p>
+<h3 id="1、静态函数和属性"><a href="#1、静态函数和属性" class="headerlink" title="1、静态函数和属性"></a>1、静态函数和属性</h3><h4 id="1-1-顶层函数"><a href="#1-1-顶层函数" class="headerlink" title="1.1 顶层函数"></a>1.1 顶层函数</h4><hr>
 <p>顶层函数直接在kotlin文件中定义函数和属性，会直接生成静态的。</p>
 <p>在其他kotlin类中可以直接使用函数名，在Java中通过 <code>文件名Kt</code>来使用。</p>
 <p>如果在kotlin文件中注解 <code>@file:JvmName(&quot;类名&quot;)</code>，那么在Java中可以通过 <code>类名.函数名</code> 来使用。</p>
@@ -573,6 +578,90 @@ joinToString
 <h3 id="2、internal"><a href="#2、internal" class="headerlink" title="2、internal"></a>2、internal</h3><hr>
 <p>有多个module模块情况下，可⻅性修饰符internal的作用是，只能被当前module模块访问的到。</p>
 <hr>
+<h3 id="3、主构造器"><a href="#3、主构造器" class="headerlink" title="3、主构造器"></a>3、主构造器</h3><hr>
+<p>改造前</p>
+<pre><code>class User1 {
+    var userName: String? = null
+    var userPassWord: String? = null
+    constructor(){
+
+    }
+    constructor(name: String, password: String){
+        this.userName = name
+        this.userPassWord = password
+    }
+}
+</code></pre><p>改成主构造器：</p>
+<pre><code>class User1 constructor(name: String?, password: String?) {
+    var userName: String? = null
+    var userPassWord: String? = null
+    constructor() : this(null, null){
+
+    }
+    init {
+        this.userName = name
+        this.userPassWord = password
+    }
+}
+</code></pre><p>进一步修改：</p>
+<pre><code>class User1 constructor(name: String?, password: String?) {
+    var userName: String? = name
+    var userPassWord: String? = password
+     constructor(): this(null, null)
+}
+</code></pre><p>再进一步修改：</p>
+<pre><code>class User1 constructor(var name: String?, var password: String?) {
+    constructor(): this(null, null)
+}
+</code></pre><p>在主构造参数前面加上 <code>var/val</code> 使构造参数同时成为成员变量。</p>
+<p>再进一步修改：</p>
+<pre><code>class User1 constructor(var name: String? = null, var password: String? = null) {
+}
+</code></pre><hr>
+<h3 id="4、查看kotlin类的字节码"><a href="#4、查看kotlin类的字节码" class="headerlink" title="4、查看kotlin类的字节码"></a>4、查看kotlin类的字节码</h3><hr>
+<p>Tools –&gt; Kotlin –&gt; Show Kotlin Bytecode</p>
+<hr>
+<h3 id="5、Elvis操作符"><a href="#5、Elvis操作符" class="headerlink" title="5、Elvis操作符"></a>5、Elvis操作符</h3><hr>
+<p>通过 <code>?:</code> 的操作来简化 <code>if null</code> 的操作。</p>
+<pre><code>var myName = user.name
+if (myName == null){
+    myName = &quot;kotlin&quot;
+}
+</code></pre><p>修改后：</p>
+<pre><code>var myName = user.name ?: &quot;kotlin&quot;
+</code></pre><p>修改前：</p>
+<pre><code>if (user.name == null || user.name!!.length &lt; 4){
+
+}
+</code></pre><p>修改后：</p>
+<pre><code>if (user.name?.length ?: 0 &lt; 4){
+
+}
+</code></pre><hr>
+<h3 id="6、forEach和filter"><a href="#6、forEach和filter" class="headerlink" title="6、forEach和filter"></a>6、forEach和filter</h3><hr>
+<p>forEach：</p>
+<pre><code>var arrayListUser1 = ArrayList&lt;User1&gt;()
+var arrayListUser2 = ArrayList&lt;User1&gt;()
+
+arrayListUser1.forEach {
+    if (it.name == &quot;kotlin&quot;){
+        arrayListUser2.add(it)
+    }
+}
+</code></pre><p>filter：</p>
+<pre><code>var arrayListUser1 = ArrayList&lt;User1&gt;()
+var arrayListUser2: List&lt;User1&gt; = arrayListUser1.filter { it.name == &quot;kotlin&quot; }
+</code></pre><hr>
+<h3 id="7、let、apply、run、also"><a href="#7、let、apply、run、also" class="headerlink" title="7、let、apply、run、also"></a>7、let、apply、run、also</h3><hr>
+<p>返回自身 –&gt; 从 apply 和 also 中选</p>
+<pre><code>作用域中使用 this 作为参数 ----&gt; 选择 apply
+
+作用域中使用 it 作为参数 ----&gt; 选择 also
+</code></pre><p>不需要返回自身 -&gt; 从 run 和 let 中选择</p>
+<pre><code>作用域中使用 this 作为参数 ----&gt; 选择 run
+
+作用域中使用 it 作为参数 ----&gt; 选择 let
+</code></pre><hr>
 
     </div>
     
@@ -634,7 +723,7 @@ joinToString
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快速入门"><span class="toc-text">快速入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、资料"><span class="toc-text">1、资料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、HelloWorld"><span class="toc-text">2、HelloWorld</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、基本类型定义"><span class="toc-text">3、基本类型定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、定义final"><span class="toc-text">4、定义final</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、占位符-quot-quot"><span class="toc-text">5、占位符&quot;${}&quot;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、数组和遍历"><span class="toc-text">6、数组和遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、list和map"><span class="toc-text">7、list和map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、静态变量、方法"><span class="toc-text">8、静态变量、方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9、方法函数"><span class="toc-text">9、方法函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10、when表达式"><span class="toc-text">10、when表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11、实例化类和class实例"><span class="toc-text">11、实例化类和class实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12、继承"><span class="toc-text">12、继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13、AS转化"><span class="toc-text">13、AS转化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14、Lambda"><span class="toc-text">14、Lambda</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15、空安全"><span class="toc-text">15、空安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16、类"><span class="toc-text">16、类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17、运算符重载"><span class="toc-text">17、运算符重载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18、方法扩展"><span class="toc-text">18、方法扩展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#详解kotlin"><span class="toc-text">详解kotlin</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据类型和函数"><span class="toc-text">1、数据类型和函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#和"><span class="toc-text">==和===</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#open继承"><span class="toc-text">open继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#init"><span class="toc-text">init</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#is"><span class="toc-text">is</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#as父类向下转为子类"><span class="toc-text">as父类向下转为子类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Any父类和Unit返回值"><span class="toc-text">Any父类和Unit返回值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用包名"><span class="toc-text">引用包名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#range"><span class="toc-text">range</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类中的toString"><span class="toc-text">类中的toString</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#get和set方法"><span class="toc-text">get和set方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#if可以作为表达式"><span class="toc-text">if可以作为表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标签"><span class="toc-text">标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接口代理"><span class="toc-text">接口代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#object类"><span class="toc-text">object类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#静态方法和成员"><span class="toc-text">静态方法和成员</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法重载"><span class="toc-text">方法重载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#data-class类"><span class="toc-text">data class类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内部类"><span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#匿名内部类"><span class="toc-text">匿名内部类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、高阶函数"><span class="toc-text">2、高阶函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、协程"><span class="toc-text">3、协程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高阶函数"><span class="toc-text">高阶函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、静态函数和属性"><span class="toc-text">1、静态函数和属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-顶层函数"><span class="toc-text">1.1 顶层函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-object类"><span class="toc-text">1.2 object类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-companion-object"><span class="toc-text">1.3 companion object</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、internal"><span class="toc-text">2、internal</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快速入门"><span class="toc-text">快速入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、资料"><span class="toc-text">1、资料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、HelloWorld"><span class="toc-text">2、HelloWorld</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、基本类型定义"><span class="toc-text">3、基本类型定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、定义final"><span class="toc-text">4、定义final</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、占位符-quot-quot"><span class="toc-text">5、占位符&quot;${}&quot;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、数组和遍历"><span class="toc-text">6、数组和遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、list和map"><span class="toc-text">7、list和map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、静态变量、方法"><span class="toc-text">8、静态变量、方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9、方法函数"><span class="toc-text">9、方法函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10、when表达式"><span class="toc-text">10、when表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11、实例化类和class实例"><span class="toc-text">11、实例化类和class实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12、继承"><span class="toc-text">12、继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13、AS转化"><span class="toc-text">13、AS转化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14、Lambda"><span class="toc-text">14、Lambda</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15、空安全"><span class="toc-text">15、空安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16、类"><span class="toc-text">16、类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17、运算符重载"><span class="toc-text">17、运算符重载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18、方法扩展"><span class="toc-text">18、方法扩展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#详解kotlin"><span class="toc-text">详解kotlin</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据类型和函数"><span class="toc-text">1、数据类型和函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#和"><span class="toc-text">==和===</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#open继承"><span class="toc-text">open继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#init"><span class="toc-text">init</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#is"><span class="toc-text">is</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#as父类向下转为子类"><span class="toc-text">as父类向下转为子类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Any父类和Unit返回值"><span class="toc-text">Any父类和Unit返回值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用包名"><span class="toc-text">引用包名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#range"><span class="toc-text">range</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类中的toString"><span class="toc-text">类中的toString</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#get和set方法"><span class="toc-text">get和set方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#if可以作为表达式"><span class="toc-text">if可以作为表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标签"><span class="toc-text">标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接口代理"><span class="toc-text">接口代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#object类"><span class="toc-text">object类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#静态方法和成员"><span class="toc-text">静态方法和成员</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法重载"><span class="toc-text">方法重载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#data-class类"><span class="toc-text">data class类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内部类"><span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#匿名内部类"><span class="toc-text">匿名内部类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、高阶函数"><span class="toc-text">2、高阶函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、协程"><span class="toc-text">3、协程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高阶函数"><span class="toc-text">高阶函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、静态函数和属性"><span class="toc-text">1、静态函数和属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-顶层函数"><span class="toc-text">1.1 顶层函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-object类"><span class="toc-text">1.2 object类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-companion-object"><span class="toc-text">1.3 companion object</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、internal"><span class="toc-text">2、internal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、主构造器"><span class="toc-text">3、主构造器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、查看kotlin类的字节码"><span class="toc-text">4、查看kotlin类的字节码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、Elvis操作符"><span class="toc-text">5、Elvis操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、forEach和filter"><span class="toc-text">6、forEach和filter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、let、apply、run、also"><span class="toc-text">7、let、apply、run、also</span></a></li></ol></li></ol>
         
     </div>
 </aside>
