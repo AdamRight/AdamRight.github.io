@@ -1,482 +1,351 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
-
-
-
+<!DOCTYPE HTML>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="John Doe">
-  <meta name="keywords" content="">
-  
-  <title>win下Fiddler和mac下charles抓包 - Hexo</title>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>win下Fiddler和mac下charles抓包 | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
     
+
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+
     
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
     
-  
 
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
 <body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
+    <header class="main-header"  style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='John Doe'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 士不可以不弘毅，任重而道远 </h2>
+            
+    	</div>
     </div>
-  </div>
-</nav>
-
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="win下Fiddler和mac下charles抓包">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2019-04-12 19:59" pubdate>
-        2019年4月12日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      906 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      10
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
-          
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Android/"><i class="fa "></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Web/"><i class="fa "></i>Web</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/Java/"><i class="fa "></i>Java</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/C/"><i class="fa "></i>C</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/iOS/"><i class="fa "></i>iOS</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/python/"><i class="fa "></i>python</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">win下Fiddler和mac下charles抓包</h1>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="win下Fiddler和mac下charles抓包">
             
-            <div class="markdown-body">
-              <h2 id="前戏"><a href="#前戏" class="headerlink" title="前戏"></a>前戏</h2><p>准备：win下的Fiddler，mac下的charles，安卓手机。</p>
+	            win下Fiddler和mac下charles抓包
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Android">
+            Android
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Fiddler" title='Fiddler'>
+                        Fiddler
+                    </a>
+                
+                    <a href="/tags/charles" title='charles'>
+                        charles
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/04/12</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="前戏"><a href="#前戏" class="headerlink" title="前戏"></a>前戏</h2><p>准备：win下的Fiddler，mac下的charles，安卓手机。</p>
 <p>手机：打开手机WIFI高级设置，代理服务器类型改为”手动”，代理服务器地址填入PC的IP地址，填入代理服务器端口值，一般默认为8888。</p>
 <p>ip：方式一：win通过ipconfig，mac通过ifconfig，快速查询电脑ip。</p>
 <p>方式二：顶部菜单：Fiddler右上角;charles中Help → Local IP Address。</p>
-<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/10.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/10.png" alt></p>
 <h2 id="Fiddler"><a href="#Fiddler" class="headerlink" title="Fiddler"></a>Fiddler</h2><p>Fiddler官网</p>
 <pre><code>https://www.telerik.com/fiddler
-</code></pre><h3 id="端口号设置"><a href="#端口号设置" class="headerlink" title="端口号设置"></a>端口号设置</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/1.png" srcset="/img/loading.gif" lazyload alt></p>
-<h3 id="过滤设置"><a href="#过滤设置" class="headerlink" title="过滤设置"></a>过滤设置</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/2.png" srcset="/img/loading.gif" lazyload alt></p>
-<h3 id="查看请求和返回数据"><a href="#查看请求和返回数据" class="headerlink" title="查看请求和返回数据"></a>查看请求和返回数据</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/3.png" srcset="/img/loading.gif" lazyload alt></p>
-<h3 id="模拟请求"><a href="#模拟请求" class="headerlink" title="模拟请求"></a>模拟请求</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/4.png" srcset="/img/loading.gif" lazyload alt></p>
+</code></pre><h3 id="端口号设置"><a href="#端口号设置" class="headerlink" title="端口号设置"></a>端口号设置</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/1.png" alt></p>
+<h3 id="过滤设置"><a href="#过滤设置" class="headerlink" title="过滤设置"></a>过滤设置</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/2.png" alt></p>
+<h3 id="查看请求和返回数据"><a href="#查看请求和返回数据" class="headerlink" title="查看请求和返回数据"></a>查看请求和返回数据</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/3.png" alt></p>
+<h3 id="模拟请求"><a href="#模拟请求" class="headerlink" title="模拟请求"></a>模拟请求</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/4.png" alt></p>
 <blockquote>
 <p>注意4中为请求头，5中为请求体。</p>
 </blockquote>
 <h3 id="抓取https"><a href="#抓取https" class="headerlink" title="抓取https"></a>抓取https</h3><p>手机自带浏览器输入<code>ip:端口号</code>下载证书</p>
-<h3 id="修改请求或返回参数"><a href="#修改请求或返回参数" class="headerlink" title="修改请求或返回参数"></a>修改请求或返回参数</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/5.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="修改请求或返回参数"><a href="#修改请求或返回参数" class="headerlink" title="修改请求或返回参数"></a>修改请求或返回参数</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/5.png" alt></p>
 <blockquote>
 <p>步骤：1设置修改返回数据，2去掉勾勾，3修改返回数据，4打上勾勾，5输入<code>go</code>回车。</p>
 </blockquote>
 <h2 id="charles"><a href="#charles" class="headerlink" title="charles"></a>charles</h2><p>charles官网，30天试用</p>
 <pre><code>https://www.charlesproxy.com/
-</code></pre><h3 id="端口号设置-1"><a href="#端口号设置-1" class="headerlink" title="端口号设置"></a>端口号设置</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/6.png" srcset="/img/loading.gif" lazyload alt></p>
+</code></pre><h3 id="端口号设置-1"><a href="#端口号设置-1" class="headerlink" title="端口号设置"></a>端口号设置</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/6.png" alt></p>
 <p>通过菜单栏：proxy → Proxy Settings，进行查看当前或者修改当前代理端口，并且保证Enable transparent HTTP proxying被勾选。</p>
-<h3 id="过滤设置-1"><a href="#过滤设置-1" class="headerlink" title="过滤设置"></a>过滤设置</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/7.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="过滤设置-1"><a href="#过滤设置-1" class="headerlink" title="过滤设置"></a>过滤设置</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/7.png" alt></p>
 <p>菜单栏选择 “Proxy”-&gt;”Recording Settings”，然后选择Include栏，选择添加一个项目，然后填入需要监控的协议，主机地址，端口号。这样就可以只截取目标网站的封包了。</p>
-<h3 id="查看请求和返回数据-1"><a href="#查看请求和返回数据-1" class="headerlink" title="查看请求和返回数据"></a>查看请求和返回数据</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/8.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="查看请求和返回数据-1"><a href="#查看请求和返回数据-1" class="headerlink" title="查看请求和返回数据"></a>查看请求和返回数据</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/8.png" alt></p>
 <p>Structure视图模式下，所有的请求是以域名进行分类显示的;Sequence视图模式下，会将所有的网络请求都按照访问的时间从上到下进行排序。</p>
 <h3 id="抓取https-1"><a href="#抓取https-1" class="headerlink" title="抓取https"></a>抓取https</h3><p>在Mac上安装CA证书:通过顶部菜单选择：Help → SSL Proxying → Install Charles Root Certificate，来安装CA证书。</p>
 <p>安卓手机安装Charles证书:在Charles菜单栏里点击Help — SSL Proxying — Save Charles Root Certificate，生成后缀名是.cer的文件，然后传到手机安装。</p>
 <p>最后:双击对应证书，打开简介全部信任。</p>
 <p><strong>如果还是不行:设置匹配规则，菜单栏 - proxy - ssl proxy settings，重启</strong></p>
-<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/9.png" srcset="/img/loading.gif" lazyload alt></p>
-<h3 id="模拟限流网络"><a href="#模拟限流网络" class="headerlink" title="模拟限流网络"></a>模拟限流网络</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/11.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/9.png" alt></p>
+<h3 id="模拟限流网络"><a href="#模拟限流网络" class="headerlink" title="模拟限流网络"></a>模拟限流网络</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/11.png" alt></p>
 <p>Proxy → Throttle Setting，勾选Enable Throttling然后在1中选择我们需要网络环境。开启限速之后，2处的小乌龟图标也会高亮，点击小乌龟，就可以关闭限速模式。</p>
-<h3 id="重发请求-模拟请求"><a href="#重发请求-模拟请求" class="headerlink" title="重发请求,模拟请求"></a>重发请求,模拟请求</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/12.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="重发请求-模拟请求"><a href="#重发请求-模拟请求" class="headerlink" title="重发请求,模拟请求"></a>重发请求,模拟请求</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/12.png" alt></p>
 <p>在网络请求上，右键选择Repeat，即可对这个链接重新发送一遍。右键选择Compose，就可以对这个请求进行编辑。</p>
-<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/13.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/13.png" alt></p>
 <p>对网络请求的任意修改后,点击Execute即可将修改后的数据直接发送出去;点击Revert就恢复到最初的数据了。</p>
 <h3 id="修改请求响应数据"><a href="#修改请求响应数据" class="headerlink" title="修改请求响应数据"></a>修改请求响应数据</h3><p>Map适合将所有的A请求，重定向到，B地址请求(Map Remote)或者本地文件(Map Local)。</p>
 <p>设置Map Remote或者Map Local可以在，顶部菜单中选择Tools或者请求链接上右键。请求链接上，点击右键save，可以保存请求或者响应的数据文件。</p>
-<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/14.png" srcset="/img/loading.gif" lazyload alt></p>
-<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/15.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/14.png" alt></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/15.png" alt></p>
 <p>Rewrite功能适合对所有网络请求做一些简单的正则匹配后，对匹配的内容进行替换。</p>
 <p>顶部菜单栏中，选择Tools → Rewrite。图中将所有响应体中“查询新闻列表成功”替换成了“我成功啦”。1处可以添加url。</p>
-<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/16.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/16.png" alt></p>
 <p>Breakpoints类似于调试的断点。每次触发 Breakpoint 都会断住两次，一次是 request、一次是 response,可以分别对请求和响应的数据进行修改。点击2处execute继续执行。</p>
 <p>请求链接上点击右键，然后选择Breakpoints:接下来的相同url会被断点。或者点击1处的六边形，有颜色就开始对接下来的请求依次断点，直至终止。</p>
-<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/17.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/17.png" alt></p>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Android/">Android</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Fiddler/">Fiddler</a>
-                    
-                      <a class="hover-with-bg" href="/tags/charles/">charles</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2019/04/17/15.%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E3%80%81%E6%B3%9B%E5%9E%8B/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">反射、注解、泛型</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2019/04/03/13.Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                        <span class="hidden-mobile">Vue学习笔记</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
             
-          </article>
+                <span class="reward-type">
+                    <img class="alipay" src="../../../../img/reward-alipay.jpg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="../../../../img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
         </div>
-      </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
 </div>
 
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
 
     
-
-    
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
         </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
+        <div>
+            
+        </div>
     </div>
-  </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2019/04/17/15.%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E3%80%81%E6%B3%9B%E5%9E%8B/" class="pre-post btn btn-default" title='反射、注解、泛型'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">反射、注解、泛型</span>
+        </a>
+    
+    
+        <a href="/2019/04/03/13.Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="next-post btn btn-default" title='Vue学习笔记'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Vue学习笔记</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
 </div>
-    
 
-    
-  </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  
 
-  
 
-  
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%88%8F"><span class="toc-text">前戏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fiddler"><span class="toc-text">Fiddler</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E5%8F%B7%E8%AE%BE%E7%BD%AE"><span class="toc-text">端口号设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E8%AE%BE%E7%BD%AE"><span class="toc-text">过滤设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%AF%B7%E6%B1%82%E5%92%8C%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE"><span class="toc-text">查看请求和返回数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E8%AF%B7%E6%B1%82"><span class="toc-text">模拟请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%93%E5%8F%96https"><span class="toc-text">抓取https</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%AF%B7%E6%B1%82%E6%88%96%E8%BF%94%E5%9B%9E%E5%8F%82%E6%95%B0"><span class="toc-text">修改请求或返回参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#charles"><span class="toc-text">charles</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E5%8F%B7%E8%AE%BE%E7%BD%AE-1"><span class="toc-text">端口号设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E8%AE%BE%E7%BD%AE-1"><span class="toc-text">过滤设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%AF%B7%E6%B1%82%E5%92%8C%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE-1"><span class="toc-text">查看请求和返回数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%93%E5%8F%96https-1"><span class="toc-text">抓取https</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E9%99%90%E6%B5%81%E7%BD%91%E7%BB%9C"><span class="toc-text">模拟限流网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%8F%91%E8%AF%B7%E6%B1%82-%E6%A8%A1%E6%8B%9F%E8%AF%B7%E6%B1%82"><span class="toc-text">重发请求,模拟请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%AF%B7%E6%B1%82%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE"><span class="toc-text">修改请求响应数据</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
 </footer>
 
-
-  <!-- SCRIPTS -->
-  
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-  
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
 
 
 
 
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
-  </script>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -485,15 +354,7 @@
 
 
 
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
+<script src="/js/app.js?rev=@@hash.js"></script>
 
 
 </body>
