@@ -1,194 +1,234 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
 <head>
-    <!--Setting-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta http-equiv="Cache-Control" content="no-siteapp">
-    <meta http-equiv="Cache-Control" content="no-transform">
-    <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <meta name="apple-mobile-web-app-capable" content="Hexo">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no,email=no,adress=no">
-    <meta name="browsermode" content="application">
-    <meta name="screen-orientation" content="portrait">
-    <link rel="dns-prefetch" href="http://yoursite.com">
-    <!--SEO-->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>Android自定义控件入门与实战-读书笔记 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-
-
-<meta name="robots" content="all" />
-<meta name="google" content="all" />
-<meta name="googlebot" content="all" />
-<meta name="verify" content="all" />
-    <!--Title-->
-
-
-<title>Android自定义控件入门与实战-读书笔记 | Hexo</title>
-
-
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-
-
-    <link rel="icon" href="/favicon.ico">
-
+  
     
-
-
-
-
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
-
-
-
-
-
     
-	<div class="hide">
-		<script type="text/javascript">
-			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
-		</script>
-	</div>
-
-
-
-
-
-
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
     
+  
 
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
-<!--[if lte IE 8]>
-<style>
-    html{ font-size: 1em }
-</style>
-<![endif]-->
-<!--[if lte IE 9]>
-<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
-<![endif]-->
-
 <body>
-    <header class="main-header"  style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)"  >
-    <div class="main-header-box">
-        <a class="header-avatar" href="/" title='John Doe'>
-            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
-        </a>
-        <div class="branding">
-        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
-            
-                <h2> 士不可以不弘毅，任重而道远 </h2>
-            
-    	</div>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-</header>
-    <nav class="main-navigation">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
-                    <span class="sr-only"></span>
-                        <i class="fa fa-bars"></i>
-                    </span>
-                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
-                </div>
-                <div class="collapse navbar-collapse" id="main-menu">
-                    <ul class="menu">
-                        
-                            <li role="presentation" class="text-center">
-                                <a href="/"><i class="fa "></i>首页</a>
-                            </li>
-                        
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/Android/"><i class="fa "></i>Android</a>
-                            </li>
-                        
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/Web/"><i class="fa "></i>Web</a>
-                            </li>
-                        
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/Java/"><i class="fa "></i>Java</a>
-                            </li>
-                        
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/C/"><i class="fa "></i>C</a>
-                            </li>
-                        
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/iOS/"><i class="fa "></i>iOS</a>
-                            </li>
-                        
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/python/"><i class="fa "></i>python</a>
-                            </li>
-                        
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
 </nav>
-    <section class="content-wrap">
-        <div class="container">
-            <div class="row">
-                <main class="col-md-8 main-content m-post">
-                    <p id="process"></p>
-<article class="post">
-    <div class="post-head">
-        <h1 id="Android自定义控件入门与实战-读书笔记">
-            
-	            Android自定义控件入门与实战-读书笔记
-            
-        </h1>
-        <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/Android">
-            Android
-        </a>
-    </span>
-    
 
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-                
-                    <a href="/tags/自定义控件" title='自定义控件'>
-                        自定义控件
-                    </a>
-                
-            
-        </span>
-    </span>
-    
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Android自定义控件入门与实战-读书笔记">
+              
+            </span>
 
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-01-04 19:48" pubdate>
+        2020年1月4日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
     
-        
-        <span class="fa-wrap">
-            <i class="fa fa-clock-o"></i>
-            <span class="date-meta">2020/01/04</span>
-        </span>
-        
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      13.3k 字
+    </span>
+  
+
+  
     
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      177
+       分钟
+    </span>
+  
+
+  
+  
 </div>
 
             
-            
+          </div>
+
+          
+        </div>
+      </div>
     </div>
+  </header>
+
+  <main>
     
-    <div class="post-body post-content">
-        <h2 id="第1章、绘图基础"><a href="#第1章、绘图基础" class="headerlink" title="第1章、绘图基础"></a>第1章、绘图基础</h2><h3 id="1-1、基本图形绘制"><a href="#1-1、基本图形绘制" class="headerlink" title="1.1、基本图形绘制"></a>1.1、基本图形绘制</h3><h4 id="1-1-1、概述"><a href="#1-1-1、概述" class="headerlink" title="1.1.1、概述"></a>1.1.1、概述</h4><p>在 Android中，Paint类就是画笔，而Canvas类就是纸，在这里叫作画布。</p>
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Android自定义控件入门与实战-读书笔记</h1>
+            
+            <div class="markdown-body">
+              <h2 id="第1章、绘图基础"><a href="#第1章、绘图基础" class="headerlink" title="第1章、绘图基础"></a>第1章、绘图基础</h2><h3 id="1-1、基本图形绘制"><a href="#1-1、基本图形绘制" class="headerlink" title="1.1、基本图形绘制"></a>1.1、基本图形绘制</h3><h4 id="1-1-1、概述"><a href="#1-1-1、概述" class="headerlink" title="1.1.1、概述"></a>1.1.1、概述</h4><p>在 Android中，Paint类就是画笔，而Canvas类就是纸，在这里叫作画布。</p>
 <h4 id="1-1-2、画笔的基本设置"><a href="#1-1-2、画笔的基本设置" class="headerlink" title="1.1.2、画笔的基本设置"></a>1.1.2、画笔的基本设置</h4><p>Paint</p>
 <pre><code>paint.setAntiAlias(true); //打开抗锯齿功能
 
@@ -1190,120 +1230,221 @@ canvas.restoreToCount(layerid);
 <h4 id="8-2-2、颜色叠加相关模式"><a href="#8-2-2、颜色叠加相关模式" class="headerlink" title="8.2.2、颜色叠加相关模式"></a>8.2.2、颜色叠加相关模式</h4><h3 id="8-3、PorterDuffXfermode之源图像模式"><a href="#8-3、PorterDuffXfermode之源图像模式" class="headerlink" title="8.3、PorterDuffXfermode之源图像模式"></a>8.3、PorterDuffXfermode之源图像模式</h3><p>刮刮卡效果示例</p>
 <h3 id="8-4、目标图像模式与真他模式"><a href="#8-4、目标图像模式与真他模式" class="headerlink" title="8.4、目标图像模式与真他模式"></a>8.4、目标图像模式与真他模式</h3><p>区域波纹示例</p>
 
-    </div>
-    
-        <div class="reward">
-    <div class="reward-wrap">赏
-        <div class="reward-box">
-            
-                <span class="reward-type">
-                    <img class="alipay" src="../../../../img/reward-alipay.jpg"><b>支付宝打赏</b>
-                </span>
-            
-            
-                <span class="reward-type">
-                    <img class="wechat" src="../../../../img/reward-wepay.jpg"><b>微信打赏</b>
-                </span>
-            
-        </div>
-    </div>
-    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
-</div>
-
-
-    
-    <div class="post-footer">
-        <div>
-            
-                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
-            
-        </div>
-        <div>
-            
-        </div>
-    </div>
-</article>
-
-<div class="article-nav prev-next-wrap clearfix">
-    
-        <a href="/2020/03/07/33.JNI%E5%85%A5%E9%97%A8/" class="pre-post btn btn-default" title='JNI入门'>
-            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">JNI入门</span>
-        </a>
-    
-    
-        <a href="/2019/12/23/31.ConstraintLayout%E5%B8%83%E5%B1%80/" class="next-post btn btn-default" title='ConstraintLayout布局详解'>
-            <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">ConstraintLayout布局详解</span><i class="fa fa-angle-right fa-fw"></i>
-        </a>
-    
-</div>
-
-
-
-
-
-
-                </main>
-                
-                    <aside id="article-toc" role="navigation" class="col-md-4">
-    <div class="widget">
-        <h3 class="title">文章目录</h3>
-        
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC1%E7%AB%A0%E3%80%81%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80"><span class="toc-text">第1章、绘图基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E3%80%81%E5%9F%BA%E6%9C%AC%E5%9B%BE%E5%BD%A2%E7%BB%98%E5%88%B6"><span class="toc-text">1.1、基本图形绘制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">1.1.1、概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2%E3%80%81%E7%94%BB%E7%AC%94%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE"><span class="toc-text">1.1.2、画笔的基本设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-3%E3%80%81Canvas%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80"><span class="toc-text">1.1.3、Canvas使用基础</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E7%94%BB%E5%B8%83%E8%83%8C%E6%99%AF%E8%AE%BE%E7%BD%AE"><span class="toc-text">1、画布背景设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E7%94%BB%E7%9B%B4%E7%BA%BF"><span class="toc-text">2、画直线</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E5%A4%9A%E6%9D%A1%E7%9B%B4%E7%BA%BF"><span class="toc-text">3、多条直线</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E7%82%B9"><span class="toc-text">4、点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81%E5%A4%9A%E4%B8%AA%E7%82%B9"><span class="toc-text">5、多个点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81%E7%9F%A9%E5%BD%A2%E5%B7%A5%E5%85%B7%E7%B1%BBRectF%E5%92%8CRect"><span class="toc-text">6、矩形工具类RectF和Rect</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7%E3%80%81%E7%9F%A9%E5%BD%A2"><span class="toc-text">7、矩形</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8%E3%80%81%E5%9C%86%E8%A7%92%E7%9F%A9%E5%BD%A2"><span class="toc-text">8、圆角矩形</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9%E3%80%81%E5%9C%86%E5%BD%A2"><span class="toc-text">9、圆形</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10%E3%80%81%E6%A4%AD%E5%9C%86"><span class="toc-text">10、椭圆</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11%E3%80%81%E5%BC%A7"><span class="toc-text">11、弧</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-4%E3%80%81Rect%E4%B8%8ERectF"><span class="toc-text">1.1.4、Rect与RectF</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E7%82%B9%E3%80%81%E7%9F%A9%E5%BD%A2"><span class="toc-text">1、是否包含点、矩形</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E5%88%A4%E6%96%AD%E4%B8%A4%E4%B8%AA%E7%9F%A9%E5%BD%A2%E6%98%AF%E5%90%A6%E7%9B%B8%E4%BA%A4"><span class="toc-text">2、判断两个矩形是否相交</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E5%90%88%E5%B9%B6"><span class="toc-text">3、合并</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-5%E3%80%81Color"><span class="toc-text">1.1.5、Color</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E3%80%81%E8%B7%AF%E5%BE%84"><span class="toc-text">1.2、路径</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-1%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">1.2.1、概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-2%E3%80%81%E7%9B%B4%E7%BA%BF%E8%B7%AF%E5%BE%84"><span class="toc-text">1.2.2、直线路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-3%E3%80%81%E5%BC%A7%E7%BA%BF%E8%B7%AF%E5%BE%84"><span class="toc-text">1.2.3、弧线路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-4%E3%80%81addXXX%E7%B3%BB%E5%88%97%E5%87%BD%E6%95%B0"><span class="toc-text">1.2.4、addXXX系列函数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%9F%A9%E5%BD%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">添加矩形路径</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%9C%86%E8%A7%92%E7%9F%A9%E5%BD%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">添加圆角矩形路径</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%9C%86%E5%BD%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">添加圆形路径</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%A4%AD%E5%9C%86%E8%B7%AF%E5%BE%84"><span class="toc-text">添加椭圆路径</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%BC%A7%E5%BD%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">添加弧形路径</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-5%E3%80%81%E5%A1%AB%E5%85%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">1.2.5、填充模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-6%E3%80%81%E9%87%8D%E7%BD%AE%E8%B7%AF%E5%BE%84"><span class="toc-text">1.2.6、重置路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-7%E3%80%81%E8%9C%98%E8%9B%9B%E7%BD%91%E7%8A%B6%E5%9B%BE%E7%A4%BA%E4%BE%8B"><span class="toc-text">1.2.7、蜘蛛网状图示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3%E3%80%81%E6%96%87%E5%AD%97"><span class="toc-text">1.3、文字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-1%E3%80%81Paint%E8%AE%BE%E7%BD%AE"><span class="toc-text">1.3.1、Paint设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-2%E3%80%81Canvas%E7%BB%98%E5%88%B6%E6%96%87%E6%9C%AC"><span class="toc-text">1.3.2、Canvas绘制文本</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E6%99%AE%E9%80%9A%E7%BB%98%E5%88%B6"><span class="toc-text">1、普通绘制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E9%80%90%E4%B8%AA%E6%8C%87%E5%AE%9A%E6%96%87%E5%AD%97%E4%BD%8D%E7%BD%AE"><span class="toc-text">2、逐个指定文字位置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E6%B2%BF%E8%B7%AF%E5%BE%84%E7%BB%98%E5%88%B6"><span class="toc-text">3、沿路径绘制</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-3%E3%80%81%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E6%A0%B7%E5%BC%8F"><span class="toc-text">1.3.3、设置字体样式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4%E3%80%81Region"><span class="toc-text">1.4、Region</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-1%E3%80%81%E6%9E%84%E9%80%A0Region"><span class="toc-text">1.4.1、构造Region</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E6%9E%84%E9%80%A0"><span class="toc-text">直接构造</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%97%B4%E6%8E%A5%E6%9E%84%E9%80%A0"><span class="toc-text">间接构造</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-2%E3%80%81%E6%9E%9A%E4%B8%BE%E5%8C%BA%E5%9F%9F%E2%80%94%E2%80%94RegionIterator%E7%B1%BB"><span class="toc-text">1.4.2、枚举区域——RegionIterator类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-3%E3%80%81%E5%8C%BA%E5%9F%9F%E7%9B%B8%E4%BA%A4"><span class="toc-text">1.4.3、区域相交</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#union-%E5%87%BD%E6%95%B0"><span class="toc-text">union()函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8C%BA%E5%9F%9F%E6%93%8D%E4%BD%9C"><span class="toc-text">区域操作</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-4%E3%80%81%E5%85%B6%E4%BB%96%E5%87%BD%E6%95%B0"><span class="toc-text">1.4.4、其他函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5%E3%80%81Canvas%EF%BC%88%E7%94%BB%E5%B8%83%EF%BC%89"><span class="toc-text">1.5、Canvas（画布）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-1%E3%80%81Canvas%E5%8F%98%E6%8D%A2"><span class="toc-text">1.5.1、Canvas变换</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B9%B3%E7%A7%BB%EF%BC%88Translate%EF%BC%89"><span class="toc-text">平移（Translate）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%8F%E5%B9%95%E6%98%BE%E7%A4%BA%E4%B8%8ECanvas%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">屏幕显示与Canvas的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%EF%BC%88Rotate%EF%BC%89"><span class="toc-text">旋转（Rotate）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BC%A9%E6%94%BE%EF%BC%88Scale%EF%BC%89"><span class="toc-text">缩放（Scale）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%89%AD%E6%9B%B2%EF%BC%88Skew%EF%BC%89"><span class="toc-text">扭曲（Skew）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A3%81%E5%89%AA%E7%94%BB%E5%B8%83%EF%BC%88clip%E7%B3%BB%E5%88%97%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-text">裁剪画布（clip系列函数）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-2%E3%80%81%E7%94%BB%E5%B8%83%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="toc-text">1.5.2、画布的保存与恢复</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#save-%E5%92%8Crestore-%E5%87%BD%E6%95%B0"><span class="toc-text">save()和restore()函数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#restoreToCount-int-saveCount-%E5%87%BD%E6%95%B0"><span class="toc-text">restoreToCount(int saveCount)函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-3%E3%80%81%E5%9C%86%E5%BD%A2%E5%A4%B4%E5%83%8F%E7%A4%BA%E4%BE%8B"><span class="toc-text">1.5.3、圆形头像示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-4%E3%80%81%E8%A3%81%E5%89%AA%E5%8A%A8%E7%94%BB%E7%A4%BA%E4%BE%8B"><span class="toc-text">1.5.4、裁剪动画示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6%E3%80%81%E6%8E%A7%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">1.6、控件的使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-1%E3%80%81%E6%8E%A7%E4%BB%B6%E6%A6%82%E8%BF%B0"><span class="toc-text">1.6.1、控件概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-2%E3%80%81%E9%80%9A%E8%BF%87XML%E5%BC%95%E5%85%A5%E6%8E%A7%E4%BB%B6"><span class="toc-text">1.6.2、通过XML引入控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-3%E3%80%81%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E6%8E%A7%E4%BB%B6"><span class="toc-text">1.6.3、动态添加控件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#addRule"><span class="toc-text">addRule</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEmargin"><span class="toc-text">设置margin</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AElayout-weight%EF%BC%88%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%89"><span class="toc-text">设置layout_weight（方法一）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AElayout-weight%EF%BC%88%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%89"><span class="toc-text">设置layout_weight（方法二）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AElayout-gravity"><span class="toc-text">设置layout_gravity</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEandroid-gravity"><span class="toc-text">设置android:gravity</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#addView"><span class="toc-text">addView</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC2%E7%AB%A0%E3%80%81%E8%A7%86%E5%9B%BE%E5%8A%A8%E7%94%BB"><span class="toc-text">第2章、视图动画</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E3%80%81%E8%A7%86%E5%9B%BE%E5%8A%A8%E7%94%BB%E6%A0%87%E7%AD%BE"><span class="toc-text">2.1、视图动画标签</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">2.1.1、概述</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEXML%E5%8A%A8%E7%94%BB%E6%96%87%E4%BB%B6"><span class="toc-text">配置XML动画文件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2%E3%80%81scale%E6%A0%87%E7%AD%BE"><span class="toc-text">2.1.2、scale标签</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Animation%E7%BB%A7%E6%89%BF%E5%B1%9E%E6%80%A7"><span class="toc-text">Animation继承属性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3%E3%80%81alpha%E6%A0%87%E7%AD%BE"><span class="toc-text">2.1.3、alpha标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-4%E3%80%81rotate%E6%A0%87%E7%AD%BE"><span class="toc-text">2.1.4、rotate标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-5%E3%80%81translate%E6%A0%87%E7%AD%BE"><span class="toc-text">2.1.5、translate标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-6%E3%80%81set%E6%A0%87%E7%AD%BE"><span class="toc-text">2.1.6、set标签</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E3%80%81%E8%A7%86%E5%9B%BE%E5%8A%A8%E7%94%BB%E7%9A%84%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.2、视图动画的代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">2.2.1、概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2%E3%80%81ScaleAnimation"><span class="toc-text">2.2.2、ScaleAnimation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3%E3%80%81AlphaAnimation"><span class="toc-text">2.2.3、AlphaAnimation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-4%E3%80%81RotateAnimation"><span class="toc-text">2.2.4、RotateAnimation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-5%E3%80%81TranslateAnimation"><span class="toc-text">2.2.5、TranslateAnimation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-6%E3%80%81AnimationSet"><span class="toc-text">2.2.6、AnimationSet</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-7%E3%80%81Animation"><span class="toc-text">2.2.7、Animation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E3%80%81%E6%8F%92%E5%80%BC%E5%99%A8%E5%88%9D%E6%8E%A2"><span class="toc-text">2.3、插值器初探</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1%E3%80%81AccelerateDeceleratelnterpolator"><span class="toc-text">2.3.1、AccelerateDeceleratelnterpolator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2%E3%80%81Acceleratelnterpolator"><span class="toc-text">2.3.2、Acceleratelnterpolator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-3%E3%80%81Deceleratelntelnterpolator"><span class="toc-text">2.3.3、Deceleratelntelnterpolator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-4%E3%80%81Linearlnterpolator"><span class="toc-text">2.3.4、Linearlnterpolator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-5%E3%80%81Bouncelnterpolator"><span class="toc-text">2.3.5、Bouncelnterpolator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-6%E3%80%81Anticipatelnterpolator"><span class="toc-text">2.3.6、Anticipatelnterpolator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-7%E3%80%81Overshootlnterpolator"><span class="toc-text">2.3.7、Overshootlnterpolator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-8%E3%80%81AnticipateOvershootlnterpolator"><span class="toc-text">2.3.8、AnticipateOvershootlnterpolator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-9%E3%80%81Cyclelnterpolator"><span class="toc-text">2.3.9、Cyclelnterpolator</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4%E3%80%81%E5%8A%A8%E7%94%BB%E7%A4%BA%E4%BE%8B"><span class="toc-text">2.4、动画示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-1%E3%80%81%E9%95%9C%E5%A4%B4%E7%94%B1%E8%BF%9C%E5%8F%8A%E8%BF%91%E6%95%88%E6%9E%9C"><span class="toc-text">2.4.1、镜头由远及近效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-2%E3%80%81%E5%8A%A0%E8%BD%BD%E6%A1%86%E6%95%88%E6%9E%9C"><span class="toc-text">2.4.2、加载框效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-3%E3%80%81%E6%89%AB%E6%8F%8F%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C"><span class="toc-text">2.4.3、扫描动画效果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5%E3%80%81%E9%80%90%E5%B8%A7%E5%8A%A8%E7%94%BB"><span class="toc-text">2.5、逐帧动画</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-1%E3%80%81XML%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.5.1、XML实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">1、概述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E7%A4%BA%E4%BE%8B"><span class="toc-text">2、音乐播放示例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81AnimationDrawable%E7%B1%BB"><span class="toc-text">3、AnimationDrawable类</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-2%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.5.2、代码实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0%E3%80%81%E5%B1%9E%E6%80%A7%E5%8A%A8%E7%94%BB"><span class="toc-text">第3章、属性动画</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E3%80%81ValueAnimator%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">3.1、ValueAnimator的基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">3.1.1、概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2%E3%80%81ValueAnimator%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="toc-text">3.1.2、ValueAnimator的简单使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-3%E3%80%81%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">3.1.3、常用函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-4%E3%80%81%E5%BC%B9%E8%B7%B3%E5%8A%A0%E8%BD%BD%E7%94%B3%E6%95%88%E6%9E%9C%E7%A4%BA%E4%BE%8B"><span class="toc-text">3.1.4、弹跳加载申效果示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E5%80%BC%E5%99%A8%E4%B8%8EEvaluator"><span class="toc-text">3.2、自定义插值器与Evaluator</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E5%80%BC%E5%99%A8"><span class="toc-text">3.2.1、自定义插值器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2%E3%80%81Evaluator"><span class="toc-text">3.2.2、Evaluator</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ArgbEvaluator"><span class="toc-text">ArgbEvaluator</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3%E3%80%81ValueAnimator%E8%BF%9B%E9%98%B6ofObject"><span class="toc-text">3.3、ValueAnimator进阶ofObject</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TextView%E4%B8%AD%E7%9A%84%E5%AD%97%E6%AF%8D%E4%BB%8EA%E5%8F%98%E5%8C%96%E5%88%B0Z%E5%AE%9E%E4%BE%8B"><span class="toc-text">TextView中的字母从A变化到Z实例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2%E3%80%81%E7%A4%BA%E4%BE%8B%EF%BC%9A%E6%8A%9B%E7%89%A9%E5%8A%A8%E7%94%BB"><span class="toc-text">3.3.2、示例：抛物动画</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4%E3%80%81ObjectAnimator"><span class="toc-text">3.4、ObjectAnimator</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-1%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">3.4.1、概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-2%E3%80%81ObjectAnimator%E5%8A%A8%E7%94%BB%E5%8E%9F%E7%90%86"><span class="toc-text">3.4.2、ObjectAnimator动画原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-3%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89ObjectAnimator%E5%B1%9E%E6%80%A7"><span class="toc-text">3.4.3、自定义ObjectAnimator属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-4%E3%80%81%E4%BD%95%E6%97%B6%E9%9C%80%E8%A6%81%E5%AE%9E%E7%8E%B0%E5%AF%B9%E5%BA%94%E5%B1%9E%E6%80%A7%E7%9A%84get%E5%87%BD%E6%95%B0"><span class="toc-text">3.4.4、何时需要实现对应属性的get函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-5%E3%80%81%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">3.4.5、常用函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5%E3%80%81%E7%BB%84%E5%90%88%E5%8A%A8%E7%94%BBAnimatorSet"><span class="toc-text">3.5、组合动画AnimatorSet</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-1%E3%80%81playSequentially%E4%B8%8EplayTogether"><span class="toc-text">3.5.1、playSequentially与playTogether</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-2%E3%80%81AnimatorSet-Builde"><span class="toc-text">3.5.2、AnimatorSet.Builde</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-3%E3%80%81AnimatorSet%E7%9B%91%E6%98%95%E5%99%A8"><span class="toc-text">3.5.3、AnimatorSet监昕器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-4%E3%80%81%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">3.5.4、常用函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-5%E3%80%81%E7%A4%BA%E4%BE%8B%EF%BC%9A%E8%B7%AF%E5%BE%84%E5%8A%A8%E7%94%BB"><span class="toc-text">3.5.5、示例：路径动画</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6%E3%80%81Animator%E5%8A%A8%E7%94%BB%E7%9A%84XML%E5%AE%9E%E7%8E%B0"><span class="toc-text">3.6、Animator动画的XML实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC4%E7%AB%A0%E5%B1%9E%E6%80%A7%E5%8A%A8%E7%94%BB%E8%BF%9B%E9%98%B6"><span class="toc-text">第4章属性动画进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E3%80%81PropertyValuesHolder%E4%B8%8EKeyframe"><span class="toc-text">4.1、PropertyValuesHolder与Keyframe</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1%E3%80%81PropertyValuesHolder"><span class="toc-text">4.1.1、PropertyValuesHolder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2%E3%80%81Keyframe"><span class="toc-text">4.1.2、Keyframe</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-3-PropertyValuesHolde%E5%85%B6%E4%BB%96%E5%87%BD%E6%95%B0"><span class="toc-text">4.1.3 PropertyValuesHolde其他函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-4%E3%80%81%E7%94%B5%E8%AF%9D%E6%99%8C%E9%93%83%E6%95%88%E6%9E%9C%E7%A4%BA%E4%BE%8B"><span class="toc-text">4.1.4、电话晌铃效果示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2%E3%80%81ViewPropertyAnimator"><span class="toc-text">4.2、ViewPropertyAnimator</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">4.2.1、概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2%E3%80%81%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">4.2.2、常用函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3%E3%80%81%E4%B8%BAViewGroup%E5%86%85%E7%9A%84%E7%BB%84%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%8A%A8%E7%94%BB"><span class="toc-text">4.3、为ViewGroup内的组件添加动画</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-1%E3%80%81animatelayoutChanges%E5%B1%9E%E6%80%A7"><span class="toc-text">4.3.1、animatelayoutChanges属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-2%E3%80%81LayoutTransition"><span class="toc-text">4.3.2、LayoutTransition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-3%E3%80%81%E5%85%B6%E4%BB%96%E5%87%BD%E6%95%B0"><span class="toc-text">4.3.3、其他函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4%E3%80%81%E5%BC%80%E6%BA%90%E5%8A%A8%E7%94%BB%E5%BA%93NineOldAndroids"><span class="toc-text">4.4、开源动画库NineOldAndroids</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC5%E7%AB%A0%E5%8A%A8%E7%94%BB%E8%BF%9B%E9%98%B6"><span class="toc-text">第5章动画进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E3%80%81%E5%88%A9%E7%94%A8PathMeasure%E5%AE%9E%E7%8E%B0%E8%B7%AF%E5%BE%84%E5%8A%A8%E7%94%BB"><span class="toc-text">5.1、利用PathMeasure实现路径动画</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-1%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">5.1.1、初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-2%E3%80%81%E7%AE%80%E5%8D%95%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8"><span class="toc-text">5.1.2、简单函数使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-3%E3%80%81getSegment%E5%87%BD%E6%95%B0"><span class="toc-text">5.1.3、getSegment函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-4%E3%80%81getPosTan%E5%87%BD%E6%95%B0"><span class="toc-text">5.1.4、getPosTan函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-5%E3%80%81getMatrix%E5%87%BD%E6%95%B0"><span class="toc-text">5.1.5、getMatrix函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-6%E3%80%81%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%88%90%E5%8A%9F%E5%8A%A8%E7%94%BB%E7%A4%BA%E4%BE%8B"><span class="toc-text">5.1.6、支付宝支付成功动画示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2%E3%80%81SVG%E5%8A%A8%E7%94%BB"><span class="toc-text">5.2、SVG动画</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-1%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">5.2.1、概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-2%E3%80%81vector%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA"><span class="toc-text">5.2.2、vector标签与图像显示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-3%E3%80%81%E5%8A%A8%E6%80%81Vector"><span class="toc-text">5.2.3、动态Vector</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-4%E3%80%81%E8%BE%93%E5%85%A5%E6%90%9C%E7%B4%A2%E5%8A%A8%E7%94%BB%E7%A4%BA%E4%BE%8B"><span class="toc-text">5.2.4、输入搜索动画示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC6%E7%AB%A0Paint%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">第6章Paint基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1%E3%80%81%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F"><span class="toc-text">6.1、硬件加速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2%E3%80%81%E6%96%87%E5%AD%97"><span class="toc-text">6.2、文字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-1%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">6.2.1、概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-2%E3%80%81%E7%BB%98%E5%9B%BE%E5%9B%9B%E7%BA%BF%E6%90%AD%E4%B8%8EFontMetrics"><span class="toc-text">6.2.2、绘图四线搭与FontMetrics</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-3%E3%80%81%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">6.2.3、常用函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-4%E3%80%81%E5%AE%9A%E7%82%B9%E5%86%99%E5%AD%97%E7%A4%BA%E4%BE%8B"><span class="toc-text">6.2.4、定点写字示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3%E3%80%81Paint%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">6.3、Paint常用函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-3-1%E3%80%81%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">6.3.1、基本设置函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-3-2%E3%80%81%E5%AD%97%E4%BD%93%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-text">6.3.2、字体相关函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC7%E7%AB%A0%E7%BB%98%E5%9B%BE%E8%BF%9B%E9%98%B6"><span class="toc-text">第7章绘图进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1%E3%80%81%E8%B4%9D%E6%B5%8E%E5%9F%83%E6%9B%B2%E7%BA%BF"><span class="toc-text">7.1、贝济埃曲线</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-1-1%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">7.1.1、概述</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-2%E3%80%81%E8%B4%9D%E6%B5%8E%E5%9F%83%E6%9B%B2%E7%BA%BF%E4%B9%8BquadTo"><span class="toc-text">7.1.2、贝济埃曲线之quadTo</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-1-3%E3%80%81%E8%B4%9D%E6%B5%8E%E5%9F%83%E6%9B%B2%E7%BA%BF%E4%B9%8BrQuadTo"><span class="toc-text">7.1.3、贝济埃曲线之rQuadTo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-1-4%E3%80%81%E6%B3%A2%E6%B5%AA%E6%95%88%E6%9E%9C%E7%A4%BA%E4%BE%8B"><span class="toc-text">7.1.4、波浪效果示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2%E3%80%81setShadowLayer%E4%B8%8E%E9%98%B4%E5%BD%B1%E6%95%88%E6%9E%9C"><span class="toc-text">7.2、setShadowLayer与阴影效果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-2-1%E3%80%81setShadowlayer-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">7.2.1、setShadowlayer()构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-2-2%E3%80%81%E6%B8%85%E9%99%A4%E9%98%B4%E5%BD%B1"><span class="toc-text">7.2.2、清除阴影</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-2-3%E3%80%81%E7%BB%99%E6%96%87%E5%AD%97%E6%B7%BB%E5%8A%A0%E9%98%B4%E5%BD%B1%E7%A4%BA%E4%BE%8B"><span class="toc-text">7.2.3、给文字添加阴影示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3%E3%80%81BlurMaskFilter%E5%8F%91%E5%85%89%E6%95%88%E6%9E%9C%E4%B8%8E%E5%9B%BE%E7%89%87%E9%98%B4%E5%BD%B1"><span class="toc-text">7.3、BlurMaskFilter发光效果与图片阴影</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-3-2%E3%80%81%E7%BB%99%E5%9B%BE%E7%89%87%E6%B7%BB%E5%8A%A0%E7%BA%AF%E8%89%B2%E9%98%B4%E5%BD%B1"><span class="toc-text">7.3.2、给图片添加纯色阴影</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4%E3%80%81Shader%E4%B8%8EBitmapShader"><span class="toc-text">7.4、Shader与BitmapShader</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-4-1%E3%80%81Shader%E6%A6%82%E8%BF%B0"><span class="toc-text">7.4.1、Shader概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-4-2%E3%80%81BitmapShader%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-text">7.4.2、BitmapShader的基本用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-4-3%E3%80%81%E6%9C%9B%E8%BF%9C%E9%95%9C%E6%95%88%E6%9E%9C%E7%A4%BA%E4%BE%8B"><span class="toc-text">7.4.3、望远镜效果示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-4-4%E3%80%81%E7%94%9F%E6%88%90%E4%B8%8D%E8%A7%84%E5%88%99%E5%A4%B4%E5%83%8F%E7%A4%BA%E4%BE%8B"><span class="toc-text">7.4.4、生成不规则头像示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-5%E3%80%81Shader%E4%B9%8BLinearGradient"><span class="toc-text">7.5、Shader之LinearGradient</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-5-1%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">7.5.1、概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-5-2%E3%80%81%E9%97%AA%E5%85%89%E6%96%87%E5%AD%97%E6%95%88%E6%9E%9C%E7%A4%BA%E4%BE%8B"><span class="toc-text">7.5.2、闪光文字效果示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-6%E3%80%81Shader%E4%B9%8BRadialGradient"><span class="toc-text">7.6、Shader之RadialGradient</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-6-1%E3%80%81%E5%8F%8C%E8%89%B2%E6%B8%90%E5%8F%98"><span class="toc-text">7.6.1、双色渐变</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-6-2%E3%80%81%E5%A4%9A%E8%89%B2%E6%B8%90%E5%8F%98"><span class="toc-text">7.6.2、多色渐变</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC8%E7%AB%A0%E6%B7%B7%E5%90%88%E6%A8%A1%E5%BC%8F"><span class="toc-text">第8章混合模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1%E3%80%81%E6%B7%B7%E5%90%88%E6%A8%A1%E5%BC%8F%E4%B9%8BAvoidXfermode"><span class="toc-text">8.1、混合模式之AvoidXfermode</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#8-1-1%E3%80%81%E6%B7%B7%E5%90%88%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0"><span class="toc-text">8.1.1、混合模式概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-1-2%E3%80%81AvoidXfermode"><span class="toc-text">8.1.2、AvoidXfermode</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-1-3%E3%80%81AvoidXfermode%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86"><span class="toc-text">8.1.3、AvoidXfermode绘制原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-1-4%E3%80%81AvoidXfermode%E4%B9%8BMode-AVOID"><span class="toc-text">8.1.4、AvoidXfermode之Mode.AVOID</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2%E3%80%81%E6%B7%B7%E5%90%88%E6%A8%A1%E5%BC%8F%E4%B9%8BPorterDuffXfermode"><span class="toc-text">8.2、混合模式之PorterDuffXfermode</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#8-2-1%E3%80%81PorterDuffXfermode%E6%A6%82%E8%BF%B0"><span class="toc-text">8.2.1、PorterDuffXfermode概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-2-2%E3%80%81%E9%A2%9C%E8%89%B2%E5%8F%A0%E5%8A%A0%E7%9B%B8%E5%85%B3%E6%A8%A1%E5%BC%8F"><span class="toc-text">8.2.2、颜色叠加相关模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3%E3%80%81PorterDuffXfermode%E4%B9%8B%E6%BA%90%E5%9B%BE%E5%83%8F%E6%A8%A1%E5%BC%8F"><span class="toc-text">8.3、PorterDuffXfermode之源图像模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-4%E3%80%81%E7%9B%AE%E6%A0%87%E5%9B%BE%E5%83%8F%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%9C%9F%E4%BB%96%E6%A8%A1%E5%BC%8F"><span class="toc-text">8.4、目标图像模式与真他模式</span></a></li></ol></li></ol>
-        
-    </div>
-</aside>
-
-                
             </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Android/">Android</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6/">自定义控件</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/07/33.JNI%E5%85%A5%E9%97%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JNI入门</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/12/23/31.ConstraintLayout%E5%B8%83%E5%B1%80/">
+                        <span class="hidden-mobile">ConstraintLayout布局详解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
-    </section>
-    <footer class="main-footer">
-    <div class="container">
-        <div class="row">
-        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
 </footer>
 
-<a id="back-to-top" class="icon-btn hide">
-	<i class="fa fa-chevron-up"></i>
-</a>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
 
-    <div class="copyright">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="busuanzi">
-    
-</div>
 
-            </div>
-            <div class="col-sm-12">
-                <span>Copyright &copy; 2017
-                </span> |
-                <span>
-                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
-                </span> |
-                <span>
-                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
 
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
 
 
 
 
 
-<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 </body>
