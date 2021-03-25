@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -212,18 +214,18 @@
 <p>2、RealCall里面有enqueue，通过<code>call.enqueue()</code>,转换成了AsyncCall。</p>
 <p>3、AsyncCall是RealCall的内部类，AsyncCall继承了Runnable。AsyncCall给了OKhttp的Dispatcher（线程池），executorService().execute(call); </p>
 <p>4、最终去执行了AsyncCall.execute()方法，执行getResponseWithInterceptorChain返回 Response。</p>
-<pre><code>synchronized void enqueue(AsyncCall call) {  
+<pre><code>synchronized void enqueue(AsyncCall call) &#123;  
     //判断当前正在执行的任务数量，最大是64，正在执行的任务中的host,最大是5   
-    if (runningAsyncCalls.size() &lt; maxRequests &amp;&amp; runningCallsForHost(call) &lt; maxRequestsPerHost) {
+    if (runningAsyncCalls.size() &lt; maxRequests &amp;&amp; runningCallsForHost(call) &lt; maxRequestsPerHost) &#123;
         //加入到正在执行      
         runningAsyncCalls.add(call);
         // 线程池，     
         executorService().execute(call);    
-    } else {
+    &#125; else &#123;
         // 加入准备执行的集合，等待执行      
         readyAsyncCalls.add(call);    
-    }  
-}
+    &#125;  
+&#125;
 </code></pre><h3 id="2-1、官网和导入"><a href="#2-1、官网和导入" class="headerlink" title="2.1、官网和导入"></a>2.1、官网和导入</h3><p>官网</p>
 <pre><code>http://square.github.io/okhttp/
 </code></pre><p>引入</p>
@@ -234,29 +236,29 @@ http://httpbin.org/post
 </code></pre><h3 id="2-3、get请求"><a href="#2-3、get请求" class="headerlink" title="2.3、get请求"></a>2.3、get请求</h3><p>同步请求</p>
 <pre><code>OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder().url(&quot;http://httpbin.org/get?id=123&quot;).build();
-try {
+try &#123;
     Response response = client.newCall(request).execute();
-    if (response.isSuccessful()) {
+    if (response.isSuccessful()) &#123;
         System.out.println(response.body().string());
-    }
-} catch (IOException e) {
+    &#125;
+&#125; catch (IOException e) &#123;
     e.printStackTrace();
-}
+&#125;
 </code></pre><p>异步请求</p>
 <pre><code>System.out.println(Thread.currentThread().getId());
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder().url(&quot;http://httpbin.org/get?id=123&quot;).build();
-client.newCall(request).enqueue(new Callback() {
+client.newCall(request).enqueue(new Callback() &#123;
     @Override
-    public void onFailure(Call call, IOException e) {
-    }
+    public void onFailure(Call call, IOException e) &#123;
+    &#125;
     @Override
-    public void onResponse(Call call, Response response) throws IOException {
-        if (response.isSuccessful()) {
+    public void onResponse(Call call, Response response) throws IOException &#123;
+        if (response.isSuccessful()) &#123;
             System.out.println(Thread.currentThread().getId());
-        }
-    }
-});
+        &#125;
+    &#125;
+&#125;);
 </code></pre><h3 id="2-4、post请求"><a href="#2-4、post请求" class="headerlink" title="2.4、post请求"></a>2.4、post请求</h3><p>同步请求，提交表单</p>
 <pre><code>OkHttpClient client = new OkHttpClient();
 FormBody body = new FormBody
@@ -265,14 +267,14 @@ FormBody body = new FormBody
         .add(&quot;age&quot;, &quot;19&quot;)
         .build();
 Request request = new Request.Builder().url(&quot;http://httpbin.org/post&quot;).post(body).build();
-try {
+try &#123;
     Response response = client.newCall(request).execute();
-    if (response.isSuccessful()) {
+    if (response.isSuccessful()) &#123;
         System.out.println(response.body().string());
-    }
-} catch (IOException e) {
+    &#125;
+&#125; catch (IOException e) &#123;
     e.printStackTrace();
-}
+&#125;
 </code></pre><p>异步提交，提交json</p>
 <pre><code>OkHttpClient okHttpClient  = new OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
@@ -295,16 +297,16 @@ Request request = new Request.Builder()
 //创建Call
 Call call = okHttpClient.newCall(request);
 //加入队列 异步操作
-call.enqueue(new Callback() {
+call.enqueue(new Callback() &#123;
     //请求错误回调方法
     @Override
-    public void onFailure(Call call, IOException e) {
+    public void onFailure(Call call, IOException e) &#123;
         System.out.println(&quot;连接失败&quot;);
-    }
+    &#125;
     @Override
-    public void onResponse(Call call, Response response) throws IOException {
+    public void onResponse(Call call, Response response) throws IOException &#123;
         System.out.println(response.body().string());
-    }
+    &#125;
 </code></pre><h3 id="2-5、设置url参数-HttpUrl"><a href="#2-5、设置url参数-HttpUrl" class="headerlink" title="2.5、设置url参数-HttpUrl"></a>2.5、设置url参数-HttpUrl</h3><pre><code>OkHttpClient client = new OkHttpClient();
 HttpUrl httpUrl = HttpUrl.parse(&quot;http://httpbin.org/get&quot;).
         newBuilder().
@@ -314,28 +316,28 @@ HttpUrl httpUrl = HttpUrl.parse(&quot;http://httpbin.org/get&quot;).
 String url = httpUrl.toString();
 System.out.println(httpUrl.toString());// http://httpbin.org/get?city=beijing&amp;key=123
 Request request = new Request.Builder().url(url).build();
-try {
+try &#123;
     Response response = client.newCall(request).execute();
-    if (response.isSuccessful()) {
+    if (response.isSuccessful()) &#123;
         System.out.println(response.body().string());
-    }
-} catch (IOException e) {
+    &#125;
+&#125; catch (IOException e) &#123;
     e.printStackTrace();
-}
+&#125;
 </code></pre><h3 id="2-6、请求头的设置-addHeader"><a href="#2-6、请求头的设置-addHeader" class="headerlink" title="2.6、请求头的设置-addHeader"></a>2.6、请求头的设置-addHeader</h3><pre><code>OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder().
         url(&quot;http://httpbin.org/get?id=123&quot;).
         addHeader(&quot;User-Agent&quot;, &quot;this my head&quot;).
         addHeader(&quot;Accept&quot;, &quot;text/plain, text/html&quot;).
         build();
-try {
+try &#123;
     Response response = client.newCall(request).execute();
-    if (response.isSuccessful()) {
+    if (response.isSuccessful()) &#123;
         System.out.println(response.body().string());
-    }
-} catch (IOException e) {
+    &#125;
+&#125; catch (IOException e) &#123;
     e.printStackTrace();
-}
+&#125;
 </code></pre><h3 id="2-7、上传文件"><a href="#2-7、上传文件" class="headerlink" title="2.7、上传文件"></a>2.7、上传文件</h3><pre><code>RequestBody imageBody = RequestBody.create(MediaType.parse(&quot;image/jpeg&quot;), new File(&quot;文件路径+文件名&quot;));
 MultipartBody body = new MultipartBody.Builder()
         .setType(MultipartBody.FORM)
@@ -343,27 +345,27 @@ MultipartBody body = new MultipartBody.Builder()
         .addFormDataPart(&quot;filename&quot;, &quot;文件名&quot;, imageBody).build();
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder().url(&quot;http://192.168.1.6:8080/web/UploadServlet&quot;).post(body).build();
-try {
+try &#123;
     Response response = client.newCall(request).execute();
-    if (response.isSuccessful()) {
+    if (response.isSuccessful()) &#123;
         System.out.println(response.body().string());
-    }
-} catch (IOException e) {
+    &#125;
+&#125; catch (IOException e) &#123;
     e.printStackTrace();
-}
+&#125;
 </code></pre><p><strong>boundary</strong></p>
 <h3 id="2-8、定义拦截器"><a href="#2-8、定义拦截器" class="headerlink" title="2.8、定义拦截器"></a>2.8、定义拦截器</h3><pre><code>//定义拦截器
-Interceptor interceptor = new Interceptor() {
+Interceptor interceptor = new Interceptor() &#123;
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(Chain chain) throws IOException &#123;
         long start = System.currentTimeMillis();
         Request request  = chain.request();
         Response response = chain.proceed(request);
         long end = System.currentTimeMillis();
         System.out.println(&quot;interceptor: cost time = &quot; + (end - start));
         return response;
-    }
-};
+    &#125;
+&#125;;
 // 创建 OkHttpClient 对象
 OkHttpClient client = new OkHttpClient.Builder()
         .addInterceptor(interceptor)
@@ -384,40 +386,40 @@ Request request = new Request.Builder()
         //.cacheControl(new CacheControl.Builder().maxStale(365, TimeUnit.DAYS).build())//最大缓存时效365天
         .build();
 // OkHttpClient 执行 Request
-try {
+try &#123;
     Response response = client.newCall(request).execute();
     Response responseCache = response.cacheResponse();
     Response responseNet = response.networkResponse();
-    if (responseCache != null) {
+    if (responseCache != null) &#123;
         //从缓存响应
         System.out.println(&quot;response from cache&quot;);
-    }
-    if (responseNet != null) {
+    &#125;
+    if (responseNet != null) &#123;
         //从网络响应
         System.out.println(&quot;response from net&quot;);
-    }
+    &#125;
     System.out.println(&quot;response:&quot; + response.body().string());
-} catch (IOException e) {
+&#125; catch (IOException e) &#123;
     e.printStackTrace();
-}
+&#125;
 </code></pre><p><strong>Okhttp实现缓存方式：在<code>CacheInterceptor</code>缓存拦截器中，根据缓存策略<code>CacheStrategy</code>分配。<code>Cache</code>和<code>DiskLruCache</code>。</strong></p>
 <h3 id="2-10、文件下载"><a href="#2-10、文件下载" class="headerlink" title="2.10、文件下载"></a>2.10、文件下载</h3><pre><code>OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder().url(&quot;文件地址&quot;).
         addHeader(&quot;Accept-Encoding&quot;,&quot;identity&quot;).
         addHeader(&quot;Range&quot;, &quot;bytes=0-&quot;).
         build();
-try {
+try &#123;
     Response response = client.newCall(request).execute();
     System.out.println(&quot;content-length : &quot;+response.body().contentLength());
-    if (response.isSuccessful()) {
+    if (response.isSuccessful()) &#123;
         Headers headers = response.headers();
-        for (int i = 0; i &lt; headers.size(); i++) {
+        for (int i = 0; i &lt; headers.size(); i++) &#123;
             System.out.println(headers.name(i) + &quot; : &quot; + headers.value(i));
-        }
-    }
-} catch (IOException e) {
+        &#125;
+    &#125;
+&#125; catch (IOException e) &#123;
     e.printStackTrace();
-}
+&#125;
 </code></pre><p><strong><code>content-length</code>和<code>Range</code>。</strong></p>
 <h2 id="3、源码分析"><a href="#3、源码分析" class="headerlink" title="3、源码分析"></a>3、源码分析</h2><p>Volley是基于HttpUrlConnection；OkHttp基于Okio(原生的JavaIO + 自定义封装) + Socket连接。</p>
 <h3 id="3-1、OkHttpClient"><a href="#3-1、OkHttpClient" class="headerlink" title="3.1、OkHttpClient"></a>3.1、OkHttpClient</h3><hr>
@@ -485,13 +487,13 @@ client.newCall(request).execute();
 </code></pre><hr>
 <h3 id="3-2、RealCall"><a href="#3-2、RealCall" class="headerlink" title="3.2、RealCall"></a>3.2、RealCall</h3><hr>
 <p>newCall(Request)方法会返回一个RealCall对象，它是Call接口的实现。</p>
-<pre><code>final class RealCall implements Call {
+<pre><code>final class RealCall implements Call &#123;
 </code></pre><p>当调用RealCall.execute()的时候，getResponseWithInterceptorChain()会被调用，它会发起网络请求并拿到返回的响应，装进一个Response对象并作为返回值返回。</p>
 <pre><code>Response result = getResponseWithInterceptorChain();
 </code></pre><p>RealCall.enqueue()被调用的时候大同小异，区别在于enqueue会使用Dispatcher的线程池来把请求放在后台线程进行，但实质上使用的同样也是getResponseWithInterceptorChain()方法。</p>
 <p>getResponseWithInterceptorChain()方法里做的事：把所有配置好的Interceptor放在一个List里，然后作为参数，创建一个RealInterceptorChain对象，并调用chain.proceed(request)发起请求和获取响应。</p>
 <p>RealCall类中的<code>getResponseWithInterceptorChain()</code>方法作用：<strong>将请求Request转变成响应Response</strong>。</p>
-<pre><code>Response getResponseWithInterceptorChain() throws IOException {
+<pre><code>Response getResponseWithInterceptorChain() throws IOException &#123;
     // 拦截器的一个集合
     List&lt;Interceptor&gt; interceptors = new ArrayList&lt;&gt;();
     // 客户端的所有自定义拦截器，可以添加自己定义的
@@ -507,7 +509,7 @@ client.newCall(request).execute();
             client.readTimeoutMillis(), client.writeTimeoutMillis());
 
     return chain.proceed(originalRequest);
-}
+&#125;
 </code></pre><hr>
 <h3 id="3-3、拦截器"><a href="#3-3、拦截器" class="headerlink" title="3.3、拦截器"></a>3.3、拦截器</h3><p>在RealInterceptorChain中，多个Interceptor会依次调用自己的intercepter方法，方法会做三件事情</p>
 <p>1、对请求进行预处理</p>
@@ -534,14 +536,14 @@ client.newCall(request).execute();
 <h2 id="4、Okio"><a href="#4、Okio" class="headerlink" title="4、Okio"></a>4、Okio</h2><p>程序内部（内存）和外部（本地文件和网络）进行数据交互的过程，就叫输入输出。</p>
 <p>从文件里或者从网络上读数据到内存里，就叫输入；从内存里写到文件里或者发送到网络上，就叫输出。Java I/O 作用只有一个：和外界做数据交互。使用流，例如 <code>FileInputStream / FileOutputStream</code>。</p>
 <p>Okio特点：基于插管的，而且是单向的，输入源叫 Source，输出目标叫 Sink，支持 Buffer，可以对 Buffer 进行操作，但不强制使用Buffer。</p>
-<pre><code>try (Source source = Okio.buffer(Okio.source(new File(&quot;./io/text.txt&quot;)))) {
+<pre><code>try (Source source = Okio.buffer(Okio.source(new File(&quot;./io/text.txt&quot;)))) &#123;
     Buffer buffer = new Buffer();
     source.read(buffer, 1024);
     System.out.println(buffer.readUtf8Line());
     System.out.println(buffer.readUtf8Line());
-} catch (IOException e) {
+&#125; catch (IOException e) &#123;
     e.printStackTrace();
-}
+&#125;
 </code></pre>
     </div>
     
@@ -579,13 +581,13 @@ client.newCall(request).execute();
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/01/05/4.安卓自定义安全键盘/" class="pre-post btn btn-default" title='安卓自定义安全键盘'>
+        <a href="/2019/01/05/4.%E5%AE%89%E5%8D%93%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%89%E5%85%A8%E9%94%AE%E7%9B%98/" class="pre-post btn btn-default" title='安卓自定义安全键盘'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">安卓自定义安全键盘</span>
         </a>
     
     
-        <a href="/2018/12/01/2.html和css基础/" class="next-post btn btn-default" title='HTML和CSS基础'>
+        <a href="/2018/12/01/2.html%E5%92%8Ccss%E5%9F%BA%E7%A1%80/" class="next-post btn btn-default" title='HTML和CSS基础'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">HTML和CSS基础</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -603,7 +605,7 @@ client.newCall(request).execute();
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、网络基础"><span class="toc-text">1、网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、Cookie-、Session和Token"><span class="toc-text">1.2、Cookie 、Session和Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、Http缓存"><span class="toc-text">1.3、Http缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、Https"><span class="toc-text">1.5、Https</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、OkHttp"><span class="toc-text">2、OkHttp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、官网和导入"><span class="toc-text">2.1、官网和导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2、测试地址"><span class="toc-text">2.2、测试地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3、get请求"><span class="toc-text">2.3、get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4、post请求"><span class="toc-text">2.4、post请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5、设置url参数-HttpUrl"><span class="toc-text">2.5、设置url参数-HttpUrl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6、请求头的设置-addHeader"><span class="toc-text">2.6、请求头的设置-addHeader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7、上传文件"><span class="toc-text">2.7、上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8、定义拦截器"><span class="toc-text">2.8、定义拦截器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9、缓存"><span class="toc-text">2.9、缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-10、文件下载"><span class="toc-text">2.10、文件下载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、源码分析"><span class="toc-text">3、源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1、OkHttpClient"><span class="toc-text">3.1、OkHttpClient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2、RealCall"><span class="toc-text">3.2、RealCall</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3、拦截器"><span class="toc-text">3.3、拦截器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、Okio"><span class="toc-text">4、Okio</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="toc-text">1、网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E3%80%81Cookie-%E3%80%81Session%E5%92%8CToken"><span class="toc-text">1.2、Cookie 、Session和Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3%E3%80%81Http%E7%BC%93%E5%AD%98"><span class="toc-text">1.3、Http缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5%E3%80%81Https"><span class="toc-text">1.5、Https</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81OkHttp"><span class="toc-text">2、OkHttp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E3%80%81%E5%AE%98%E7%BD%91%E5%92%8C%E5%AF%BC%E5%85%A5"><span class="toc-text">2.1、官网和导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E3%80%81%E6%B5%8B%E8%AF%95%E5%9C%B0%E5%9D%80"><span class="toc-text">2.2、测试地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E3%80%81get%E8%AF%B7%E6%B1%82"><span class="toc-text">2.3、get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4%E3%80%81post%E8%AF%B7%E6%B1%82"><span class="toc-text">2.4、post请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5%E3%80%81%E8%AE%BE%E7%BD%AEurl%E5%8F%82%E6%95%B0-HttpUrl"><span class="toc-text">2.5、设置url参数-HttpUrl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6%E3%80%81%E8%AF%B7%E6%B1%82%E5%A4%B4%E7%9A%84%E8%AE%BE%E7%BD%AE-addHeader"><span class="toc-text">2.6、请求头的设置-addHeader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7%E3%80%81%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6"><span class="toc-text">2.7、上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8%E3%80%81%E5%AE%9A%E4%B9%89%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-text">2.8、定义拦截器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9%E3%80%81%E7%BC%93%E5%AD%98"><span class="toc-text">2.9、缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-10%E3%80%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="toc-text">2.10、文件下载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-text">3、源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E3%80%81OkHttpClient"><span class="toc-text">3.1、OkHttpClient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2%E3%80%81RealCall"><span class="toc-text">3.2、RealCall</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3%E3%80%81%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-text">3.3、拦截器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81Okio"><span class="toc-text">4、Okio</span></a></li></ol>
         
     </div>
 </aside>
@@ -655,7 +657,9 @@ client.newCall(request).execute();
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

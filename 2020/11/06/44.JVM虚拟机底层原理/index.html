@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -192,7 +194,7 @@
 <pre><code>JVM + 基础类库 = JRE
 
 JVM + 基础类库 + 编译归工具 = JDK
-</code></pre><p><img src="/2020/11/06/44.JVM虚拟机底层原理/1.png" alt=""></p>
+</code></pre><p><img src="/2020/11/06/44.JVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/44.JVM虚拟机底层原理/1.png" alt></p>
 <p>类加载器：ClassLoader</p>
 <p>JVM内存结构：方法区（Method Area）、堆（Heap）、虚拟机栈（JVM Stacks）、程序计数器（PC Register）、本地方法栈（Nataive Method Stacks）。</p>
 <p>执行引擎：解释器（Interpreter）、即时编译器（JIT Compiler）、垃圾回收（GC）。</p>
@@ -209,28 +211,28 @@ JVM + 基础类库 + 编译归工具 = JDK
 <p>垃圾回收是否涉及栈内存？ 不需要，弹出栈。</p>
 <p>栈内存分配越大越好吗？递归时候大内存较好，但是栈内存大了会影响线程数量。</p>
 <p>方法内的局部变量是否线程安全？ 如果方法内局部变量没有逃离方法的作用访问，它是线程安全的。如果是局部变量引用了对象，并逃离方法的作用范围，需要考虑线程安全。下面代码，只有<code>m1()</code>方法是线程安全的。</p>
-<pre><code>public static void m1() {
+<pre><code>public static void m1() &#123;
     StringBuilder sb = new StringBuilder();
     sb.append(1);
     sb.append(2);
     sb.append(3);
     System.out.println(sb.toString());
-}
+&#125;
 
-public static void m2(StringBuilder sb) {
+public static void m2(StringBuilder sb) &#123;
     sb.append(1);
     sb.append(2);
     sb.append(3);
     System.out.println(sb.toString());
-}
+&#125;
 
-public static StringBuilder m3() {
+public static StringBuilder m3() &#123;
     StringBuilder sb = new StringBuilder();
     sb.append(1);
     sb.append(2);
     sb.append(3);
     return sb;
-}
+&#125;
 </code></pre><p>栈内存溢出（java.lang.StackOverflowError）：<strong>栈帧过多</strong>导致栈内存溢出（比如，递归）；栈帧过大导致栈内存溢出（该情况较少）。</p>
 <hr>
 <h3 id="JVM内存结构之本地方法栈"><a href="#JVM内存结构之本地方法栈" class="headerlink" title="JVM内存结构之本地方法栈"></a>JVM内存结构之本地方法栈</h3><hr>
@@ -319,65 +321,65 @@ System.out.println(x1 == x2);//true
 <pre><code>private static final int _4MB = 4 * 1024 * 1024;
 
 List&lt;byte[]&gt; list = new ArrayList&lt;&gt;();
-for (int i = 0; i &lt; 5; i++) {
+for (int i = 0; i &lt; 5; i++) &#123;
     list.add(new byte[_4MB]);
-}
+&#125;
 System.in.read();
 
 // 软引用：list --&gt; SoftReference --&gt; byte[]
 List&lt;SoftReference&lt;byte[]&gt;&gt; list = new ArrayList&lt;&gt;();
-for (int i = 0; i &lt; 5; i++) {
+for (int i = 0; i &lt; 5; i++) &#123;
     SoftReference&lt;byte[]&gt; ref = new SoftReference&lt;&gt;(new byte[_4MB]);
     System.out.println(ref.get());
     list.add(ref);
     System.out.println(list.size());
-}
+&#125;
 System.out.println(&quot;循环结束：&quot; + list.size());
-for (SoftReference&lt;byte[]&gt; ref : list) {
+for (SoftReference&lt;byte[]&gt; ref : list) &#123;
     System.out.println(ref.get());
-}
+&#125;
 </code></pre><hr>
 <p>软引用配合<strong>引用队列</strong>使用，自动清除无用的软引用：</p>
 <pre><code>private static final int _4MB = 4 * 1024 * 1024;
-public static void main(String[] args) {
+public static void main(String[] args) &#123;
     List&lt;SoftReference&lt;byte[]&gt;&gt; list = new ArrayList&lt;&gt;();
     // 引用队列
     ReferenceQueue&lt;byte[]&gt; queue = new ReferenceQueue&lt;&gt;();
-    for (int i = 0; i &lt; 5; i++) {
+    for (int i = 0; i &lt; 5; i++) &#123;
         // 关联了引用队列， 当软引用所关联的 byte[]被回收时，软引用自己会加入到 queue 中去
         SoftReference&lt;byte[]&gt; ref = new SoftReference&lt;&gt;(new byte[_4MB], queue);
         System.out.println(ref.get());
         list.add(ref);
         System.out.println(list.size());
-    }
+    &#125;
 
     // 从队列中获取无用的 软引用对象，并移除
     Reference&lt;? extends byte[]&gt; poll = queue.poll();
-    while( poll != null) {
+    while( poll != null) &#123;
         list.remove(poll);
         poll = queue.poll();
-    }
+    &#125;
     System.out.println(&quot;===========================&quot;);
-    for (SoftReference&lt;byte[]&gt; reference : list) {
+    for (SoftReference&lt;byte[]&gt; reference : list) &#123;
         System.out.println(reference.get());
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <p>弱引用演示代码：</p>
 <pre><code>private static final int _4MB = 4 * 1024 * 1024;
-public static void main(String[] args) {
+public static void main(String[] args) &#123;
     //  list --&gt; WeakReference --&gt; byte[]
     List&lt;WeakReference&lt;byte[]&gt;&gt; list = new ArrayList&lt;&gt;();
-    for (int i = 0; i &lt; 10; i++) {
+    for (int i = 0; i &lt; 10; i++) &#123;
         WeakReference&lt;byte[]&gt; ref = new WeakReference&lt;&gt;(new byte[_4MB]);
         list.add(ref);
-        for (WeakReference&lt;byte[]&gt; w : list) {
+        for (WeakReference&lt;byte[]&gt; w : list) &#123;
             System.out.print(w.get()+&quot; &quot;);
-        }
+        &#125;
         System.out.println();
-    }
+    &#125;
     System.out.println(&quot;循环结束：&quot; + list.size());
-}
+&#125;
 </code></pre><hr>
 <h3 id="垃圾回收算法之标记清除"><a href="#垃圾回收算法之标记清除" class="headerlink" title="垃圾回收算法之标记清除"></a>垃圾回收算法之标记清除</h3><hr>
 <p><code>Mark Sweep</code>:先标记垃圾，再清除垃圾。优点：速度快。缺点：空间不连续，产生内存碎片。</p>
@@ -504,7 +506,7 @@ public static void main(String[] args) {
         </a>
     
     
-        <a href="/2020/09/09/43.python高级/" class="next-post btn btn-default" title='python高级'>
+        <a href="/2020/09/09/43.python%E9%AB%98%E7%BA%A7/" class="next-post btn btn-default" title='python高级'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">python高级</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -522,7 +524,7 @@ public static void main(String[] args) {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM内存结构"><span class="toc-text">JVM内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之程序计数器"><span class="toc-text">JVM内存结构之程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之虚拟机栈"><span class="toc-text">JVM内存结构之虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之本地方法栈"><span class="toc-text">JVM内存结构之本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之堆"><span class="toc-text">JVM内存结构之堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM内存结构之方法区"><span class="toc-text">JVM内存结构之方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StringTable"><span class="toc-text">StringTable</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收"><span class="toc-text">垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#判断对象是否可以回收之引用计数法"><span class="toc-text">判断对象是否可以回收之引用计数法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#判断对象是否可以回收之可达性分析算法"><span class="toc-text">判断对象是否可以回收之可达性分析算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五种引用"><span class="toc-text">五种引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法之标记清除"><span class="toc-text">垃圾回收算法之标记清除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法之标记整理"><span class="toc-text">垃圾回收算法之标记整理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法之复制"><span class="toc-text">垃圾回收算法之复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分代垃圾回收"><span class="toc-text">分代垃圾回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收器"><span class="toc-text">垃圾回收器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Garbage-First"><span class="toc-text">Garbage First</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-text">JVM内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E4%B9%8B%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-text">JVM内存结构之程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E4%B9%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88"><span class="toc-text">JVM内存结构之虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E4%B9%8B%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88"><span class="toc-text">JVM内存结构之本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E4%B9%8B%E5%A0%86"><span class="toc-text">JVM内存结构之堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E4%B9%8B%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="toc-text">JVM内存结构之方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StringTable"><span class="toc-text">StringTable</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E6%B3%95"><span class="toc-text">判断对象是否可以回收之引用计数法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E5%9B%9E%E6%94%B6%E4%B9%8B%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="toc-text">判断对象是否可以回收之可达性分析算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E7%A7%8D%E5%BC%95%E7%94%A8"><span class="toc-text">五种引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E4%B9%8B%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4"><span class="toc-text">垃圾回收算法之标记清除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E4%B9%8B%E6%A0%87%E8%AE%B0%E6%95%B4%E7%90%86"><span class="toc-text">垃圾回收算法之标记整理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E4%B9%8B%E5%A4%8D%E5%88%B6"><span class="toc-text">垃圾回收算法之复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E4%BB%A3%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">分代垃圾回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="toc-text">垃圾回收器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Garbage-First"><span class="toc-text">Garbage First</span></a></li></ol></li></ol>
         
     </div>
 </aside>
@@ -574,7 +576,9 @@ public static void main(String[] args) {
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

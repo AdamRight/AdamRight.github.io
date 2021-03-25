@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -265,7 +267,7 @@ tree    //以树状方式显示目录信息
 <p>Linux文件或者目录名称最长可以有256个字符，<code>.</code>代表当前目录，<code>..</code>代表上一级目录，以<code>.</code>开头的文件为隐藏文件，需要用<code>-a</code>参数才能显示。</p>
 <pre><code>ls -a     //查看所有文件包含隐藏文件
 ls -l     //以列表形式查看文件，不包含隐藏文件
-ls -lh     //以列表形式查看文件，不包含隐藏文件 ，按照1024倍数显示{KB MB GB}
+ls -lh     //以列表形式查看文件，不包含隐藏文件 ，按照1024倍数显示&#123;KB MB GB&#125;
 ls -all    //以列表形式查看文件，包含隐藏文件 快捷方式【ll】
 </code></pre><p>通配符：</p>
 <pre><code>【*】 匹配任意多个字符【0-256】  a*  一个以上字符 256以下 
@@ -518,13 +520,13 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2020/09/09/43.python高级/" class="pre-post btn btn-default" title='python高级'>
+        <a href="/2020/09/09/43.python%E9%AB%98%E7%BA%A7/" class="pre-post btn btn-default" title='python高级'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">python高级</span>
         </a>
     
     
-        <a href="/2020/09/05/41.python基础/" class="next-post btn btn-default" title='python基础'>
+        <a href="/2020/09/05/41.python%E5%9F%BA%E7%A1%80/" class="next-post btn btn-default" title='python基础'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">python基础</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -542,7 +544,7 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux主要目录速查表"><span class="toc-text">Linux主要目录速查表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件"><span class="toc-text">文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件权限"><span class="toc-text">文件权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用Linux命令"><span class="toc-text">常用Linux命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户、权限管理"><span class="toc-text">用户、权限管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统管理"><span class="toc-text">系统管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VI"><span class="toc-text">VI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH"><span class="toc-text">SSH</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充一些"><span class="toc-text">补充一些</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向命令"><span class="toc-text">重定向命令</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E4%B8%BB%E8%A6%81%E7%9B%AE%E5%BD%95%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="toc-text">Linux主要目录速查表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6"><span class="toc-text">文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-text">文件权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8Linux%E5%91%BD%E4%BB%A4"><span class="toc-text">常用Linux命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E3%80%81%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-text">用户、权限管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="toc-text">系统管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VI"><span class="toc-text">VI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH"><span class="toc-text">SSH</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B"><span class="toc-text">补充一些</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E5%91%BD%E4%BB%A4"><span class="toc-text">重定向命令</span></a></li></ol></li></ol>
         
     </div>
 </aside>
@@ -594,7 +596,9 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

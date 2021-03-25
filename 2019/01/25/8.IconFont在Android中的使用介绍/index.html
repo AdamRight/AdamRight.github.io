@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -217,7 +219,7 @@ https://ionicons.com/
 TextView textview1 = findViewById(R.id.tv1);
 textview1.setTypeface(iconfont1);
 </code></pre><h3 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h3><p>自定义TextView</p>
-<pre><code>public class IconFontView extends AppCompatTextView {
+<pre><code>public class IconFontView extends AppCompatTextView &#123;
 
     private Context context;
     private boolean isFirst = true;
@@ -226,61 +228,61 @@ textview1.setTypeface(iconfont1);
     private String clicked_text;
     private int clicked_textColor;
 
-    public IconFontView(Context context) {
+    public IconFontView(Context context) &#123;
         this(context, null);
-    }
+    &#125;
 
-    public IconFontView(Context context, AttributeSet attrs) {
+    public IconFontView(Context context, AttributeSet attrs) &#123;
         this(context, attrs, 0);
-    }
+    &#125;
 
-    public IconFontView(Context context, AttributeSet attrs, int defStyle) {
+    public IconFontView(Context context, AttributeSet attrs, int defStyle) &#123;
         super(context, attrs, defStyle);
         this.context = context;
         init(attrs);
-    }
+    &#125;
 
     /** 初始化 */
-    private void init(AttributeSet attrs){
+    private void init(AttributeSet attrs)&#123;
         // 设置字体类型
         setTypeface(Typeface.createFromAsset(context.getAssets(), &quot;iconfont/iconfont.ttf&quot;));
         // 获取配置信息（text &amp;&amp; textColor）
         getAttrs(attrs);
-    }
+    &#125;
 
     /** 获得配置信息 */
-    private void getAttrs(AttributeSet attrs) {
+    private void getAttrs(AttributeSet attrs) &#123;
         TypedArray taCustom = context.obtainStyledAttributes(attrs, R.styleable.IconFontViewAttr);
         clicked_text = taCustom.getString(R.styleable.IconFontViewAttr_clicked_text);
         clicked_textColor = taCustom.getColor(R.styleable.IconFontViewAttr_clicked_textColor, 0);
         taCustom.recycle();
-    }
+    &#125;
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN){
+    public boolean onTouchEvent(MotionEvent event) &#123;
+        if (event.getAction() == MotionEvent.ACTION_DOWN)&#123;
             text = getText().toString();
             textColor = getCurrentTextColor();
-        }
+        &#125;
         return super.onTouchEvent(event);
-    }
+    &#125;
 
     @Override
-    protected void dispatchSetPressed(boolean pressed) {
+    protected void dispatchSetPressed(boolean pressed) &#123;
         super.dispatchSetPressed(pressed);
-        if (isDuplicateParentStateEnabled()) {
-            if (pressed){
+        if (isDuplicateParentStateEnabled()) &#123;
+            if (pressed)&#123;
                 if(clicked_text != null)
                     this.setText(clicked_text);
                 if(clicked_textColor != 0)
                     this.setTextColor(clicked_textColor);
-            }else {
+            &#125;else &#123;
                 this.setText(text);
                 this.setTextColor(textColor);
-            }
-        }
-    }
-}
+            &#125;
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>在<code>res/values/attrs</code>中定义属性</p>
 <pre><code>&lt;!-- IconFontView属性 --&gt;
 &lt;declare-styleable name=&quot;IconFontViewAttr&quot;&gt;
@@ -339,13 +341,13 @@ textview1.setTypeface(iconfont1);
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/02/17/9.微信小程序开发/" class="pre-post btn btn-default" title='微信小程序开发'>
+        <a href="/2019/02/17/9.%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" class="pre-post btn btn-default" title='微信小程序开发'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">微信小程序开发</span>
         </a>
     
     
-        <a href="/2019/01/23/7.快速入门kotlin/" class="next-post btn btn-default" title='快速入门和详解kotlin'>
+        <a href="/2019/01/23/7.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8kotlin/" class="next-post btn btn-default" title='快速入门和详解kotlin'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">快速入门和详解kotlin</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -363,7 +365,7 @@ textview1.setTypeface(iconfont1);
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#iconfont介绍"><span class="toc-text">iconfont介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体使用"><span class="toc-text">具体使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方式一"><span class="toc-text">方式一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方式二"><span class="toc-text">方式二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#iconfont%E4%BB%8B%E7%BB%8D"><span class="toc-text">iconfont介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E4%BD%BF%E7%94%A8"><span class="toc-text">具体使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80"><span class="toc-text">方式一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C"><span class="toc-text">方式二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-text">补充</span></a></li></ol>
         
     </div>
 </aside>
@@ -415,7 +417,9 @@ textview1.setTypeface(iconfont1);
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

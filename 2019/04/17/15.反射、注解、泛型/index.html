@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -196,72 +198,72 @@ Class clazz = p.getClass();//1
 </code></pre><p>方式三：必须类全名,使用最多。</p>
 <pre><code>Class clazz = Class.forName(&quot;cn.bean.Person&quot;);//必须类全名
 </code></pre><h3 id="通过构造函数，获取对象"><a href="#通过构造函数，获取对象" class="headerlink" title="通过构造函数，获取对象"></a>通过构造函数，获取对象</h3><p>默认构造函数</p>
-<pre><code>public class Person {
-    public Person() {
+<pre><code>public class Person &#123;
+    public Person() &#123;
         System.out.println(&quot;无参构造---&quot;);
-    }
-}
+    &#125;
+&#125;
 
-try{
+try&#123;
     Class clazz = Person.class;
     Person person = (Person)clazz.newInstance();
-} catch (Exception e) {
+&#125; catch (Exception e) &#123;
     e.printStackTrace();
-}
+&#125;
 </code></pre><p>有参公共构造函数</p>
-<pre><code>public class Person {
+<pre><code>public class Person &#123;
     private String name;
-    public Person(String name) {
+    public Person(String name) &#123;
         this.name = name;
         System.out.println(&quot;有参构造---&quot; + name);
-    }
-}
+    &#125;
+&#125;
 
-try{
+try&#123;
     Class clazz = Person.class;
     Constructor constructor = clazz.getConstructor(String.class);
     Person person = (Person)constructor.newInstance(&quot;张三&quot;);
-} catch (Exception e) {
+&#125; catch (Exception e) &#123;
     e.printStackTrace();
-}
+&#125;
 </code></pre><p>无参私有构造</p>
-<pre><code>public class Person {
-    private Person() {
+<pre><code>public class Person &#123;
+    private Person() &#123;
         System.out.println(&quot;无参私有构造---&quot; );
-    }
-}
+    &#125;
+&#125;
 
-try{
+try&#123;
     Class clazz = Person.class;
     Constructor constructor = clazz.getDeclaredConstructor();
     constructor.setAccessible(true);
     Person person = (Person)constructor.newInstance();
-} catch (Exception e) {
+&#125; catch (Exception e) &#123;
     e.printStackTrace();
-}
+&#125;
 </code></pre><p>有参私有构造</p>
-<pre><code>public class Person {
+<pre><code>public class Person &#123;
     private String name;
-    private Person(String name) {
+    private Person(String name) &#123;
         this.name = name;
         System.out.println(&quot;有参私有构造---&quot; + name);
-    }
-}
+    &#125;
+&#125;
 
-try{
+try&#123;
     Class clazz = Person.class;
     Constructor constructor = clazz.getDeclaredConstructor(String.class);
     constructor.setAccessible(true);
     Person person = (Person)constructor.newInstance(&quot;张三&quot;);
-} catch (Exception e) {
+&#125; catch (Exception e) &#123;
     e.printStackTrace();
-}
-</code></pre><h3 id="获取属性"><a href="#获取属性" class="headerlink" title="获取属性"></a>获取属性</h3><pre><code>public class Person {
+&#125;
+</code></pre><h3 id="获取属性"><a href="#获取属性" class="headerlink" title="获取属性"></a>获取属性</h3><pre><code>public class Person &#123;
     private String name = &quot;李四&quot;;
     public int age = 18;
-}
+&#125;
 
-try {
+try &#123;
     Class clazz = Person.class;
     Person person = (Person) clazz.newInstance();
 
@@ -273,27 +275,27 @@ try {
     String name = (String) fieldDeclared.get(person);
 
     System.out.println(name + &quot;----&quot; + age);
-} catch (Exception e) {
+&#125; catch (Exception e) &#123;
     e.printStackTrace();
-}
+&#125;
 </code></pre><h3 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h3><p>获取，私有有参方法和公有无参方法</p>
-<pre><code>public class Person {
+<pre><code>public class Person &#123;
 
     private String name = &quot;李四&quot;;
 
-    public String getName() {
+    public String getName() &#123;
         System.out.println(&quot;get:&quot; + name);
         return name;
-    }
+    &#125;
 
-    private void setName(String name) {
+    private void setName(String name) &#123;
         this.name = name;
         System.out.println(&quot;set:&quot; + name);
 
-    }
-}
+    &#125;
+&#125;
 
-try{
+try&#123;
     Class clazz = Person.class;
     Person person = (Person)clazz.newInstance();
 
@@ -304,9 +306,9 @@ try{
     Method method = clazz.getMethod(&quot;getName&quot;);
     method.invoke(person);
 
-} catch (Exception e) {
+&#125; catch (Exception e) &#123;
     e.printStackTrace();
-}
+&#125;
 </code></pre><h3 id="实例：调用静态属性"><a href="#实例：调用静态属性" class="headerlink" title="实例：调用静态属性"></a>实例：调用静态属性</h3><pre><code>Class clazz = Class.forName(&quot;android.app.ActivityThread&quot;);
 Field sCurrentActivityThreadField =  clazz.getDeclaredField(&quot;sCurrentActivityThread&quot;);
 sCurrentActivityThreadField.setAccessible(true);
@@ -333,27 +335,27 @@ METHOD:方法上可以用此注解
 TYPE:类/接口上可以使用此注解
 </code></pre><p>例如</p>
 <pre><code>@Target(ElementType.FIELD)
-@Target({ElementType.METHOD,ElementType.TYPE})
+@Target(&#123;ElementType.METHOD,ElementType.TYPE&#125;)
 </code></pre><p>注解例子</p>
-<pre><code>@Target({ElementType.METHOD,ElementType.TYPE})
+<pre><code>@Target(&#123;ElementType.METHOD,ElementType.TYPE&#125;)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Anno {
+public @interface Anno &#123;
     int age() default 28;
     String[] value();
-}
+&#125;
 
-@Target({ElementType.METHOD,ElementType.TYPE})
+@Target(&#123;ElementType.METHOD,ElementType.TYPE&#125;)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Anno2 {
+public @interface Anno2 &#123;
     String value();
-}
+&#125;
 
 @Anno2(&quot;张三&quot;)
-public class Test{
-    @Anno(value = { &quot;aaa&quot;,&quot;bbb&quot;,&quot;ccc&quot;},age = 18)
-    public void test(){
-    }
-}
+public class Test&#123;
+    @Anno(value = &#123; &quot;aaa&quot;,&quot;bbb&quot;,&quot;ccc&quot;&#125;,age = 18)
+    public void test()&#123;
+    &#125;
+&#125;
 </code></pre><p><code>default</code>作用是设置默认值,如果设置了<code>default</code>,注解时候可以不传。</p>
 <p>butterknife 用了反射没有？ 一个地方用了Class.fromName().newInstance();（new 对象的时候）。</p>
 <p>补充<code>@Target</code>注解的作用目标</p>
@@ -376,66 +378,66 @@ public class Test{
 <p>运行时注解，仿xutil获取Id（编译时注解-ButterKnife注解）:</p>
 <pre><code>@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ViewById {
+public @interface ViewById &#123;
     int value();
-}
+&#125;
 
-public class ViewUtils {
-    public static void inject(Activity activity) {
+public class ViewUtils &#123;
+    public static void inject(Activity activity) &#123;
         // 1.获取所有的属性
         Field[] fields = activity.getClass().getDeclaredFields();
         // 2.过滤关于 ViewById 属性
-        for (Field field : fields) {
+        for (Field field : fields) &#123;
             ViewById viewById =  field.getAnnotation(ViewById.class);
-            if(viewById != null){
+            if(viewById != null)&#123;
                 // 3.findViewById
                 View view = activity.findViewById(viewById.value());
                 // 4.反射注入
                 field.setAccessible(true);
-                try {
+                try &#123;
                     //activity 属性所在类，view 代表的是属性的值
                     field.set(activity,view);
-                } catch (IllegalAccessException e) {
+                &#125; catch (IllegalAccessException e) &#123;
                     e.printStackTrace();
-                }
-            }
-        }
-    }
-}
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
 
 @ViewById(R.id.tv)
 private TextView tv;
 @Override
-protected void onCreate(Bundle savedInstanceState) {
+protected void onCreate(Bundle savedInstanceState) &#123;
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     ViewUtils.inject(this);
     tv.setText(&quot;ViewById&quot;);
-}
+&#125;
 </code></pre><h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>泛型的好处：将运行时期的ClassCastException，转移到了编译时期变成了编译失败;避免了类型强转的麻烦。</p>
 <p>缺点：泛型不能用于显性地引用运行时类型的操作之中，例如转型，instanceof和new操作。</p>
 <p>多泛型</p>
-<pre><code>class MorePoint&lt;T,U,A,B,C&gt;{
-}
+<pre><code>class MorePoint&lt;T,U,A,B,C&gt;&#123;
+&#125;
 </code></pre><p>任意一个大写字母都可以。他们的意义是完全相同的，但为了提高可读性，大家还是用有意义的字母比较好，一般来讲，在不同的情境下使用的字母意义如下：</p>
 <pre><code>E — Element，常用在java Collection里，如：List&lt;E&gt;,Iterator&lt;E&gt;,Set&lt;E&gt;
 K,V — Key，Value，代表Map的键值对
 N — Number，数字
 T — Type，类型，如String，Integer等等
 </code></pre><h3 id="类泛型"><a href="#类泛型" class="headerlink" title="类泛型"></a>类泛型</h3><p>在任何地方出现的，代表的是统一类型。<strong>创建对象时，确定泛型的类型</strong></p>
-<pre><code>class ArrayList&lt;T&gt; {
-    public boolean add(T e) {
+<pre><code>class ArrayList&lt;T&gt; &#123;
+    public boolean add(T e) &#123;
         return false;
-    }
+    &#125;
 
-    public T get(int index) {
+    public T get(int index) &#123;
         return null;
-    }
-}
-</code></pre><h3 id="方法泛型"><a href="#方法泛型" class="headerlink" title="方法泛型"></a>方法泛型</h3><p>定义格式：<code>修饰符 &lt;代表泛型的变量&gt; 返回值类型 方法名(参数){泛型类型 变量名}</code></p>
+    &#125;
+&#125;
+</code></pre><h3 id="方法泛型"><a href="#方法泛型" class="headerlink" title="方法泛型"></a>方法泛型</h3><p>定义格式：<code>修饰符 &lt;代表泛型的变量&gt; 返回值类型 方法名(参数)&#123;泛型类型 变量名&#125;</code></p>
 <p>例如，API中的ArrayList集合中的方法：</p>
 <pre><code>//该方法，用来把集合元素存储到指定数据类型的数组中，返回已存储集合元素的数组
-public &lt;T&gt; T[] toArray(T[] a){  }  
+public &lt;T&gt; T[] toArray(T[] a)&#123;  &#125;  
 
 //使用格式：调用方法时，确定泛型的类型
 ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
@@ -445,27 +447,27 @@ String[] result = list.toArray(arr);
 <p>方法泛型最好与类的泛型一致,如果不一致,需要在方法上声明该泛型静态方法必须声明自己的泛型</p>
 </blockquote>
 <h3 id="泛型的接口"><a href="#泛型的接口" class="headerlink" title="泛型的接口"></a>泛型的接口</h3><pre><code>//带有泛型的接口
-public interface List &lt;E&gt;{
+public interface List &lt;E&gt;&#123;
     abstract boolean add(E e);
-}
+&#125;
 //一种实现类,先实现接口,不理会泛型
-public class ArrayList&lt;E&gt; implements List&lt;E&gt;{
-}  
+public class ArrayList&lt;E&gt; implements List&lt;E&gt;&#123;
+&#125;  
 //另一种实现类,实现接口的同时,也指定了数据类型
-public class XXX implements List&lt;String&gt;{
-}
+public class XXX implements List&lt;String&gt;&#123;
+&#125;
 </code></pre><h3 id="泛型的通配"><a href="#泛型的通配" class="headerlink" title="泛型的通配"></a>泛型的通配</h3><p>匹配所有的数据类型:<code>&lt;?&gt;</code>。</p>
 <h3 id="泛型的上限和下限"><a href="#泛型的上限和下限" class="headerlink" title="泛型的上限和下限"></a>泛型的上限和下限</h3><pre><code>// 上限，限制的是父类,接收BaseActivity和它的子类
-public void startActivity(Class&lt;? extends BaseActivity&gt; clazz) {
+public void startActivity(Class&lt;? extends BaseActivity&gt; clazz) &#123;
     Intent intent = new Intent(this,clazz);
     startActivity(intent);
-}
+&#125;
 
 //下限，限制的是子类,接收BaseActivity和它的父类
-public void startActivity1(Class&lt;? super BaseActivity&gt; clazz) {
+public void startActivity1(Class&lt;? super BaseActivity&gt; clazz) &#123;
     Intent intent = new Intent(this,clazz);
     startActivity(intent);
-}
+&#125;
 </code></pre>
     </div>
     
@@ -503,13 +505,13 @@ public void startActivity1(Class&lt;? super BaseActivity&gt; clazz) {
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/04/24/16.设计模式/" class="pre-post btn btn-default" title='设计模式'>
+        <a href="/2019/04/24/16.%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="pre-post btn btn-default" title='设计模式'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">设计模式</span>
         </a>
     
     
-        <a href="/2019/04/12/14.win下Fiddler和mac下charles抓包/" class="next-post btn btn-default" title='win下Fiddler和mac下charles抓包'>
+        <a href="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/" class="next-post btn btn-default" title='win下Fiddler和mac下charles抓包'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">win下Fiddler和mac下charles抓包</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -527,7 +529,7 @@ public void startActivity1(Class&lt;? super BaseActivity&gt; clazz) {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#反射"><span class="toc-text">反射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取class对象的三种方式"><span class="toc-text">获取class对象的三种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过构造函数，获取对象"><span class="toc-text">通过构造函数，获取对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取属性"><span class="toc-text">获取属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法调用"><span class="toc-text">方法调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例：调用静态属性"><span class="toc-text">实例：调用静态属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解"><span class="toc-text">注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#jdk5提供的注解"><span class="toc-text">jdk5提供的注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写一个注解"><span class="toc-text">编写一个注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反射加注解实现"><span class="toc-text">反射加注解实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型"><span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类泛型"><span class="toc-text">类泛型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法泛型"><span class="toc-text">方法泛型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型的接口"><span class="toc-text">泛型的接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型的通配"><span class="toc-text">泛型的通配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型的上限和下限"><span class="toc-text">泛型的上限和下限</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-text">反射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96class%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">获取class对象的三种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%EF%BC%8C%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1"><span class="toc-text">通过构造函数，获取对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%B1%9E%E6%80%A7"><span class="toc-text">获取属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8"><span class="toc-text">方法调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A%E8%B0%83%E7%94%A8%E9%9D%99%E6%80%81%E5%B1%9E%E6%80%A7"><span class="toc-text">实例：调用静态属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3"><span class="toc-text">注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#jdk5%E6%8F%90%E4%BE%9B%E7%9A%84%E6%B3%A8%E8%A7%A3"><span class="toc-text">jdk5提供的注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E6%B3%A8%E8%A7%A3"><span class="toc-text">编写一个注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%8A%A0%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0"><span class="toc-text">反射加注解实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E6%B3%9B%E5%9E%8B"><span class="toc-text">类泛型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E6%B3%9B%E5%9E%8B"><span class="toc-text">方法泛型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="toc-text">泛型的接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E9%80%9A%E9%85%8D"><span class="toc-text">泛型的通配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%B8%8A%E9%99%90%E5%92%8C%E4%B8%8B%E9%99%90"><span class="toc-text">泛型的上限和下限</span></a></li></ol></li></ol>
         
     </div>
 </aside>
@@ -579,7 +581,9 @@ public void startActivity1(Class&lt;? super BaseActivity&gt; clazz) {
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

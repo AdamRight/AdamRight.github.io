@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -191,18 +193,18 @@
 <p>套路：1、构造函数私有，防止在外部new对象；2、内部必须提供一个静态的方法，让外部调用。</p>
 <hr>
 <h3 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h3><hr>
-<pre><code>public class SingletonEHan {
+<pre><code>public class SingletonEHan &#123;
 
-    private SingletonEHan() {
-    }
+    private SingletonEHan() &#123;
+    &#125;
 
     private static SingletonEHan singletonEHan = new SingletonEHan();
 
-    public static SingletonEHan getInstance() {
+    public static SingletonEHan getInstance() &#123;
         return singletonEHan;
-    }
+    &#125;
 //  SingletonEHan instance= SingletonEHan.getInstance();
-}
+&#125;
 </code></pre><blockquote>
 <ul>
 <li>优点：比较简单，在类加载的时候就完成了实例化，避免了线程的同步问题。</li>
@@ -211,33 +213,33 @@
 </blockquote>
 <hr>
 <h3 id="懒汉模式，四种方式"><a href="#懒汉模式，四种方式" class="headerlink" title="懒汉模式，四种方式"></a>懒汉模式，四种方式</h3><hr>
-<pre><code>public class SingletonLanHan {
+<pre><code>public class SingletonLanHan &#123;
 
-    private SingletonLanHan() {
-    }
+    private SingletonLanHan() &#123;
+    &#125;
 
     /**
      * 单例模式的懒汉式[线程不安全，不可用]
      */
     private static SingletonLanHan singletonLanHan;
-    public static SingletonLanHan getInstance() {
-        if (singletonLanHan == null) { //多线程并发，这里线程是不安全的,可能得到两个不同的实例
+    public static SingletonLanHan getInstance() &#123;
+        if (singletonLanHan == null) &#123; //多线程并发，这里线程是不安全的,可能得到两个不同的实例
             singletonLanHan = new SingletonLanHan();
-        }
+        &#125;
         return singletonLanHan;
-    }
+    &#125;
 
     /**
      * 懒汉式线程安全的:加锁，[线程安全，效率低不推荐使用]
      * 缺点：效率太低，每个线程在想获得类的实例时候，执行getSingletonLanHanTwo()方法都要进行同步。
      */
     private static SingletonLanHan singletonLanHanTwo;
-    public static synchronized SingletonLanHan getSingletonLanHanTwo() {
-        if (singletonLanHanTwo == null) {
+    public static synchronized SingletonLanHan getSingletonLanHanTwo() &#123;
+        if (singletonLanHanTwo == null) &#123;
             singletonLanHanTwo = new SingletonLanHan();
-        }
+        &#125;
         return singletonLanHanTwo;
-    }
+    &#125;
 
     /**
      * 单例模式懒汉式[线程不安全，不可用]
@@ -245,90 +247,90 @@
      * 
      */
     private static SingletonLanHan singletonLanHanThree = null;
-    public static SingletonLanHan getSingletonLanHanThree() {
-        if (singletonLanHanThree == null) {
-            synchronized (SingletonLanHan.class) {// 线程不安全
+    public static SingletonLanHan getSingletonLanHanThree() &#123;
+        if (singletonLanHanThree == null) &#123;
+            synchronized (SingletonLanHan.class) &#123;// 线程不安全
                 singletonLanHanThree = new SingletonLanHan();
-            }
-        }
+            &#125;
+        &#125;
         return singletonLanHanThree;
-    }
+    &#125;
 
     /**
      * 懒汉式双重校验
      * 缺点:不推荐用，下面解释
      */
     private static SingletonLanHan singletonLanHanFour;
-    public static SingletonLanHan getSingletonLanHanFour() {
-        if (singletonLanHanFour == null) {//只执行一次锁，所以效率高一些
-            synchronized (SingletonLanHan.class) {
-                if (singletonLanHanFour == null) {
+    public static SingletonLanHan getSingletonLanHanFour() &#123;
+        if (singletonLanHanFour == null) &#123;//只执行一次锁，所以效率高一些
+            synchronized (SingletonLanHan.class) &#123;
+                if (singletonLanHanFour == null) &#123;
                     singletonLanHanFour = new SingletonLanHan();
-                }
-            }
-        }
+                &#125;
+            &#125;
+        &#125;
         return singletonLanHanFour;
-    }
-}
+    &#125;
+&#125;
 </code></pre><blockquote>
 <p>1、开辟一块内存空间，2、初始化对象，3、给变量赋值，指向内存地址。在java中2和3的顺序不一定，也可能先3再2。用volatile保证123的顺序执行，防止重排序。</p>
 </blockquote>
 <hr>
 <h3 id="volatile-同步锁DCL"><a href="#volatile-同步锁DCL" class="headerlink" title="volatile[同步锁DCL]"></a>volatile[同步锁DCL]</h3><hr>
-<pre><code>public class SingletonLanHan {
+<pre><code>public class SingletonLanHan &#123;
 
-    private SingletonLanHan() {
-    }
+    private SingletonLanHan() &#123;
+    &#125;
 
     //volatile解决了gvm指令重排序优化
     private static volatile SingletonLanHan singletonLanHanFour;
 
-    public static SingletonLanHan getSingletonLanHanFour() {
-        if (singletonLanHanFour == null) {
-            synchronized (SingletonLanHan.class) {
-                if (singletonLanHanFour == null) {
+    public static SingletonLanHan getSingletonLanHanFour() &#123;
+        if (singletonLanHanFour == null) &#123;
+            synchronized (SingletonLanHan.class) &#123;
+                if (singletonLanHanFour == null) &#123;
                     singletonLanHanFour = new SingletonLanHan();
-                }
-            }
-        }
+                &#125;
+            &#125;
+        &#125;
         return singletonLanHanFour;
-    }
-}
+    &#125;
+&#125;
 </code></pre><blockquote>
 <p>volatile关键字作用:防止重排序,线程可见性。</p>
 </blockquote>
 <p>线程可见性:某一个线程改了公用对象(变量)，短时间内另一个线程可能是不可见的，因为每一个线程都有自己的缓存区(线程工作区)。</p>
 <p>举例：可以看加不加volatile的区别：</p>
-<pre><code>public class VolatileTest {
-    public static void main(String[] args) {
+<pre><code>public class VolatileTest &#123;
+    public static void main(String[] args) &#123;
         ThreadDemo td = new ThreadDemo();
         new Thread(td).start();
-        while(true){
-            if(td.isFlag()){
+        while(true)&#123;
+            if(td.isFlag())&#123;
                 System.out.println(&quot;主线程flag:&quot; + td.isFlag());
                 break;
-            }
-        }
-    }
-}
-class ThreadDemo implements Runnable {
+            &#125;
+        &#125;
+    &#125;
+&#125;
+class ThreadDemo implements Runnable &#123;
     private volatile boolean flag = false;
     @Override
-    public void run() {
-        try {
+    public void run() &#123;
+        try &#123;
             Thread.sleep(200);
-        } catch (InterruptedException e) {
-        }
+        &#125; catch (InterruptedException e) &#123;
+        &#125;
         flag = true;
         System.out.println(&quot;其他线程flag=&quot; + isFlag());
-    }
-    public boolean isFlag() {
+    &#125;
+    public boolean isFlag() &#123;
         return flag;
-    }
-    public void setFlag(boolean flag) {
+    &#125;
+    public void setFlag(boolean flag) &#123;
         this.flag = flag;
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><hr>
 <pre><code>/**
@@ -337,19 +339,19 @@ class ThreadDemo implements Runnable {
  * 内部类是在需要实例化时，调用getInstance方法，才会装载SingletonHolder类
  * 优点：避免了线程不安全，延迟加载，效率高。
  */
-public class SingletonIn {
+public class SingletonIn &#123;
 
-    private SingletonIn() {
-    }
+    private SingletonIn() &#123;
+    &#125;
 
-    private static class SingletonInHodler {
+    private static class SingletonInHodler &#123;
         private static final SingletonIn singletonIn = new SingletonIn();
-    }
+    &#125;
 
-    public static SingletonIn getSingletonIn() {
+    public static SingletonIn getSingletonIn() &#123;
         return SingletonInHodler.singletonIn;
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><hr>
 <pre><code>/**
@@ -359,64 +361,64 @@ public class SingletonIn {
  * 借助JDK1.5中添加的枚举来实现单例模式。不仅能避免多线程同步问题，而且还能防止反序列化重新创建新的对象
  */
 
-public enum SingletonEnum {
+public enum SingletonEnum &#123;
 
     instance;
 
-    private SingletonEnum() {
-    }
-    public void whateverMethod() {
-    }
+    private SingletonEnum() &#123;
+    &#125;
+    public void whateverMethod() &#123;
+    &#125;
     // SingletonEnum.instance.method();
-}
+&#125;
 </code></pre><hr>
 <h3 id="容器管理"><a href="#容器管理" class="headerlink" title="容器管理"></a>容器管理</h3><hr>
 <p><code>SystemServiceRegistry.getSystemService</code>系统的服务就是用的这种</p>
-<pre><code>public class Singleton {
+<pre><code>public class Singleton &#123;
     private static Map&lt;String,Object&gt; mSingleMap = new HashMap&lt;&gt;();
 
-    static {
+    static &#123;
         mSingleMap.put(&quot;activity_manager&quot;,new Singleton());
-    }
+    &#125;
 
-    private Singleton() {
+    private Singleton() &#123;
 
-    }
+    &#125;
 
-    public static Object getService(String serviceName){
+    public static Object getService(String serviceName)&#123;
         return mSingleMap.get(serviceName);
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="补充复习static"><a href="#补充复习static" class="headerlink" title="补充复习static"></a>补充复习static</h3><hr>
 <p>static关键字的特点：随着类的加载而加载，随着类的消失而消失；优先于对象存在；被类的所有对象共享。</p>
 <p>静态变量存储于方法区的静态区；成员变量存储于堆内存。</p>
 <p>静态代码块：在类中方法外出现，并加上static修饰；用于给类进行初始化(全局初始化)，在类加载的时候就执行，并且只执行一次。main主方法所在的类中的静态代码块优先于主方法执行。</p>
-<pre><code>class Student {
-    static {
+<pre><code>class Student &#123;
+    static &#123;
         System.out.println(&quot;Student 静态代码块&quot;);
-    }
+    &#125;
 
-    {
+    &#123;
         System.out.println(&quot;Student 构造代码块&quot;);
-    }
+    &#125;
 
-    public Student() {
+    public Student() &#123;
         System.out.println(&quot;Student 构造方法&quot;);
-    }
-}
-class Demo2_Student {
-    static {
+    &#125;
+&#125;
+class Demo2_Student &#123;
+    static &#123;
         System.out.println(&quot;Demo2_Student静态代码块&quot;);
-    }
+    &#125;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) &#123;
         System.out.println(&quot;我是main方法&quot;);
 
         Student s1 = new Student();
         Student s2 = new Student();
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>输出结果：</p>
 <pre><code>Demo2_Student静态代码块
 我是main方法
@@ -434,36 +436,36 @@ Student 构造方法
 <h3 id="简单工厂场景"><a href="#简单工厂场景" class="headerlink" title="简单工厂场景"></a>简单工厂场景</h3><hr>
 <p>使用简单工厂模式设计一个可以创建圆形、方形和三角形的绘图工具。</p>
 <pre><code>//抽象类 
-public interface IPain {
+public interface IPain &#123;
     void draw();
-}
+&#125;
 
 //具体产品类
-class Triangle implements IPain {
+class Triangle implements IPain &#123;
     @Override
-    public void draw() {
+    public void draw() &#123;
         System.out.println(&quot;画出三角形&quot;);
-    }
-}
+    &#125;
+&#125;
 
-class Square implements IPain {
+class Square implements IPain &#123;
     @Override
-    public void draw() {
+    public void draw() &#123;
         System.out.println(&quot;画出正方形&quot;);
-    }
-}
+    &#125;
+&#125;
 
-class Circle implements IPain {
+class Circle implements IPain &#123;
     @Override
-    public void draw() {
+    public void draw() &#123;
         System.out.println(&quot;画出圆形&quot;);
-    }
-}
+    &#125;
+&#125;
 //工厂类
-public class PainFactory {
+public class PainFactory &#123;
     //静态工厂方法
-    public static IPain create(int type){
-        switch (type) {
+    public static IPain create(int type)&#123;
+        switch (type) &#123;
         case 1:
             return new Triangle();
         case 2:
@@ -472,17 +474,17 @@ public class PainFactory {
             return new Circle();
         default:
             return new Circle();
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 //客户端
-public class Client {
-    public static void main(String[] args) {
+public class Client &#123;
+    public static void main(String[] args) &#123;
         //通过静态工厂方法创建产品 
         IPain mPain = PainFactory.create(2);
         mPain.draw();
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="在简单工厂模式包含如下几个角色："><a href="#在简单工厂模式包含如下几个角色：" class="headerlink" title="在简单工厂模式包含如下几个角色："></a>在简单工厂模式包含如下几个角色：</h3><hr>
 <ol>
@@ -507,52 +509,52 @@ list.iterator();
 <h3 id="工厂方法场景"><a href="#工厂方法场景" class="headerlink" title="工厂方法场景"></a>工厂方法场景</h3><hr>
 <p>玩具工厂生产动物玩具，发出不同叫声。</p>
 <pre><code>//抽象产品-玩具
-interface IToy {
+interface IToy &#123;
     void makeNoise(String string);
-}
+&#125;
 
 //具体产品
-class DogToy implements IToy {
-    public void makeNoise(String string) {
+class DogToy implements IToy &#123;
+    public void makeNoise(String string) &#123;
         System.out.println(string + &quot;汪汪汪的叫。&quot; );
-    }
-}
+    &#125;
+&#125;
 
 //具体产品
-class CatToy implements IToy {
-    public void makeNoise(String string) {
+class CatToy implements IToy &#123;
+    public void makeNoise(String string) &#123;
         System.out.println(string + &quot;喵喵喵的叫。&quot;);
-    }
-}
+    &#125;
+&#125;
 
 //抽象工厂
-abstract class IToyFactory {
+abstract class IToyFactory &#123;
     abstract IToy createToy();
-}
+&#125;
 
 //具体工厂
-class DogFactory extends IToyFactory {
-    public IToy createToy() {
+class DogFactory extends IToyFactory &#123;
+    public IToy createToy() &#123;
         return new DogToy();
-    }
-}
+    &#125;
+&#125;
 
 //具体工厂
-class CatFactory extends IToyFactory {
-    public IToy createToy() {
+class CatFactory extends IToyFactory &#123;
+    public IToy createToy() &#123;
         return new CatToy();
-    }
-}
+    &#125;
+&#125;
 
 //客户端
-class Client {
-    public static void main(String args[]) {
+class Client &#123;
+    public static void main(String args[]) &#123;
         IToyFactory factory = new CatFactory();
         IToy toy = factory.createToy();
         toy.makeNoise(&quot;我是cat。&quot;);
         //factory.createToy().makeNoise(&quot;我是cat。&quot;);
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="工厂方法模式的几个角色："><a href="#工厂方法模式的几个角色：" class="headerlink" title="工厂方法模式的几个角色："></a>工厂方法模式的几个角色：</h3><hr>
 <ol>
@@ -592,34 +594,34 @@ class Client {
 <h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><hr>
 <p>实例：生产机器人，包含机器人服装，脸型，机器人功能</p>
 <pre><code>//产品,包含很多组件
-class RobotProduct {
+class RobotProduct &#123;
     private String type; //机器人功能
     private String face; //脸型
     private String costume; //服装
 
-    public void setType(String type) {
+    public void setType(String type) &#123;
         this.type = type;
-    }
-    public void setFace(String face) {
+    &#125;
+    public void setFace(String face) &#123;
         this.face = face;
-    }
-    public void setCostume(String costume) {
+    &#125;
+    public void setCostume(String costume) &#123;
         this.costume = costume;
-    }
+    &#125;
 
-    public String getType() {
+    public String getType() &#123;
         return (this.type);
-    }
-    public String getFace() {
+    &#125;
+    public String getFace() &#123;
         return (this.face);
-    }
-    public String getCostume() {
+    &#125;
+    public String getCostume() &#123;
         return (this.costume);
-    }
-}
+    &#125;
+&#125;
 
 //抽象建造者
-abstract class RobotBuilder {
+abstract class RobotBuilder &#123;
 
     protected RobotProduct robot = new RobotProduct();
 
@@ -628,57 +630,57 @@ abstract class RobotBuilder {
     public abstract void buildCostume();
 
     //工厂方法，返回一个完整机器人
-    public RobotProduct createRobot() {
+    public RobotProduct createRobot() &#123;
         return robot;
-    }
-}
+    &#125;
+&#125;
 
 //具体建造者
-class ManBuilder extends RobotBuilder {
+class ManBuilder extends RobotBuilder &#123;
 
-    public void buildType() {
+    public void buildType() &#123;
         robot.setType(&quot;男仆&quot;);
-    }
+    &#125;
 
-    public void buildFace() {
+    public void buildFace() &#123;
         robot.setFace(&quot;英俊&quot;);
-    }
+    &#125;
 
-    public void buildCostume() {
+    public void buildCostume() &#123;
         robot.setCostume(&quot;西服&quot;);
-    }
-}
+    &#125;
+&#125;
 
 //具体建造者
-class WomanBuilder extends RobotBuilder {
-    public void buildType() {
+class WomanBuilder extends RobotBuilder &#123;
+    public void buildType() &#123;
         robot.setType(&quot;女仆&quot;);
-    }
+    &#125;
 
-    public void buildFace() {
+    public void buildFace() &#123;
         robot.setFace(&quot;漂亮&quot;);
-    }
+    &#125;
 
-    public void buildCostume() {
+    public void buildCostume() &#123;
         robot.setCostume(&quot;短裙&quot;);
-    }
-}
+    &#125;
+&#125;
 
 //指挥者类定义了construct()方法，该方法拥有一个抽象建造者类型的参数，在该方法内部实现了机器人的逐步构建
-class RobotController {
+class RobotController &#123;
     //逐步构建复杂产品对象
-    public RobotProduct construct(RobotBuilder ab) {
+    public RobotProduct construct(RobotBuilder ab) &#123;
         RobotProduct robot;
         ab.buildType();
         ab.buildFace();
         ab.buildCostume();
         robot = ab.createRobot();
         return robot;
-    }
-}
+    &#125;
+&#125;
 
-class Client {
-    public static void main(String args[]) {
+class Client &#123;
+    public static void main(String args[]) &#123;
         RobotBuilder ab =  new WomanBuilder();
         RobotController ac = new  RobotController();
 
@@ -687,67 +689,67 @@ class Client {
         System.out.println(robot.getType()  + &quot;的外观：&quot;);
         System.out.println(&quot;面容：&quot; + robot.getFace());
         System.out.println(&quot;服装：&quot; + robot.getCostume());
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h3><hr>
 <p>建造者模式的变形，也是在源码和开源项目中长用的，比如：AlertDialog</p>
 <pre><code>//产品,包含很多组件
-class RobotProduct {
+class RobotProduct &#123;
     private String type; //机器人功能
     private String face; //脸型
     private String costume; //服装
-    public void apply(RobotBuilder.RobotParmas parmas) {
+    public void apply(RobotBuilder.RobotParmas parmas) &#123;
         type = parmas.type;
         face = parmas.face;
         costume = parmas.costume;
-    }
+    &#125;
     @Override
-    public String toString() {
+    public String toString() &#123;
         return type + &quot;的外观：&quot; + &quot;面容：&quot; + face + &quot;服装：&quot; + costume;
-    }
-}
+    &#125;
+&#125;
 
 //具体建造者
-class RobotBuilder {
+class RobotBuilder &#123;
 
     private RobotBuilder.RobotParmas parmas;
 
-    public RobotBuilder() {
+    public RobotBuilder() &#123;
         this.parmas = new RobotBuilder.RobotParmas();
-    }
-    public RobotBuilder makeType(String type) {
+    &#125;
+    public RobotBuilder makeType(String type) &#123;
         parmas.type = type;
         return this;
-    }
-    public RobotBuilder makeFace(String face) {
+    &#125;
+    public RobotBuilder makeFace(String face) &#123;
         parmas.face = face;
         return this;
-    }
-    public RobotBuilder makeCostume(String costume) {
+    &#125;
+    public RobotBuilder makeCostume(String costume) &#123;
         parmas.costume = costume;
         return this;
-    }
+    &#125;
     //真正构建
-    public RobotProduct build() {
+    public RobotProduct build() &#123;
         RobotProduct produc = new RobotProduct();
         produc.apply(parmas);
         return produc;
-    }
+    &#125;
 
-    class RobotParmas {
+    class RobotParmas &#123;
         public String type; //机器人功能
         public String face; //脸型
         public String costume; //服装
-    }
-}
+    &#125;
+&#125;
 
-class Client {
-    public static void main(String args[]) {
+class Client &#123;
+    public static void main(String args[]) &#123;
          RobotProduct product = new RobotBuilder().makeType(&quot;女仆&quot;).makeFace(&quot;俊俏&quot;).makeCostume(&quot;护士装&quot;).build();
          System.out.println(product.toString());
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h2 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>职责链模式(Chain of Responsibility Pattern，职责链模式)：避免请求发送者与接收者耦合在一起，让多个对象都有可能接收请求，将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。职责链模式是一种对象行为型模式。职责链模式结构的核心在于引入了一个抽象处理者。</p>
@@ -764,8 +766,8 @@ class Client {
 <h3 id="场景-1"><a href="#场景-1" class="headerlink" title="场景"></a>场景</h3><hr>
 <p>安卓实例，比如，事件分发机制。在View、ViewGroup、Activity中都有机会处理OnTouchEvent请求。</p>
 <p>例子：主任、副董事长、董事长有不同的审批金额的权利，当超过自己额度审批范围，就像上级提交。</p>
-<pre><code>class Client {
-    public static void main(String[] args) {
+<pre><code>class Client &#123;
+    public static void main(String[] args) &#123;
         ApproverHander little, middle, high;
         little = new Director(&quot;张三&quot;);
         middle = new VicePresident(&quot;李四&quot;);
@@ -784,86 +786,86 @@ class Client {
 
         PurchaseRequest pr3 = new PurchaseRequest(160000);
         little.processRequest(pr3);
-    }
-}
+    &#125;
+&#125;
 
 //采购单：请求类
-class PurchaseRequest {
+class PurchaseRequest &#123;
     private double amount;  //采购金额
 
-    public PurchaseRequest(double amount) {
+    public PurchaseRequest(double amount) &#123;
         this.amount = amount;
-    }
-    public void setAmount(double amount) {
+    &#125;
+    public void setAmount(double amount) &#123;
         this.amount = amount;
-    }
-    public double getAmount() {
+    &#125;
+    public double getAmount() &#123;
         return this.amount;
-    }
-}
+    &#125;
+&#125;
 
 //审批者类：抽象处理者
-abstract class ApproverHander {
+abstract class ApproverHander &#123;
 
     protected ApproverHander hander; //定义后继对象
     protected String name; //审批者姓名
 
-    public ApproverHander(String name) {
+    public ApproverHander(String name) &#123;
         this.name = name;
-    }
+    &#125;
     //设置后继者
-    public void setSuccessor(ApproverHander hander) {
+    public void setSuccessor(ApproverHander hander) &#123;
         this.hander = hander;
-    }
+    &#125;
     //抽象请求处理方法
     public abstract void processRequest(PurchaseRequest request);
-}
+&#125;
 
 //主任类：具体处理者
-class Director extends ApproverHander {
+class Director extends ApproverHander &#123;
 
-    public Director(String name) {
+    public Director(String name) &#123;
         super(name);
-    }
+    &#125;
 
     //具体请求处理方法
-    public void processRequest(PurchaseRequest request) {
-        if (request.getAmount() &lt; 50000) {
+    public void processRequest(PurchaseRequest request) &#123;
+        if (request.getAmount() &lt; 50000) &#123;
             System.out.println(&quot;主任&quot; + this.name + &quot;审批金额：&quot; + request.getAmount());  //处理请求
-        } else {
+        &#125; else &#123;
             this.hander.processRequest(request);  //转发请求
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 
 //副董事长类：具体处理者
-class VicePresident extends ApproverHander {
-    public VicePresident(String name) {
+class VicePresident extends ApproverHander &#123;
+    public VicePresident(String name) &#123;
         super(name);
-    }
+    &#125;
 
     //具体请求处理方法
-    public void processRequest(PurchaseRequest request) {
-        if (request.getAmount() &lt; 100000) {
+    public void processRequest(PurchaseRequest request) &#123;
+        if (request.getAmount() &lt; 100000) &#123;
             System.out.println(&quot;副董事长&quot; + this.name + &quot;审批金额：&quot; + request.getAmount());  //处理请求
-        } else {
+        &#125; else &#123;
             this.hander.processRequest(request);  //转发请求
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 
 //董事长类：具体处理者
-class President extends ApproverHander {
-    public President(String name) {
+class President extends ApproverHander &#123;
+    public President(String name) &#123;
         super(name);
-    }
+    &#125;
 
     //具体请求处理方法
-    public void processRequest(PurchaseRequest request) {
+    public void processRequest(PurchaseRequest request) &#123;
             System.out.println(&quot;董事长&quot; + this.name + &quot;审批金额：&quot; + request.getAmount());  //处理请求
 
-    }
-}    
+    &#125;
+&#125;    
 </code></pre><hr>
 <h3 id="和观察者模式区别"><a href="#和观察者模式区别" class="headerlink" title="和观察者模式区别"></a>和观察者模式区别</h3><hr>
 <p>受众数量不同。观察者广播链式可以 1:N 的方式广播，而责任链则要求是的 1:1 的传递，必然有一个且只有一个类完成请求的处理;</p>
@@ -891,55 +893,55 @@ class President extends ApproverHander {
 <hr>
 <h3 id="场景-2"><a href="#场景-2" class="headerlink" title="场景"></a>场景</h3><hr>
 <p>例子：在铺了地板的毛坯房上进行装饰：</p>
-<pre><code>public class Client {
-    public static void main(String args[]) {
+<pre><code>public class Client &#123;
+    public static void main(String args[]) &#123;
         Home home, homeTake; //使用抽象构件定义
         home = new Floor(); //定义具体构件
         homeTake = new TakeHomeDecorator(home); //定义装饰后的构件
         homeTake.display();
-    }
-}
+    &#125;
+&#125;
 
 //抽象界面构件类
-abstract class Home {
+abstract class Home &#123;
     public abstract void display();
-}
+&#125;
 
 //具体构件类
-class Floor extends Home {
-    public void display() {
+class Floor extends Home &#123;
+    public void display() &#123;
         System.out.println(&quot;毛坯房铺了地板&quot;);
-    }
-}
+    &#125;
+&#125;
 
 //抽象装饰类
-class HomeDecorator extends Home {
+class HomeDecorator extends Home &#123;
     private Home component;  //维持对抽象构件类型对象的引用
 
-    public HomeDecorator(Home component){//注入抽象构件类型的对象
+    public HomeDecorator(Home component)&#123;//注入抽象构件类型的对象
         this.component = component;
-    }
-    public void display() {
+    &#125;
+    public void display() &#123;
         component.display();
-    }
-}
+    &#125;
+&#125;
 
 //具体装饰类
-class TakeHomeDecorator extends HomeDecorator {
+class TakeHomeDecorator extends HomeDecorator &#123;
 
-    public TakeHomeDecorator(Home component) {
+    public TakeHomeDecorator(Home component) &#123;
         super(component);
-    }
+    &#125;
 
-    public void display() {
+    public void display() &#123;
         super.display();
         this.setFurniture();
-    }
+    &#125;
 
-    public void setFurniture() {
+    public void setFurniture() &#123;
         System.out.println(&quot;搬进去很多家具&quot;);
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="安卓实例"><a href="#安卓实例" class="headerlink" title="安卓实例"></a>安卓实例</h3><hr>
 <p>ListView中的HeaderViewListAdapter，添加头部和底部。</p>
@@ -952,20 +954,20 @@ class TakeHomeDecorator extends HomeDecorator {
 <hr>
 <h3 id="场景-3"><a href="#场景-3" class="headerlink" title="场景"></a>场景</h3><hr>
 <p>模版和钩子,比如吃饭:点餐、吃东西、充卡、买单,充卡可以自由选择</p>
-<pre><code>public class Client {
-    public static void main(String[] args) {
+<pre><code>public class Client &#123;
+    public static void main(String[] args) &#123;
         PeopleEat h1 = new PeopleEat();
         h1.setMoney(true);
         h1.havaEat();
-    }
-}
+    &#125;
+&#125;
 
-abstract class EatModel {
+abstract class EatModel &#123;
 
     //钩子方法，默认会充钱
-    protected boolean isAdd(){
+    protected boolean isAdd()&#123;
         return true;
-    }
+    &#125;
     protected abstract void orderFood();
 
     protected abstract void eatMeal();
@@ -974,49 +976,49 @@ abstract class EatModel {
 
     protected abstract void payBill();
 
-    final public void havaEat() {
+    final public void havaEat() &#123;
         this.orderFood();
         this.eatMeal();
-        if(this.isAdd()){
+        if(this.isAdd())&#123;
             this.addMoney();
-        }
+        &#125;
         this.payBill();
-    }
-}
+    &#125;
+&#125;
 
-class PeopleEat extends EatModel {
+class PeopleEat extends EatModel &#123;
 
     private boolean addMoneyFlag = true;
 
     @Override
-    protected void addMoney() {
+    protected void addMoney() &#123;
         System.out.println(&quot;充值200元...&quot;);
-    }
+    &#125;
 
     @Override
-    protected void payBill() {
+    protected void payBill() &#123;
         System.out.println(&quot;买单离开...&quot;);
-    }
+    &#125;
 
     @Override
-    protected void orderFood() {
+    protected void orderFood() &#123;
         System.out.println(&quot;点了烤肉...&quot;);
-    }
+    &#125;
 
     @Override
-    protected void eatMeal() {
+    protected void eatMeal() &#123;
         System.out.println(&quot;开始烤肉啦...&quot;);
-    }
+    &#125;
 
     @Override
-    protected boolean isAdd() {
+    protected boolean isAdd() &#123;
         return this.addMoneyFlag;
-    }
+    &#125;
 
-    public void setMoney(boolean isAdd){
+    public void setMoney(boolean isAdd)&#123;
         this.addMoneyFlag = isAdd;
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="安卓实例-1"><a href="#安卓实例-1" class="headerlink" title="安卓实例"></a>安卓实例</h3><hr>
 <p>Activity的生命周期采用了模板方法模式：首先都是继承自Activity，而且所有要自己定义写的Activity的生命周期的流程都是一样的，每个Activity可以设置不同的界面，可以实现自己的具体交互逻辑。</p>
@@ -1040,8 +1042,8 @@ class PeopleEat extends EatModel {
 <hr>
 <h3 id="场景-4"><a href="#场景-4" class="headerlink" title="场景"></a>场景</h3><hr>
 <p>景区门票，原始票价，学生票价，老人票价</p>
-<pre><code>public class Client {
-    public static void main(String[] args){
+<pre><code>public class Client &#123;
+    public static void main(String[] args)&#123;
         ParkTicket pt = new ParkTicket();
         double originalPrice = 100;
 
@@ -1051,49 +1053,49 @@ class PeopleEat extends EatModel {
         Discount discount = new StudentDiscount();
         pt.setDiscount(discount); //注入折扣对象
         System.out.println(&quot;折后价为：&quot; + pt.getPrice());
-    }
-}
+    &#125;
+&#125;
 
 //环境类:公园票价
-class ParkTicket {
+class ParkTicket &#123;
     private double price;
     private Discount discount; //维持一个对抽象折扣类的引用
 
-    public void setPrice(double price) {
+    public void setPrice(double price) &#123;
         this.price = price;
-    }
+    &#125;
 
     //注入一个折扣类对象
-    public void setDiscount(Discount discount) {
+    public void setDiscount(Discount discount) &#123;
         this.discount = discount;
-    }
+    &#125;
 
-    public double getPrice() {
+    public double getPrice() &#123;
         //调用折扣类的折扣价计算方法
         return discount.calculate(this.price);
-    }
-}
+    &#125;
+&#125;
 
 //抽象策略类：折扣类
-interface Discount {
+interface Discount &#123;
     public double calculate(double price);
-}
+&#125;
 
 //具体策略类：学生票折扣类
-class StudentDiscount implements Discount {
-    public double calculate(double price) {
+class StudentDiscount implements Discount &#123;
+    public double calculate(double price) &#123;
         System.out.println(&quot;学生票：&quot;);
         return price * 0.8;
-    }
-}
+    &#125;
+&#125;
 
 //具体策略类：老人票折扣类
-class OldManDiscount implements Discount {
-    public double calculate(double price) {
+class OldManDiscount implements Discount &#123;
+    public double calculate(double price) &#123;
         System.out.println(&quot;老人票：&quot;);
         return price - 10;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>策略模式定义了一系列算法，并将每一个算法封装起来，而且是他们之间可以相互切换。</p>
 <hr>
 <h3 id="安卓实例-2"><a href="#安卓实例-2" class="headerlink" title="安卓实例"></a>安卓实例</h3><hr>
@@ -1102,8 +1104,8 @@ class OldManDiscount implements Discount {
 <hr>
 <h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><h3 id="场景-5"><a href="#场景-5" class="headerlink" title="场景"></a>场景</h3><hr>
 <p>观察者是汽车，根据被观察者红路灯，作出反应。</p>
-<pre><code>public class Client {
-    public static void main(String[] args){
+<pre><code>public class Client &#123;
+    public static void main(String[] args)&#123;
         //观察者
         Observer bigCar = new BigCar();
         Observer smallCar = new SmallCar();
@@ -1115,80 +1117,80 @@ class OldManDiscount implements Discount {
         //目标有变化，看看观察者怎么办
         trafficLight.havaRed();
         trafficLight.havaGreen();
-    }
-}
+    &#125;
+&#125;
 
 //被观察者
-interface Observable {
+interface Observable &#123;
     //增加一个观察者
     void addObserver(Observer observer);
     //删除一个观察者
     void deleteObserver(Observer observer);
     //通知观察者
     void notifyObservers(String context);
-}
+&#125;
 
 //观察者
-interface Observer {
+interface Observer &#123;
     //一发现􏰀人有动静，自己也要行动起来
     void update(String context);
-}
+&#125;
 
 //被观察者
-class TrafficLight implements Observable {
+class TrafficLight implements Observable &#123;
 
     //存放所有的观察者
     private ArrayList&lt;Observer&gt; observerList = new ArrayList&lt;&gt;();
 
     //增加观察者
-    public void addObserver(Observer observer) {
+    public void addObserver(Observer observer) &#123;
         this.observerList.add(observer);
-    }
+    &#125;
 
     //删除观察者
-    public void deleteObserver(Observer observer) {
+    public void deleteObserver(Observer observer) &#123;
         this.observerList.remove(observer);
-    }
+    &#125;
 
     //通知所有的观察者
-    public void notifyObservers(String context) {
-        for (Observer observer : observerList) {
+    public void notifyObservers(String context) &#123;
+        for (Observer observer : observerList) &#123;
             observer.update(context);
-        }
-    }
+        &#125;
+    &#125;
 
-    public void havaRed() {
+    public void havaRed() &#123;
         System.out.println(&quot;红灯...&quot;); //通知所有的观察者
         this.notifyObservers(&quot;红灯停车啦&quot;);
-    }
+    &#125;
 
-    public void havaGreen() {
+    public void havaGreen() &#123;
         System.out.println(&quot;绿灯...&quot;);
         this.notifyObservers(&quot;绿灯开车啦&quot;);
-    }
-}
+    &#125;
+&#125;
 
 //观察者
-class BigCar implements Observer {
-    public void update(String str) {
+class BigCar implements Observer &#123;
+    public void update(String str) &#123;
         System.out.println(str);
         this.makeCar(str);
-    }
-    private void makeCar(String reportContext) {
+    &#125;
+    private void makeCar(String reportContext) &#123;
         System.out.println(&quot;我是大汽车---&gt;&quot; + reportContext);
-    }
-}
+    &#125;
+&#125;
 
 //观察者
-class SmallCar implements Observer {
-    public void update(String str) {
+class SmallCar implements Observer &#123;
+    public void update(String str) &#123;
         System.out.println(str);
         this.makeCar(str);
-    }
-    private void makeCar(String reportContext) {
+    &#125;
+    private void makeCar(String reportContext) &#123;
         System.out.println(&quot;我是小汽车---&gt;&quot; + reportContext);
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="推拉模式"><a href="#推拉模式" class="headerlink" title="推拉模式"></a>推拉模式</h3><hr>
 <p>推拉模式：上面是推模式，即被观察者变化的时候，推送给观察者。拉模式，即被观察者变化的时候，观察者主动查看下被观察者。可以分开使用，也可以结合使用。</p>
@@ -1198,8 +1200,8 @@ class SmallCar implements Observer {
 <pre><code>import java.util.Observable;
 import java.util.Observer;
 
-public class Client {
-    public static void main(String[] args){
+public class Client &#123;
+    public static void main(String[] args)&#123;
         //观察者
         Observer bigCar = new BigCar();
         Observer smallCar = new SmallCar();
@@ -1211,50 +1213,50 @@ public class Client {
         //目标有变化，看看观察者怎么办
         trafficLight.havaRed();
         trafficLight.havaGreen();
-    }
-}
+    &#125;
+&#125;
 
 //被观察者
-class TrafficLight extends Observable {
+class TrafficLight extends Observable &#123;
 
-    public void havaRed() {
+    public void havaRed() &#123;
         System.out.println(&quot;红灯...&quot;);
         super.setChanged();
         super.notifyObservers(&quot;红灯停车啦&quot;);
-    }
+    &#125;
 
-    public void havaGreen() {
+    public void havaGreen() &#123;
         System.out.println(&quot;绿灯...&quot;);
         super.setChanged();
         super.notifyObservers(&quot;绿灯开车啦&quot;);
-    }
-}
+    &#125;
+&#125;
 
 //观察者
-class BigCar implements Observer {
-    private void makeCar(String reportContext) {
+class BigCar implements Observer &#123;
+    private void makeCar(String reportContext) &#123;
         System.out.println(&quot;我是大汽车---&gt;&quot; + reportContext);
-    }
+    &#125;
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Observable o, Object arg) &#123;
         System.out.println(arg.toString());
         this.makeCar(arg.toString());
-    }
-}
+    &#125;
+&#125;
 
 //观察者
-class SmallCar implements Observer {
-    private void makeCar(String reportContext) {
+class SmallCar implements Observer &#123;
+    private void makeCar(String reportContext) &#123;
         System.out.println(&quot;我是小汽车---&gt;&quot; + reportContext);
-    }
+    &#125;
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Observable o, Object arg) &#123;
         System.out.println(arg.toString());
         this.makeCar(arg.toString());
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="安卓实例-3"><a href="#安卓实例-3" class="headerlink" title="安卓实例"></a>安卓实例</h3><hr>
 <p>ListView的Adapter的setDataChange方法。给Adapter注册一个mDataSetObserver。</p>
@@ -1265,97 +1267,97 @@ class SmallCar implements Observer {
 <pre><code>/**
  * 银行办理业务 - 目标接口（业务）
  */
-public interface IBank {
+public interface IBank &#123;
     /*** 申请办卡*/
     public void applyBank();
 
     /*** 挂失*/
     public void lostBank();
-}
+&#125;
 
 /**
  * 银行办理业务 - 代理对象 - 银行的业务员
  */
-public class BankWorker implements IBank{
+public class BankWorker implements IBank&#123;
     private IBank bank;
     /**
      * 持有被代理的对象
      * @param bank
      */
-    public BankWorker(IBank bank){
+    public BankWorker(IBank bank)&#123;
         this.bank = bank;
-    }
+    &#125;
 
     @Override
-    public void applyBank() {
+    public void applyBank() &#123;
         System.out.println(&quot;开始受理&quot;);
         bank.applyBank();
         System.out.println(&quot;操作完毕&quot;);
-    }
+    &#125;
 
     @Override
-    public void lostBank() {
+    public void lostBank() &#123;
         System.out.println(&quot;开始受理&quot;);
         bank.lostBank();
         System.out.println(&quot;操作完毕&quot;);
-    }
-}
+    &#125;
+&#125;
 
 /**
  * 银行办理业务 - 被代理的对象 - 我们
  */
-public class Man implements IBank {
+public class Man implements IBank &#123;
     private String name;
 
-    public Man(String name) {
+    public Man(String name) &#123;
         this.name = name;
-    }
+    &#125;
 
     /**
      * 自己的一些操作
      */
     @Override
-    public void applyBank() {
+    public void applyBank() &#123;
         System.out.println(name + &quot; 申请办卡&quot;);
-    }
+    &#125;
 
     @Override
-    public void lostBank() {
+    public void lostBank() &#123;
         System.out.println(name + &quot; 申请挂失&quot;);
-    }
-}
+    &#125;
+&#125;
 
-public class Client {
-    public static void main(String[] args){
+public class Client &#123;
+    public static void main(String[] args)&#123;
         Man man = new Man(&quot;张三&quot;);
         BankWorker bankWorker = new BankWorker(man);
         bankWorker.applyBank();
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><hr>
 <p>形式</p>
 <pre><code>Proxy.newProxyInstance(
     IBank.class.getClassLoader(),//ClassLoader
-    new Class&lt;?&gt;[]{IBank.class},//目标接口
+    new Class&lt;?&gt;[]&#123;IBank.class&#125;,//目标接口
     null//InvocationHandler-关键
 );
 </code></pre><p>代码</p>
 <pre><code>/**
  * 银行办理业务 - 动态代理 - InvocationHandler
  */
-public class BankInvocationHandler implements InvocationHandler{
+public class BankInvocationHandler implements InvocationHandler&#123;
     /**
      * 被代理的对象
      */
     private Object mObject;
 
-    public BankInvocationHandler(Object object){
+    public BankInvocationHandler(Object object)&#123;
         this.mObject = object;
-    }
+    &#125;
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;
         // 执行方法 ，目标接口调用的方法都会来到这里面
         // System.out.println(&quot;methodName = &quot;+method.getName());
         System.out.println(&quot;开始受理&quot;);
@@ -1364,31 +1366,31 @@ public class BankInvocationHandler implements InvocationHandler{
         Object voidObject = method.invoke(mObject,args);
         System.out.println(&quot;操作完毕&quot;);
         return voidObject;
-    }
-}
+    &#125;
+&#125;
 
-public class Client {
-    public static void main(String[] args) {
+public class Client &#123;
+    public static void main(String[] args) &#123;
         Man man = new Man(&quot;张三&quot;);
 
         IBank bank =
                 // 返回的是 IBank 的一个实例对象，这个对象是由 Java 给我们创建的 ,调用的是 jni
                 (IBank) Proxy.newProxyInstance(
                         IBank.class.getClassLoader(), // ClassLoader
-                        new Class&lt;?&gt;[]{IBank.class}, // 目标接口
+                        new Class&lt;?&gt;[]&#123;IBank.class&#125;, // 目标接口
                         new BankInvocationHandler(man) // InvocationHandler (这个类是关键)
                 );
         // 当调用这个方法的时候会来到 BankInvocationHandler 的 invoke 方法
         bank.applyBank();
         bank.lostBank();
         bank.extraBank();
-    }
-}
+    &#125;
+&#125;
 
 /**
  * 银行办理业务 - 目标接口（业务）
  */
-public interface IBank {
+public interface IBank &#123;
     /**
      * 申请办卡
      */
@@ -1403,36 +1405,36 @@ public interface IBank {
      * 额外业务
      */
     public void extraBank();
-}
+&#125;
 
 /**
  * 银行办理业务 - 被代理的对象 - 我们
  */
-public class Man implements IBank {
+public class Man implements IBank &#123;
     private String name;
 
-    public Man(String name){
+    public Man(String name)&#123;
         this.name = name;
-    }
+    &#125;
 
     /**
      * 自己的一些操作
      */
     @Override
-    public void applyBank() {
+    public void applyBank() &#123;
         System.out.println(name + &quot; 申请办卡&quot;);
-    }
+    &#125;
 
     @Override
-    public void lostBank() {
+    public void lostBank() &#123;
         System.out.println(name + &quot; 申请挂失&quot;);
-    }
+    &#125;
 
     @Override
-    public void extraBank() {
+    public void extraBank() &#123;
         System.out.println(name + &quot; 额外业务&quot;);
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="开发用到的地方"><a href="#开发用到的地方" class="headerlink" title="开发用到的地方"></a>开发用到的地方</h3><hr>
 <pre><code>Android 插件化架构之绕过 AndroidManifest 检测（动态代理）
@@ -1443,33 +1445,33 @@ Android Retrofit 的 create 创建接口对象 （动态代理）
 Android Framework 层的 AMS
 Android Framework 层的 Binder 驱动
 </code></pre><p>Retrofit的create</p>
-<pre><code>public &lt;T&gt; T create(final Class&lt;T&gt; service) {
+<pre><code>public &lt;T&gt; T create(final Class&lt;T&gt; service) &#123;
     // 验证当前类是否是接口
     Utils.validateServiceInterface(service);
 
     //有需要的话做方法缓存？
-    if (validateEagerly) {
+    if (validateEagerly) &#123;
         eagerlyValidateMethods(service);
-    }
+    &#125;
 
     // 动态代理设计模式
     return (T) Proxy.newProxyInstance(service.getClassLoader(),
-            new Class&lt;?&gt;[] { service }, new InvocationHandler() {
+            new Class&lt;?&gt;[] &#123; service &#125;, new InvocationHandler() &#123;
 
                 private final Platform platform = Platform.get();
 
                 @Override
                 public Object invoke(Object proxy, Method method,
-                        Object... args) throws Throwable {
+                        Object... args) throws Throwable &#123;
                     //如果调用的方法是Object的
-                    if (method.getDeclaringClass() == Object.class) {
+                    if (method.getDeclaringClass() == Object.class) &#123;
                         return method.invoke(this, args);
-                    }
+                    &#125;
                     // //默认进不来这个if ，平台判断 android java8 ios
-                    if (platform.isDefaultMethod(method)) {
+                    if (platform.isDefaultMethod(method)) &#123;
                         return platform.invokeDefaultMethod(method,
                                 service, proxy, args);
-                    }
+                    &#125;
 
                     // 重点*具体执行细节
                     // method:就是我们调用的具体的方法(例如：login方法) 去解析方法属性和参数属性吧？
@@ -1478,16 +1480,16 @@ Android Framework 层的 Binder 驱动
                     OkHttpCall okHttpCall = new OkHttpCall&lt;&gt;(serviceMethod, args);
                     // 这个最终是 ExecutorCallAdapterFactory 里面的 CallAdapter 所以最终返回的是 ExecutorCallbackCall
                     return serviceMethod.callAdapter.adapt(okHttpCall);
-                }
-            });
-}
+                &#125;
+            &#125;);
+&#125;
 </code></pre><p>自己实现create的思路</p>
-<pre><code>public &lt;T&gt; T create(Class&lt;T&gt; clazz){
+<pre><code>public &lt;T&gt; T create(Class&lt;T&gt; clazz)&#123;
     // 动态代理
     return (T) Proxy.newProxyInstance(clazz.getClassLoader(),
-            new Class&lt;?&gt;[]{clazz}, new InvocationHandler() {
+            new Class&lt;?&gt;[]&#123;clazz&#125;, new InvocationHandler() &#123;
                 @Override
-                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;
                     Log.e(&quot;TAG&quot;,method.getName());
                     // 如果要实现 Retrofit 一样的代码应该怎么办？
                     // 1. 解析方法的所有注解 比如 POST GET FormUrlEncoded 等等
@@ -1495,9 +1497,9 @@ Android Framework 层的 Binder 驱动
                     // 3. 封装成 Call 对象
                     // 4.返回的 Call 对象
                     return &quot;返回&quot;;
-                }
-            });
-}
+                &#125;
+            &#125;);
+&#125;
 </code></pre><p>通过<code>Retrofit.create(class)</code>方法创建出Service interface的实例，从而使得Service中配置的方法变得可用，这是Retrofit代码结构的核心。</p>
 <p><code>Retrofit.create(class)</code>方法内部，使用<code>Proxy.newProxyInstance()</code>方法创建Service实例。create方法会为参数中的interface创建一个对象，这个对象实现了interface中的每一个方法，并且每个方法的实现都是类似的：调用对象实例内部的一个<code>InvocationHandler</code>成员变量的<code>invoke()</code>方法，并把自己的方法信息传递进去。实质上就是动态代理：interface中的方法全部由一个另外设定的<code>InvocationHandler</code>对象来进行代理操作。并且，这些方法的具体实现是在运行时生成interface实例时才确定的，而不是在编译时。</p>
 <p><code>invoke()</code>方法中创建interface实例，有三行关键代码：</p>
@@ -1549,13 +1551,13 @@ Android Framework 层的 Binder 驱动
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/04/26/17.学习node/" class="pre-post btn btn-default" title='学习Node'>
+        <a href="/2019/04/26/17.%E5%AD%A6%E4%B9%A0node/" class="pre-post btn btn-default" title='学习Node'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">学习Node</span>
         </a>
     
     
-        <a href="/2019/04/17/15.反射、注解、泛型/" class="next-post btn btn-default" title='反射、注解、泛型'>
+        <a href="/2019/04/17/15.%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E3%80%81%E6%B3%9B%E5%9E%8B/" class="next-post btn btn-default" title='反射、注解、泛型'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">反射、注解、泛型</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -1573,7 +1575,7 @@ Android Framework 层的 Binder 驱动
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式"><span class="toc-text">单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#饿汉模式"><span class="toc-text">饿汉模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#懒汉模式，四种方式"><span class="toc-text">懒汉模式，四种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile-同步锁DCL"><span class="toc-text">volatile[同步锁DCL]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态内部类"><span class="toc-text">静态内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举"><span class="toc-text">枚举</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容器管理"><span class="toc-text">容器管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#补充复习static"><span class="toc-text">补充复习static</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工厂模式"><span class="toc-text">工厂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单工厂模式"><span class="toc-text">简单工厂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单工厂场景"><span class="toc-text">简单工厂场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在简单工厂模式包含如下几个角色："><span class="toc-text">在简单工厂模式包含如下几个角色：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工厂方法模式"><span class="toc-text">工厂方法模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工厂方法场景"><span class="toc-text">工厂方法场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工厂方法模式的几个角色："><span class="toc-text">工厂方法模式的几个角色：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抽象工厂模式"><span class="toc-text">抽象工厂模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建造者模式"><span class="toc-text">建造者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#角色"><span class="toc-text">角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#场景"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变形"><span class="toc-text">变形</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#责任链模式"><span class="toc-text">责任链模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍-1"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#角色-1"><span class="toc-text">角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#场景-1"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#和观察者模式区别"><span class="toc-text">和观察者模式区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰模式"><span class="toc-text">装饰模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍-2"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#角色-2"><span class="toc-text">角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#场景-2"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安卓实例"><span class="toc-text">安卓实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板方法模式"><span class="toc-text">模板方法模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍-3"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#场景-3"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安卓实例-1"><span class="toc-text">安卓实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#策略设计模式"><span class="toc-text">策略设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍-4"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#角色-3"><span class="toc-text">角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#场景-4"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安卓实例-2"><span class="toc-text">安卓实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#观察者模式"><span class="toc-text">观察者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#场景-5"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推拉模式"><span class="toc-text">推拉模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原生API"><span class="toc-text">原生API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安卓实例-3"><span class="toc-text">安卓实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代理模式"><span class="toc-text">代理模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#静态代理"><span class="toc-text">静态代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态代理"><span class="toc-text">动态代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发用到的地方"><span class="toc-text">开发用到的地方</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-text">单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A5%BF%E6%B1%89%E6%A8%A1%E5%BC%8F"><span class="toc-text">饿汉模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%87%92%E6%B1%89%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%9B%9B%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">懒汉模式，四种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile-%E5%90%8C%E6%AD%A5%E9%94%81DCL"><span class="toc-text">volatile[同步锁DCL]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%86%85%E9%83%A8%E7%B1%BB"><span class="toc-text">静态内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE"><span class="toc-text">枚举</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%AE%A1%E7%90%86"><span class="toc-text">容器管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%E5%A4%8D%E4%B9%A0static"><span class="toc-text">补充复习static</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-text">工厂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-text">简单工厂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E5%9C%BA%E6%99%AF"><span class="toc-text">简单工厂场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%E5%8C%85%E5%90%AB%E5%A6%82%E4%B8%8B%E5%87%A0%E4%B8%AA%E8%A7%92%E8%89%B2%EF%BC%9A"><span class="toc-text">在简单工厂模式包含如下几个角色：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-text">工厂方法模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E5%9C%BA%E6%99%AF"><span class="toc-text">工厂方法场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%87%A0%E4%B8%AA%E8%A7%92%E8%89%B2%EF%BC%9A"><span class="toc-text">工厂方法模式的几个角色：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-text">抽象工厂模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">建造者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%92%E8%89%B2"><span class="toc-text">角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E5%BD%A2"><span class="toc-text">变形</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F"><span class="toc-text">责任链模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D-1"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%92%E8%89%B2-1"><span class="toc-text">角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-1"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%92%8C%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB"><span class="toc-text">和观察者模式区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F"><span class="toc-text">装饰模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D-2"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%92%E8%89%B2-2"><span class="toc-text">角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-2"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%8D%93%E5%AE%9E%E4%BE%8B"><span class="toc-text">安卓实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-text">模板方法模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D-3"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-3"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%8D%93%E5%AE%9E%E4%BE%8B-1"><span class="toc-text">安卓实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">策略设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D-4"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%92%E8%89%B2-3"><span class="toc-text">角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-4"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%8D%93%E5%AE%9E%E4%BE%8B-2"><span class="toc-text">安卓实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">观察者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-5"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E6%8B%89%E6%A8%A1%E5%BC%8F"><span class="toc-text">推拉模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%94%9FAPI"><span class="toc-text">原生API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%8D%93%E5%AE%9E%E4%BE%8B-3"><span class="toc-text">安卓实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="toc-text">代理模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86"><span class="toc-text">静态代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="toc-text">动态代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E7%94%A8%E5%88%B0%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="toc-text">开发用到的地方</span></a></li></ol></li></ol>
         
     </div>
 </aside>
@@ -1625,7 +1627,9 @@ Android Framework 层的 Binder 驱动
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

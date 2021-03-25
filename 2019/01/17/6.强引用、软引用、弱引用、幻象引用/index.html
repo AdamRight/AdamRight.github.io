@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -220,27 +222,27 @@ SoftReference  ref = new  SoftReference(aMyObject, queue);
 Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
 Drawable drawable = new BitmapDrawable(bitmap);
 SoftReference&lt;Drawable&gt; drawableSoftReference = new SoftReference&lt;Drawable&gt;(drawable);
-if(drawableSoftReference != null) {
+if(drawableSoftReference != null) &#123;
     view.setBackground(drawableSoftReference.get());
-}
+&#125;
 </code></pre><h2 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h2><p>WeakReference随时可能会被垃圾回收器回收，不一定要等到虚拟机内存不足时才强制回收。</p>
 <p>由于垃圾回收器是一个优先级很低的线程，因此不一定会很快回收弱引用的对象。弱引用可以和一个引用队列（ReferenceQueue）联合使用，如果弱引用所引用的对象被垃圾回收，Java虚拟机就会把这个弱引用加入到与之关联的引用队列中。</p>
 <p>应用场景：弱应用同样可用于内存敏感的缓存。</p>
 <p>在静态内部类中，经常会使用弱引用。例如，一个类发送网络请求，承担callback的静态内部类，则常以虚引用的方式来保存外部类(宿主类)的引用，当外部类需要被JVM回收时，不会因为网络请求没有及时回来，导致外部类不能被回收，引起内存泄漏。</p>
 <p>Glide 图片加载框架的内存缓存就使用到了弱引用缓存机制。</p>
 <pre><code>private MyHandler handler = new MyHandler(this);
-private static class MyHandler extends Handler{
+private static class MyHandler extends Handler&#123;
     WeakReference&lt;FirstActivity&gt; weakReference;
-    MyHandler(FirstActivity activity) {
+    MyHandler(FirstActivity activity) &#123;
         weakReference = new WeakReference&lt;&gt;(activity);
-    }
+    &#125;
     @Override
-    public void handleMessage(Message msg) {
+    public void handleMessage(Message msg) &#123;
         super.handleMessage(msg);
-        switch (msg.what){
-        }
-    }
-}
+        switch (msg.what)&#123;
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>当一个android主线程被创建的时候，同时会有一个Looper对象被创建，而这个Looper对象会实现一个MessageQueue(消息队列)，当我们创建一个handler对象时，而handler的作用就是放入和取出消息从这个消息队列中，每当我们通过handler将一个msg放入消息队列时，这个msg就会持有一个handler对象的引用。</p>
 <p>因此当Activity被结束后，这个msg在被取出来之前，这msg会继续存活，但是这个msg持有handler的引用，而handler在Activity中创建，会持有Activity的引用，因而当Activity结束后，Activity对象并不能够被gc回收，因而出现内存泄漏。</p>
 <p><strong>在java中所有非静态的对象都会持有当前类的强引用，而静态对象则只会持有当前类的弱引用。</strong></p>
@@ -289,13 +291,13 @@ PhantomReference pr = new PhantomReference (object, queue);
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/01/23/7.快速入门kotlin/" class="pre-post btn btn-default" title='快速入门和详解kotlin'>
+        <a href="/2019/01/23/7.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8kotlin/" class="pre-post btn btn-default" title='快速入门和详解kotlin'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">快速入门和详解kotlin</span>
         </a>
     
     
-        <a href="/2019/01/07/5.移动web开发记录/" class="next-post btn btn-default" title='移动web开发记录'>
+        <a href="/2019/01/07/5.%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/" class="next-post btn btn-default" title='移动web开发记录'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">移动web开发记录</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -313,7 +315,7 @@ PhantomReference pr = new PhantomReference (object, queue);
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#强引用"><span class="toc-text">强引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软引用"><span class="toc-text">软引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#弱引用"><span class="toc-text">弱引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#幻象引用"><span class="toc-text">幻象引用</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%BC%95%E7%94%A8"><span class="toc-text">强引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E5%BC%95%E7%94%A8"><span class="toc-text">软引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%B1%E5%BC%95%E7%94%A8"><span class="toc-text">弱引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BB%E8%B1%A1%E5%BC%95%E7%94%A8"><span class="toc-text">幻象引用</span></a></li></ol>
         
     </div>
 </aside>
@@ -365,7 +367,9 @@ PhantomReference pr = new PhantomReference (object, queue);
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -208,70 +210,101 @@
 &lt;body&gt;
       &lt;!-- Vue 实例所控制的这个元素区域，就是我们的V  --&gt;
     &lt;div id=&quot;vue_det&quot;&gt;
-        &lt;h1&gt;url : {{url}}&lt;/h1&gt;
-        &lt;h1&gt;{{details()}}&lt;/h1&gt;
+        &lt;h1&gt;url : &#123;&#123;url&#125;&#125;&lt;/h1&gt;
+        &lt;h1&gt;&#123;&#123;details()&#125;&#125;&lt;/h1&gt;
     &lt;/div&gt;
     &lt;script type=&quot;text/javascript&quot;&gt;
         // new 出来的这个 vm 对象，就是我们 MVVM中的 VM调度者
-        var vm = new Vue({
+        var vm = new Vue(&#123;
             // 表示new 的这个 Vue 实例，要控制页面上的哪个区域
             el: &apos;#vue_det&apos;,
 
             // 这里的 data 就是 MVVM中的 M，专门用来保存 每个页面的数据的
-            data: {
+            data: &#123;
                 url: &quot;http://www.baidu.com&quot;
-            },
-            methods: {
-                details: function() {
+            &#125;,
+            methods: &#123;
+                details: function() &#123;
                     return  this.url + &quot; - 百度一下&quot;;
-                }
-            }
-        })
+                &#125;
+            &#125;
+        &#125;)
         document.write(vm.url)
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><p>文本插值使用双大括号:</p>
-<pre><code>{{}}
-</code></pre><hr>
-<h3 id="Vue调试"><a href="#Vue调试" class="headerlink" title="Vue调试"></a>Vue调试</h3><p>谷歌应用商店搜索<code>Vue.js devtools</code></p>
-<hr>
-<h3 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h3><pre><code>https://cn.vuejs.org/v2/guide/
-https://github.com/pagekit/vue-resource
-http://cubic-bezier.com/#.17,.67,.83,.67
-</code></pre><hr>
-<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><hr>
-<p>指令是带有 <code>v-</code> 前缀的特殊属性。指令用于在表达式的值改变时，将某些行为应用到 <code>DOM</code> 上。</p>
-<hr>
-<h3 id="v-cloak"><a href="#v-cloak" class="headerlink" title="v-cloak"></a>v-cloak</h3><p>解决插值表达式闪烁问题，只替换占位符。</p>
-<h3 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h3><p>v-text默认没有闪烁问题，替换内容时会把整个元素替换。</p>
-<h3 id="v-html"><a href="#v-html" class="headerlink" title="v-html"></a>v-html</h3><p>用于输出html格式的，也会替换全部内容。</p>
-<h3 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h3><p><strong>绑定属性的指令</strong>，用于监听DOM事件。<code>v-bind:</code>可以省略为<code>:</code>。变量加常量的效果可以实现。</p>
-<h3 id="v-on"><a href="#v-on" class="headerlink" title="v-on"></a>v-on</h3><p><strong>事件绑定机制</strong>。<code>v-on:</code>可以省略为<code>@</code>。</p>
-<p>代码：</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot; xmlns:v-bind=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
-    &lt;style&gt;
-        [v-cloak] {
-            display: none;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div id=&quot;app&quot;&gt;
-    &lt;!-- 使用 v-cloak 能够解决 插值表达式闪烁的问题 --&gt;
-    &lt;p v-cloak&gt;++++++++ {{ msg }} ----------&lt;/p&gt;
+<pre><code>&#123;&#123;&#125;&#125;
+
+----------------------------------
+
+### Vue调试
+
+谷歌应用商店搜索`Vue.js devtools`
+
+----------------------------------
+
+### 教程
+
+	https://cn.vuejs.org/v2/guide/
+	https://github.com/pagekit/vue-resource
+	http://cubic-bezier.com/#.17,.67,.83,.67
+
+----------------------------------
+
+## 指令
+
+----------------------------------
+
+指令是带有 `v-` 前缀的特殊属性。指令用于在表达式的值改变时，将某些行为应用到 `DOM` 上。
+
+----------------------------------
+
+### v-cloak
+
+解决插值表达式闪烁问题，只替换占位符。
+
+### v-text
+
+v-text默认没有闪烁问题，替换内容时会把整个元素替换。
+
+### v-html
+
+用于输出html格式的，也会替换全部内容。
+
+### v-bind
+
+**绑定属性的指令**，用于监听DOM事件。`v-bind:`可以省略为`:`。变量加常量的效果可以实现。
+
+### v-on
+
+**事件绑定机制**。`v-on:`可以省略为`@`。
+	
+代码：
+		
+	<!DOCTYPE html>
+	<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Document</title>
+	    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+	    <style>
+	        [v-cloak] &#123;
+	            display: none;
+	        &#125;
+	    </style>
+	</head>
+	<body>
+	<div id="app">
+	    <!-- 使用 v-cloak 能够解决 插值表达式闪烁的问题 -->
+	    <p v-cloak>++++++++ &#123;&#123; msg &#125;&#125; ----------&lt;/p&gt;
     &lt;!-- 默认 v-text 是没有闪烁问题的 --&gt;
     &lt;!-- v-text会覆盖元素中原本的内容，但是 插值表达式  只会替换自己的这个占位符，不会把 整个元素的内容清空 --&gt;
     &lt;h4 v-text=&quot;msg&quot;&gt;==================&lt;/h4&gt;
 
-    &lt;div&gt;{{msg2}}&lt;/div&gt;
+    &lt;div&gt;&#123;&#123;msg2&#125;&#125;&lt;/div&gt;
     &lt;div v-text=&quot;msg2&quot;&gt;&lt;/div&gt;
     &lt;div v-html=&quot;msg2&quot;&gt;1212112&lt;/div&gt;
 
@@ -285,23 +318,23 @@ http://cubic-bezier.com/#.17,.67,.83,.67
 &lt;/div&gt;
 
 &lt;script&gt;
-    var vm = new Vue({
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             msg: &apos;123&apos;,
             msg2: &apos;&lt;h1&gt;哈哈，我是一个大大的H1， 我大，我骄傲&lt;/h1&gt;&apos;,
             mytitle: &apos;这是一个自己定义的title&apos;
-        },
-        methods: { // 这个 methods属性中定义了当前Vue实例所有可用的方法
-            show: function () {
+        &#125;,
+        methods: &#123; // 这个 methods属性中定义了当前Vue实例所有可用的方法
+            show: function () &#123;
                 alert(&apos;Hello&apos;)
-            }
-        }
-    })
+            &#125;
+        &#125;
+    &#125;)
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><hr>
+</p></div></body></html></code></pre><hr>
 <h3 id="示例之跑马灯"><a href="#示例之跑马灯" class="headerlink" title="示例之跑马灯"></a>示例之跑马灯</h3><hr>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
@@ -317,35 +350,35 @@ http://cubic-bezier.com/#.17,.67,.83,.67
 &lt;div id=&quot;app&quot;&gt;
     &lt;input type=&quot;button&quot; value=&quot;浪起来&quot; @click=&quot;lang&quot;&gt;
     &lt;input type=&quot;button&quot; value=&quot;低调&quot; @click=&quot;stop&quot;&gt;
-    &lt;h4&gt;{{ msg }}&lt;/h4&gt;
+    &lt;h4&gt;&#123;&#123; msg &#125;&#125;&lt;/h4&gt;
 &lt;/div&gt;
 &lt;script&gt;
     // 注意：在 VM实例中，如果想要获取 data 上的数据，或者 想要调用 methods 中的 方法，必须通过 this.数据属性名  或  this.方法名 来进行访问，这里的this，就表示 我们 new 出来的  VM 实例对象
-    var vm = new Vue({
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             msg: &apos;猥琐发育，别浪~~！&apos;,
             intervalId: null // 在data上定义 定时器Id
-        },
-        methods: {
-            lang() {
+        &#125;,
+        methods: &#123;
+            lang() &#123;
                 if (this.intervalId != null) return;
-                this.intervalId = setInterval(() =&gt; {
+                this.intervalId = setInterval(() =&gt; &#123;
                     var start = this.msg.substring(0, 1)
                     // 获取到 后面的所有字符
                     var end = this.msg.substring(1)
                     // 重新拼接得到新的字符串，并赋值给 this.msg
                     this.msg = end + start
-                }, 400)
+                &#125;, 400)
             // 注意： VM实例，会监听自己身上 data 中所有数据的改变，只要数据一发生变化，就会自动把 最新的数据，从data 上同步到页面中去；【好处：程序员只需要关心数据，不需要考虑如何重新渲染DOM页面】
-        },
-        stop() { // 停止定时器
+        &#125;,
+        stop() &#123; // 停止定时器
             clearInterval(this.intervalId)
             // 每当清除了定时器之后，需要重新把 intervalId 置为 null
             this.intervalId = null;
-        }
-    }
-    })
+        &#125;
+    &#125;
+    &#125;)
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -376,17 +409,17 @@ http://cubic-bezier.com/#.17,.67,.83,.67
     &lt;input type=&quot;text&quot; v-model=&quot;result&quot;/&gt;
 &lt;/div&gt;
 &lt;script&gt;
-    var vm = new Vue({
+    var vm = new Vue(&#123;
         el: &quot;#app&quot;,
-        data: {
+        data: &#123;
             n1:0,
             n2:0,
             result:0,
             opt:&quot;+&quot;
-        },
-        methods:{
-            calc:function(){
-                /*switch (this.opt){
+        &#125;,
+        methods:&#123;
+            calc:function()&#123;
+                /*switch (this.opt)&#123;
                     case &quot;+&quot;:
                        this.result = parseInt(this.n1)+parseInt(this.n2)
                         break;
@@ -399,12 +432,12 @@ http://cubic-bezier.com/#.17,.67,.83,.67
                     case &quot;/&quot;:
                         this.result = parseInt(this.n1)/parseInt(this.n2)
                         break;
-                }*/
+                &#125;*/
                 var codeStr =&quot;parseInt(this.n1)&quot;+ this.opt + &quot;parseInt(this.n2)&quot;
                 this.result = eval(codeStr)
-            }
-        }
-    })
+            &#125;
+        &#125;
+    &#125;)
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -414,37 +447,37 @@ http://cubic-bezier.com/#.17,.67,.83,.67
 <p>循环普通数组；循环对象数组；循环对象，包含key，value，和索引；迭代数字，从1开始。</p>
 <pre><code>&lt;div id=&quot;app&quot;&gt;
     &lt;!--循环普通数组--&gt;
-    &lt;p v-for=&quot;item in list&quot;&gt;{{item}}&lt;/p&gt;
-    &lt;p v-for=&quot;(item,i) in list&quot;&gt;索引值是{{i}}，每一项是{{item}}&lt;/p&gt;
+    &lt;p v-for=&quot;item in list&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/p&gt;
+    &lt;p v-for=&quot;(item,i) in list&quot;&gt;索引值是&#123;&#123;i&#125;&#125;，每一项是&#123;&#123;item&#125;&#125;&lt;/p&gt;
     &lt;!--循环对象数组--&gt;
-    &lt;p v-for=&quot;item in list2&quot;&gt;{{item.id}}和{{item.name}}&lt;/p&gt;
-    &lt;p v-for=&quot;(item,i) in list2&quot;&gt;索引值是{{i}}&lt;/p&gt;
+    &lt;p v-for=&quot;item in list2&quot;&gt;&#123;&#123;item.id&#125;&#125;和&#123;&#123;item.name&#125;&#125;&lt;/p&gt;
+    &lt;p v-for=&quot;(item,i) in list2&quot;&gt;索引值是&#123;&#123;i&#125;&#125;&lt;/p&gt;
     &lt;!--循环对象--&gt;
-    &lt;p v-for=&quot;val in user&quot;&gt;{{val}}&lt;/p&gt;
-    &lt;p v-for=&quot;(val,key) in user&quot;&gt;{{val}}---{{key}}&lt;/p&gt;
-    &lt;p v-for=&quot;(val,key,i) in user&quot;&gt;{{val}}---{{key}}----{{i}}&lt;/p&gt;
+    &lt;p v-for=&quot;val in user&quot;&gt;&#123;&#123;val&#125;&#125;&lt;/p&gt;
+    &lt;p v-for=&quot;(val,key) in user&quot;&gt;&#123;&#123;val&#125;&#125;---&#123;&#123;key&#125;&#125;&lt;/p&gt;
+    &lt;p v-for=&quot;(val,key,i) in user&quot;&gt;&#123;&#123;val&#125;&#125;---&#123;&#123;key&#125;&#125;----&#123;&#123;i&#125;&#125;&lt;/p&gt;
     &lt;!--迭代数字--&gt;
-    &lt;p v-for=&quot;count in 10&quot;&gt;这是第{{count}}次&lt;/p&gt;
+    &lt;p v-for=&quot;count in 10&quot;&gt;这是第&#123;&#123;count&#125;&#125;次&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
-    var vm = new Vue({
+    var vm = new Vue(&#123;
         el: &quot;#app&quot;,
-        data: {
+        data: &#123;
             list:[1,2,3,4,5,6],
             list2:[
-                {id:1,name:&quot;a&quot;},
-                {id:2,name:&quot;b&quot;},
-                {id:3,name:&quot;c&quot;},
-                {id:4,name:&quot;d&quot;}
+                &#123;id:1,name:&quot;a&quot;&#125;,
+                &#123;id:2,name:&quot;b&quot;&#125;,
+                &#123;id:3,name:&quot;c&quot;&#125;,
+                &#123;id:4,name:&quot;d&quot;&#125;
             ],
-            user:{
+            user:&#123;
                 id:1,
                 name:&quot;张三&quot;,
                 sex:&quot;男&quot;
-            }
-        }
-    })
+            &#125;
+        &#125;
+    &#125;)
 &lt;/script&gt;
 </code></pre><p>注意：在2.2.0+的版本里，当在组件中使用<code>v-for</code>时，key是必须的。<strong>key属性只能使用number或者string，必须使用v-bind属性绑定的形式，指定key的值。</strong></p>
 <pre><code>&lt;p v-for=&quot;item in list&quot; :key=&quot;item.id&quot;&gt;
@@ -461,12 +494,12 @@ http://cubic-bezier.com/#.17,.67,.83,.67
 &lt;/div&gt;
 
 &lt;script&gt;
-    var vm = new Vue({
+    var vm = new Vue(&#123;
         el: &quot;#app&quot;,
-        data: {
+        data: &#123;
             flag:true
-        }
-    })
+        &#125;
+    &#125;)
 &lt;/script&gt;
 </code></pre><p><code>v-else-if</code>和<code>v-else</code>的使用</p>
 <pre><code>&lt;!DOCTYPE html&gt;
@@ -491,12 +524,12 @@ http://cubic-bezier.com/#.17,.67,.83,.67
     &lt;/div&gt;
 
     &lt;script&gt;
-    new Vue({
+    new Vue(&#123;
       el: &apos;#app&apos;,
-      data: {
+      data: &#123;
         type: &apos;C&apos;
-      }
-    })
+      &#125;
+    &#125;)
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -516,10 +549,10 @@ http://cubic-bezier.com/#.17,.67,.83,.67
     &lt;title&gt;&lt;/title&gt;
     &lt;script src=&quot;lib/vue.js&quot;&gt;&lt;/script&gt;
     &lt;style&gt;
-        .inner{
+        .inner&#123;
             height: 150px;
             background-color: darkcyan;
-        }
+        &#125;
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -542,20 +575,20 @@ http://cubic-bezier.com/#.17,.67,.83,.67
     &lt;/div&gt;
 
     &lt;script&gt;
-        var vm = new Vue({
+        var vm = new Vue(&#123;
             el: &quot;#app&quot;,
-            data: {
-                div1:function(){
+            data: &#123;
+                div1:function()&#123;
                     console.log(&quot;div1click&quot;)
-                },
-                btn:function(){
+                &#125;,
+                btn:function()&#123;
                     console.log(&quot;btnclick&quot;)
-                },
-                linkClick:function(){
+                &#125;,
+                linkClick:function()&#123;
                     console.log(&quot;btnclick&quot;)
-                }
-            }
-        })
+                &#125;
+            &#125;
+        &#125;)
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -570,20 +603,20 @@ http://cubic-bezier.com/#.17,.67,.83,.67
     &lt;!--三元运算--&gt;
     &lt;h1 :class=&quot;[&apos;类名1&apos;,&apos;类名2&apos;,flag?&apos;类名3&apos;:&apos;&apos;]&quot;&gt;&lt;/h1&gt;
     &lt;!--嵌套对象--&gt;
-    &lt;h1 :class=&quot;[&apos;类名1&apos;,&apos;类名2&apos;,{&apos;类名3&apos;:flag}]&quot;&gt;&lt;/h1&gt;
+    &lt;h1 :class=&quot;[&apos;类名1&apos;,&apos;类名2&apos;,&#123;&apos;类名3&apos;:flag&#125;]&quot;&gt;&lt;/h1&gt;
     &lt;!--使用对象--&gt;
-    &lt;h1 :class=&quot;{类名1:true,类名2:true,类名3:true}&quot;&gt;&lt;/h1&gt;
+    &lt;h1 :class=&quot;&#123;类名1:true,类名2:true,类名3:true&#125;&quot;&gt;&lt;/h1&gt;
     &lt;!--抽取对象--&gt;
     &lt;h1 :class=&quot;classObj&quot;&gt;&lt;/h1&gt;
 &lt;/div&gt;
 &lt;script&gt;
-    var vm = new Vue({
+    var vm = new Vue(&#123;
         el: &quot;#app&quot;,
-        data: {
+        data: &#123;
             flag: true,
-            classObj:{类名1:true,类名2:true,类名3:true}
-        }
-    })
+            classObj:&#123;类名1:true,类名2:true,类名3:true&#125;
+        &#125;
+    &#125;)
 &lt;/script&gt;
 </code></pre><p>代码：</p>
 <pre><code>&lt;!DOCTYPE html&gt;
@@ -595,18 +628,18 @@ http://cubic-bezier.com/#.17,.67,.83,.67
   &lt;title&gt;Document&lt;/title&gt;
   &lt;script src=&quot;./lib/vue-2.4.0.js&quot;&gt;&lt;/script&gt;
   &lt;style&gt;
-    .red {
+    .red &#123;
       color: red;
-    }
-    .thin {
+    &#125;
+    .thin &#123;
       font-weight: 200;
-    }
-    .italic {
+    &#125;
+    .italic &#123;
       font-style: italic;
-    }
-    .active {
+    &#125;
+    .active &#123;
       letter-spacing: 0.5em;
-    }
+    &#125;
   &lt;/style&gt;
 &lt;/head&gt;
 
@@ -621,7 +654,7 @@ http://cubic-bezier.com/#.17,.67,.83,.67
     &lt;!-- &lt;h1 :class=&quot;[&apos;thin&apos;, &apos;italic&apos;, flag?&apos;active&apos;:&apos;&apos;]&quot;&gt;这是一个很大很大的H1，大到你无法想象！！！&lt;/h1&gt; --&gt;
 
     &lt;!-- 在数组中使用 对象来代替三元表达式，提高代码的可读性 --&gt;
-    &lt;!-- &lt;h1 :class=&quot;[&apos;thin&apos;, &apos;italic&apos;, {&apos;active&apos;:flag} ]&quot;&gt;这是一个很大很大的H1，大到你无法想象！！！&lt;/h1&gt; --&gt;
+    &lt;!-- &lt;h1 :class=&quot;[&apos;thin&apos;, &apos;italic&apos;, &#123;&apos;active&apos;:flag&#125; ]&quot;&gt;这是一个很大很大的H1，大到你无法想象！！！&lt;/h1&gt; --&gt;
 
     &lt;!-- 在为 class 使用 v-bind 绑定 对象的时候，对象的属性是类名，由于 对象的属性可带引号，也可不带引号，所以 这里我没写引号；  属性的值 是一个标识符 --&gt;
     &lt;h1 :class=&quot;classObj&quot;&gt;这是一个很大很大的H1，大到你无法想象！！！&lt;/h1&gt;
@@ -629,14 +662,14 @@ http://cubic-bezier.com/#.17,.67,.83,.67
 
   &lt;script&gt;
     // 创建 Vue 实例，得到 ViewModel
-    var vm = new Vue({
+    var vm = new Vue(&#123;
       el: &apos;#app&apos;,
-      data: {
+      data: &#123;
         flag: true,
-        classObj: { red: true, thin: true, italic: false, active: false }
-      },
-      methods: {}
-    });
+        classObj: &#123; red: true, thin: true, italic: false, active: false &#125;
+      &#125;,
+      methods: &#123;&#125;
+    &#125;);
   &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -644,21 +677,21 @@ http://cubic-bezier.com/#.17,.67,.83,.67
 <h3 id="内联样式"><a href="#内联样式" class="headerlink" title="内联样式"></a>内联样式</h3><hr>
 <pre><code>&lt;div id=&quot;app&quot;&gt;
     &lt;!--直接绑定--&gt;
-    &lt;h1 :style=&quot;{color:&apos;red&apos;,&apos;font-weight&apos;:200}&quot;&gt;哈哈哈&lt;/h1&gt;
+    &lt;h1 :style=&quot;&#123;color:&apos;red&apos;,&apos;font-weight&apos;:200&#125;&quot;&gt;哈哈哈&lt;/h1&gt;
     &lt;!--data--&gt;
     &lt;h1 :style=&quot;styleObj1&quot;&gt;哈哈哈&lt;/h1&gt;
     &lt;!--多个data--&gt;
     &lt;h1 :style=&quot;[styleObj1,styleObj2]&quot;&gt;哈哈哈&lt;/h1&gt;
 &lt;/div&gt;
 &lt;script&gt;
-    var vm = new Vue({
+    var vm = new Vue(&#123;
         el: &quot;#app&quot;,
-        data: {
-            styleObj1 : {color:&apos;red&apos;,&apos;font-weight&apos;:200},
-            styleObj2 : {&apos;font-style&apos;:&apos;italic&apos;},
+        data: &#123;
+            styleObj1 : &#123;color:&apos;red&apos;,&apos;font-weight&apos;:200&#125;,
+            styleObj2 : &#123;&apos;font-style&apos;:&apos;italic&apos;&#125;,
 
-        }
-    })
+        &#125;
+    &#125;)
 &lt;/script&gt;
 </code></pre><hr>
 <h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><hr>
@@ -674,38 +707,38 @@ http://cubic-bezier.com/#.17,.67,.83,.67
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;app&quot;&gt;
-    &lt;p&gt;{{ message | data1 }}&lt;/p&gt;
-    &lt;p&gt;{{ message | data2("嘻嘻")}}&lt;/p&gt;
-    &lt;p&gt;{{ message | data1 | data3}}&lt;/p&gt;
-    &lt;p&gt;{{ message | data4 }}&lt;/p&gt;
+    &lt;p&gt;&#123;&#123; message | data1 &#125;&#125;&lt;/p&gt;
+    &lt;p&gt;&#123;&#123; message | data2("嘻嘻")&#125;&#125;&lt;/p&gt;
+    &lt;p&gt;&#123;&#123; message | data1 | data3&#125;&#125;&lt;/p&gt;
+    &lt;p&gt;&#123;&#123; message | data4 &#125;&#125;&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
     //方式一：全局过滤器
-    Vue.filter(&apos;data1&apos;,function(value){
+    Vue.filter(&apos;data1&apos;,function(value)&#123;
         return value+&quot;嘻嘻&quot;
-    })
+    &#125;)
     //方式二：可以多个参数
-    Vue.filter(&apos;data2&apos;,function(value,arg1){
+    Vue.filter(&apos;data2&apos;,function(value,arg1)&#123;
         return value+arg1
-    })
+    &#125;)
     //方式三：可以多次调用
-    Vue.filter(&apos;data3&apos;,function(value){
+    Vue.filter(&apos;data3&apos;,function(value)&#123;
         return value+&quot;哈哈&quot;
-    })
+    &#125;)
 
-    new Vue({
+    new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             message: &apos;哈哈哈&apos;
-        },
+        &#125;,
         //方式四：私有过滤器
-        filters: {
-            data4: function (value) {
+        filters: &#123;
+            data4: function (value) &#123;
                 return value+&quot;嘻嘻&quot;
-            }
-        }
-    })
+            &#125;
+        &#125;
+    &#125;)
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -717,36 +750,36 @@ http://cubic-bezier.com/#.17,.67,.83,.67
 <h2 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h2><hr>
 <p>和js相关的最好在<code>inserted</code>中执行；和样式相关的，一般在<code>bind</code>中执行。</p>
 <p><code>Vue.directive</code>:</p>
-<pre><code>Vue.directive(&apos;focus&apos;, {
-  bind: function (el) { // 每当指令绑定到元素上的时候，会立即执行这个 bind 函数，只执行一次
+<pre><code>Vue.directive(&apos;focus&apos;, &#123;
+  bind: function (el) &#123; // 每当指令绑定到元素上的时候，会立即执行这个 bind 函数，只执行一次
 
-  },
-  inserted: function (el) {  // inserted 表示元素 插入到DOM中的时候，会执行 inserted 函数【触发1次】
+  &#125;,
+  inserted: function (el) &#123;  // inserted 表示元素 插入到DOM中的时候，会执行 inserted 函数【触发1次】
 
-  },
-  updated: function (el) {  // 当VNode更新的时候，会执行 updated， 可能会触发多次
+  &#125;,
+  updated: function (el) &#123;  // 当VNode更新的时候，会执行 updated， 可能会触发多次
 
-  }
-})
+  &#125;
+&#125;)
 </code></pre><p>全局指令和私有指令。自定义指令下的钩子函数。</p>
 <pre><code>https://cn.vuejs.org/v2/guide/custom-directive.html
 </code></pre><p>私有指令：</p>
-<pre><code>var vm2 = new Vue({
+<pre><code>var vm2 = new Vue(&#123;
   el: &apos;#app&apos;,
-  data: {
-  },
-  methods: {},
-  filters: { // 定义私有过滤器    过滤器有两个 条件  【过滤器名称 和 处理函数】
-  },
-  directives: { // 自定义私有指令
-  }
-})
+  data: &#123;
+  &#125;,
+  methods: &#123;&#125;,
+  filters: &#123; // 定义私有过滤器    过滤器有两个 条件  【过滤器名称 和 处理函数】
+  &#125;,
+  directives: &#123; // 自定义私有指令
+  &#125;
+&#125;)
 </code></pre><p>简写方式：</p>
-<pre><code>directives: { // 自定义私有指令
-    &apos;fontsize&apos;: function (el, binding) { // 注意：这个 function 等同于 把 代码写到了 bind 和 update 中去
+<pre><code>directives: &#123; // 自定义私有指令
+    &apos;fontsize&apos;: function (el, binding) &#123; // 注意：这个 function 等同于 把 代码写到了 bind 和 update 中去
       el.style.fontSize = parseInt(binding.value) + &apos;px&apos;
-    }
-  }
+    &#125;
+  &#125;
 </code></pre><hr>
 <h2 id="vue实例的生命周期"><a href="#vue实例的生命周期" class="headerlink" title="vue实例的生命周期"></a>vue实例的生命周期</h2><hr>
 <p>生命周期：从Vue实例创建、运行、到销毁期间，总是伴随着各种各样的事件，这些事件，统称为生命周期。生命周期钩子 = 生命周期函数 = 生命周期事件。</p>
@@ -772,43 +805,43 @@ http://cubic-bezier.com/#.17,.67,.83,.67
 </ul>
 <p>代码：</p>
 <pre><code>// 创建 Vue 实例，得到 ViewModel
-var vm = new Vue({
+var vm = new Vue(&#123;
   el: &apos;#app&apos;,
-  data: {
+  data: &#123;
     msg: &apos;ok&apos;
-  },
-  methods: {
-    show() {
+  &#125;,
+  methods: &#123;
+    show() &#123;
       console.log(&apos;执行了show方法&apos;)
-    }
-  },
-  beforeCreate() { // 这是我们遇到的第一个生命周期函数，表示实例完全被创建出来之前，会执行它
+    &#125;
+  &#125;,
+  beforeCreate() &#123; // 这是我们遇到的第一个生命周期函数，表示实例完全被创建出来之前，会执行它
     // 注意： 在 beforeCreate 生命周期函数执行的时候，data 和 methods 中的 数据都还没有没初始化
-  },
-  created() { // 这是遇到的第二个生命周期函数
+  &#125;,
+  created() &#123; // 这是遇到的第二个生命周期函数
     //  在 created 中，data 和 methods 都已经被初始化好了！
     // 如果要调用 methods 中的方法，或者操作 data 中的数据，最早，只能在 created 中操作
-  },
-  beforeMount() { // 这是遇到的第3个生命周期函数，表示 模板已经在内存中编辑完成了，但是尚未把 模板渲染到 页面中
-    // console.log(document.getElementById(&apos;h3&apos;).innerText)//{{msg}}
+  &#125;,
+  beforeMount() &#123; // 这是遇到的第3个生命周期函数，表示 模板已经在内存中编辑完成了，但是尚未把 模板渲染到 页面中
+    // console.log(document.getElementById(&apos;h3&apos;).innerText)//&#123;&#123;msg&#125;&#125;
     // 在 beforeMount 执行的时候，页面中的元素，还没有被真正替换过来，只是之前写的一些模板字符串
-  },
-  mounted() { // 这是遇到的第4个生命周期函数，表示，内存中的模板，已经真实的挂载到了页面中，用户已经可以看到渲染好的页面了
+  &#125;,
+  mounted() &#123; // 这是遇到的第4个生命周期函数，表示，内存中的模板，已经真实的挂载到了页面中，用户已经可以看到渲染好的页面了
     // console.log(document.getElementById(&apos;h3&apos;).innerText)
     // 注意： mounted 是 实例创建期间的最后一个生命周期函数，当执行完 mounted 就表示，实例已经被完全创建好了，此时，如果没有其它操作的话，这个实例，就静静的 躺在我们的内存中，一动不动
-  },
+  &#125;,
   // 接下来的是运行中的两个事件
-  beforeUpdate() { // 这时候，表示 我们的界面还没有被更新【数据被更新了吗？  数据肯定被更新了】
+  beforeUpdate() &#123; // 这时候，表示 我们的界面还没有被更新【数据被更新了吗？  数据肯定被更新了】
     /* console.log(&apos;界面上元素的内容：&apos; + document.getElementById(&apos;h3&apos;).innerText)
     console.log(&apos;data 中的 msg 数据是：&apos; + this.msg) */
     // 得出结论： 当执行 beforeUpdate 的时候，页面中的显示的数据，还是旧的，此时 data 数据是最新的，页面尚未和 最新的数据保持同步
-  },
-  updated() {
+  &#125;,
+  updated() &#123;
     console.log(&apos;界面上元素的内容：&apos; + document.getElementById(&apos;h3&apos;).innerText)
     console.log(&apos;data 中的 msg 数据是：&apos; + this.msg)
     // updated 事件执行的时候，页面和 data 数据已经保持同步了，都是最新的
-  }
-});
+  &#125;
+&#125;);
 </code></pre><p><strong>页面初始化可以在created中请求网络。</strong></p>
 <hr>
 <h2 id="vue-resource实现网络请求"><a href="#vue-resource实现网络请求" class="headerlink" title="vue-resource实现网络请求"></a>vue-resource实现网络请求</h2><hr>
@@ -816,27 +849,27 @@ var vm = new Vue({
 </code></pre><p>直接在页面中，通过script标签，引入vue-resource的脚本文件,注意：引用的先后顺序是：先引用Vue的脚本文件，再引用vue-resource的脚本文件；</p>
 <pre><code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue-resource@1.5.1&quot;&gt;&lt;/script&gt;
 </code></pre><p>发送get请求：</p>
-<pre><code>getInfo() { // get 方式获取数据
-  this.$http.get(&apos;url&apos;).then(res =&gt; {
+<pre><code>getInfo() &#123; // get 方式获取数据
+  this.$http.get(&apos;url&apos;).then(res =&gt; &#123;
     console.log(res.body);
-  })
-}
+  &#125;)
+&#125;
 </code></pre><p>发送post请求：</p>
-<pre><code>postInfo() {
+<pre><code>postInfo() &#123;
   // post 方法接收三个参数：
   // 参数1： 要请求的URL地址
   // 参数2： 要发送的数据对象
   // 参数3： 指定post提交的编码类型为 application/x-www-form-urlencoded
-  this.$http.post(url, { name: &apos;zs&apos; }, { emulateJSON: true }).then(res =&gt; {
+  this.$http.post(url, &#123; name: &apos;zs&apos; &#125;, &#123; emulateJSON: true &#125;).then(res =&gt; &#123;
     console.log(res.body);
-  });
-}
+  &#125;);
+&#125;
 </code></pre><p>发送JSONP请求获取数据：</p>
-<pre><code>jsonpInfo() { // JSONP形式从服务器获取数据
-  this.$http.jsonp(url).then(res =&gt; {
+<pre><code>jsonpInfo() &#123; // JSONP形式从服务器获取数据
+  this.$http.jsonp(url).then(res =&gt; &#123;
     console.log(res.body);
-  });
-}
+  &#125;);
+&#125;
 </code></pre><p>JSONP的实现原理</p>
 <ul>
 <li>由于浏览器的安全性限制，不允许AJAX访问 协议不同、域名不同、端口号不同的数据接口，浏览器认为这种访问不安全；</li>
@@ -906,9 +939,9 @@ Vue.http.options.emulateJSON = true;
       &lt;/thead&gt;
       &lt;tbody&gt;
         &lt;tr v-for=&quot;item in search(keywords)&quot; :key=&quot;item.id&quot;&gt;
-          &lt;td&gt;{{ item.id }}&lt;/td&gt;
+          &lt;td&gt;&#123;&#123; item.id &#125;&#125;&lt;/td&gt;
           &lt;td v-text=&quot;item.name&quot;&gt;&lt;/td&gt;
-          &lt;td&gt;{{ item.ctime | dateFormat() }}&lt;/td&gt;
+          &lt;td&gt;&#123;&#123; item.ctime | dateFormat() &#125;&#125;&lt;/td&gt;
           &lt;td&gt;
             &lt;a href=&quot;&quot; @click.prevent=&quot;del(item.id)&quot;&gt;删除&lt;/a&gt;
           &lt;/td&gt;
@@ -918,105 +951,105 @@ Vue.http.options.emulateJSON = true;
   &lt;/div&gt;
 
   &lt;script&gt;
-    Vue.filter(&apos;dateFormat&apos;, function (dateStr, pattern = &quot;&quot;) {
+    Vue.filter(&apos;dateFormat&apos;, function (dateStr, pattern = &quot;&quot;) &#123;
       // 根据给定的时间字符串，得到特定的时间
       var dt = new Date(dateStr)
       //   yyyy-mm-dd
       var y = dt.getFullYear()
       var m = dt.getMonth() + 1
       var d = dt.getDate()
-      if (pattern.toLowerCase() === &apos;yyyy-mm-dd&apos;) {
-        return `${y}-${m}-${d}`
-      } else {
+      if (pattern.toLowerCase() === &apos;yyyy-mm-dd&apos;) &#123;
+        return `$&#123;y&#125;-$&#123;m&#125;-$&#123;d&#125;`
+      &#125; else &#123;
         var hh = dt.getHours()
         var mm = dt.getMinutes()
         var ss = dt.getSeconds()
-        return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
-      }
-    })
+        return `$&#123;y&#125;-$&#123;m&#125;-$&#123;d&#125; $&#123;hh&#125;:$&#123;mm&#125;:$&#123;ss&#125;`
+      &#125;
+    &#125;)
     // 自定义全局按键修饰符
     Vue.config.keyCodes.f2 = 113
     // 使用  Vue.directive() 定义全局的指令  v-focus
     // 其中：参数1 ： 指令的名称，注意，在定义的时候，指令的名称前面，不需要加 v- 前缀, 
     // 但是： 在调用的时候，必须 在指令名称前 加上 v- 前缀来进行调用
     //  参数2： 是一个对象，这个对象身上，有一些指令相关的函数，这些函数可以在特定的阶段，执行相关的操作
-    Vue.directive(&apos;focus&apos;, {
-      bind: function (el) { // 每当指令绑定到元素上的时候，会立即执行这个 bind 函数，只执行一次
+    Vue.directive(&apos;focus&apos;, &#123;
+      bind: function (el) &#123; // 每当指令绑定到元素上的时候，会立即执行这个 bind 函数，只执行一次
         // 注意： 在每个 函数中，第一个参数，永远是 el ，表示 被绑定了指令的那个元素，这个 el 参数，是一个原生的JS对象
         // 在元素 刚绑定了指令的时候，还没有 插入到 DOM中去，这时候，调用 focus 方法没有作用
         //  因为，一个元素，只有插入DOM之后，才能获取焦点
         // el.focus()
-      },
-      inserted: function (el) {  // inserted 表示元素 插入到DOM中的时候，会执行 inserted 函数【触发1次】
+      &#125;,
+      inserted: function (el) &#123;  // inserted 表示元素 插入到DOM中的时候，会执行 inserted 函数【触发1次】
         el.focus()
         // 和JS行为有关的操作，最好在 inserted 中去执行，放置 JS行为不生效
-      },
-      updated: function (el) {  // 当VNode更新的时候，会执行 updated， 可能会触发多次
+      &#125;,
+      updated: function (el) &#123;  // 当VNode更新的时候，会执行 updated， 可能会触发多次
 
-      }
-    })
+      &#125;
+    &#125;)
     // 自定义一个 设置字体颜色的 指令
-    Vue.directive(&apos;color&apos;, {
+    Vue.directive(&apos;color&apos;, &#123;
       // 样式，只要通过指令绑定给了元素，不管这个元素有没有被插入到页面中去，这个元素肯定有了一个内联的样式
       // 将来元素肯定会显示到页面中，这时候，浏览器的渲染引擎必然会解析样式，应用给这个元素
-      bind: function (el, binding) {
+      bind: function (el, binding) &#123;
         // el.style.color = &apos;red&apos;
         // console.log(binding.name)
         // 和样式相关的操作，一般都可以在 bind 执行
         // console.log(binding.value)
         // console.log(binding.expression)
         el.style.color = binding.value
-      }
-    })
+      &#125;
+    &#125;)
     // 创建 Vue 实例，得到 ViewModel
-    var vm = new Vue({
+    var vm = new Vue(&#123;
       el: &apos;#app&apos;,
-      data: {
+      data: &#123;
         id: &apos;&apos;,
         name: &apos;&apos;,
         keywords: &apos;&apos;, // 搜索的关键字
         list: [
-          { id: 1, name: &apos;奔驰&apos;, ctime: new Date() },
-          { id: 2, name: &apos;宝马&apos;, ctime: new Date() }
+          &#123; id: 1, name: &apos;奔驰&apos;, ctime: new Date() &#125;,
+          &#123; id: 2, name: &apos;宝马&apos;, ctime: new Date() &#125;
         ]
-      },
-      methods: {
-        add() { // 添加的方法
-          var car = { id: this.id, name: this.name, ctime: new Date() }
+      &#125;,
+      methods: &#123;
+        add() &#123; // 添加的方法
+          var car = &#123; id: this.id, name: this.name, ctime: new Date() &#125;
           this.list.push(car)
           this.id = this.name = &apos;&apos;
-        },
-        del(id) { // 根据Id删除数据
-          var index = this.list.findIndex(item =&gt; {
-            if (item.id == id) {
+        &#125;,
+        del(id) &#123; // 根据Id删除数据
+          var index = this.list.findIndex(item =&gt; &#123;
+            if (item.id == id) &#123;
               return true;
-            }
-          })
+            &#125;
+          &#125;)
           this.list.splice(index, 1)
-        },
-        search(keywords) { // 根据关键字，进行数据的搜索
+        &#125;,
+        search(keywords) &#123; // 根据关键字，进行数据的搜索
           /* var newList = []
-          this.list.forEach(item =&gt; {
-            if (item.name.indexOf(keywords) != -1) {
+          this.list.forEach(item =&gt; &#123;
+            if (item.name.indexOf(keywords) != -1) &#123;
               newList.push(item)
-            }
-          })
+            &#125;
+          &#125;)
           return newList */
           // 注意：  forEach   some   filter   findIndex   这些都属于数组的新方法，
           //  都会对数组中的每一项，进行遍历，执行相关的操作；
-          return this.list.filter(item =&gt; {
+          return this.list.filter(item =&gt; &#123;
             // if(item.name.indexOf(keywords) != -1)
             // 注意 ： ES6中，为字符串提供了一个新方法，叫做  String.prototype.includes(&apos;要包含的字符串&apos;)
             //  如果包含，则返回 true ，否则返回 false
             //  contain
-            if (item.name.includes(keywords)) {
+            if (item.name.includes(keywords)) &#123;
               return item
-            }
-          })
+            &#125;
+          &#125;)
           // return newList
-        }
-      }
-    });
+        &#125;
+      &#125;
+    &#125;);
   &lt;/script&gt;
 &lt;/body&gt;
 
@@ -1033,14 +1066,14 @@ Vue.http.options.emulateJSON = true;
     &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
     &lt;style&gt;
         .v-enter,
-        .v-leave-to{
+        .v-leave-to&#123;
             opacity: 0;
             transform: translateX(150px);
-        }
+        &#125;
         .v-enter-active,
-        .v-leave-active{
+        .v-leave-active&#123;
             transition: all 0.8s ease;
-        }
+        &#125;
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -1052,12 +1085,12 @@ Vue.http.options.emulateJSON = true;
 &lt;/div&gt;
 
 &lt;script&gt;
-    new Vue({
+    new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             flag:false
-        }
-    })
+        &#125;
+    &#125;)
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1072,14 +1105,14 @@ Vue.http.options.emulateJSON = true;
     &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
     &lt;style&gt;
         .my-enter,
-        .my-leave-to{
+        .my-leave-to&#123;
             opacity: 0;
             transform: translateX(150px);
-        }
+        &#125;
         .my-enter-active,
-        .my-leave-active{
+        .my-leave-active&#123;
             transition: all 0.8s ease;
-        }
+        &#125;
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -1091,12 +1124,12 @@ Vue.http.options.emulateJSON = true;
 &lt;/div&gt;
 
 &lt;script&gt;
-    new Vue({
+    new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             flag:false
-        }
-    })
+        &#125;
+    &#125;)
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1116,18 +1149,18 @@ Vue.http.options.emulateJSON = true;
 &lt;div id=&quot;app&quot;&gt;
     &lt;input type=&quot;button&quot; value=&quot;toggle&quot; @click=&quot;flag=!flag&quot;/&gt;
     &lt;transition enter-active-class=&quot;bounceIn&quot; leave-active-class=&quot;bounceOut&quot;
-            :duration=&quot;{ enter: 200, leave: 400}&quot;&gt;
+            :duration=&quot;&#123; enter: 200, leave: 400&#125;&quot;&gt;
         &lt;h3 v-if=&quot;flag&quot; class=&quot;animated&quot;&gt;我是h3&lt;/h3&gt;
     &lt;/transition&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
-    new Vue({
+    new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             flag:false
-        }
-    })
+        &#125;
+    &#125;)
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1150,12 +1183,12 @@ Vue.http.options.emulateJSON = true;
     &lt;title&gt;Document&lt;/title&gt;
     &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
     &lt;style&gt;
-        .ball {
+        .ball &#123;
             width: 15px;
             height: 15px;
             border-radius: 50%;
             background-color: red;
-        }
+        &#125;
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -1171,26 +1204,26 @@ Vue.http.options.emulateJSON = true;
 &lt;/div&gt;
 
 &lt;script&gt;
-    new Vue({
+    new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             flag:false
-        },
-        methods: {
-            beforeEnter: function (el) {
+        &#125;,
+        methods: &#123;
+            beforeEnter: function (el) &#123;
                 el.style.transform = &quot;translate(0, 0)&quot;
-            },
-            enter: function (el, done) {
+            &#125;,
+            enter: function (el, done) &#123;
                 el.offsetWidth
                 el.style.transform = &quot;translate(150px, 450px)&quot;
                 el.style.transition = &apos;all 1s ease&apos;
                 done()
-            },
-            afterEnter: function (el) {
+            &#125;,
+            afterEnter: function (el) &#123;
                 this.flag = !this.flag
-            }
-        }
-    })
+            &#125;
+        &#125;
+    &#125;)
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1204,33 +1237,33 @@ Vue.http.options.emulateJSON = true;
     &lt;title&gt;Document&lt;/title&gt;
     &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
     &lt;style&gt;
-        li {
+        li &#123;
             border: 1px dashed #999;
             margin: 5px;
             line-height: 35px;
             padding-left: 5px;
             font-size: 12px;
             width: 100%;
-        }
-        li:hover {
+        &#125;
+        li:hover &#123;
             background-color: hotpink;
             transition: all 0.8s ease;
-        }
+        &#125;
         .v-enter,
-        .v-leave-to {
+        .v-leave-to &#123;
             opacity: 0;
             transform: translateY(80px);
-        }
+        &#125;
         .v-enter-active,
-        .v-leave-active {
+        .v-leave-active &#123;
             transition: all 0.6s ease;
-        }
-        .v-move {
+        &#125;
+        .v-move &#123;
             transition: all 0.6s ease;
-        }
-        .v-leave-active {
+        &#125;
+        .v-leave-active &#123;
             position: absolute;
-        }
+        &#125;
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -1252,33 +1285,33 @@ Vue.http.options.emulateJSON = true;
 
     &lt;transition-group appear tag=&quot;ul&quot;&gt;
         &lt;li v-for=&quot;(item, i) in list&quot; :key=&quot;item.id&quot; @click=&quot;del(i)&quot;&gt;
-            {{item.id}} --- {{item.name}}
+            &#123;&#123;item.id&#125;&#125; --- &#123;&#123;item.name&#125;&#125;
         &lt;/li&gt;
     &lt;/transition-group&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
-    var vm = new Vue({
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             id: &apos;&apos;,
             name: &apos;&apos;,
             list: [
-                {id: 1, name: &apos;Tom&apos;},
-                {id: 2, name: &apos;Jim&apos;},
-                {id: 3, name: &apos;Lucy&apos;}
+                &#123;id: 1, name: &apos;Tom&apos;&#125;,
+                &#123;id: 2, name: &apos;Jim&apos;&#125;,
+                &#123;id: 3, name: &apos;Lucy&apos;&#125;
             ]
-        },
-        methods: {
-            add: function () {
-                this.list.push({id: this.id, name: this.name})
+        &#125;,
+        methods: &#123;
+            add: function () &#123;
+                this.list.push(&#123;id: this.id, name: this.name&#125;)
                 this.id = this.name = &apos;&apos;
-            },
-            del: function (i) {
+            &#125;,
+            del: function (i) &#123;
                 this.list.splice(i, 1)
-            }
-        }
-    });
+            &#125;
+        &#125;
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1314,9 +1347,9 @@ Vue.http.options.emulateJSON = true;
 &lt;script&gt;
     //方式一：
      //1.1 使用 Vue.extend 来创建全局的Vue组件
-     var com1 = Vue.extend({
+     var com1 = Vue.extend(&#123;
        template: &apos;&lt;h3&gt;这是使用 Vue.extend 创建的组件&lt;/h3&gt;&apos; // 通过 template 属性，指定了组件要展示的HTML结构
-     })
+     &#125;)
      // 1.2 使用 Vue.component(&apos;组件的名称&apos;, 创建出来的组件模板对象)
       Vue.component(&apos;myCom1&apos;, com1)
      // 如果使用 Vue.component 定义全局组件的时候，组件名称使用了 驼峰命名，则在引用组件的时候，需要把大写的驼峰改为小写的字母，同时，两个单词之前，使用 - 链接；
@@ -1324,23 +1357,23 @@ Vue.http.options.emulateJSON = true;
       Vue.component(&apos;mycom1&apos;, com1)
 
      // Vue.component 第一个参数:组件的名称,将来在引用组件的时候,就是一个 标签形式 来引入 它的；第二个参数: Vue.extend 创建的组件
-     Vue.component(&apos;mycom2&apos;, Vue.extend({
+     Vue.component(&apos;mycom2&apos;, Vue.extend(&#123;
          template: &apos;&lt;h3&gt;这是使用 Vue.extend 创建的组件&lt;/h3&gt;&apos;
-     }))
+     &#125;))
 
     //方式二：
      // 注意:不论是哪种方式创建出来的组件,组件的 template 属性指向的模板内容,必须有且只能有唯一的一个根元素
-     Vue.component(&apos;mycom3&apos;, {
+     Vue.component(&apos;mycom3&apos;, &#123;
          template: &apos;&lt;div&gt;&lt;h3&gt;这是直接使用 Vue.component 创建出来的组件&lt;/h3&gt;&lt;span&gt;123&lt;/span&gt;&lt;/div&gt;&apos;
-     })
+     &#125;)
     // 方式三：
-     Vue.component(&apos;mycom4&apos;, {
+     Vue.component(&apos;mycom4&apos;, &#123;
          template: &apos;#tmpl&apos;
-     })
+     &#125;)
 
-    var vm = new Vue({
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;
-    });
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1365,17 +1398,17 @@ Vue.http.options.emulateJSON = true;
     &lt;h3&gt;这是私有组件&lt;/h3&gt;
 &lt;/template&gt;
 &lt;script&gt;
-    var vm = new Vue({
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        components: { // 定义实例内部私有组件的
-            login: {
+        components: &#123; // 定义实例内部私有组件的
+            login: &#123;
                 //方式一：
 //                template: &apos;&lt;h3&gt;这是私有组件&lt;/h3&gt;&apos;,
                 //方式二：
                 template: &apos;#tmpl2&apos;
-            }
-        }
-    });
+            &#125;
+        &#125;
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1398,26 +1431,26 @@ Vue.http.options.emulateJSON = true;
 &lt;template id=&quot;tmpl&quot;&gt;
     &lt;div&gt;
         &lt;input type=&quot;button&quot; value=&quot;+1&quot; @click=&quot;increment&quot;&gt;
-        &lt;h3&gt;{{count}}&lt;/h3&gt;
+        &lt;h3&gt;&#123;&#123;count&#125;&#125;&lt;/h3&gt;
     &lt;/div&gt;
 &lt;/template&gt;
 &lt;script&gt;
     // 这是一个计数器的组件, 身上有个按钮,每当点击按钮,让 data 中的 count 值 +1
-    Vue.component(&apos;counter&apos;, {
+    Vue.component(&apos;counter&apos;, &#123;
         template: &apos;#tmpl&apos;,
-        data: function () {
+        data: function () &#123;
             // return dataObj
-            return { count: 0 }
-        },
-        methods: {
-            increment() {
+            return &#123; count: 0 &#125;
+        &#125;,
+        methods: &#123;
+            increment() &#123;
                 this.count++
-            }
-        }
-    })
-    var vm = new Vue({
+            &#125;
+        &#125;
+    &#125;)
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;
-    });
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1440,18 +1473,18 @@ Vue.http.options.emulateJSON = true;
     &lt;register v-else=&quot;flag&quot;&gt;&lt;/register&gt;
 &lt;/div&gt;
 &lt;script&gt;
-    Vue.component(&apos;login&apos;, {
+    Vue.component(&apos;login&apos;, &#123;
         template: &apos;&lt;h3&gt;登录组件&lt;/h3&gt;&apos;
-    })
-    Vue.component(&apos;register&apos;, {
+    &#125;)
+    Vue.component(&apos;register&apos;, &#123;
         template: &apos;&lt;h3&gt;注册组件&lt;/h3&gt;&apos;
-    })
-    var vm = new Vue({
+    &#125;)
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             flag: false
-        }
-    });
+        &#125;
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1471,18 +1504,18 @@ Vue.http.options.emulateJSON = true;
 &lt;/div&gt;
 &lt;script&gt;
     // 组件名称是 字符串
-    Vue.component(&apos;login&apos;, {
+    Vue.component(&apos;login&apos;, &#123;
         template: &apos;&lt;h3&gt;登录组件&lt;/h3&gt;&apos;
-    })
-    Vue.component(&apos;register&apos;, {
+    &#125;)
+    Vue.component(&apos;register&apos;, &#123;
         template: &apos;&lt;h3&gt;注册组件&lt;/h3&gt;&apos;
-    })
-    var vm = new Vue({
+    &#125;)
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             comName: &apos;login&apos; // 当前 component 中的 :is 绑定的组件的名称
-        }
-    });
+        &#125;
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1496,14 +1529,14 @@ Vue.http.options.emulateJSON = true;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/animate.css@3.5.2/animate.min.css&quot;/&gt;
     &lt;style&gt;
         .v-enter,
-        .v-leave-to {
+        .v-leave-to &#123;
             opacity: 0;
             transform: translateX(150px);
-        }
+        &#125;
         .v-enter-active,
-        .v-leave-active {
+        .v-leave-active &#123;
             transition: all 0.5s ease;
-        }
+        &#125;
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -1517,18 +1550,18 @@ Vue.http.options.emulateJSON = true;
 &lt;/div&gt;
 &lt;script&gt;
     // 组件名称是 字符串
-    Vue.component(&apos;login&apos;, {
+    Vue.component(&apos;login&apos;, &#123;
         template: &apos;&lt;h3&gt;登录组件&lt;/h3&gt;&apos;
-    })
-    Vue.component(&apos;register&apos;, {
+    &#125;)
+    Vue.component(&apos;register&apos;, &#123;
         template: &apos;&lt;h3&gt;注册组件&lt;/h3&gt;&apos;
-    })
-    var vm = new Vue({
+    &#125;)
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             comName: &apos;login&apos; // 当前 component 中的 :is 绑定的组件的名称
-        }
-    });
+        &#125;
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1550,18 +1583,18 @@ Vue.http.options.emulateJSON = true;
     &lt;com1 v-bind:parentmsg=&quot;msg&quot;&gt;&lt;/com1&gt;
 &lt;/div&gt;
 &lt;script&gt;
-    var vm = new Vue({
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             msg: &apos;这是父组件中的数据&apos;
-        },
-        components: {
-            com1: {
-                template: &apos;&lt;h1 @click=&quot;change&quot;&gt;这是子组件 --- {{ parentmsg }}&lt;/h1&gt;&apos;,
+        &#125;,
+        components: &#123;
+            com1: &#123;
+                template: &apos;&lt;h1 @click=&quot;change&quot;&gt;这是子组件 --- &#123;&#123; parentmsg &#125;&#125;&lt;/h1&gt;&apos;,
                 props: [&apos;parentmsg&apos;]// 把父组件传递过来的 parentmsg 属性，先在 props 数组中，定义一下，这样，才能使用这个数据
-            }
-        }
-    });
+            &#125;
+        &#125;
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1588,34 +1621,34 @@ Vue.http.options.emulateJSON = true;
 &lt;/template&gt;
 
 &lt;script&gt;
-    var com2 = {
+    var com2 = &#123;
         template: &apos;#tmpl&apos;,
-        data() {
-            return {
-                sonmsg: { name: &apos;子组件data&apos;, age: 16 }
-            }
-         },
-        methods: {
-            myclick() {
+        data() &#123;
+            return &#123;
+                sonmsg: &#123; name: &apos;子组件data&apos;, age: 16 &#125;
+            &#125;
+         &#125;,
+        methods: &#123;
+            myclick() &#123;
                 this.$emit(&apos;func&apos;, this.sonmsg)
-            }
-        }
-    }
-    var vm = new Vue({
+            &#125;
+        &#125;
+    &#125;
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             datamsgFormSon: null
-        },
-        methods: {
-            show(data) {
+        &#125;,
+        methods: &#123;
+            show(data) &#123;
                 this.datamsgFormSon = data
                 console.log(this.datamsgFormSon)
-            }
-        },
-        components: {
+            &#125;
+        &#125;,
+        components: &#123;
             com2
-        }
-    });
+        &#125;
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1634,8 +1667,8 @@ Vue.http.options.emulateJSON = true;
 
     &lt;ul class=&quot;list-group&quot;&gt;
         &lt;li class=&quot;list-group-item&quot; v-for=&quot;item in list&quot; :key=&quot;item.id&quot;&gt;
-            &lt;span class=&quot;badge&quot;&gt;评论人： {{ item.user }}&lt;/span&gt;
-            {{ item.content }}
+            &lt;span class=&quot;badge&quot;&gt;评论人： &#123;&#123; item.user &#125;&#125;&lt;/span&gt;
+            &#123;&#123; item.content &#125;&#125;
         &lt;/li&gt;
     &lt;/ul&gt;
 &lt;/div&gt;
@@ -1655,17 +1688,17 @@ Vue.http.options.emulateJSON = true;
     &lt;/div&gt;
 &lt;/template&gt;
 &lt;script&gt;
-    var commentBox = {
-        data() {
-            return {
+    var commentBox = &#123;
+        data() &#123;
+            return &#123;
                 user: &apos;&apos;,
                 content: &apos;&apos;
-            }
-        },
+            &#125;
+        &#125;,
         template: &apos;#tmpl&apos;,
-        methods: {
-            postComment() {
-                var comment = { id: Date.now(), user: this.user, content: this.content }
+        methods: &#123;
+            postComment() &#123;
+                var comment = &#123; id: Date.now(), user: this.user, content: this.content &#125;
                 // 从 localStorage 中获取所有的评论
                 var list = JSON.parse(localStorage.getItem(&apos;cmts&apos;) || &apos;[]&apos;)
                 list.unshift(comment)
@@ -1673,27 +1706,27 @@ Vue.http.options.emulateJSON = true;
                 localStorage.setItem(&apos;cmts&apos;, JSON.stringify(list))
                 this.user = this.content = &apos;&apos;
                 this.$emit(&apos;func&apos;)
-            }
-        }
-    }
-    var vm = new Vue({
+            &#125;
+        &#125;
+    &#125;
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             list: []
-        },
-        created(){
+        &#125;,
+        created()&#123;
             this.loadComments()
-        },
-        methods: {
-            loadComments() { // 从本地的 localStorage 中，加载评论列表
+        &#125;,
+        methods: &#123;
+            loadComments() &#123; // 从本地的 localStorage 中，加载评论列表
                 var list = JSON.parse(localStorage.getItem(&apos;cmts&apos;) || &apos;[]&apos;)
                 this.list = list
-            }
-        },
-        components: {
+            &#125;
+        &#125;,
+        components: &#123;
             &apos;cmt-box&apos;: commentBox
-        }
-    });
+        &#125;
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1713,33 +1746,33 @@ Vue.http.options.emulateJSON = true;
 
 &lt;script&gt;
 
-    var login = {
+    var login = &#123;
         template: &apos;&lt;h1&gt;登录组件&lt;/h1&gt;&apos;,
-        data() {
-            return {
+        data() &#123;
+            return &#123;
                 msg: &apos;son msg&apos;
-            }
-        },
-        methods: {
-            show() {
+            &#125;
+        &#125;,
+        methods: &#123;
+            show() &#123;
                 console.log(&apos;调用了子组件的方法&apos;)
-            }
-        }
-    }
-    var vm = new Vue({
+            &#125;
+        &#125;
+    &#125;
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {},
-        methods: {
-            getElement() {
+        data: &#123;&#125;,
+        methods: &#123;
+            getElement() &#123;
                 console.log(this.$refs.myh3.innerText)
                 console.log(this.$refs.mylogin.msg)
                 this.$refs.mylogin.show()
-            }
-        },
-        components: {
+            &#125;
+        &#125;,
+        components: &#123;
             login
-        }
-    });
+        &#125;
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1764,48 +1797,48 @@ Vue.http.options.emulateJSON = true;
     &lt;router-view&gt;&lt;/router-view&gt;
 &lt;/div&gt;
 &lt;script&gt;
-    var login = {
+    var login = &#123;
         template: &apos;&lt;h1&gt;登录组件&lt;/h1&gt;&apos;
-    }
-    var register = {
+    &#125;
+    var register = &#123;
         template: &apos;&lt;h1&gt;注册组件&lt;/h1&gt;&apos;
-    }
-    var routerObj = new VueRouter({
+    &#125;
+    var routerObj = new VueRouter(&#123;
         routes: [
-            {path: &apos;/login&apos;, component: login},
-            {path: &apos;/register&apos;, component: register}
+            &#123;path: &apos;/login&apos;, component: login&#125;,
+            &#123;path: &apos;/register&apos;, component: register&#125;
         ]
-    })
-    var vm = new Vue({
+    &#125;)
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {},
-        methods: {},
+        data: &#123;&#125;,
+        methods: &#123;&#125;,
         router: routerObj // 将路由规则对象，注册到 vm 实例上，用来监听 URL 地址的变化，然后展示对应的组件
-    });
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><h3 id="router-link"><a href="#router-link" class="headerlink" title="router-link"></a>router-link</h3><pre><code>&lt;router-link to=&quot;/login&quot; tag=&quot;span&quot;&gt;登录&lt;/router-link&gt;
 &lt;router-link to=&quot;/register&quot;&gt;注册&lt;/router-link&gt;
 </code></pre><h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><pre><code>routes: [ // 路由匹配规则 
-    { path: &apos;/&apos;, redirect: &apos;/login&apos; }, // 这里的 redirect 和 Node 中的 redirect 完全是两码事
-    { path: &apos;/login&apos;, component: login },
-    { path: &apos;/register&apos;, component: register }
+    &#123; path: &apos;/&apos;, redirect: &apos;/login&apos; &#125;, // 这里的 redirect 和 Node 中的 redirect 完全是两码事
+    &#123; path: &apos;/login&apos;, component: login &#125;,
+    &#123; path: &apos;/register&apos;, component: register &#125;
 ]
 </code></pre><h3 id="选中路由高亮"><a href="#选中路由高亮" class="headerlink" title="选中路由高亮"></a>选中路由高亮</h3><p>方式一：router-link标签中，默认情况</p>
 <pre><code>&lt;style&gt;
-    .router-link-active{
+    .router-link-active&#123;
         color: red;
         font-weight: 800;
         font-style: italic;
         font-size: 18px;
         text-decoration: underline;
-    }
+    &#125;
 &lt;/style&gt;
 </code></pre><p>方式二：修改router-link-active为myactive，然后再定义样式</p>
-<pre><code>var routerObj = new VueRouter({
+<pre><code>var routerObj = new VueRouter(&#123;
       linkActiveClass: &apos;myactive&apos;
-})
+&#125;)
 </code></pre><h3 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h3><p>方式一：query方式传递参数</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
@@ -1821,26 +1854,26 @@ Vue.http.options.emulateJSON = true;
     &lt;router-view&gt;&lt;/router-view&gt;
 &lt;/div&gt;
 &lt;script&gt;
-    var login = {
-        template: &apos;&lt;h1&gt;登录组件 --- {{ $route.query.id }} --- {{ $route.query.name }}&lt;/h1&gt;&apos;,
-        created(){ // 组件的生命周期钩子函数
+    var login = &#123;
+        template: &apos;&lt;h1&gt;登录组件 --- &#123;&#123; $route.query.id &#125;&#125; --- &#123;&#123; $route.query.name &#125;&#125;&lt;/h1&gt;&apos;,
+        created()&#123; // 组件的生命周期钩子函数
              console.log(this.$route.query.id)
-        }
-    }
-    var register = {
+        &#125;
+    &#125;
+    var register = &#123;
         template: &apos;&lt;h1&gt;注册组件&lt;/h1&gt;&apos;
-    }
-    var routerObj = new VueRouter({
+    &#125;
+    var routerObj = new VueRouter(&#123;
         routes: [
-            {path: &apos;/login&apos;, component: login}
+            &#123;path: &apos;/login&apos;, component: login&#125;
         ]
-    })
-    var vm = new Vue({
+    &#125;)
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {},
-        methods: {},
+        data: &#123;&#125;,
+        methods: &#123;&#125;,
         router: routerObj // 将路由规则对象，注册到 vm 实例上，用来监听 URL 地址的变化，然后展示对应的组件
-    });
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1859,26 +1892,26 @@ Vue.http.options.emulateJSON = true;
     &lt;router-view&gt;&lt;/router-view&gt;
 &lt;/div&gt;
 &lt;script&gt;
-    var login = {
-        template: &apos;&lt;h1&gt;登录组件 --- {{ $route.params.id }} --- {{ $route.params.name }}&lt;/h1&gt;&apos;,
-        created(){ // 组件的生命周期钩子函数
+    var login = &#123;
+        template: &apos;&lt;h1&gt;登录组件 --- &#123;&#123; $route.params.id &#125;&#125; --- &#123;&#123; $route.params.name &#125;&#125;&lt;/h1&gt;&apos;,
+        created()&#123; // 组件的生命周期钩子函数
              console.log(this.$route.params.id)
-        }
-    }
-    var register = {
+        &#125;
+    &#125;
+    var register = &#123;
         template: &apos;&lt;h1&gt;注册组件&lt;/h1&gt;&apos;
-    }
-    var routerObj = new VueRouter({
+    &#125;
+    var routerObj = new VueRouter(&#123;
         routes: [
-            {path: &apos;/login/:id/:name&apos;, component: login}
+            &#123;path: &apos;/login/:id/:name&apos;, component: login&#125;
         ]
-    })
-    var vm = new Vue({
+    &#125;)
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {},
-        methods: {},
+        data: &#123;&#125;,
+        methods: &#123;&#125;,
         router: routerObj // 将路由规则对象，注册到 vm 实例上，用来监听 URL 地址的变化，然后展示对应的组件
-    });
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1906,33 +1939,33 @@ Vue.http.options.emulateJSON = true;
     &lt;/div&gt;
 &lt;/template&gt;
 &lt;script&gt;
-    var account = {
+    var account = &#123;
         template: &apos;#tmpl&apos;
-    }
-    var login = {
+    &#125;
+    var login = &#123;
         template: &apos;&lt;h3&gt;登录&lt;/h3&gt;&apos;
-    }
-    var register = {
+    &#125;
+    var register = &#123;
         template: &apos;&lt;h3&gt;注册&lt;/h3&gt;&apos;
-    }
-    var router = new VueRouter({
+    &#125;
+    var router = new VueRouter(&#123;
         routes: [
-            {
+            &#123;
                 path: &apos;/account&apos;,
                 component: account,
                 children: [
-                    { path: &apos;login&apos;, component: login },
-                    { path: &apos;register&apos;, component: register }
+                    &#123; path: &apos;login&apos;, component: login &#125;,
+                    &#123; path: &apos;register&apos;, component: register &#125;
                 ]
-            }
+            &#125;
         ]
-    })
-    var vm = new Vue({
+    &#125;)
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {},
-        methods: {},
+        data: &#123;&#125;,
+        methods: &#123;&#125;,
         router
-    });
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -1945,31 +1978,31 @@ Vue.http.options.emulateJSON = true;
     &lt;script src=&quot;./lib/vue-router-3.0.1.js&quot;&gt;&lt;/script&gt;
     &lt;style&gt;
         html,
-        body {
+        body &#123;
             margin: 0;
             padding: 0;
-        }
-        .header {
+        &#125;
+        .header &#123;
             background-color: orange;
             height: 80px;
-        }
-        h1 {
+        &#125;
+        h1 &#123;
             margin: 0;
             padding: 0;
             font-size: 16px;
-        }
-        .container {
+        &#125;
+        .container &#123;
             display: flex;
             height: 600px;
-        }
-        .left {
+        &#125;
+        .left &#123;
             background-color: lightgreen;
             flex: 2;
-        }
-        .main {
+        &#125;
+        .main &#123;
             background-color: lightpink;
             flex: 8;
-        }
+        &#125;
     &lt;/style&gt;
 &lt;/head&gt;
 
@@ -1982,32 +2015,32 @@ Vue.http.options.emulateJSON = true;
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;script&gt;
-    var header = {
+    var header = &#123;
         template: &apos;&lt;h1 class=&quot;header&quot;&gt;Header头部区域&lt;/h1&gt;&apos;
-    }
-    var leftBox = {
+    &#125;
+    var leftBox = &#123;
         template: &apos;&lt;h1 class=&quot;left&quot;&gt;Left侧边栏区域&lt;/h1&gt;&apos;
-    }
-    var mainBox = {
+    &#125;
+    var mainBox = &#123;
         template: &apos;&lt;h1 class=&quot;main&quot;&gt;mainBox主体区域&lt;/h1&gt;&apos;
-    }
-    var router = new VueRouter({
+    &#125;
+    var router = new VueRouter(&#123;
         routes: [
-            {
-                path: &apos;/&apos;, components: {
+            &#123;
+                path: &apos;/&apos;, components: &#123;
                 &apos;default&apos;: header,
                 &apos;left&apos;: leftBox,
                 &apos;main&apos;: mainBox
-                }
-            }
+                &#125;
+            &#125;
         ]
-    })
-    var vm = new Vue({
+    &#125;)
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {},
-        methods: {},
+        data: &#123;&#125;,
+        methods: &#123;&#125;,
         router
-    });
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -2027,24 +2060,24 @@ Vue.http.options.emulateJSON = true;
 &lt;/div&gt;
 &lt;script&gt;
     // 创建 Vue 实例，得到 ViewModel
-    var vm = new Vue({
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             firstname: &apos;&apos;,
             lastname: &apos;&apos;,
             fullname: &apos;&apos;
-        },
-        methods: {},
-        watch: {
-            &apos;firstname&apos;: function (newVal, oldVal) {
+        &#125;,
+        methods: &#123;&#125;,
+        watch: &#123;
+            &apos;firstname&apos;: function (newVal, oldVal) &#123;
                 // this.fullname = this.firstname + &apos;-&apos; + this.lastname
                 this.fullname = newVal + &apos;-&apos; + this.lastname
-            },
-            &apos;lastname&apos;: function (newVal) {
+            &#125;,
+            &apos;lastname&apos;: function (newVal) &#123;
                 this.fullname = this.firstname + &apos;-&apos; + newVal
-            }
-        }
-    });
+            &#125;
+        &#125;
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -2064,36 +2097,36 @@ Vue.http.options.emulateJSON = true;
     &lt;router-view&gt;&lt;/router-view&gt;
 &lt;/div&gt;
 &lt;script&gt;
-    var login = {
+    var login = &#123;
         template: &apos;&lt;h3&gt;这是登录子组件&lt;/h3&gt;&apos;
-    }
-    var register = {
+    &#125;
+    var register = &#123;
         template: &apos;&lt;h3&gt;这是注册子组件&lt;/h3&gt;&apos;
-    }
-    var router = new VueRouter({
+    &#125;
+    var router = new VueRouter(&#123;
         routes: [
-            { path: &apos;/&apos;, redirect: &apos;/login&apos; },
-            { path: &apos;/login&apos;, component: login },
-            { path: &apos;/register&apos;, component: register }
+            &#123; path: &apos;/&apos;, redirect: &apos;/login&apos; &#125;,
+            &#123; path: &apos;/login&apos;, component: login &#125;,
+            &#123; path: &apos;/register&apos;, component: register &#125;
         ]
-    })
-    var vm = new Vue({
+    &#125;)
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {},
-        methods: {},
+        data: &#123;&#125;,
+        methods: &#123;&#125;,
         // router: router
         router,
-        watch: {
-            &apos;$route.path&apos;: function (newVal, oldVal) {
+        watch: &#123;
+            &apos;$route.path&apos;: function (newVal, oldVal) &#123;
                 // console.log(newVal + &apos; --- &apos; + oldVal)
-                if (newVal === &apos;/login&apos;) {
+                if (newVal === &apos;/login&apos;) &#123;
                     console.log(&apos;欢迎进入登录页面&apos;)
-                } else if (newVal === &apos;/register&apos;) {
+                &#125; else if (newVal === &apos;/register&apos;) &#123;
                     console.log(&apos;欢迎进入注册页面&apos;)
-                }
-            }
-        }
-    });
+                &#125;
+            &#125;
+        &#125;
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -2113,24 +2146,24 @@ Vue.http.options.emulateJSON = true;
     &lt;input type=&quot;text&quot; v-model=&quot;middlename&quot;&gt; +
     &lt;input type=&quot;text&quot; v-model=&quot;lastname&quot;&gt; =
     &lt;input type=&quot;text&quot; v-model=&quot;fullname&quot;&gt;
-    &lt;p&gt;{{ fullname }}&lt;/p&gt;
+    &lt;p&gt;&#123;&#123; fullname &#125;&#125;&lt;/p&gt;
 &lt;/div&gt;
 &lt;script&gt;
-    var vm = new Vue({
+    var vm = new Vue(&#123;
         el: &apos;#app&apos;,
-        data: {
+        data: &#123;
             firstname: &apos;&apos;,
             lastname: &apos;&apos;,
             middlename: &apos;&apos;
-        },
-        methods: {},
-        computed: {
-            &apos;fullname&apos;: function () {
+        &#125;,
+        methods: &#123;&#125;,
+        computed: &#123;
+            &apos;fullname&apos;: function () &#123;
                 console.log(&apos;ok&apos;)
                 return this.firstname + &apos;-&apos; + this.middlename + &apos;-&apos; + this.lastname
-            }
-        }
-    });
+            &#125;
+        &#125;
+    &#125;);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -2152,13 +2185,13 @@ Vue.http.options.emulateJSON = true;
 <pre><code>// 导入处理路径的模块
 var path = require(&apos;path&apos;);
 // 导出一个配置对象，将来webpack在启动的时候，会默认来查找webpack.config.js，并读取这个文件中导出的配置对象，来进行打包处理
-module.exports = {
+module.exports = &#123;
     entry: path.join(__dirname, &apos;src/js/main.js&apos;), // 项目入口文件
-    output: { // 配置输出选项
+    output: &#123; // 配置输出选项
         path: path.join(__dirname, &apos;dist&apos;), // 配置输出的路径
         filename: &apos;bundle.js&apos; // 配置输出的文件名
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>最后控制台执行webpack。</p>
 <h3 id="webpack-dev-server实时打包构建"><a href="#webpack-dev-server实时打包构建" class="headerlink" title="webpack-dev-server实时打包构建"></a>webpack-dev-server实时打包构建</h3><p>使用<code>webpack-dev-server</code>来实现代码实时打包编译，当修改代码之后，会自动进行打包构建。</p>
 <p>运行<code>cnpm i webpack-dev-server --save-dev</code>安装到开发依赖</p>
@@ -2171,12 +2204,12 @@ module.exports = {
 <h3 id="配置package-json"><a href="#配置package-json" class="headerlink" title="配置package.json"></a>配置package.json</h3><p>修改<code>package.json</code>的script节点如下，其中<code>--open</code>表示自动打开浏览器，<code>--port 4321</code>表示打开的端口号为4321，<code>--hot</code>表示启用浏览器热更新，<code>--contentBase src</code>表示直接访问到index首页：</p>
 <pre><code>&quot;dev&quot;: &quot;webpack-dev-server --hot --port 4321 --open --contentBase src&quot;
 </code></pre><h3 id="配置webpack-config-js"><a href="#配置webpack-config-js" class="headerlink" title="配置webpack.config.js"></a>配置webpack.config.js</h3><p><code>webpack.config.js</code>文件，新增<code>devServer</code>节点如下：</p>
-<pre><code>devServer:{
+<pre><code>devServer:&#123;
     hot:true,
     open:true,
     port:4321,
     contentBase:&apos;src&apos;
-}
+&#125;
 </code></pre><p>在头部引入<code>webpack</code>模块：</p>
 <pre><code>var webpack = require(&apos;webpack&apos;);
 </code></pre><p>在<code>plugins</code>节点下新增：</p>
@@ -2220,13 +2253,13 @@ module.exports = {
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/04/12/14.win下Fiddler和mac下charles抓包/" class="pre-post btn btn-default" title='win下Fiddler和mac下charles抓包'>
+        <a href="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/" class="pre-post btn btn-default" title='win下Fiddler和mac下charles抓包'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">win下Fiddler和mac下charles抓包</span>
         </a>
     
     
-        <a href="/2019/02/17/9.微信小程序开发/" class="next-post btn btn-default" title='微信小程序开发'>
+        <a href="/2019/02/17/9.%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" class="next-post btn btn-default" title='微信小程序开发'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">微信小程序开发</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -2244,7 +2277,7 @@ module.exports = {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mvvm"><span class="toc-text">mvvm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue调试"><span class="toc-text">Vue调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#教程"><span class="toc-text">教程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指令"><span class="toc-text">指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#v-cloak"><span class="toc-text">v-cloak</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-text"><span class="toc-text">v-text</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-html"><span class="toc-text">v-html</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-bind"><span class="toc-text">v-bind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-on"><span class="toc-text">v-on</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例之跑马灯"><span class="toc-text">示例之跑马灯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-model"><span class="toc-text">v-model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-for"><span class="toc-text">v-for</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-if和v-show"><span class="toc-text">v-if和v-show</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件修饰符"><span class="toc-text">事件修饰符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#stop"><span class="toc-text">.stop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#prevent"><span class="toc-text">.prevent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capture"><span class="toc-text">.capture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#self"><span class="toc-text">.self</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#once"><span class="toc-text">.once</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#样式"><span class="toc-text">样式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#class样式"><span class="toc-text">class样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内联样式"><span class="toc-text">内联样式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过滤器"><span class="toc-text">过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义键盘修饰符"><span class="toc-text">自定义键盘修饰符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义指令"><span class="toc-text">自定义指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue实例的生命周期"><span class="toc-text">vue实例的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-resource实现网络请求"><span class="toc-text">vue-resource实现网络请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#练习-品牌案例"><span class="toc-text">练习-品牌案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue中的动画"><span class="toc-text">Vue中的动画</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义v-前缀"><span class="toc-text">自定义v-前缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用第三方animate-css类库实现动画"><span class="toc-text">使用第三方animate.css类库实现动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动画钩子"><span class="toc-text">动画钩子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-for的列表过渡"><span class="toc-text">v-for的列表过渡</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件"><span class="toc-text">组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全局组件定义的三种方式"><span class="toc-text">全局组件定义的三种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有组件定义"><span class="toc-text">私有组件定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件中的data和methods"><span class="toc-text">组件中的data和methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件切换"><span class="toc-text">组件切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父组件向子组件传值"><span class="toc-text">父组件向子组件传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父组件向子组件传方法"><span class="toc-text">父组件向子组件传方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件案例-评论功能实现"><span class="toc-text">组件案例-评论功能实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过refs获取元素和组件"><span class="toc-text">通过refs获取元素和组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由"><span class="toc-text">路由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#router-link"><span class="toc-text">router-link</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向"><span class="toc-text">重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选中路由高亮"><span class="toc-text">选中路由高亮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由传参"><span class="toc-text">路由传参</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由嵌套"><span class="toc-text">路由嵌套</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命名视图实现经典布局"><span class="toc-text">命名视图实现经典布局</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#watch"><span class="toc-text">watch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#computed计算属性"><span class="toc-text">computed计算属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack安装的两种方式"><span class="toc-text">webpack安装的两种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件打包命令"><span class="toc-text">配置文件打包命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack-dev-server实时打包构建"><span class="toc-text">webpack-dev-server实时打包构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置package-json"><span class="toc-text">配置package.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置webpack-config-js"><span class="toc-text">配置webpack.config.js</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mvvm"><span class="toc-text">mvvm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%B9%8B%E8%B7%91%E9%A9%AC%E7%81%AF"><span class="toc-text">示例之跑马灯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-model"><span class="toc-text">v-model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-for"><span class="toc-text">v-for</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-if%E5%92%8Cv-show"><span class="toc-text">v-if和v-show</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-text">事件修饰符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#stop"><span class="toc-text">.stop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#prevent"><span class="toc-text">.prevent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capture"><span class="toc-text">.capture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#self"><span class="toc-text">.self</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#once"><span class="toc-text">.once</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E5%BC%8F"><span class="toc-text">样式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#class%E6%A0%B7%E5%BC%8F"><span class="toc-text">class样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E8%81%94%E6%A0%B7%E5%BC%8F"><span class="toc-text">内联样式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-text">过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%94%AE%E7%9B%98%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-text">自定义键盘修饰符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4"><span class="toc-text">自定义指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">vue实例的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-resource%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82"><span class="toc-text">vue-resource实现网络请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-%E5%93%81%E7%89%8C%E6%A1%88%E4%BE%8B"><span class="toc-text">练习-品牌案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue%E4%B8%AD%E7%9A%84%E5%8A%A8%E7%94%BB"><span class="toc-text">Vue中的动画</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89v-%E5%89%8D%E7%BC%80"><span class="toc-text">自定义v-前缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9animate-css%E7%B1%BB%E5%BA%93%E5%AE%9E%E7%8E%B0%E5%8A%A8%E7%94%BB"><span class="toc-text">使用第三方animate.css类库实现动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB%E9%92%A9%E5%AD%90"><span class="toc-text">动画钩子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-for%E7%9A%84%E5%88%97%E8%A1%A8%E8%BF%87%E6%B8%A1"><span class="toc-text">v-for的列表过渡</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6"><span class="toc-text">组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">全局组件定义的三种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%81%E6%9C%89%E7%BB%84%E4%BB%B6%E5%AE%9A%E4%B9%89"><span class="toc-text">私有组件定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E4%B8%AD%E7%9A%84data%E5%92%8Cmethods"><span class="toc-text">组件中的data和methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%88%87%E6%8D%A2"><span class="toc-text">组件切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC"><span class="toc-text">父组件向子组件传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E6%96%B9%E6%B3%95"><span class="toc-text">父组件向子组件传方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E6%A1%88%E4%BE%8B-%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="toc-text">组件案例-评论功能实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87refs%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E5%92%8C%E7%BB%84%E4%BB%B6"><span class="toc-text">通过refs获取元素和组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1"><span class="toc-text">路由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#router-link"><span class="toc-text">router-link</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-text">重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E4%B8%AD%E8%B7%AF%E7%94%B1%E9%AB%98%E4%BA%AE"><span class="toc-text">选中路由高亮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82"><span class="toc-text">路由传参</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%B5%8C%E5%A5%97"><span class="toc-text">路由嵌套</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E8%A7%86%E5%9B%BE%E5%AE%9E%E7%8E%B0%E7%BB%8F%E5%85%B8%E5%B8%83%E5%B1%80"><span class="toc-text">命名视图实现经典布局</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#watch"><span class="toc-text">watch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#computed%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7"><span class="toc-text">computed计算属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack%E5%AE%89%E8%A3%85%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">webpack安装的两种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%89%93%E5%8C%85%E5%91%BD%E4%BB%A4"><span class="toc-text">配置文件打包命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack-dev-server%E5%AE%9E%E6%97%B6%E6%89%93%E5%8C%85%E6%9E%84%E5%BB%BA"><span class="toc-text">webpack-dev-server实时打包构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEpackage-json"><span class="toc-text">配置package.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEwebpack-config-js"><span class="toc-text">配置webpack.config.js</span></a></li></ol></li></ol>
         
     </div>
 </aside>
@@ -2296,7 +2329,9 @@ module.exports = {
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

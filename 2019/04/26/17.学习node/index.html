@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -201,85 +203,85 @@ console.log(f)
 <p>node执行下面的js文件：</p>
 <pre><code>var fs = require(&apos;fs&apos;)
 //    第一个参数就是要读取的文件路径,第二个参数是一个回调函数
-fs.readFile(&apos;./data/hello.txt&apos;, function (error, data) {
-  if (error) {
+fs.readFile(&apos;./data/hello.txt&apos;, function (error, data) &#123;
+  if (error) &#123;
     console.log(&apos;读取文件失败了&apos;)
-  } else {
+  &#125; else &#123;
     console.log(data.toString())
-  }
-})
+  &#125;
+&#125;)
 </code></pre><p>写文件：</p>
 <pre><code>var fs = require(&apos;fs&apos;)
-fs.writeFile(&apos;./data/你好.md&apos;, &apos;我是Node.js&apos;, function (error) {
-  if (error) {
+fs.writeFile(&apos;./data/你好.md&apos;, &apos;我是Node.js&apos;, function (error) &#123;
+  if (error) &#123;
     console.log(&apos;写入失败&apos;)
-  } else {
+  &#125; else &#123;
     console.log(&apos;写入成功了&apos;)
-  }
-})
+  &#125;
+&#125;)
 </code></pre><h2 id="http服务"><a href="#http服务" class="headerlink" title="http服务"></a>http服务</h2><p>简单的http服务</p>
 <pre><code>var http = require(&apos;http&apos;)
 //使用 http.createServer() 方法创建一个 Web 服务器
 var server = http.createServer()
 //当客户端请求过来，就会自动触发服务器的 request 请求事件，然后执行第二个参数：回调处理函数
-server.on(&apos;request&apos;, function () {
+server.on(&apos;request&apos;, function () &#123;
   console.log(&apos;收到客户端的请求了&apos;)
-})
+&#125;)
 //绑定端口号，启动服务器
-server.listen(3000, function () {
+server.listen(3000, function () &#123;
   console.log(&apos;服务器启动成功了，可以通过 http://你的ip/ 来进行访问&apos;)
-})
+&#125;)
 </code></pre><p>处理请求,request请求事件处理函数，需要接收两个参数：Request 请求对象,请求对象可以用来获取客户端的一些请求信息，例如请求路径;Response 响应对象,响应对象可以用来给客户端发送响应消息。</p>
 <pre><code>var http = require(&apos;http&apos;)
 var server = http.createServer()
 
-server.on(&apos;request&apos;, function (request, response) {
+server.on(&apos;request&apos;, function (request, response) &#123;
   console.log(&apos;收到客户端的请求了，请求路径是：&apos; + request.url)
   // response 对象有一个方法：write 可以用来给客户端发送响应数据,write 可以使用多次，但是最后一定要使用 end 来结束响应，否则客户端会一直等待
   response.write(&apos;hello&apos;)
   response.write(&apos; nodejs&apos;)
   response.end()
-})
+&#125;)
 
-server.listen(3000, function () {
+server.listen(3000, function () &#123;
   console.log(&apos;服务器启动成功了，可以通过 http://你的ip:3000/ 来进行访问&apos;)
-})
+&#125;)
 </code></pre><p>根据不同请求路径返回不同数据：</p>
 <pre><code>var http = require(&apos;http&apos;)
 var server = http.createServer()
 
-server.on(&apos;request&apos;, function (req, res) {
+server.on(&apos;request&apos;, function (req, res) &#123;
   console.log(&apos;收到请求了，请求路径是：&apos; + req.url)
   console.log(&apos;请求我的客户端的地址是：&apos;, req.socket.remoteAddress, req.socket.remotePort)
   var url = req.url
-  if (url === &apos;/&apos;) {
+  if (url === &apos;/&apos;) &#123;
     res.end(&apos;index page&apos;)
-  } else if (url === &apos;/login&apos;) {
+  &#125; else if (url === &apos;/login&apos;) &#123;
     res.end(&apos;login page&apos;)
-  } else if (url === &apos;/products&apos;) {
-    var products = [{
+  &#125; else if (url === &apos;/products&apos;) &#123;
+    var products = [&#123;
         name: &apos;苹果 X&apos;,
         price: 8888
-      },
-      {
+      &#125;,
+      &#123;
         name: &apos;菠萝 X&apos;,
         price: 5000
-      },
-      {
+      &#125;,
+      &#123;
         name: &apos;小辣椒 X&apos;,
         price: 1999
-      }
+      &#125;
     ]
     res.setHeader(&apos;Content-Type&apos;, &apos;text/plain; charset=utf-8&apos;)
     // 响应内容只能是二进制数据或者字符串、 数字、 对象、数组、布尔值
     res.end(JSON.stringify(products))
-  } else {
+  &#125; else &#123;
     res.end(&apos;404 Not Found.&apos;)
-  }
-})
-server.listen(3000, function () {
+  &#125;
+&#125;)
+server.listen(3000, function () &#123;
   console.log(&apos;服务器启动成功，可以访问了。。。&apos;)
-})
+&#125;)
 </code></pre><p>在服务端默认发送的数据，其实是 utf8 编码的内容，中文操作系统默认是 gbk。在 http 协议中，Content-Type 就是用来告知对方我给你发送的数据内容是什么类型</p>
 <pre><code>// text/plain 就是普通文本
 res.setHeader(&apos;Content-Type&apos;, &apos;text/plain; charset=utf-8&apos;)
@@ -289,12 +291,12 @@ res.setHeader(&apos;Content-Type&apos;, &apos;text/html; charset=utf-8&apos;)
 res.setHeader(&apos;Content-Type&apos;, &apos;image/jpeg&apos;)
 </code></pre><h2 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h2><p>读取文件目录</p>
 <pre><code>var fs = require(&apos;fs&apos;)
-fs.readdir(&apos;D:/Movie/www&apos;, function (err, files) {
-  if (err) {
+fs.readdir(&apos;D:/Movie/www&apos;, function (err, files) &#123;
+  if (err) &#123;
     return console.log(&apos;目录不存在&apos;)
-  }
+  &#125;
   console.log(files)
-})
+&#125;)
 </code></pre><p><code>art-template</code>不仅可以在浏览器使用，也可以在 node 中使用。</p>
 <pre><code>https://github.com/aui/art-template
 https://aui.github.io/art-template/
@@ -318,15 +320,15 @@ https://aui.github.io/art-template/
       &lt;title&gt;Document&lt;/title&gt;
     &lt;/head&gt;
     &lt;body&gt;
-      &lt;p&gt;大家好，我叫：{{ name }}&lt;/p&gt;
-      &lt;p&gt;我今年 {{ age }} 岁了&lt;/p&gt;
-      &lt;h1&gt;我来自 {{ province }}&lt;/h1&gt;
-      &lt;p&gt;我喜欢：{{each hobbies}} {{ $value }} {{/each}}&lt;/p&gt;
+      &lt;p&gt;大家好，我叫：&#123;&#123; name &#125;&#125;&lt;/p&gt;
+      &lt;p&gt;我今年 &#123;&#123; age &#125;&#125; 岁了&lt;/p&gt;
+      &lt;h1&gt;我来自 &#123;&#123; province &#125;&#125;&lt;/h1&gt;
+      &lt;p&gt;我喜欢：&#123;&#123;each hobbies&#125;&#125; &#123;&#123; $value &#125;&#125; &#123;&#123;/each&#125;&#125;&lt;/p&gt;
     &lt;/body&gt;
     &lt;/html&gt;
   &lt;/script&gt;
   &lt;script&gt;
-    var ret = template(&apos;tpl&apos;, {
+    var ret = template(&apos;tpl&apos;, &#123;
       name: &apos;Jack&apos;,
       age: 18,
       province: &apos;北京市&apos;,
@@ -335,7 +337,7 @@ https://aui.github.io/art-template/
         &apos;唱歌&apos;,
         &apos;打游戏&apos;
       ]
-    })
+    &#125;)
     console.log(ret)
   &lt;/script&gt;
 &lt;/body&gt;
@@ -344,11 +346,11 @@ https://aui.github.io/art-template/
 <p>node执行js</p>
 <pre><code>var template = require(&apos;art-template&apos;)
 var fs = require(&apos;fs&apos;)
-fs.readFile(&apos;./tpl.html&apos;, function (err, data) {
-  if (err) {
+fs.readFile(&apos;./tpl.html&apos;, function (err, data) &#123;
+  if (err) &#123;
     return console.log(&apos;读取文件失败了&apos;)
-  }
-  var ret = template.render(data.toString(), {
+  &#125;
+  var ret = template.render(data.toString(), &#123;
     name: &apos;Jack&apos;,
     age: 18,
     province: &apos;北京市&apos;,
@@ -358,23 +360,23 @@ fs.readFile(&apos;./tpl.html&apos;, function (err, data) {
       &apos;打游戏&apos;
     ],
     title: &apos;个人信息&apos;
-  })
+  &#125;)
   console.log(ret)
-})
+&#125;)
 </code></pre><p>tpl.html</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
-  &lt;title&gt;{{ title }}&lt;/title&gt;
+  &lt;title&gt;&#123;&#123; title &#125;&#125;&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;p&gt;大家好，我叫：{{ name }}&lt;/p&gt;
-  &lt;p&gt;我今年 {{ age }} 岁了&lt;/p&gt;
-  &lt;h1&gt;我来自 {{ province }}&lt;/h1&gt;
-  &lt;p&gt;我喜欢：{{each hobbies}} {{ $value }} {{/each}}&lt;/p&gt;
+  &lt;p&gt;大家好，我叫：&#123;&#123; name &#125;&#125;&lt;/p&gt;
+  &lt;p&gt;我今年 &#123;&#123; age &#125;&#125; 岁了&lt;/p&gt;
+  &lt;h1&gt;我来自 &#123;&#123; province &#125;&#125;&lt;/h1&gt;
+  &lt;p&gt;我喜欢：&#123;&#123;each hobbies&#125;&#125; &#123;&#123; $value &#125;&#125; &#123;&#123;/each&#125;&#125;&lt;/p&gt;
   &lt;script&gt;
-    var foo = &apos;{{ title }}&apos;
+    var foo = &apos;&#123;&#123; title &#125;&#125;&apos;
   &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -452,13 +454,13 @@ npm config list
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/05/13/21.线程和线程池/" class="pre-post btn btn-default" title='线程和线程池'>
+        <a href="/2019/05/13/21.%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="pre-post btn btn-default" title='线程和线程池'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">线程和线程池</span>
         </a>
     
     
-        <a href="/2019/04/24/16.设计模式/" class="next-post btn btn-default" title='设计模式'>
+        <a href="/2019/04/24/16.%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="next-post btn btn-default" title='设计模式'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">设计模式</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -476,7 +478,7 @@ npm config list
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#起步"><span class="toc-text">起步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读和写文件"><span class="toc-text">读和写文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http服务"><span class="toc-text">http服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板引擎"><span class="toc-text">模板引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm"><span class="toc-text">npm</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E6%AD%A5"><span class="toc-text">起步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%92%8C%E5%86%99%E6%96%87%E4%BB%B6"><span class="toc-text">读和写文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http%E6%9C%8D%E5%8A%A1"><span class="toc-text">http服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E"><span class="toc-text">模板引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm"><span class="toc-text">npm</span></a></li></ol>
         
     </div>
 </aside>
@@ -528,7 +530,9 @@ npm config list
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

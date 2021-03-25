@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -223,43 +225,43 @@
 <pre><code>int[] temp=new int[n];//申请n*4个字节+数组自身头信息开销24个字节
 </code></pre><hr>
 <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h3 id="1、Comparable接口"><a href="#1、Comparable接口" class="headerlink" title="1、Comparable接口"></a>1、Comparable接口</h3><hr>
-<pre><code>public class Student implements Comparable&lt;Student&gt;{
+<pre><code>public class Student implements Comparable&lt;Student&gt;&#123;
     private String username;
     private int age;
 
-    public String getUsername() {
+    public String getUsername() &#123;
         return username;
-    }
+    &#125;
 
-    public void setUsername(String username) {
+    public void setUsername(String username) &#123;
         this.username = username;
-    }
+    &#125;
 
-    public int getAge() {
+    public int getAge() &#123;
         return age;
-    }
+    &#125;
 
-    public void setAge(int age) {
+    public void setAge(int age) &#123;
         this.age = age;
-    }
+    &#125;
 
     @Override
-    public String toString() {
-        return &quot;Student{&quot; +
+    public String toString() &#123;
+        return &quot;Student&#123;&quot; +
                 &quot;username=&apos;&quot; + username + &apos;\&apos;&apos; +
                 &quot;, age=&quot; + age +
-                &apos;}&apos;;
-    }
+                &apos;&#125;&apos;;
+    &#125;
 
     @Override
-    public int compareTo(Student o) {
+    public int compareTo(Student o) &#123;
         return this.getAge()-o.getAge();
-    }
-}
+    &#125;
+&#125;
 
-public class TestComparable {
+public class TestComparable &#123;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) &#123;
         //创建两个Student对象，并调用getMax方法，完成测试
         Student s1 = new Student();
         s1.setUsername(&quot;张三&quot;);
@@ -271,262 +273,262 @@ public class TestComparable {
 
         Comparable max = getMax(s1, s2);
         System.out.println(max);
-    }
+    &#125;
 
-    public static Comparable getMax(Comparable c1,Comparable c2){
+    public static Comparable getMax(Comparable c1,Comparable c2)&#123;
         int result = c1.compareTo(c2);
         //如果result&lt;0,则c1比c2小；
         //如果result&gt;0，则c1比c2大；
         //如果result==0,则c1和c2一样大；
-        if (result&gt;=0){
+        if (result&gt;=0)&#123;
             return c1;
-        }else{
+        &#125;else&#123;
             return c2;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="2、冒泡排序"><a href="#2、冒泡排序" class="headerlink" title="2、冒泡排序"></a>2、冒泡排序</h3><hr>
 <p>比较相邻的元素。如果前一个元素比后一个元素大，就交换这两个元素的位置。最终最后位置的元素就是最大值。</p>
-<pre><code>public class Bubble {
+<pre><code>public class Bubble &#123;
     /*
      *  对数组的元素进行排序
     */
-    public static void sort(Comparable[] a){
-        for(int i=a.length-1;i&gt;0;i--){
-            for(int j=0;j&lt;i;j++){
+    public static void sort(Comparable[] a)&#123;
+        for(int i=a.length-1;i&gt;0;i--)&#123;
+            for(int j=0;j&lt;i;j++)&#123;
                 //比较索引j和索引j+1处的值
-                if (greater(a[j],a[j+1])){
+                if (greater(a[j],a[j+1]))&#123;
                     exch(a,j,j+1);
-                }
-            }
-        }
-    }
+                &#125;
+            &#125;
+        &#125;
+    &#125;
 
     /*
      *  比较v元素是否大于w元素
      */
-    private static  boolean greater(Comparable v,Comparable w){
+    private static  boolean greater(Comparable v,Comparable w)&#123;
         return v.compareTo(w)&gt;0;
-    }
+    &#125;
 
     /*
     数组元素i和j交换位置
      */
-    private static void exch(Comparable[] a,int i,int j){
+    private static void exch(Comparable[] a,int i,int j)&#123;
         Comparable temp;
         temp = a[i];
         a[i]=a[j];
         a[j]=temp;
-    }
-}
+    &#125;
+&#125;
 
-public class BubbleTest {
-    public static void main(String[] args) {
-        Integer[] arr = {4,5,6,3,2,1};
+public class BubbleTest &#123;
+    public static void main(String[] args) &#123;
+        Integer[] arr = &#123;4,5,6,3,2,1&#125;;
         Bubble.sort(arr);
 
-        System.out.println(Arrays.toString(arr));//{1,2,3,4,5,6}
-    }
-}
+        System.out.println(Arrays.toString(arr));//&#123;1,2,3,4,5,6&#125;
+    &#125;
+&#125;
 </code></pre><p>冒泡排序的时间复杂度为O(N^2)。</p>
 <hr>
 <h3 id="3、选择排序"><a href="#3、选择排序" class="headerlink" title="3、选择排序"></a>3、选择排序</h3><hr>
 <p>每一次遍历的过程中，都假定第一个索引处的元素是最小值，和其他索引处的值依次进行比较，如果当前索引处的值大于其他某个索引处的值，则假定其他某个索引出的值为最小值，最后可以找到最小值所在的索引。然后交换第一个索引处和最小值所在的索引处的值。</p>
-<pre><code>public class Selection {
+<pre><code>public class Selection &#123;
     /*
        对数组中的元素进行排序
     */
-    public static void sort(Comparable[] a){
-        for(int i=0;i&lt;=a.length-2;i++){
+    public static void sort(Comparable[] a)&#123;
+        for(int i=0;i&lt;=a.length-2;i++)&#123;
             //定义一个变量，记录最小元素所在的索引，默认为参与选择排序的第一个元素所在的位置
             int minIndex = i;
-            for(int j=i+1;j&lt;a.length;j++){
+            for(int j=i+1;j&lt;a.length;j++)&#123;
                 //需要比较最小索引minIndex处的值和j索引处的值；
-                if (greater(a[minIndex],a[j])){
+                if (greater(a[minIndex],a[j]))&#123;
                     minIndex=j;
-                }
-            }
+                &#125;
+            &#125;
             //交换最小元素所在索引minIndex处的值和索引i处的值
             exch(a,i,minIndex);
-        }
-    }
+        &#125;
+    &#125;
 
     /*
         比较v元素是否大于w元素
      */
-    private static  boolean greater(Comparable v,Comparable w){
+    private static  boolean greater(Comparable v,Comparable w)&#123;
         return v.compareTo(w)&gt;0;
-    }
+    &#125;
 
     /*
     数组元素i和j交换位置
      */
-    private static void exch(Comparable[] a,int i,int j){
+    private static void exch(Comparable[] a,int i,int j)&#123;
         Comparable temp;
         temp = a[i];
         a[i]=a[j];
         a[j]=temp;
-    }
-}
+    &#125;
+&#125;
 
-public class SelectionTest {
-    public static void main(String[] args) {
+public class SelectionTest &#123;
+    public static void main(String[] args) &#123;
         //原始数据
-        Integer[] a = {4,6,8,7,9,2,10,1};
+        Integer[] a = &#123;4,6,8,7,9,2,10,1&#125;;
         Selection.sort(a);
-        System.out.println(Arrays.toString(a));//{1,2,4,5,7,8,9,10}
-    }
-}
+        System.out.println(Arrays.toString(a));//&#123;1,2,4,5,7,8,9,10&#125;
+    &#125;
+&#125;
 </code></pre><p>时间复杂度为O(N^2)。</p>
 <hr>
 <h3 id="4、插入排序"><a href="#4、插入排序" class="headerlink" title="4、插入排序"></a>4、插入排序</h3><hr>
 <p>把所有的元素分为两组，已经排序的和未排序的；找到未排序的组中的第一个元素，向已经排序的组中进行插入；倒叙遍历已经排序的元素，依次和待插入的元素进行比较，直到找到一个元素小于等于待插入元素，那么就把待插入元素放到这个位置，其他的元素向后移动一位。类似打扑克牌时，新牌往手里牌的排序。</p>
-<pre><code>public class Insertion {
+<pre><code>public class Insertion &#123;
     /*
        对数组a中的元素进行排序
     */
-    public static void sort(Comparable[] a){
-        for(int i=1;i&lt;a.length;i++){
-            for(int j=i;j&gt;0;j--){
+    public static void sort(Comparable[] a)&#123;
+        for(int i=1;i&lt;a.length;i++)&#123;
+            for(int j=i;j&gt;0;j--)&#123;
                 //比较索引j处的值和索引j-1处的值，如果索引j-1处的值比索引j处的值大，则交换数据，如果不大，那么就找到合适的位置了，退出循环即可；
-                if (greater(a[j-1],a[j])){
+                if (greater(a[j-1],a[j]))&#123;
                     exch(a,j-1,j);
-                }else{
+                &#125;else&#123;
                     break;
-                }
-            }
-        }
-    }
+                &#125;
+            &#125;
+        &#125;
+    &#125;
 
     /*
         比较v元素是否大于w元素
      */
-    private static  boolean greater(Comparable v,Comparable w){
+    private static  boolean greater(Comparable v,Comparable w)&#123;
         return v.compareTo(w)&gt;0;
-    }
+    &#125;
 
     /*
     数组元素i和j交换位置
      */
-    private static void exch(Comparable[] a,int i,int j){
+    private static void exch(Comparable[] a,int i,int j)&#123;
         Comparable temp;
         temp = a[i];
         a[i]=a[j];
         a[j]=temp;
-    }
-}
+    &#125;
+&#125;
 
-public class InsertionTest {
-    public static void main(String[] args) {
-        Integer[] a = {4,3,2,10,12,1,5,6};
+public class InsertionTest &#123;
+    public static void main(String[] args) &#123;
+        Integer[] a = &#123;4,3,2,10,12,1,5,6&#125;;
 
         Insertion.sort(a);
 
-        System.out.println(Arrays.toString(a));//{1,2,3,4,5,6,10,12}
+        System.out.println(Arrays.toString(a));//&#123;1,2,3,4,5,6,10,12&#125;
 
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>时间复杂度为O(N^2)。</p>
 <hr>
 <h3 id="5、希尔排序"><a href="#5、希尔排序" class="headerlink" title="5、希尔排序"></a>5、希尔排序</h3><hr>
 <p>选定一个增长量h，按照增长量h作为数据分组的依据，对数据进行分组；对分好组的每一组数据完成插入排序；减小增长量，最小减为1，重复第二步操作。</p>
 <p>增长量h的确定：</p>
 <pre><code>int h=1
-while(h&lt;(数组长度/2)){
+while(h&lt;(数组长度/2))&#123;
     h=2h+1
-}
+&#125;
 //循环结束后我们就可以确定h的最大值
 
 //h的减小规则为：
 h=h/2
 </code></pre><p>代码</p>
-<pre><code>public class Shell {
+<pre><code>public class Shell &#123;
     /*
        对数组a中的元素进行排序
     */
-    public static void sort(Comparable[] a){
+    public static void sort(Comparable[] a)&#123;
         //1.根据数组a的长度，确定增长量h的初始值；
         int h = 1;
-        while(h&lt;a.length/2){
+        while(h&lt;a.length/2)&#123;
             h=2*h+1;
-        }
+        &#125;
         //2.希尔排序
-        while(h&gt;=1){
+        while(h&gt;=1)&#123;
             //排序
             //2.1.找到待插入的元素
-            for (int i=h;i&lt;a.length;i++){
+            for (int i=h;i&lt;a.length;i++)&#123;
                 //2.2把待插入的元素插入到有序数列中
-                for (int j=i;j&gt;=h;j-=h){
+                for (int j=i;j&gt;=h;j-=h)&#123;
 
                     //待插入的元素是a[j],比较a[j]和a[j-h]
-                    if (greater(a[j-h],a[j])){
+                    if (greater(a[j-h],a[j]))&#123;
                         //交换元素
                         exch(a,j-h,j);
-                    }else{
+                    &#125;else&#123;
                         //待插入元素已经找到了合适的位置，结束循环；
                         break;
-                    }
-                }
-            }
+                    &#125;
+                &#125;
+            &#125;
             //减小h的值
             h= h/2;
-        }
-    }
+        &#125;
+    &#125;
 
     /*
         比较v元素是否大于w元素
      */
-    private static  boolean greater(Comparable v,Comparable w){
+    private static  boolean greater(Comparable v,Comparable w)&#123;
         return v.compareTo(w)&gt;0;
-    }
+    &#125;
 
     /*
     数组元素i和j交换位置
      */
-    private static void exch(Comparable[] a,int i,int j){
+    private static void exch(Comparable[] a,int i,int j)&#123;
         Comparable temp;
         temp = a[i];
         a[i]=a[j];
         a[j]=temp;
-    }
-}
+    &#125;
+&#125;
 
-public class ShellTest {
-    public static void main(String[] args) {
-        Integer[] a = {9,1,2,5,7,4,8,6,3,5};
+public class ShellTest &#123;
+    public static void main(String[] args) &#123;
+        Integer[] a = &#123;9,1,2,5,7,4,8,6,3,5&#125;;
         Shell.sort(a);
-        System.out.println(Arrays.toString(a));//{1,2,3,4,5,5,6,7,8,9}
-    }
-}
+        System.out.println(Arrays.toString(a));//&#123;1,2,3,4,5,5,6,7,8,9&#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="6、归并排序"><a href="#6、归并排序" class="headerlink" title="6、归并排序"></a>6、归并排序</h3><hr>
 <p>尽可能的一组数据拆分成两个元素相等的子组，并对每一个子组继续拆分，直到拆分后的每个子组的元素个数是1为止。将相邻的两个子组进行合并成一个有序的大组；不断的重复步骤2，直到最终只有一个组为止。</p>
-<pre><code>public class Merge {
+<pre><code>public class Merge &#123;
     //归并所需要的辅助数组
     private static Comparable[] assist;
 
     /*
        比较v元素是否小于w元素
     */
-    private static boolean less(Comparable v, Comparable w) {
+    private static boolean less(Comparable v, Comparable w) &#123;
         return v.compareTo(w)&lt;0;
-    }
+    &#125;
 
     /*
     数组元素i和j交换位置
      */
-    private static void exch(Comparable[] a, int i, int j) {
+    private static void exch(Comparable[] a, int i, int j) &#123;
         Comparable t = a[i];
         a[i] = a[j];
         a[j] = t;
-    }
+    &#125;
 
 
     /*
            对数组a中的元素进行排序
         */
-    public static void sort(Comparable[] a) {
+    public static void sort(Comparable[] a) &#123;
         //1.初始化辅助数组assist；
         assist = new Comparable[a.length];
         //2.定义一个lo变量，和hi变量，分别记录数组中最小的索引和最大的索引；
@@ -534,16 +536,16 @@ public class ShellTest {
         int hi=a.length-1;
         //3.调用sort重载方法完成数组a中，从索引lo到索引hi的元素的排序
         sort(a,lo,hi);
-    }
+    &#125;
 
     /*
     对数组a中从lo到hi的元素进行排序
      */
-    private static void sort(Comparable[] a, int lo, int hi) {
+    private static void sort(Comparable[] a, int lo, int hi) &#123;
         //做安全性校验；
-        if (hi&lt;=lo){
+        if (hi&lt;=lo)&#123;
             return;
-        }
+        &#125;
 
         //对lo到hi之间的数据进行分为两个组
         int mid = lo+(hi-lo)/2;//   5,9  mid=7
@@ -554,51 +556,51 @@ public class ShellTest {
 
         //再把两个组中的数据进行归并
         merge(a,lo,mid,hi);
-    }
+    &#125;
 
     /*
     对数组中，从lo到mid为一组，从mid+1到hi为一组，对这两组数据进行归并
      */
-    private static void merge(Comparable[] a, int lo, int mid, int hi) {
+    private static void merge(Comparable[] a, int lo, int mid, int hi) &#123;
         //定义三个指针
         int i=lo;
         int p1=lo;
         int p2=mid+1;
 
         //遍历，移动p1指针和p2指针，比较对应索引处的值，找出小的那个，放到辅助数组的对应索引处
-        while(p1&lt;=mid &amp;&amp; p2&lt;=hi){
+        while(p1&lt;=mid &amp;&amp; p2&lt;=hi)&#123;
             //比较对应索引处的值
-            if (less(a[p1],a[p2])){
+            if (less(a[p1],a[p2]))&#123;
                 assist[i++] = a[p1++];
-            }else{
+            &#125;else&#123;
                 assist[i++]=a[p2++];
-            }
-        }
+            &#125;
+        &#125;
 
         //遍历，如果p1的指针没有走完，那么顺序移动p1指针，把对应的元素放到辅助数组的对应索引处
-        while(p1&lt;=mid){
+        while(p1&lt;=mid)&#123;
             assist[i++]=a[p1++];
-        }
+        &#125;
         //遍历，如果p2的指针没有走完，那么顺序移动p2指针，把对应的元素放到辅助数组的对应索引处
-        while(p2&lt;=hi){
+        while(p2&lt;=hi)&#123;
             assist[i++]=a[p2++];
-        }
+        &#125;
         //把辅助数组中的元素拷贝到原数组中
-        for(int index=lo;index&lt;=hi;index++){
+        for(int index=lo;index&lt;=hi;index++)&#123;
             a[index]=assist[index];
-        }
+        &#125;
 
-    }
+    &#125;
 
-}
+&#125;
 
-public class MergeTest {
-    public static void main(String[] args) {
-        Integer[] a = {8,4,5,7,1,3,6,2};
+public class MergeTest &#123;
+    public static void main(String[] args) &#123;
+        Integer[] a = &#123;8,4,5,7,1,3,6,2&#125;;
         Merge.sort(a);
-        System.out.println(Arrays.toString(a));//{1,2,3,4,5,6,7,8}
-    }
-}
+        System.out.println(Arrays.toString(a));//&#123;1,2,3,4,5,6,7,8&#125;
+    &#125;
+&#125;
 </code></pre><p>归并排序的时间复杂度为O(nlogn)。归并排序的缺点：需要申请额外的数组空间，导致空间复杂度提升，是典型的以空间换时间的操作。</p>
 <hr>
 <h3 id="7、快速排序"><a href="#7、快速排序" class="headerlink" title="7、快速排序"></a>7、快速排序</h3><hr>
@@ -611,36 +613,36 @@ public class MergeTest {
 <p>3.再从头部向尾部开始搜索一个比基准值大的元素，搜索到即停止，并记录指针的位置；</p>
 <p>4.交换当前左边指针位置和右边指针位置的元素；</p>
 <p>5.重复2,3,4步骤，直到左边指针的值大于右边指针的值停止。</p>
-<pre><code>public class Quick {
+<pre><code>public class Quick &#123;
     /*
       比较v元素是否小于w元素
    */
-    private static boolean less(Comparable v, Comparable w) {
+    private static boolean less(Comparable v, Comparable w) &#123;
         return v.compareTo(w) &lt; 0;
-    }
+    &#125;
 
     /*
    数组元素i和j交换位置
     */
-    private static void exch(Comparable[] a, int i, int j) {
+    private static void exch(Comparable[] a, int i, int j) &#123;
         Comparable t = a[i];
         a[i] = a[j];
         a[j] = t;
-    }
+    &#125;
 
     //对数组内的元素进行排序
-    public static void sort(Comparable[] a) {
+    public static void sort(Comparable[] a) &#123;
         int lo = 0;
         int hi = a.length-1;
         sort(a,lo,hi);
-    }
+    &#125;
 
     //对数组a中从索引lo到索引hi之间的元素进行排序
-    private static void sort(Comparable[] a, int lo, int hi) {
+    private static void sort(Comparable[] a, int lo, int hi) &#123;
         //安全性校验
-        if (hi&lt;=lo){
+        if (hi&lt;=lo)&#123;
             return;
-        }
+        &#125;
 
         //需要对数组中lo索引到hi索引处的元素进行分组（左子组和右子组）；
         int partition = partition(a, lo, hi);//返回的是分组的分界值所在的索引，分界值位置变换后的索引
@@ -650,10 +652,10 @@ public class MergeTest {
 
         //让右子组有序
         sort(a,partition+1,hi);
-    }
+    &#125;
 
     //对数组a中，从索引 lo到索引 hi之间的元素进行分组，并返回分组界限对应的索引
-    public static int partition(Comparable[] a, int lo, int hi) {
+    public static int partition(Comparable[] a, int lo, int hi) &#123;
        //确定分界值
         Comparable key = a[lo];
         //定义两个指针，分别指向待切分元素的最小索引处和最大索引处的下一个位置
@@ -661,43 +663,43 @@ public class MergeTest {
         int right=hi+1;
 
         //切分
-        while(true){
+        while(true)&#123;
             //先从右往左扫描，移动right指针，找到一个比分界值小的元素，停止
-            while(less(key,a[--right])){
-                if (right==lo){
+            while(less(key,a[--right]))&#123;
+                if (right==lo)&#123;
                     break;
-                }
-            }
+                &#125;
+            &#125;
 
             //再从左往右扫描，移动left指针，找到一个比分界值大的元素，停止
-            while(less(a[++left],key)){
-                if (left==hi){
+            while(less(a[++left],key))&#123;
+                if (left==hi)&#123;
                     break;
-                }
-            }
+                &#125;
+            &#125;
             //判断 left&gt;=right,如果是，则证明元素扫描完毕，结束循环，如果不是，则交换元素即可
-            if (left&gt;=right){
+            if (left&gt;=right)&#123;
                 break;
-            }else{
+            &#125;else&#123;
                 exch(a,left,right);
-            }
-        }
+            &#125;
+        &#125;
 
         //交换分界值
         exch(a,lo,right);
 
        return right;
-    }
+    &#125;
 
-}
+&#125;
 
-public class QuickTest {
-    public static void main(String[] args) {
-        Integer[] a= {6, 1, 2, 7, 9, 3, 4, 5, 8};
+public class QuickTest &#123;
+    public static void main(String[] args) &#123;
+        Integer[] a= &#123;6, 1, 2, 7, 9, 3, 4, 5, 8&#125;;
         Quick.sort(a);
-        System.out.println(Arrays.toString(a));//{1, 2, 3, 4, 5, 6, 7, 8, 9}
-    }
-}
+        System.out.println(Arrays.toString(a));//&#123;1, 2, 3, 4, 5, 6, 7, 8, 9&#125;
+    &#125;
+&#125;
 </code></pre><p>快速排序和归并排序是互补的：归并排序将数组分成两个子数组分别排序，并将有序的子数组归并从而将整个数组排序，而快速排序的方式则是当两个数组都有序时，整个数组自然就有序了。在归并排序中，一个数组被等分为两半，归并调用发生在处理整个数组之前，在快速排序中，切分数组的位置取决于数组的内容，递归调用发生在处理整个数组之后。</p>
 <p>快速排序的时间复杂度为O(nlogn)。</p>
 <hr>
@@ -715,130 +717,130 @@ public class QuickTest {
 <h3 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h3><hr>
 <p>顺序表是在计算机内存中以数组的形式保存的线性表，线性表的顺序存储是指用一组地址连续的存储单元，依次存储线性表中的各个元素、使得线性表中再逻辑结构上响铃的数据元素存储在相邻的物理存储单元中，即通过数据元素物理存储的相邻关系来反映数据元素之间逻辑上的相邻关系。</p>
 <p>基本API、扩容、缩容、SequenceList能支持foreach循环，则需要做如下操作：让SequenceList实现Iterable接口，重写iterator方法；在SequenceList内部提供一个内部类SIterator,实现Iterator接口，重写hasNext方法和next方法。</p>
-<pre><code>public class SequenceList&lt;T&gt; implements Iterable&lt;T&gt;{
+<pre><code>public class SequenceList&lt;T&gt; implements Iterable&lt;T&gt;&#123;
     //存储元素的数组
     private T[] eles;
     //记录当前顺序表中的元素个数
     private int N;
 
     //构造方法
-    public SequenceList(int capacity){
+    public SequenceList(int capacity)&#123;
         //初始化数组
         this.eles=(T[])new Object[capacity];
         //初始化长度
         this.N=0;
-    }
+    &#125;
 
     //将一个线性表置为空表
-    public void clear(){
+    public void clear()&#123;
         this.N=0;
-    }
+    &#125;
 
     //判断当前线性表是否为空表
-    public boolean isEmpty(){
+    public boolean isEmpty()&#123;
        return N==0;
-    }
+    &#125;
 
     //获取线性表的长度
-    public int length(){
+    public int length()&#123;
         return N;
-    }
+    &#125;
 
     //获取指定位置的元素
-    public T get(int i){
+    public T get(int i)&#123;
         return eles[i];
-    }
+    &#125;
 
     //向线型表中添加元素t
-    public void insert(T t){
-        if (N==eles.length){
+    public void insert(T t)&#123;
+        if (N==eles.length)&#123;
             resize(2*eles.length);
-        }
+        &#125;
 
         eles[N++]=t;
-    }
+    &#125;
 
     //在i元素处插入元素t
-    public void insert(int i,T t){
-        if (N==eles.length){
+    public void insert(int i,T t)&#123;
+        if (N==eles.length)&#123;
             resize(2*eles.length);
-        }
+        &#125;
 
         //先把i索引处的元素及其后面的元素依次向后移动一位
-        for(int index=N;index&gt;i;index--){
+        for(int index=N;index&gt;i;index--)&#123;
             eles[index]=eles[index-1];
-        }
+        &#125;
         //再把t元素放到i索引处即可
         eles[i]=t;
 
         //元素个数+1
         N++;
-    }
+    &#125;
 
     //删除指定位置i处的元素，并返回该元素
-    public T remove(int i){
+    public T remove(int i)&#123;
         //记录索引i处的值
         T current = eles[i];
         //索引i后面元素依次向前移动一位即可
-        for(int index=i;index&lt;N-1;index++){
+        for(int index=i;index&lt;N-1;index++)&#123;
             eles[index]=eles[index+1];
-        }
+        &#125;
         //元素个数-1
         N--;
 
-        if (N&lt;eles.length/4){
+        if (N&lt;eles.length/4)&#123;
             resize(eles.length/2);
-        }
+        &#125;
 
         return current;
-    }
+    &#125;
 
     //查找t元素第一次出现的位置
-    public int indexOf(T t){
-        for(int i=0;i&lt;N;i++){
-            if (eles[i].equals(t)){
+    public int indexOf(T t)&#123;
+        for(int i=0;i&lt;N;i++)&#123;
+            if (eles[i].equals(t))&#123;
                 return i;
-            }
-        }
+            &#125;
+        &#125;
         return -1;
-    }
+    &#125;
 
     //根据参数newSize，重置eles的大小
-    public void resize(int newSize){
+    public void resize(int newSize)&#123;
         //定义一个临时数组，指向原数组
         T[] temp=eles;
         //创建新数组
         eles=(T[])new Object[newSize];
         //把原数组的数据拷贝到新数组即可
-        for(int i=0;i&lt;N;i++){
+        for(int i=0;i&lt;N;i++)&#123;
             eles[i]=temp[i];
-        }
-    }
+        &#125;
+    &#125;
 
     @Override
-    public Iterator&lt;T&gt; iterator() {
+    public Iterator&lt;T&gt; iterator() &#123;
         return new SIterator();
-    }
+    &#125;
 
-    private class SIterator implements Iterator{
+    private class SIterator implements Iterator&#123;
         private int cusor;
-        public SIterator(){
+        public SIterator()&#123;
             this.cusor=0;
-        }
+        &#125;
         @Override
-        public boolean hasNext() {
+        public boolean hasNext() &#123;
             return cusor&lt;N;
-        }
+        &#125;
 
         @Override
-        public Object next() {
+        public Object next() &#123;
             return eles[cusor++];
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class SequenceListTest {
-    public static void main(String[] args) {
+<pre><code>public class SequenceListTest &#123;
+    public static void main(String[] args) &#123;
         //创建顺序表对象
         SequenceList&lt;String&gt; sl = new SequenceList&lt;&gt;(10);
         //测试插入
@@ -847,9 +849,9 @@ public class QuickTest {
         sl.insert(&quot;麦迪&quot;);
         sl.insert(1,&quot;詹姆斯&quot;);
 
-        for (String s : sl) {
+        for (String s : sl) &#123;
             System.out.println(s);
-        }
+        &#125;
         System.out.println(&quot;------------------------------------------&quot;);
 
         //测试获取
@@ -861,25 +863,25 @@ public class QuickTest {
         //测试清空
         sl.clear();
         System.out.println(&quot;清空后的线性表中的元素个数为:&quot;+sl.length());
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>由于顺序表的底层由数组实现，数组的长度是固定的，所以在操作的过程中涉及到了容器扩容操作。这样会导致顺序表在使用过程中的时间复杂度不是线性的，在某些需要扩容的结点处，耗时会突增，尤其是元素越多，这个问题越明显。</p>
 <p><strong>java中ArrayList集合的底层也是一种顺序表，使用数组实现，同样提供了增删改查、扩容、遍历等功能。</strong></p>
 <hr>
 <h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><hr>
 <p>链表由一系列的结点（链表中的每一个元素称为结点）组成，结点可以在运行时动态生成。</p>
-<pre><code>public class Node&lt;T&gt; {
+<pre><code>public class Node&lt;T&gt; &#123;
     //存储元素
     public T item;
     //指向下一个结点
     public Node next;
 
-    public Node(T item, Node next) {
+    public Node(T item, Node next) &#123;
         this.item = item;
         this.next = next;
-    }
-}
-public static void main(String[] args) throws Exception {
+    &#125;
+&#125;
+public static void main(String[] args) throws Exception &#123;
     //构建结点
     Node&lt;Integer&gt; first = new Node&lt;Integer&gt;(11, null);
     Node&lt;Integer&gt; second = new Node&lt;Integer&gt;(13, null);
@@ -891,83 +893,83 @@ public static void main(String[] args) throws Exception {
     second.next = third;
     third.next = fourth;
     fourth.next = fifth;
-}
+&#125;
 </code></pre><hr>
 <h3 id="单向链表"><a href="#单向链表" class="headerlink" title="单向链表"></a>单向链表</h3><hr>
 <p>单向链表是链表的一种，它由多个结点组成，每个结点都由一个数据域和一个指针域组成，数据域用来存储数据，指针域用来指向其后继结点。链表的头结点的数据域不存储数据，指针域指向第一个真正存储数据的结点。</p>
 <p>实现基本API、遍历、链表的反转。</p>
-<pre><code>public class LinkList&lt;T&gt; implements Iterable&lt;T&gt;{
+<pre><code>public class LinkList&lt;T&gt; implements Iterable&lt;T&gt;&#123;
     //记录头结点
     private Node head;
     //记录链表的长度
     private int N;
     //结点类
-    private class Node {
+    private class Node &#123;
         //存储数据
         T item;
         //下一个结点
         Node next;
-        public Node(T item, Node next) {
+        public Node(T item, Node next) &#123;
             this.item = item;
             this.next = next;
-        }
-    }
+        &#125;
+    &#125;
 
-    public LinkList() {
+    public LinkList() &#123;
         //初始化头结点、
         this.head = new Node(null,null);
         //初始化元素个数
         this.N=0;
-    }
+    &#125;
 
     //清空链表
-    public void clear() {
+    public void clear() &#123;
         head.next=null;
         this.N=0;
-    }
+    &#125;
 
     //获取链表的长度
-    public int length() {
+    public int length() &#123;
         return N;
-    }
+    &#125;
 
     //判断链表是否为空
-    public boolean isEmpty() {
+    public boolean isEmpty() &#123;
         return N==0;
-    }
+    &#125;
 
     //获取指定位置i出的元素
-    public T get(int i) {
+    public T get(int i) &#123;
         //通过循环,从头结点开始往后找，依次找i次，就可以找到对应的元素
         Node n = head.next;
-        for(int index=0;index&lt;i;index++){
+        for(int index=0;index&lt;i;index++)&#123;
             n=n.next;
-        }
+        &#125;
         return n.item;
-    }
+    &#125;
 
     //向链表中添加元素t
-    public void insert(T t) {
+    public void insert(T t) &#123;
         //找到当前最后一个结点
         Node n = head;
-        while(n.next!=null){
+        while(n.next!=null)&#123;
             n=n.next;
-        }
+        &#125;
         //创建新结点，保存元素t
         Node newNode = new Node(t, null);
         //让当前最后一个结点指向新结点
         n.next=newNode;
         //元素的个数+1
         N++;
-    }
+    &#125;
 
     //向指定位置i出，添加元素t
-    public void insert(int i, T t) {
+    public void insert(int i, T t) &#123;
         //找到i位置前一个结点
         Node pre = head;
-        for(int index=0;index&lt;=i-1;index++){
+        for(int index=0;index&lt;=i-1;index++)&#123;
             pre=pre.next;
-        }
+        &#125;
         //找到i位置的结点
         Node curr = pre.next;
         //创建新结点，并且新结点需要指向原来i位置的结点
@@ -976,15 +978,15 @@ public static void main(String[] args) throws Exception {
         pre.next=newNode;
         //元素的个数+1
         N++;
-    }
+    &#125;
 
     //删除指定位置i处的元素，并返回被删除的元素
-    public T remove(int i) {
+    public T remove(int i) &#123;
         //找到i位置的前一个节点
         Node pre = head;
-        for(int index=0;index&lt;=i-1;i++){
+        for(int index=0;index&lt;=i-1;i++)&#123;
             pre=pre.next;
-        }
+        &#125;
         //要找到i位置的结点
         Node curr = pre.next;
         //找到i位置的下一个结点
@@ -994,59 +996,59 @@ public static void main(String[] args) throws Exception {
         //元素个数-1
         N--;
         return curr.item;
-    }
+    &#125;
 
     //查找元素t在链表中第一次出现的位置
-    public int indexOf(T t) {
+    public int indexOf(T t) &#123;
         //从头结点开始，依次找到每一个结点，取出item，和t比较，如果相同，就找到了
         Node n = head;
-        for(int i=0;n.next!=null;i++){
+        for(int i=0;n.next!=null;i++)&#123;
             n=n.next;
-            if (n.item.equals(t)){
+            if (n.item.equals(t))&#123;
                 return i;
-            }
-        }
+            &#125;
+        &#125;
         return -1;
-    }
+    &#125;
 
     @Override
-    public Iterator&lt;T&gt; iterator() {
+    public Iterator&lt;T&gt; iterator() &#123;
         return new LIterator();
-    }
+    &#125;
 
-    private class LIterator implements Iterator{
+    private class LIterator implements Iterator&#123;
         private Node n;
-        public LIterator(){
+        public LIterator()&#123;
             this.n=head;
-        }
+        &#125;
 
         @Override
-        public boolean hasNext() {
+        public boolean hasNext() &#123;
             return n.next!=null;
-        }
+        &#125;
 
         @Override
-        public Object next() {
+        public Object next() &#123;
             n = n.next;
             return n.item;
-        }
-    }
+        &#125;
+    &#125;
 
     //用来反转整个链表
-    public void reverse(){
+    public void reverse()&#123;
         //判断当前链表是否为空链表，如果是空链表，则结束运行，如果不是，则调用重载的reverse方法完成反转
-        if (isEmpty()){
+        if (isEmpty())&#123;
             return;
-        }
+        &#125;
         reverse(head.next);
-    }
+    &#125;
 
     //反转指定的结点curr，并把反转后的结点返回
-    public Node reverse(Node curr){
-        if (curr.next==null){
+    public Node reverse(Node curr)&#123;
+        if (curr.next==null)&#123;
             head.next=curr;
             return curr;
-        }
+        &#125;
         //递归的反转当前结点curr的下一个结点；返回值就是链表反转后，当前结点的上一个结点
         Node pre = reverse(curr.next);
         //让返回的结点的下一个结点变为当前结点curr；
@@ -1054,11 +1056,11 @@ public static void main(String[] args) throws Exception {
         //把当前结点的下一个结点变为null
         curr.next=null;
         return curr;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class LinkListTest {
-    public static void main(String[] args) {
+<pre><code>public class LinkListTest &#123;
+    public static void main(String[] args) &#123;
         //创建顺序表对象
         LinkList&lt;String&gt; sl = new LinkList&lt;&gt;();
         //测试插入
@@ -1066,9 +1068,9 @@ public static void main(String[] args) throws Exception {
         sl.insert(&quot;科比&quot;);
         sl.insert(&quot;麦迪&quot;);
         sl.insert(1,&quot;詹姆斯&quot;);
-        for (String s : sl) {
+        for (String s : sl) &#123;
             System.out.println(s);
-        }
+        &#125;
         System.out.println(&quot;------------------------------------------&quot;);
 
         //测试获取
@@ -1080,13 +1082,13 @@ public static void main(String[] args) throws Exception {
         //测试清空
         sl.clear();
         System.out.println(&quot;清空后的线性表中的元素个数为:&quot;+sl.length());
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><hr>
 <p>双向链表也叫双向表，是链表的一种，它由多个结点组成，每个结点都由一个数据域和两个指针域组成，数据域用来存储数据，其中一个指针域用来指向其后继结点，另一个指针域用来指向前驱结点。链表的头结点的数据域不存储数据，指向前驱结点的指针域值为null，指向后继结点的指针域指向第一个真正存储数据的结点。</p>
 <p>实现基本API、遍历。</p>
-<pre><code>public class TowWayLinkList&lt;T&gt; implements Iterable&lt;T&gt; {
+<pre><code>public class TowWayLinkList&lt;T&gt; implements Iterable&lt;T&gt; &#123;
     //首结点
     private Node head;
     //最后一个结点
@@ -1094,66 +1096,66 @@ public static void main(String[] args) throws Exception {
     //链表的长度
     private int N;
     //结点类
-    private class Node{
-        public Node(T item, Node pre, Node next) {
+    private class Node&#123;
+        public Node(T item, Node pre, Node next) &#123;
             this.item = item;
             this.pre = pre;
             this.next = next;
-        }
+        &#125;
         //存储数据
         public T item;
         //指向上一个结点
         public Node pre;
         //指向下一个结点
         public Node next;
-    }
+    &#125;
 
-    public TowWayLinkList() {
+    public TowWayLinkList() &#123;
        //初始化头结点和尾结点
         this.head = new Node(null,null,null);
         this.last=null;
         //初始化元素个数
         this.N=0;
-    }
+    &#125;
 
     //清空链表
-    public void clear(){
+    public void clear()&#123;
         this.head.next=null;
         this.head.pre=null;
         this.head.item=null;
         this.last=null;
         this.N=0;
-    }
+    &#125;
 
     //获取链表长度
-    public int length(){
+    public int length()&#123;
         return N;
-    }
+    &#125;
 
     //判断链表是否为空
-    public boolean isEmpty(){
+    public boolean isEmpty()&#123;
         return N==0;
-    }
+    &#125;
 
     //获取第一个元素
-    public T getFirst(){
-        if (isEmpty()){
+    public T getFirst()&#123;
+        if (isEmpty())&#123;
             return null;
-        }
+        &#125;
         return head.next.item;
-    }
+    &#125;
 
     //获取最后一个元素
-    public T getLast(){
-        if (isEmpty()){
+    public T getLast()&#123;
+        if (isEmpty())&#123;
             return null;
-        }
+        &#125;
         return last.item;
-    }
+    &#125;
 
     //插入元素t
-    public void insert(T t){
-        if (isEmpty()){
+    public void insert(T t)&#123;
+        if (isEmpty())&#123;
             //如果链表为空：
             //创建新的结点
             Node newNode = new Node(t,head, null);
@@ -1161,7 +1163,7 @@ public static void main(String[] args) throws Exception {
             last=newNode;
             //让头结点指向尾结点
             head.next=last;
-        }else {
+        &#125;else &#123;
             //如果链表不为空
             Node oldLast = last;
             //创建新的结点
@@ -1170,18 +1172,18 @@ public static void main(String[] args) throws Exception {
             oldLast.next=newNode;
             //让新结点称为尾结点
             last = newNode;
-        }
+        &#125;
         //元素个数+1
         N++;
-    }
+    &#125;
 
     //向指定位置i处插入元素t
-    public void insert(int i,T t){
+    public void insert(int i,T t)&#123;
         //找到i位置的前一个结点
         Node pre = head;
-        for(int index=0;index&lt;i;index++){
+        for(int index=0;index&lt;i;index++)&#123;
             pre=pre.next;
-        }
+        &#125;
         //找到i位置的结点
         Node curr = pre.next;
         //创建新结点
@@ -1192,36 +1194,36 @@ public static void main(String[] args) throws Exception {
         curr.pre=newNode;
         //元素个数+1
         N++;
-    }
+    &#125;
 
     //获取指定位置i处的元素
-    public T get(int i){
+    public T get(int i)&#123;
         Node n = head.next;
-        for(int index=0;index&lt;i;index++){
+        for(int index=0;index&lt;i;index++)&#123;
             n=n.next;
-        }
+        &#125;
         return n.item;
-    }
+    &#125;
 
     //找到元素t在链表中第一次出现的位置
-    public int indexOf(T t){
+    public int indexOf(T t)&#123;
         Node n = head;
-        for(int i=0;n.next!=null;i++){
+        for(int i=0;n.next!=null;i++)&#123;
             n=n.next;
-            if (n.next.equals(t)){
+            if (n.next.equals(t))&#123;
                 return i;
-            }
-        }
+            &#125;
+        &#125;
         return -1;
-    }
+    &#125;
 
     //删除位置i处的元素，并返回该元素
-    public T remove(int i){
+    public T remove(int i)&#123;
         //找到i位置的前一个结点
         Node pre = head;
-        for(int index=0;index&lt;i;index++){
+        for(int index=0;index&lt;i;index++)&#123;
             pre=pre.next;
-        }
+        &#125;
         //找到i位置的结点
         Node curr = pre.next;
         //找到i位置的下一个结点
@@ -1233,33 +1235,33 @@ public static void main(String[] args) throws Exception {
         //元素的个数-1
         N--;
         return curr.item;
-    }
+    &#125;
 
     @Override
-    public Iterator&lt;T&gt; iterator() {
+    public Iterator&lt;T&gt; iterator() &#123;
         return new TIterator();
-    }
+    &#125;
 
-    private class TIterator implements Iterator{
+    private class TIterator implements Iterator&#123;
         private Node n;
-        public TIterator(){
+        public TIterator()&#123;
             this.n=head;
-        }
+        &#125;
         @Override
-        public boolean hasNext() {
+        public boolean hasNext() &#123;
             return n.next!=null;
-        }
+        &#125;
 
         @Override
-        public Object next() {
+        public Object next() &#123;
             n=n.next;
             return n.item;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class TowWayLinkListTest {
-    public static void main(String[] args) {
+<pre><code>public class TowWayLinkListTest &#123;
+    public static void main(String[] args) &#123;
         //创建双向链表对象
         TowWayLinkList&lt;String&gt; sl = new TowWayLinkList&lt;&gt;();
         //测试插入
@@ -1267,9 +1269,9 @@ public static void main(String[] args) throws Exception {
         sl.insert(&quot;科比&quot;);
         sl.insert(&quot;麦迪&quot;);
         sl.insert(1,&quot;詹姆斯&quot;);
-        for (String s : sl) {
+        for (String s : sl) &#123;
             System.out.println(s);
-        }
+        &#125;
         System.out.println(&quot;--------------------------------------&quot;);
         System.out.println(&quot;第一个元素是：&quot;+sl.getFirst());
         System.out.println(&quot;最后一个元素是：&quot;+sl.getLast());
@@ -1283,16 +1285,16 @@ public static void main(String[] args) throws Exception {
         //测试清空
         sl.clear();
         System.out.println(&quot;清空后的线性表中的元素个数为:&quot;+sl.length());
-    }
-}
+    &#125;
+&#125;
 </code></pre><p><strong>java中LinkedList集合也是使用双向链表实现，结点类有三个域，并提供了增删改查等相关方法。</strong></p>
 <p>链表的物理地址是不连续的，它不需要预先指定存储空间大小，或者在存储过程中涉及到扩容等操作,同时它并没有涉及的元素的交换。</p>
 <p>相比较顺序表，链表的查询操作性能会比较低。因此，如果我们的程序中查询操作比较多，建议使用顺序表，增删操作比较多，建议使用链表。</p>
 <hr>
 <h3 id="快慢指针"><a href="#快慢指针" class="headerlink" title="快慢指针"></a>快慢指针</h3><hr>
 <p>快慢指针获取中间值。slow与fast指针都指向链表第一个节点，然后slow每次移动一个指针，fast每次移动两个指针。</p>
-<pre><code>public class FastSlowTest {
-    public static void main(String[] args) throws Exception {
+<pre><code>public class FastSlowTest &#123;
+    public static void main(String[] args) throws Exception &#123;
         //创建结点
         Node&lt;String&gt; first = new Node&lt;String&gt;(&quot;aa&quot;, null);
         Node&lt;String&gt; second = new Node&lt;String&gt;(&quot;bb&quot;, null);
@@ -1312,42 +1314,42 @@ public static void main(String[] args) throws Exception {
         //查找中间值
         String mid = getMid(first);
         System.out.println(&quot;中间值为：&quot;+mid);
-    }
+    &#125;
 
     /**
      * @param first 链表的首结点
      * @return 链表的中间结点的值
      */
-    public static String getMid(Node&lt;String&gt; first) {
+    public static String getMid(Node&lt;String&gt; first) &#123;
         //定义两个指针
         Node&lt;String&gt; fast = first;
         Node&lt;String&gt; slow = first;
         //使用两个指针遍历链表，当快指针指向的结点没有下一个结点了，就可以结束了，结束之后，慢指针指向的结点就是中间值
-        while(fast!=null &amp;&amp;fast.next!=null){
+        while(fast!=null &amp;&amp;fast.next!=null)&#123;
             //变化fast的值和slow的值
             fast = fast.next.next;
             slow=slow.next;
-        }
+        &#125;
 
         return slow.item;
-    }
+    &#125;
 
     //结点类
-    private static class Node&lt;T&gt; {
+    private static class Node&lt;T&gt; &#123;
         //存储数据
         T item;
         //下一个结点
         Node next;
 
-        public Node(T item, Node next) {
+        public Node(T item, Node next) &#123;
             this.item = item;
             this.next = next;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>快慢指针检查是否有环。两个指针有速度差，那么迟早两个指针会相遇，只要相遇那么就说明有环。</p>
-<pre><code>public class CircleListCheckTest {
-    public static void main(String[] args) throws Exception {
+<pre><code>public class CircleListCheckTest &#123;
+    public static void main(String[] args) throws Exception &#123;
         //创建结点
         Node&lt;String&gt; first = new Node&lt;String&gt;(&quot;aa&quot;, null);
         Node&lt;String&gt; second = new Node&lt;String&gt;(&quot;bb&quot;, null);
@@ -1370,46 +1372,46 @@ public static void main(String[] args) throws Exception {
         //判断链表是否有环
         boolean circle = isCircle(first);
         System.out.println(&quot;first链表中是否有环：&quot;+circle);
-    }
+    &#125;
 
     /**
      * 判断链表中是否有环
      * @param first 链表首结点
      * @return ture为有环，false为无环
      */
-    public static boolean isCircle(Node&lt;String&gt; first) {
+    public static boolean isCircle(Node&lt;String&gt; first) &#123;
         //定义快慢指针
         Node&lt;String&gt; fast = first;
         Node&lt;String&gt; slow = first;
         //遍历链表，如果快慢指针指向了同一个结点，那么证明有环
-        while(fast!=null &amp;&amp; fast.next!=null){
+        while(fast!=null &amp;&amp; fast.next!=null)&#123;
             //变换fast和slow
             fast = fast.next.next;
             slow = slow.next;
 
-            if (fast.equals(slow)){
+            if (fast.equals(slow))&#123;
                 return true;
-            }
-        }
+            &#125;
+        &#125;
         return false;
-    }
+    &#125;
 
     //结点类
-    private static class Node&lt;T&gt; {
+    private static class Node&lt;T&gt; &#123;
         //存储数据
         T item;
         //下一个结点
         Node next;
 
-        public Node(T item, Node next) {
+        public Node(T item, Node next) &#123;
             this.item = item;
             this.next = next;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>快慢指针查找有环链表入口。当快慢指针相遇时，我们可以判断到链表中有环，这时重新设定一个新指针指向链表的起点，且步长与慢指针一样为1，则慢指针与“新”指针相遇的地方就是环的入口。</p>
-<pre><code>public class CircleListInTest {
-    public static void main(String[] args) throws Exception {
+<pre><code>public class CircleListInTest &#123;
+    public static void main(String[] args) throws Exception &#123;
         Node&lt;String&gt; first = new Node&lt;String&gt;(&quot;aa&quot;, null);
         Node&lt;String&gt; second = new Node&lt;String&gt;(&quot;bb&quot;, null);
         Node&lt;String&gt; third = new Node&lt;String&gt;(&quot;cc&quot;, null);
@@ -1430,81 +1432,81 @@ public static void main(String[] args) throws Exception {
         //查找环的入口结点
         Node&lt;String&gt; entrance = getEntrance(first);
         System.out.println(&quot;first链表中环的入口结点元素为：&quot;+entrance.item);
-    }
+    &#125;
 
     /**
      * 查找有环链表中环的入口结点
      * @param first 链表首结点
      * @return 环的入口结点
      */
-    public static Node getEntrance(Node&lt;String&gt; first) {
+    public static Node getEntrance(Node&lt;String&gt; first) &#123;
         //定义快慢指针
         Node&lt;String&gt; fast = first;
         Node&lt;String&gt; slow = first;
         Node&lt;String&gt; temp = null;
         //遍历链表，先找到环(快慢指针相遇),准备一个临时指针，指向链表的首结点，继续遍历，直到慢指针和临时指针相遇，那么相遇时所指向的结点就是环的入口
-        while(fast!=null &amp;&amp; fast.next!=null){
+        while(fast!=null &amp;&amp; fast.next!=null)&#123;
             //变换快慢指针
             fast = fast.next.next;
             slow = slow.next;
             //判断快慢指针是否相遇
-            if (fast.equals(slow)){
+            if (fast.equals(slow))&#123;
                 temp = first;
                 continue;
-            }
+            &#125;
             //让临时结点变换
-            if (temp!=null){
+            if (temp!=null)&#123;
                 temp = temp.next;
                 //判断临时指针是否和慢指针相遇
-                if (temp.equals(slow)){
+                if (temp.equals(slow))&#123;
                     break;
-                }
-            }
-        }
+                &#125;
+            &#125;
+        &#125;
         return temp;
-    }
+    &#125;
     //结点类
-    private static class Node&lt;T&gt; {
+    private static class Node&lt;T&gt; &#123;
         //存储数据
         T item;
         //下一个结点
         Node next;
-        public Node(T item, Node next) {
+        public Node(T item, Node next) &#123;
             this.item = item;
             this.next = next;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><hr>
 <p>在单向链表中，最后一个节点的指针为null，不指向任何结点，因为没有下一个元素了。要实现循环链表，我们只需要让单向链表的最后一个节点的指针指向头结点即可。</p>
 <hr>
 <h3 id="约瑟夫问题"><a href="#约瑟夫问题" class="headerlink" title="约瑟夫问题"></a>约瑟夫问题</h3><hr>
 <p>构建含有41个结点的单向循环链表，分别存储1~41的值，分别代表这41个人；使用计数器count，记录当前报数的值；遍历链表，每循环一次，count++；判断count的值，如果是3，则从链表中删除这个结点并打印结点的值，把count重置为0。</p>
-<pre><code>public class JosephTest {
-    public static void main(String[] args) {
+<pre><code>public class JosephTest &#123;
+    public static void main(String[] args) &#123;
         //解决约瑟夫问题
         //1.构建循环链表，包含41个结点，分别存储1~41之间的值
         //用来就首结点
         Node&lt;Integer&gt; first = null;
         //用来记录前一个结点
         Node&lt;Integer&gt; pre = null;
-        for(int i = 1;i&lt;=41;i++){
+        for(int i = 1;i&lt;=41;i++)&#123;
             //如果是第一个结点
-            if (i==1){
+            if (i==1)&#123;
                 first = new Node&lt;&gt;(i,null);
                 pre = first;
                 continue;
-            }
+            &#125;
             //如果不是第一个结点
             Node&lt;Integer&gt; newNode = new Node&lt;&gt;(i, null);
             pre.next=newNode;
             pre=newNode;
             //如果是最后一个结点，那么需要让最后一个结点的下一个结点变为first,变为循环链表了
-            if (i==41){
+            if (i==41)&#123;
                 pre.next=first;
-            }
-        }
+            &#125;
+        &#125;
 
         //2.需要count计数器，模拟报数
         int count=0;
@@ -1513,38 +1515,38 @@ public static void main(String[] args) throws Exception {
         Node&lt;Integer&gt; n = first;
         //记录当前结点的上一个结点
         Node&lt;Integer&gt; before = null;
-        while(n!=n.next){
+        while(n!=n.next)&#123;
             //模拟报数
             count++;
             //判断当前报数是不是为3
-            if (count==3){
+            if (count==3)&#123;
                 //如果是3，则把当前结点删除调用，打印当前结点，重置count=0，让当前结点n后移
                 before.next=n.next;
                 System.out.print(n.item+&quot;,&quot;);
                 count=0;
                 n=n.next;
-            }else{
+            &#125;else&#123;
                 //如果不是3，让before变为当前结点，让当前结点后移；
                 before=n;
                 n=n.next;
-            }
-        }
+            &#125;
+        &#125;
         //打印最后一个元素
         System.out.println(n.item);
-    }
+    &#125;
 
     //结点类
-    private static class Node&lt;T&gt; {
+    private static class Node&lt;T&gt; &#123;
         //存储数据
         T item;
         //下一个结点
         Node next;
-        public Node(T item, Node next) {
+        public Node(T item, Node next) &#123;
             this.item = item;
             this.next = next;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><hr>
 <p>栈是一种基于先进后出(FILO)的数据结构，是一种只能在一端进行插入和删除操作的特殊线性表。它按照先进后出的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据（最后一个数据被第一个读出来）。</p>
@@ -1552,37 +1554,37 @@ public static void main(String[] args) throws Exception {
 <hr>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><hr>
 <p>压栈、弹栈、遍历。</p>
-<pre><code>public class Stack&lt;T&gt; implements Iterable&lt;T&gt;{
+<pre><code>public class Stack&lt;T&gt; implements Iterable&lt;T&gt;&#123;
     //记录首结点
     private Node head;
     //栈中元素的个数
     private int N;
-    private class Node{
+    private class Node&#123;
         public T item;
         public Node next;
-        public Node(T item, Node next) {
+        public Node(T item, Node next) &#123;
             this.item = item;
             this.next = next;
-        }
-    }
+        &#125;
+    &#125;
 
-    public Stack() {
+    public Stack() &#123;
         this.head = new Node(null,null);
         this.N=0;
-    }
+    &#125;
 
     //判断当前栈中元素个数是否为0
-    public boolean isEmpty(){
+    public boolean isEmpty()&#123;
         return N==0;
-    }
+    &#125;
 
     //获取栈中元素的个数
-    public int size(){
+    public int size()&#123;
         return N;
-    }
+    &#125;
 
     //把t元素压入栈
-    public void push(T t){
+    public void push(T t)&#123;
         //找到首结点指向的第一个结点
         Node oldFirst = head.next;
         //创建新结点
@@ -1593,48 +1595,48 @@ public static void main(String[] args) throws Exception {
         newNode.next=oldFirst;
         //元素个数+1；
         N++;
-    }
+    &#125;
 
     //弹出栈顶元素
-    public T pop(){
+    public T pop()&#123;
         //找到首结点指向的第一个结点
         Node oldFirst = head.next;
-        if (oldFirst==null){
+        if (oldFirst==null)&#123;
             return null;
-        }
+        &#125;
         //让首结点指向原来第一个结点的下一个结点
         head.next=oldFirst.next;
         //元素个数-1；
         N--;
         return oldFirst.item;
-    }
+    &#125;
 
     @Override
-    public Iterator&lt;T&gt; iterator() {
+    public Iterator&lt;T&gt; iterator() &#123;
         return new SIterator();
-    }
+    &#125;
 
-    private class SIterator implements Iterator{
+    private class SIterator implements Iterator&#123;
         private Node n;
-        public SIterator(){
+        public SIterator()&#123;
             this.n=head;
-        }
+        &#125;
 
         @Override
-        public boolean hasNext() {
+        public boolean hasNext() &#123;
             return n.next!=null;
-        }
+        &#125;
 
         @Override
-        public Object next() {
+        public Object next() &#123;
             n = n.next;
             return n.item;
-        }
-    }
-}-
+        &#125;
+    &#125;
+&#125;-
 </code></pre><p>测试</p>
-<pre><code>public class StackTest {
-    public static void main(String[] args) {
+<pre><code>public class StackTest &#123;
+    public static void main(String[] args) &#123;
         //创建栈对象
         Stack&lt;String&gt; stack = new Stack&lt;&gt;();
         //测试压栈
@@ -1642,86 +1644,86 @@ public static void main(String[] args) throws Exception {
         stack.push(&quot;b&quot;);
         stack.push(&quot;c&quot;);
         stack.push(&quot;d&quot;);
-        for (String item : stack) {
+        for (String item : stack) &#123;
             System.out.println(item);
-        }
+        &#125;
         System.out.println(&quot;------------------------------&quot;);
         //测试弹栈
         String result = stack.pop();
         System.out.println(&quot;弹出的元素是：&quot;+result);
         System.out.println(&quot;剩余的元素个数：&quot;+stack.size());
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="括号匹配问题"><a href="#括号匹配问题" class="headerlink" title="括号匹配问题"></a>括号匹配问题</h3><hr>
 <p>给定一个字符串，里边可能包含”()”小括号和其他字符，请编写程序检查该字符串的中的小括号是否成对出现。</p>
 <p>创建一个栈用来存储左括号；从左往右遍历字符串，拿到每一个字符；判断该字符是不是左括号，如果是，放入栈中存储；判断该字符是不是右括号，如果不是，继续下一次循环；如果该字符是右括号，则从栈中弹出一个元素t；判断元素t是否为null，如果不是，则证明有对应的左括号，如果不是，则证明没有对应的左括号；循环结束后，判断栈中还有没有剩余的左括号，如果有，则不匹配，如果没有，则匹配。</p>
-<pre><code>public class BracketsMatchTest {
-    public static void main(String[] args) {
+<pre><code>public class BracketsMatchTest &#123;
+    public static void main(String[] args) &#123;
         String str = &quot;上海(长安)())&quot;;
         boolean match = isMatch(str);
         System.out.println(str+&quot;中的括号是否匹配：&quot;+match);
-    }
+    &#125;
 
     /**
      * 判断str中的括号是否匹配
      * @param str 括号组成的字符串
      * @return 如果匹配，返回true，如果不匹配，返回false
      */
-    public static boolean isMatch(String str){
+    public static boolean isMatch(String str)&#123;
         //1.创建栈对象，用来存储左括号
         Stack&lt;String&gt; chars = new Stack&lt;&gt;();
         //2.从左往右遍历字符串
-        for (int i = 0; i &lt; str.length(); i++) {
+        for (int i = 0; i &lt; str.length(); i++) &#123;
             String currChar = str.charAt(i)+ &quot;&quot;;
 
             //3.判断当前字符是否为左括号，如果是，则把字符放入到栈中
-            if (currChar.equals(&quot;(&quot;)){
+            if (currChar.equals(&quot;(&quot;))&#123;
                 chars.push(currChar);
-            }else if(currChar.equals(&quot;)&quot;)){
+            &#125;else if(currChar.equals(&quot;)&quot;))&#123;
                 //4.继续判断当前字符是否是有括号，如果是，则从栈中弹出一个左括号，并判断弹出的结果是否为null,如果为null证明没有匹配的左括号，如果不为null，则证明有匹配的左括号
                 String pop = chars.pop();
-                if (pop==null){
+                if (pop==null)&#123;
                     return false;
-                }
-            }
+                &#125;
+            &#125;
 
-        }
+        &#125;
         //5.判断栈中还有没有剩余的左括号，如果有，则证明括号不匹配
-        if (chars.size()==0){
+        if (chars.size()==0)&#123;
             return true;
-        }else{
+        &#125;else&#123;
             return false;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="逆波兰表达式求值"><a href="#逆波兰表达式求值" class="headerlink" title="逆波兰表达式求值"></a>逆波兰表达式求值</h3><hr>
 <p>创建一个栈对象oprands存储操作数；从左往右遍历逆波兰表达式，得到每一个字符串；判断该字符串是不是运算符，如果不是，把该该操作数压入oprands栈中；如果是运算符，则从oprands栈中弹出两个操作数o1,o2；使用该运算符计算o1和o2，得到结果result；把该结果压入oprands栈中 ；遍历结束后，拿出栈中最终的结果返回。</p>
-<pre><code>public class ReversePolishNotationTest {
+<pre><code>public class ReversePolishNotationTest &#123;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) &#123;
         //中缀表达式 3*（17-15）+18/6 的逆波兰表达式如下 6+3=9
-        String[] notation = {&quot;3&quot;, &quot;17&quot;, &quot;15&quot;, &quot;-&quot;, &quot;*&quot;, &quot;18&quot;, &quot;6&quot;, &quot;/&quot;, &quot;+&quot;};
+        String[] notation = &#123;&quot;3&quot;, &quot;17&quot;, &quot;15&quot;, &quot;-&quot;, &quot;*&quot;, &quot;18&quot;, &quot;6&quot;, &quot;/&quot;, &quot;+&quot;&#125;;
         int result = caculate(notation);
         System.out.println(&quot;逆波兰表达式的结果为：&quot; + result);
-    }
+    &#125;
 
     /**
      * @param notaion 逆波兰表达式的数组表示方式
      * @return 逆波兰表达式的计算结果
      */
-    public static int caculate(String[] notaion) {
+    public static int caculate(String[] notaion) &#123;
         //1.定义一个栈，用来存储操作数
         Stack&lt;Integer&gt; oprands = new Stack&lt;&gt;();
         //2.从左往右遍历逆波兰表达式，得到每一个元素
-        for (int i = 0; i &lt; notaion.length; i++) {
+        for (int i = 0; i &lt; notaion.length; i++) &#123;
             String curr = notaion[i];
             //3.判断当前元素是运算符还是操作数
             Integer o1;
             Integer o2;
             Integer result;
-            switch (curr) {
+            switch (curr) &#123;
                 case &quot;+&quot;:
                     //4.运算符，从栈中弹出两个操作数，完成运算，运算完的结果再压入栈中
                     o1 = oprands.pop();
@@ -1755,107 +1757,107 @@ public static void main(String[] args) throws Exception {
                     //5.操作数，把该操作数放入到栈中；
                     oprands.push(Integer.parseInt(curr));
                     break;
-            }
-        }
+            &#125;
+        &#125;
         //6.得到栈中最后一个元素，就是逆波兰表达式的结果
         int result = oprands.pop();
         return result;
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><hr>
 <p>队列是一种基于先进先出(FIFO)的数据结构，是一种只能在一端进行插入,在另一端进行删除操作的特殊线性表，它按照先进先出的原则存储数据，先进入的数据，在读取数据时先读被读出来。</p>
 <hr>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><hr>
 <p>插入、删除、遍历。</p>
-<pre><code>public class Queue&lt;T&gt; implements Iterable&lt;T&gt;{
+<pre><code>public class Queue&lt;T&gt; implements Iterable&lt;T&gt;&#123;
     //记录首结点
     private Node head;
     //记录最后一个结点
     private Node last;
     //记录队列中元素的个数
     private int N;
-    private class Node{
+    private class Node&#123;
         public T item;
         public Node next;
-        public Node(T item, Node next) {
+        public Node(T item, Node next) &#123;
             this.item = item;
             this.next = next;
-        }
-    }
-    public Queue() {
+        &#125;
+    &#125;
+    public Queue() &#123;
         this.head = new Node(null,null);
         this.last=null;
         this.N=0;
-    }
+    &#125;
 
     //判断队列是否为空
-    public boolean isEmpty(){
+    public boolean isEmpty()&#123;
         return N==0;
-    }
+    &#125;
 
     //返回队列中元素的个数
-    public int size(){
+    public int size()&#123;
         return N;
-    }
+    &#125;
 
     //向队列中插入元素t
-    public void enqueue(T t){
-        if (last==null){
+    public void enqueue(T t)&#123;
+        if (last==null)&#123;
             //当前尾结点last为null
             last= new Node(t,null);
             head.next=last;
-        } else {
+        &#125; else &#123;
             //当前尾结点last不为null
             Node oldLast = last;
             last = new Node(t, null);
             oldLast.next=last;
-        }
+        &#125;
         //元素个数+1
         N++;
-    }
+    &#125;
 
     //从队列中拿出一个元素
-    public T dequeue(){
-        if (isEmpty()){
+    public T dequeue()&#123;
+        if (isEmpty())&#123;
             return null;
-        }
+        &#125;
         Node oldFirst = head.next;
         head.next = oldFirst.next;
         N--;
         //因为出队列其实是在删除元素，因此如果队列中的元素被删除完了，需要重置last=null;
-        if (isEmpty()){
+        if (isEmpty())&#123;
             last=null;
-        }
+        &#125;
         return oldFirst.item;
-    }
+    &#125;
 
     @Override
-    public Iterator&lt;T&gt; iterator() {
+    public Iterator&lt;T&gt; iterator() &#123;
         return new QIterator();
-    }
+    &#125;
 
-    private class QIterator implements Iterator{
+    private class QIterator implements Iterator&#123;
         private Node n;
 
-        public QIterator(){
+        public QIterator()&#123;
             this.n=head;
-        }
+        &#125;
         @Override
-        public boolean hasNext() {
+        public boolean hasNext() &#123;
             return n.next!=null;
-        }
+        &#125;
 
         @Override
-        public Object next() {
+        public Object next() &#123;
             n = n.next;
             return n.item;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class QueueTest {
-    public static void main(String[] args) {
+<pre><code>public class QueueTest &#123;
+    public static void main(String[] args) &#123;
         //创建队列对象
         Queue&lt;String&gt; q = new Queue&lt;&gt;();
         //测试队列的enqueue方法
@@ -1863,63 +1865,63 @@ public static void main(String[] args) throws Exception {
         q.enqueue(&quot;b&quot;);
         q.enqueue(&quot;c&quot;);
         q.enqueue(&quot;d&quot;);
-        for (String str : q) {
+        for (String str : q) &#123;
             System.out.println(str);
-        }
+        &#125;
         System.out.println(&quot;-------------------------------&quot;);
         //测试队列的dequeue方法
         String result = q.dequeue();
         System.out.println(&quot;出队列的元素是：&quot;+result);
         System.out.println(&quot;剩余的元素个数：&quot;+q.size());
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h2 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h2><hr>
 <p>符号表最主要的目的就是将一个键和一个值联系起来，符号表能够将存储的数据元素是一个键和一个值共同组成的键值对数据，我们可以根据键来查找对应的值。<strong>符号表中，键具有唯一性</strong>。</p>
 <hr>
 <h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><hr>
-<pre><code>public class SymbolTable&lt;Key,Value&gt; {
+<pre><code>public class SymbolTable&lt;Key,Value&gt; &#123;
     //记录首结点
     private Node head;
     //记录符号表中元素的个数
     private int N;
-    private class Node{
+    private class Node&#123;
         //键
         public Key key;
         //值
         public Value value;
         //下一个结点
         public Node next;
-        public Node(Key key, Value value, Node next) {
+        public Node(Key key, Value value, Node next) &#123;
             this.key = key;
             this.value = value;
             this.next = next;
-        }
-    }
+        &#125;
+    &#125;
 
-    public SymbolTable() {
+    public SymbolTable() &#123;
         this.head = new Node(null,null,null);
         this.N=0;
-    }
+    &#125;
 
     //获取符号表中键值对的个数
-    public int size(){
+    public int size()&#123;
         return N;
-    }
+    &#125;
 
     //往符号表中插入键值对
-    public void put(Key key,Value value){
+    public void put(Key key,Value value)&#123;
         //符号表中已经存在了键为key的键值对，那么只需要找到该结点，替换值为value即可
         Node n = head;
-        while(n.next!=null){
+        while(n.next!=null)&#123;
             //变换n
             n = n.next;
             //判断n结点存储的键是否为key，如果是，则替换n结点的值
-            if (n.key.equals(key)){
+            if (n.key.equals(key))&#123;
                 n.value = value;
                 return;
-            }
-        }
+            &#125;
+        &#125;
 
         //如果符号表中不存在键为key的键值对，只需要创建新的结点，保存要插入的键值对，把新结点插入到链表的头部  head.next=新结点即可
         Node newNode = new Node(key, value, null);
@@ -1928,40 +1930,40 @@ public static void main(String[] args) throws Exception {
         head.next = newNode;
         //元素个数+1；
         N++;
-    }
+    &#125;
     //删除符号表中键为key的键值对
-    public void delete(Key key){
+    public void delete(Key key)&#123;
         //找到键为key的结点，把该结点从链表中删除
         Node n = head;
-        while(n.next!=null){
+        while(n.next!=null)&#123;
             //判断n结点的下一个结点的键是否为key，如果是，就删除该结点
-            if (n.next.key.equals(key)){
+            if (n.next.key.equals(key))&#123;
                 n.next = n.next.next;
                 N--;
                 return;
-            }
+            &#125;
             //变换n
             n = n.next;
-        }
-    }
+        &#125;
+    &#125;
 
     //从符号表中获取key对应的值
-    public Value get(Key key){
+    public Value get(Key key)&#123;
         //找到键为key的结点
         Node n = head;
-        while(n.next!=null){
+        while(n.next!=null)&#123;
             //变换n
             n = n.next;
-            if (n.key.equals(key)){
+            if (n.key.equals(key))&#123;
                 return n.value;
-            }
-        }
+            &#125;
+        &#125;
         return null;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class SymbolTableTest {
-    public static void main(String[] args) {
+<pre><code>public class SymbolTableTest &#123;
+    public static void main(String[] args) &#123;
         //创建符号表对象
         SymbolTable&lt;Integer, String&gt; symbolTable = new SymbolTable&lt;&gt;();
         //测试put方法（插入,替换）
@@ -1979,96 +1981,96 @@ public static void main(String[] args) throws Exception {
         //测试删除方法
         symbolTable.delete(2);
         System.out.println(&quot;删除完毕后，元素的个数:&quot;+symbolTable.size());
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="有序符号表"><a href="#有序符号表" class="headerlink" title="有序符号表"></a>有序符号表</h3><hr>
 <p>要根据键的大小进行排序，插入数据时要考虑顺序。</p>
-<pre><code>public class OrderSymbolTable&lt;Key extends Comparable&lt;Key&gt;,Value&gt; {
+<pre><code>public class OrderSymbolTable&lt;Key extends Comparable&lt;Key&gt;,Value&gt; &#123;
     //记录首结点
     private Node head;
     //记录符号表中元素的个数
     private int N;
-    private class Node{
+    private class Node&#123;
         //键
         public Key key;
         //值
         public Value value;
         //下一个结点
         public Node next;
-        public Node(Key key, Value value, Node next) {
+        public Node(Key key, Value value, Node next) &#123;
             this.key = key;
             this.value = value;
             this.next = next;
-        }
-    }
+        &#125;
+    &#125;
 
-    public OrderSymbolTable() {
+    public OrderSymbolTable() &#123;
         this.head = new Node(null,null,null);
         this.N=0;
-    }
+    &#125;
 
     //获取符号表中键值对的个数
-    public int size(){
+    public int size()&#123;
         return N;
-    }
+    &#125;
 
     //往符号表中插入键值对
-    public void put(Key key,Value value){
+    public void put(Key key,Value value)&#123;
         //定义两个Node变量，分别记录当前结点和当前结点的上一个结点
         Node curr = head.next;
         Node pre = head;
-        while(curr!=null &amp;&amp; key.compareTo(curr.key)&gt;0){
+        while(curr!=null &amp;&amp; key.compareTo(curr.key)&gt;0)&#123;
             //变换当前结点和前一个结点即可
             pre = curr;
             curr = curr.next;
-        }
+        &#125;
         //如果当前结点curr的键和要插入的key一样，则替换
-        if (curr!=null &amp;&amp; key.compareTo(curr.key)==0){
+        if (curr!=null &amp;&amp; key.compareTo(curr.key)==0)&#123;
             curr.value = value;
             return;
-        }
+        &#125;
         //如果当前结点curr的键和要插入的key不一样，把新的结点插入到curr之前
         Node newNode = new Node(key, value, curr);
         pre.next = newNode;
         //元素的个数+1；
         N++;
 
-    }
+    &#125;
     //删除符号表中键为key的键值对
-    public void delete(Key key){
+    public void delete(Key key)&#123;
         //找到键为key的结点，把该结点从链表中删除
 
         Node n = head;
-        while(n.next!=null){
+        while(n.next!=null)&#123;
             //判断n结点的下一个结点的键是否为key，如果是，就删除该结点
-            if (n.next.key.equals(key)){
+            if (n.next.key.equals(key))&#123;
                 n.next = n.next.next;
                 N--;
                 return;
-            }
+            &#125;
             //变换n
             n = n.next;
-        }
-    }
+        &#125;
+    &#125;
 
     //从符号表中获取key对应的值
-    public Value get(Key key){
+    public Value get(Key key)&#123;
         //找到键为key的结点
         Node n = head;
-        while(n.next!=null){
+        while(n.next!=null)&#123;
             //变换n
             n = n.next;
-            if (n.key.equals(key)){
+            if (n.key.equals(key))&#123;
                 return n.value;
-            }
-        }
+            &#125;
+        &#125;
         return null;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class OrderSymbolTableTest {
-    public static void main(String[] args) {
+<pre><code>public class OrderSymbolTableTest &#123;
+    public static void main(String[] args) &#123;
         //创建有序符号表对象
         OrderSymbolTable&lt;Integer, String&gt; table = new OrderSymbolTable&lt;&gt;();
         table.put(1,&quot;张三&quot;);
@@ -2076,8 +2078,8 @@ public static void main(String[] args) throws Exception {
         table.put(4,&quot;赵六&quot;);
         table.put(7,&quot;田七&quot;);
         table.put(3,&quot;王五&quot;);
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><hr>
 <p>树是由n（n&gt;=1）个有限结点组成一个具有层次关系的集合。树具有以下特点：每个结点有零个或多个子结点；没有父结点的结点为根结点；每一个非根结点只有一个父结点；每个结点及其后代结点整体上可以看做是一棵树，称为当前结点的父结点的一个子树。</p>
@@ -2108,12 +2110,12 @@ public static void main(String[] args) throws Exception {
 <p>后序遍历实现步骤：找到当前结点的左子树，如果不为空，递归遍历左子树；找到当前结点的右子树，如果不为空，递归遍历右子树；把当前结点的key放入到队列中。</p>
 <p><strong>层序遍历</strong>，就是从根节点（第一层）开始，依次向下，获取每一层所有结点的值。实现步骤：创建队列，存储每一层的结点；使用循环从队列中弹出一个结点：获取当前结点的key；如果当前结点的左子结点不为空，则把左子结点放入到队列中；如果当前结点的右子结点不为空，则把右子结点放入到队列中。</p>
 <p><strong>最大深度</strong>：如果根结点为空，则最大深度为0；计算左子树的最大深度；计算右子树的最大深度；当前树的最大深度=左子树的最大深度和右子树的最大深度中的较大者+1。</p>
-<pre><code>public class BinaryTree&lt;Key extends Comparable&lt;Key&gt;, Value&gt; {
+<pre><code>public class BinaryTree&lt;Key extends Comparable&lt;Key&gt;, Value&gt; &#123;
     //记录根结点
     private Node root;
     //记录树中元素的个数
     private int N;
-    private class Node {
+    private class Node &#123;
         //存储键
         public Key key;
         //存储值
@@ -2122,262 +2124,262 @@ public static void main(String[] args) throws Exception {
         public Node left;
         //记录右子结点
         public Node right;
-        public Node(Key key, Value value, Node left, Node right) {
+        public Node(Key key, Value value, Node left, Node right) &#123;
             this.key = key;
             this.value = value;
             this.left = left;
             this.right = right;
-        }
-    }
+        &#125;
+    &#125;
 
     //获取树中元素的个数
-    public int size() {
+    public int size() &#123;
         return N;
-    }
+    &#125;
 
     //向树中添加元素key-value
-    public void put(Key key, Value value) {
+    public void put(Key key, Value value) &#123;
         root = put(root, key, value);
-    }
+    &#125;
 
     //向指定的树x中添加key-value,并返回添加元素后新的树
-    private Node put(Node x, Key key, Value value) {
+    private Node put(Node x, Key key, Value value) &#123;
         //如果x子树为空，
-        if (x==null){
+        if (x==null)&#123;
             N++;
             return new Node(key,value, null,null);
-        }
+        &#125;
         //如果x子树不为空
         //比较x结点的键和key的大小：
         int cmp = key.compareTo(x.key);
-        if (cmp&gt;0){
+        if (cmp&gt;0)&#123;
             //如果key大于x结点的键，则继续找x结点的右子树
             x.right = put(x.right,key,value);
-        }else if(cmp&lt;0){
+        &#125;else if(cmp&lt;0)&#123;
             //如果key小于x结点的键，则继续找x结点的左子树
             x.left = put(x.left,key,value);
-        }else{
+        &#125;else&#123;
             //如果key等于x结点的键，则替换x结点的值为value即可
             x.value = value;
-        }
+        &#125;
         return x;
-    }
+    &#125;
 
     //查询树中指定key对应的value
-    public Value get(Key key) {
+    public Value get(Key key) &#123;
         return get(root,key);
-    }
+    &#125;
 
     //从指定的树x中，查找key对应的值
-    public Value get(Node x, Key key) {
+    public Value get(Node x, Key key) &#123;
         //x树为null
-        if (x==null){
+        if (x==null)&#123;
             return null;
-        }
+        &#125;
         //x树不为null
         //比较key和x结点的键的大小
         int cmp = key.compareTo(x.key);
-        if (cmp&gt;0){
+        if (cmp&gt;0)&#123;
             //如果key大于x结点的键，则继续找x结点的右子树
             return get(x.right,key);
-        }else if(cmp&lt;0){
+        &#125;else if(cmp&lt;0)&#123;
             //如果key小于x结点的键，则继续找x结点的左子树
             return get(x.left,key);
-        }else{
+        &#125;else&#123;
             //如果key等于x结点的键，就找到了键为key的结点，只需要返回x结点的值即可
             return x.value;
-        }
-    }
+        &#125;
+    &#125;
 
     //删除树中key对应的value
-    public void delete(Key key) {
+    public void delete(Key key) &#123;
         delete(root, key);
-    }
+    &#125;
 
     //删除指定树x中的key对应的value，并返回删除后的新树
-    public Node delete(Node x, Key key) {
+    public Node delete(Node x, Key key) &#123;
         //x树为null
-        if (x==null){
+        if (x==null)&#123;
             return null;
-        }
+        &#125;
         //x树不为null
         int cmp = key.compareTo(x.key);
-        if (cmp&gt;0){
+        if (cmp&gt;0)&#123;
             //如果key大于x结点的键，则继续找x结点的右子树
             x.right = delete(x.right,key);
-        }else if(cmp&lt;0){
+        &#125;else if(cmp&lt;0)&#123;
             //如果key小于x结点的键，则继续找x结点的左子树
             x.left = delete(x.left,key);
-        }else{
+        &#125;else&#123;
             //如果key等于x结点的键，完成真正的删除结点动作，要删除的结点就是x；
             //让元素个数-1
             N--;
             //得找到右子树中最小的结点
-            if (x.right==null){
+            if (x.right==null)&#123;
                 return x.left;
-            }
-            if (x.left==null){
+            &#125;
+            if (x.left==null)&#123;
                 return x.right;
-            }
+            &#125;
             Node minNode = x.right;
-            while(minNode.left!=null){
+            while(minNode.left!=null)&#123;
                 minNode = minNode.left;
-            }
+            &#125;
             //删除右子树中最小的结点
             Node n = x.right;
-            while(n.left!=null){
-                if (n.left.left==null){
+            while(n.left!=null)&#123;
+                if (n.left.left==null)&#123;
                     n.left=null;
-                }else{
+                &#125;else&#123;
                     //变换n结点即可
                     n = n.left;
-                }
-            }
+                &#125;
+            &#125;
             //让x结点的左子树成为minNode的左子树
             minNode.left = x.left;
             //让x结点的右子树成为minNode的右子树
             minNode.right = x.right;
             //让x结点的父结点指向minNode
             x = minNode;
-        }
+        &#125;
         return x;
-    }
+    &#125;
 
     //查找整个树中最小的键
-    public Key min(){
+    public Key min()&#123;
         return min(root).key;
-    }
+    &#125;
 
     //在指定树x中找出最小键所在的结点
-    private Node min(Node x){
+    private Node min(Node x)&#123;
         //需要判断x还有没有左子结点，如果有，则继续向左找，如果没有，则x就是最小键所在的结点
-        if (x.left!=null){
+        if (x.left!=null)&#123;
             return min(x.left);
-        }else{
+        &#125;else&#123;
             return x;
-        }
-    }
+        &#125;
+    &#125;
 
     //在整个树中找到最大的键
-    public Key max(){
+    public Key max()&#123;
         return max(root).key;
-    }
+    &#125;
 
     //在指定的树x中，找到最大的键所在的结点
-    public Node max(Node x){
+    public Node max(Node x)&#123;
         //判断x还有没有右子结点，如果有，则继续向右查找，如果没有，则x就是最大键所在的结点
-        if (x.right!=null){
+        if (x.right!=null)&#123;
             return max(x.right);
-        }else{
+        &#125;else&#123;
             return x;
-        }
-    }
+        &#125;
+    &#125;
 
     //获取整个树中所有的键
-    public Queue&lt;Key&gt; preErgodic(){
+    public Queue&lt;Key&gt; preErgodic()&#123;
         Queue&lt;Key&gt; keys = new Queue&lt;&gt;();
         preErgodic(root, keys);
         return keys;
-    }
+    &#125;
 
     //获取指定树x的所有键，并放到keys队列中
-    private void preErgodic(Node x,Queue&lt;Key&gt; keys){
-        if (x==null){
+    private void preErgodic(Node x,Queue&lt;Key&gt; keys)&#123;
+        if (x==null)&#123;
             return;
-        }
+        &#125;
         //把x结点的key放入到keys中
         keys.enqueue(x.key);
         //递归遍历x结点的左子树
-        if (x.left!=null){
+        if (x.left!=null)&#123;
             preErgodic(x.left,keys);
-        }
+        &#125;
         //递归遍历x结点的右子树
-        if (x.right!=null){
+        if (x.right!=null)&#123;
             preErgodic(x.right,keys);
-        }
-    }
+        &#125;
+    &#125;
 
     //使用中序遍历获取树中所有的键
-    public Queue&lt;Key&gt; midErgodic(){
+    public Queue&lt;Key&gt; midErgodic()&#123;
         Queue&lt;Key&gt; keys = new Queue&lt;&gt;();
         midErgodic(root,keys);
         return keys;
-    }
+    &#125;
 
     //使用中序遍历，获取指定树x中所有的键，并存放到key中
-    private void midErgodic(Node x,Queue&lt;Key&gt; keys){
-        if (x==null){
+    private void midErgodic(Node x,Queue&lt;Key&gt; keys)&#123;
+        if (x==null)&#123;
             return;
-        }
+        &#125;
         //先递归，把左子树中的键放到keys中
-        if (x.left!=null){
+        if (x.left!=null)&#123;
             midErgodic(x.left,keys);
-        }
+        &#125;
         //把当前结点x的键放到keys中
         keys.enqueue(x.key);
         //在递归，把右子树中的键放到keys中
-        if(x.right!=null){
+        if(x.right!=null)&#123;
             midErgodic(x.right,keys);
-        }
-    }
+        &#125;
+    &#125;
 
     //使用后序遍历，把整个树中所有的键返回
-    public Queue&lt;Key&gt; afterErgodic(){
+    public Queue&lt;Key&gt; afterErgodic()&#123;
         Queue&lt;Key&gt; keys = new Queue&lt;&gt;();
         afterErgodic(root,keys);
         return keys;
-    }
+    &#125;
 
     //使用后序遍历，把指定树x中所有的键放入到keys中
-    private void afterErgodic(Node x,Queue&lt;Key&gt; keys){
-        if (x==null){
+    private void afterErgodic(Node x,Queue&lt;Key&gt; keys)&#123;
+        if (x==null)&#123;
             return ;
-        }
+        &#125;
         //通过递归把左子树中所有的键放入到keys中
-        if (x.left!=null){
+        if (x.left!=null)&#123;
             afterErgodic(x.left,keys);
-        }
+        &#125;
         //通过递归把右子树中所有的键放入到keys中
-        if (x.right!=null){
+        if (x.right!=null)&#123;
             afterErgodic(x.right,keys);
-        }
+        &#125;
         //把x结点的键放入到keys中
         keys.enqueue(x.key);
-    }
+    &#125;
 
     //使用层序遍历，获取整个树中所有的键
-    public Queue&lt;Key&gt; layerErgodic(){
+    public Queue&lt;Key&gt; layerErgodic()&#123;
         //定义两个队列，分别存储树中的键和树中的结点
         Queue&lt;Key&gt; keys = new Queue&lt;&gt;();
         Queue&lt;Node&gt; nodes = new Queue&lt;&gt;();
         //默认，往队列中放入根结点
         nodes.enqueue(root);
-        while(!nodes.isEmpty()){
+        while(!nodes.isEmpty())&#123;
             //从队列中弹出一个结点，把key放入到keys中
             Node n = nodes.dequeue();
             keys.enqueue(n.key);
             //判断当前结点还有没有左子结点，如果有，则放入到nodes中
-            if (n.left!=null){
+            if (n.left!=null)&#123;
                 nodes.enqueue(n.left);
-            }
+            &#125;
             //判断当前结点还有没有右子结点，如果有，则放入到nodes中
-            if (n.right!=null){
+            if (n.right!=null)&#123;
                 nodes.enqueue(n.right);
-            }
-        }
+            &#125;
+        &#125;
         return keys;
-    }
+    &#125;
 
     //获取整个树的最大深度
-    public int maxDepth(){
+    public int maxDepth()&#123;
         return maxDepth(root);
-    }
+    &#125;
 
     //获取指定树x的最大深度
-    private int maxDepth(Node x){
-        if (x==null){
+    private int maxDepth(Node x)&#123;
+        if (x==null)&#123;
             return 0;
-        }
+        &#125;
         //x的最大深度
         int max=0;
         //左子树的最大深度
@@ -2385,21 +2387,21 @@ public static void main(String[] args) throws Exception {
         //右子树的最大深度
         int maxR=0;
         //计算x结点左子树的最大深度
-        if (x.left!=null){
+        if (x.left!=null)&#123;
             maxL = maxDepth(x.left);
-        }
+        &#125;
         //计算x结点右子树的最大深度
-        if (x.right!=null){
+        if (x.right!=null)&#123;
             maxR = maxDepth(x.right);
-        }
+        &#125;
         //比较左子树最大深度和右子树最大深度，取较大值+1即可
         max = maxL&gt;maxR?maxL+1:maxR+1;
         return max;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>代码测试</p>
-<pre><code>public class BinaryTreeTest {
-    public static void main(String[] args) {
+<pre><code>public class BinaryTreeTest &#123;
+    public static void main(String[] args) &#123;
         //创建二叉查找树对象
         BinaryTree&lt;Integer, String&gt; tree = new BinaryTree&lt;&gt;();
         //测试插入
@@ -2413,13 +2415,13 @@ public static void main(String[] args) throws Exception {
         tree.delete(3);
         System.out.println(&quot;删除后的元素个数：&quot;+tree.size());
         System.out.println(&quot;删除后键3对应的元素:&quot;+tree.get(3));
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>遍历测试</p>
-<pre><code>public class BinaryTreeErgodicTest {
+<pre><code>public class BinaryTreeErgodicTest &#123;
 
     /*//测试前序遍历
-    public static void main(String[] args) {
+    public static void main(String[] args) &#123;
         //创建树对象
         BinaryTree&lt;String, String&gt; tree = new BinaryTree&lt;&gt;();
         //往树中添加数据
@@ -2433,14 +2435,14 @@ public static void main(String[] args) throws Exception {
         tree.put(&quot;C&quot;, &quot;3&quot;);
         //遍历
         Queue&lt;String&gt; keys = tree.preErgodic();
-        for (String key : keys) {
+        for (String key : keys) &#123;
             String value = tree.get(key);
             System.out.println(key+&quot;----&quot;+value);
-        }
-    }*/
+        &#125;
+    &#125;*/
 
     //测试中序遍历
-   /* public static void main(String[] args) {
+   /* public static void main(String[] args) &#123;
         //创建树对象
         BinaryTree&lt;String, String&gt; tree = new BinaryTree&lt;&gt;();
         //往树中添加数据
@@ -2454,14 +2456,14 @@ public static void main(String[] args) throws Exception {
         tree.put(&quot;C&quot;, &quot;3&quot;);
         //遍历
         Queue&lt;String&gt; keys = tree.midErgodic();
-        for (String key : keys) {
+        for (String key : keys) &#123;
             String value = tree.get(key);
             System.out.println(key+&quot;----&quot;+value);
-        }
-    }*/
+        &#125;
+    &#125;*/
 
     //测试后序遍历
-    /*public static void main(String[] args) {
+    /*public static void main(String[] args) &#123;
         //创建树对象
         BinaryTree&lt;String, String&gt; tree = new BinaryTree&lt;&gt;();
         //往树中添加数据
@@ -2475,14 +2477,14 @@ public static void main(String[] args) throws Exception {
         tree.put(&quot;C&quot;, &quot;3&quot;);
         //遍历
         Queue&lt;String&gt; keys = tree.afterErgodic();
-        for (String key : keys) {
+        for (String key : keys) &#123;
             String value = tree.get(key);
             System.out.println(key+&quot;----&quot;+value);
-        }
-    }*/
+        &#125;
+    &#125;*/
 
     //测试层序遍历
-    public static void main(String[] args) {
+    public static void main(String[] args) &#123;
         //创建树对象
         BinaryTree&lt;String, String&gt; tree = new BinaryTree&lt;&gt;();
         //往树中添加数据
@@ -2496,15 +2498,15 @@ public static void main(String[] args) throws Exception {
         tree.put(&quot;C&quot;, &quot;3&quot;);
         //遍历
         Queue&lt;String&gt; keys = tree.layerErgodic();
-        for (String key : keys) {
+        for (String key : keys) &#123;
             String value = tree.get(key);
             System.out.println(key+&quot;----&quot;+value);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>最大深度测试</p>
-<pre><code>public class BinaryTreeMaxDepthTest {
-    public static void main(String[] args) {
+<pre><code>public class BinaryTreeMaxDepthTest &#123;
+    public static void main(String[] args) &#123;
         //创建树对象
         BinaryTree&lt;String, String&gt; tree = new BinaryTree&lt;&gt;();
         //往树中添加数据
@@ -2518,87 +2520,87 @@ public static void main(String[] args) throws Exception {
         tree.put(&quot;C&quot;, &quot;3&quot;);
         int maxDepth = tree.maxDepth();
         System.out.println(maxDepth);
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="折纸问题"><a href="#折纸问题" class="headerlink" title="折纸问题"></a>折纸问题</h3><hr>
 <p>纸条对折1次，压出折痕后展开。此时 折痕是凹下去的，即折痕突起的方向指向纸条的背面。如果从纸条的下边向上方连续对折2次，压出折痕后展开，此时有三条折痕，从上到下依次是下折痕、下折痕和上折痕。连续对折N次，请从上到下打印所有折痕的方向 例如：N=1时，打印： down；N=2时，打印： down down up。</p>
 <p>根结点为下折痕；每一个结点的左子结点为下折痕；每一个结点的右子结点为上折痕。</p>
-<pre><code>public class PagerFoldingTest {
+<pre><code>public class PagerFoldingTest &#123;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) &#123;
         //模拟这只过程，产生树
         Node&lt;String&gt; tree = createTree(2);
         //遍历树，打印每个结点
         printTree(tree);
-    }
+    &#125;
 
     //通过模拟对折N次纸，产生树
-    public static Node&lt;String&gt; createTree(int N){
+    public static Node&lt;String&gt; createTree(int N)&#123;
         //定义根结点
         Node&lt;String&gt; root=null;
-        for (int i = 0; i &lt; N; i++) {
+        for (int i = 0; i &lt; N; i++) &#123;
             //1.当前是第一次对折
-            if (i==0){
+            if (i==0)&#123;
                 root = new Node&lt;&gt;(&quot;down&quot;,null,null);
                 continue;
-            }
+            &#125;
             //2.当前不是第一次对折
             //定义一个辅助队列，通过层序遍历的思想，找到叶子结点，叶子结点添加子节点
             Queue&lt;Node&gt; queue = new Queue&lt;&gt;();
             queue.enqueue(root);
             //循环遍历队列
-            while(!queue.isEmpty()){
+            while(!queue.isEmpty())&#123;
                 //从队列中弹出一个结点
                 Node&lt;String&gt; tmp = queue.dequeue();
                 //如果有左子结点，则把左子结点放入到队列中
-                if (tmp.left!=null){
+                if (tmp.left!=null)&#123;
                     queue.enqueue(tmp.left);
-                }
+                &#125;
                 //如果有右子结点，则把右子结点放入到队列中
-                if (tmp.right!=null){
+                if (tmp.right!=null)&#123;
                     queue.enqueue(tmp.right);
-                }
+                &#125;
                 //如果同时没有左子结点和右子结点，那么证明该节点是叶子结点，只需要给该节点添加左子结点和右子结点即可
-                if (tmp.left==null &amp;&amp; tmp.right==null){
+                if (tmp.left==null &amp;&amp; tmp.right==null)&#123;
                     tmp.left = new Node&lt;String&gt;(&quot;down&quot;, null,null);
                     tmp.right = new Node&lt;String&gt;(&quot;up&quot;,null,null);
-                }
-            }
-        }
+                &#125;
+            &#125;
+        &#125;
         return root;
-    }
+    &#125;
 
     //打印树中每个结点到控制台
-    public static void printTree(Node&lt;String&gt; root){
+    public static void printTree(Node&lt;String&gt; root)&#123;
         //需要使用中序遍历完成
-        if (root==null){
+        if (root==null)&#123;
             return;
-        }
+        &#125;
         //打印左子树的每个结点
-        if (root.left!=null){
+        if (root.left!=null)&#123;
             printTree(root.left);
-        }
+        &#125;
         //打印当前结点
         System.out.print(root.item+&quot; &quot;);
         //打印右子树的每个结点
-        if (root.right!=null){
+        if (root.right!=null)&#123;
             printTree(root.right);
-        }
-    }
+        &#125;
+    &#125;
 
     //结点类
-    private static class Node&lt;T&gt;{
+    private static class Node&lt;T&gt;&#123;
         public T item;//存储元素
         public Node left;
         public Node right;
-        public Node(T item, Node left, Node right) {
+        public Node(T item, Node left, Node right) &#123;
             this.item = item;
             this.left = left;
             this.right = right;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><hr>
 <p>堆通常可以被看做是一棵<strong>完全二叉树</strong>的<strong>数组对象</strong>。</p>
@@ -2610,49 +2612,49 @@ public static void main(String[] args) throws Exception {
 <h3 id="API实现"><a href="#API实现" class="headerlink" title="API实现"></a>API实现</h3><hr>
 <p>如果往堆中新插入元素，我们只需要不断的比较新结点a[k]和它的父结点a[k/2]的大小，然后根据结果完成数据元素的交换，就可以完成堆的有序调整。</p>
 <p>当删除掉最大元素后，只需要将最后一个元素放到索引1处，并不断的拿着当前结点a[k]与它的子结点a[2k]和a[2k+1]中的较大者交换位置，即可完成堆的有序调整。</p>
-<pre><code>public class Heap&lt;T extends Comparable&lt;T&gt;&gt; {
+<pre><code>public class Heap&lt;T extends Comparable&lt;T&gt;&gt; &#123;
     //存储堆中的元素
     private T[] items;
     //记录堆中元素的个数
     private int N;
 
-    public Heap(int capacity) {
+    public Heap(int capacity) &#123;
         this.items= (T[]) new Comparable[capacity+1];
         this.N=0;
-    }
+    &#125;
 
     //判断堆中索引i处的元素是否小于索引j处的元素
-    private boolean less(int i,int j){
+    private boolean less(int i,int j)&#123;
         return items[i].compareTo(items[j])&lt;0;
-    }
+    &#125;
 
     //交换堆中i索引和j索引处的值
-    private void exch(int i,int j){
+    private void exch(int i,int j)&#123;
         T temp = items[i];
         items[i] = items[j];
         items[j] = temp;
-    }
+    &#125;
 
     //往堆中插入一个元素
-    public void insert(T t){
+    public void insert(T t)&#123;
         items[++N]=t;
         swim(N);
-    }
+    &#125;
 
     //使用上浮算法，使索引k处的元素能在堆中处于一个正确的位置
-    private void swim(int k){
+    private void swim(int k)&#123;
         //通过循环，不断的比较当前结点的值和其父结点的值，如果发现父结点的值比当前结点的值小，则交换位置
-        while(k&gt;1){
+        while(k&gt;1)&#123;
             //比较当前结点和其父结点
-            if (less(k/2,k)){
+            if (less(k/2,k))&#123;
                 exch(k/2,k);
-            }
+            &#125;
             k = k/2;
-        }
-    }
+        &#125;
+    &#125;
 
     //删除堆中最大的元素,并返回这个最大元素
-    public T delMax(){
+    public T delMax()&#123;
         T max = items[1];
         //交换索引1处的元素和最大索引处的元素，让完全二叉树中最右侧的元素变为临时根结点
         exch(1,N);
@@ -2663,35 +2665,35 @@ public static void main(String[] args) throws Exception {
         //通过下沉调整堆，让堆重新有序
         sink(1);
         return max;
-    }
+    &#125;
 
     //使用下沉算法，使索引k处的元素能在堆中处于一个正确的位置
-    private void sink(int k){
+    private void sink(int k)&#123;
         //通过循环不断的对比当前k结点和其左子结点2*k以及右子结点2k+1处中的较大值的元素大小，如果当前结点小，则需要交换位置
-        while(2*k&lt;=N){
+        while(2*k&lt;=N)&#123;
             //获取当前结点的子结点中的较大结点
             int max;//记录较大结点所在的索引
-            if (2*k+1&lt;=N){
-                if (less(2*k,2*k+1)){
+            if (2*k+1&lt;=N)&#123;
+                if (less(2*k,2*k+1))&#123;
                     max=2*k+1;
-                }else{
+                &#125;else&#123;
                     max=2*k;
-                }
-            }else {
+                &#125;
+            &#125;else &#123;
                 max = 2*k;
-            }
+            &#125;
             //比较当前结点和较大结点的值
-            if (!less(k,max)){
+            if (!less(k,max))&#123;
                 break;
-            }
+            &#125;
             //交换k索引处的值和max索引处的值
             exch(k,max);
             //变换k的值
             k = max;
-        }
-    }
+        &#125;
+    &#125;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) &#123;
         Heap&lt;String&gt; heap = new Heap&lt;String&gt;(20);
         heap.insert(&quot;A&quot;);
         heap.insert(&quot;B&quot;);
@@ -2701,14 +2703,14 @@ public static void main(String[] args) throws Exception {
         heap.insert(&quot;F&quot;);
         heap.insert(&quot;G&quot;);
         String del;
-        while((del=heap.delMax())!=null){
+        while((del=heap.delMax())!=null)&#123;
             System.out.print(del+&quot;,&quot;);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class HeapTest {
-    public static void main(String[] args) {
+<pre><code>public class HeapTest &#123;
+    public static void main(String[] args) &#123;
         //创建堆对象
         Heap&lt;String&gt; heap = new Heap&lt;&gt;(10);
         //往堆中存入字符串数据
@@ -2721,179 +2723,179 @@ public static void main(String[] args) throws Exception {
         heap.insert(&quot;G&quot;);
         //通过循环从堆中删除数据
         String result = null;
-        while((result = heap.delMax())!=null){
+        while((result = heap.delMax())!=null)&#123;
             System.out.print(result+&quot; &quot;);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="利用堆进行排序"><a href="#利用堆进行排序" class="headerlink" title="利用堆进行排序"></a>利用堆进行排序</h3><hr>
 <p>构造堆；得到堆顶元素，这个值就是最大值；交换堆顶元素和数组中的最后一个元素，此时所有元素中的最大元素已经放到合适的位置；对堆进行调整，重新让除了最后一个元素的剩余元素中的最大值放到堆顶；重复上述步骤，直到堆中剩一个元素为止。</p>
 <p>堆构造过程：创建一个新数组，把原数组0~length-1的数据拷贝到新数组的1~length处，再从新数组长度的一半处开始往1索引处扫描（从右往左），然后对扫描到的每一个元素做下沉调整即可。</p>
 <p>堆排序过程：对构造好的堆，我们只需要做类似于堆的删除操作，就可以完成排序。将堆顶元素和堆中最后一个元素交换位置；通过对堆顶元素下沉调整堆，把最大的元素放到堆顶(此时最后一个元素不参与堆的调整，因为最大的数据已经到了数组的最右边)；重复上面步骤，直到堆中剩最后一个元素。</p>
 <p>实现：</p>
-<pre><code>public class HeapSort {
+<pre><code>public class HeapSort &#123;
     //判断heap堆中索引i处的元素是否小于索引j处的元素
-    private static  boolean less(Comparable[] heap, int i, int j) {
+    private static  boolean less(Comparable[] heap, int i, int j) &#123;
         return heap[i].compareTo(heap[j])&lt;0;
-    }
+    &#125;
 
     //交换heap堆中i索引和j索引处的值
-    private static  void exch(Comparable[] heap, int i, int j) {
+    private static  void exch(Comparable[] heap, int i, int j) &#123;
         Comparable tmp = heap[i];
         heap[i] = heap[j];
         heap[j] = tmp;
-    }
+    &#125;
 
     //根据原数组source，构造出堆heap
-    private static void createHeap(Comparable[] source, Comparable[] heap) {
+    private static void createHeap(Comparable[] source, Comparable[] heap) &#123;
         //把source中的元素拷贝到heap中，heap中的元素就形成一个无序的堆
         System.arraycopy(source,0,heap,1,source.length);
         //对堆中的元素做下沉调整(从长度的一半处开始，往索引1处扫描)
-        for (int i = (heap.length)/2;i&gt;0;i--){
+        for (int i = (heap.length)/2;i&gt;0;i--)&#123;
             sink(heap,i,heap.length-1);
-        }
-    }
+        &#125;
+    &#125;
 
     //对source数组中的数据从小到大排序
-    public static  void sort(Comparable[] source) {
+    public static  void sort(Comparable[] source) &#123;
         //构建堆
         Comparable[] heap = new Comparable[source.length+1];
         createHeap(source,heap);
         //定义一个变量，记录未排序的元素中最大的索引
         int N = heap.length-1;
         //通过循环，交换1索引处的元素和排序的元素中最大的索引处的元素
-        while(N!=1){
+        while(N!=1)&#123;
             //交换元素
             exch(heap,1,N);
             //排序交换后最大元素所在的索引，让它不要参与堆的下沉调整
             N--;
             //需要对索引1处的元素进行对的下沉调整
             sink(heap,1, N);
-        }
+        &#125;
         //把heap中的数据复制到原数组source中
         System.arraycopy(heap,1,source,0,source.length);
-    }
+    &#125;
 
     //在heap堆中，对target处的元素做下沉，范围是0~range
-    private static void sink(Comparable[] heap, int target, int range){
-        while(2*target&lt;=range){
+    private static void sink(Comparable[] heap, int target, int range)&#123;
+        while(2*target&lt;=range)&#123;
             //1.找出当前结点的较大的子结点
             int max;
-            if (2*target+1&lt;=range){
-                if (less(heap,2*target,2*target+1)){
+            if (2*target+1&lt;=range)&#123;
+                if (less(heap,2*target,2*target+1))&#123;
                     max = 2*target+1;
-                }else{
+                &#125;else&#123;
                     max = 2*target;
-                }
-            }else{
+                &#125;
+            &#125;else&#123;
                 max = 2*target;
-            }
+            &#125;
             //2.比较当前结点的值和较大子结点的值
-            if (!less(heap,target,max)){
+            if (!less(heap,target,max))&#123;
                 break;
-            }
+            &#125;
             exch(heap,target,max);
             target = max;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class HeapSortTest {
-    public static void main(String[] args) {
+<pre><code>public class HeapSortTest &#123;
+    public static void main(String[] args) &#123;
         //待排序数组
-        String[] arr = {&quot;S&quot;,&quot;O&quot;,&quot;R&quot;,&quot;T&quot;,&quot;E&quot;,&quot;X&quot;,&quot;A&quot;,&quot;M&quot;,&quot;P&quot;,&quot;L&quot;,&quot;E&quot;};
+        String[] arr = &#123;&quot;S&quot;,&quot;O&quot;,&quot;R&quot;,&quot;T&quot;,&quot;E&quot;,&quot;X&quot;,&quot;A&quot;,&quot;M&quot;,&quot;P&quot;,&quot;L&quot;,&quot;E&quot;&#125;;
         //通过HeapSort对数组中的元素进行排序
         HeapSort.sort(arr);
         //打印排序后数组中的元素
         System.out.println(Arrays.toString(arr));
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h2 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h2><h3 id="最大优先队列"><a href="#最大优先队列" class="headerlink" title="最大优先队列"></a>最大优先队列</h3><hr>
 <p>可以获取并删除队列中最大的值。基于堆区实现最大优先队列。</p>
-<pre><code>public class MaxPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; {
+<pre><code>public class MaxPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; &#123;
     //存储堆中的元素
     private T[] items;
     //记录堆中元素的个数
     private int N;
 
-    public MaxPriorityQueue(int capacity) {
+    public MaxPriorityQueue(int capacity) &#123;
         this.items = (T[]) new Comparable[capacity+1];
         this.N= 0;
-    }
+    &#125;
 
     //获取队列中元素的个数
-    public int size() {
+    public int size() &#123;
         return N;
-    }
+    &#125;
 
     //判断队列是否为空
-    public boolean isEmpty() {
+    public boolean isEmpty() &#123;
         return N==0;
-    }
+    &#125;
 
     //判断堆中索引i处的元素是否小于索引j处的元素
-    private boolean less(int i, int j) {
+    private boolean less(int i, int j) &#123;
         return items[i].compareTo(items[j])&lt;0;
-    }
+    &#125;
 
     //交换堆中i索引和j索引处的值
-    private void exch(int i, int j) {
+    private void exch(int i, int j) &#123;
         T tmp = items[i];
         items[i] = items[j];
         items[j] = tmp;
-    }
+    &#125;
 
     //往堆中插入一个元素
-    public void insert(T t) {
+    public void insert(T t) &#123;
         items[++N] = t;
         swim(N);
-    }
+    &#125;
 
     //删除堆中最大的元素,并返回这个最大元素
-    public T delMax() {
+    public T delMax() &#123;
         T max = items[1];
         exch(1,N);
         N--;
         sink(1);
         return max;
-    }
+    &#125;
 
     //使用上浮算法，使索引k处的元素能在堆中处于一个正确的位置
-    private void swim(int k) {
-        while(k&gt;1){
-            if (less(k/2,k)){
+    private void swim(int k) &#123;
+        while(k&gt;1)&#123;
+            if (less(k/2,k))&#123;
                 exch(k/2,k);
-            }
+            &#125;
             k = k/2;
-        }
-    }
+        &#125;
+    &#125;
 
     //使用下沉算法，使索引k处的元素能在堆中处于一个正确的位置
-    private void sink(int k) {
-        while(2*k&lt;=N){
+    private void sink(int k) &#123;
+        while(2*k&lt;=N)&#123;
             int max;
-            if (2*k+1&lt;=N){
-                if (less(2*k,2*k+1)){
+            if (2*k+1&lt;=N)&#123;
+                if (less(2*k,2*k+1))&#123;
                     max=2*k+1;
-                }else{
+                &#125;else&#123;
                     max = 2*k;
-                }
-            }else {
+                &#125;
+            &#125;else &#123;
                 max = 2*k;
-            }
-            if (!less(k,max)){
+            &#125;
+            if (!less(k,max))&#123;
                 break;
-            }
+            &#125;
             exch(k,max);
             k = max;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class MaxPriorityQueueTest {
-    public static void main(String[] args) {
+<pre><code>public class MaxPriorityQueueTest &#123;
+    public static void main(String[] args) &#123;
         //创建优先队列
         MaxPriorityQueue&lt;String&gt; queue = new MaxPriorityQueue&lt;&gt;(10);
         //往队列中存储元素
@@ -2905,101 +2907,101 @@ public static void main(String[] args) throws Exception {
         queue.insert(&quot;F&quot;);
         queue.insert(&quot;G&quot;);
         //通过循环从队列中获取最大的元素
-        while(!queue.isEmpty()){
+        while(!queue.isEmpty())&#123;
             String max = queue.delMax();
             System.out.print(max+&quot; &quot;);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="最小优先队列"><a href="#最小优先队列" class="headerlink" title="最小优先队列"></a>最小优先队列</h3><hr>
 <p>可以获取并删除队列中最小的值。基于堆来完成最小优先队列：最小的元素放在数组的索引1处；每个结点的数据总是小于等于它的两个子结点的数据。</p>
-<pre><code>public class MinPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; {
+<pre><code>public class MinPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; &#123;
     //存储堆中的元素
     private T[] items;
     //记录堆中元素的个数
     private int N;
 
-    public MinPriorityQueue(int capacity) {
+    public MinPriorityQueue(int capacity) &#123;
         this.items = (T[]) new Comparable[capacity+1];
         this.N=0;
-    }
+    &#125;
 
     //获取队列中元素的个数
-    public int size() {
+    public int size() &#123;
         return N;
-    }
+    &#125;
 
     //判断队列是否为空
-    public boolean isEmpty() {
+    public boolean isEmpty() &#123;
         return N==0;
-    }
+    &#125;
 
     //判断堆中索引i处的元素是否小于索引j处的元素
-    private boolean less(int i, int j) {
+    private boolean less(int i, int j) &#123;
         return items[i].compareTo(items[j])&lt;0;
-    }
+    &#125;
 
     //交换堆中i索引和j索引处的值
-    private void exch(int i, int j) {
+    private void exch(int i, int j) &#123;
         T tmp = items[i];
         items[i] = items[j];
         items[j] = tmp;
-    }
+    &#125;
 
     //往堆中插入一个元素
-    public void insert(T t) {
+    public void insert(T t) &#123;
         items[++N] = t;
         swim(N);
-    }
+    &#125;
 
     //删除堆中最小的元素,并返回这个最小元素
-    public T delMin() {
+    public T delMin() &#123;
         T min = items[1];
         exch(1,N);
         N--;
         sink(1);
         return min;
-    }
+    &#125;
 
     //使用上浮算法，使索引k处的元素能在堆中处于一个正确的位置
-    private void swim(int k) {
+    private void swim(int k) &#123;
         //通过循环比较当前结点和其父结点的大小
-        while(k&gt;1){
-            if (less(k,k/2)){
+        while(k&gt;1)&#123;
+            if (less(k,k/2))&#123;
                 exch(k,k/2);
-            }
+            &#125;
             k = k/2;
-        }
-    }
+        &#125;
+    &#125;
 
     //使用下沉算法，使索引k处的元素能在堆中处于一个正确的位置
-    private void sink(int k) {
+    private void sink(int k) &#123;
         //通过循环比较当前结点和其子结点中的较小值
-        while(2*k&lt;=N){
+        while(2*k&lt;=N)&#123;
             //1.找到子结点中的较小值
             int min;
-            if (2*k+1&lt;=N){
-                if (less(2*k, 2*k+1)){
+            if (2*k+1&lt;=N)&#123;
+                if (less(2*k, 2*k+1))&#123;
                     min = 2*k;
-                }else{
+                &#125;else&#123;
                     min = 2*k+1;
-                }
-            }else{
+                &#125;
+            &#125;else&#123;
                 min = 2*k;
-            }
+            &#125;
             //2.判断当前结点和较小值的大小
-            if (less(k,min)){
+            if (less(k,min))&#123;
                 break;
-            }
+            &#125;
             exch(k,min);
             k = min;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class MinPriorityQueueTest {
-    public static void main(String[] args) {
+<pre><code>public class MinPriorityQueueTest &#123;
+    public static void main(String[] args) &#123;
         //创建最小优先队列对象
         MinPriorityQueue&lt;String&gt; queue = new MinPriorityQueue&lt;String&gt;(10);
         //往队列中存数据
@@ -3011,12 +3013,12 @@ public static void main(String[] args) throws Exception {
         queue.insert(&quot;B&quot;);
         queue.insert(&quot;A&quot;);
         //通过循环获取最小优先队列中的元素
-        while(!queue.isEmpty()){
+        while(!queue.isEmpty())&#123;
             String min = queue.delMin();
             System.out.print(min+&quot; &quot;);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="索引优先队列"><a href="#索引优先队列" class="headerlink" title="索引优先队列"></a>索引优先队列</h3><hr>
 <p>存储数据时，给每一个数据元素关联一个整数，例如insert(int k,T t),我们可以看做k是t关联的整数，那么我们的实现需要通过k这个值，快速获取到队列中t这个元素，此时有个k这个值需要具有唯一性。</p>
@@ -3024,7 +3026,7 @@ public static void main(String[] args) throws Exception {
 <p>数组<code>int[]pq</code>,来保存每个元素在items数组中的索引，pq数组需要堆有序，也就是说，pq[1]对应的数据元素items[pq[1]]要小于等于pq[2]和pq[3]对应的数据元素items[pq[2]]和items[pq[3]]。</p>
 <p>数组<code>int[] qp</code>,用来存储pq的逆序。例如：在pq数组中：pq[1]=6;那么在qp数组中，把6作为索引，1作为值，结果是：qp[6]=1。</p>
 <p>代码实现</p>
-<pre><code>public class IndexMinPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; {
+<pre><code>public class IndexMinPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; &#123;
     //存储堆中的元素
     private T[] items;
     //保存每个元素在items数组中的索引，pq数组需要堆有序
@@ -3033,35 +3035,35 @@ public static void main(String[] args) throws Exception {
     private int[] qp;
     //记录堆中元素的个数
     private int N;
-    public IndexMinPriorityQueue(int capacity) {
+    public IndexMinPriorityQueue(int capacity) &#123;
         this.items = (T[]) new Comparable[capacity+1];
         this.pq = new int[capacity+1];
         this.qp= new int[capacity+1];
         this.N = 0;
 
         //默认情况下，队列中没有存储任何数据，让qp中的元素都为-1；
-        for (int i = 0; i &lt; qp.length; i++) {
+        for (int i = 0; i &lt; qp.length; i++) &#123;
             qp[i]=-1;
-        }
-    }
+        &#125;
+    &#125;
 
     //获取队列中元素的个数
-    public int size() {
+    public int size() &#123;
         return N;
-    }
+    &#125;
 
     //判断队列是否为空
-    public boolean isEmpty() {
+    public boolean isEmpty() &#123;
         return N==0;
-    }
+    &#125;
 
     //判断堆中索引i处的元素是否小于索引j处的元素
-    private boolean less(int i, int j) {
+    private boolean less(int i, int j) &#123;
         return items[pq[i]].compareTo(items[pq[j]])&lt;0;
-    }
+    &#125;
 
     //交换堆中i索引和j索引处的值
-    private void exch(int i, int j) {
+    private void exch(int i, int j) &#123;
         //交换pq中的数据
         int tmp = pq[i];
         pq[i] = pq[j];
@@ -3069,25 +3071,25 @@ public static void main(String[] args) throws Exception {
         //更新qp中的数据
         qp[pq[i]]=i;
         qp[pq[j]] =j;
-    }
+    &#125;
 
     //判断k对应的元素是否存在
-    public boolean contains(int k) {
+    public boolean contains(int k) &#123;
         return qp[k] !=-1;
-    }
+    &#125;
 
     //最小元素关联的索引
-    public int minIndex() {
+    public int minIndex() &#123;
         return pq[1];
-    }
+    &#125;
 
 
     //往队列中插入一个元素,并关联索引i
-    public void insert(int i, T t) {
+    public void insert(int i, T t) &#123;
         //判断i是否已经被关联，如果已经被关联，则不让插入
-        if (contains(i)){
+        if (contains(i))&#123;
             return;
-        }
+        &#125;
         //元素个数+1
         N++;
         //把数据存储到items对应的i位置处
@@ -3098,10 +3100,10 @@ public static void main(String[] args) throws Exception {
         qp[i]=N;
         //通过堆上浮完成堆的调整
         swim(N);
-    }
+    &#125;
 
     //删除队列中最小的元素,并返回该元素关联的索引
-    public int delMin() {
+    public int delMin() &#123;
         //获取最小元素关联的索引
         int minIndex = pq[1];
         //交换pq中索引1处和最大索引处的元素
@@ -3117,10 +3119,10 @@ public static void main(String[] args) throws Exception {
         //下沉调整
         sink(1);
         return minIndex;
-    }
+    &#125;
 
     //删除索引i关联的元素
-    public void delete(int i) {
+    public void delete(int i) &#123;
         //找到i在pq中的索引
         int k = qp[i];
         //交换pq中索引k处的值和索引N处的值
@@ -3136,10 +3138,10 @@ public static void main(String[] args) throws Exception {
         //堆的调整
         sink(k);
         swim(k);
-    }
+    &#125;
 
     //把与索引i关联的元素修改为为t
-    public void changeItem(int i, T t) {
+    public void changeItem(int i, T t) &#123;
         //修改items数组中i位置的元素为t
         items[i] = t;
         //找到i在pq中出现的位置
@@ -3147,44 +3149,44 @@ public static void main(String[] args) throws Exception {
         //堆调整
         sink(k);
         swim(k);
-    }
+    &#125;
 
     //使用上浮算法，使索引k处的元素能在堆中处于一个正确的位置
-    private void swim(int k) {
-        while(k&gt;1){
-            if (less(k,k/2)){
+    private void swim(int k) &#123;
+        while(k&gt;1)&#123;
+            if (less(k,k/2))&#123;
                 exch(k,k/2);
-            }
+            &#125;
             k = k/2;
-        }
-    }
+        &#125;
+    &#125;
 
     //使用下沉算法，使索引k处的元素能在堆中处于一个正确的位置
-    private void sink(int k) {
-        while(2*k&lt;=N){
+    private void sink(int k) &#123;
+        while(2*k&lt;=N)&#123;
             //找到子结点中的较小值
             int min;
-            if (2*k+1&lt;=N){
-                if (less(2*k,2*k+1)){
+            if (2*k+1&lt;=N)&#123;
+                if (less(2*k,2*k+1))&#123;
                     min = 2*k;
-                }else{
+                &#125;else&#123;
                     min = 2*k+1;
-                }
-            }else{
+                &#125;
+            &#125;else&#123;
                 min = 2*k;
-            }
+            &#125;
             //比较当前结点和较小值
-            if (less(k,min)){
+            if (less(k,min))&#123;
                 break;
-            }
+            &#125;
             exch(k,min);
             k = min;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>测试代码</p>
-<pre><code>public class IndexMinPriorityQueueTest {
-    public static void main(String[] args) {
+<pre><code>public class IndexMinPriorityQueueTest &#123;
+    public static void main(String[] args) &#123;
         //创建索引最小优先队列对象
         IndexMinPriorityQueue&lt;String&gt; queue = new IndexMinPriorityQueue&lt;&gt;(10);
         //往队列中添加元素
@@ -3194,12 +3196,12 @@ public static void main(String[] args) throws Exception {
         //测试修改
         queue.changeItem(2,&quot;B&quot;);
         //测试删除
-        while(!queue.isEmpty()){
+        while(!queue.isEmpty())&#123;
             int index = queue.delMin();
             System.out.print(index+&quot; &quot;);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h2 id="平衡树"><a href="#平衡树" class="headerlink" title="平衡树"></a>平衡树</h2><h3 id="2-3查找树"><a href="#2-3查找树" class="headerlink" title="2-3查找树"></a>2-3查找树</h3><hr>
 <p>2-结点：含有一个键(及其对应的值)和两条链，左链接指向2-3树中的键都小于该结点，右链接指向的2-3树中的键都大于该结点。</p>
@@ -3220,7 +3222,7 @@ public static void main(String[] args) throws Exception {
 <p><strong>颜色反转</strong>：当一个结点的左子结点和右子结点的color都为RED时，也就是出现了临时的4-结点，此时只需要把左子结点和右子结点的颜色变为BLACK，同时让当前结点的颜色变为RED即可。</p>
 <p>由于根结点不存在父结点，所以每次插入操作后，我们都需要把根结点的颜色设置为黑色。</p>
 <p>代码实现</p>
-<pre><code>public class RedBlackTree&lt;Key extends Comparable&lt;Key&gt;, Value&gt; {
+<pre><code>public class RedBlackTree&lt;Key extends Comparable&lt;Key&gt;, Value&gt; &#123;
     //根节点
     private Node root;
     //记录树中元素的个数
@@ -3231,7 +3233,7 @@ public static void main(String[] args) throws Exception {
     private static final boolean BLACK = false;
 
     //结点类
-    private class Node {
+    private class Node &#123;
         //存储键
         public Key key;
         //存储值
@@ -3242,19 +3244,19 @@ public static void main(String[] args) throws Exception {
         public Node right;
         //由其父结点指向它的链接的颜色
         public boolean color;
-        public Node(Key key, Value value, Node left, Node right, boolean color) {
+        public Node(Key key, Value value, Node left, Node right, boolean color) &#123;
             this.key = key;
             this.value = value;
             this.left = left;
             this.right = right;
             this.color = color;
-        }
-    }
+        &#125;
+    &#125;
 
     //获取树中元素的个数
-    public int size() {
+    public int size() &#123;
         return N;
-    }
+    &#125;
 
     /**
      * 判断当前节点的父指向链接是否为红色
@@ -3262,12 +3264,12 @@ public static void main(String[] args) throws Exception {
      * @param x
      * @return
      */
-    private boolean isRed(Node x) {
-        if (x==null){
+    private boolean isRed(Node x) &#123;
+        if (x==null)&#123;
             return false;
-        }
+        &#125;
         return x.color==RED;
-    }
+    &#125;
 
     /**
      * 左旋转
@@ -3275,7 +3277,7 @@ public static void main(String[] args) throws Exception {
      * @param h
      * @return
      */
-    private Node rotateLeft(Node h) {
+    private Node rotateLeft(Node h) &#123;
         //找到h结点的右子结点x
         Node x = h.right;
         //找到x结点的左子结点，让x结点的左子结点称为h结点的右子结点
@@ -3287,7 +3289,7 @@ public static void main(String[] args) throws Exception {
         //让h结点的color属性变为RED
         h.color = RED;
         return x;
-    }
+    &#125;
 
     /**
      * 右旋
@@ -3295,7 +3297,7 @@ public static void main(String[] args) throws Exception {
      * @param h
      * @return
      */
-    private Node rotateRight(Node h) {
+    private Node rotateRight(Node h) &#123;
         //找到h结点的左子结点 x
         Node x = h.left;
         //让x结点的右子结点成为h结点的左子结点
@@ -3307,20 +3309,20 @@ public static void main(String[] args) throws Exception {
         //让h结点的color属性为RED
         h.color = RED;
         return x;
-    }
+    &#125;
 
     /**
      * 颜色反转,相当于完成拆分4-节点
      *
      * @param h
      */
-    private void flipColors(Node h) {
+    private void flipColors(Node h) &#123;
         //当前结点变为红色
         h.color = RED;
         //左子结点和右子结点变为黑色
         h.left.color=BLACK;
         h.right.color = BLACK;
-    }
+    &#125;
 
     /**
      * 在整个树上完成插入操作
@@ -3328,11 +3330,11 @@ public static void main(String[] args) throws Exception {
      * @param key
      * @param val
      */
-    public void put(Key key, Value val) {
+    public void put(Key key, Value val) &#123;
         root = put(root,key,val);
         //根结点的颜色总是黑色
         root.color = BLACK;
-    }
+    &#125;
 
     /**
      * 在指定树中，完成插入操作,并返回添加元素后新的树
@@ -3341,65 +3343,65 @@ public static void main(String[] args) throws Exception {
      * @param key
      * @param val
      */
-    private Node put(Node h, Key key, Value val) {
+    private Node put(Node h, Key key, Value val) &#123;
         //判断h是否为空，如果为空则直接返回一个红色的结点就可以了
-        if (h == null){
+        if (h == null)&#123;
             //数量+1
             N++;
             return new Node(key,val,null,null,BLACK);
-        }
+        &#125;
         //比较h结点的键和key的大小
         int cmp = key.compareTo(h.key);
-        if (cmp&lt;0){
+        if (cmp&lt;0)&#123;
             //继续往左
             h.left = put(h.left,key,val);
-        }else if (cmp&gt;0){
+        &#125;else if (cmp&gt;0)&#123;
             //继续往右
             h.right = put(h.right,key,val);
-        }else{
+        &#125;else&#123;
             //发生值的替换
             h.value = val;
-        }
+        &#125;
         //进行左旋:当当前结点h的左子结点为黑色，右子结点为红色，需要左旋
-        if (isRed(h.right) &amp;&amp; !isRed(h.left)){
+        if (isRed(h.right) &amp;&amp; !isRed(h.left))&#123;
             h = rotateLeft(h);
-        }
+        &#125;
 
         //进行右旋：当当前结点h的左子结点和左子结点的左子结点都为红色，需要右旋
-        if (isRed(h.left) &amp;&amp; isRed(h.left.left)){
+        if (isRed(h.left) &amp;&amp; isRed(h.left.left))&#123;
             rotateRight(h);
-        }
+        &#125;
         //颜色反转：当前结点的左子结点和右子结点都为红色时，需要颜色反转
-        if (isRed(h.left) &amp;&amp; isRed(h.right)){
+        if (isRed(h.left) &amp;&amp; isRed(h.right))&#123;
             flipColors(h);
-        }
+        &#125;
         return h;
-    }
+    &#125;
 
     //根据key，从树中找出对应的值
-    public Value get(Key key) {
+    public Value get(Key key) &#123;
         return get(root,key);
-    }
+    &#125;
 
     //从指定的树x中，查找key对应的值
-    public Value get(Node x, Key key) {
-        if (x == null){
+    public Value get(Node x, Key key) &#123;
+        if (x == null)&#123;
             return null;
-        }
+        &#125;
         //比较x结点的键和key的大小
         int cmp = key.compareTo(x.key);
-        if (cmp&lt;0){
+        if (cmp&lt;0)&#123;
             return get(x.left,key);
-        }else if (cmp&gt;0){
+        &#125;else if (cmp&gt;0)&#123;
             return get(x.right,key);
-        }else{
+        &#125;else&#123;
            return x.value;
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class RedBlackTreeTest {
-    public static void main(String[] args) {
+<pre><code>public class RedBlackTreeTest &#123;
+    public static void main(String[] args) &#123;
         //创建红黑树
         RedBlackTree&lt;String, String&gt; tree = new RedBlackTree&lt;&gt;();
         //往树中插入元素
@@ -3413,8 +3415,8 @@ public static void main(String[] args) throws Exception {
         System.out.println(r2);
         String r3 = tree.get(&quot;3&quot;);
         System.out.println(r3);
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h2 id="B树和B-树"><a href="#B树和B-树" class="headerlink" title="B树和B+树"></a>B树和B+树</h2><h3 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h3><hr>
 <p>B树中允许一个结点中包含多个key，可以是3个、4个、5个甚至更多，并不确定，需要看具体的实现。现在我们选择一个参数M，来构造一个B树，我们可以把它称作是M阶的B树，那么该树会具有如下特点：每个结点最多有M-1个key，并且以升序排列；每个结点最多能有M个子结点；根结点至少有两个子结点。</p>
@@ -3433,164 +3435,164 @@ public static void main(String[] args) throws Exception {
 <h3 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h3><hr>
 <p>初始情况下，并查集中的数据默认分为N个组；初始化数组eleAndGroup；把eleAndGroup数组的索引看做是每个结点存储的元素，把eleAndGroup数组每个索引处的值看做是该结点所在的分组，那么初始化情况下，i索引处存储的值就是i。</p>
 <p>如果p和q已经在同一个分组中，则无需合并；如果p和q不在同一个分组，则只需要将p元素所在组的所有的元素的组标识符修改为q元素所在组的标识符即可；分组数量-1。</p>
-<pre><code>public class UF {
+<pre><code>public class UF &#123;
     //记录结点元素和该元素所在分组的标识
     private int[] eleAndGroup;
     //记录并查集中数据的分组个数
     private int count;
     //初始化并查集
-    public UF(int N){
+    public UF(int N)&#123;
         //初始化分组的数量,默认情况下，有N个分组
         this.count = N;
         //初始化eleAndGroup数组
         this.eleAndGroup = new int[N];
         //初始化eleAndGroup中的元素及其所在的组的标识符,让eleAndGroup数组的索引作为并查集的每个结点的元素，并且让每个索引处的值(该元素所在的组的标识符)就是该索引
-        for (int i = 0; i &lt; eleAndGroup.length; i++) {
+        for (int i = 0; i &lt; eleAndGroup.length; i++) &#123;
             eleAndGroup[i] = i;
-        }
-    }
+        &#125;
+    &#125;
 
     //获取当前并查集中的数据有多少个分组
-    public int count(){
+    public int count()&#123;
         return count;
-    }
+    &#125;
 
     //元素p所在分组的标识符
-    public int find(int p){
+    public int find(int p)&#123;
         return eleAndGroup[p];
-    }
+    &#125;
 
     //判断并查集中元素p和元素q是否在同一分组中
-    public boolean connected(int p,int q){
+    public boolean connected(int p,int q)&#123;
         return find(p) == find(q);
-    }
+    &#125;
 
     //把p元素所在分组和q元素所在分组合并
-    public void union(int p,int q){
+    public void union(int p,int q)&#123;
         //判断元素q和p是否已经在同一分组中，如果已经在同一分组中，则结束方法就可以了
-        if (connected(p,q)){
+        if (connected(p,q))&#123;
             return;
-        }
+        &#125;
         //找到p所在分组的标识符
         int pGroup = find(p);
         //找到q所在分组的标识符
         int qGroup = find(q);
         //合并组：让p所在组的所有元素的组标识符变为q所在分组的标识符
-        for (int i = 0; i &lt; eleAndGroup.length; i++) {
-            if (eleAndGroup[i]==pGroup){
+        for (int i = 0; i &lt; eleAndGroup.length; i++) &#123;
+            if (eleAndGroup[i]==pGroup)&#123;
                 eleAndGroup[i] = qGroup;
-            }
-        }
+            &#125;
+        &#125;
         //分组个数-1
         this.count--;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class UFTest {
-    public static void main(String[] args) {
+<pre><code>public class UFTest &#123;
+    public static void main(String[] args) &#123;
         //创建并查集对象
         UF uf = new UF(5);
         System.out.println(&quot;默认情况下，并查集中有：&quot;+uf.count()+&quot;个分组&quot;);
         //从控制台录入两个要合并的元素，调用union方法合并，观察合并后并查集中的分组是否减少
         Scanner sc = new Scanner(System.in);
-        while(true){
+        while(true)&#123;
             System.out.println(&quot;请输入第一个要合并的元素：&quot;);
             int p = sc.nextInt();
             System.out.println(&quot;请输入第二个要合并的元素：&quot;);
             int q = sc.nextInt();
             //判断这两个元素是否已经在同一组了
-            if (uf.connected(p,q)){
+            if (uf.connected(p,q))&#123;
                 System.out.println(p+&quot;元素和&quot;+q+&quot;元素已经在同一个组中了&quot;);
                 continue;
-            }
+            &#125;
             uf.union(p,q);
             System.out.println(&quot;当前并查集中还有：&quot;+uf.count()+&quot;个分组&quot;);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="UF-Tree算法优化"><a href="#UF-Tree算法优化" class="headerlink" title="UF_Tree算法优化"></a>UF_Tree算法优化</h3><hr>
 <p>我们仍然让eleAndGroup数组的索引作为某个结点的元素；eleAndGroup[i]的值不再是当前结点所在的分组标识，而是该结点的父结点。</p>
-<pre><code>public class UF_Tree {
+<pre><code>public class UF_Tree &#123;
     //记录结点元素和该元素所在分组的标识
     private int[] eleAndGroup;
     //记录并查集中数据的分组个数
     private int count;
     //初始化并查集
-    public UF_Tree(int N){
+    public UF_Tree(int N)&#123;
         //初始化分组的数量,默认情况下，有N个分组
         this.count = N;
         //初始化eleAndGroup数组
         this.eleAndGroup = new int[N];
         //初始化eleAndGroup中的元素及其所在的组的标识符,让eleAndGroup数组的索引作为并查集的每个结点的元素，并且让每个索引处的值(该元素所在的组的标识符)就是该索引
-        for (int i = 0; i &lt; eleAndGroup.length; i++) {
+        for (int i = 0; i &lt; eleAndGroup.length; i++) &#123;
             eleAndGroup[i] = i;
-        }
-    }
+        &#125;
+    &#125;
 
     //获取当前并查集中的数据有多少个分组
-    public int count(){
+    public int count()&#123;
         return count;
-    }
+    &#125;
 
     //判断并查集中元素p和元素q是否在同一分组中
-    public boolean connected(int p,int q){
+    public boolean connected(int p,int q)&#123;
         return find(p) == find(q);
-    }
+    &#125;
 
     //元素p所在分组的标识符
-    public int find(int p){
-        while(true){
-            if (p == eleAndGroup[p]){
+    public int find(int p)&#123;
+        while(true)&#123;
+            if (p == eleAndGroup[p])&#123;
                 return p;
-            }
+            &#125;
             p = eleAndGroup[p];
-        }
+        &#125;
 
-    }
+    &#125;
 
     //把p元素所在分组和q元素所在分组合并
-    public void union(int p,int q){
+    public void union(int p,int q)&#123;
         //找到p元素和q元素所在组对应的树的根结点
         int pRoot = find(p);
         int qRoot = find(q);
         //如果p和q已经在同一分组，则不需要合并了
-        if (pRoot==qRoot){
+        if (pRoot==qRoot)&#123;
             return;
-        }
+        &#125;
         //让p所在的树的根结点的父结点为q所在树的根结点即可
         eleAndGroup[pRoot] = qRoot;
         //组的数量-1
         this.count--;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class UFTeeTest {
-    public static void main(String[] args) {
+<pre><code>public class UFTeeTest &#123;
+    public static void main(String[] args) &#123;
         //创建并查集对象
         UF_Tree uf = new UF_Tree(5);
         System.out.println(&quot;默认情况下，并查集中有：&quot;+uf.count()+&quot;个分组&quot;);
         //从控制台录入两个要合并的元素，调用union方法合并，观察合并后并查集中的分组是否减少
         Scanner sc = new Scanner(System.in);
-        while(true){
+        while(true)&#123;
             System.out.println(&quot;请输入第一个要合并的元素：&quot;);
             int p = sc.nextInt();
             System.out.println(&quot;请输入第二个要合并的元素：&quot;);
             int q = sc.nextInt();
             //判断这两个元素是否已经在同一组了
-            if (uf.connected(p,q)){
+            if (uf.connected(p,q))&#123;
                 System.out.println(p+&quot;元素和&quot;+q+&quot;元素已经在同一个组中了&quot;);
                 continue;
-            }
+            &#125;
             uf.union(p,q);
             System.out.println(&quot;当前并查集中还有：&quot;+uf.count()+&quot;个分组&quot;);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="路径压缩优化"><a href="#路径压缩优化" class="headerlink" title="路径压缩优化"></a>路径压缩优化</h3><hr>
 <p>在每次合并树的时候，把较小的树连接到较大的树上，就可以减小树的深度。</p>
-<pre><code>public class UF_Tree_Weighted {
+<pre><code>public class UF_Tree_Weighted &#123;
     //记录结点元素和该元素所在分组的标识
     private int[] eleAndGroup;
     //记录并查集中数据的分组个数
@@ -3598,91 +3600,91 @@ public static void main(String[] args) throws Exception {
     //用来存储每一个根结点对应的树中保存的结点的个数
     private int[] sz;
     //初始化并查集
-    public UF_Tree_Weighted(int N){
+    public UF_Tree_Weighted(int N)&#123;
         //初始化分组的数量,默认情况下，有N个分组
         this.count = N;
         //初始化eleAndGroup数组
         this.eleAndGroup = new int[N];
         //初始化eleAndGroup中的元素及其所在的组的标识符,让eleAndGroup数组的索引作为并查集的每个结点的元素，并且让每个索引处的值(该元素所在的组的标识符)就是该索引
-        for (int i = 0; i &lt; eleAndGroup.length; i++) {
+        for (int i = 0; i &lt; eleAndGroup.length; i++) &#123;
             eleAndGroup[i] = i;
-        }
+        &#125;
         this.sz = new int[N];
         //默认情况下，sz中每个索引处的值都是1
-        for (int i = 0; i &lt; sz.length; i++) {
+        for (int i = 0; i &lt; sz.length; i++) &#123;
             sz[i] = 1;
-        } 
-    }
+        &#125; 
+    &#125;
 
     //获取当前并查集中的数据有多少个分组
-    public int count(){
+    public int count()&#123;
         return count;
-    }
+    &#125;
 
     //判断并查集中元素p和元素q是否在同一分组中
-    public boolean connected(int p,int q){
+    public boolean connected(int p,int q)&#123;
         return find(p) == find(q);
-    }
+    &#125;
 
     //元素p所在分组的标识符
-    public int find(int p){
-        while(true){
-            if (p == eleAndGroup[p]){
+    public int find(int p)&#123;
+        while(true)&#123;
+            if (p == eleAndGroup[p])&#123;
                 return p;
-            }
+            &#125;
             p = eleAndGroup[p];
-        }
-    }
+        &#125;
+    &#125;
 
     //把p元素所在分组和q元素所在分组合并
-    public void union(int p,int q){
+    public void union(int p,int q)&#123;
         //找到p元素和q元素所在组对应的树的根结点
         int pRoot = find(p);
         int qRoot = find(q);
         //如果p和q已经在同一分组，则不需要合并了
-        if (pRoot==qRoot){
+        if (pRoot==qRoot)&#123;
             return;
-        }
+        &#125;
         //判断proot对应的树大还是qroot对应的树大，最终需要把较小的树合并到较大的树中
-        if (sz[pRoot]&lt;sz[qRoot]){
+        if (sz[pRoot]&lt;sz[qRoot])&#123;
             eleAndGroup[pRoot] = qRoot;
             sz[qRoot]+=sz[pRoot];
-        }else{
+        &#125;else&#123;
             eleAndGroup[qRoot] = pRoot;
             sz[pRoot]+= sz[qRoot];
-        }
+        &#125;
         //组的数量-1
         this.count--;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class UFTeeWeightedTest {
-    public static void main(String[] args) {
+<pre><code>public class UFTeeWeightedTest &#123;
+    public static void main(String[] args) &#123;
         //创建并查集对象
         UF_Tree_Weighted uf = new UF_Tree_Weighted(5);
         System.out.println(&quot;默认情况下，并查集中有：&quot;+uf.count()+&quot;个分组&quot;);
         //从控制台录入两个要合并的元素，调用union方法合并，观察合并后并查集中的分组是否减少
         Scanner sc = new Scanner(System.in);
-        while(true){
+        while(true)&#123;
             System.out.println(&quot;请输入第一个要合并的元素：&quot;);
             int p = sc.nextInt();
             System.out.println(&quot;请输入第二个要合并的元素：&quot;);
             int q = sc.nextInt();
             //判断这两个元素是否已经在同一组了
-            if (uf.connected(p,q)){
+            if (uf.connected(p,q))&#123;
                 System.out.println(p+&quot;元素和&quot;+q+&quot;元素已经在同一个组中了&quot;);
                 continue;
-            }
+            &#125;
             uf.union(p,q);
             System.out.println(&quot;当前并查集中还有：&quot;+uf.count()+&quot;个分组&quot;);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><hr>
-<pre><code>public class Traffic_Project_Test {
+<pre><code>public class Traffic_Project_Test &#123;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception&#123;
         //构建一个缓冲读取流BufferedReader
         BufferedReader br = new BufferedReader(new InputStreamReader(Traffic_Project_Test.class.getClassLoader().getResourceAsStream(&quot;traffic_project.txt&quot;)));
         //读取第一行数据20
@@ -3692,7 +3694,7 @@ public static void main(String[] args) throws Exception {
         //读取第二行数据7
         int roadNumber = Integer.parseInt(br.readLine());
         //循环读取7条道路
-        for (int i=1;i&lt;=roadNumber;i++){
+        for (int i=1;i&lt;=roadNumber;i++)&#123;
             String line = br.readLine();//0 1
             String[] str = line.split(&quot; &quot;);
             int p = Integer.parseInt(str[0]);
@@ -3700,12 +3702,12 @@ public static void main(String[] args) throws Exception {
 
             //调用并查集对象的union方法让两个城市相通
             uf.union(p,q);
-        }
+        &#125;
         //获取当前并查集中分组的数量-1就可以得到还需要修建的道路的数目
         int roads = uf.count()-1;
         System.out.println(&quot;还需要修建&quot;+roads+&quot;条道路，才能实现畅通工程&quot;);
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><hr>
 <p>图是由一组顶点和一组能够将两个顶点相连的边组成的。按照连接两个顶点的边的不同，可以把图分为以下两种：无向图：边仅仅连接两个顶点，没有其他含义；有向图：边不仅连接两个顶点，并且具有方向。</p>
@@ -3724,7 +3726,7 @@ public static void main(String[] args) throws Exception {
 <p>邻接表：使用一个大小为V的数组 <code>Queue[V] adj</code>，把索引看做是顶点；每个索引处<code>adj[v]</code>存储了一个队列，该队列中存储的是所有与该顶点相邻的其他顶点。</p>
 <hr>
 <h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><hr>
-<pre><code>public class Graph {
+<pre><code>public class Graph &#123;
     //顶点数目
     private final int V;
     //边的数目
@@ -3732,87 +3734,87 @@ public static void main(String[] args) throws Exception {
     //邻接表
     private Queue&lt;Integer&gt;[] adj;
 
-    public Graph(int V){
+    public Graph(int V)&#123;
         //初始化顶点数量
         this.V = V;
         //初始化边的数量
         this.E = 0;
         //初始化邻接表
         this.adj = new Queue[V];
-        for (int i = 0; i &lt; adj.length; i++) {
+        for (int i = 0; i &lt; adj.length; i++) &#123;
             adj[i] = new Queue&lt;Integer&gt;();
-        }
-    }
+        &#125;
+    &#125;
 
     //获取顶点数目
-    public int V(){
+    public int V()&#123;
         return V;
-    }
+    &#125;
 
     //获取边的数目
-    public int E(){
+    public int E()&#123;
         return E;
-    }
+    &#125;
 
     //向图中添加一条边 v-w
-    public void addEdge(int v, int w) {
+    public void addEdge(int v, int w) &#123;
         //在无向图中，边是没有方向的，所以该边既可以说是从v到w的边，又可以说是从w到v的边，因此，需要让w出现在v的邻接表中，并且还要让v出现在w的邻接表中
         adj[v].enqueue(w);
         adj[w].enqueue(v);
         //边的数量+1
         E++;
-    }
+    &#125;
 
     //获取和顶点v相邻的所有顶点
-    public Queue&lt;Integer&gt; adj(int v){
+    public Queue&lt;Integer&gt; adj(int v)&#123;
         return adj[v];
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="图的搜索"><a href="#图的搜索" class="headerlink" title="图的搜索"></a>图的搜索</h3><hr>
 <p><strong>深度优先搜索</strong>：在搜索时，如果遇到一个结点既有子结点，又有兄弟结点，那么先找子结点，然后找兄弟结点。</p>
-<pre><code>public class DepthFirstSearch {
+<pre><code>public class DepthFirstSearch &#123;
     //索引代表顶点，值表示当前顶点是否已经被搜索
     private boolean[] marked;
     //记录有多少个顶点与s顶点相通
     private int count;
 
     //构造深度优先搜索对象，使用深度优先搜索找出G图中s顶点的所有相邻顶点
-    public DepthFirstSearch(Graph G,int s){
+    public DepthFirstSearch(Graph G,int s)&#123;
         //初始化marked数组
         this.marked = new boolean[G.V()];
         //初始化跟顶点s相通的顶点的数量
         this.count=0;
         dfs(G,s);
-    }
+    &#125;
 
     //使用深度优先搜索找出G图中v顶点的所有相通顶点
-    private void dfs(Graph G, int v){
+    private void dfs(Graph G, int v)&#123;
         //把v顶点标识为已搜索
         marked[v] = true;
-        for (Integer w : G.adj(v)) {
+        for (Integer w : G.adj(v)) &#123;
             //判断当前w顶点有没有被搜索过，如果没有被搜索过，则递归调用dfs方法进行深度搜索
-            if (!marked[w]){
+            if (!marked[w])&#123;
                 dfs(G,w);
-            }
-        }
+            &#125;
+        &#125;
         //相通顶点数量+1
         count++;
-    }
+    &#125;
 
     //判断w顶点与s顶点是否相通
-    public boolean marked(int w){
+    public boolean marked(int w)&#123;
        return marked[w];
-    }
+    &#125;
 
     //获取与顶点s相通的所有顶点的总数
-    public int count(){
+    public int count()&#123;
         return count;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>测试深度优先搜索</p>
-<pre><code>public class DepthFirstSearchTest {
-    public static void main(String[] args) {
+<pre><code>public class DepthFirstSearchTest &#123;
+    public static void main(String[] args) &#123;
         //准备Graph对象
         Graph G = new Graph(13);
         G.addEdge(0,5);
@@ -3838,11 +3840,11 @@ public static void main(String[] args) throws Exception {
         System.out.println(&quot;顶点5和顶点0是否相通：&quot;+marked1);
         boolean marked2 = search.marked(7);
         System.out.println(&quot;顶点7和顶点0是否相通：&quot;+marked2);
-    }
-}
+    &#125;
+&#125;
 </code></pre><p><strong>广度优先搜索</strong>:在搜索时，如果遇到一个结点既有子结点，又有兄弟结点，那么先找兄弟结点，然后找子结点。</p>
 <p>实现代码</p>
-<pre><code>public class BreadthFirstSearch {
+<pre><code>public class BreadthFirstSearch &#123;
     //索引代表顶点，值表示当前顶点是否已经被搜索
     private boolean[] marked;
     //记录有多少个顶点与s顶点相通
@@ -3851,47 +3853,47 @@ public static void main(String[] args) throws Exception {
     private Queue&lt;Integer&gt; waitSearch;
 
     //构造广度优先搜索对象，使用广度优先搜索找出G图中s顶点的所有相邻顶点
-    public BreadthFirstSearch(Graph G, int s) {
+    public BreadthFirstSearch(Graph G, int s) &#123;
         this.marked = new boolean[G.V()];
         this.count=0;
         this.waitSearch = new Queue&lt;Integer&gt;();
         bfs(G,s);
-    }
+    &#125;
 
     //使用广度优先搜索找出G图中v顶点的所有相邻顶点
-    private void bfs(Graph G, int v) {
+    private void bfs(Graph G, int v) &#123;
         //把当前顶点v标识为已搜索
         marked[v] = true;
         //让顶点v进入队列，待搜索
         waitSearch.enqueue(v);
         //通过循环，如果队列不为空，则从队列中弹出一个待搜索的顶点进行搜索
-        while(!waitSearch.isEmpty()){
+        while(!waitSearch.isEmpty())&#123;
             //弹出一个待搜索的顶点
             Integer wait = waitSearch.dequeue();
             //遍历wait顶点的邻接表
-            for (Integer w : G.adj(wait)) {
-                if (!marked[w]){
+            for (Integer w : G.adj(wait)) &#123;
+                if (!marked[w])&#123;
                     bfs(G,w);
-                }
-            }
-        }
+                &#125;
+            &#125;
+        &#125;
         //让相通的顶点+1；
         count++;
-    }
+    &#125;
 
     //判断w顶点与s顶点是否相通
-    public boolean marked(int w) {
+    public boolean marked(int w) &#123;
         return marked[w];
-    }
+    &#125;
 
     //获取与顶点s相通的所有顶点的总数
-    public int count() {
+    public int count() &#123;
         return count;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class BreadthFirstSearchTest {
-    public static void main(String[] args) {
+<pre><code>public class BreadthFirstSearchTest &#123;
+    public static void main(String[] args) &#123;
         //准备Graph对象
         Graph G = new Graph(13);
         G.addEdge(0,5);
@@ -3917,13 +3919,13 @@ public static void main(String[] args) throws Exception {
         System.out.println(&quot;顶点5和顶点0是否相通：&quot;+marked1);
         boolean marked2 = search.marked(7);
         System.out.println(&quot;顶点7和顶点0是否相通：&quot;+marked2);
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="案例-1"><a href="#案例-1" class="headerlink" title="案例"></a>案例</h3><hr>
-<pre><code>public class Traffic_Project_Test2 {
+<pre><code>public class Traffic_Project_Test2 &#123;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception&#123;
         //构建一个缓冲读取流BufferedReader
         BufferedReader br = new BufferedReader(new InputStreamReader(Traffic_Project_Test2.class.getClassLoader().getResourceAsStream(&quot;traffic_project.txt&quot;)));
         //读取第一行数据20
@@ -3933,25 +3935,25 @@ public static void main(String[] args) throws Exception {
         //读取第二行数据7
         int roadNumber = Integer.parseInt(br.readLine());
         //循环读取有限次(7)，读取已经修建好的道路
-        for (int i = 1;i&lt;=roadNumber;i++){
+        for (int i = 1;i&lt;=roadNumber;i++)&#123;
             String road = br.readLine();//&quot;0 1&quot;
             String[] str = road.split(&quot; &quot;);
             int v = Integer.parseInt(str[0]);
             int w = Integer.parseInt(str[1]);
             //调用图的addEdge方法，把边添加到图中，表示已经修建好的道路
             G.addEdge(v,w);
-        }
+        &#125;
 
         //构建一个深度优先搜索对象，起点设置为顶点9
         DepthFirstSearch search = new DepthFirstSearch(G, 9);
         //调用marked方法，判断8顶点和10顶点是否与起点9相通
         System.out.println(&quot;顶点8和顶点9是否相通：&quot;+search.marked(8));
         System.out.println(&quot;顶点10和顶点9是否相通：&quot;+search.marked(10));
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="路径查找"><a href="#路径查找" class="headerlink" title="路径查找"></a>路径查找</h3><hr>
-<pre><code>public class DepthFirstPaths {
+<pre><code>public class DepthFirstPaths &#123;
     //索引代表顶点，值表示当前顶点是否已经被搜索
     private boolean[] marked;
     //起点
@@ -3960,7 +3962,7 @@ public static void main(String[] args) throws Exception {
     private int[] edgeTo;
 
     //构造深度优先搜索对象，使用深度优先搜索找出G图中起点为s的所有路径
-    public DepthFirstPaths(Graph G, int s){
+    public DepthFirstPaths(Graph G, int s)&#123;
         //初始化marked数组
         this.marked = new boolean[G.V()];
         //初始化起点
@@ -3968,46 +3970,46 @@ public static void main(String[] args) throws Exception {
         //初始化edgeTo数组
         this.edgeTo = new int[G.V()];
         dfs(G,s);
-    }
+    &#125;
 
     //使用深度优先搜索找出G图中v顶点的所有相邻顶点
-    private void dfs(Graph G, int v){
+    private void dfs(Graph G, int v)&#123;
         //把v表示为已搜索
         marked[v] = true;
         //遍历顶点v的邻接表，拿到每一个相邻的顶点，继续递归搜索
-        for (Integer w : G.adj(v)) {
+        for (Integer w : G.adj(v)) &#123;
             //如果顶点w没有被搜索，则继续递归搜索
-            if (!marked[w]){
+            if (!marked[w])&#123;
                 edgeTo[w] = v;//到达顶点w的路径上的最后一个顶点是v
                 dfs(G,w);
-            }
-        }
-    }
+            &#125;
+        &#125;
+    &#125;
 
     //判断w顶点与s顶点是否存在路径
-    public boolean hasPathTo(int v){
+    public boolean hasPathTo(int v)&#123;
         return marked[v];
-    }
+    &#125;
 
     //找出从起点s到顶点v的路径(就是该路径经过的顶点)
-    public Stack&lt;Integer&gt; pathTo(int v){
-        if (!hasPathTo(v)){
+    public Stack&lt;Integer&gt; pathTo(int v)&#123;
+        if (!hasPathTo(v))&#123;
             return null;
-        }
+        &#125;
         //创建栈对象，保存路径中的所有顶点
         Stack&lt;Integer&gt; path = new Stack&lt;&gt;();
         //通过循环，从顶点v开始，一直往前找，到找到起点为止
-        for (int x = v; x!=s;x = edgeTo[x]){
+        for (int x = v; x!=s;x = edgeTo[x])&#123;
             path.push(x);
-        }
+        &#125;
         //把起点s放到栈中
         path.push(s);
         return path;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class DepthFirstPathsTest {
-    public static void main(String[] args) throws Exception{
+<pre><code>public class DepthFirstPathsTest &#123;
+    public static void main(String[] args) throws Exception&#123;
         //构建缓冲读取流BufferedReader
         BufferedReader br = new BufferedReader(new InputStreamReader(DepthFirstPathsTest.class.getClassLoader().getResourceAsStream(&quot;road_find.txt&quot;)));
         //读取第一行数据6
@@ -4017,26 +4019,26 @@ public static void main(String[] args) throws Exception {
         //读取第二行数据8
         int edgeNumbers = Integer.parseInt(br.readLine());
         //继续通过循环读取每一条边关联的两个顶点，调用addEdge方法，添加边
-        for (int i = 1;i&lt;=edgeNumbers;i++){
+        for (int i = 1;i&lt;=edgeNumbers;i++)&#123;
             String edge = br.readLine();//0 1
             String[] str = edge.split(&quot; &quot;);
             int v = Integer.parseInt(str[0]);
             int w = Integer.parseInt(str[1]);
             G.addEdge(v,w);
-        }
+        &#125;
         //构建路径查找对象，并设置起点为0
         DepthFirstPaths paths = new DepthFirstPaths(G, 0);
         //调用 pathTo(4)，找到从起点0到终点4的路径，返回Stack
         Stack&lt;Integer&gt; path = paths.pathTo(4);
         StringBuilder sb = new StringBuilder();
         //遍历栈对象
-        for (Integer v : path) {
+        for (Integer v : path) &#123;
             sb.append(v+&quot;-&quot;);
-        }
+        &#125;
         sb.deleteCharAt(sb.length()-1);
         System.out.println(sb);
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="有向图定义"><a href="#有向图定义" class="headerlink" title="有向图定义"></a>有向图定义</h3><hr>
 <p>有向图是一副具有方向性的图，是由一组顶点和一组有方向的边组成的，每条方向的边都连着一对有序的顶点。</p>
@@ -4047,7 +4049,7 @@ public static void main(String[] args) throws Exception {
 <p>一副有向图中两个顶点v和w可能存在以下四种关系：没有边相连；存在从v到w的边v—&gt;w;存在从w到v的边w—&gt;v;既存在w到v的边，也存在v到w的边，即双向连接。</p>
 <hr>
 <h3 id="有向图实现"><a href="#有向图实现" class="headerlink" title="有向图实现"></a>有向图实现</h3><hr>
-<pre><code>public class Digraph {
+<pre><code>public class Digraph &#123;
     //顶点数目
     private final int V;
     //边的数目
@@ -4055,61 +4057,61 @@ public static void main(String[] args) throws Exception {
     //邻接表
     private Queue&lt;Integer&gt;[] adj;
 
-    public Digraph(int V){
+    public Digraph(int V)&#123;
         //初始化顶点数量
         this.V = V;
         //初始化边的数量
         this.E = 0;
         //初始化邻接表
         this.adj = new Queue[V];
-        for (int i = 0; i &lt; adj.length; i++) {
+        for (int i = 0; i &lt; adj.length; i++) &#123;
             adj[i] = new Queue&lt;Integer&gt;();
-        }
-    }
+        &#125;
+    &#125;
 
 
     //获取顶点数目
-    public int V(){
+    public int V()&#123;
         return V;
-    }
+    &#125;
 
     //获取边的数目
-    public int E(){
+    public int E()&#123;
         return E;
-    }
+    &#125;
 
     //向有向图中添加一条边 v-&gt;w
-    public void addEdge(int v, int w) {
+    public void addEdge(int v, int w) &#123;
         //只需要让顶点w出现在顶点v的邻接表中，因为边是有方向的，最终，顶点v的邻接表中存储的相邻顶点的含义是：  v-&gt;其他顶点
         adj[v].enqueue(w);
         E++;
-    }
+    &#125;
 
     //获取由v指出的边所连接的所有顶点
-    public Queue&lt;Integer&gt; adj(int v){
+    public Queue&lt;Integer&gt; adj(int v)&#123;
         return adj[v];
-    }
+    &#125;
 
     //该图的反向图
-    private Digraph reverse(){
+    private Digraph reverse()&#123;
         //创建有向图对象
         Digraph r = new Digraph(V);
-        for (int v = 0;v&lt;V;v++){
+        for (int v = 0;v&lt;V;v++)&#123;
             //获取由该顶点v指出的所有边
-            for (Integer w : adj[v]) {//原图中表示的是由顶点v-&gt;w的边
+            for (Integer w : adj[v]) &#123;//原图中表示的是由顶点v-&gt;w的边
                 r.addEdge(w,v);//w-&gt;v
-            }
-        }
+            &#125;
+        &#125;
         return r;
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="拓扑排序-检测有向图中的环"><a href="#拓扑排序-检测有向图中的环" class="headerlink" title="拓扑排序-检测有向图中的环"></a>拓扑排序-检测有向图中的环</h3><hr>
 <p>拓扑排序：给定一副有向图，将所有的顶点排序，使得所有的有向边均从排在前面的元素指向排在后面的元素，此时就可以明确的表示出每个顶点的优先级。</p>
 <p>如果我们要使用拓扑排序解决优先级问题，首先得保证图中没有环的存在。</p>
 <p><code>onStack[]</code> 布尔数组，索引为图的顶点，当我们深度搜索时：在如果当前顶点正在搜索，则把对应的onStack数组中的值改为true，标识进栈；如果当前顶点搜索完毕，则把对应的onStack数组中的值改为false，标识出栈；如果即将要搜索某个顶点，但该顶点已经在栈中，则图中有环。</p>
 <p>代码实现</p>
-<pre><code>public class DirectedCycle {
+<pre><code>public class DirectedCycle &#123;
     //索引代表顶点，值表示当前顶点是否已经被搜索
     private boolean[] marked;
     //记录图中是否有环
@@ -4118,7 +4120,7 @@ public static void main(String[] args) throws Exception {
     private boolean[] onStack;
 
     //创建一个检测环对象，检测图G中是否有环
-    public DirectedCycle(Digraph G){
+    public DirectedCycle(Digraph G)&#123;
         //初始化marked数组
         this.marked = new boolean[G.V()];
         //初始化hasCycle
@@ -4126,115 +4128,115 @@ public static void main(String[] args) throws Exception {
         //初始化onStack数组
         this.onStack = new boolean[G.V()];
         //找到图中每一个顶点，让每一个顶点作为入口，调用一次dfs进行搜索
-        for (int v =0; v&lt;G.V();v++){
+        for (int v =0; v&lt;G.V();v++)&#123;
             //判断如果当前顶点还没有搜索过，则调用dfs进行搜索
-            if (!marked[v]){
+            if (!marked[v])&#123;
                 dfs(G,v);
-            }
-        }
-    }
+            &#125;
+        &#125;
+    &#125;
 
     //基于深度优先搜索，检测图G中是否有环
-    private void dfs(Digraph G, int v){
+    private void dfs(Digraph G, int v)&#123;
         //把顶点v表示为已搜索
         marked[v] = true;
         //把当前顶点进栈
         onStack[v] = true;
         //进行深度搜索
-        for (Integer w : G.adj(v)) {
+        for (Integer w : G.adj(v)) &#123;
             //判断如果当前顶点w没有被搜索过，则继续递归调用dfs方法完成深度优先搜索
-            if (!marked[w]){
+            if (!marked[w])&#123;
                 dfs(G,w);
-            }
+            &#125;
             //判断当前顶点w是否已经在栈中，如果已经在栈中，证明当前顶点之前处于正在搜索的状态，那么现在又要搜索一次，证明检测到环了
-            if (onStack[w]){
+            if (onStack[w])&#123;
                 hasCycle = true;
                 return;
-            }
-        }
+            &#125;
+        &#125;
         //把当前顶点出栈
         onStack[v] = false;
-    }
+    &#125;
 
     //判断当前有向图G中是否有环
-    public boolean hasCycle(){
+    public boolean hasCycle()&#123;
         return hasCycle;
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="拓扑排序-基于深度优先的顶点排序"><a href="#拓扑排序-基于深度优先的顶点排序" class="headerlink" title="拓扑排序-基于深度优先的顶点排序"></a>拓扑排序-基于深度优先的顶点排序</h3><hr>
 <p>栈reversePost用来存储顶点，当我们深度搜索图时，每搜索完毕一个顶点，把该顶点放入到reversePost中，这样就可以实现顶点排序。</p>
 <p>代码实现：</p>
-<pre><code>public class DepthFirstOrder {
+<pre><code>public class DepthFirstOrder &#123;
     //索引代表顶点，值表示当前顶点是否已经被搜索
     private boolean[] marked;
     //使用栈，存储顶点序列
     private Stack&lt;Integer&gt; reversePost;
 
     //创建一个检测环对象，检测图G中是否有环
-    public DepthFirstOrder(Digraph G){
+    public DepthFirstOrder(Digraph G)&#123;
         //初始化marked数组
         this.marked = new boolean[G.V()];
         //初始化reversePost栈
         this.reversePost = new Stack&lt;Integer&gt;();
         //遍历图中的每一个顶点，让每个顶点作为入口，完成一次深度优先搜索
-        for (int v = 0;v&lt;G.V();v++){
-            if (!marked[v]){
+        for (int v = 0;v&lt;G.V();v++)&#123;
+            if (!marked[v])&#123;
                 dfs(G,v);
-            }
-        }
-    }
+            &#125;
+        &#125;
+    &#125;
 
     //基于深度优先搜索，把顶点排序
-    private void dfs(Digraph G, int v){
+    private void dfs(Digraph G, int v)&#123;
         //标记当前v已经被搜索
         marked[v] = true;
         //通过循环深度搜索顶点v
-        for (Integer w : G.adj(v)) {
+        for (Integer w : G.adj(v)) &#123;
             //如果当前顶点w没有搜索，则递归调用dfs进行搜索
-            if (!marked[w]){
+            if (!marked[w])&#123;
                 dfs(G,w);
-            }
-        }
+            &#125;
+        &#125;
         //让顶点v进栈
         reversePost.push(v);
-    }
+    &#125;
 
     //获取顶点线性序列
-    public Stack&lt;Integer&gt;  reversePost(){
+    public Stack&lt;Integer&gt;  reversePost()&#123;
         return reversePost;
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="拓扑排序实现"><a href="#拓扑排序实现" class="headerlink" title="拓扑排序实现"></a>拓扑排序实现</h3><hr>
-<pre><code>public class TopoLogical {
+<pre><code>public class TopoLogical &#123;
     //顶点的拓扑排序
     private Stack&lt;Integer&gt; order;
 
     //构造拓扑排序对象
-    public TopoLogical(Digraph G) {
+    public TopoLogical(Digraph G) &#123;
         //创建一个检测有向环的对象
         DirectedCycle cycle = new DirectedCycle(G);
         //判断G图中有没有环，如果没有环，则进行顶点排序：创建一个顶点排序对象
-        if (!cycle.hasCycle()){
+        if (!cycle.hasCycle())&#123;
             DepthFirstOrder depthFirstOrder = new DepthFirstOrder(G);
             order = depthFirstOrder.reversePost();
-        }
-    }
+        &#125;
+    &#125;
 
     //判断图G是否有环
-    private boolean isCycle(){
+    private boolean isCycle()&#123;
         return order==null;
-    }
+    &#125;
 
     //获取拓扑排序的所有顶点
-    public Stack&lt;Integer&gt;  order(){
+    public Stack&lt;Integer&gt;  order()&#123;
         return order;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class TopoLogicalTest {
-    public static void main(String[] args) {
+<pre><code>public class TopoLogicalTest &#123;
+    public static void main(String[] args) &#123;
         //准备有向图
         Digraph digraph = new Digraph(6);
         digraph.addEdge(0,2);
@@ -4248,69 +4250,69 @@ public static void main(String[] args) throws Exception {
         //获取顶点的线性序列进行打印
         Stack&lt;Integer&gt; order = topoLogical.order();
         StringBuilder sb = new StringBuilder();
-        for (Integer w : order) {
+        for (Integer w : order) &#123;
             sb.append(w+&quot;-&gt;&quot;);
-        }
+        &#125;
         String str = sb.toString();
         int index = str.lastIndexOf(&quot;-&gt;&quot;);
         str = str.substring(0,index);
         System.out.println(str);
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="加权无向图"><a href="#加权无向图" class="headerlink" title="加权无向图"></a>加权无向图</h3><hr>
 <p>加权无向图中的边我们就不能简单的使用v-w两个顶点表示了，而必须要给边关联一个权重值，因此我们可以使用对象来描述一条边。</p>
 <p>边的实现：</p>
-<pre><code>public class Edge implements Comparable&lt;Edge&gt; {
+<pre><code>public class Edge implements Comparable&lt;Edge&gt; &#123;
     private final int v;//顶点一
     private final int w;//顶点二
     private final double weight;//当前边的权重
 
     //通过顶点v和w，以及权重weight值构造一个边对象
-    public Edge(int v, int w, double weight) {
+    public Edge(int v, int w, double weight) &#123;
         this.v = v;
         this.w = w;
         this.weight = weight;
-    }
+    &#125;
 
     //获取边的权重值
-    public double weight(){
+    public double weight()&#123;
         return weight;
-    }
+    &#125;
 
     //获取边上的一个点
-    public int either(){
+    public int either()&#123;
         return v;
-    }
+    &#125;
 
     //获取边上除了顶点vertex外的另外一个顶点
-    public int other(int vertex){
-        if (vertex==v){
+    public int other(int vertex)&#123;
+        if (vertex==v)&#123;
             return w;
-        }else{
+        &#125;else&#123;
             return v;
-        }
-    }
+        &#125;
+    &#125;
 
     @Override
-    public int compareTo(Edge that) {
+    public int compareTo(Edge that) &#123;
         //使用一个遍历记录比较的结果
         int cmp;
-        if (this.weight()&gt;that.weight()){
+        if (this.weight()&gt;that.weight())&#123;
             //如果当前边的权重值大，则让cmp=1；
             cmp = 1;
-        }else if (this.weight()&lt;that.weight()){
+        &#125;else if (this.weight()&lt;that.weight())&#123;
             //如果当前边的权重值小，则让cmp=-1；
             cmp=-1;
-        }else{
+        &#125;else&#123;
             //如果当前边的权重值和that边的权重值一样大，则让cmp=0
             cmp = 0;
-        }
+        &#125;
         return cmp;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>加权无向图的实现</p>
-<pre><code>public class EdgeWeightedGraph {
+<pre><code>public class EdgeWeightedGraph &#123;
     //顶点总数
     private final int V;
     //边的总数
@@ -4319,31 +4321,31 @@ public static void main(String[] args) throws Exception {
     private Queue&lt;Edge&gt;[] adj;
 
     //创建一个含有V个顶点的空加权无向图
-    public EdgeWeightedGraph(int V) {
+    public EdgeWeightedGraph(int V) &#123;
         //初始化顶点数量
         this.V = V;
         //初始化边的数量
         this.E = 0;
         //初始化邻接表
         this.adj = new Queue[V];
-        for (int i = 0; i &lt; adj.length; i++) {
+        for (int i = 0; i &lt; adj.length; i++) &#123;
             adj[i] = new Queue&lt;Edge&gt;();
-        }
+        &#125;
 
-    }
+    &#125;
 
     //获取图中顶点的数量
-    public int V() {
+    public int V() &#123;
         return V;
-    }
+    &#125;
 
     //获取图中边的数量
-    public int E() {
+    public int E() &#123;
         return E;
-    }
+    &#125;
 
     //向加权无向图中添加一条边e
-    public void addEdge(Edge e) {
+    public void addEdge(Edge e) &#123;
         //需要让边e同时出现在e这个边的两个顶点的邻接表中
         int v = e.either();
         int w = e.other(v);
@@ -4351,30 +4353,30 @@ public static void main(String[] args) throws Exception {
         adj[w].enqueue(e);
         //边的数量+1
         E++;
-    }
+    &#125;
 
     //获取和顶点v关联的所有边
-    public Queue&lt;Edge&gt; adj(int v) {
+    public Queue&lt;Edge&gt; adj(int v) &#123;
         return adj[v];
-    }
+    &#125;
 
     //获取加权无向图的所有边
-    public Queue&lt;Edge&gt; edges() {
+    public Queue&lt;Edge&gt; edges() &#123;
         //创建一个队列对象，存储所有的边
         Queue&lt;Edge&gt; allEdges = new Queue&lt;&gt;();
         //遍历图中的每一个顶点，找到该顶点的邻接表，邻接表中存储了该顶点关联的每一条边
         //因为这是无向图，所以同一条边同时出现在了它关联的两个顶点的邻接表中，需要让一条边只记录一次；
-        for(int v =0;v&lt;V;v++){
+        for(int v =0;v&lt;V;v++)&#123;
             //遍历v顶点的邻接表，找到每一条和v关联的边
-            for (Edge e : adj(v)) {
-                if (e.other(v)&lt;v){
+            for (Edge e : adj(v)) &#123;
+                if (e.other(v)&lt;v)&#123;
                     allEdges.enqueue(e);
-                }
-            }
-        }
+                &#125;
+            &#125;
+        &#125;
         return allEdges;
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h3><hr>
 <p>图的生成树是它的一棵含有其所有顶点的无环连通子图，一副加权无向图的最小生成树它的一棵权值(树中所有边的权重之和)最小的生成树。</p>
@@ -4386,7 +4388,7 @@ public static void main(String[] args) throws Exception {
 <hr>
 <h3 id="最小生成树Prim算法"><a href="#最小生成树Prim算法" class="headerlink" title="最小生成树Prim算法"></a>最小生成树Prim算法</h3><hr>
 <p><strong>Prim算法</strong>的切分规则：把最小生成树中的顶点看做是一个集合，把不在最小生成树中的顶点看做是另外一个集合。实现：</p>
-<pre><code>public class PrimMST {
+<pre><code>public class PrimMST &#123;
     //索引代表顶点，值表示当前顶点和最小生成树之间的最短边
     private Edge[] edgeTo;
     //索引代表顶点，值表示当前顶点和最小生成树之间的最短边的权重
@@ -4397,14 +4399,14 @@ public static void main(String[] args) throws Exception {
     private IndexMinPriorityQueue&lt;Double&gt; pq;
 
     //根据一副加权无向图，创建最小生成树计算对象
-    public PrimMST(EdgeWeightedGraph G) {
+    public PrimMST(EdgeWeightedGraph G) &#123;
        //初始化edgeTo
         this.edgeTo = new Edge[G.V()];
         //初始化distTo
         this.distTo = new double[G.V()];
-        for (int i = 0; i &lt; distTo.length; i++) {
+        for (int i = 0; i &lt; distTo.length; i++) &#123;
             distTo[i] = Double.POSITIVE_INFINITY;
-        }
+        &#125;
         //初始化marked
         this.marked = new boolean[G.V()];
         //初始化pq
@@ -4413,59 +4415,59 @@ public static void main(String[] args) throws Exception {
         distTo[0] = 0.0;
         pq.insert(0,0.0);
         //遍历索引最小优先队列，拿到最小和N切边对应的顶点，把该顶点加入到最小生成树中
-        while (!pq.isEmpty()){
+        while (!pq.isEmpty())&#123;
             visit(G,pq.delMin());
-        }
-    }
+        &#125;
+    &#125;
 
     //将顶点v添加到最小生成树中，并且更新数据
-    private void visit(EdgeWeightedGraph G, int v) {
+    private void visit(EdgeWeightedGraph G, int v) &#123;
         //把顶点v添加到最小生成树中
         marked[v] = true;
         //更新数据
-        for (Edge e : G.adj(v)) {
+        for (Edge e : G.adj(v)) &#123;
             //获取e边的另外一个顶点(当前顶点是v)
             int w = e.other(v);
             //判断另外一个顶点是不是已经在树中，如果在树中，则不做任何处理，如果不再树中，更新数据
-            if (marked[w]){
+            if (marked[w])&#123;
                 continue;
-            }
+            &#125;
             //判断边e的权重是否小于从w顶点到树中已经存在的最小边的权重；
-            if (e.weight()&lt;distTo[w]){
+            if (e.weight()&lt;distTo[w])&#123;
                 //更新数据
                 edgeTo[w] = e;
                 distTo[w] = e.weight();
-                if (pq.contains(w)){
+                if (pq.contains(w))&#123;
                     pq.changeItem(w,e.weight());
-                }else{
+                &#125;else&#123;
                     pq.insert(w,e.weight());
-                }
-            }
-        }
-    }
+                &#125;
+            &#125;
+        &#125;
+    &#125;
 
     //获取最小生成树的所有边
-    public Queue&lt;Edge&gt; edges() {
+    public Queue&lt;Edge&gt; edges() &#123;
         //创建队列对象
         Queue&lt;Edge&gt; allEdges = new Queue&lt;&gt;();
         //遍历edgeTo数组，拿到每一条边，如果不为null，则添加到队列中
-        for (int i = 0; i &lt; edgeTo.length; i++) {
-            if (edgeTo[i]!=null){
+        for (int i = 0; i &lt; edgeTo.length; i++) &#123;
+            if (edgeTo[i]!=null)&#123;
                 allEdges.enqueue(edgeTo[i]);
-            }
-        }
+            &#125;
+        &#125;
         return allEdges;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class PrimMSTTest {
-    public static void main(String[] args) throws Exception{
+<pre><code>public class PrimMSTTest &#123;
+    public static void main(String[] args) throws Exception&#123;
         //准备一副加权无向图
         BufferedReader br = new BufferedReader(new InputStreamReader(PrimMSTTest.class.getClassLoader().getResourceAsStream(&quot;min_create_tree_test.txt&quot;)));
         int total = Integer.parseInt(br.readLine());
         EdgeWeightedGraph G = new EdgeWeightedGraph(total);
         int edgeNumbers = Integer.parseInt(br.readLine());
-        for (int e = 1;e&lt;=edgeNumbers;e++){
+        for (int e = 1;e&lt;=edgeNumbers;e++)&#123;
             String line = br.readLine();//4 5 0.35
             String[] strs = line.split(&quot; &quot;);
             int v = Integer.parseInt(strs[0]);
@@ -4474,28 +4476,28 @@ public static void main(String[] args) throws Exception {
             //构建加权无向边
             Edge edge = new Edge(v, w, weight);
             G.addEdge(edge);
-        }
+        &#125;
 
         //创建一个PrimMST对象，计算加权无向图中的最小生成树
         PrimMST primMST = new PrimMST(G);
         //获取最小生成树中的所有边
         Queue&lt;Edge&gt; edges = primMST.edges();
         //遍历打印所有的边
-        for (Edge e : edges) {
+        for (Edge e : edges) &#123;
             int v = e.either();
             int w = e.other(v);
             double weight = e.weight();
             System.out.println(v+&quot;-&quot;+w+&quot; :: &quot;+weight);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="最小生成树kruskal算法"><a href="#最小生成树kruskal算法" class="headerlink" title="最小生成树kruskal算法"></a>最小生成树kruskal算法</h3><hr>
 <p><strong>kruskal算法</strong>是按照边的权重(从小到大)处理它们，将边加入最小生成树中，加入的边不会与已经加入最小生成树的边构成环，直到树中含有V-1条边为止。</p>
 <p>kruskal算法和prim算法的区别：Prim算法是一条边一条边的构造最小生成树，每一步都为一棵树添加一条边。kruskal算法构造最小生成树的时候<br>也是一条边一条边地构造，但它的切分规则是不一样的。它每一次寻找的边会连接一片森林中的两棵树。如果一副加权无向图由V个顶点组成，初始化情况下每个顶点都构成一棵独立的树，则V个顶点对应V棵树，组成一片森林，kruskal算法每一次处理都会将两棵树合并为一棵树，直到整个森林中只剩一棵树为止。</p>
 <p>取出权重最小的边，并得到该边关联的两个顶点v和w，通过uf.connect(v,w)判断v和w是否已经连通，如果连通，则证明这两个顶点在同一棵树中，那么就不能再把这条边添加到最小生成树中，因为在一棵树的任意两个顶点上添加一条边，都会形成环，而最小生成树不能有环的存在，如果不连通，则通过uf.connect(v,w)把顶点v所在的树和顶点w所在的树合并成一棵树，并把这条边加入到mst队列中，这样如果把所有的边处理完，最终mst中存储的就是最小生树的所有边。</p>
 <p><strong>kruskal算法</strong>实现:</p>
-<pre><code>public class KruskalMST {
+<pre><code>public class KruskalMST &#123;
     //保存最小生成树的所有边
     private Queue&lt;Edge&gt; mst;
     //索引代表顶点，使用uf.connect(v,w)可以判断顶点v和顶点w是否在同一颗树中，使用uf.union(v,w)可以把顶点v所在的树和顶点w所在的树合并
@@ -4504,7 +4506,7 @@ public static void main(String[] args) throws Exception {
     private MinPriorityQueue&lt;Edge&gt; pq;
 
     //根据一副加权无向图，创建最小生成树计算对象
-    public KruskalMST(EdgeWeightedGraph G) {
+    public KruskalMST(EdgeWeightedGraph G) &#123;
         //初始化mst
         this.mst = new Queue&lt;Edge&gt;();
         //初始化uf
@@ -4512,42 +4514,42 @@ public static void main(String[] args) throws Exception {
         //初始化pq
         this.pq = new MinPriorityQueue&lt;&gt;(G.E()+1);
         //把图中所有的边存储到pq中
-        for (Edge e : G.edges()) {
+        for (Edge e : G.edges()) &#123;
             pq.insert(e);
-        }
+        &#125;
 
         //遍历pq队列，拿到最小权重的边，进行处理
-        while(!pq.isEmpty() &amp;&amp; mst.size()&lt;G.V()-1){
+        while(!pq.isEmpty() &amp;&amp; mst.size()&lt;G.V()-1)&#123;
             //找到权重最小的边
             Edge e = pq.delMin();
             //找到该边的两个顶点
             int v = e.either();
             int w = e.other(v);
             //判断这两个顶点是否已经在同一颗树中，如果在同一颗树中，则不对该边做处理，如果不在一棵树中，则让这两个顶点属于的两棵树合并成一棵树
-            if (uf.connected(v,w)){
+            if (uf.connected(v,w))&#123;
                 continue;
-            }
+            &#125;
             uf.union(v,w);
             //让边e进入到mst队列中
             mst.enqueue(e);
-        }
-    }
+        &#125;
+    &#125;
 
     //获取最小生成树的所有边
-    public Queue&lt;Edge&gt; edges() {
+    public Queue&lt;Edge&gt; edges() &#123;
         return mst;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class KruskalMSTTest {
+<pre><code>public class KruskalMSTTest &#123;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception&#123;
         //准备一副加权无向图
         BufferedReader br = new BufferedReader(new InputStreamReader(KruskalMSTTest.class.getClassLoader().getResourceAsStream(&quot;min_create_tree_test.txt&quot;)));
         int total = Integer.parseInt(br.readLine());
         EdgeWeightedGraph G = new EdgeWeightedGraph(total);
         int edgeNumbers = Integer.parseInt(br.readLine());
-        for (int e = 1;e&lt;=edgeNumbers;e++){
+        for (int e = 1;e&lt;=edgeNumbers;e++)&#123;
             String line = br.readLine();//4 5 0.35
             String[] strs = line.split(&quot; &quot;);
             int v = Integer.parseInt(strs[0]);
@@ -4556,53 +4558,53 @@ public static void main(String[] args) throws Exception {
             //构建加权无向边
             Edge edge = new Edge(v, w, weight);
             G.addEdge(edge);
-        }
+        &#125;
 
         //创建一个KruskalMST对象，计算加权无向图中的最小生成树
         KruskalMST primMST = new KruskalMST(G);
         //获取最小生成树中的所有边
         Queue&lt;Edge&gt; edges = primMST.edges();
         //遍历打印所有的边
-        for (Edge e : edges) {
+        for (Edge e : edges) &#123;
             int v = e.either();
             int w = e.other(v);
             double weight = e.weight();
             System.out.println(v+&quot;-&quot;+w+&quot; :: &quot;+weight);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="加权有向图"><a href="#加权有向图" class="headerlink" title="加权有向图"></a>加权有向图</h3><hr>
 <p>有向图边的表示：</p>
-<pre><code>public class DirectedEdge {
+<pre><code>public class DirectedEdge &#123;
     private final int v;//起点
     private final int w;//终点
     private final double weight;//当前边的权重
 
     //通过顶点v和w，以及权重weight值构造一个边对象
-    public DirectedEdge(int v, int w, double weight) {
+    public DirectedEdge(int v, int w, double weight) &#123;
         this.v = v;
         this.w = w;
         this.weight = weight;
-    }
+    &#125;
 
     //获取边的权重值
-    public double weight(){
+    public double weight()&#123;
         return weight;
-    }
+    &#125;
 
     //获取有向边的起点
-    public int from(){
+    public int from()&#123;
         return v;
-    }
+    &#125;
 
     //获取有向边的终点
-    public int to(){
+    public int to()&#123;
         return w;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>有向图的实现：</p>
-<pre><code>public class EdgeWeightedDigraph {
+<pre><code>public class EdgeWeightedDigraph &#123;
     //顶点总数
     private final int V;
     //边的总数
@@ -4611,53 +4613,53 @@ public static void main(String[] args) throws Exception {
     private Queue&lt;DirectedEdge&gt;[] adj;
 
     //创建一个含有V个顶点的空加权有向图
-    public EdgeWeightedDigraph(int V) {
+    public EdgeWeightedDigraph(int V) &#123;
         //初始化顶点数量
         this.V = V;
         //初始化边的数量
         this.E = 0;
         //初始化邻接表
         this.adj = new Queue[V];
-        for (int i = 0; i &lt; adj.length; i++) {
+        for (int i = 0; i &lt; adj.length; i++) &#123;
             adj[i] = new Queue&lt;DirectedEdge&gt;();
-        }
-    }
+        &#125;
+    &#125;
 
     //获取图中顶点的数量
-    public int V() {
+    public int V() &#123;
         return V;
-    }
+    &#125;
 
     //获取图中边的数量
-    public int E() {
+    public int E() &#123;
         return E;
-    }
+    &#125;
 
     //向加权有向图中添加一条边e
-    public void addEdge(DirectedEdge e) {
+    public void addEdge(DirectedEdge e) &#123;
         //边e是有方向的，所以只需要让e出现在起点的邻接表中即可
         int v = e.from();
         adj[v].enqueue(e);
         E++;
-    }
+    &#125;
 
     //获取由顶点v指出的所有的边
-    public Queue&lt;DirectedEdge&gt; adj(int v) {
+    public Queue&lt;DirectedEdge&gt; adj(int v) &#123;
         return adj[v];
-    }
+    &#125;
 
     //获取加权有向图的所有边
-    public Queue&lt;DirectedEdge&gt; edges() {
+    public Queue&lt;DirectedEdge&gt; edges() &#123;
         //遍历图中的每一个顶点，得到该顶点的邻接表，遍历得到每一条边，添加到队列中返回即可
         Queue&lt;DirectedEdge&gt; allEdges = new Queue&lt;&gt;();
-        for (int v = 0;v&lt;V;v++){
-            for (DirectedEdge edge : adj[v]) {
+        for (int v = 0;v&lt;V;v++)&#123;
+            for (DirectedEdge edge : adj[v]) &#123;
                 allEdges.enqueue(edge);
-            }
-        }
+            &#125;
+        &#125;
         return allEdges;
-    }
-}
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h3><hr>
 <p>最短路径定义及性质定义：在一副加权有向图中，从顶点s到顶点t的最短路径是所有从顶点s到顶点t的路径中总权重最小的那条路径。</p>
@@ -4665,7 +4667,7 @@ public static void main(String[] args) throws Exception {
 <p>边的松弛：放松边v-&gt;w意味着检查从s到w的最短路径是否先从s到v，然后再从v到w。</p>
 <p>顶点的松弛：顶点的松弛是基于边的松弛完成的，只需要把某个顶点指出的所有边松弛，那么该顶点就松弛完毕。例如要松弛顶点v，只需要遍历v的邻接表，把每一条边都松弛，那么顶点v就松弛了。</p>
 <p>Disjstra算法的实现和Prim算法很类似，构造最短路径树的每一步都是向这棵树中添加一条新的边，而这条新的边是有效横切边pq队列中的权重最小的边。</p>
-<pre><code>public class DijkstraSP {
+<pre><code>public class DijkstraSP &#123;
     //索引代表顶点，值表示从顶点s到当前顶点的最短路径上的最后一条边
     private DirectedEdge[] edgeTo;
     //索引代表顶点，值从顶点s到当前顶点的最短路径的总权重
@@ -4674,14 +4676,14 @@ public static void main(String[] args) throws Exception {
     private IndexMinPriorityQueue&lt;Double&gt; pq;
 
     //根据一副加权有向图G和顶点s，创建一个计算顶点为s的最短路径树对象
-    public DijkstraSP(EdgeWeightedDigraph G, int s){
+    public DijkstraSP(EdgeWeightedDigraph G, int s)&#123;
         //初始化edgeTo
         this.edgeTo = new DirectedEdge[G.V()];
         //初始化distTo
         this.distTo = new double[G.V()];
-        for (int i = 0; i &lt; distTo.length; i++) {
+        for (int i = 0; i &lt; distTo.length; i++) &#123;
             distTo[i] = Double.POSITIVE_INFINITY;
-        }
+        &#125;
         //初始化pq
         this.pq = new IndexMinPriorityQueue&lt;&gt;(G.V());
         //找到图G中以顶点s为起点的最短路径树
@@ -4689,71 +4691,71 @@ public static void main(String[] args) throws Exception {
         distTo[s] = 0.0;
         pq.insert(s,0.0);
         //遍历pq
-        while(!pq.isEmpty()){
+        while(!pq.isEmpty())&#123;
             relax(G,pq.delMin());
-        }
-    }
+        &#125;
+    &#125;
 
     //松弛图G中的顶点v
-    private void relax(EdgeWeightedDigraph G, int v){
-        for (DirectedEdge edge : G.adj(v)) {
+    private void relax(EdgeWeightedDigraph G, int v)&#123;
+        for (DirectedEdge edge : G.adj(v)) &#123;
             //获取到该边的终点w
             int w = edge.to();
             //通过松弛技术，判断从起点s到顶点w的最短路径是否需要先从顶点s到顶点v，然后再由顶点v到顶点w
-            if (distTo(v)+edge.weight()&lt;distTo(w)){
+            if (distTo(v)+edge.weight()&lt;distTo(w))&#123;
                 distTo[w] = distTo[v]+edge.weight();
                 edgeTo[w] = edge;
                 //判断pq中是否已经存在顶点w，如果存在，则更新权重，如果不存在，则直接添加
-                if (pq.contains(w)){
+                if (pq.contains(w))&#123;
                     pq.changeItem(w,distTo(w));
-                }else{
+                &#125;else&#123;
                     pq.insert(w,distTo(w));
-                }
-            }
-        }
+                &#125;
+            &#125;
+        &#125;
 
-    }
+    &#125;
 
     //获取从顶点s到顶点v的最短路径的总权重
-    public double distTo(int v){
+    public double distTo(int v)&#123;
         return distTo[v];
-    }
+    &#125;
 
     //判断从顶点s到顶点v是否可达
-    public boolean hasPathTo(int v){
+    public boolean hasPathTo(int v)&#123;
         return distTo[v]&lt;Double.POSITIVE_INFINITY;
-    }
+    &#125;
 
     //查询从起点s到顶点v的最短路径中所有的边
-    public Queue&lt;DirectedEdge&gt; pathTo(int v){
+    public Queue&lt;DirectedEdge&gt; pathTo(int v)&#123;
         //判断从顶点s到顶点v是否可达，如果不可达，直接返回null
-        if (!hasPathTo(v)){
+        if (!hasPathTo(v))&#123;
             return null;
-        }
+        &#125;
 
         //创建队列对象
         Queue&lt;DirectedEdge&gt; allEdges = new Queue&lt;&gt;();
-        while (true){
+        while (true)&#123;
             DirectedEdge e = edgeTo[v];
-            if (e==null){
+            if (e==null)&#123;
                 break;
-            }
+            &#125;
             allEdges.enqueue(e);
             v = e.from();
-        }
+        &#125;
         return allEdges;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>测试</p>
-<pre><code>public class DijkstraSPTest {
+<pre><code>public class DijkstraSPTest &#123;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception&#123;
         //创建一副加权有向图
         BufferedReader br = new BufferedReader(new InputStreamReader(DijkstraSPTest.class.getClassLoader().getResourceAsStream(&quot;min_route_test.txt&quot;)));
         int total = Integer.parseInt(br.readLine());
         EdgeWeightedDigraph G = new EdgeWeightedDigraph(total);
         int edgeNumbers = Integer.parseInt(br.readLine());
-        for(int i=1;i&lt;=edgeNumbers;i++){
+        for(int i=1;i&lt;=edgeNumbers;i++)&#123;
             String line = br.readLine();//4 5 0.35
             String[] strs = line.split(&quot; &quot;);
             int v = Integer.parseInt(strs[0]);
@@ -4761,17 +4763,17 @@ public static void main(String[] args) throws Exception {
             double weight = Double.parseDouble(strs[2]);
             DirectedEdge e = new DirectedEdge(v, w, weight);
             G.addEdge(e);
-        }
+        &#125;
         //创建DijkstraSP对象，查找最短路径树
         DijkstraSP dijkstraSP = new DijkstraSP(G, 0);
         //查找最短路径,0-&gt;6的最短路径
         Queue&lt;DirectedEdge&gt; edges = dijkstraSP.pathTo(6);
         //遍历打印
-        for (DirectedEdge edge : edges) {
+        for (DirectedEdge edge : edges) &#123;
             System.out.println(edge.from()+&quot;-&gt;&quot;+edge.to()+&quot; ：： &quot;+edge.weight());
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><hr>
 
     </div>
@@ -4810,7 +4812,7 @@ public static void main(String[] args) throws Exception {
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2020/08/29/40.从oc到swift/" class="pre-post btn btn-default" title='从oc到swift'>
+        <a href="/2020/08/29/40.%E4%BB%8Eoc%E5%88%B0swift/" class="pre-post btn btn-default" title='从oc到swift'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">从oc到swift</span>
         </a>
@@ -4834,7 +4836,7 @@ public static void main(String[] args) throws Exception {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、数据结构分类"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、算法介绍"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、算法的时间复杂度"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、时间复杂度大O记法"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、算法的空间复杂度"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Comparable接口"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、冒泡排序"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、选择排序"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、插入排序"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、希尔排序"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、归并排序"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、快速排序"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、排序的稳定性"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序表"><span class="toc-text">顺序表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向链表"><span class="toc-text">单向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双向链表"><span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约瑟夫问题"><span class="toc-text">约瑟夫问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈"><span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号匹配问题"><span class="toc-text">括号匹配问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆波兰表达式求值"><span class="toc-text">逆波兰表达式求值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#队列"><span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#符号表"><span class="toc-text">符号表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-1"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序符号表"><span class="toc-text">有序符号表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树"><span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉查找树基于链表的实现"><span class="toc-text">二叉查找树基于链表的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#折纸问题"><span class="toc-text">折纸问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆"><span class="toc-text">堆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API实现"><span class="toc-text">API实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用堆进行排序"><span class="toc-text">利用堆进行排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优先队列"><span class="toc-text">优先队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最大优先队列"><span class="toc-text">最大优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最小优先队列"><span class="toc-text">最小优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#索引优先队列"><span class="toc-text">索引优先队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平衡树"><span class="toc-text">平衡树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3查找树"><span class="toc-text">2-3查找树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#红黑树"><span class="toc-text">红黑树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B树和B-树"><span class="toc-text">B树和B+树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B树"><span class="toc-text">B树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-树"><span class="toc-text">B+树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并查集"><span class="toc-text">并查集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-2"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UF-Tree算法优化"><span class="toc-text">UF_Tree算法优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径压缩优化"><span class="toc-text">路径压缩优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例"><span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图"><span class="toc-text">图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图的存储结构"><span class="toc-text">图的存储结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现-1"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图的搜索"><span class="toc-text">图的搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例-1"><span class="toc-text">案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路径查找"><span class="toc-text">路径查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有向图定义"><span class="toc-text">有向图定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有向图实现"><span class="toc-text">有向图实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓扑排序-检测有向图中的环"><span class="toc-text">拓扑排序-检测有向图中的环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓扑排序-基于深度优先的顶点排序"><span class="toc-text">拓扑排序-基于深度优先的顶点排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓扑排序实现"><span class="toc-text">拓扑排序实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加权无向图"><span class="toc-text">加权无向图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最小生成树"><span class="toc-text">最小生成树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最小生成树Prim算法"><span class="toc-text">最小生成树Prim算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最小生成树kruskal算法"><span class="toc-text">最小生成树kruskal算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加权有向图"><span class="toc-text">加权有向图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最短路径"><span class="toc-text">最短路径</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB"><span class="toc-text">1、数据结构分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">2、算法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">3、算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%A4%A7O%E8%AE%B0%E6%B3%95"><span class="toc-text">4、时间复杂度大O记法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">5、算法的空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81Comparable%E6%8E%A5%E5%8F%A3"><span class="toc-text">1、Comparable接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="toc-text">2、冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="toc-text">3、选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="toc-text">4、插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F"><span class="toc-text">5、希尔排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-text">6、归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="toc-text">7、快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8%E3%80%81%E6%8E%92%E5%BA%8F%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="toc-text">8、排序的稳定性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8"><span class="toc-text">顺序表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8"><span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8"><span class="toc-text">单向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8"><span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="toc-text">循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A6%E7%91%9F%E5%A4%AB%E9%97%AE%E9%A2%98"><span class="toc-text">约瑟夫问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%88"><span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98"><span class="toc-text">括号匹配问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="toc-text">逆波兰表达式求值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%9F%E5%88%97"><span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E8%A1%A8"><span class="toc-text">符号表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-1"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%BA%8F%E7%AC%A6%E5%8F%B7%E8%A1%A8"><span class="toc-text">有序符号表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91%E5%9F%BA%E4%BA%8E%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">二叉查找树基于链表的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%98%E7%BA%B8%E9%97%AE%E9%A2%98"><span class="toc-text">折纸问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A0%86"><span class="toc-text">堆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API%E5%AE%9E%E7%8E%B0"><span class="toc-text">API实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%A0%86%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="toc-text">利用堆进行排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="toc-text">优先队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="toc-text">最大优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="toc-text">最小优先队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="toc-text">索引优先队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%A0%91"><span class="toc-text">平衡树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E6%9F%A5%E6%89%BE%E6%A0%91"><span class="toc-text">2-3查找树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="toc-text">红黑树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B%E6%A0%91%E5%92%8CB-%E6%A0%91"><span class="toc-text">B树和B+树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B%E6%A0%91"><span class="toc-text">B树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-%E6%A0%91"><span class="toc-text">B+树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="toc-text">并查集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-2"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UF-Tree%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96"><span class="toc-text">UF_Tree算法优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9%E4%BC%98%E5%8C%96"><span class="toc-text">路径压缩优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE"><span class="toc-text">图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-text">图的存储结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-1"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E6%90%9C%E7%B4%A2"><span class="toc-text">图的搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-1"><span class="toc-text">案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E6%9F%A5%E6%89%BE"><span class="toc-text">路径查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%90%91%E5%9B%BE%E5%AE%9A%E4%B9%89"><span class="toc-text">有向图定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%90%91%E5%9B%BE%E5%AE%9E%E7%8E%B0"><span class="toc-text">有向图实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F-%E6%A3%80%E6%B5%8B%E6%9C%89%E5%90%91%E5%9B%BE%E4%B8%AD%E7%9A%84%E7%8E%AF"><span class="toc-text">拓扑排序-检测有向图中的环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F-%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E7%9A%84%E9%A1%B6%E7%82%B9%E6%8E%92%E5%BA%8F"><span class="toc-text">拓扑排序-基于深度优先的顶点排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E5%AE%9E%E7%8E%B0"><span class="toc-text">拓扑排序实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E6%9D%83%E6%97%A0%E5%90%91%E5%9B%BE"><span class="toc-text">加权无向图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-text">最小生成树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91Prim%E7%AE%97%E6%B3%95"><span class="toc-text">最小生成树Prim算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91kruskal%E7%AE%97%E6%B3%95"><span class="toc-text">最小生成树kruskal算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E6%9D%83%E6%9C%89%E5%90%91%E5%9B%BE"><span class="toc-text">加权有向图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="toc-text">最短路径</span></a></li></ol></li></ol>
         
     </div>
 </aside>
@@ -4886,7 +4888,9 @@ public static void main(String[] args) throws Exception {
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

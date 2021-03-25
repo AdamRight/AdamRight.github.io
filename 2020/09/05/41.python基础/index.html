@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -228,10 +230,10 @@ print(type(e))  # &lt;class &apos;list&apos;&gt; -- 列表
 f = (10, 20, 30)
 print(type(f))  # &lt;class &apos;tuple&apos;&gt; -- 元组
 
-h = {10, 20, 30}
+h = &#123;10, 20, 30&#125;
 print(type(h))  # &lt;class &apos;set&apos;&gt; -- 集合
 
-g = {&apos;name&apos;: &apos;TOM&apos;, &apos;age&apos;: 20}
+g = &#123;&apos;name&apos;: &apos;TOM&apos;, &apos;age&apos;: 20&#125;
 print(type(g))  # &lt;class &apos;dict&apos;&gt; -- 字典
 </code></pre><hr>
 <h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><hr>
@@ -299,7 +301,7 @@ print(type(g))  # &lt;class &apos;dict&apos;&gt; -- 字典
 <ul>
 <li>%06d，表示输出的整数显示位数，不足以0补全，超出当前位数则原样输出</li>
 <li>%.2f，表示小数点后显示的小数位数。</li>
-<li><p>格式化字符串除了%s，还可以写为<code>f&#39;{表达式}&#39;</code></p>
+<li><p>格式化字符串除了%s，还可以写为<code>f&#39;&#123;表达式&#125;&#39;</code></p>
 <pre><code>age = 18
 name = &apos;TOM&apos;
 weight = 75.5
@@ -318,7 +320,7 @@ print(&apos;我的体重是%.2f公斤&apos; % weight)
 print(&apos;我的名字是%s，明年%d岁了&apos; % (name, age + 1))
 
 # 我的名字是TOM，明年19岁了
-print(f&apos;我的名字是{name}, 明年{age + 1}岁了&apos;)
+print(f&apos;我的名字是&#123;name&#125;, 明年&#123;age + 1&#125;岁了&apos;)
 </code></pre></li>
 </ul>
 <hr>
@@ -326,7 +328,7 @@ print(f&apos;我的名字是{name}, 明年{age + 1}岁了&apos;)
 <pre><code>input(&quot;提示信息&quot;)
 </code></pre><p>在Python中，<code>input</code>会把接收到的任意用户输入的数据都当做字符串处理。</p>
 <pre><code>password = input(&apos;请输入您的密码：&apos;)
-print(f&apos;您输入的密码是{password}&apos;)
+print(f&apos;您输入的密码是&#123;password&#125;&apos;)
 # &lt;class &apos;str&apos;&gt;
 print(type(password))
 </code></pre><hr>
@@ -541,11 +543,11 @@ else:
 </code></pre><p>实例：</p>
 <pre><code>age = int(input(&apos;请输入您的年龄：&apos;))
 if age &lt; 18:
-    print(f&apos;您的年龄是{age},童工一枚&apos;)
+    print(f&apos;您的年龄是&#123;age&#125;,童工一枚&apos;)
 elif (age &gt;= 18) and (age &lt;= 60):
-    print(f&apos;您的年龄是{age},合法工龄&apos;)
+    print(f&apos;您的年龄是&#123;age&#125;,合法工龄&apos;)
 elif age &gt; 60:
-    print(f&apos;您的年龄是{age},可以退休&apos;)
+    print(f&apos;您的年龄是&#123;age&#125;,可以退休&apos;)
 </code></pre><hr>
 <h3 id="猜拳游戏"><a href="#猜拳游戏" class="headerlink" title="猜拳游戏"></a>猜拳游戏</h3><hr>
 <pre><code># 导入random模块
@@ -1041,9 +1043,9 @@ print(tuple2)
 <p>字典里面的数据是以键值对形式出现，字典数据和数据顺序没有关系，即字典不支持下标，后期无论数据如何变化，只需要按照对应的键的名字查找数据即可。</p>
 <p>字典特点：符号为大括号；数据为键值对形式出现；各个键值对之间用逗号隔开。</p>
 <pre><code># 有数据字典
-dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 # 空字典
-dict2 = {}
+dict2 = &#123;&#125;
 </code></pre><p>一般称冒号前面的为键(key)，简称k；冒号后面的为值(value)，简称v。</p>
 <hr>
 <h3 id="增和改"><a href="#增和改" class="headerlink" title="增和改"></a>增和改</h3><hr>
@@ -1051,14 +1053,14 @@ dict2 = {}
 <blockquote>
 <p>注意：如果key存在则修改这个key对应的值；如果key不存在则新增此键值对。</p>
 </blockquote>
-<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 
 dict1[&apos;name&apos;] = &apos;Rose&apos;
-# 结果：{&apos;name&apos;: &apos;Rose&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+# 结果：&#123;&apos;name&apos;: &apos;Rose&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 print(dict1)
 
 dict1[&apos;id&apos;] = 110
-# {&apos;name&apos;: &apos;Rose&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;, &apos;id&apos;: 110}
+# &#123;&apos;name&apos;: &apos;Rose&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;, &apos;id&apos;: 110&#125;
 print(dict1)
 </code></pre><blockquote>
 <p>注意：<strong>字典为可变类型</strong>。</p>
@@ -1066,18 +1068,18 @@ print(dict1)
 <hr>
 <h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><hr>
 <p>del()/del：删除字典或删除字典中指定键值对。</p>
-<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 
 del dict1[&apos;gender&apos;]
-# 结果：{&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20}
+# 结果：&#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20&#125;
 print(dict1)
 </code></pre><p>clear()：清空字典</p>
-<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 dict1.clear()
-print(dict1)  # {}
+print(dict1)  # &#123;&#125;
 </code></pre><hr>
 <h3 id="key值查找"><a href="#key值查找" class="headerlink" title="key值查找"></a>key值查找</h3><hr>
-<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 print(dict1[&apos;name&apos;])  # Tom
 print(dict1[&apos;id&apos;])  # 报错
 </code></pre><blockquote>
@@ -1089,50 +1091,50 @@ print(dict1[&apos;id&apos;])  # 报错
 </code></pre><blockquote>
 <p>注意：如果当前查找的key不存在则返回第二个参数(默认值)，如果省略第二个参数，则返回None。</p>
 </blockquote>
-<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 print(dict1.get(&apos;name&apos;))  # Tom
 print(dict1.get(&apos;id&apos;, 110))  # 110
 print(dict1.get(&apos;id&apos;))  # None
 </code></pre><hr>
 <h3 id="keys"><a href="#keys" class="headerlink" title="keys"></a>keys</h3><hr>
-<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 print(dict1.keys())  # dict_keys([&apos;name&apos;, &apos;age&apos;, &apos;gender&apos;])
 </code></pre><hr>
 <h3 id="values"><a href="#values" class="headerlink" title="values"></a>values</h3><hr>
-<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 print(dict1.values())  # dict_values([&apos;Tom&apos;, 20, &apos;男&apos;])
 </code></pre><hr>
 <h3 id="items"><a href="#items" class="headerlink" title="items"></a>items</h3><hr>
-<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 print(dict1.items())  # dict_items([(&apos;name&apos;, &apos;Tom&apos;), (&apos;age&apos;, 20), (&apos;gender&apos;, &apos;男&apos;)])
 </code></pre><hr>
 <h3 id="遍历字典的key"><a href="#遍历字典的key" class="headerlink" title="遍历字典的key"></a>遍历字典的key</h3><hr>
-<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 for key in dict1.keys():
     print(key)
 </code></pre><hr>
 <h3 id="遍历字典的value"><a href="#遍历字典的value" class="headerlink" title="遍历字典的value"></a>遍历字典的value</h3><hr>
-<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 for value in dict1.values():
     print(value)
 </code></pre><hr>
 <h3 id="遍历字典的元素"><a href="#遍历字典的元素" class="headerlink" title="遍历字典的元素"></a>遍历字典的元素</h3><hr>
-<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 for item in dict1.items():
     print(item)
 </code></pre><hr>
 <h3 id="遍历字典的键值对"><a href="#遍历字典的键值对" class="headerlink" title="遍历字典的键值对"></a>遍历字典的键值对</h3><hr>
-<pre><code>dict1 = {&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;}
+<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
 for key, value in dict1.items():
-    print(f&apos;{key} = {value}&apos;)
+    print(f&apos;&#123;key&#125; = &#123;value&#125;&apos;)
 </code></pre><hr>
 <h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><hr>
-<p>创建集合使用<code>{}</code>或<code>set()</code>，但是如果要创建空集合只能使用<code>set()</code>，因为<code>{}</code>用来创建空字典。</p>
-<pre><code>s1 = {10, 20, 30, 40, 50}
-print(s1)#{40, 10, 50, 20, 30}
+<p>创建集合使用<code>&#123;&#125;</code>或<code>set()</code>，但是如果要创建空集合只能使用<code>set()</code>，因为<code>&#123;&#125;</code>用来创建空字典。</p>
+<pre><code>s1 = &#123;10, 20, 30, 40, 50&#125;
+print(s1)#&#123;40, 10, 50, 20, 30&#125;
 
-s2 = {10, 30, 20, 10, 30, 40, 30, 50}
-print(s2)#{40, 10, 50, 20, 30}
+s2 = &#123;10, 30, 20, 10, 30, 40, 30, 50&#125;
+print(s2)#&#123;40, 10, 50, 20, 30&#125;
 
 s3 = set(&apos;abcdefg&apos;)
 print(s3)
@@ -1140,21 +1142,21 @@ print(s3)
 s4 = set()
 print(type(s4))  # set
 
-s5 = {}
+s5 = &#123;&#125;
 print(type(s5))  # dict
 </code></pre><p>特点：集合可以去掉重复数据；集合数据是无序的，故不支持下标。</p>
 <hr>
 <h3 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h3><hr>
 <p>add()</p>
-<pre><code>s1 = {10, 20}
+<pre><code>s1 = &#123;10, 20&#125;
 s1.add(100)
 s1.add(10)
-print(s1)  # {100, 10, 20}
+print(s1)  # &#123;100, 10, 20&#125;
 </code></pre><blockquote>
 <p>因为集合有去重功能，所以，当向集合内追加的数据是当前集合已有数据的话，则不进行任何操作。</p>
 </blockquote>
 <p>update(), 追加的数据是序列。</p>
-<pre><code>s1 = {10, 20}
+<pre><code>s1 = &#123;10, 20&#125;
 # s1.update(100)  # 报错
 s1.update([100, 200])
 s1.update(&apos;abc&apos;)
@@ -1162,14 +1164,14 @@ print(s1)
 </code></pre><hr>
 <h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><hr>
 <p>remove()，删除集合中的指定数据，如果数据不存在则报错。</p>
-<pre><code>s1 = {10, 20}
+<pre><code>s1 = &#123;10, 20&#125;
 
 s1.remove(10)
 print(s1)
 s1.remove(10)  # 报错
 print(s1)
 </code></pre><p>discard()，删除集合中的指定数据，如果数据不存在也不会报错。</p>
-<pre><code>s1 = {10, 20}
+<pre><code>s1 = &#123;10, 20&#125;
 
 s1.discard(10)
 print(s1)
@@ -1177,14 +1179,14 @@ print(s1)
 s1.discard(10)
 print(s1)
 </code></pre><p>pop()，随机删除集合中的某个数据，并返回这个数据。</p>
-<pre><code>s1 = {10, 20, 30, 40, 50}
+<pre><code>s1 = &#123;10, 20, 30, 40, 50&#125;
 del_num = s1.pop()
 print(del_num)
 print(s1)
 </code></pre><hr>
 <h3 id="查找数据"><a href="#查找数据" class="headerlink" title="查找数据"></a>查找数据</h3><hr>
 <p>in：判断数据在集合序列。not in：判断数据不在集合序列</p>
-<pre><code>s1 = {10, 20, 30, 40, 50}
+<pre><code>s1 = &#123;10, 20, 30, 40, 50&#125;
 
 print(10 in s1)
 print(10 not in s1)
@@ -1318,11 +1320,11 @@ t1 = (10, 20, 30, 40, 50)
 print(len(t1))  # 5
 
 # 4. 集合
-s1 = {10, 20, 30}
+s1 = &#123;10, 20, 30&#125;
 print(len(s1))  # 3
 
 # 5. 字典
-dict1 = {&apos;name&apos;: &apos;Rose&apos;, &apos;age&apos;: 18}
+dict1 = &#123;&apos;name&apos;: &apos;Rose&apos;, &apos;age&apos;: 18&#125;
 print(len(dict1))  # 2
 </code></pre><hr>
 <p>del()</p>
@@ -1381,18 +1383,18 @@ for i in enumerate(list1):
     print(i)#(0, &apos;a&apos;)(1, &apos;b&apos;)(2, &apos;c&apos;)(4, &apos;e&apos;)
 
 for index, char in enumerate(list1, start=1):
-    print(f&apos;下标是{index}, 对应的字符是{char}&apos;)#下标是1, 对应的字符是a...
+    print(f&apos;下标是&#123;index&#125;, 对应的字符是&#123;char&#125;&apos;)#下标是1, 对应的字符是a...
 </code></pre><hr>
 <h3 id="容器类型转换"><a href="#容器类型转换" class="headerlink" title="容器类型转换"></a>容器类型转换</h3><hr>
 <p>tuple()：将某个序列转换成元组</p>
 <pre><code>list1 = [10, 20, 30, 40, 50, 20]
-s1 = {100, 200, 300, 400, 500}
+s1 = &#123;100, 200, 300, 400, 500&#125;
 
 print(tuple(list1))#(10, 20, 30, 40, 50, 20)
 print(tuple(s1))#(100, 200, 300, 400, 500)
 </code></pre><p>list()：将某个序列转换成列表</p>
 <pre><code>t1 = (&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;)
-s1 = {100, 200, 300, 400, 500}
+s1 = &#123;100, 200, 300, 400, 500&#125;
 
 print(list(t1))#[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;]
 print(list(s1))#[100, 200, 300, 400, 500]
@@ -1400,8 +1402,8 @@ print(list(s1))#[100, 200, 300, 400, 500]
 <pre><code>list1 = [10, 20, 30, 40, 50, 20]
 t1 = (&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;)
 
-print(set(list1))#{40, 10, 50, 20, 30}
-print(set(t1))#{&apos;c&apos;, &apos;d&apos;, &apos;a&apos;, &apos;b&apos;, &apos;e&apos;}
+print(set(list1))#&#123;40, 10, 50, 20, 30&#125;
+print(set(t1))#&#123;&apos;c&apos;, &apos;d&apos;, &apos;a&apos;, &apos;b&apos;, &apos;e&apos;&#125;
 </code></pre><blockquote>
 <p>注意：集合可以快速完成列表去重；集合不支持下标</p>
 </blockquote>
@@ -1452,27 +1454,27 @@ print(list1)
 list2 = [&apos;Tom&apos;, 20, &apos;man&apos;]
 </code></pre><p>字典推导式作用：快速合并列表为字典或提取字典中目标数据。</p>
 <p>创建一个字典：字典key是1-5数字，value是这个数字的2次方：</p>
-<pre><code>dict1 = {i: i**2 for i in range(1, 5)}
-print(dict1)  # {1: 1, 2: 4, 3: 9, 4: 16}
+<pre><code>dict1 = &#123;i: i**2 for i in range(1, 5)&#125;
+print(dict1)  # &#123;1: 1, 2: 4, 3: 9, 4: 16&#125;
 </code></pre><p>将两个列表合并为一个字典：</p>
 <pre><code>list1 = [&apos;name&apos;, &apos;age&apos;, &apos;gender&apos;]
 list2 = [&apos;Tom&apos;, 20, &apos;man&apos;]
-dict1 = {list1[i]: list2[i] for i in range(len(list1))}
+dict1 = &#123;list1[i]: list2[i] for i in range(len(list1))&#125;
 print(dict1)
 </code></pre><p>提取字典中目标数据</p>
-<pre><code>counts = {&apos;MBP&apos;: 268, &apos;HP&apos;: 125, &apos;DELL&apos;: 201, &apos;Lenovo&apos;: 199, &apos;acer&apos;: 99}
+<pre><code>counts = &#123;&apos;MBP&apos;: 268, &apos;HP&apos;: 125, &apos;DELL&apos;: 201, &apos;Lenovo&apos;: 199, &apos;acer&apos;: 99&#125;
 
 # 需求：提取上述电脑数量大于等于200的字典数据
-count1 = {key: value for key, value in counts.items() if value &gt;= 200}
-print(count1)  # {&apos;MBP&apos;: 268, &apos;DELL&apos;: 201}
+count1 = &#123;key: value for key, value in counts.items() if value &gt;= 200&#125;
+print(count1)  # &#123;&apos;MBP&apos;: 268, &apos;DELL&apos;: 201&#125;
 </code></pre><hr>
 <h3 id="集合推导式"><a href="#集合推导式" class="headerlink" title="集合推导式"></a>集合推导式</h3><hr>
 <p>创建一个集合，数据为下方列表的2次方。</p>
 <pre><code>list1 = [1, 1, 2]
 </code></pre><p>代码如下：</p>
 <pre><code>list1 = [1, 1, 2]
-set1 = {i ** 2 for i in list1}
-print(set1)  # {1, 4}
+set1 = &#123;i ** 2 for i in list1&#125;
+print(set1)  # &#123;1, 4&#125;
 </code></pre><blockquote>
 <p>注意：集合有数据去重功能。</p>
 </blockquote>
@@ -1513,7 +1515,7 @@ def testB():
     print(a)
 testA()  # 100
 testB()  # 200
-print(f&apos;全局变量a = {a}&apos;)  # 全局变量a = 100
+print(f&apos;全局变量a = &#123;a&#125;&apos;)  # 全局变量a = 100
 </code></pre><p>在<code>testB</code>函数内部的<code>a = 200</code>中的变量a是在修改全局变量<code>a</code>吗？不是。<code>testB</code>函数内部的<code>a = 200</code>是定义了一个局部变量。</p>
 <p>如何在函数体内部修改全局变量？</p>
 <pre><code>a = 100
@@ -1529,7 +1531,7 @@ def testB():
 
 testA()  # 100
 testB()  # 200
-print(f&apos;全局变量a = {a}&apos;)  # 全局变量a = 200
+print(f&apos;全局变量a = &#123;a&#125;&apos;)  # 全局变量a = 200
 </code></pre><hr>
 <h3 id="函数的返回值"><a href="#函数的返回值" class="headerlink" title="函数的返回值"></a>函数的返回值</h3><hr>
 <p>如果一个函数要有多个返回值，该如何书写代码？</p>
@@ -1545,14 +1547,14 @@ print(result)  # (1, 2)
 <h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><hr>
 <p>位置参数：调用函数时根据函数定义的参数位置来传递参数。</p>
 <pre><code>def user_info(name, age, gender):
-    print(f&apos;您的名字是{name}, 年龄是{age}, 性别是{gender}&apos;)
+    print(f&apos;您的名字是&#123;name&#125;, 年龄是&#123;age&#125;, 性别是&#123;gender&#125;&apos;)
 user_info(&apos;TOM&apos;, 20, &apos;男&apos;)
 </code></pre><blockquote>
 <p>注意：传递和定义参数的顺序及个数必须一致。</p>
 </blockquote>
 <p>关键字参数：函数调用，通过“键=值”形式加以指定。可以让函数更加清晰、容易使用，<strong>同时也清除了参数的顺序需求</strong>。</p>
 <pre><code>def user_info(name, age, gender):
-    print(f&apos;您的名字是{name}, 年龄是{age}, 性别是{gender}&apos;)
+    print(f&apos;您的名字是&#123;name&#125;, 年龄是&#123;age&#125;, 性别是&#123;gender&#125;&apos;)
 
 
 user_info(&apos;Rose&apos;, age=20, gender=&apos;女&apos;)
@@ -1560,7 +1562,7 @@ user_info(&apos;小明&apos;, gender=&apos;男&apos;, age=16)
 </code></pre><p>注意：<strong>函数调用时，如果有位置参数时，位置参数必须在关键字参数的前面，但关键字参数之间不存在先后顺序。</strong></p>
 <p>缺省参数也叫默认参数，用于定义函数，为参数提供默认值，调用函数时可不传该默认参数的值（注意：所有位置参数必须出现在默认参数前，包括函数定义和调用）。</p>
 <pre><code>def user_info(name, age, gender=&apos;男&apos;):
-    print(f&apos;您的名字是{name}, 年龄是{age}, 性别是{gender}&apos;)
+    print(f&apos;您的名字是&#123;name&#125;, 年龄是&#123;age&#125;, 性别是&#123;gender&#125;&apos;)
 user_info(&apos;TOM&apos;, 20)
 user_info(&apos;Rose&apos;, 18, &apos;女&apos;)
 </code></pre><p>不定长参数也叫可变参数。用于不确定调用的时候会传递多少个参数(不传参也可以)的场景。此时，可用包裹(packing)位置参数，或者包裹关键字参数，来进行参数传递，会显得非常方便。</p>
@@ -1578,7 +1580,7 @@ user_info(&apos;TOM&apos;, 18)
 <pre><code>def user_info(**kwargs):
     print(kwargs)
 
-# {&apos;name&apos;: &apos;TOM&apos;, &apos;age&apos;: 18, &apos;id&apos;: 110}
+# &#123;&apos;name&apos;: &apos;TOM&apos;, &apos;age&apos;: 18, &apos;id&apos;: 110&#125;
 user_info(name=&apos;TOM&apos;, age=18, id=110)
 </code></pre><blockquote>
 <p>综上：无论是包裹位置传递还是包裹关键字传递，都是一个组包的过程。</p>
@@ -1593,7 +1595,7 @@ num1, num2 = return_num()
 print(num1)  # 100
 print(num2)  # 200
 </code></pre><p>拆包：字典</p>
-<pre><code>dict1 = {&apos;name&apos;: &apos;TOM&apos;, &apos;age&apos;: 18}
+<pre><code>dict1 = &#123;&apos;name&apos;: &apos;TOM&apos;, &apos;age&apos;: 18&#125;
 a, b = dict1
 
 # 对字典进行拆包，取出来的是字典的key
@@ -1723,9 +1725,9 @@ print(fn1(name=&apos;python&apos;, age=20))
 print(fn1(1000, 500))
 </code></pre><p>lambda的应用，列表数据按字典key的值排序</p>
 <pre><code>students = [
-    {&apos;name&apos;: &apos;TOM&apos;, &apos;age&apos;: 20},
-    {&apos;name&apos;: &apos;ROSE&apos;, &apos;age&apos;: 19},
-    {&apos;name&apos;: &apos;Jack&apos;, &apos;age&apos;: 22}
+    &#123;&apos;name&apos;: &apos;TOM&apos;, &apos;age&apos;: 20&#125;,
+    &#123;&apos;name&apos;: &apos;ROSE&apos;, &apos;age&apos;: 19&#125;,
+    &#123;&apos;name&apos;: &apos;Jack&apos;, &apos;age&apos;: 22&#125;
 ]
 
 # 按name值升序排列
@@ -1891,9 +1893,9 @@ f.close()
 </code></pre><p>readline()一次读取一行内容。</p>
 <pre><code>f = open(&apos;test.txt&apos;)
 content = f.readline()
-print(f&apos;第一行：{content}&apos;)
+print(f&apos;第一行：&#123;content&#125;&apos;)
 content = f.readline()
-print(f&apos;第二行：{content}&apos;)
+print(f&apos;第二行：&#123;content&#125;&apos;)
 </code></pre><p>seek()：用来移动文件指针。</p>
 <pre><code>文件对象.seek(偏移量, 起始位置)
 #起始位置：0：文件开头；1：当前位置；2：文件结尾
@@ -2038,8 +2040,8 @@ haier1.height = 800
 </code></pre><p>类外面获取对象属性</p>
 <pre><code>对象名.属性名
 
-print(f&apos;haier1洗衣机的宽度是{haier1.width}&apos;)
-print(f&apos;haier1洗衣机的高度是{haier1.height}&apos;)
+print(f&apos;haier1洗衣机的宽度是&#123;haier1.width&#125;&apos;)
+print(f&apos;haier1洗衣机的高度是&#123;haier1.height&#125;&apos;)
 </code></pre><p>类里面获取对象属性</p>
 <pre><code>self.属性名
 
@@ -2047,8 +2049,8 @@ print(f&apos;haier1洗衣机的高度是{haier1.height}&apos;)
 class Washer():
     def print_info(self):
         # 类里面获取实例属性
-        print(f&apos;haier1洗衣机的宽度是{self.width}&apos;)
-        print(f&apos;haier1洗衣机的高度是{self.height}&apos;)
+        print(f&apos;haier1洗衣机的宽度是&#123;self.width&#125;&apos;)
+        print(f&apos;haier1洗衣机的高度是&#123;self.height&#125;&apos;)
 
 # 创建对象
 haier1 = Washer()
@@ -2072,7 +2074,7 @@ haier1.print_info()
 
     def print_info(self):
         # 类里面调用实例属性
-        print(f&apos;洗衣机的宽度是{self.width}, 高度是{self.height}&apos;)
+        print(f&apos;洗衣机的宽度是&#123;self.width&#125;, 高度是&#123;self.height&#125;&apos;)
 
 haier1 = Washer()
 haier1.print_info()
@@ -2087,8 +2089,8 @@ haier1.print_info()
         self.height = height
 
     def print_info(self):
-        print(f&apos;洗衣机的宽度是{self.width}&apos;)
-        print(f&apos;洗衣机的高度是{self.height}&apos;)
+        print(f&apos;洗衣机的宽度是&#123;self.width&#125;&apos;)
+        print(f&apos;洗衣机的高度是&#123;self.height&#125;&apos;)
 
 haier1 = Washer(10, 20)
 haier1.print_info()
@@ -2117,7 +2119,7 @@ print(haier1)
         self.height = height
 
     def __del__(self):
-        print(f&apos;{self}对象已经被删除&apos;)
+        print(f&apos;&#123;self&#125;对象已经被删除&apos;)
 
 haier1 = Washer(10, 20)
 # &lt;__main__.Washer object at 0x0000026118223278&gt;对象已经被删除
@@ -2157,7 +2159,7 @@ class Master(object):
         self.kongfu = &apos;[古法煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 # 2. 徒弟类
 class Prentice(Master):
@@ -2177,7 +2179,7 @@ daqiu.make_cake()
         self.kongfu = &apos;[古法煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 # 创建学校类
 class School(object):
@@ -2185,7 +2187,7 @@ class School(object):
         self.kongfu = &apos;[school煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 class Prentice(School, Master):
     pass
@@ -2203,14 +2205,14 @@ daqiu.make_cake()
         self.kongfu = &apos;[古法煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 class School(object):
     def __init__(self):
         self.kongfu = &apos;[school煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 # 独创配方
 class Prentice(School, Master):
@@ -2218,7 +2220,7 @@ class Prentice(School, Master):
         self.kongfu = &apos;[独创煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 daqiu = Prentice()
 print(daqiu.kongfu)
@@ -2234,14 +2236,14 @@ print(Prentice.__mro__)
         self.kongfu = &apos;[古法煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 class School(object):
     def __init__(self):
         self.kongfu = &apos;[school煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 class Prentice(School, Master):
     def __init__(self):
@@ -2250,7 +2252,7 @@ class Prentice(School, Master):
     def make_cake(self):
         # 如果是先调用了父类的属性和方法，父类属性会覆盖子类属性，故在调用属性前，先调用自己子类的初始化
         self.__init__()
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
     # 调用父类方法，但是为保证调用到的也是父类的属性，必须在调用方法前调用父类的初始化
     def make_master_cake(self):
@@ -2273,14 +2275,14 @@ daqiu.make_cake()
         self.kongfu = &apos;[古法煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 class School(object):
     def __init__(self):
         self.kongfu = &apos;[school煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 class Prentice(School, Master):
     def __init__(self):
@@ -2288,7 +2290,7 @@ class Prentice(School, Master):
 
     def make_cake(self):
         self.__init__()
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
     def make_master_cake(self):
         Master.__init__(self)
@@ -2313,14 +2315,14 @@ xiaoqiu.make_master_cake()
         self.kongfu = &apos;[古法煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 class School(Master):
     def __init__(self):
         self.kongfu = &apos;[school煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
         # 方法2.1
         # super(School, self).__init__()
@@ -2336,7 +2338,7 @@ class Prentice(School):
 
     def make_cake(self):
         self.__init__()
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
     # 子类调用父类的同名方法和属性：把父类的同名属性和方法再次封装
     def make_master_cake(self):
@@ -2379,14 +2381,14 @@ daqiu.make_old_cake()
         self.kongfu = &apos;[古法煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 class School(object):
     def __init__(self):
         self.kongfu = &apos;[school煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 class Prentice(School, Master):
     def __init__(self):
@@ -2401,7 +2403,7 @@ class Prentice(School, Master):
 
     def make_cake(self):
         self.__init__()
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
     def make_master_cake(self):
         Master.__init__(self)
@@ -2435,14 +2437,14 @@ xiaoqiu = Tusun()
         self.kongfu = &apos;[古法煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 class School(object):
     def __init__(self):
         self.kongfu = &apos;[school煎饼果子配方]&apos;
 
     def make_cake(self):
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
 class Prentice(School, Master):
     def __init__(self):
@@ -2463,7 +2465,7 @@ class Prentice(School, Master):
 
     def make_cake(self):
         self.__init__()
-        print(f&apos;运用{self.kongfu}制作煎饼果子&apos;)
+        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
 
     def make_master_cake(self):
         Master.__init__(self)
@@ -2653,7 +2655,7 @@ class ShortInputError(Exception):
 
     # 设置抛出异常的描述信息
     def __str__(self):
-        return f&apos;你输入的长度是{self.length}, 不能少于{self.min_len}个字符&apos;
+        return f&apos;你输入的长度是&#123;self.length&#125;, 不能少于&#123;self.min_len&#125;个字符&apos;
 
 def main():
     try:
@@ -2856,13 +2858,13 @@ my_module1.info_print1()
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2020/09/09/42.Linux命令/" class="pre-post btn btn-default" title='Linux命令'>
+        <a href="/2020/09/09/42.Linux%E5%91%BD%E4%BB%A4/" class="pre-post btn btn-default" title='Linux命令'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">Linux命令</span>
         </a>
     
     
-        <a href="/2020/08/29/40.从oc到swift/" class="next-post btn btn-default" title='从oc到swift'>
+        <a href="/2020/08/29/40.%E4%BB%8Eoc%E5%88%B0swift/" class="next-post btn btn-default" title='从oc到swift'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">从oc到swift</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -2880,7 +2882,7 @@ my_module1.info_print1()
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换数据类型"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#猜拳游戏"><span class="toc-text">猜拳游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三元运算符"><span class="toc-text">三元运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环"><span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while…else"><span class="toc-text">while…else</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for…else"><span class="toc-text">for…else</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#三引号字符串"><span class="toc-text">三引号字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切片"><span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find"><span class="toc-text">find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace"><span class="toc-text">replace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#split"><span class="toc-text">split</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-text">join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capitalize"><span class="toc-text">capitalize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#title"><span class="toc-text">title</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lower和upper"><span class="toc-text">lower和upper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lstrip和rstrip和strip"><span class="toc-text">lstrip和rstrip和strip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ljust和rjust和center"><span class="toc-text">ljust和rjust和center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#startswith和endswith"><span class="toc-text">startswith和endswith</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalpha"><span class="toc-text">isalpha</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isdigit"><span class="toc-text">isdigit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalnum"><span class="toc-text">isalnum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isspace"><span class="toc-text">isspace</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下标"><span class="toc-text">下标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-1"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count-1"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#len"><span class="toc-text">len</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#in和not-in"><span class="toc-text">in和not in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#append"><span class="toc-text">append</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extend"><span class="toc-text">extend</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert"><span class="toc-text">insert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#del"><span class="toc-text">del</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pop"><span class="toc-text">pop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#remove"><span class="toc-text">remove</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clear"><span class="toc-text">clear</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改指定下标数据"><span class="toc-text">修改指定下标数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆置reverse"><span class="toc-text">逆置reverse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序sort"><span class="toc-text">排序sort</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制copy"><span class="toc-text">复制copy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while遍历列表"><span class="toc-text">while遍历列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for遍历列表"><span class="toc-text">for遍历列表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元组"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字典"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增和改"><span class="toc-text">增和改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删"><span class="toc-text">删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key值查找"><span class="toc-text">key值查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get"><span class="toc-text">get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keys"><span class="toc-text">keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#values"><span class="toc-text">values</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#items"><span class="toc-text">items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的key"><span class="toc-text">遍历字典的key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的value"><span class="toc-text">遍历字典的value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的元素"><span class="toc-text">遍历字典的元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历字典的键值对"><span class="toc-text">遍历字典的键值对</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增加数据"><span class="toc-text">增加数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除数据"><span class="toc-text">删除数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找数据"><span class="toc-text">查找数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公共操作"><span class="toc-text">公共操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#运算符-1"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公共方法"><span class="toc-text">公共方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容器类型转换"><span class="toc-text">容器类型转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推导式"><span class="toc-text">推导式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#列表推导式"><span class="toc-text">列表推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典推导式"><span class="toc-text">字典推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合推导式"><span class="toc-text">集合推导式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数基础"><span class="toc-text">函数基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数提高"><span class="toc-text">函数提高</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量作用域"><span class="toc-text">变量作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数的返回值"><span class="toc-text">函数的返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拆包和交换变量值"><span class="toc-text">拆包和交换变量值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用"><span class="toc-text">引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可变和不可变类型"><span class="toc-text">可变和不可变类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#递归"><span class="toc-text">递归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lambda表达式"><span class="toc-text">lambda表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高阶函数"><span class="toc-text">高阶函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件操作"><span class="toc-text">文件操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象基础"><span class="toc-text">面向对象基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#魔法方法"><span class="toc-text">魔法方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象之继承"><span class="toc-text">面向对象之继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单继承"><span class="toc-text">单继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多继承"><span class="toc-text">多继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子类重写父类同名方法和属性"><span class="toc-text">子类重写父类同名方法和属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子类调用父类的同名方法和属性"><span class="toc-text">子类调用父类的同名方法和属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多层继承"><span class="toc-text">多层继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#super-调用父类方法"><span class="toc-text">super()调用父类方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有权限"><span class="toc-text">私有权限</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象之其他"><span class="toc-text">面向对象之其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#面向对象三大特性"><span class="toc-text">面向对象三大特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多态"><span class="toc-text">多态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类属性和实例属性"><span class="toc-text">类属性和实例属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改类属性"><span class="toc-text">修改类属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例属性"><span class="toc-text">实例属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类方法"><span class="toc-text">类方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态方法"><span class="toc-text">静态方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常"><span class="toc-text">异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块"><span class="toc-text">模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#制作模块"><span class="toc-text">制作模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模块定位顺序"><span class="toc-text">模块定位顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#all"><span class="toc-text">__all__</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#包"><span class="toc-text">包</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">转换数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if%E8%AF%AD%E5%8F%A5"><span class="toc-text">if语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8C%9C%E6%8B%B3%E6%B8%B8%E6%88%8F"><span class="toc-text">猜拳游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">三元运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF"><span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for%E5%BE%AA%E7%8E%AF"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while%E2%80%A6else"><span class="toc-text">while…else</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for%E2%80%A6else"><span class="toc-text">for…else</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E5%BC%95%E5%8F%B7%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">三引号字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E7%89%87"><span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find"><span class="toc-text">find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace"><span class="toc-text">replace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#split"><span class="toc-text">split</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-text">join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capitalize"><span class="toc-text">capitalize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#title"><span class="toc-text">title</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lower%E5%92%8Cupper"><span class="toc-text">lower和upper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lstrip%E5%92%8Crstrip%E5%92%8Cstrip"><span class="toc-text">lstrip和rstrip和strip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ljust%E5%92%8Crjust%E5%92%8Ccenter"><span class="toc-text">ljust和rjust和center</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#startswith%E5%92%8Cendswith"><span class="toc-text">startswith和endswith</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalpha"><span class="toc-text">isalpha</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isdigit"><span class="toc-text">isdigit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalnum"><span class="toc-text">isalnum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isspace"><span class="toc-text">isspace</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E6%A0%87"><span class="toc-text">下标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-1"><span class="toc-text">index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count-1"><span class="toc-text">count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#len"><span class="toc-text">len</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#in%E5%92%8Cnot-in"><span class="toc-text">in和not in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#append"><span class="toc-text">append</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extend"><span class="toc-text">extend</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert"><span class="toc-text">insert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#del"><span class="toc-text">del</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pop"><span class="toc-text">pop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#remove"><span class="toc-text">remove</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clear"><span class="toc-text">clear</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%8C%87%E5%AE%9A%E4%B8%8B%E6%A0%87%E6%95%B0%E6%8D%AE"><span class="toc-text">修改指定下标数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%86%E7%BD%AEreverse"><span class="toc-text">逆置reverse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%92%E5%BA%8Fsort"><span class="toc-text">排序sort</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6copy"><span class="toc-text">复制copy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while%E9%81%8D%E5%8E%86%E5%88%97%E8%A1%A8"><span class="toc-text">while遍历列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for%E9%81%8D%E5%8E%86%E5%88%97%E8%A1%A8"><span class="toc-text">for遍历列表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%92%8C%E6%94%B9"><span class="toc-text">增和改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0"><span class="toc-text">删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key%E5%80%BC%E6%9F%A5%E6%89%BE"><span class="toc-text">key值查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get"><span class="toc-text">get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keys"><span class="toc-text">keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#values"><span class="toc-text">values</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#items"><span class="toc-text">items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E5%AD%97%E5%85%B8%E7%9A%84key"><span class="toc-text">遍历字典的key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E5%AD%97%E5%85%B8%E7%9A%84value"><span class="toc-text">遍历字典的value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E5%AD%97%E5%85%B8%E7%9A%84%E5%85%83%E7%B4%A0"><span class="toc-text">遍历字典的元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E5%AD%97%E5%85%B8%E7%9A%84%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="toc-text">遍历字典的键值对</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="toc-text">增加数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-text">删除数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%95%B0%E6%8D%AE"><span class="toc-text">查找数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%85%B1%E6%93%8D%E4%BD%9C"><span class="toc-text">公共操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6-1"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E5%85%B1%E6%96%B9%E6%B3%95"><span class="toc-text">公共方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">容器类型转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="toc-text">推导式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="toc-text">列表推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="toc-text">字典推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="toc-text">集合推导式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80"><span class="toc-text">函数基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8F%90%E9%AB%98"><span class="toc-text">函数提高</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">变量作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-text">函数的返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%86%E5%8C%85%E5%92%8C%E4%BA%A4%E6%8D%A2%E5%8F%98%E9%87%8F%E5%80%BC"><span class="toc-text">拆包和交换变量值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E5%92%8C%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B"><span class="toc-text">可变和不可变类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%BD%92"><span class="toc-text">递归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">lambda表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-text">高阶函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="toc-text">文件操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80"><span class="toc-text">面向对象基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AD%94%E6%B3%95%E6%96%B9%E6%B3%95"><span class="toc-text">魔法方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E7%BB%A7%E6%89%BF"><span class="toc-text">面向对象之继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%BB%A7%E6%89%BF"><span class="toc-text">单继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BB%A7%E6%89%BF"><span class="toc-text">多继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E5%90%8C%E5%90%8D%E6%96%B9%E6%B3%95%E5%92%8C%E5%B1%9E%E6%80%A7"><span class="toc-text">子类重写父类同名方法和属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E7%B1%BB%E8%B0%83%E7%94%A8%E7%88%B6%E7%B1%BB%E7%9A%84%E5%90%8C%E5%90%8D%E6%96%B9%E6%B3%95%E5%92%8C%E5%B1%9E%E6%80%A7"><span class="toc-text">子类调用父类的同名方法和属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%B1%82%E7%BB%A7%E6%89%BF"><span class="toc-text">多层继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#super-%E8%B0%83%E7%94%A8%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="toc-text">super()调用父类方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%81%E6%9C%89%E6%9D%83%E9%99%90"><span class="toc-text">私有权限</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%85%B6%E4%BB%96"><span class="toc-text">面向对象之其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7"><span class="toc-text">面向对象三大特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%80%81"><span class="toc-text">多态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%B1%9E%E6%80%A7%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7"><span class="toc-text">类属性和实例属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%B1%BB%E5%B1%9E%E6%80%A7"><span class="toc-text">修改类属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7"><span class="toc-text">实例属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="toc-text">类方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-text">静态方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8"><span class="toc-text">异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97"><span class="toc-text">模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E6%A8%A1%E5%9D%97"><span class="toc-text">制作模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%AE%9A%E4%BD%8D%E9%A1%BA%E5%BA%8F"><span class="toc-text">模块定位顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#all"><span class="toc-text">__all__</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%85"><span class="toc-text">包</span></a></li></ol>
         
     </div>
 </aside>
@@ -2932,7 +2934,9 @@ my_module1.info_print1()
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

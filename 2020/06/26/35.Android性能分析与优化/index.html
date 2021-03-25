@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -202,33 +204,33 @@ WaitTime：AMS启动Activity的总耗时
 </code></pre><p>2、手动打点方式：启动时埋点，可以线上使用</p>
 <p>开始时间Application</p>
 <pre><code>@Override
-protected void attachBaseContext(Context base) {
+protected void attachBaseContext(Context base) &#123;
     super.attachBaseContext(base);
     //开始计时
-}
+&#125;
 </code></pre><p>结束计时</p>
 <pre><code>//Activity中
 @Override
-public void onWindowFocusChanged(boolean hasFocus) {
+public void onWindowFocusChanged(boolean hasFocus) &#123;
     super.onWindowFocusChanged(hasFocus);
     //结束计时
-}
+&#125;
 
 //或者Adapter
 @Override
-public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-    if (position == 0 &amp;&amp; !mHasRecorded) {
+public void onBindViewHolder(@NonNull final ViewHolder holder, int position) &#123;
+    if (position == 0 &amp;&amp; !mHasRecorded) &#123;
         mHasRecorded = true;
         holder.layout.getViewTreeObserver()
-                .addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                .addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() &#123;
                     @Override
-                    public boolean onPreDraw() {
+                    public boolean onPreDraw() &#123;
                         //结束计时
                         return true;
-                    }
-                });
-    }
-}
+                    &#125;
+                &#125;);
+    &#125;
+&#125;
 </code></pre><hr>
 <h3 id="1-3、工具"><a href="#1-3、工具" class="headerlink" title="1.3、工具"></a>1.3、工具</h3><hr>
 <p>traceview:图形展示执行时间、调用栈；包含所有线程。缺点：运行变慢。</p>
@@ -331,7 +333,7 @@ private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4)
         </a>
     
     
-        <a href="/2020/06/13/34.HTTP和加密和HTTPS/" class="next-post btn btn-default" title='HTTP和加密和HTTPS'>
+        <a href="/2020/06/13/34.HTTP%E5%92%8C%E5%8A%A0%E5%AF%86%E5%92%8CHTTPS/" class="next-post btn btn-default" title='HTTP和加密和HTTPS'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">HTTP和加密和HTTPS</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -349,7 +351,7 @@ private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4)
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、启动优化"><span class="toc-text">1、启动优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、启动类型"><span class="toc-text">1.1、启动类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、启动时间"><span class="toc-text">1.2、启动时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、工具"><span class="toc-text">1.3、工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、统计方法消耗时间"><span class="toc-text">1.4、统计方法消耗时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、Theme小技巧"><span class="toc-text">1.4、Theme小技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5、异步解决方案-启动器"><span class="toc-text">1.5、异步解决方案-启动器</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96"><span class="toc-text">1、启动优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E3%80%81%E5%90%AF%E5%8A%A8%E7%B1%BB%E5%9E%8B"><span class="toc-text">1.1、启动类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E3%80%81%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4"><span class="toc-text">1.2、启动时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3%E3%80%81%E5%B7%A5%E5%85%B7"><span class="toc-text">1.3、工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4%E3%80%81%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95%E6%B6%88%E8%80%97%E6%97%B6%E9%97%B4"><span class="toc-text">1.4、统计方法消耗时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4%E3%80%81Theme%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="toc-text">1.4、Theme小技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5%E3%80%81%E5%BC%82%E6%AD%A5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-%E5%90%AF%E5%8A%A8%E5%99%A8"><span class="toc-text">1.5、异步解决方案-启动器</span></a></li></ol></li></ol>
         
     </div>
 </aside>
@@ -401,7 +403,9 @@ private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4)
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

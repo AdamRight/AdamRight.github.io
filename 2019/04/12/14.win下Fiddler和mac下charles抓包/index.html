@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -194,50 +196,50 @@
 <p>手机：打开手机WIFI高级设置，代理服务器类型改为”手动”，代理服务器地址填入PC的IP地址，填入代理服务器端口值，一般默认为8888。</p>
 <p>ip：方式一：win通过ipconfig，mac通过ifconfig，快速查询电脑ip。</p>
 <p>方式二：顶部菜单：Fiddler右上角;charles中Help → Local IP Address。</p>
-<p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/10.png" alt=""></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/10.png" alt></p>
 <h2 id="Fiddler"><a href="#Fiddler" class="headerlink" title="Fiddler"></a>Fiddler</h2><p>Fiddler官网</p>
 <pre><code>https://www.telerik.com/fiddler
-</code></pre><h3 id="端口号设置"><a href="#端口号设置" class="headerlink" title="端口号设置"></a>端口号设置</h3><p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/1.png" alt=""></p>
-<h3 id="过滤设置"><a href="#过滤设置" class="headerlink" title="过滤设置"></a>过滤设置</h3><p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/2.png" alt=""></p>
-<h3 id="查看请求和返回数据"><a href="#查看请求和返回数据" class="headerlink" title="查看请求和返回数据"></a>查看请求和返回数据</h3><p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/3.png" alt=""></p>
-<h3 id="模拟请求"><a href="#模拟请求" class="headerlink" title="模拟请求"></a>模拟请求</h3><p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/4.png" alt=""></p>
+</code></pre><h3 id="端口号设置"><a href="#端口号设置" class="headerlink" title="端口号设置"></a>端口号设置</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/1.png" alt></p>
+<h3 id="过滤设置"><a href="#过滤设置" class="headerlink" title="过滤设置"></a>过滤设置</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/2.png" alt></p>
+<h3 id="查看请求和返回数据"><a href="#查看请求和返回数据" class="headerlink" title="查看请求和返回数据"></a>查看请求和返回数据</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/3.png" alt></p>
+<h3 id="模拟请求"><a href="#模拟请求" class="headerlink" title="模拟请求"></a>模拟请求</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/4.png" alt></p>
 <blockquote>
 <p>注意4中为请求头，5中为请求体。</p>
 </blockquote>
 <h3 id="抓取https"><a href="#抓取https" class="headerlink" title="抓取https"></a>抓取https</h3><p>手机自带浏览器输入<code>ip:端口号</code>下载证书</p>
-<h3 id="修改请求或返回参数"><a href="#修改请求或返回参数" class="headerlink" title="修改请求或返回参数"></a>修改请求或返回参数</h3><p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/5.png" alt=""></p>
+<h3 id="修改请求或返回参数"><a href="#修改请求或返回参数" class="headerlink" title="修改请求或返回参数"></a>修改请求或返回参数</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/5.png" alt></p>
 <blockquote>
 <p>步骤：1设置修改返回数据，2去掉勾勾，3修改返回数据，4打上勾勾，5输入<code>go</code>回车。</p>
 </blockquote>
 <h2 id="charles"><a href="#charles" class="headerlink" title="charles"></a>charles</h2><p>charles官网，30天试用</p>
 <pre><code>https://www.charlesproxy.com/
-</code></pre><h3 id="端口号设置-1"><a href="#端口号设置-1" class="headerlink" title="端口号设置"></a>端口号设置</h3><p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/6.png" alt=""></p>
+</code></pre><h3 id="端口号设置-1"><a href="#端口号设置-1" class="headerlink" title="端口号设置"></a>端口号设置</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/6.png" alt></p>
 <p>通过菜单栏：proxy → Proxy Settings，进行查看当前或者修改当前代理端口，并且保证Enable transparent HTTP proxying被勾选。</p>
-<h3 id="过滤设置-1"><a href="#过滤设置-1" class="headerlink" title="过滤设置"></a>过滤设置</h3><p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/7.png" alt=""></p>
+<h3 id="过滤设置-1"><a href="#过滤设置-1" class="headerlink" title="过滤设置"></a>过滤设置</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/7.png" alt></p>
 <p>菜单栏选择 “Proxy”-&gt;”Recording Settings”，然后选择Include栏，选择添加一个项目，然后填入需要监控的协议，主机地址，端口号。这样就可以只截取目标网站的封包了。</p>
-<h3 id="查看请求和返回数据-1"><a href="#查看请求和返回数据-1" class="headerlink" title="查看请求和返回数据"></a>查看请求和返回数据</h3><p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/8.png" alt=""></p>
+<h3 id="查看请求和返回数据-1"><a href="#查看请求和返回数据-1" class="headerlink" title="查看请求和返回数据"></a>查看请求和返回数据</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/8.png" alt></p>
 <p>Structure视图模式下，所有的请求是以域名进行分类显示的;Sequence视图模式下，会将所有的网络请求都按照访问的时间从上到下进行排序。</p>
 <h3 id="抓取https-1"><a href="#抓取https-1" class="headerlink" title="抓取https"></a>抓取https</h3><p>在Mac上安装CA证书:通过顶部菜单选择：Help → SSL Proxying → Install Charles Root Certificate，来安装CA证书。</p>
 <p>安卓手机安装Charles证书:在Charles菜单栏里点击Help — SSL Proxying — Save Charles Root Certificate，生成后缀名是.cer的文件，然后传到手机安装。</p>
 <p>最后:双击对应证书，打开简介全部信任。</p>
 <p><strong>如果还是不行:设置匹配规则，菜单栏 - proxy - ssl proxy settings，重启</strong></p>
-<p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/9.png" alt=""></p>
-<h3 id="模拟限流网络"><a href="#模拟限流网络" class="headerlink" title="模拟限流网络"></a>模拟限流网络</h3><p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/11.png" alt=""></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/9.png" alt></p>
+<h3 id="模拟限流网络"><a href="#模拟限流网络" class="headerlink" title="模拟限流网络"></a>模拟限流网络</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/11.png" alt></p>
 <p>Proxy → Throttle Setting，勾选Enable Throttling然后在1中选择我们需要网络环境。开启限速之后，2处的小乌龟图标也会高亮，点击小乌龟，就可以关闭限速模式。</p>
-<h3 id="重发请求-模拟请求"><a href="#重发请求-模拟请求" class="headerlink" title="重发请求,模拟请求"></a>重发请求,模拟请求</h3><p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/12.png" alt=""></p>
+<h3 id="重发请求-模拟请求"><a href="#重发请求-模拟请求" class="headerlink" title="重发请求,模拟请求"></a>重发请求,模拟请求</h3><p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/12.png" alt></p>
 <p>在网络请求上，右键选择Repeat，即可对这个链接重新发送一遍。右键选择Compose，就可以对这个请求进行编辑。</p>
-<p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/13.png" alt=""></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/13.png" alt></p>
 <p>对网络请求的任意修改后,点击Execute即可将修改后的数据直接发送出去;点击Revert就恢复到最初的数据了。</p>
 <h3 id="修改请求响应数据"><a href="#修改请求响应数据" class="headerlink" title="修改请求响应数据"></a>修改请求响应数据</h3><p>Map适合将所有的A请求，重定向到，B地址请求(Map Remote)或者本地文件(Map Local)。</p>
 <p>设置Map Remote或者Map Local可以在，顶部菜单中选择Tools或者请求链接上右键。请求链接上，点击右键save，可以保存请求或者响应的数据文件。</p>
-<p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/14.png" alt=""></p>
-<p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/15.png" alt=""></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/14.png" alt></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/15.png" alt></p>
 <p>Rewrite功能适合对所有网络请求做一些简单的正则匹配后，对匹配的内容进行替换。</p>
 <p>顶部菜单栏中，选择Tools → Rewrite。图中将所有响应体中“查询新闻列表成功”替换成了“我成功啦”。1处可以添加url。</p>
-<p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/16.png" alt=""></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/16.png" alt></p>
 <p>Breakpoints类似于调试的断点。每次触发 Breakpoint 都会断住两次，一次是 request、一次是 response,可以分别对请求和响应的数据进行修改。点击2处execute继续执行。</p>
 <p>请求链接上点击右键，然后选择Breakpoints:接下来的相同url会被断点。或者点击1处的六边形，有颜色就开始对接下来的请求依次断点，直至终止。</p>
-<p><img src="/2019/04/12/14.win下Fiddler和mac下charles抓包/17.png" alt=""></p>
+<p><img src="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/14.win下Fiddler和mac下charles抓包/17.png" alt></p>
 
     </div>
     
@@ -275,13 +277,13 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/04/17/15.反射、注解、泛型/" class="pre-post btn btn-default" title='反射、注解、泛型'>
+        <a href="/2019/04/17/15.%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E3%80%81%E6%B3%9B%E5%9E%8B/" class="pre-post btn btn-default" title='反射、注解、泛型'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">反射、注解、泛型</span>
         </a>
     
     
-        <a href="/2019/04/03/13.Vue学习笔记/" class="next-post btn btn-default" title='Vue学习笔记'>
+        <a href="/2019/04/03/13.Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="next-post btn btn-default" title='Vue学习笔记'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">Vue学习笔记</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -299,7 +301,7 @@
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前戏"><span class="toc-text">前戏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fiddler"><span class="toc-text">Fiddler</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#端口号设置"><span class="toc-text">端口号设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤设置"><span class="toc-text">过滤设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看请求和返回数据"><span class="toc-text">查看请求和返回数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模拟请求"><span class="toc-text">模拟请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抓取https"><span class="toc-text">抓取https</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改请求或返回参数"><span class="toc-text">修改请求或返回参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#charles"><span class="toc-text">charles</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#端口号设置-1"><span class="toc-text">端口号设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤设置-1"><span class="toc-text">过滤设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看请求和返回数据-1"><span class="toc-text">查看请求和返回数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抓取https-1"><span class="toc-text">抓取https</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模拟限流网络"><span class="toc-text">模拟限流网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重发请求-模拟请求"><span class="toc-text">重发请求,模拟请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改请求响应数据"><span class="toc-text">修改请求响应数据</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%88%8F"><span class="toc-text">前戏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fiddler"><span class="toc-text">Fiddler</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E5%8F%B7%E8%AE%BE%E7%BD%AE"><span class="toc-text">端口号设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E8%AE%BE%E7%BD%AE"><span class="toc-text">过滤设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%AF%B7%E6%B1%82%E5%92%8C%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE"><span class="toc-text">查看请求和返回数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E8%AF%B7%E6%B1%82"><span class="toc-text">模拟请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%93%E5%8F%96https"><span class="toc-text">抓取https</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%AF%B7%E6%B1%82%E6%88%96%E8%BF%94%E5%9B%9E%E5%8F%82%E6%95%B0"><span class="toc-text">修改请求或返回参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#charles"><span class="toc-text">charles</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E5%8F%B7%E8%AE%BE%E7%BD%AE-1"><span class="toc-text">端口号设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E8%AE%BE%E7%BD%AE-1"><span class="toc-text">过滤设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%AF%B7%E6%B1%82%E5%92%8C%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE-1"><span class="toc-text">查看请求和返回数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%93%E5%8F%96https-1"><span class="toc-text">抓取https</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E9%99%90%E6%B5%81%E7%BD%91%E7%BB%9C"><span class="toc-text">模拟限流网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%8F%91%E8%AF%B7%E6%B1%82-%E6%A8%A1%E6%8B%9F%E8%AF%B7%E6%B1%82"><span class="toc-text">重发请求,模拟请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%AF%B7%E6%B1%82%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE"><span class="toc-text">修改请求响应数据</span></a></li></ol></li></ol>
         
     </div>
 </aside>
@@ -351,7 +353,9 @@
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

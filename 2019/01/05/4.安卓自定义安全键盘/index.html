@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -327,25 +329,25 @@ keyboardView.setKeyboard(keyboard);
 keyboardView.setPreviewEnabled(true);
 keyboardView.setOnKeyboardActionListener(onKeyboardActionListener);
 </code></pre><p>OnKeyboardActionListener</p>
-<pre><code>KeyboardView.OnKeyboardActionListener onKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() {
+<pre><code>KeyboardView.OnKeyboardActionListener onKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() &#123;
     ......
     @Override
-    public void onKey(int primaryCode, int[] keyCodes) {
-        if (primaryCode == Keyboard.KEYCODE_CANCEL) {// 完成
+    public void onKey(int primaryCode, int[] keyCodes) &#123;
+        if (primaryCode == Keyboard.KEYCODE_CANCEL) &#123;// 完成
 
-        } else if (primaryCode == Keyboard.KEYCODE_DELETE) {//回退
+        &#125; else if (primaryCode == Keyboard.KEYCODE_DELETE) &#123;//回退
             Toast.makeText(BoardActivity.this,&quot;delete&quot;,Toast.LENGTH_SHORT).show();
-        } else if (primaryCode == Keyboard.KEYCODE_SHIFT) {//大小写切换
+        &#125; else if (primaryCode == Keyboard.KEYCODE_SHIFT) &#123;//大小写切换
 
-        } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE) {//数字键盘切换
+        &#125; else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE) &#123;//数字键盘切换
 
-        } else {
+        &#125; else &#123;
 
-        }
-    }
-};
-</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://github.com/onlyloveyd/LazyKeyboard" target="_blank" rel="noopener">https://github.com/onlyloveyd/LazyKeyboard</a></p>
-<p><a href="https://github.com/r17171709/android_demo/tree/master/KeyBoardDemo" target="_blank" rel="noopener">https://github.com/r17171709/android_demo/tree/master/KeyBoardDemo</a></p>
+        &#125;
+    &#125;
+&#125;;
+</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://github.com/onlyloveyd/LazyKeyboard">https://github.com/onlyloveyd/LazyKeyboard</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/r17171709/android_demo/tree/master/KeyBoardDemo">https://github.com/r17171709/android_demo/tree/master/KeyBoardDemo</a></p>
 
     </div>
     
@@ -383,13 +385,13 @@ keyboardView.setOnKeyboardActionListener(onKeyboardActionListener);
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/01/07/5.移动web开发记录/" class="pre-post btn btn-default" title='移动web开发记录'>
+        <a href="/2019/01/07/5.%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/" class="pre-post btn btn-default" title='移动web开发记录'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">移动web开发记录</span>
         </a>
     
     
-        <a href="/2018/12/02/3.OkHttp基本使用及网络封装/" class="next-post btn btn-default" title='OkHttp基本使用及网络封装'>
+        <a href="/2018/12/02/3.OkHttp%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E5%8F%8A%E7%BD%91%E7%BB%9C%E5%B0%81%E8%A3%85/" class="next-post btn btn-default" title='OkHttp基本使用及网络封装'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">OkHttp基本使用及网络封装</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -407,7 +409,7 @@ keyboardView.setOnKeyboardActionListener(onKeyboardActionListener);
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Keyboard"><span class="toc-text">Keyboard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KeyboardView"><span class="toc-text">KeyboardView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Keyboard"><span class="toc-text">Keyboard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KeyboardView"><span class="toc-text">KeyboardView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
         
     </div>
 </aside>
@@ -459,7 +461,9 @@ keyboardView.setOnKeyboardActionListener(onKeyboardActionListener);
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

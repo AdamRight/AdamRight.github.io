@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -187,10 +189,10 @@
     
     <div class="post-body post-content">
         <h2 id="1、基本使用和封装"><a href="#1、基本使用和封装" class="headerlink" title="1、基本使用和封装"></a>1、基本使用和封装</h2><p>布局、点击、分割线、多类型条目使用。</p>
-<h3 id="1-1、基本使用"><a href="#1-1、基本使用" class="headerlink" title="1.1、基本使用"></a>1.1、基本使用</h3><p><a href="https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/rv/baseuse" target="_blank" rel="noopener">点我跳转</a></p>
-<h3 id="1-2、基本封装"><a href="#1-2、基本封装" class="headerlink" title="1.2、基本封装"></a>1.2、基本封装</h3><p><a href="https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/rv/common" target="_blank" rel="noopener">点我跳转</a></p>
-<h3 id="1-3、多类型条目"><a href="#1-3、多类型条目" class="headerlink" title="1.3、多类型条目"></a>1.3、多类型条目</h3><p><a href="https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/rv/type" target="_blank" rel="noopener">点我跳转</a></p>
-<h3 id="1-4、添加头部和底部"><a href="#1-4、添加头部和底部" class="headerlink" title="1.4、添加头部和底部"></a>1.4、添加头部和底部</h3><p><a href="https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/rv/headandbottom" target="_blank" rel="noopener">点我跳转</a></p>
+<h3 id="1-1、基本使用"><a href="#1-1、基本使用" class="headerlink" title="1.1、基本使用"></a>1.1、基本使用</h3><p><a target="_blank" rel="noopener" href="https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/rv/baseuse">点我跳转</a></p>
+<h3 id="1-2、基本封装"><a href="#1-2、基本封装" class="headerlink" title="1.2、基本封装"></a>1.2、基本封装</h3><p><a target="_blank" rel="noopener" href="https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/rv/common">点我跳转</a></p>
+<h3 id="1-3、多类型条目"><a href="#1-3、多类型条目" class="headerlink" title="1.3、多类型条目"></a>1.3、多类型条目</h3><p><a target="_blank" rel="noopener" href="https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/rv/type">点我跳转</a></p>
+<h3 id="1-4、添加头部和底部"><a href="#1-4、添加头部和底部" class="headerlink" title="1.4、添加头部和底部"></a>1.4、添加头部和底部</h3><p><a target="_blank" rel="noopener" href="https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/rv/headandbottom">点我跳转</a></p>
 <h2 id="2、分割线"><a href="#2、分割线" class="headerlink" title="2、分割线"></a>2、分割线</h2><h3 id="2-1、条目相关"><a href="#2-1、条目相关" class="headerlink" title="2.1、条目相关"></a>2.1、条目相关</h3><p>设置分割线类中的<code>getItemOffsets</code>方法中</p>
 <pre><code>//获取条目View在RecyclerView中的第几个位置：0、1、2、3...
 int currentPosition = ((RecyclerView.LayoutParams) view.getLayoutParams()).getViewLayoutPosition();
@@ -200,10 +202,10 @@ int itemCount = parent.getAdapter().getItemCount();
 
 //GridLayoutManager时候，获取列数
 RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
-if (layoutManager instanceof GridLayoutManager) {
+if (layoutManager instanceof GridLayoutManager) &#123;
     GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
     int spanCount = gridLayoutManager.getSpanCount();
-}
+&#125;
 </code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h2 id="实例化View的3种方式"><a href="#实例化View的3种方式" class="headerlink" title="实例化View的3种方式"></a>实例化View的3种方式</h2><pre><code>View.inflate(mContext, mLayoutId, null); 
 LayoutInflater.from(mContext).inflate(mLayoutId, parent);
 LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
@@ -244,13 +246,13 @@ LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/07/07/28.手写实现EventBus/" class="pre-post btn btn-default" title='手写实现EventBus'>
+        <a href="/2019/07/07/28.%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0EventBus/" class="pre-post btn btn-default" title='手写实现EventBus'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">手写实现EventBus</span>
         </a>
     
     
-        <a href="/2019/06/29/26.手写实现Butterknife/" class="next-post btn btn-default" title='手写实现Butterknife'>
+        <a href="/2019/06/29/26.%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0Butterknife/" class="next-post btn btn-default" title='手写实现Butterknife'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">手写实现Butterknife</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -268,7 +270,7 @@ LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、基本使用和封装"><span class="toc-text">1、基本使用和封装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1、基本使用"><span class="toc-text">1.1、基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2、基本封装"><span class="toc-text">1.2、基本封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3、多类型条目"><span class="toc-text">1.3、多类型条目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4、添加头部和底部"><span class="toc-text">1.4、添加头部和底部</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、分割线"><span class="toc-text">2、分割线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1、条目相关"><span class="toc-text">2.1、条目相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例化View的3种方式"><span class="toc-text">实例化View的3种方式</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E5%92%8C%E5%B0%81%E8%A3%85"><span class="toc-text">1、基本使用和封装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E3%80%81%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">1.1、基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E3%80%81%E5%9F%BA%E6%9C%AC%E5%B0%81%E8%A3%85"><span class="toc-text">1.2、基本封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3%E3%80%81%E5%A4%9A%E7%B1%BB%E5%9E%8B%E6%9D%A1%E7%9B%AE"><span class="toc-text">1.3、多类型条目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4%E3%80%81%E6%B7%BB%E5%8A%A0%E5%A4%B4%E9%83%A8%E5%92%8C%E5%BA%95%E9%83%A8"><span class="toc-text">1.4、添加头部和底部</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%88%86%E5%89%B2%E7%BA%BF"><span class="toc-text">2、分割线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E3%80%81%E6%9D%A1%E7%9B%AE%E7%9B%B8%E5%85%B3"><span class="toc-text">2.1、条目相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96View%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">实例化View的3种方式</span></a></li></ol>
         
     </div>
 </aside>
@@ -320,7 +322,9 @@ LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -236,19 +238,19 @@ String(变量名);
 </blockquote>
 <hr>
 <h2 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h2><hr>
-<pre><code>if(条件){
+<pre><code>if(条件)&#123;
 
-} else if(条件){
+&#125; else if(条件)&#123;
 
-} else {
+&#125; else &#123;
 
-}
+&#125;
 </code></pre><hr>
 <h2 id="三元表达式"><a href="#三元表达式" class="headerlink" title="三元表达式"></a>三元表达式</h2><hr>
 <pre><code>var 变量 = 表达式1 ? 表达式2 : 表达式3;
 </code></pre><hr>
 <h2 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h2><hr>
-<pre><code>switch (表达式){
+<pre><code>switch (表达式)&#123;
     case 值1:
         代码1;
         break;
@@ -259,35 +261,35 @@ String(变量名);
     default:
         代码3;
         break;
-}
+&#125;
 </code></pre><hr>
 <h2 id="while循环-有可能一次都不执行"><a href="#while循环-有可能一次都不执行" class="headerlink" title="while循环(有可能一次都不执行)"></a>while循环(有可能一次都不执行)</h2><hr>
-<pre><code>while(循环的条件){
+<pre><code>while(循环的条件)&#123;
     循环体;
     计数器++;
-}
+&#125;
 </code></pre><hr>
 <h2 id="do…while-至少执行一次"><a href="#do…while-至少执行一次" class="headerlink" title="do…while(至少执行一次)"></a>do…while(至少执行一次)</h2><hr>
-<pre><code>do{
+<pre><code>do&#123;
     //循环体
-}while(条件);
+&#125;while(条件);
 </code></pre><hr>
 <h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><hr>
 <p>先执行表达式1，然后判断表达式2，如果不成立直接跳出循环。如果成立，执行循环体代码，结束后，跳到表达式3，然后判断表达式2。</p>
-<pre><code>for (表达式1; 表达式2; 表达式3) {
+<pre><code>for (表达式1; 表达式2; 表达式3) &#123;
     循环体;
-}
+&#125;
 
-for(var i = 0; i &lt; 10; i++){
+for(var i = 0; i &lt; 10; i++)&#123;
 
-}
+&#125;
 </code></pre><hr>
 <h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><hr>
 <pre><code>alert();
 console.log();
 document.write(&quot;&quot;);
 </code></pre><p>代码调试</p>
-<p><img src="/2018/11/25/1.JavaScript基本语法和DOM和BOM/1.png" alt=""></p>
+<p><img src="/2018/11/25/1.JavaScript%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%92%8CDOM%E5%92%8CBOM/1.JavaScript基本语法和DOM和BOM/1.png" alt></p>
 <hr>
 <h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><hr>
 <pre><code>var arr1 = new Array();//空数组
@@ -328,54 +330,54 @@ alert(colors);  //green,red,purple,orange,blue
 </code></pre><hr>
 <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><hr>
 <p>函数的定义</p>
-<pre><code>function 函数名(){
+<pre><code>function 函数名()&#123;
     函数体
-}
+&#125;
 </code></pre><p>函数的调用</p>
 <pre><code>函数名();
 </code></pre><p>函数的参数</p>
-<pre><code>function 函数名(参数名){
+<pre><code>function 函数名(参数名)&#123;
     函数体
-}
+&#125;
 </code></pre><blockquote>
 <p>注意:参数不需要定义var。形参指函数定义时小括号中的变量。实参指函数在调用时候小括号中传入的值。形参和实参个数可以不一致。</p>
 </blockquote>
 <p>函数的返回值</p>
-<pre><code>function getSum(x,y){
+<pre><code>function getSum(x,y)&#123;
     return x + y;
-}
+&#125;
 var result = getSum(10,30);
 </code></pre><p>函数的数据类型是function</p>
 <hr>
 <h2 id="arguments对象伪数组"><a href="#arguments对象伪数组" class="headerlink" title="arguments对象伪数组"></a>arguments对象伪数组</h2><p>arguments可以获取传入的每个参数的值</p>
-<pre><code>function f1(){
+<pre><code>function f1()&#123;
     arguments.length;
     console.log(arguments)
-}
+&#125;
 f1(10,20,30,50);
-</code></pre><h2 id="匿名函数（函数表达式）"><a href="#匿名函数（函数表达式）" class="headerlink" title="匿名函数（函数表达式）"></a>匿名函数（函数表达式）</h2><pre><code>var f1 = function (){
+</code></pre><h2 id="匿名函数（函数表达式）"><a href="#匿名函数（函数表达式）" class="headerlink" title="匿名函数（函数表达式）"></a>匿名函数（函数表达式）</h2><pre><code>var f1 = function ()&#123;
     console.log(&quot;dsds&quot;);
-}
+&#125;
 //匿名函数不能直接调用
 f1();
-</code></pre><h2 id="函数的自调用（一次性）"><a href="#函数的自调用（一次性）" class="headerlink" title="函数的自调用（一次性）"></a>函数的自调用（一次性）</h2><pre><code>(function (){
+</code></pre><h2 id="函数的自调用（一次性）"><a href="#函数的自调用（一次性）" class="headerlink" title="函数的自调用（一次性）"></a>函数的自调用（一次性）</h2><pre><code>(function ()&#123;
     console.log(&quot;ddddds&quot;);
-})();
+&#125;)();
 </code></pre><h2 id="函数作为参数（回调函数）"><a href="#函数作为参数（回调函数）" class="headerlink" title="函数作为参数（回调函数）"></a>函数作为参数（回调函数）</h2><p>注意f2不要加括号</p>
-<pre><code>function f1(fn){
+<pre><code>function f1(fn)&#123;
    fn();
-}
-function f2(){
+&#125;
+function f2()&#123;
     console.log(&quot;原来这样&quot;);
-}
+&#125;
 f1(f2);
 </code></pre><h2 id="函数作为返回值"><a href="#函数作为返回值" class="headerlink" title="函数作为返回值"></a>函数作为返回值</h2><p>注意<code>ff();</code></p>
-<pre><code>function f1(){
+<pre><code>function f1()&#123;
     console.log(&quot;原来&quot;);
-   return function (){
+   return function ()&#123;
        console.log(&quot;原来这样&quot;);
-   };
-}
+   &#125;;
+&#125;
 var ff = f1();
 ff();
 </code></pre><h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>全局变量：用var声明的。可以在页面的任何位置使用。页面不关闭，全局变量不会释放，会占空间，消耗内存。</p>
@@ -398,109 +400,109 @@ console.log(typeof num2);//underfine
 var num = 10;
 </code></pre><p>函数的声明提前了。</p>
 <pre><code>f1();
-function f1(){
+function f1()&#123;
     console.log(&quot;dd&quot;);//dd
-}
+&#125;
 </code></pre><blockquote>
 <p>注意：</p>
 </blockquote>
 <p>结果为<code>underfine</code></p>
 <pre><code>f1();
 var num = 20;
-function f1(){
+function f1()&#123;
     console.log(num);//underfine
-}
+&#125;
 </code></pre><p>结果为20</p>
 <pre><code>var num = 20;
-function f1(){
+function f1()&#123;
     console.log(num);//20
-}
+&#125;
 f1();
 </code></pre><p>结果为<code>underfine</code></p>
 <pre><code>var num = 20;
-function f1(){
+function f1()&#123;
     console.log(num);//underfine
     var num = 30;
-}
+&#125;
 f1();
 </code></pre><p>结果为一个报错，其余为9，因为b和c为隐式全局变量，a是局部变量。</p>
 <pre><code>f1();
 console.log(c);
 console.log(b);
 console.log(a);//报错
-function f1(){
+function f1()&#123;
     var a = b = c = 9;
     console.log(c);
     console.log(b);
     console.log(a);
 </code></pre><p>结果为<code>f1();</code>报错，预解析f1是变量，调用<code>f1();</code>报错。</p>
 <pre><code>f1();
-var f1 = function (){
+var f1 = function ()&#123;
     console.log(a);
     var a = 9;
-}
+&#125;
 </code></pre><h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p>1、调用系统的构造函数创建对象</p>
 <pre><code>var people = new Object();
 //添加属性
 people.name = &quot;小李&quot;;
 people.age = 18;
 //添加方法
-people.eat = function(){
+people.eat = function()&#123;
     console.log(&quot;吃&quot;);
-};
+&#125;;
 //调用
 people.eat();
 </code></pre><p>获取变量或者对象属于什么类型</p>
 <pre><code>instanceof
 </code></pre><p>工厂模式创建对象</p>
-<pre><code>function createObject(name,age){
+<pre><code>function createObject(name,age)&#123;
     var obj = new Object();
     obj.name = name;
     obj.age = age;
-    obj.say = function (){
+    obj.say = function ()&#123;
       console.log(&quot;我叫&quot;+this.name+&quot;，今年&quot;+this.age);
-    };
+    &#125;;
     return obj;
-}
+&#125;
 var person1 = createObject(&quot;小李&quot;,20);
 person1.say();
 </code></pre><p>2、自定义构造函数创建对象</p>
 <p>函数和构造函数区别，首字母是不是大写</p>
-<pre><code>function Person(name,age){
+<pre><code>function Person(name,age)&#123;
     this.name = name;
     this.age = age;
-    this.say = function (){
+    this.say = function ()&#123;
         console.log(&quot;我叫&quot;+this.name+&quot;，今年&quot;+this.age);
-    };
-}
+    &#125;;
+&#125;
 var obj = new Person(&quot;小明&quot;,20);
 console.log(obj.age);
 obj.say();
 </code></pre><p>3、字面量的方式创建对象</p>
-<pre><code>var obj = {
+<pre><code>var obj = &#123;
     name : &quot;jsop&quot;,
-    say : function (){
+    say : function ()&#123;
         console.log(&quot;I am &quot; + this.name);
-    }
-};
+    &#125;
+&#125;;
 obj.say();
 </code></pre><h2 id="JSON格式的数据遍历"><a href="#JSON格式的数据遍历" class="headerlink" title="JSON格式的数据遍历"></a>JSON格式的数据遍历</h2><p>访问属性的另一种写法：<code>[&quot;&quot;]</code></p>
-<pre><code>var obj = {
+<pre><code>var obj = &#123;
     name : &quot;jsop&quot;,
-    say : function (){
+    say : function ()&#123;
         console.log(&quot;I am &quot; + this.name);
-    }
-};
+    &#125;
+&#125;;
 obj.say();
 </code></pre><p>遍历</p>
-<pre><code>var json = {
+<pre><code>var json = &#123;
     &quot;name&quot; : &quot;jsop&quot;,
     &quot;age&quot; : 18
-};
-for(var key in json){
+&#125;;
+for(var key in json)&#123;
     console.log(key);
     console.log(json[key]);
-}
+&#125;
 </code></pre><h2 id="内置对象-系统提供的"><a href="#内置对象-系统提供的" class="headerlink" title="内置对象(系统提供的)"></a>内置对象(系统提供的)</h2><pre><code>https://developer.mozilla.org/zh-CN/
 </code></pre><p>Math</p>
 <pre><code>Math.random()//[0,1)范围
@@ -527,17 +529,17 @@ console.log(dt.valueOf());//毫秒值
 <pre><code>&lt;body&gt;
     &lt;input type=&quot;button&quot; value=&quot;显示&quot; id=&quot;btn&quot;&gt;
 &lt;script &gt;
-    document.getElementById(&quot;btn&quot;).onclick = function (){
+    document.getElementById(&quot;btn&quot;).onclick = function ()&#123;
         alert(&quot;哈哈&quot;);
-    };
+    &#125;;
 &lt;/script&gt;
 &lt;/body&gt;
 </code></pre><p><code>document.getElementsByTagName(&quot;标签名&quot;)</code></p>
 <p>返回一个伪数组</p>
 <pre><code>var pObjs = document.getElementsByTagName(&quot;p&quot;)
-for (var i = 0; i &lt; pObjs.length;i++){
+for (var i = 0; i &lt; pObjs.length;i++)&#123;
     pObjs[i].innerText = &quot;哈哈哈&quot;;
-}
+&#125;
 </code></pre><p>和<code>document.getElementsByTagName</code>类似的有：<code>document.getElementsByName</code>获取的是<code>name</code>伪数组，<code>document.getElementsByClassName</code>获取的是<code>class</code>伪数组</p>
 <p><code>document.getElementsByTagName</code>–排他功能</p>
 <pre><code>&lt;input type=&quot;button&quot; value=&quot;显示&quot; &gt;
@@ -548,21 +550,21 @@ for (var i = 0; i &lt; pObjs.length;i++){
 &lt;input type=&quot;button&quot; value=&quot;显示&quot; &gt;
 &lt;script &gt;
     var objs = document.getElementsByTagName(&quot;input&quot;)
-    for (var i = 0; i &lt; objs.length;i++){
-        objs[i].onclick = function () {
-            for (var j = 0; j &lt; objs.length;j++){
+    for (var i = 0; i &lt; objs.length;i++)&#123;
+        objs[i].onclick = function () &#123;
+            for (var j = 0; j &lt; objs.length;j++)&#123;
                 objs[j].value = &quot;显示&quot;;
-            }
+            &#125;
             this.value= &quot;点击&quot;;
-        };
-    }
+        &#125;;
+    &#125;
 &lt;/script&gt;
 </code></pre><p>根据选择器的方式获取元素</p>
 <pre><code>&lt;input type=&quot;button&quot; value=&quot;show&quot; id=&quot;btn&quot; class=&quot;cls&quot;/&gt;
 &lt;script &gt;
-    document.querySelector(&quot;#btn&quot;).onclick = function(){
+    document.querySelector(&quot;#btn&quot;).onclick = function()&#123;
       alert(&quot;哈哈&quot;);
-    };
+    &#125;;
     var objs = document.querySelectorAll(&quot;cls&quot;);//伪数组
 &lt;/script&gt;
 </code></pre><p>小结</p>
@@ -585,10 +587,10 @@ document.documentElement
 </code></pre><p>阻止超链接跳转</p>
 <pre><code>&lt;a href=&quot;http://www.baidu.com&quot; id=&quot;ak&quot;&gt;百度&lt;/a&gt;
 &lt;script &gt;
-    document.getElementById(&quot;ak&quot;).onclick = function (){
+    document.getElementById(&quot;ak&quot;).onclick = function ()&#123;
         alert(&quot;哈啊哈&quot;);
         return false;
-    };
+    &#125;;
 &lt;/script&gt;
 </code></pre><p>鼠标进入和离开</p>
 <pre><code>.onmouseover
@@ -601,30 +603,30 @@ document.documentElement
 </code></pre><p>获取输入框输入长度<code>value.length</code></p>
 <pre><code>&lt;input type=&quot;text&quot; value=&quot;&quot; id=&quot;txt&quot;/&gt;
 &lt;script &gt;
-    document.getElementById(&quot;txt&quot;).onblur = function(){
+    document.getElementById(&quot;txt&quot;).onblur = function()&#123;
       alert(this.value.length);
-    };
+    &#125;;
 &lt;/script&gt;
 </code></pre><h2 id="innerText和textContent、innerHTML"><a href="#innerText和textContent、innerHTML" class="headerlink" title="innerText和textContent、innerHTML"></a>innerText和textContent、innerHTML</h2><p>凡是成对的标签，设置文本内容，都使用<code>innerText</code>属性,同样，获取文本内容是<code>.innerText</code>。</p>
 <pre><code>document.getElementById(&quot;p1&quot;).innerText=&quot;这是设置文本p&quot;;
 </code></pre><p>单数不兼容。innerText：谷歌，火狐支持，IE8不支持；textContent：谷歌，火狐，IE8都支持。</p>
 <p>封装</p>
 <pre><code>//设置
-function setInnerText(element,text){
-    if(typeof element.textContent == &quot;underfined&quot;){//不支持
+function setInnerText(element,text)&#123;
+    if(typeof element.textContent == &quot;underfined&quot;)&#123;//不支持
         element.innerText = text;
-    } else{//支持
+    &#125; else&#123;//支持
         lement.textContent = text;
-    }
-}
+    &#125;
+&#125;
 //获取
-function getInnerText(element){
-    if(typeof element.textContent == &quot;underfined&quot;) {//不支持
+function getInnerText(element)&#123;
+    if(typeof element.textContent == &quot;underfined&quot;) &#123;//不支持
         return element.innerText;
-    } else{//支持
+    &#125; else&#123;//支持
         return element.textContent;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>innerText和innerHTML都可以设置设置文本，innerHTML还可以设置标签。</p>
 <p>innerText可以获取标签中的文本，但是标签中还有标签，那么最里面的标签文本内容也能获取。innerHTML可以获取标签中的所有文本，包括标签。</p>
 <pre><code>.innerHTML = &quot;haha&quot;;
@@ -636,10 +638,10 @@ function getInnerText(element){
     &lt;meta charset=&quot;UTF-8&quot;&gt;
     &lt;title&gt;&lt;/title&gt;
     &lt;style&gt;
-        ul{
+        ul&#123;
             list-style: none;
             cursor: pointer;
-        }
+        &#125;
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -651,12 +653,12 @@ function getInnerText(element){
     &lt;/ul&gt;
     &lt;script &gt;
         var list = document.getElementsByTagName(&quot;li&quot;);
-        for(var i = 0; i &lt; list.length; i ++){
+        for(var i = 0; i &lt; list.length; i ++)&#123;
             list[i].setAttribute(&quot;score&quot;,(i+1)*10);
-            list[i].onclick = function(){
+            list[i].onclick = function()&#123;
               alert(this.getAttribute(&quot;score&quot;));
-            };
-        }
+            &#125;;
+        &#125;
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -701,51 +703,51 @@ function getInnerText(element){
 <pre><code>&lt;input type=&quot;button&quot; value=&quot;追加&quot; id=&quot;btn&quot;/&gt;
 &lt;div id=&quot;dv&quot;&gt;&lt;/div&gt;
 &lt;script &gt;
-    document.getElementById(&quot;btn&quot;).onclick = function (){
+    document.getElementById(&quot;btn&quot;).onclick = function ()&#123;
         var pObj = document.createElement(&quot;P&quot;);
         pObj.innerText = &quot;这是p&quot;;
         document.getElementById(&quot;dv&quot;).appendChild(pObj);
-    };
+    &#125;;
 &lt;/script&gt;
 </code></pre><p>把新的子元素插到第一个子元素前面</p>
 <pre><code>.insertBefore(新元素，旧元素);
 </code></pre><p>移除父级元素中的第一个元素</p>
 <pre><code>.removeChild(父元素对象.firstElementChild);
 </code></pre><p>移除父级元素中的所有元素</p>
-<pre><code>while(父元素对象.firstElementChild){
+<pre><code>while(父元素对象.firstElementChild)&#123;
     .removeChild(父元素对象.firstElementChild);
-}
+&#125;
 </code></pre><p><code>createElement</code>只创建一个元素</p>
 <pre><code>&lt;input type=&quot;button&quot; value=&quot;追加&quot; id=&quot;btn&quot;/&gt;
 &lt;div id=&quot;dv&quot;&gt;&lt;/div&gt;
 &lt;script &gt;
-    document.getElementById(&quot;btn&quot;).onclick = function (){
-        if(!document.getElementById(&quot;dv&quot;).firstElementChild){
+    document.getElementById(&quot;btn&quot;).onclick = function ()&#123;
+        if(!document.getElementById(&quot;dv&quot;).firstElementChild)&#123;
             var pObj = document.createElement(&quot;P&quot;);
             pObj.innerText = &quot;这是p&quot;;
             document.getElementById(&quot;dv&quot;).appendChild(pObj);
-        }
-    };
+        &#125;
+    &#125;;
 &lt;/script&gt;
 </code></pre><h2 id="元素绑定多个事件-addEventListener和-attachEvent"><a href="#元素绑定多个事件-addEventListener和-attachEvent" class="headerlink" title="元素绑定多个事件.addEventListener和.attachEvent"></a>元素绑定多个事件<code>.addEventListener</code>和<code>.attachEvent</code></h2><pre><code>&lt;input type=&quot;button&quot; value=&quot;多个事件&quot; id=&quot;btn&quot;/&gt;
 &lt;script &gt;
-    document.getElementById(&quot;btn&quot;).addEventListener(&quot;click&quot;,function(){
+    document.getElementById(&quot;btn&quot;).addEventListener(&quot;click&quot;,function()&#123;
         console.log(&quot;哈哈&quot;);
-    },false);
-    document.getElementById(&quot;btn&quot;).addEventListener(&quot;click&quot;,function(){
+    &#125;,false);
+    document.getElementById(&quot;btn&quot;).addEventListener(&quot;click&quot;,function()&#123;
         console.log(&quot;嘻嘻&quot;);
-    },false);
+    &#125;,false);
 &lt;/script&gt;
 </code></pre><p>兼容性<code>.addEventListener</code>支持谷歌火狐，<code>.attachEvent</code>支持IE</p>
-<pre><code>function commonAddEventListener(element,type,fn){
-    if(element.addEventListener()){
+<pre><code>function commonAddEventListener(element,type,fn)&#123;
+    if(element.addEventListener())&#123;
         element.addEventListener(type,fn,false);
-    } else if (element.attachEvent()){
+    &#125; else if (element.attachEvent())&#123;
         element.attachEvent(&quot;on&quot; + type,fn);
-    } else{
+    &#125; else&#123;
         element[&quot;on&quot; + type] = fn;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p><code>addEventListener</code>和<code>attachEvent</code>都可以为元素绑定事件。它们的不同点有：参数个数不一样；<code>addEventListener</code>中事件类型没有<code>on</code>,<code>attachEvent</code>中事件类型有<code>on</code>;<code>addEventListener</code>中<code>this</code>指当前绑定的事件，<code>attachEvent</code>中<code>this</code>指<code>window</code>。</p>
 <h2 id="元素解绑事件"><a href="#元素解绑事件" class="headerlink" title="元素解绑事件"></a>元素解绑事件</h2><p>解绑<code>onclick</code>、<code>addEventListener</code>、<code>attachEvent</code></p>
 <pre><code>.onclick = null;
@@ -764,16 +766,16 @@ window.event.stopPropagation();//谷歌和火狐支持，IE不支持
 <pre><code>.onclick = f;
 .onmouseover = f;
 .onmouseout = f;
-function f (e){
-    switch (e.type){
+function f (e)&#123;
+    switch (e.type)&#123;
         case &quot;click&quot;:
             break;
         case &quot;mouseover&quot;:
             break;
         case &quot;mouseout&quot;:
             break;
-    }
-}
+    &#125;
+&#125;
 </code></pre><h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><p>浏览器对象模型。</p>
 <p>window:浏览器的顶级对象；</p>
 <p>document:页面中的顶级对象。</p>
@@ -782,11 +784,11 @@ function f (e){
 prompt()
 confirm()
 </code></pre><h2 id="onload"><a href="#onload" class="headerlink" title="onload"></a>onload</h2><p><code>onload</code>使用</p>
-<pre><code>window.onload = function(){
-    document.getElementById(&quot;btn&quot;).onclick = function (){
+<pre><code>window.onload = function()&#123;
+    document.getElementById(&quot;btn&quot;).onclick = function ()&#123;
 
-    };
-};
+    &#125;;
+&#125;;
 </code></pre><p><code>onunload</code>页面关闭后触发的事件；<code>onbeforeunload</code>页面关闭前触发的事件(IE8支持)。</p>
 <h2 id="location"><a href="#location" class="headerlink" title="location"></a>location</h2><p>属性</p>
 <pre><code>window.location.hash//#及后面内容
@@ -817,10 +819,10 @@ setInterval(func[, delay, param1, param2, ...])
 </code></pre><p>setTimeout函数的参数说明:func, 表示定时器要执行的函数名；delay, 表示时间间隔，默认是0，单位是毫秒；param1, 表示定时器执行函数的第一个参数，一次类推传入多个执行函数对应的参数。</p>
 <p>setInterval函数的参数说明:func , 表示定时器要执行的函数名;delay, 表示时间间隔，默认是0，单位是毫秒;param1, 表示定时器执行函数的第一个参数，一次类推传入多个执行函数对应的参数。</p>
 <p>反复执行</p>
-<pre><code>var timeId = window.setInterval(function(){},1000);//设置定时
+<pre><code>var timeId = window.setInterval(function()&#123;&#125;,1000);//设置定时
 window.clearInterval(timeId);//停止定时
 </code></pre><p>一次性定时器</p>
-<pre><code>var timeId = window.setTimeout(function(){},1000);
+<pre><code>var timeId = window.setTimeout(function()&#123;&#125;,1000);
 clearTimeout(timeId);//清除定时缓存空间
 </code></pre><hr>
 <h2 id="offset"><a href="#offset" class="headerlink" title="offset"></a>offset</h2><p>获取元素的宽和高（包含边框）</p>
@@ -851,13 +853,13 @@ var left = window.pageXOffset || document.documentElement.scrollLeft || document
 </code></pre><h2 id="获取元素的样式属性值"><a href="#获取元素的样式属性值" class="headerlink" title="获取元素的样式属性值"></a>获取元素的样式属性值</h2><pre><code>window.getComputedStyle(元素对象,null).属性;//谷歌，火狐
 元素对象.currentStyle.属性;//IE8
 </code></pre><p>兼容代码</p>
-<pre><code>function getStyle(element,attr){
-   if(window.getComputedStyle){
+<pre><code>function getStyle(element,attr)&#123;
+   if(window.getComputedStyle)&#123;
        return window.getComputedStyle(element,attr)[attr];//谷歌，火狐
-   } else{
+   &#125; else&#123;
        return element.currentStyle[attr];
-   }
-}
+   &#125;
+&#125;
 </code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>透明度</p>
 <pre><code>.style.opacity = 
 </code></pre><hr>
@@ -872,23 +874,23 @@ var left = window.pageXOffset || document.documentElement.scrollLeft || document
 <p>入口函数示例代码:</p>
 <pre><code>&lt;script src=&quot;js/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
-    window.onload = function(){
+    window.onload = function()&#123;
         var oDiv = document.getElementById(&apos;div01&apos;);
         alert(&apos;原生就是获取的div：&apos; + oDiv);
-    };
-    $(document).ready(function(){
+    &#125;;
+    $(document).ready(function()&#123;
         var $div = $(&apos;#div01&apos;);
         alert(&apos;jquery获取的div：&apos; + $div);
-    });
+    &#125;);
 &lt;/script&gt;
 
 &lt;div id=&quot;div01&quot;&gt;这是一个div&lt;/div&gt;
 </code></pre><p>入口函数的简写示例代码:</p>
 <pre><code>// 上面ready的写法可以简写成下面的形式：
-$(function(){
+$(function()&#123;
     var $div = $(&apos;#div01&apos;);
     alert(&apos;jquery获取的div：&apos; + $div);
-}); 
+&#125;); 
 </code></pre><hr>
 <h3 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h3><hr>
 <p>选择器就是快速选择标签元素，获取标签的，选择规则和css样式一样。</p>
@@ -899,22 +901,22 @@ $(&apos;li&apos;) //选择所有的li标签
 $(&apos;#ul1 li span&apos;) //选择id为ul1标签下的所有li标签下的span标签
 $(&apos;input[name=first]&apos;) // 选择name属性等于first的input标签
 </code></pre><p>可以使用length属性来判断标签是否选择成功, 如果length大于0表示选择成功，否则选择失败。</p>
-<pre><code>$(function(){
+<pre><code>$(function()&#123;
     result = $(&quot;div&quot;).length;
     alert(result);
-});
+&#125;);
 </code></pre><hr>
 <h3 id="选择集过滤"><a href="#选择集过滤" class="headerlink" title="选择集过滤"></a>选择集过滤</h3><hr>
 <p>选择集过滤就是在选择标签的集合里面过滤自己需要的标签。</p>
 <p>选择集过滤的操作：has(选择器名称)方法，表示选取包含指定选择器的标签；eq(索引)方法，表示选取指定索引的标签。</p>
 <p>has方法的示例代码:</p>
 <pre><code>&lt;script&gt;
-    $(function(){
+    $(function()&#123;
         //  has方法的使用
         var $div = $(&quot;div&quot;).has(&quot;#mytext&quot;);
         //  设置样式
-        $div.css({&quot;background&quot;:&quot;red&quot;});
-    });
+        $div.css(&#123;&quot;background&quot;:&quot;red&quot;&#125;);
+    &#125;);
 &lt;/script&gt;
 &lt;div&gt;
     这是第一个div
@@ -928,16 +930,16 @@ $(&apos;input[name=first]&apos;) // 选择name属性等于first的input标签
 &lt;/div&gt;
 </code></pre><p>eq方法的示例代码:</p>
 <pre><code>&lt;script&gt;
-    $(function(){
+    $(function()&#123;
         //  has方法的使用
         var $div = $(&quot;div&quot;).has(&quot;#mytext&quot;);
         //  设置样式
-        $div.css({&quot;background&quot;:&quot;red&quot;});
+        $div.css(&#123;&quot;background&quot;:&quot;red&quot;&#125;);
         //  eq方法的使用
         var $div = $(&quot;div&quot;).eq(1);
         //  设置样式
-        $div.css({&quot;background&quot;:&quot;yellow&quot;});
-    });
+        $div.css(&#123;&quot;background&quot;:&quot;yellow&quot;&#125;);
+    &#125;);
 &lt;/script&gt;
 
 &lt;div&gt;
@@ -966,7 +968,7 @@ $(&apos;#box&apos;).find(&apos;.myClass&apos;); 表示选择id是box元素的cla
 <h3 id="获取和设置元素内容"><a href="#获取和设置元素内容" class="headerlink" title="获取和设置元素内容"></a>获取和设置元素内容</h3><hr>
 <p>jquery中的html方法可以获取和设置标签的html内容。</p>
 <pre><code>&lt;script&gt;
-    $(function(){
+    $(function()&#123;
 
         var $div = $(&quot;#div1&quot;);
         //  获取标签的html内容
@@ -976,7 +978,7 @@ $(&apos;#box&apos;).find(&apos;.myClass&apos;); 表示选择id是box元素的cla
         $div.html(&quot;&lt;span style=&apos;color:red&apos;&gt;你好&lt;/span&gt;&quot;);
         //  追加html内容
         $div.append(&quot;&lt;span style=&apos;color:red&apos;&gt;你好&lt;/span&gt;&quot;);
-    });
+    &#125;);
 &lt;/script&gt;
 
 &lt;div id=&quot;div1&quot;&gt;
@@ -986,13 +988,13 @@ $(&apos;#box&apos;).find(&apos;.myClass&apos;); 表示选择id是box元素的cla
 <h3 id="获取和设置元素属性"><a href="#获取和设置元素属性" class="headerlink" title="获取和设置元素属性"></a>获取和设置元素属性</h3><hr>
 <p>使用css方法可以给标签设置样式属性，那么设置标签的其它属性可以使用prop方法了。</p>
 <pre><code>&lt;style&gt;
-    .a01{
+    .a01&#123;
         color:red;
-    }
+    &#125;
 &lt;/style&gt;
 
 &lt;script&gt;
-    $(function(){
+    $(function()&#123;
         var $a = $(&quot;#link01&quot;);
         var $input = $(&apos;#input01&apos;)
 
@@ -1001,7 +1003,7 @@ $(&apos;#box&apos;).find(&apos;.myClass&apos;); 表示选择id是box元素的cla
         alert(sId);
 
         // 设置元素属性
-        $a.prop({&quot;href&quot;:&quot;http://www.baidu.com&quot;,&quot;title&quot;:&apos;这是去到百度的链接&apos;,&quot;class&quot;:&quot;a01&quot;});
+        $a.prop(&#123;&quot;href&quot;:&quot;http://www.baidu.com&quot;,&quot;title&quot;:&apos;这是去到百度的链接&apos;,&quot;class&quot;:&quot;a01&quot;&#125;);
 
         //  获取value属性
         // var sValue = $input.prop(&quot;value&quot;);
@@ -1012,7 +1014,7 @@ $(&apos;#box&apos;).find(&apos;.myClass&apos;); 表示选择id是box元素的cla
         alert(sValue);
         // 设置value值
         $input.val(&quot;222222&quot;);
-    })
+    &#125;)
 &lt;/script&gt;
 
 &lt;a id=&quot;link01&quot;&gt;这是一个链接&lt;/a&gt;
@@ -1028,51 +1030,51 @@ mouseout() 鼠标离开（离开子元素也触发）
 ready() DOM加载完成
 </code></pre><p>示例代码:</p>
 <pre><code>&lt;script&gt;
-    $(function(){
+    $(function()&#123;
         var $li = $(&apos;.list li&apos;);
         var $button = $(&apos;#button1&apos;)
         var $text = $(&quot;#text1&quot;);
         var $div = $(&quot;#div1&quot;)
 
         //  鼠标点击
-        $li.click(function(){             
+        $li.click(function()&#123;             
             // this指的是当前发生事件的对象，但是它是一个原生js对象
             // this.style.background = &apos;red&apos;;
 
             // $(this) 指的是当前发生事件的jquery对象
-            $(this).css({&apos;background&apos;:&apos;gold&apos;});
+            $(this).css(&#123;&apos;background&apos;:&apos;gold&apos;&#125;);
             // 获取jquery对象的索引值,通过index() 方法
             alert($(this).index());
-        });
+        &#125;);
 
         //  一般和按钮配合使用
-        $button.click(function(){
+        $button.click(function()&#123;
             alert($text.val());
-        });
+        &#125;);
 
         //  获取焦点
-        $text.focus(function(){
-            $(this).css({&apos;background&apos;:&apos;red&apos;});
+        $text.focus(function()&#123;
+            $(this).css(&#123;&apos;background&apos;:&apos;red&apos;&#125;);
 
-        });
+        &#125;);
 
         //  失去焦点
-        $text.blur(function(){
-            $(this).css({&apos;background&apos;:&apos;white&apos;});
+        $text.blur(function()&#123;
+            $(this).css(&#123;&apos;background&apos;:&apos;white&apos;&#125;);
 
-        });
+        &#125;);
 
         //  鼠标进入
-        $div.mouseover(function(){
-            $(this).css({&apos;background&apos;:&apos;gold&apos;});
+        $div.mouseover(function()&#123;
+            $(this).css(&#123;&apos;background&apos;:&apos;gold&apos;&#125;);
 
-        });
+        &#125;);
 
         //  鼠标离开
-        $div.mouseout(function() {
-            $(this).css({&apos;background&apos;:&apos;white&apos;});
-        });
-    });
+        $div.mouseout(function() &#123;
+            $(this).css(&#123;&apos;background&apos;:&apos;white&apos;&#125;);
+        &#125;);
+    &#125;);
 &lt;/script&gt;
 
 &lt;div id=&quot;div1&quot;&gt;
@@ -1089,18 +1091,18 @@ ready() DOM加载完成
 <p>事件代理就是利用事件冒泡的原理(事件冒泡就是事件会向它的父级一级一级传递),把事件加到父级上，通过判断事件来源，执行相应的子元素的操作，事件代理首先可以极大减少事件绑定次数，提高性能；其次可以让新加入的子元素也可以拥有相同的操作。</p>
 <p>事件冒泡代码:当点击子元素div，它的点击事件会向它父元素传递，也会触发了父元素的点击事件，这就是事件冒泡。</p>
 <pre><code>&lt;script&gt;
-    $(function(){
+    $(function()&#123;
         var $div1 = $(&apos;#div1&apos;);
         var $div2 = $(&apos;#div2&apos;);
 
-        $div1.click(function(){
+        $div1.click(function()&#123;
             alert($(this).html());
-        }); 
+        &#125;); 
 
-        $div2.click(function(){
+        $div2.click(function()&#123;
             alert($(this).html());
-        }); 
-    });
+        &#125;); 
+    &#125;);
 &lt;/script&gt;
 
  &lt;div id=&quot;div1&quot; style=&quot;width:200px; height:200px; background: red;&quot;&gt;
@@ -1109,12 +1111,12 @@ ready() DOM加载完成
     &lt;/div&gt;
 &lt;/div&gt;
 </code></pre><p>事件代理的使用，一般绑定事件的写法:</p>
-<pre><code>$(function(){
+<pre><code>$(function()&#123;
     $ali = $(&apos;#list li&apos;);
-    $ali.click(function() {
-        $(this).css({background:&apos;red&apos;});
-    });
-})
+    $ali.click(function() &#123;
+        $(this).css(&#123;background:&apos;red&apos;&#125;);
+    &#125;);
+&#125;)
 
 &lt;ul id=&quot;list&quot;&gt;
     &lt;li&gt;1&lt;/li&gt;
@@ -1124,14 +1126,14 @@ ready() DOM加载完成
     &lt;li&gt;5&lt;/li&gt;
 &lt;/ul&gt;
 </code></pre><p>事件代理的写法</p>
-<pre><code>$(function(){
+<pre><code>$(function()&#123;
     $list = $(&apos;#list&apos;);
     // 父元素ul 来代理 子元素li的点击事件
-    $list.delegate(&apos;li&apos;, &apos;click&apos;, function() {
+    $list.delegate(&apos;li&apos;, &apos;click&apos;, function() &#123;
         // $(this)表示当前点击的子元素对象
-        $(this).css({background:&apos;red&apos;});
-    });
-})
+        $(this).css(&#123;background:&apos;red&apos;&#125;);
+    &#125;);
+&#125;)
 
 &lt;ul id=&quot;list&quot;&gt;
     &lt;li&gt;1&lt;/li&gt;
@@ -1157,9 +1159,9 @@ ready() DOM加载完成
     person.age = &apos;25&apos;;
 
     // 添加方法：
-    person.sayName = function(){
+    person.sayName = function()&#123;
         alert(this.name);
-    }
+    &#125;
 
     // 调用属性和方法：
     alert(person.age);
@@ -1167,13 +1169,13 @@ ready() DOM加载完成
 &lt;/script&gt;
 </code></pre><p>对象字面量创建对象的示例代码:</p>
 <pre><code>&lt;script&gt;
-    var person2 = {
+    var person2 = &#123;
         name:&apos;Rose&apos;,
         age: 18,
-        sayName:function(){
+        sayName:function()&#123;
             alert(&apos;My name is&apos; + this.name);
-        }
-    }
+        &#125;
+    &#125;
 
     // 调用属性和方法：
     alert(person2.age);
@@ -1183,7 +1185,7 @@ ready() DOM加载完成
 <h3 id="json数据"><a href="#json数据" class="headerlink" title="json数据"></a>json数据</h3><hr>
 <p>json本质上是字符串，如果在js中操作json数据，可以将json字符串转化为JavaScript对象。</p>
 <p>示例代码:</p>
-<pre><code>var sJson = &apos;{&quot;name&quot;:&quot;tom&quot;,&quot;age&quot;:18}&apos;;
+<pre><code>var sJson = &apos;&#123;&quot;name&quot;:&quot;tom&quot;,&quot;age&quot;:18&#125;&apos;;
 var oPerson = JSON.parse(sJson);
 // 操作属性
 alert(oPerson.name);
@@ -1194,7 +1196,7 @@ alert(oPerson.age);
 <p>jquery将它封装成了一个方法<code>$.ajax()</code>，我们可以直接用这个方法来执行ajax请求。</p>
 <p>示例代码:</p>
 <pre><code>&lt;script&gt;
-    $.ajax({
+    $.ajax(&#123;
     // 1.url 请求地址
     url:&apos;http://t.weather.sojson.com/api/weather/city/101010100&apos;,
     // 2.type 请求方式，默认是&apos;GET&apos;，常用的还有&apos;POST&apos;
@@ -1203,34 +1205,34 @@ alert(oPerson.age);
     dataType:&apos;JSON&apos;,
     // 4.data 设置发送给服务器的数据, 没有参数不需要设置​
     // 5.success 设置请求成功后的回调函数
-    success:function (response) {
+    success:function (response) &#123;
         console.log(response);    
-    },
+    &#125;,
     // 6.error 设置请求失败后的回调函数
-    error:function () {
+    error:function () &#123;
         alert(&quot;请求失败,请稍后再试!&quot;);
-    },
+    &#125;,
     // 7.async 设置是否异步，默认值是&apos;true&apos;，表示异步，一般不用写
     async:true
-});
+&#125;);
 &lt;/script&gt;
 </code></pre><p>同步和异步说明：同步是一个ajax请求完成另外一个才可以请求，需要等待上一个ajax请求完成，好比线程同步。异步是多个ajax同时请求，不需要等待其它ajax请求完成，好比线程异步。</p>
 <p><code>$.ajax</code>按照请求方式可以简写成<code>$.get</code>或者<code>$.post</code>方式。示例代码:</p>
 <pre><code>&lt;script&gt;
-    $(function(){
+    $(function()&#123;
         /*
          1. url 请求地址
          2. data 设置发送给服务器的数据, 没有参数不需要设置
          3. success 设置请求成功后的回调函数
          4. dataType 设置返回的数据格式，常用的是&apos;json&apos;格式, 默认智能判断数据格式
         */ 
-        $.get(&quot;http://t.weather.sojson.com/api/weather/city/101010100&quot;, function(dat,status){
+        $.get(&quot;http://t.weather.sojson.com/api/weather/city/101010100&quot;, function(dat,status)&#123;
             console.log(dat);
             console.log(status);
             alert(dat);
-        }).error(function(){
+        &#125;).error(function()&#123;
             alert(&quot;网络异常&quot;);
-        });
+        &#125;);
 
         /*
          1. url 请求地址
@@ -1238,13 +1240,13 @@ alert(oPerson.age);
          3. success 设置请求成功后的回调函数
          4. dataType 设置返回的数据格式，常用的是&apos;json&apos;格式, 默认智能判断数据格式
         */ 
-        $.post(&quot;test.php&quot;, {&quot;func&quot;: &quot;getNameAndTime&quot;}, function(data){
+        $.post(&quot;test.php&quot;, &#123;&quot;func&quot;: &quot;getNameAndTime&quot;&#125;, function(data)&#123;
             alert(data.name); 
             console.log(data.time); 
-        }, &quot;json&quot;).error(function(){
+        &#125;, &quot;json&quot;).error(function()&#123;
             alert(&quot;网络异常&quot;);
-        }); 
-    });
+        &#125;); 
+    &#125;);
 &lt;/script&gt;
 </code></pre><hr>
 
@@ -1284,7 +1286,7 @@ alert(oPerson.age);
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2018/12/01/2.html和css基础/" class="pre-post btn btn-default" title='HTML和CSS基础'>
+        <a href="/2018/12/01/2.html%E5%92%8Ccss%E5%9F%BA%E7%A1%80/" class="pre-post btn btn-default" title='HTML和CSS基础'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">HTML和CSS基础</span>
         </a>
@@ -1303,7 +1305,7 @@ alert(oPerson.age);
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript介绍"><span class="toc-text">JavaScript介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript三种写法"><span class="toc-text">JavaScript三种写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量和数据类型"><span class="toc-text">变量和数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三元表达式"><span class="toc-text">三元表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#switch语句"><span class="toc-text">switch语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#while循环-有可能一次都不执行"><span class="toc-text">while循环(有可能一次都不执行)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#do…while-至少执行一次"><span class="toc-text">do…while(至少执行一次)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for循环"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试"><span class="toc-text">调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#arguments对象伪数组"><span class="toc-text">arguments对象伪数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名函数（函数表达式）"><span class="toc-text">匿名函数（函数表达式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数的自调用（一次性）"><span class="toc-text">函数的自调用（一次性）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作为参数（回调函数）"><span class="toc-text">函数作为参数（回调函数）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作为返回值"><span class="toc-text">函数作为返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预解析"><span class="toc-text">预解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON格式的数据遍历"><span class="toc-text">JSON格式的数据遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置对象-系统提供的"><span class="toc-text">内置对象(系统提供的)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-文档对象模型"><span class="toc-text">DOM-文档对象模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取元素对象"><span class="toc-text">获取元素对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象属性"><span class="toc-text">对象属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#innerText和textContent、innerHTML"><span class="toc-text">innerText和textContent、innerHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义属性"><span class="toc-text">自定义属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节点"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素的创建"><span class="toc-text">元素的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素绑定多个事件-addEventListener和-attachEvent"><span class="toc-text">元素绑定多个事件.addEventListener和.attachEvent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素解绑事件"><span class="toc-text">元素解绑事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件冒泡"><span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件的三个阶段"><span class="toc-text">事件的三个阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BOM"><span class="toc-text">BOM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#onload"><span class="toc-text">onload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location"><span class="toc-text">location</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#history"><span class="toc-text">history</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#navigator"><span class="toc-text">navigator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定时器"><span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#offset"><span class="toc-text">offset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scroll"><span class="toc-text">scroll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#client"><span class="toc-text">client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取元素的样式属性值"><span class="toc-text">获取元素的样式属性值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jQuery"><span class="toc-text">jQuery</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用法"><span class="toc-text">用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择器"><span class="toc-text">选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择集过滤"><span class="toc-text">选择集过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择集转移"><span class="toc-text">选择集转移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取和设置元素内容"><span class="toc-text">获取和设置元素内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取和设置元素属性"><span class="toc-text">获取和设置元素属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jQuery事件"><span class="toc-text">jQuery事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件代理"><span class="toc-text">事件代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript对象"><span class="toc-text">JavaScript对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#json数据"><span class="toc-text">json数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ajax"><span class="toc-text">ajax</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript%E4%BB%8B%E7%BB%8D"><span class="toc-text">JavaScript介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript%E4%B8%89%E7%A7%8D%E5%86%99%E6%B3%95"><span class="toc-text">JavaScript三种写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">变量和数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if%E8%AF%AD%E5%8F%A5"><span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">三元表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#switch%E8%AF%AD%E5%8F%A5"><span class="toc-text">switch语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#while%E5%BE%AA%E7%8E%AF-%E6%9C%89%E5%8F%AF%E8%83%BD%E4%B8%80%E6%AC%A1%E9%83%BD%E4%B8%8D%E6%89%A7%E8%A1%8C"><span class="toc-text">while循环(有可能一次都不执行)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#do%E2%80%A6while-%E8%87%B3%E5%B0%91%E6%89%A7%E8%A1%8C%E4%B8%80%E6%AC%A1"><span class="toc-text">do…while(至少执行一次)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for%E5%BE%AA%E7%8E%AF"><span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E8%AF%95"><span class="toc-text">调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#arguments%E5%AF%B9%E8%B1%A1%E4%BC%AA%E6%95%B0%E7%BB%84"><span class="toc-text">arguments对象伪数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%EF%BC%88%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%89"><span class="toc-text">匿名函数（函数表达式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E8%87%AA%E8%B0%83%E7%94%A8%EF%BC%88%E4%B8%80%E6%AC%A1%E6%80%A7%EF%BC%89"><span class="toc-text">函数的自调用（一次性）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%8F%82%E6%95%B0%EF%BC%88%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-text">函数作为参数（回调函数）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-text">函数作为返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E8%A7%A3%E6%9E%90"><span class="toc-text">预解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%95%B0%E6%8D%AE%E9%81%8D%E5%8E%86"><span class="toc-text">JSON格式的数据遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1-%E7%B3%BB%E7%BB%9F%E6%8F%90%E4%BE%9B%E7%9A%84"><span class="toc-text">内置对象(系统提供的)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B"><span class="toc-text">DOM-文档对象模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E5%AF%B9%E8%B1%A1"><span class="toc-text">获取元素对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7"><span class="toc-text">对象属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#innerText%E5%92%8CtextContent%E3%80%81innerHTML"><span class="toc-text">innerText和textContent、innerHTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7"><span class="toc-text">自定义属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%82%E7%82%B9"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-text">元素的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E7%BB%91%E5%AE%9A%E5%A4%9A%E4%B8%AA%E4%BA%8B%E4%BB%B6-addEventListener%E5%92%8C-attachEvent"><span class="toc-text">元素绑定多个事件.addEventListener和.attachEvent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E8%A7%A3%E7%BB%91%E4%BA%8B%E4%BB%B6"><span class="toc-text">元素解绑事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1"><span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-text">事件的三个阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BOM"><span class="toc-text">BOM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#onload"><span class="toc-text">onload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location"><span class="toc-text">location</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#history"><span class="toc-text">history</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#navigator"><span class="toc-text">navigator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#offset"><span class="toc-text">offset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scroll"><span class="toc-text">scroll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#client"><span class="toc-text">client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E7%9A%84%E6%A0%B7%E5%BC%8F%E5%B1%9E%E6%80%A7%E5%80%BC"><span class="toc-text">获取元素的样式属性值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jQuery"><span class="toc-text">jQuery</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%B3%95"><span class="toc-text">用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-text">选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E9%9B%86%E8%BF%87%E6%BB%A4"><span class="toc-text">选择集过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E9%9B%86%E8%BD%AC%E7%A7%BB"><span class="toc-text">选择集转移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%92%8C%E8%AE%BE%E7%BD%AE%E5%85%83%E7%B4%A0%E5%86%85%E5%AE%B9"><span class="toc-text">获取和设置元素内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%92%8C%E8%AE%BE%E7%BD%AE%E5%85%83%E7%B4%A0%E5%B1%9E%E6%80%A7"><span class="toc-text">获取和设置元素属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jQuery%E4%BA%8B%E4%BB%B6"><span class="toc-text">jQuery事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86"><span class="toc-text">事件代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%AF%B9%E8%B1%A1"><span class="toc-text">JavaScript对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#json%E6%95%B0%E6%8D%AE"><span class="toc-text">json数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ajax"><span class="toc-text">ajax</span></a></li></ol></li></ol>
         
     </div>
 </aside>
@@ -1355,7 +1357,9 @@ alert(oPerson.age);
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

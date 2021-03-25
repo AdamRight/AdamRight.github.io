@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -195,67 +197,67 @@
 </blockquote>
 <p>共同点：都要用start()开启线程</p>
 <h3 id="创建子线程方式1："><a href="#创建子线程方式1：" class="headerlink" title="创建子线程方式1："></a>创建子线程方式1：</h3><hr>
-<pre><code>Thread thread = new Thread() {
+<pre><code>Thread thread = new Thread() &#123;
     @Override
-    public void run() {
+    public void run() &#123;
         //super.run();
         System.out.println(&quot;Thread started!&quot;);
-    }
-};
+    &#125;
+&#125;;
 thread.start();
 </code></pre><p>start调用了native方法。</p>
 <p>或者</p>
-<pre><code>class MyThread1 extends Thread{
+<pre><code>class MyThread1 extends Thread&#123;
     @Override
-    public void run() {
+    public void run() &#123;
         super.run();
         System.out.println(&quot;MyThread1:&quot;+Thread.currentThread().getName());
-    }
-}
+    &#125;
+&#125;
 new MyThread1().start();//创建并启动线程
 </code></pre><hr>
 <h3 id="创建子线程方式2："><a href="#创建子线程方式2：" class="headerlink" title="创建子线程方式2："></a>创建子线程方式2：</h3><hr>
-<pre><code>Runnable runnable = new Runnable() {
+<pre><code>Runnable runnable = new Runnable() &#123;
     @Override
-    public void run() {
+    public void run() &#123;
         System.out.println(&quot;Thread with Runnable started!&quot;);
-    }
-};
+    &#125;
+&#125;;
 Thread thread = new Thread(runnable);
 thread.start();
 </code></pre><p>或者</p>
-<pre><code>class MyThread2 implements Runnable{
+<pre><code>class MyThread2 implements Runnable&#123;
     @Override
-    public void run() {
+    public void run() &#123;
         System.out.println(&quot;MyThread2:&quot;+Thread.currentThread().getName());
-    }
-}
+    &#125;
+&#125;
 
 new Thread(new MyThread2()).start();//创建并启动线程
 
 //或者
-new Thread(new Runnable() {
+new Thread(new Runnable() &#123;
     @Override
-    public void run() {
+    public void run() &#123;
         System.out.println(&quot;MyThread3:&quot;+Thread.currentThread().getName());
-    }
-}).start();
+    &#125;
+&#125;).start();
 </code></pre><hr>
 <h3 id="ThreadFactory"><a href="#ThreadFactory" class="headerlink" title="ThreadFactory"></a>ThreadFactory</h3><hr>
-<pre><code>ThreadFactory factory = new ThreadFactory() {
+<pre><code>ThreadFactory factory = new ThreadFactory() &#123;
     AtomicInteger count = new AtomicInteger(0);
     @Override
-    public Thread newThread(Runnable r) {
+    public Thread newThread(Runnable r) &#123;
         return new Thread(r, &quot;Thread-&quot; + count.incrementAndGet());
-    }
-};
+    &#125;
+&#125;;
 
-Runnable runnable = new Runnable() {
+Runnable runnable = new Runnable() &#123;
     @Override
-    public void run() {
+    public void run() &#123;
         System.out.println(Thread.currentThread().getName() + &quot; started!&quot;);
-    }
-};
+    &#125;
+&#125;;
 
 Thread thread = factory.newThread(runnable);
 thread.start();
@@ -263,21 +265,21 @@ Thread thread1 = factory.newThread(runnable);
 thread1.start();
 </code></pre><hr>
 <h3 id="Executors"><a href="#Executors" class="headerlink" title="Executors"></a>Executors</h3><hr>
-<pre><code>Runnable runnable = new Runnable() {
+<pre><code>Runnable runnable = new Runnable() &#123;
     @Override
-    public void run() {
+    public void run() &#123;
         System.out.println(&quot;Thread with Runnable started!&quot;);
-    }
-};
+    &#125;
+&#125;;
 Executor executor = Executors.newCachedThreadPool();
 executor.execute(runnable);
 executor.execute(runnable);
 executor.execute(runnable);
 </code></pre><p>除了newCachedThreadPool还有newSingleThreadExecutor单线程池、newFixedThreadPool指定固定线程数的线程池。</p>
 <pre><code>ExecutorService executor = Executors.newFixedThreadPool(20);
-for (Bitmap bitmap : bitmaps) {
+for (Bitmap bitmap : bitmaps) &#123;
      executor.execute(bitmapProcessor(bitmap));
-}
+&#125;
 executor.shutdown();
 </code></pre><hr>
 <h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h3><hr>
@@ -286,29 +288,29 @@ executor.shutdown();
 <p>synchronized定义在方法上，Monitor默认指定的是这个类；方法中使用<code>synchronized(this)</code>,Monitor指定的也是这个类；如果想更换Monitor，就要把this换成其他对象。即多个线程，访问同一个类的多个方法，就要处理Monitor是不是同一个。</p>
 </blockquote>
 <p>如果线程1正在访问count方法，那么线程2无法访问到minus方法，因为两个方法是同一个Monitor：</p>
-<pre><code>private synchronized void count(int newValue) {
+<pre><code>private synchronized void count(int newValue) &#123;
     x = newValue;
     y = newValue;
-}
+&#125;
 
-private void minus(int delta) {
-    synchronized (this) {
+private void minus(int delta) &#123;
+    synchronized (this) &#123;
         x -= delta;
         y -= delta;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>如果线程1正在访问count方法，线程2可以访问到minus方法，因为两个方法不是同一个Monitor，是两个Monitor：</p>
 <pre><code>private final Object monitor1 = new Object();
-private synchronized void count(int newValue) {
+private synchronized void count(int newValue) &#123;
     x = newValue;
     y = newValue;
-}
-private void minus(int delta) {
-    synchronized (monitor1) {
+&#125;
+private void minus(int delta) &#123;
+    synchronized (monitor1) &#123;
         x -= delta;
         y -= delta;
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>保证线程之间对监视资源的数据同步。即，任何线程在获取到 Monitor 后的第一时间，会先将共享内存中的数据复制到自己的缓存中；任何线程在释放 Monitor 的第一时间，会先将缓存中的数据复制到共享内存中。</p>
 <hr>
 <h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><hr>
@@ -328,140 +330,140 @@ atomicInteger.getAndIncrement();
 <pre><code>Lock lock = new ReentrantLock();
 ...
 lock.lock();
-try {
+try &#123;
     x++;
-} finally {
+&#125; finally &#123;
     lock.unlock();
-}
+&#125;
 </code></pre><p>一般并不会只是使用Lock，而是会使用更复杂的锁ReentrantReadWriteLock：</p>
-<pre><code>public class ReadWriteLockDemo {
+<pre><code>public class ReadWriteLockDemo &#123;
     ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
     Lock readLock = lock.readLock();
     Lock writeLock = lock.writeLock();
     private int x = 0;
-    private void count() {
+    private void count() &#123;
         writeLock.lock();
-        try {
+        try &#123;
             x++;
-        } finally {
+        &#125; finally &#123;
             writeLock.unlock();
-        }
-    }
+        &#125;
+    &#125;
 
-    private void print(int time) {
+    private void print(int time) &#123;
         readLock.lock();
-        try {
-            for (int i = 0; i &lt; time; i++) {
+        try &#123;
+            for (int i = 0; i &lt; time; i++) &#123;
                 System.out.print(x + &quot; &quot;);
-            }
+            &#125;
             System.out.println();
-        } finally {
+        &#125; finally &#123;
             readLock.unlock();
-        }
-    }
+        &#125;
+    &#125;
 
-    public void runTest() {
-        new Thread() {
+    public void runTest() &#123;
+        new Thread() &#123;
             @Override
-            public void run() {
-                for (int i = 0; i &lt; 1_000_000; i++) {
+            public void run() &#123;
+                for (int i = 0; i &lt; 1_000_000; i++) &#123;
                     count();
-                }
+                &#125;
                 System.out.println(&quot;final x from 1: &quot; + x);
-            }
-        }.start();
-        new Thread() {
+            &#125;
+        &#125;.start();
+        new Thread() &#123;
             @Override
-            public void run() {
+            public void run() &#123;
                 print(1);
-            }
-        }.start();
-        new Thread() {
+            &#125;
+        &#125;.start();
+        new Thread() &#123;
             @Override
-            public void run() {
+            public void run() &#123;
                 print(2);
-            }
-        }.start();
-        new Thread() {
+            &#125;
+        &#125;.start();
+        new Thread() &#123;
             @Override
-            public void run() {
+            public void run() &#123;
                 print(3);
-            }
-        }.start();
-        new Thread() {
+            &#125;
+        &#125;.start();
+        new Thread() &#123;
             @Override
-            public void run() {
+            public void run() &#123;
                 print(4);
-            }
-        }.start();
-        new Thread() {
+            &#125;
+        &#125;.start();
+        new Thread() &#123;
             @Override
-            public void run() {
+            public void run() &#123;
                 print(5);
-            }
-        }.start();
-    }
-}
+            &#125;
+        &#125;.start();
+    &#125;
+&#125;
 </code></pre><h3 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h3><p>在未达到目标时 wait();用 while 循环检查;设置完成后 notifyAll();wait() 和 notify() / notifyAll() 都需要放在同步代码块里。</p>
-<pre><code>public class WaitDemo {
+<pre><code>public class WaitDemo &#123;
     private String sharedString;
-    private synchronized void initString() {
+    private synchronized void initString() &#123;
         sharedString = &quot;kkk&quot;;
         notifyAll();
-    }
+    &#125;
 
-    private synchronized void printString() {
-        while (sharedString == null) {
-            try {
+    private synchronized void printString() &#123;
+        while (sharedString == null) &#123;
+            try &#123;
                 wait();
-            } catch (InterruptedException e) {
+            &#125; catch (InterruptedException e) &#123;
                 e.printStackTrace();
-            }
-        }
+            &#125;
+        &#125;
         System.out.println(&quot;String: &quot; + sharedString);
-    }
+    &#125;
 
-    public void runTest() {
-        final Thread thread1 = new Thread() {
+    public void runTest() &#123;
+        final Thread thread1 = new Thread() &#123;
             @Override
-            public void run() {
-                try {
+            public void run() &#123;
+                try &#123;
                     Thread.sleep(500);
-                } catch (InterruptedException e) {
+                &#125; catch (InterruptedException e) &#123;
                     e.printStackTrace();
-                }
+                &#125;
                 printString();
-            }
-        };
+            &#125;
+        &#125;;
         thread1.start();
-        Thread thread2 = new Thread() {
+        Thread thread2 = new Thread() &#123;
             @Override
-            public void run() {
+            public void run() &#123;
                 Thread.yield();
-                try {
+                try &#123;
                     Thread.sleep(1000);
-                } catch (InterruptedException e) {
+                &#125; catch (InterruptedException e) &#123;
                     e.printStackTrace();
-                }
+                &#125;
                 initString();
-            }
-        };
+            &#125;
+        &#125;;
         thread2.start();
-    }
-}
+    &#125;
+&#125;
 </code></pre><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>Service：后台任务的活动空间。适用场景：音乐播放器等。IntentService：执行单个任务后自动关闭的 Service。</p>
 <p>如果在界面组件里创建 Executor 或者 HandlerThread，记得要在关闭的时候（例如Activity.onDestroy() ）关闭 Executor 和 HandlerThread。</p>
 <pre><code>@Override
-protected void onDestroy() {
+protected void onDestroy() &#123;
  super.onDestroy();
  executor.shutdown();
-}
+&#125;
 
 @Override
-protected void onDestroy() {
+protected void onDestroy() &#123;
  super.onDestroy();
  handlerThread.quit(); // 这个其实就是停⽌ Looper 的循环
-}
+&#125;
 </code></pre><hr>
 <h2 id="线程池ThreadPoolExecutor"><a href="#线程池ThreadPoolExecutor" class="headerlink" title="线程池ThreadPoolExecutor"></a>线程池ThreadPoolExecutor</h2><p>构造方法参数</p>
 <pre><code>public ThreadPoolExecutor(int corePoolSize,
@@ -482,49 +484,49 @@ protected void onDestroy() {
 </ul>
 </blockquote>
 <h2 id="手动创建线程池"><a href="#手动创建线程池" class="headerlink" title="手动创建线程池"></a>手动创建线程池</h2><p>仿照AsyncTask源码，写个线程池。缓存队列Runnable，加入到线程队列中去执行。</p>
-<pre><code>public class ThreadPoolDemo {
+<pre><code>public class ThreadPoolDemo &#123;
 
     static ThreadPoolExecutor threadPoolExecutor;
 
     private static final BlockingQueue&lt;Runnable&gt; sPoolWorkQueue = new LinkedBlockingQueue&lt;&gt;(128);
 
-    static {
+    static &#123;
         threadPoolExecutor = new ThreadPoolExecutor(
                 4,// 核心线程数，就是线程池里面的核心线程数量
                 10, // 最大线程数，线程池中的最大线程数
                 60,// 线程存活的时间，没事干的时候的空闲存活时间，超过这个时间线程就会被销毁
                 TimeUnit.SECONDS,// 线程存活时间的单位
                 sPoolWorkQueue,// 线程队列
-                new ThreadFactory() {//线程创建工厂，如果线程池需要创建线程就会调用newThread 来创建
+                new ThreadFactory() &#123;//线程创建工厂，如果线程池需要创建线程就会调用newThread 来创建
                     @Override
-                    public Thread newThread(@NonNull Runnable r) {
+                    public Thread newThread(@NonNull Runnable r) &#123;
 //                        Thread thread = new Thread(r,&quot;自己线程的名字&quot;);
 //                        thread.setDaemon(false); // 不是守护线程
                         return new Thread(r);
-                    }
-                });
-    }
+                    &#125;
+                &#125;);
+    &#125;
 
-    public static void main(String[] args) {
-        for (int i = 0; i &lt; 20; i++) {
-            Runnable runnable = new Runnable() {
+    public static void main(String[] args) &#123;
+        for (int i = 0; i &lt; 20; i++) &#123;
+            Runnable runnable = new Runnable() &#123;
                 @Override
-                public void run() {
-                    try {
+                public void run() &#123;
+                    try &#123;
                         Thread.sleep(2000);
-                    } catch (InterruptedException e) {
+                    &#125; catch (InterruptedException e) &#123;
                         e.printStackTrace();
-                    }
+                    &#125;
                     System.out.println(&quot;下载图片显示完毕&quot;+Thread.currentThread().getName());
-                }
-            };
+                &#125;
+            &#125;;
             // 加入线程队列，寻找合适的时机去执行
             threadPoolExecutor.execute(runnable);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre><p>输出结果：</p>
-<p><img src="/2019/05/13/21.线程和线程池/1.gif" alt=""></p>
+<p><img src="/2019/05/13/21.%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/21.线程和线程池/1.gif" alt></p>
 <blockquote>
 <p>Runnable缓存队列大于WorkQueue线程队列就可能会报错。</p>
 </blockquote>
@@ -533,46 +535,46 @@ SynchronousQueue: 线程安全的队列，它里面是没有固定的缓存的�
 PriorityBlockingQueue: 无序的可以根据优先级进行排序，指定的对象要实现Comparable作比较
 </code></pre><p>有限队列<code>SynchronousQueue</code>和<code>ArrayBlockingQueue</code>；无限队列<code>LinkedBloackingQueue</code>。</p>
 <p>PriorityBlockingQueue示例</p>
-<pre><code>public class Request implements Runnable,Comparable&lt;Request&gt;{
+<pre><code>public class Request implements Runnable,Comparable&lt;Request&gt;&#123;
     @Override
-    public void run() {
+    public void run() &#123;
         System.out.println(&quot;run&quot;);
-    }
+    &#125;
 
     @Override
-    public int compareTo(@NonNull Request o) {
+    public int compareTo(@NonNull Request o) &#123;
         return 0;
-    }
-}
+    &#125;
+&#125;
 
-public class ThreadPoolTest {
+public class ThreadPoolTest &#123;
     static ThreadPoolExecutor threadPoolExecutor;
 
     private static final BlockingQueue&lt;Runnable&gt; sPoolWorkQueue = new PriorityBlockingQueue&lt;Runnable&gt;(4);
 
-    static {
+    static &#123;
         threadPoolExecutor = new ThreadPoolExecutor(
                 4,// 核心线程数，就是线程池里面的核心线程数量
                 10, // 最大线程数，线程池中的最大线程数
                 60,// 线程存活的时间，没事干的时候的空闲存活时间，超过这个时间线程就会被销毁
                 TimeUnit.SECONDS,// 线程存活时间的单位
                 sPoolWorkQueue,// 线程队列
-                new ThreadFactory() {// 线程创建工厂，如果线程池需要创建线程就会调用 newThread 来创建
+                new ThreadFactory() &#123;// 线程创建工厂，如果线程池需要创建线程就会调用 newThread 来创建
                     @Override
-                    public Thread newThread(@NonNull Runnable r) {
+                    public Thread newThread(@NonNull Runnable r) &#123;
                         return new Thread(r);
-                    }
-                });
-    }
+                    &#125;
+                &#125;);
+    &#125;
 
-    public static void main(String[] args) {
-        for (int i = 0; i &lt; 20; i++) {
+    public static void main(String[] args) &#123;
+        for (int i = 0; i &lt; 20; i++) &#123;
             Request request = new Request();
             // 加入线程队列，寻找合适的时机去执行
             threadPoolExecutor.execute(request);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 </code></pre>
     </div>
     
@@ -610,13 +612,13 @@ public class ThreadPoolTest {
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/05/15/22.自定义View/" class="pre-post btn btn-default" title='自定义View'>
+        <a href="/2019/05/15/22.%E8%87%AA%E5%AE%9A%E4%B9%89View/" class="pre-post btn btn-default" title='自定义View'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">自定义View</span>
         </a>
     
     
-        <a href="/2019/04/26/17.学习node/" class="next-post btn btn-default" title='学习Node'>
+        <a href="/2019/04/26/17.%E5%AD%A6%E4%B9%A0node/" class="next-post btn btn-default" title='学习Node'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">学习Node</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -634,7 +636,7 @@ public class ThreadPoolTest {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建线程"><span class="toc-text">创建线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建子线程方式1："><span class="toc-text">创建子线程方式1：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建子线程方式2："><span class="toc-text">创建子线程方式2：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ThreadFactory"><span class="toc-text">ThreadFactory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Executors"><span class="toc-text">Executors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#synchronized"><span class="toc-text">synchronized</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile"><span class="toc-text">volatile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#atomic"><span class="toc-text">atomic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lock"><span class="toc-text">lock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wait"><span class="toc-text">wait</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程池ThreadPoolExecutor"><span class="toc-text">线程池ThreadPoolExecutor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#手动创建线程池"><span class="toc-text">手动创建线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#workQueue的参数"><span class="toc-text">workQueue的参数</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B"><span class="toc-text">创建线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AD%90%E7%BA%BF%E7%A8%8B%E6%96%B9%E5%BC%8F1%EF%BC%9A"><span class="toc-text">创建子线程方式1：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AD%90%E7%BA%BF%E7%A8%8B%E6%96%B9%E5%BC%8F2%EF%BC%9A"><span class="toc-text">创建子线程方式2：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ThreadFactory"><span class="toc-text">ThreadFactory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Executors"><span class="toc-text">Executors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#synchronized"><span class="toc-text">synchronized</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile"><span class="toc-text">volatile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#atomic"><span class="toc-text">atomic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lock"><span class="toc-text">lock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wait"><span class="toc-text">wait</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor"><span class="toc-text">线程池ThreadPoolExecutor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-text">手动创建线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#workQueue%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-text">workQueue的参数</span></a></li></ol></li></ol>
         
     </div>
 </aside>
@@ -686,7 +688,9 @@ public class ThreadPoolTest {
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>

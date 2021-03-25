@@ -39,9 +39,11 @@
 
 
 
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
 
 
 
@@ -60,7 +62,7 @@
 
     
 
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <!--[if lte IE 8]>
@@ -186,46 +188,46 @@
     </div>
     
     <div class="post-body post-content">
-        <h2 id="小实例"><a href="#小实例" class="headerlink" title="小实例"></a>小实例</h2><pre><code>private Handler mHandler = new Handler(){
+        <h2 id="小实例"><a href="#小实例" class="headerlink" title="小实例"></a>小实例</h2><pre><code>private Handler mHandler = new Handler()&#123;
     @Override
-    public void handleMessage(Message msg) {
+    public void handleMessage(Message msg) &#123;
         super.handleMessage(msg);
         System.out.println(msg.what);
-    }
-};
+    &#125;
+&#125;;
 @Override
-public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) &#123;
     super.onCreate(savedInstanceState, persistentState);
     setContentView(R.layout.activity_main);
-    new Thread(new Runnable() {
+    new Thread(new Runnable() &#123;
         @Override
-        public void run() {
+        public void run() &#123;
             //进行耗时操作后
             Message message = Message.obtain();
             message.what = 1;
             mHandler.sendMessage(message);
-        }
-    }).start();
-}
+        &#125;
+    &#125;).start();
+&#125;
 </code></pre><p>在子线程中，进行耗时操作，执行完操作后，发送消息，通知主线程更新UI。</p>
 <h2 id="子线程中创建handler"><a href="#子线程中创建handler" class="headerlink" title="子线程中创建handler"></a>子线程中创建handler</h2><p>如果在子线程中创建handler：</p>
-<pre><code>new Thread(){
+<pre><code>new Thread()&#123;
     @Override
-    public void run() {
+    public void run() &#123;
         Handler handler = new Handler();
-    }
-}.start();
+    &#125;
+&#125;.start();
 </code></pre><p>代码运行报错：</p>
 <pre><code>java.lang.RuntimeException: Can&apos;t create handler inside thread that has not called Looper.prepare()
 </code></pre><p>可以修改为：</p>
-<pre><code>new Thread(){
+<pre><code>new Thread()&#123;
     @Override
-    public void run() {
+    public void run() &#123;
         Looper.prepare();
         Handler handler = new Handler();
         Looper.loop();
-    }
-}.start();
+    &#125;
+&#125;.start();
 </code></pre><p>在主线程中不需要，究其原因，在ActivityThread的<code>main()</code>方法中：</p>
 <pre><code>...    
 Looper.prepareMainLooper();//准备循环
@@ -236,99 +238,99 @@ Looper.loop();//循环
 <h2 id="源码流程分析"><a href="#源码流程分析" class="headerlink" title="源码流程分析"></a>源码流程分析</h2><p>分析源码的思路,就是小实例中,从子线程调用<code>mHandler.sendMessage(message);</code>到主线程更新数据执行<code>handleMessage(Message msg)</code>方法的流程。</p>
 <h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>sendMessage到MessageQueue:<code>Handler.sendMessage</code> → <code>Handler.sendMessageDelayed</code> → <code>Handler.sendMessageAtTime</code> → <code>MessageQueue.enqueueMessage</code>。</p>
 <p>Handler中<code>sendMessageAtTime()</code>方法</p>
-<pre><code>public boolean sendMessageAtTime(Message msg, long uptimeMillis) {
+<pre><code>public boolean sendMessageAtTime(Message msg, long uptimeMillis) &#123;
     //其中mQueue是消息队列，从Looper中获取的
     MessageQueue queue = mQueue;
-    if (queue == null) {
+    if (queue == null) &#123;
         RuntimeException e = new RuntimeException(
                 this + &quot; sendMessageAtTime() called with no mQueue&quot;);
         Log.w(&quot;Looper&quot;, e.getMessage(), e);
         return false;
-    }
+    &#125;
     //调用enqueueMessage方法
     return enqueueMessage(queue, msg, uptimeMillis);
-}
+&#125;
 
-private boolean enqueueMessage(MessageQueue queue, Message msg, long uptimeMillis) {
+private boolean enqueueMessage(MessageQueue queue, Message msg, long uptimeMillis) &#123;
     //注意此处的msg.target就是当前的Handler，Looper中的loop会使用。
     msg.target = this;
-    if (mAsynchronous) {
+    if (mAsynchronous) &#123;
         msg.setAsynchronous(true);
-    }
+    &#125;
     //调用MessageQueue的enqueueMessage方法
     return queue.enqueueMessage(msg, uptimeMillis);
-}
+&#125;
 </code></pre><p>可以看到<code>sendMessageAtTime()</code>方法的作用很简单，就是调用MessageQueue的<code>enqueueMessage()</code>方法，往消息队列中添加一个消息。</p>
 <p>知识扩展：在子线程中通过Handler的post()方式或send()方式发送消息，最终都是调用了<code>sendMessageAtTime()</code>方法。子线程中调用Activity中的<code>runOnUiThread()</code>中更新UI，其实也是发送消息通知主线程更新UI，最终也会调用<code>sendMessageAtTime()</code>方法。</p>
 <p>MessageQueue中<code>enqueueMessage()</code>方法</p>
-<pre><code>boolean enqueueMessage(Message msg, long when) {
+<pre><code>boolean enqueueMessage(Message msg, long when) &#123;
     // 每一个Message必须有一个target
-    if (msg.target == null) {
+    if (msg.target == null) &#123;
         throw new IllegalArgumentException(&quot;Message must have a target.&quot;);
-    }
-    if (msg.isInUse()) {
+    &#125;
+    if (msg.isInUse()) &#123;
         throw new IllegalStateException(msg + &quot; This message is already in use.&quot;);
-    }
-    synchronized (this) {
+    &#125;
+    synchronized (this) &#123;
         //正在退出时，回收msg，加入到消息池
-        if (mQuitting) {
+        if (mQuitting) &#123;
             IllegalStateException e = new IllegalStateException(
                     msg.target + &quot; sending message to a Handler on a dead thread&quot;);
             Log.w(TAG, e.getMessage(), e);
             msg.recycle();
             return false;
-        }
+        &#125;
         msg.markInUse();
         msg.when = when;
         Message p = mMessages;
         boolean needWake;
-        if (p == null || when == 0 || when &lt; p.when) {
+        if (p == null || when == 0 || when &lt; p.when) &#123;
 
             //p为null(代表MessageQueue没有消息） 或者msg的触发时间是队列中最早的（即第一个msg）,则进入该该分支.
             msg.next = p;
             mMessages = msg;
             needWake = mBlocked;
-        } else {
+        &#125; else &#123;
 
             //将消息按时间顺序插入到MessageQueue。
             needWake = mBlocked &amp;&amp; p.target == null &amp;&amp; msg.isAsynchronous();
             Message prev;
-            for (;;) {
+            for (;;) &#123;
                 prev = p;
                 p = p.next;
-                if (p == null || when &lt; p.when) {
+                if (p == null || when &lt; p.when) &#123;
                     break;
-                }
-                if (needWake &amp;&amp; p.isAsynchronous()) {
+                &#125;
+                if (needWake &amp;&amp; p.isAsynchronous()) &#123;
                     needWake = false;
-                }
-            }
+                &#125;
+            &#125;
             msg.next = p; // invariant: p == prev.next
             prev.next = msg;
-        }
-        if (needWake) {
+        &#125;
+        if (needWake) &#123;
             nativeWake(mPtr);
-        }
-    }
+        &#125;
+    &#125;
     return true;
-}
+&#125;
 </code></pre><p>MessageQueue是按照Message触发时间(when)的先后顺序排列的，队头的消息是最早触发的消息。当有消息需要加入消息队列时，会从队列头开始遍历，直到找到消息应该插入的合适位置，以保证所有消息的时间顺序。<strong>MessageQueue消息队列采用链表存储Message,因为链表是增加删除快，数组是查询快</strong></p>
 <p>第一步总结：Handler.sendMessage是把Message加入了消息队列(MessageQueue)中，消息队列采用的是链表存储方式，按照when也就是时间排序。</p>
 <h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><p>我们知道主线程中，已经创建了Looper，在Loop方法中消息循环调用了Handler.handleMessage。</p>
 <h4 id="初始化Looper"><a href="#初始化Looper" class="headerlink" title="初始化Looper"></a>初始化Looper</h4><p>无参情况下，默认调用<code>prepare(true);</code>表示的是这个Looper可以退出，而对于false的情况则表示当前Looper不可以退出。</p>
 <p>Looper中</p>
-<pre><code>public static void prepare() {
+<pre><code>public static void prepare() &#123;
         prepare(true);
-}
+&#125;
 
-private static void prepare(boolean quitAllowed) {
-    if (sThreadLocal.get() != null) {
+private static void prepare(boolean quitAllowed) &#123;
+    if (sThreadLocal.get() != null) &#123;
         throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);
-    }
+    &#125;
     sThreadLocal.set(new Looper(quitAllowed));
-}
+&#125;
 </code></pre><p>调用<code>sThreadLocal.set</code>，在ThreadLocal中</p>
-<pre><code>public void set(T value) {
+<pre><code>public void set(T value) &#123;
     Thread t = Thread.currentThread();
     //从线程中获取ThreadLocalMap ，一个线程中只有一个ThreadLocalMap
     ThreadLocalMap map = getMap(t);
@@ -336,14 +338,14 @@ private static void prepare(boolean quitAllowed) {
         map.set(this, value);
     else
         createMap(t, value);
-}
+&#125;
 </code></pre><p>一个线程中只有一个ThreadLocalMap，<strong>一个线程中只能创建一个Looper</strong>，ThreadLocalMap中把ThreadLocal为key，Looper为value，存储起来。其中ThreadLocal是线程本地存储区（Thread Local Storage，简称为TLS），每个线程都有自己的私有的本地存储区域，不同线程之间彼此不能访问对方的TLS区域。</p>
-<h4 id="开启Looper"><a href="#开启Looper" class="headerlink" title="开启Looper"></a>开启Looper</h4><pre><code>public static void loop() {
+<h4 id="开启Looper"><a href="#开启Looper" class="headerlink" title="开启Looper"></a>开启Looper</h4><pre><code>public static void loop() &#123;
     //获取线程中TLS存储的Looper对象 
     final Looper me = myLooper();
-    if (me == null) {
+    if (me == null) &#123;
         throw new RuntimeException(&quot;No Looper; Looper.prepare() wasn&apos;t called on this thread.&quot;);
-    }
+    &#125;
 
     //获取Looper对象中的消息队列
     final MessageQueue queue = me.mQueue;
@@ -351,125 +353,125 @@ private static void prepare(boolean quitAllowed) {
     final long ident = Binder.clearCallingIdentity();
 
     //进入loop的主循环方法，死循环
-    for (;;) {
+    for (;;) &#123;
         Message msg = queue.next(); //可能会阻塞,因为next()方法可能会无限循环
-        if (msg == null) { //消息为空，则退出循环
+        if (msg == null) &#123; //消息为空，则退出循环
             // No message indicates that the message queue is quitting.
             return;
-        }
+        &#125;
 
-        try {
+        try &#123;
 
             //重点地方,获取msg的目标Handler，然后通过handler去执行Message这个时候就调用了handleMessage方法
             msg.target.dispatchMessage(msg);
             end = (slowDispatchThresholdMs == 0) ? 0 : SystemClock.uptimeMillis();
-        } finally {
-            if (traceTag != 0) {
+        &#125; finally &#123;
+            if (traceTag != 0) &#123;
                 Trace.traceEnd(traceTag);
-            }
-        }
+            &#125;
+        &#125;
 
         // 回收消息
         msg.recycleUnchecked();
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>loop()进入循环模式，直到消息为空时退出循环:读取MessageQueue的下一条Message；把Message分发给相应的target。</p>
 <p><strong>当next()取出下一条消息时，队列中已经没有消息时，next()会无限循环，产生阻塞。等待MessageQueue中加入消息，然后重新唤醒。</strong></p>
 <h4 id="Handler创建"><a href="#Handler创建" class="headerlink" title="Handler创建"></a>Handler创建</h4><p>创建Handler</p>
-<pre><code>public Handler() {
+<pre><code>public Handler() &#123;
     this(null, false);
-}
+&#125;
 
-public Handler(Callback callback, boolean async) {
+public Handler(Callback callback, boolean async) &#123;
 
     //必须先执行Looper.prepare()，才能获取Looper对象，否则为null.
     mLooper = Looper.myLooper();  //从当前线程的TLS中获取Looper对象
-    if (mLooper == null) {
+    if (mLooper == null) &#123;
         throw new RuntimeException(&quot;&quot;);
-    }
+    &#125;
     mQueue = mLooper.mQueue; //消息队列，来自Looper对象
     mCallback = callback;  //回调方法
     mAsynchronous = async; //设置消息是否为异步处理方式
-}
+&#125;
 </code></pre><p>对于Handler的无参构造方法，默认采用当前线程TLS中的Looper对象，并且callback回调方法为null，且消息为同步处理方式。只要执行了<code>Looper.prepare()</code>方法，那么便可以获取有效的Looper对象。</p>
 <h4 id="Handler分发消息"><a href="#Handler分发消息" class="headerlink" title="Handler分发消息"></a>Handler分发消息</h4><p>在<code>Looper.loop()</code>方法中，获取到下一条消息后，执行<code>msg.target.dispatchMessage(msg)</code>，来分发消息到目标Handler对象。   </p>
-<pre><code>public void dispatchMessage(Message msg) {
-    if (msg.callback != null) {
+<pre><code>public void dispatchMessage(Message msg) &#123;
+    if (msg.callback != null) &#123;
         //当Message存在回调方法，回调msg.callback.run()方法；
         handleCallback(msg);
-    } else {
-        if (mCallback != null) {
+    &#125; else &#123;
+        if (mCallback != null) &#123;
             //当Handler存在Callback成员变量时，回调方法handleMessage()；
-            if (mCallback.handleMessage(msg)) {
+            if (mCallback.handleMessage(msg)) &#123;
                 return;
-            }
-        }
+            &#125;
+        &#125;
         //Handler自身的回调方法handleMessage()
         handleMessage(msg);
-    }
-}
+    &#125;
+&#125;
 
-private static void handleCallback(Message message) {
+private static void handleCallback(Message message) &#123;
         message.callback.run();
-}
+&#125;
 
-public void handleMessage(Message msg) {
-}
+public void handleMessage(Message msg) &#123;
+&#125;
 </code></pre><h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><p>获取消息：当发送了消息后，在MessageQueue维护了消息队列，然后在Looper中通过<code>loop()</code>方法，不断地获取消息。上面对<code>loop()</code>方法进行了介绍，其中最重要的是调用了<code>queue.next()</code>方法,通过该方法来提取下一条信息。下面我们来看一下<code>next()</code>方法的具体流程。  </p>
 <p>MessageQueue中</p>
-<pre><code>Message next() {
+<pre><code>Message next() &#123;
     final long ptr = mPtr;
-    if (ptr == 0) { //当消息循环已经退出，则直接返回
+    if (ptr == 0) &#123; //当消息循环已经退出，则直接返回
         return null;
-    }
+    &#125;
     int pendingIdleHandlerCount = -1; // 循环迭代的首次为-1
     int nextPollTimeoutMillis = 0;
-    for (;;) {
-        if (nextPollTimeoutMillis != 0) {
+    for (;;) &#123;
+        if (nextPollTimeoutMillis != 0) &#123;
             Binder.flushPendingCommands();
-        }
+        &#125;
         //阻塞操作，当等待nextPollTimeoutMillis时长，或者消息队列被唤醒，都会返回
         nativePollOnce(ptr, nextPollTimeoutMillis);
-        synchronized (this) {
+        synchronized (this) &#123;
             final long now = SystemClock.uptimeMillis();
             Message prevMsg = null;
             Message msg = mMessages;
-            if (msg != null &amp;&amp; msg.target == null) {
+            if (msg != null &amp;&amp; msg.target == null) &#123;
                 //当消息Handler为空时，查询MessageQueue中的下一条异步消息msg，为空则退出循环。
-                do {
+                do &#123;
                     prevMsg = msg;
                     msg = msg.next;
-                } while (msg != null &amp;&amp; !msg.isAsynchronous());
-            }
-            if (msg != null) {
-                if (now &lt; msg.when) {
+                &#125; while (msg != null &amp;&amp; !msg.isAsynchronous());
+            &#125;
+            if (msg != null) &#123;
+                if (now &lt; msg.when) &#123;
                     //当异步消息触发时间大于当前时间，则设置下一次轮询的超时时长
                     nextPollTimeoutMillis = (int) Math.min(msg.when - now, Integer.MAX_VALUE);
-                } else {
+                &#125; else &#123;
                     // 获取一条消息，并返回
                     mBlocked = false;
-                    if (prevMsg != null) {
+                    if (prevMsg != null) &#123;
                         prevMsg.next = msg.next;
-                    } else {
+                    &#125; else &#123;
                         mMessages = msg.next;
-                    }
+                    &#125;
                     msg.next = null;
                     //设置消息的使用状态，即flags |= FLAG_IN_USE
                     msg.markInUse();
                     return msg;   //成功地获取MessageQueue中的下一条即将要执行的消息
-                }
-            } else {
+                &#125;
+            &#125; else &#123;
                 //没有消息
                 nextPollTimeoutMillis = -1;
-            }
+            &#125;
          //消息正在退出，返回null
-            if (mQuitting) {
+            if (mQuitting) &#123;
                 dispose();
                 return null;
-            }
+            &#125;
             ...............................
-    }
-}
+    &#125;
+&#125;
 </code></pre><p>nativePollOnce是阻塞操作，其中nextPollTimeoutMillis代表下一个消息到来前，还需要等待的时长；当nextPollTimeoutMillis = -1时，表示消息队列中无消息，会一直等待下去。可以看出<code>next()</code>方法根据消息的触发时间，获取下一条需要执行的消息,队列中消息为空时，则会进行阻塞操作。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>消息机制主要包含部分：</p>
 <p><code>Message</code>：需要传递的消息，可以传递数据；</p>
@@ -479,16 +481,16 @@ public void handleMessage(Message msg) {
 <p>在主线程中,默认已经调用了<code>Looper.preper()</code>方法,调用该方法的目的是在Looper中创建MessageQueue成员变量并把Looper对象绑定到当前线程中。当调用Handler的<code>sendMessage()</code>方法的时候就将Message对象添加到了Looper创建的MessageQueue队列中，同时给Message指定了target对象，其实这个target对象就是Handler对象。主线程默认执行了<code>Looper.looper()</code>方法,该方法从Looper的成员变量MessageQueue中取出Message，然后调用Message的target对象的handleMessage()方法。这样就完成了整个消息机制。</p>
 <p><strong>每个线程中只能存在一个Looper，Looper是保存在ThreadLocal中的。</strong>主线程（UI线程）已经创建了一个Looper，所以在主线程中不需要再创建Looper，但是在其他线程中需要创建Looper。<strong>每个线程中可以有多个Handler，即一个Looper可以处理来自多个Handler的消息。</strong> Looper中维护一个MessageQueue，来维护消息队列。MessageQueue有一组待处理的Message,消息队列中的Message可以来自不同的Handler。</p>
 <h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><h3 id="在Activity中使用Handler的时候如何去除警告信息"><a href="#在Activity中使用Handler的时候如何去除警告信息" class="headerlink" title="在Activity中使用Handler的时候如何去除警告信息"></a>在Activity中使用Handler的时候如何去除警告信息</h3><p>将Handler类声明为static，同时在Handler类中使用弱引用去引用Context对象。</p>
-<pre><code>static class MyHandler extends Handler {
+<pre><code>static class MyHandler extends Handler &#123;
     private SoftReference&lt;Context&gt; srf;
-    public MyHandler(Context context) {
+    public MyHandler(Context context) &#123;
         srf = new SoftReference&lt;Context&gt;(context);
-    }
+    &#125;
     @Override
-    public void handleMessage(Message msg) {
+    public void handleMessage(Message msg) &#123;
         Toast.makeText(srf.get(), msg.toString(), Toast.LENGTH_SHORT).show();
-    }
-}
+    &#125;
+&#125;
 </code></pre><h3 id="Android中为什么主线程不会因为Looper-loop-里的死循环卡死"><a href="#Android中为什么主线程不会因为Looper-loop-里的死循环卡死" class="headerlink" title="Android中为什么主线程不会因为Looper.loop()里的死循环卡死"></a>Android中为什么主线程不会因为Looper.loop()里的死循环卡死</h3><p>主线程，我们是绝不希望会被运行一段时间，自己就退出，那么如何保证能一直存活呢？简单做法就是可执行代码是能一直执行下去的，死循环便能保证不会被退出，例如，binder线程也是采用死循环的方法，通过循环方式不同与Binder驱动进行读写操作，当然并非简单地死循环，无消息时会休眠。但这里可能又引发了另一个问题，既然是死循环又如何去处理其他事务呢？通过创建新线程的方式。</p>
 <p><strong>真正会卡死主线程的操作是在回调方法onCreate/onStart/onResume等操作时间过长，会导致掉帧，甚至发生ANR，looper.loop本身不会导致应用卡死。</strong></p>
 <p>ActivityThread实际上并非线程，ActivityThread并没有真正继承Thread类，只是往往运行在主线程，该人以线程的感觉，其实承载ActivityThread的主线程就是由Zygote fork而创建的进程。</p>
@@ -496,7 +498,7 @@ public void handleMessage(Message msg) {
 <p>Activity的生命周期都是依靠主线程的Looper.loop，当收到不同Message时则采用相应措施：</p>
 <p>在H.handleMessage(msg)方法中，根据接收到不同的msg，执行相应的生命周期。</p>
 <p>比如收到msg=H.LAUNCH_ACTIVITY，则调用ActivityThread.handleLaunchActivity()方法，最终会通过反射机制，创建Activity实例，然后再执行Activity.onCreate()等方法。</p>
-<h3 id="手写handler实现"><a href="#手写handler实现" class="headerlink" title="手写handler实现"></a>手写handler实现</h3><p><a href="https://github.com/AdamRight/TeaTool/tree/master/app/src/main/java/com/tea/teatool/teahandler" target="_blank" rel="noopener">实现代码github</a></p>
+<h3 id="手写handler实现"><a href="#手写handler实现" class="headerlink" title="手写handler实现"></a>手写handler实现</h3><p><a target="_blank" rel="noopener" href="https://github.com/AdamRight/TeaTool/tree/master/app/src/main/java/com/tea/teatool/teahandler">实现代码github</a></p>
 
     </div>
     
@@ -534,13 +536,13 @@ public void handleMessage(Message msg) {
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/06/29/26.手写实现Butterknife/" class="pre-post btn btn-default" title='手写实现Butterknife'>
+        <a href="/2019/06/29/26.%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0Butterknife/" class="pre-post btn btn-default" title='手写实现Butterknife'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
             <span class="hidden-xs">手写实现Butterknife</span>
         </a>
     
     
-        <a href="/2019/05/15/22.自定义View/" class="next-post btn btn-default" title='自定义View'>
+        <a href="/2019/05/15/22.%E8%87%AA%E5%AE%9A%E4%B9%89View/" class="next-post btn btn-default" title='自定义View'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">自定义View</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
@@ -558,7 +560,7 @@ public void handleMessage(Message msg) {
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#小实例"><span class="toc-text">小实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#子线程中创建handler"><span class="toc-text">子线程中创建handler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码流程分析"><span class="toc-text">源码流程分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步"><span class="toc-text">第一步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步"><span class="toc-text">第二步</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化Looper"><span class="toc-text">初始化Looper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开启Looper"><span class="toc-text">开启Looper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Handler创建"><span class="toc-text">Handler创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Handler分发消息"><span class="toc-text">Handler分发消息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三步"><span class="toc-text">第三步</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思考"><span class="toc-text">思考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在Activity中使用Handler的时候如何去除警告信息"><span class="toc-text">在Activity中使用Handler的时候如何去除警告信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android中为什么主线程不会因为Looper-loop-里的死循环卡死"><span class="toc-text">Android中为什么主线程不会因为Looper.loop()里的死循环卡死</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手写handler实现"><span class="toc-text">手写handler实现</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E5%AE%9E%E4%BE%8B"><span class="toc-text">小实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%B8%AD%E5%88%9B%E5%BB%BAhandler"><span class="toc-text">子线程中创建handler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="toc-text">源码流程分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="toc-text">第一步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="toc-text">第二步</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96Looper"><span class="toc-text">初始化Looper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E5%90%AFLooper"><span class="toc-text">开启Looper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Handler%E5%88%9B%E5%BB%BA"><span class="toc-text">Handler创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Handler%E5%88%86%E5%8F%91%E6%B6%88%E6%81%AF"><span class="toc-text">Handler分发消息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5"><span class="toc-text">第三步</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%80%83"><span class="toc-text">思考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8Activity%E4%B8%AD%E4%BD%BF%E7%94%A8Handler%E7%9A%84%E6%97%B6%E5%80%99%E5%A6%82%E4%BD%95%E5%8E%BB%E9%99%A4%E8%AD%A6%E5%91%8A%E4%BF%A1%E6%81%AF"><span class="toc-text">在Activity中使用Handler的时候如何去除警告信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%BB%E7%BA%BF%E7%A8%8B%E4%B8%8D%E4%BC%9A%E5%9B%A0%E4%B8%BALooper-loop-%E9%87%8C%E7%9A%84%E6%AD%BB%E5%BE%AA%E7%8E%AF%E5%8D%A1%E6%AD%BB"><span class="toc-text">Android中为什么主线程不会因为Looper.loop()里的死循环卡死</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99handler%E5%AE%9E%E7%8E%B0"><span class="toc-text">手写handler实现</span></a></li></ol></li></ol>
         
     </div>
 </aside>
@@ -610,7 +612,9 @@ public void handleMessage(Message msg) {
 
 
 
-<script src="/js/app.js?rev=@@hash"></script>
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
 
 </body>
 </html>
