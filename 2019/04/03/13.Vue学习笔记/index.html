@@ -30,7 +30,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atom-one-dark.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atelier-heath-dark.min.css" />
     
   
 
@@ -237,9 +237,9 @@
 <h3 id="mvvm"><a href="#mvvm" class="headerlink" title="mvvm"></a>mvvm</h3><hr>
 <p><strong>MVVM是前端视图层的概念，主要关注于视图层分离，把前端的视图层分为三部分，Model(数据)、View(每个页面的HTML结构)、ViewModel(调度者，数据双向绑定，可以理解为View和Model的通信桥梁)。</strong></p>
 <p>引入</p>
-<pre><code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
-</code></pre><p>实例</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+</code></pre></div><p>实例</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -273,8 +273,8 @@
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><p>文本插值使用双大括号:</p>
-<pre><code>&#123;&#123;&#125;&#125;
+</code></pre></div><p>文本插值使用双大括号:</p>
+<div class="hljs code-wrapper"><pre><code>&#123;&#123;&#125;&#125;
 
 ----------------------------------
 
@@ -374,9 +374,9 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</p></div></body></html></code></pre><hr>
+</p></div></body></html></code></pre></div><hr>
 <h3 id="示例之跑马灯"><a href="#示例之跑马灯" class="headerlink" title="示例之跑马灯"></a>示例之跑马灯</h3><hr>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -422,12 +422,12 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h3 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a><code>v-model</code></h3><hr>
 <p><strong>双向数据绑定，唯一的一个</strong>。<code>v-bind</code>只能实现数据的单向绑定，从M自动绑定到V，无法实现数据的双向绑定。 <code>v-model</code>可以实现表单元素和Model中数据双向绑定。</p>
 <p>注意:只能用到在<code>input、select、text、checkbox、radio</code>等表单元素中。根据表单上的值，自动更新绑定的元素的值。</p>
 <p><code>v-model</code>实现简单计算器</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot; xmlns:v-model=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -481,11 +481,11 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a><code>v-for</code></h3><hr>
 <p>v-for 指令需要以<code>site in sites</code>形式的特殊语法， sites是源数据数组并且site是数组元素迭代的别名。</p>
 <p>循环普通数组；循环对象数组；循环对象，包含key，value，和索引；迭代数字，从1开始。</p>
-<pre><code>&lt;div id=&quot;app&quot;&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;div id=&quot;app&quot;&gt;
     &lt;!--循环普通数组--&gt;
     &lt;p v-for=&quot;item in list&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/p&gt;
     &lt;p v-for=&quot;(item,i) in list&quot;&gt;索引值是&#123;&#123;i&#125;&#125;，每一项是&#123;&#123;item&#125;&#125;&lt;/p&gt;
@@ -519,15 +519,15 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
         &#125;
     &#125;)
 &lt;/script&gt;
-</code></pre><p>注意：在2.2.0+的版本里，当在组件中使用<code>v-for</code>时，key是必须的。<strong>key属性只能使用number或者string，必须使用v-bind属性绑定的形式，指定key的值。</strong></p>
-<pre><code>&lt;p v-for=&quot;item in list&quot; :key=&quot;item.id&quot;&gt;
+</code></pre></div><p>注意：在2.2.0+的版本里，当在组件中使用<code>v-for</code>时，key是必须的。<strong>key属性只能使用number或者string，必须使用v-bind属性绑定的形式，指定key的值。</strong></p>
+<div class="hljs code-wrapper"><pre><code>&lt;p v-for=&quot;item in list&quot; :key=&quot;item.id&quot;&gt;
 
 &lt;/p&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h3 id="v-if和v-show"><a href="#v-if和v-show" class="headerlink" title="v-if和v-show"></a><code>v-if</code>和<code>v-show</code></h3><hr>
 <p>根据表达式的值来决定是否插入元素。</p>
 <p><code>v-if</code>每次都会重新删除或者创建元素，切换消耗性能；<code>v-show</code>只是切换了元素<code>display:none</code>样式，较高的初始渲染消耗。</p>
-<pre><code>&lt;div id=&quot;app&quot;&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;div id=&quot;app&quot;&gt;
     &lt;input type=&quot;button&quot; @click=&quot;flag=!flag&quot; value=&quot;toggle&quot;/&gt;
     &lt;h3 v-if=&quot;flag&quot;&gt;这是v-if控制&lt;/h3&gt;
     &lt;h3 v-show=&quot;flag&quot;&gt;这是v-show控制&lt;/h3&gt;
@@ -541,8 +541,8 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
         &#125;
     &#125;)
 &lt;/script&gt;
-</code></pre><p><code>v-else-if</code>和<code>v-else</code>的使用</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre></div><p><code>v-else-if</code>和<code>v-else</code>的使用</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -573,7 +573,7 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h2 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h2><hr>
 <p>修饰符是以半角句号<code>.</code>指明的特殊后缀，用于指出一个指令应该以特殊方式绑定。</p>
 <h3 id="stop"><a href="#stop" class="headerlink" title=".stop"></a><code>.stop</code></h3><p>阻止事件冒泡</p>
@@ -582,7 +582,7 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
 <h3 id="self"><a href="#self" class="headerlink" title=".self"></a><code>.self</code></h3><p>只当事件在该元素本身触发时，触发回调。只会阻止自己身上冒泡行为的触发，并不会真正阻止冒泡行为。</p>
 <h3 id="once"><a href="#once" class="headerlink" title=".once"></a><code>.once</code></h3><p>事件只触发一次</p>
 <p>代码</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -632,10 +632,10 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h2 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h2><h3 id="class样式"><a href="#class样式" class="headerlink" title="class样式"></a>class样式</h3><hr>
 <p>格式：</p>
-<pre><code>&lt;div id=&quot;app&quot;&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;div id=&quot;app&quot;&gt;
     &lt;!--直接绑定--&gt;
     &lt;h1 v-bind:class=&quot;[&apos;类名1&apos;,&apos;类名2&apos;,&apos;类名3&apos;]&quot;&gt;&lt;/h1&gt;
     &lt;!--直接绑定，简写--&gt;
@@ -658,8 +658,8 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
         &#125;
     &#125;)
 &lt;/script&gt;
-</code></pre><p>代码：</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre></div><p>代码：</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -713,9 +713,9 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
   &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h3 id="内联样式"><a href="#内联样式" class="headerlink" title="内联样式"></a>内联样式</h3><hr>
-<pre><code>&lt;div id=&quot;app&quot;&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;div id=&quot;app&quot;&gt;
     &lt;!--直接绑定--&gt;
     &lt;h1 :style=&quot;&#123;color:&apos;red&apos;,&apos;font-weight&apos;:200&#125;&quot;&gt;哈哈哈&lt;/h1&gt;
     &lt;!--data--&gt;
@@ -733,12 +733,12 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
         &#125;
     &#125;)
 &lt;/script&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><hr>
 <p>Vue允许你自定义过滤器，被用作一些常见的文本格式化。过滤器可以用在两个地方：双括号插值和<code>v-bind</code>表达式，过滤器应该被添加在js表达式的尾部，由管道符(<code>|</code>)提示。</p>
 <p>过滤器中function第一个参数已经被规定死了：永远是管道符前面传递过来的数据。</p>
 <p>全局过滤器和私有过滤器：</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -782,15 +782,15 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><p>注意：使用<code>ES6</code>中的字符串新方法 <code>String.prototype.padStart(maxLength, fillString=&#39;&#39;)</code> 或 <code>String.prototype.padEnd(maxLength, fillString=&#39;&#39;)</code>来填充字符串。</p>
+</code></pre></div><p>注意：使用<code>ES6</code>中的字符串新方法 <code>String.prototype.padStart(maxLength, fillString=&#39;&#39;)</code> 或 <code>String.prototype.padEnd(maxLength, fillString=&#39;&#39;)</code>来填充字符串。</p>
 <hr>
 <h2 id="自定义键盘修饰符"><a href="#自定义键盘修饰符" class="headerlink" title="自定义键盘修饰符"></a>自定义键盘修饰符</h2><hr>
-<pre><code>Vue.config.keyCodes.f2 = 113
-</code></pre><hr>
+<div class="hljs code-wrapper"><pre><code>Vue.config.keyCodes.f2 = 113
+</code></pre></div><hr>
 <h2 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h2><hr>
 <p>和js相关的最好在<code>inserted</code>中执行；和样式相关的，一般在<code>bind</code>中执行。</p>
 <p><code>Vue.directive</code>:</p>
-<pre><code>Vue.directive(&apos;focus&apos;, &#123;
+<div class="hljs code-wrapper"><pre><code>Vue.directive(&apos;focus&apos;, &#123;
   bind: function (el) &#123; // 每当指令绑定到元素上的时候，会立即执行这个 bind 函数，只执行一次
 
   &#125;,
@@ -801,10 +801,10 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
 
   &#125;
 &#125;)
-</code></pre><p>全局指令和私有指令。自定义指令下的钩子函数。</p>
-<pre><code>https://cn.vuejs.org/v2/guide/custom-directive.html
-</code></pre><p>私有指令：</p>
-<pre><code>var vm2 = new Vue(&#123;
+</code></pre></div><p>全局指令和私有指令。自定义指令下的钩子函数。</p>
+<div class="hljs code-wrapper"><pre><code>https://cn.vuejs.org/v2/guide/custom-directive.html
+</code></pre></div><p>私有指令：</p>
+<div class="hljs code-wrapper"><pre><code>var vm2 = new Vue(&#123;
   el: &apos;#app&apos;,
   data: &#123;
   &#125;,
@@ -814,13 +814,13 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
   directives: &#123; // 自定义私有指令
   &#125;
 &#125;)
-</code></pre><p>简写方式：</p>
-<pre><code>directives: &#123; // 自定义私有指令
+</code></pre></div><p>简写方式：</p>
+<div class="hljs code-wrapper"><pre><code>directives: &#123; // 自定义私有指令
     &apos;fontsize&apos;: function (el, binding) &#123; // 注意：这个 function 等同于 把 代码写到了 bind 和 update 中去
       el.style.fontSize = parseInt(binding.value) + &apos;px&apos;
     &#125;
   &#125;
-</code></pre><hr>
+</code></pre></div><hr>
 <h2 id="vue实例的生命周期"><a href="#vue实例的生命周期" class="headerlink" title="vue实例的生命周期"></a>vue实例的生命周期</h2><hr>
 <p>生命周期：从Vue实例创建、运行、到销毁期间，总是伴随着各种各样的事件，这些事件，统称为生命周期。生命周期钩子 = 生命周期函数 = 生命周期事件。</p>
 <p>主要的生命周期函数分类：</p>
@@ -844,7 +844,7 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
 </li>
 </ul>
 <p>代码：</p>
-<pre><code>// 创建 Vue 实例，得到 ViewModel
+<div class="hljs code-wrapper"><pre><code>// 创建 Vue 实例，得到 ViewModel
 var vm = new Vue(&#123;
   el: &apos;#app&apos;,
   data: &#123;
@@ -882,20 +882,20 @@ var vm = new Vue(&#123;
     // updated 事件执行的时候，页面和 data 数据已经保持同步了，都是最新的
   &#125;
 &#125;);
-</code></pre><p><strong>页面初始化可以在created中请求网络。</strong></p>
+</code></pre></div><p><strong>页面初始化可以在created中请求网络。</strong></p>
 <hr>
 <h2 id="vue-resource实现网络请求"><a href="#vue-resource实现网络请求" class="headerlink" title="vue-resource实现网络请求"></a>vue-resource实现网络请求</h2><hr>
-<pre><code>https://github.com/pagekit/vue-resource
-</code></pre><p>直接在页面中，通过script标签，引入vue-resource的脚本文件,注意：引用的先后顺序是：先引用Vue的脚本文件，再引用vue-resource的脚本文件；</p>
-<pre><code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue-resource@1.5.1&quot;&gt;&lt;/script&gt;
-</code></pre><p>发送get请求：</p>
-<pre><code>getInfo() &#123; // get 方式获取数据
+<div class="hljs code-wrapper"><pre><code>https://github.com/pagekit/vue-resource
+</code></pre></div><p>直接在页面中，通过script标签，引入vue-resource的脚本文件,注意：引用的先后顺序是：先引用Vue的脚本文件，再引用vue-resource的脚本文件；</p>
+<div class="hljs code-wrapper"><pre><code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue-resource@1.5.1&quot;&gt;&lt;/script&gt;
+</code></pre></div><p>发送get请求：</p>
+<div class="hljs code-wrapper"><pre><code>getInfo() &#123; // get 方式获取数据
   this.$http.get(&apos;url&apos;).then(res =&gt; &#123;
     console.log(res.body);
   &#125;)
 &#125;
-</code></pre><p>发送post请求：</p>
-<pre><code>postInfo() &#123;
+</code></pre></div><p>发送post请求：</p>
+<div class="hljs code-wrapper"><pre><code>postInfo() &#123;
   // post 方法接收三个参数：
   // 参数1： 要请求的URL地址
   // 参数2： 要发送的数据对象
@@ -904,18 +904,18 @@ var vm = new Vue(&#123;
     console.log(res.body);
   &#125;);
 &#125;
-</code></pre><p>发送JSONP请求获取数据：</p>
-<pre><code>jsonpInfo() &#123; // JSONP形式从服务器获取数据
+</code></pre></div><p>发送JSONP请求获取数据：</p>
+<div class="hljs code-wrapper"><pre><code>jsonpInfo() &#123; // JSONP形式从服务器获取数据
   this.$http.jsonp(url).then(res =&gt; &#123;
     console.log(res.body);
   &#125;);
 &#125;
-</code></pre><p>JSONP的实现原理</p>
+</code></pre></div><p>JSONP的实现原理</p>
 <ul>
 <li>由于浏览器的安全性限制，不允许AJAX访问 协议不同、域名不同、端口号不同的数据接口，浏览器认为这种访问不安全；</li>
 <li>可以通过动态创建script标签的形式，把script标签的src属性，指向数据接口的地址，因为script标签不存在跨域限制，这种数据获取方式，称作JSONP（注意：根据JSONP的实现原理，知晓，JSONP只支持Get请求）；</li>
-<li>具体实现过程：<pre><code>- 先在客户端定义一个回调方法，预定义对数据的操作；
-</code></pre><ul>
+<li>具体实现过程：<div class="hljs code-wrapper"><pre><code>- 先在客户端定义一个回调方法，预定义对数据的操作；
+</code></pre></div><ul>
 <li>再把这个回调方法的名称，通过URL传参的形式，提交到服务器的数据接口；</li>
 <li>服务器数据接口组织好要发送给客户端的数据，再拿着客户端传递过来的回调方法名称，拼接出一个调用这个方法的字符串，发送给客户端去解析执行；</li>
 <li>客户端拿到服务器返回的字符串之后，当作Script脚本去解析执行，这样就能够拿到JSONP的数据了；</li>
@@ -924,14 +924,14 @@ var vm = new Vue(&#123;
 </ul>
 <p>除了vue-resource之外，axios也可以实现数据请求。</p>
 <p>全局配置</p>
-<pre><code>// 如果我们通过全局配置了，请求的数据接口 根域名，则 ，在每次单独发起 http 请求的时候，请求的 url 路径，应该以相对路径开头，前面不能带 /  ，否则 不会启用根路径做拼接；
+<div class="hljs code-wrapper"><pre><code>// 如果我们通过全局配置了，请求的数据接口 根域名，则 ，在每次单独发起 http 请求的时候，请求的 url 路径，应该以相对路径开头，前面不能带 /  ，否则 不会启用根路径做拼接；
 Vue.http.options.root = &apos;http://vue.studyit.io/&apos;;
 // 全局启用 emulateJSON 选项
 Vue.http.options.emulateJSON = true;
-</code></pre><hr>
+</code></pre></div><hr>
 <h2 id="练习-品牌案例"><a href="#练习-品牌案例" class="headerlink" title="练习-品牌案例"></a>练习-品牌案例</h2><hr>
 <p>需要bootstra样式</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 
 &lt;head&gt;
@@ -1094,11 +1094,11 @@ Vue.http.options.emulateJSON = true;
 &lt;/body&gt;
 
 &lt;/html&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h2 id="Vue中的动画"><a href="#Vue中的动画" class="headerlink" title="Vue中的动画"></a>Vue中的动画</h2><hr>
-<pre><code>https://cn.vuejs.org/v2/guide/transitions.html
-</code></pre><p>使用Vue官方提供的transition元素，把需要被动画控制的元素，包裹起来。v-enter和v-leave-to：是一个时间点，是进入之前，元素的起始状态，此时还没有开始进入。v-enter-active：入场动画的时间段。v-leave-active：离场动画的时间段。</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>https://cn.vuejs.org/v2/guide/transitions.html
+</code></pre></div><p>使用Vue官方提供的transition元素，把需要被动画控制的元素，包裹起来。v-enter和v-leave-to：是一个时间点，是进入之前，元素的起始状态，此时还没有开始进入。v-enter-active：入场动画的时间段。v-leave-active：离场动画的时间段。</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1134,10 +1134,10 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h3 id="自定义v-前缀"><a href="#自定义v-前缀" class="headerlink" title="自定义v-前缀"></a>自定义v-前缀</h3><hr>
 <p>给transition加个name属性</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1173,11 +1173,11 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h3 id="使用第三方animate-css类库实现动画"><a href="#使用第三方animate-css类库实现动画" class="headerlink" title="使用第三方animate.css类库实现动画"></a>使用第三方animate.css类库实现动画</h3><p>官网</p>
-<pre><code>https://daneden.github.io/animate.css/
-</code></pre><p>举个栗子</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>https://daneden.github.io/animate.css/
+</code></pre></div><p>举个栗子</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1204,8 +1204,8 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h3 id="动画钩子"><a href="#动画钩子" class="headerlink" title="动画钩子"></a>动画钩子</h3><pre><code>https://cn.vuejs.org/v2/guide/transitions.html#JavaScript-%E9%92%A9%E5%AD%90
-</code></pre><p>动画钩子函数的第一个参数：el，表示要执行动画的那个DOM元素，是个原生的JS DOM对象。可以认为，el是通过document.getElementById(‘’) 方式获取到的原生JS DOM对象。</p>
+</code></pre></div><h3 id="动画钩子"><a href="#动画钩子" class="headerlink" title="动画钩子"></a>动画钩子</h3><div class="hljs code-wrapper"><pre><code>https://cn.vuejs.org/v2/guide/transitions.html#JavaScript-%E9%92%A9%E5%AD%90
+</code></pre></div><p>动画钩子函数的第一个参数：el，表示要执行动画的那个DOM元素，是个原生的JS DOM对象。可以认为，el是通过document.getElementById(‘’) 方式获取到的原生JS DOM对象。</p>
 <ul>
 <li>beforeEnter 表示动画入场之前，此时，动画尚未开始，可以在beforeEnter中，设置元素开始动画之前的起始样式</li>
 <li>enter表示动画开始之后的样式，这里可以设置小球完成动画之后的，结束状态<ul>
@@ -1216,7 +1216,7 @@ Vue.http.options.emulateJSON = true;
 <li>动画完成之后，会调用afterEnter</li>
 </ul>
 <p>举个例子</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1267,10 +1267,10 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h3 id="v-for的列表过渡"><a href="#v-for的列表过渡" class="headerlink" title="v-for的列表过渡"></a>v-for的列表过渡</h3><p>在实现列表过渡的时候，如果需要过渡的元素，是通过v-for循环渲染出来的，不能使用transition包裹，需要使用transitionGroup。如果要为 v-for循环创建的元素设置动画，必须为每一个元素设置 :key 属性。给transition-group添加appear属性，实现页面刚展示出来时候，入场时候的效果。通过为transition-group元素，设置tag属性，指定transition-group渲染为指定的元素，如果不指定tag属性，默认渲染为span标签。</p>
+</code></pre></div><h3 id="v-for的列表过渡"><a href="#v-for的列表过渡" class="headerlink" title="v-for的列表过渡"></a>v-for的列表过渡</h3><p>在实现列表过渡的时候，如果需要过渡的元素，是通过v-for循环渲染出来的，不能使用transition包裹，需要使用transitionGroup。如果要为 v-for循环创建的元素设置动画，必须为每一个元素设置 :key 属性。给transition-group添加appear属性，实现页面刚展示出来时候，入场时候的效果。通过为transition-group元素，设置tag属性，指定transition-group渲染为指定的元素，如果不指定tag属性，默认渲染为span标签。</p>
 <p><code>&lt;transition-group&gt;</code>组件还有一个特殊之处。不仅可以进入和离开动画，<strong>还可以改变定位</strong>。要使用这个新功能只需了解新增的<code>v-move</code>特性，<strong>它会在元素的改变定位的过程中应用</strong>。<code>v-move</code>和<code>v-leave-active</code>结合使用，能够让列表的过渡更加平缓柔和。</p>
 <p>举个例子</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1355,13 +1355,13 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><hr>
+</code></pre></div><h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><hr>
 <p>组件：以不同的组件，来划分不同的功能模块，将来我们需要什么样的功能，就可以去调用对应的组件即可。</p>
 <p>组件化：是从UI界面的角度进行划分的；前端的组件化，方便UI组件的重用；</p>
 <p>模块化：是从代码逻辑的角度进行划分的；方便代码分层开发，保证每个功能模块的职能单一。</p>
 <hr>
 <h3 id="全局组件定义的三种方式"><a href="#全局组件定义的三种方式" class="headerlink" title="全局组件定义的三种方式"></a>全局组件定义的三种方式</h3><hr>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1417,13 +1417,13 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 <p>注意:不论是哪种方式创建出来的组件,组件的template属性指向的模板内容,必须有且只能有唯一的一个根元素。</p>
 </blockquote>
 <hr>
 <h3 id="私有组件定义"><a href="#私有组件定义" class="headerlink" title="私有组件定义"></a>私有组件定义</h3><hr>
 <p>通过<code>components</code>定义私有组件：</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1452,10 +1452,10 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h3 id="组件中的data和methods"><a href="#组件中的data和methods" class="headerlink" title="组件中的data和methods"></a>组件中的data和methods</h3><hr>
 <p>组件可以有自己的data数据，实例中的data可以为一个对象,但是组件中的data必须是一个方法，这个方法内部,还必须返回一个对象才行。组件中 的data数据,使用方式,和实例中的data使用方式完全一样。</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1494,10 +1494,10 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h3 id="组件切换"><a href="#组件切换" class="headerlink" title="组件切换"></a>组件切换</h3><hr>
 <p>v-if方式切换：</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1528,8 +1528,8 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><p>使用component元素实现：component是一个占位符,<code>:is</code>属性可以用来指定要展示的组件的名称</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre></div><p>使用component元素实现：component是一个占位符,<code>:is</code>属性可以用来指定要展示的组件的名称</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1559,8 +1559,8 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><p>组件切换动画</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre></div><p>组件切换动画</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1605,13 +1605,13 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h3 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h3><hr>
 <p>组件中，默认无法访问到父组件中的data上的数据和methods中的方法。父组件可以在引用子组件的时候，通过属性绑定<code>v-bind:</code>的形式, 把需要传递给子组件的数据，以属性绑定的形式，传递到子组件内部，供子组件使用。组件中的所有props中的数据，都是通过父组件传递给子组件的。</p>
 <blockquote>
 <p>注意：props中的数据，都是只读的，无法重新赋值。</p>
 </blockquote>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1638,10 +1638,10 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h3 id="父组件向子组件传方法"><a href="#父组件向子组件传方法" class="headerlink" title="父组件向子组件传方法"></a>父组件向子组件传方法</h3><p>父组件向子组件传递方法，使用的是事件绑定机制：v-on, 当我们自定义了一个事件属性之后，那么子组件就能够通过某些方式，来调用传递进去的 这个方法了。子组件通过<code>$emit</code>调用父组件方法。</p>
 <p>子组件调用父组件的方法，并传值：</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1692,8 +1692,8 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h3 id="组件案例-评论功能实现"><a href="#组件案例-评论功能实现" class="headerlink" title="组件案例-评论功能实现"></a>组件案例-评论功能实现</h3><p>存放在<code>localStorage</code>中。</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre></div><h3 id="组件案例-评论功能实现"><a href="#组件案例-评论功能实现" class="headerlink" title="组件案例-评论功能实现"></a>组件案例-评论功能实现</h3><p>存放在<code>localStorage</code>中。</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1770,7 +1770,7 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h2 id="通过refs获取元素和组件"><a href="#通过refs获取元素和组件" class="headerlink" title="通过refs获取元素和组件"></a>通过refs获取元素和组件</h2><pre><code>&lt;!DOCTYPE html&gt;
+</code></pre></div><h2 id="通过refs获取元素和组件"><a href="#通过refs获取元素和组件" class="headerlink" title="通过refs获取元素和组件"></a>通过refs获取元素和组件</h2><div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1816,13 +1816,13 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>后端路由：对于普通的网站，所有的超链接都是URL地址，所有的URL地址都对应服务器上对应的资源；</p>
+</code></pre></div><h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>后端路由：对于普通的网站，所有的超链接都是URL地址，所有的URL地址都对应服务器上对应的资源；</p>
 <p>前端路由：对于单页面应用程序来说，主要通过URL中的hash(#号)来实现不同页面之间的切换，同时，hash有一个特点：HTTP请求中不会包含hash相关的内容；所以，单页面程序中的页面跳转主要用hash实现；在单页面应用程序中，这种通过hash改变来切换页面的方式，称作前端路由。</p>
 <p>网站介绍</p>
-<pre><code>https://router.vuejs.org/zh/
-</code></pre><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>router-view是vue-router提供的元素，专门用来当作占位符的，匹配到的组件，就会展示到router-view中去。</p>
+<div class="hljs code-wrapper"><pre><code>https://router.vuejs.org/zh/
+</code></pre></div><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>router-view是vue-router提供的元素，专门用来当作占位符的，匹配到的组件，就会展示到router-view中去。</p>
 <p>routes:路由匹配规则，每个路由规则，都是一个对象，有两个必须的属性： 属性1是path，表示监听哪个路由链接地址；属性2是component，表示，如果路由是前面匹配到的path，则展示component属性对应的那个组件。</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1858,15 +1858,15 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h3 id="router-link"><a href="#router-link" class="headerlink" title="router-link"></a>router-link</h3><pre><code>&lt;router-link to=&quot;/login&quot; tag=&quot;span&quot;&gt;登录&lt;/router-link&gt;
+</code></pre></div><h3 id="router-link"><a href="#router-link" class="headerlink" title="router-link"></a>router-link</h3><div class="hljs code-wrapper"><pre><code>&lt;router-link to=&quot;/login&quot; tag=&quot;span&quot;&gt;登录&lt;/router-link&gt;
 &lt;router-link to=&quot;/register&quot;&gt;注册&lt;/router-link&gt;
-</code></pre><h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><pre><code>routes: [ // 路由匹配规则 
+</code></pre></div><h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><div class="hljs code-wrapper"><pre><code>routes: [ // 路由匹配规则 
     &#123; path: &apos;/&apos;, redirect: &apos;/login&apos; &#125;, // 这里的 redirect 和 Node 中的 redirect 完全是两码事
     &#123; path: &apos;/login&apos;, component: login &#125;,
     &#123; path: &apos;/register&apos;, component: register &#125;
 ]
-</code></pre><h3 id="选中路由高亮"><a href="#选中路由高亮" class="headerlink" title="选中路由高亮"></a>选中路由高亮</h3><p>方式一：router-link标签中，默认情况</p>
-<pre><code>&lt;style&gt;
+</code></pre></div><h3 id="选中路由高亮"><a href="#选中路由高亮" class="headerlink" title="选中路由高亮"></a>选中路由高亮</h3><p>方式一：router-link标签中，默认情况</p>
+<div class="hljs code-wrapper"><pre><code>&lt;style&gt;
     .router-link-active&#123;
         color: red;
         font-weight: 800;
@@ -1875,12 +1875,12 @@ Vue.http.options.emulateJSON = true;
         text-decoration: underline;
     &#125;
 &lt;/style&gt;
-</code></pre><p>方式二：修改router-link-active为myactive，然后再定义样式</p>
-<pre><code>var routerObj = new VueRouter(&#123;
+</code></pre></div><p>方式二：修改router-link-active为myactive，然后再定义样式</p>
+<div class="hljs code-wrapper"><pre><code>var routerObj = new VueRouter(&#123;
       linkActiveClass: &apos;myactive&apos;
 &#125;)
-</code></pre><h3 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h3><p>方式一：query方式传递参数</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre></div><h3 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h3><p>方式一：query方式传递参数</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1917,8 +1917,8 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><p>方式二：params方式传递参数</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre></div><p>方式二：params方式传递参数</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1955,8 +1955,8 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h3 id="路由嵌套"><a href="#路由嵌套" class="headerlink" title="路由嵌套"></a>路由嵌套</h3><p>使用children属性，实现子路由。同时，子路由的path前面，不要带<code>/</code>，否则永远以根路径开始请求，这样不方便我们用户去理解URL地址。</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre></div><h3 id="路由嵌套"><a href="#路由嵌套" class="headerlink" title="路由嵌套"></a>路由嵌套</h3><p>使用children属性，实现子路由。同时，子路由的path前面，不要带<code>/</code>，否则永远以根路径开始请求，这样不方便我们用户去理解URL地址。</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2009,7 +2009,7 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h3 id="命名视图实现经典布局"><a href="#命名视图实现经典布局" class="headerlink" title="命名视图实现经典布局"></a>命名视图实现经典布局</h3><pre><code>&lt;!DOCTYPE html&gt;
+</code></pre></div><h3 id="命名视图实现经典布局"><a href="#命名视图实现经典布局" class="headerlink" title="命名视图实现经典布局"></a>命名视图实现经典布局</h3><div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2084,8 +2084,8 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h2 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h2><p>可以监视 data 中指定数据的变化，然后触发这个 watch 中对应的 function 处理函数。</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre></div><h2 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h2><p>可以监视 data 中指定数据的变化，然后触发这个 watch 中对应的 function 处理函数。</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2121,8 +2121,8 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><p>watch监视路由地址的改变</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre></div><p>watch监视路由地址的改变</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2170,10 +2170,10 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h2 id="computed计算属性"><a href="#computed计算属性" class="headerlink" title="computed计算属性"></a>computed计算属性</h2><p>计算属性关键词:computed。computed是基于它的依赖缓存，只有相关依赖发生改变时才会重新取值。而使用methods，在重新渲染的时候，函数总会重新调用执行。</p>
+</code></pre></div><h2 id="computed计算属性"><a href="#computed计算属性" class="headerlink" title="computed计算属性"></a>computed计算属性</h2><p>计算属性关键词:computed。computed是基于它的依赖缓存，只有相关依赖发生改变时才会重新取值。而使用methods，在重新渲染的时候，函数总会重新调用执行。</p>
 <p>在computed中，可以计算属性，本质是一个方法，只不过，我们在使用这些计算属性的时候，是把它们的名称，直接当作属性来使用的,并不会把计算属性，当作方法去调用。</p>
 <p>可以说使用 computed 性能会更好，但是如果你不希望缓存，你可以使用 methods 属性。</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2207,7 +2207,7 @@ Vue.http.options.emulateJSON = true;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 <p><code>watch</code>、<code>computed</code>和<code>methods</code>之间的对比</p>
 <ol>
 <li><code>computed</code>属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。主要当作属性来使用；</li>
@@ -2218,11 +2218,11 @@ Vue.http.options.emulateJSON = true;
 <h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><p>webpack可以解决各个包之间的复杂依赖关系。webpack是基于Node.js开发出来的一个前端项目自动化构建工具，可以完美实现资源的合并、打包、压缩、混淆等诸多功能。</p>
 <p>使用Gulp，是基于task任务的；使用Webpack，是基于整个项目进行构建的。</p>
 <p>官网</p>
-<pre><code>http://webpack.github.io/
-</code></pre><h3 id="webpack安装的两种方式"><a href="#webpack安装的两种方式" class="headerlink" title="webpack安装的两种方式"></a>webpack安装的两种方式</h3><p>运行<code>npm i webpack -g</code>全局安装webpack，这样就能在全局使用webpack的命令</p>
+<div class="hljs code-wrapper"><pre><code>http://webpack.github.io/
+</code></pre></div><h3 id="webpack安装的两种方式"><a href="#webpack安装的两种方式" class="headerlink" title="webpack安装的两种方式"></a>webpack安装的两种方式</h3><p>运行<code>npm i webpack -g</code>全局安装webpack，这样就能在全局使用webpack的命令</p>
 <p>在项目根目录中运行<code>npm i webpack --save-dev</code>安装到项目依赖中</p>
 <h3 id="配置文件打包命令"><a href="#配置文件打包命令" class="headerlink" title="配置文件打包命令"></a>配置文件打包命令</h3><p>创建<code>webpack.config.js</code>文件：</p>
-<pre><code>// 导入处理路径的模块
+<div class="hljs code-wrapper"><pre><code>// 导入处理路径的模块
 var path = require(&apos;path&apos;);
 // 导出一个配置对象，将来webpack在启动的时候，会默认来查找webpack.config.js，并读取这个文件中导出的配置对象，来进行打包处理
 module.exports = &#123;
@@ -2232,31 +2232,31 @@ module.exports = &#123;
         filename: &apos;bundle.js&apos; // 配置输出的文件名
     &#125;
 &#125;
-</code></pre><p>最后控制台执行webpack。</p>
+</code></pre></div><p>最后控制台执行webpack。</p>
 <h3 id="webpack-dev-server实时打包构建"><a href="#webpack-dev-server实时打包构建" class="headerlink" title="webpack-dev-server实时打包构建"></a>webpack-dev-server实时打包构建</h3><p>使用<code>webpack-dev-server</code>来实现代码实时打包编译，当修改代码之后，会自动进行打包构建。</p>
 <p>运行<code>cnpm i webpack-dev-server --save-dev</code>安装到开发依赖</p>
 <p>在<code>package.json</code>文件中，在<code>scripts</code>节点下新增<code>&quot;dev&quot;: &quot;webpack-dev-server&quot;</code>指令，然后执行<code>npm run dev</code>,发现可以进行实时打包。</p>
 <p>但是dist目录下并没有生成<code>bundle.js</code>文件，这是因为<code>webpack-dev-server</code>将打包好的文件放在了内存中。把<code>bundle.js</code>放在内存中的好处是：由于需要实时打包编译，所以放在内存中速度会非常快。</p>
 <p>这个时候访问webpack-dev-server启动的<code>http://localhost:8080/</code>网站，发现是一个文件夹的面板，需要点击到src目录下，才能打开我们的index首页，此时引用不到bundle.js文件，需要修改index.html中script的src属性为:<code>&lt;script src=&quot;../bundle.js&quot;&gt;&lt;/script&gt;</code></p>
 <p>为了直接访问到index首页，可以指定启动的根目录：</p>
-<pre><code>&quot;dev&quot;: &quot;webpack-dev-server --contentBase src&quot;
-</code></pre><p>同时修改index页面中script的src属性为<code>&lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;</code></p>
+<div class="hljs code-wrapper"><pre><code>&quot;dev&quot;: &quot;webpack-dev-server --contentBase src&quot;
+</code></pre></div><p>同时修改index页面中script的src属性为<code>&lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;</code></p>
 <h3 id="配置package-json"><a href="#配置package-json" class="headerlink" title="配置package.json"></a>配置package.json</h3><p>修改<code>package.json</code>的script节点如下，其中<code>--open</code>表示自动打开浏览器，<code>--port 4321</code>表示打开的端口号为4321，<code>--hot</code>表示启用浏览器热更新，<code>--contentBase src</code>表示直接访问到index首页：</p>
-<pre><code>&quot;dev&quot;: &quot;webpack-dev-server --hot --port 4321 --open --contentBase src&quot;
-</code></pre><h3 id="配置webpack-config-js"><a href="#配置webpack-config-js" class="headerlink" title="配置webpack.config.js"></a>配置webpack.config.js</h3><p><code>webpack.config.js</code>文件，新增<code>devServer</code>节点如下：</p>
-<pre><code>devServer:&#123;
+<div class="hljs code-wrapper"><pre><code>&quot;dev&quot;: &quot;webpack-dev-server --hot --port 4321 --open --contentBase src&quot;
+</code></pre></div><h3 id="配置webpack-config-js"><a href="#配置webpack-config-js" class="headerlink" title="配置webpack.config.js"></a>配置webpack.config.js</h3><p><code>webpack.config.js</code>文件，新增<code>devServer</code>节点如下：</p>
+<div class="hljs code-wrapper"><pre><code>devServer:&#123;
     hot:true,
     open:true,
     port:4321,
     contentBase:&apos;src&apos;
 &#125;
-</code></pre><p>在头部引入<code>webpack</code>模块：</p>
-<pre><code>var webpack = require(&apos;webpack&apos;);
-</code></pre><p>在<code>plugins</code>节点下新增：</p>
-<pre><code>plugins:[
+</code></pre></div><p>在头部引入<code>webpack</code>模块：</p>
+<div class="hljs code-wrapper"><pre><code>var webpack = require(&apos;webpack&apos;);
+</code></pre></div><p>在<code>plugins</code>节点下新增：</p>
+<div class="hljs code-wrapper"><pre><code>plugins:[
     new webpack.HotModuleReplacementPlugin()
 ]
-</code></pre>
+</code></pre></div>
             </div>
             <hr>
             <div>

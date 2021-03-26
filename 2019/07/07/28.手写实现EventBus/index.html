@@ -30,7 +30,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atom-one-dark.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atelier-heath-dark.min.css" />
     
   
 
@@ -229,11 +229,11 @@
             
             <div class="markdown-body">
               <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>github地址：</p>
-<pre><code>https://github.com/greenrobot/EventBus
-</code></pre><p>引入</p>
-<pre><code>implementation &apos;org.greenrobot:eventbus:3.0.0&apos;
-</code></pre><p>订阅和接收</p>
-<pre><code>@Override
+<div class="hljs code-wrapper"><pre><code>https://github.com/greenrobot/EventBus
+</code></pre></div><p>引入</p>
+<div class="hljs code-wrapper"><pre><code>implementation &apos;org.greenrobot:eventbus:3.0.0&apos;
+</code></pre></div><p>订阅和接收</p>
+<div class="hljs code-wrapper"><pre><code>@Override
 protected void onCreate(Bundle savedInstanceState) &#123;
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
@@ -250,20 +250,20 @@ protected void onDestroy() &#123;
 public void onStringEvent(String event) &#123;
     Log.d(&quot;接收者&quot;, &quot;event----:&quot; + event);
 &#125;
-</code></pre><p>发布事件</p>
-<pre><code>EventBus.getDefault().post(&quot;我来发布消息&quot;);
-</code></pre><p>发布粘性事件</p>
-<pre><code>EventBus.getDefault().postSticky(&quot;我来发布消息&quot;);
-</code></pre><p>ThreadMode总共四个枚举项：</p>
-<pre><code>MAIN //UI主线程
+</code></pre></div><p>发布事件</p>
+<div class="hljs code-wrapper"><pre><code>EventBus.getDefault().post(&quot;我来发布消息&quot;);
+</code></pre></div><p>发布粘性事件</p>
+<div class="hljs code-wrapper"><pre><code>EventBus.getDefault().postSticky(&quot;我来发布消息&quot;);
+</code></pre></div><p>ThreadMode总共四个枚举项：</p>
+<div class="hljs code-wrapper"><pre><code>MAIN //UI主线程
 BACKGROUND //后台线程
 POSTING //和发布者处在同一个线程
 ASYNC //异步线程
-</code></pre><p>终止事件往下传递：</p>
-<pre><code>//优先级高的订阅者可以终止事件往下传递
+</code></pre></div><p>终止事件往下传递：</p>
+<div class="hljs code-wrapper"><pre><code>//优先级高的订阅者可以终止事件往下传递
 EventBus.getDefault().cancelEventDelivery(event);
-</code></pre><p>混淆</p>
-<pre><code>-keepattributes *Annotation*
+</code></pre></div><p>混淆</p>
+<div class="hljs code-wrapper"><pre><code>-keepattributes *Annotation*
 -keepclassmembers class * &#123;
     @org.greenrobot.eventbus.Subscribe &lt;methods&gt;;
 &#125;
@@ -271,8 +271,8 @@ EventBus.getDefault().cancelEventDelivery(event);
 -keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent &#123;
     &lt;init&gt;(java.lang.Throwable);
 &#125;
-</code></pre><h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="第一步register"><a href="#第一步register" class="headerlink" title="第一步register"></a>第一步register</h3><p>第一步：<code>EventBus.getDefault().register(this);</code>其中<code>getDefault()</code>获取单例，看EventBus中<code>register()</code>方法：</p>
-<pre><code>public void register(Object subscriber) &#123;
+</code></pre></div><h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="第一步register"><a href="#第一步register" class="headerlink" title="第一步register"></a>第一步register</h3><p>第一步：<code>EventBus.getDefault().register(this);</code>其中<code>getDefault()</code>获取单例，看EventBus中<code>register()</code>方法：</p>
+<div class="hljs code-wrapper"><pre><code>public void register(Object subscriber) &#123;
     //首先获得class对象
     Class&lt;?&gt; subscriberClass = subscriber.getClass();
     //通过findSubscriberMethods来找到订阅者订阅了哪些事件，返回一个SubscriberMethod对象的List。
@@ -286,8 +286,8 @@ EventBus.getDefault().cancelEventDelivery(event);
         &#125;
     &#125;
 &#125;
-</code></pre><p>看SubscriberMethodFinder类中<code>findSubscriberMethods(Class&lt;?&gt; subscriberClass)</code>方法：</p>
-<pre><code>List&lt;SubscriberMethod&gt; findSubscriberMethods(Class&lt;?&gt; subscriberClass) &#123;
+</code></pre></div><p>看SubscriberMethodFinder类中<code>findSubscriberMethods(Class&lt;?&gt; subscriberClass)</code>方法：</p>
+<div class="hljs code-wrapper"><pre><code>List&lt;SubscriberMethod&gt; findSubscriberMethods(Class&lt;?&gt; subscriberClass) &#123;
     // 先从缓存里面读取，订阅者的Class
     List&lt;SubscriberMethod&gt; subscriberMethods = METHOD_CACHE.get(subscriberClass);
     if (subscriberMethods != null) &#123;
@@ -310,8 +310,8 @@ EventBus.getDefault().cancelEventDelivery(event);
         return subscriberMethods;
     &#125;
 &#125;
-</code></pre><p>会走到SubscriberMethodFinder类中<code>findUsingInfo(Class&lt;?&gt; subscriberClass)</code>方法：</p>
-<pre><code>private List&lt;SubscriberMethod&gt; findUsingInfo(Class&lt;?&gt; subscriberClass) &#123;
+</code></pre></div><p>会走到SubscriberMethodFinder类中<code>findUsingInfo(Class&lt;?&gt; subscriberClass)</code>方法：</p>
+<div class="hljs code-wrapper"><pre><code>private List&lt;SubscriberMethod&gt; findUsingInfo(Class&lt;?&gt; subscriberClass) &#123;
     // FindState涉及到享元设计模式
     FindState findState = prepareFindState();
     findState.initForSubscriber(subscriberClass);
@@ -334,8 +334,8 @@ EventBus.getDefault().cancelEventDelivery(event);
     // 释放 findState 享元模式
     return getMethodsAndRelease(findState);
 &#125;
-</code></pre><p>走到SubscriberMethodFinder类中<code>findUsingReflectionInSingleClass(FindState findState)</code>方法：</p>
-<pre><code>//找方法的核心代码
+</code></pre></div><p>走到SubscriberMethodFinder类中<code>findUsingReflectionInSingleClass(FindState findState)</code>方法：</p>
+<div class="hljs code-wrapper"><pre><code>//找方法的核心代码
 private void findUsingReflectionInSingleClass(FindState findState) &#123;
     Method[] methods;
     try &#123;
@@ -381,12 +381,12 @@ private void findUsingReflectionInSingleClass(FindState findState) &#123;
         &#125;
     &#125;
 &#125;
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 <p>第一步总结：<code>register()</code>方法中调用<code>findSubscriberMethods()</code>，去解析注册者对象的所有方法，找出public方法，并且带有<code>@Subscribe</code>注解、并且参数只有一个，的方法，然后通过Annotation解析所有细节参数<code>threadMode(线程)、priority(优先级)、sticky(是否粘性)、method(方法名)、eventType(方法参数类型)</code>，把这些参数封装成一个SubscriberMethod对象，添加到集合返回。</p>
 </blockquote>
 <h3 id="第二步register"><a href="#第二步register" class="headerlink" title="第二步register"></a>第二步register</h3><p>EventBus中<code>register()</code>方法调用了<code>subscribe(subscriber, subscriberMethod);</code>其中subscriber就是<code>register(this)</code>中的this，subscriberMethod就是第一步中的集合遍历的元素对象。</p>
 <p>EventBus中<code>subscribe(Object subscriber, SubscriberMethod subscriberMethod)</code>方法:</p>
-<pre><code>private void subscribe(Object subscriber, SubscriberMethod subscriberMethod) &#123;
+<div class="hljs code-wrapper"><pre><code>private void subscribe(Object subscriber, SubscriberMethod subscriberMethod) &#123;
     // 获取方法参数的class
     Class&lt;?&gt; eventType = subscriberMethod.eventType;
     // 创建一个 Subscription，subscribe方法的参数传给了Subscription
@@ -439,19 +439,19 @@ private void findUsingReflectionInSingleClass(FindState findState) &#123;
         &#125;
     &#125;
 &#125;
-</code></pre><p>查看<strong>subscriptionsByEventType</strong>，是EventBus的一个Map成员变量，可以根据EventType查找订阅事件</p>
-<pre><code>// key 是注解方法参数的class(eventType)，value 存放的是Subscription的线程安全的集合列表
+</code></pre></div><p>查看<strong>subscriptionsByEventType</strong>，是EventBus的一个Map成员变量，可以根据EventType查找订阅事件</p>
+<div class="hljs code-wrapper"><pre><code>// key 是注解方法参数的class(eventType)，value 存放的是Subscription的线程安全的集合列表
 //Subscription 包含两个属性，一个是subscriber 订阅者（this），一个是SubscriberMethod注解方法的所有属性参数值（SubscriberMethod）
 private final Map&lt;Class&lt;?&gt;, CopyOnWriteArrayList&lt;Subscription&gt;&gt; subscriptionsByEventType;
-</code></pre><p>查看typesBySubscriber，是EventBus的一个Map成员变量，根据我们的订阅对象找到EventType。</p>
-<pre><code>// key 是所有的订阅者(this)，value 是所有订阅者里面方法的参数的class的集合
+</code></pre></div><p>查看typesBySubscriber，是EventBus的一个Map成员变量，根据我们的订阅对象找到EventType。</p>
+<div class="hljs code-wrapper"><pre><code>// key 是所有的订阅者(this)，value 是所有订阅者里面方法的参数的class的集合
 private final Map&lt;Object, List&lt;Class&lt;?&gt;&gt;&gt; typesBySubscriber;
-</code></pre><p>粘性事件<code>stickyEvents</code>:是<code>ConcurrentHashMap</code>集合,粘性事件的缓存。</p>
+</code></pre></div><p>粘性事件<code>stickyEvents</code>:是<code>ConcurrentHashMap</code>集合,粘性事件的缓存。</p>
 <blockquote>
 <p>第二步总结：<code>register()</code>方法中调用subscribe方法，解析所有SubscriberMethod的eventType，然后按照要求解析成<code>Map&lt;Class&lt;?&gt;, CopyOnWriteArrayList&lt;Subscription&gt;&gt; subscriptionsByEventType</code>和<code>Map&lt;Object, List&lt;Class&lt;?&gt;&gt;&gt; typesBySubscriber</code>。</p>
 </blockquote>
 <h3 id="第三步post"><a href="#第三步post" class="headerlink" title="第三步post"></a>第三步post</h3><p>查看EventBus中post方法：</p>
-<pre><code>public void post(Object event) &#123;
+<div class="hljs code-wrapper"><pre><code>public void post(Object event) &#123;
     // currentPostingThreadState是一个 ThreadLocal，他的特点是获取当前线程一份独有的变量数据，不受其他线程影响。
     PostingThreadState postingState = currentPostingThreadState.get();
     // postingState 就是获取到的线程独有的变量数据
@@ -485,8 +485,8 @@ private final ThreadLocal&lt;PostingThreadState&gt; currentPostingThreadState = 
         return new PostingThreadState();
     &#125;
 &#125;;
-</code></pre><p>查看EventBus中postSingleEvent方法：</p>
-<pre><code>//参数event是post的对象
+</code></pre></div><p>查看EventBus中postSingleEvent方法：</p>
+<div class="hljs code-wrapper"><pre><code>//参数event是post的对象
 private void postSingleEvent(Object event, PostingThreadState postingState) throws Error &#123;
     //得到事件的Class
     Class&lt;?&gt; eventClass = event.getClass();
@@ -518,8 +518,8 @@ private void postSingleEvent(Object event, PostingThreadState postingState) thro
         &#125;
     &#125;
 &#125;
-</code></pre><p>查看EventBus中postSingleEventForEventType方法：</p>
-<pre><code>//event是post的对象，eventClass是post的对象的class
+</code></pre></div><p>查看EventBus中postSingleEventForEventType方法：</p>
+<div class="hljs code-wrapper"><pre><code>//event是post的对象，eventClass是post的对象的class
 private boolean postSingleEventForEventType(Object event, PostingThreadState postingState, Class&lt;?&gt; eventClass) &#123;
     CopyOnWriteArrayList&lt;Subscription&gt; subscriptions;
     synchronized (this) &#123;
@@ -551,8 +551,8 @@ private boolean postSingleEventForEventType(Object event, PostingThreadState pos
     &#125;
     return false;
 &#125;
-</code></pre><p>查看EventBus中postToSubscription方法：</p>
-<pre><code>private void postToSubscription(Subscription subscription, Object event, boolean isMainThread) &#123;
+</code></pre></div><p>查看EventBus中postToSubscription方法：</p>
+<div class="hljs code-wrapper"><pre><code>private void postToSubscription(Subscription subscription, Object event, boolean isMainThread) &#123;
     // 根据不同的线程模式执行对应
     switch (subscription.subscriberMethod.threadMode) &#123;
         // 和发送事件处于同一个线程
@@ -583,11 +583,11 @@ private boolean postSingleEventForEventType(Object event, PostingThreadState pos
             throw new IllegalStateException(&quot;Unknown thread mode: &quot; + subscription.subscriberMethod.threadMode);
     &#125;
 &#125;
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 <p>第三步总结：post()方法中去遍历了<code>subscriptionsByEventType</code>，找到符合的方法,调用方法的<code>method.invoke()</code>执行。</p>
 </blockquote>
 <h3 id="第四步unregister"><a href="#第四步unregister" class="headerlink" title="第四步unregister"></a>第四步unregister</h3><p>unregister就是移除。查看EventBus中unregister方法：</p>
-<pre><code>public synchronized void unregister(Object subscriber) &#123;
+<div class="hljs code-wrapper"><pre><code>public synchronized void unregister(Object subscriber) &#123;
     // 获取订阅对象的所有订阅事件类列表,第二步中的map
     List&lt;Class&lt;?&gt;&gt; subscribedTypes = typesBySubscriber.get(subscriber);
     if (subscribedTypes != null) &#123;
@@ -601,8 +601,8 @@ private boolean postSingleEventForEventType(Object event, PostingThreadState pos
         Log.w(TAG, &quot;Subscriber to unregister was not registered before: &quot; + subscriber.getClass());
     &#125;
 &#125;
-</code></pre><p>查看EventBus中unsubscribeByEventType方法：</p>
-<pre><code>private void unsubscribeByEventType(Object subscriber, Class&lt;?&gt; eventType) &#123;
+</code></pre></div><p>查看EventBus中unsubscribeByEventType方法：</p>
+<div class="hljs code-wrapper"><pre><code>private void unsubscribeByEventType(Object subscriber, Class&lt;?&gt; eventType) &#123;
     // 获取事件类的所有订阅信息列表，将订阅信息从订阅信息集合中移除，同时将订阅信息中的active属性置为FALSE,第二步中的map
     List&lt;Subscription&gt; subscriptions = subscriptionsByEventType.get(eventType);
     if (subscriptions != null) &#123;
@@ -620,7 +620,7 @@ private boolean postSingleEventForEventType(Object event, PostingThreadState pos
         &#125;
     &#125;
 &#125;
-</code></pre><h2 id="手写实现"><a href="#手写实现" class="headerlink" title="手写实现"></a>手写实现</h2><p><a target="_blank" rel="noopener" href="https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/teaeventbus">https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/teaeventbus</a></p>
+</code></pre></div><h2 id="手写实现"><a href="#手写实现" class="headerlink" title="手写实现"></a>手写实现</h2><p><a target="_blank" rel="noopener" href="https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/teaeventbus">https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/teaeventbus</a></p>
 
             </div>
             <hr>
