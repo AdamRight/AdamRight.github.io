@@ -258,14 +258,14 @@
 <p>数据类型 内存占用字节数：byte 1、short 2、int 4、long 8、float 4、double 8、boolean 1、char 2。</p>
 <p>计算机访问内存的方式都是一次一个字节。</p>
 <p>一个引用（机器地址）需要8个字节表示：</p>
-<div class="hljs code-wrapper"><pre><code>Date date = new Date()；//则date这个变量需要占用8个字节来表示
-</code></pre></div><p>创建一个对象，比如new Date()，除了Date对象内部存储的数据(例如年月日等信息)占用的内存，该对象本身也有内存开销，每个对象的自身开销是16个字节，用来保存对象的头信息。</p>
+<pre><code>Date date = new Date()；//则date这个变量需要占用8个字节来表示
+</code></pre><p>创建一个对象，比如new Date()，除了Date对象内部存储的数据(例如年月日等信息)占用的内存，该对象本身也有内存开销，每个对象的自身开销是16个字节，用来保存对象的头信息。</p>
 <p>一般内存的使用，如果不够8个字节，都会被自动填充为8字节。</p>
 <p>java中数组被被限定为对象，他们一般都会因为记录长度而需要额外的内存，一个原始数据类型的数组一般需要24字节的头信息(16个自己的对象开销，4字节用于保存长度以及4个填充字节)再加上保存值所需的内存。</p>
-<div class="hljs code-wrapper"><pre><code>int[] temp=new int[n];//申请n*4个字节+数组自身头信息开销24个字节
-</code></pre></div><hr>
+<pre><code>int[] temp=new int[n];//申请n*4个字节+数组自身头信息开销24个字节
+</code></pre><hr>
 <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h3 id="1、Comparable接口"><a href="#1、Comparable接口" class="headerlink" title="1、Comparable接口"></a>1、Comparable接口</h3><hr>
-<div class="hljs code-wrapper"><pre><code>public class Student implements Comparable&lt;Student&gt;&#123;
+<pre><code>public class Student implements Comparable&lt;Student&gt;&#123;
     private String username;
     private int age;
 
@@ -327,10 +327,10 @@ public class TestComparable &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="2、冒泡排序"><a href="#2、冒泡排序" class="headerlink" title="2、冒泡排序"></a>2、冒泡排序</h3><hr>
 <p>比较相邻的元素。如果前一个元素比后一个元素大，就交换这两个元素的位置。最终最后位置的元素就是最大值。</p>
-<div class="hljs code-wrapper"><pre><code>public class Bubble &#123;
+<pre><code>public class Bubble &#123;
     /*
      *  对数组的元素进行排序
     */
@@ -371,11 +371,11 @@ public class BubbleTest &#123;
         System.out.println(Arrays.toString(arr));//&#123;1,2,3,4,5,6&#125;
     &#125;
 &#125;
-</code></pre></div><p>冒泡排序的时间复杂度为O(N^2)。</p>
+</code></pre><p>冒泡排序的时间复杂度为O(N^2)。</p>
 <hr>
 <h3 id="3、选择排序"><a href="#3、选择排序" class="headerlink" title="3、选择排序"></a>3、选择排序</h3><hr>
 <p>每一次遍历的过程中，都假定第一个索引处的元素是最小值，和其他索引处的值依次进行比较，如果当前索引处的值大于其他某个索引处的值，则假定其他某个索引出的值为最小值，最后可以找到最小值所在的索引。然后交换第一个索引处和最小值所在的索引处的值。</p>
-<div class="hljs code-wrapper"><pre><code>public class Selection &#123;
+<pre><code>public class Selection &#123;
     /*
        对数组中的元素进行排序
     */
@@ -420,11 +420,11 @@ public class SelectionTest &#123;
         System.out.println(Arrays.toString(a));//&#123;1,2,4,5,7,8,9,10&#125;
     &#125;
 &#125;
-</code></pre></div><p>时间复杂度为O(N^2)。</p>
+</code></pre><p>时间复杂度为O(N^2)。</p>
 <hr>
 <h3 id="4、插入排序"><a href="#4、插入排序" class="headerlink" title="4、插入排序"></a>4、插入排序</h3><hr>
 <p>把所有的元素分为两组，已经排序的和未排序的；找到未排序的组中的第一个元素，向已经排序的组中进行插入；倒叙遍历已经排序的元素，依次和待插入的元素进行比较，直到找到一个元素小于等于待插入元素，那么就把待插入元素放到这个位置，其他的元素向后移动一位。类似打扑克牌时，新牌往手里牌的排序。</p>
-<div class="hljs code-wrapper"><pre><code>public class Insertion &#123;
+<pre><code>public class Insertion &#123;
     /*
        对数组a中的元素进行排序
     */
@@ -469,12 +469,12 @@ public class InsertionTest &#123;
 
     &#125;
 &#125;
-</code></pre></div><p>时间复杂度为O(N^2)。</p>
+</code></pre><p>时间复杂度为O(N^2)。</p>
 <hr>
 <h3 id="5、希尔排序"><a href="#5、希尔排序" class="headerlink" title="5、希尔排序"></a>5、希尔排序</h3><hr>
 <p>选定一个增长量h，按照增长量h作为数据分组的依据，对数据进行分组；对分好组的每一组数据完成插入排序；减小增长量，最小减为1，重复第二步操作。</p>
 <p>增长量h的确定：</p>
-<div class="hljs code-wrapper"><pre><code>int h=1
+<pre><code>int h=1
 while(h&lt;(数组长度/2))&#123;
     h=2h+1
 &#125;
@@ -482,8 +482,8 @@ while(h&lt;(数组长度/2))&#123;
 
 //h的减小规则为：
 h=h/2
-</code></pre></div><p>代码</p>
-<div class="hljs code-wrapper"><pre><code>public class Shell &#123;
+</code></pre><p>代码</p>
+<pre><code>public class Shell &#123;
     /*
        对数组a中的元素进行排序
     */
@@ -541,10 +541,10 @@ public class ShellTest &#123;
         System.out.println(Arrays.toString(a));//&#123;1,2,3,4,5,5,6,7,8,9&#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="6、归并排序"><a href="#6、归并排序" class="headerlink" title="6、归并排序"></a>6、归并排序</h3><hr>
 <p>尽可能的一组数据拆分成两个元素相等的子组，并对每一个子组继续拆分，直到拆分后的每个子组的元素个数是1为止。将相邻的两个子组进行合并成一个有序的大组；不断的重复步骤2，直到最终只有一个组为止。</p>
-<div class="hljs code-wrapper"><pre><code>public class Merge &#123;
+<pre><code>public class Merge &#123;
     //归并所需要的辅助数组
     private static Comparable[] assist;
 
@@ -641,7 +641,7 @@ public class MergeTest &#123;
         System.out.println(Arrays.toString(a));//&#123;1,2,3,4,5,6,7,8&#125;
     &#125;
 &#125;
-</code></pre></div><p>归并排序的时间复杂度为O(nlogn)。归并排序的缺点：需要申请额外的数组空间，导致空间复杂度提升，是典型的以空间换时间的操作。</p>
+</code></pre><p>归并排序的时间复杂度为O(nlogn)。归并排序的缺点：需要申请额外的数组空间，导致空间复杂度提升，是典型的以空间换时间的操作。</p>
 <hr>
 <h3 id="7、快速排序"><a href="#7、快速排序" class="headerlink" title="7、快速排序"></a>7、快速排序</h3><hr>
 <p>首先设定一个分界值，通过该分界值将数组分成左右两部分；将大于或等于分界值的数据放到到数组右边，小于分界值的数据放到数组的左边。此时左边部分中各元素都小于或等于分界值，而右边部分中各元素都大于或等于分界值；</p>
@@ -653,7 +653,7 @@ public class MergeTest &#123;
 <p>3.再从头部向尾部开始搜索一个比基准值大的元素，搜索到即停止，并记录指针的位置；</p>
 <p>4.交换当前左边指针位置和右边指针位置的元素；</p>
 <p>5.重复2,3,4步骤，直到左边指针的值大于右边指针的值停止。</p>
-<div class="hljs code-wrapper"><pre><code>public class Quick &#123;
+<pre><code>public class Quick &#123;
     /*
       比较v元素是否小于w元素
    */
@@ -740,7 +740,7 @@ public class QuickTest &#123;
         System.out.println(Arrays.toString(a));//&#123;1, 2, 3, 4, 5, 6, 7, 8, 9&#125;
     &#125;
 &#125;
-</code></pre></div><p>快速排序和归并排序是互补的：归并排序将数组分成两个子数组分别排序，并将有序的子数组归并从而将整个数组排序，而快速排序的方式则是当两个数组都有序时，整个数组自然就有序了。在归并排序中，一个数组被等分为两半，归并调用发生在处理整个数组之前，在快速排序中，切分数组的位置取决于数组的内容，递归调用发生在处理整个数组之后。</p>
+</code></pre><p>快速排序和归并排序是互补的：归并排序将数组分成两个子数组分别排序，并将有序的子数组归并从而将整个数组排序，而快速排序的方式则是当两个数组都有序时，整个数组自然就有序了。在归并排序中，一个数组被等分为两半，归并调用发生在处理整个数组之前，在快速排序中，切分数组的位置取决于数组的内容，递归调用发生在处理整个数组之后。</p>
 <p>快速排序的时间复杂度为O(nlogn)。</p>
 <hr>
 <h3 id="8、排序的稳定性"><a href="#8、排序的稳定性" class="headerlink" title="8、排序的稳定性"></a>8、排序的稳定性</h3><hr>
@@ -757,7 +757,7 @@ public class QuickTest &#123;
 <h3 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h3><hr>
 <p>顺序表是在计算机内存中以数组的形式保存的线性表，线性表的顺序存储是指用一组地址连续的存储单元，依次存储线性表中的各个元素、使得线性表中再逻辑结构上响铃的数据元素存储在相邻的物理存储单元中，即通过数据元素物理存储的相邻关系来反映数据元素之间逻辑上的相邻关系。</p>
 <p>基本API、扩容、缩容、SequenceList能支持foreach循环，则需要做如下操作：让SequenceList实现Iterable接口，重写iterator方法；在SequenceList内部提供一个内部类SIterator,实现Iterator接口，重写hasNext方法和next方法。</p>
-<div class="hljs code-wrapper"><pre><code>public class SequenceList&lt;T&gt; implements Iterable&lt;T&gt;&#123;
+<pre><code>public class SequenceList&lt;T&gt; implements Iterable&lt;T&gt;&#123;
     //存储元素的数组
     private T[] eles;
     //记录当前顺序表中的元素个数
@@ -878,8 +878,8 @@ public class QuickTest &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class SequenceListTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class SequenceListTest &#123;
     public static void main(String[] args) &#123;
         //创建顺序表对象
         SequenceList&lt;String&gt; sl = new SequenceList&lt;&gt;(10);
@@ -905,12 +905,12 @@ public class QuickTest &#123;
         System.out.println(&quot;清空后的线性表中的元素个数为:&quot;+sl.length());
     &#125;
 &#125;
-</code></pre></div><p>由于顺序表的底层由数组实现，数组的长度是固定的，所以在操作的过程中涉及到了容器扩容操作。这样会导致顺序表在使用过程中的时间复杂度不是线性的，在某些需要扩容的结点处，耗时会突增，尤其是元素越多，这个问题越明显。</p>
+</code></pre><p>由于顺序表的底层由数组实现，数组的长度是固定的，所以在操作的过程中涉及到了容器扩容操作。这样会导致顺序表在使用过程中的时间复杂度不是线性的，在某些需要扩容的结点处，耗时会突增，尤其是元素越多，这个问题越明显。</p>
 <p><strong>java中ArrayList集合的底层也是一种顺序表，使用数组实现，同样提供了增删改查、扩容、遍历等功能。</strong></p>
 <hr>
 <h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><hr>
 <p>链表由一系列的结点（链表中的每一个元素称为结点）组成，结点可以在运行时动态生成。</p>
-<div class="hljs code-wrapper"><pre><code>public class Node&lt;T&gt; &#123;
+<pre><code>public class Node&lt;T&gt; &#123;
     //存储元素
     public T item;
     //指向下一个结点
@@ -934,11 +934,11 @@ public static void main(String[] args) throws Exception &#123;
     third.next = fourth;
     fourth.next = fifth;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="单向链表"><a href="#单向链表" class="headerlink" title="单向链表"></a>单向链表</h3><hr>
 <p>单向链表是链表的一种，它由多个结点组成，每个结点都由一个数据域和一个指针域组成，数据域用来存储数据，指针域用来指向其后继结点。链表的头结点的数据域不存储数据，指针域指向第一个真正存储数据的结点。</p>
 <p>实现基本API、遍历、链表的反转。</p>
-<div class="hljs code-wrapper"><pre><code>public class LinkList&lt;T&gt; implements Iterable&lt;T&gt;&#123;
+<pre><code>public class LinkList&lt;T&gt; implements Iterable&lt;T&gt;&#123;
     //记录头结点
     private Node head;
     //记录链表的长度
@@ -1098,8 +1098,8 @@ public static void main(String[] args) throws Exception &#123;
         return curr;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class LinkListTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class LinkListTest &#123;
     public static void main(String[] args) &#123;
         //创建顺序表对象
         LinkList&lt;String&gt; sl = new LinkList&lt;&gt;();
@@ -1124,11 +1124,11 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(&quot;清空后的线性表中的元素个数为:&quot;+sl.length());
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><hr>
 <p>双向链表也叫双向表，是链表的一种，它由多个结点组成，每个结点都由一个数据域和两个指针域组成，数据域用来存储数据，其中一个指针域用来指向其后继结点，另一个指针域用来指向前驱结点。链表的头结点的数据域不存储数据，指向前驱结点的指针域值为null，指向后继结点的指针域指向第一个真正存储数据的结点。</p>
 <p>实现基本API、遍历。</p>
-<div class="hljs code-wrapper"><pre><code>public class TowWayLinkList&lt;T&gt; implements Iterable&lt;T&gt; &#123;
+<pre><code>public class TowWayLinkList&lt;T&gt; implements Iterable&lt;T&gt; &#123;
     //首结点
     private Node head;
     //最后一个结点
@@ -1299,8 +1299,8 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class TowWayLinkListTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class TowWayLinkListTest &#123;
     public static void main(String[] args) &#123;
         //创建双向链表对象
         TowWayLinkList&lt;String&gt; sl = new TowWayLinkList&lt;&gt;();
@@ -1327,13 +1327,13 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(&quot;清空后的线性表中的元素个数为:&quot;+sl.length());
     &#125;
 &#125;
-</code></pre></div><p><strong>java中LinkedList集合也是使用双向链表实现，结点类有三个域，并提供了增删改查等相关方法。</strong></p>
+</code></pre><p><strong>java中LinkedList集合也是使用双向链表实现，结点类有三个域，并提供了增删改查等相关方法。</strong></p>
 <p>链表的物理地址是不连续的，它不需要预先指定存储空间大小，或者在存储过程中涉及到扩容等操作,同时它并没有涉及的元素的交换。</p>
 <p>相比较顺序表，链表的查询操作性能会比较低。因此，如果我们的程序中查询操作比较多，建议使用顺序表，增删操作比较多，建议使用链表。</p>
 <hr>
 <h3 id="快慢指针"><a href="#快慢指针" class="headerlink" title="快慢指针"></a>快慢指针</h3><hr>
 <p>快慢指针获取中间值。slow与fast指针都指向链表第一个节点，然后slow每次移动一个指针，fast每次移动两个指针。</p>
-<div class="hljs code-wrapper"><pre><code>public class FastSlowTest &#123;
+<pre><code>public class FastSlowTest &#123;
     public static void main(String[] args) throws Exception &#123;
         //创建结点
         Node&lt;String&gt; first = new Node&lt;String&gt;(&quot;aa&quot;, null);
@@ -1387,8 +1387,8 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>快慢指针检查是否有环。两个指针有速度差，那么迟早两个指针会相遇，只要相遇那么就说明有环。</p>
-<div class="hljs code-wrapper"><pre><code>public class CircleListCheckTest &#123;
+</code></pre><p>快慢指针检查是否有环。两个指针有速度差，那么迟早两个指针会相遇，只要相遇那么就说明有环。</p>
+<pre><code>public class CircleListCheckTest &#123;
     public static void main(String[] args) throws Exception &#123;
         //创建结点
         Node&lt;String&gt; first = new Node&lt;String&gt;(&quot;aa&quot;, null);
@@ -1449,8 +1449,8 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>快慢指针查找有环链表入口。当快慢指针相遇时，我们可以判断到链表中有环，这时重新设定一个新指针指向链表的起点，且步长与慢指针一样为1，则慢指针与“新”指针相遇的地方就是环的入口。</p>
-<div class="hljs code-wrapper"><pre><code>public class CircleListInTest &#123;
+</code></pre><p>快慢指针查找有环链表入口。当快慢指针相遇时，我们可以判断到链表中有环，这时重新设定一个新指针指向链表的起点，且步长与慢指针一样为1，则慢指针与“新”指针相遇的地方就是环的入口。</p>
+<pre><code>public class CircleListInTest &#123;
     public static void main(String[] args) throws Exception &#123;
         Node&lt;String&gt; first = new Node&lt;String&gt;(&quot;aa&quot;, null);
         Node&lt;String&gt; second = new Node&lt;String&gt;(&quot;bb&quot;, null);
@@ -1517,13 +1517,13 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><hr>
 <p>在单向链表中，最后一个节点的指针为null，不指向任何结点，因为没有下一个元素了。要实现循环链表，我们只需要让单向链表的最后一个节点的指针指向头结点即可。</p>
 <hr>
 <h3 id="约瑟夫问题"><a href="#约瑟夫问题" class="headerlink" title="约瑟夫问题"></a>约瑟夫问题</h3><hr>
 <p>构建含有41个结点的单向循环链表，分别存储1~41的值，分别代表这41个人；使用计数器count，记录当前报数的值；遍历链表，每循环一次，count++；判断count的值，如果是3，则从链表中删除这个结点并打印结点的值，把count重置为0。</p>
-<div class="hljs code-wrapper"><pre><code>public class JosephTest &#123;
+<pre><code>public class JosephTest &#123;
     public static void main(String[] args) &#123;
         //解决约瑟夫问题
         //1.构建循环链表，包含41个结点，分别存储1~41之间的值
@@ -1587,14 +1587,14 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><hr>
 <p>栈是一种基于先进后出(FILO)的数据结构，是一种只能在一端进行插入和删除操作的特殊线性表。它按照先进后出的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据（最后一个数据被第一个读出来）。</p>
 <p>我们称数据进入到栈的动作为压栈，数据从栈中出去的动作为弹栈。</p>
 <hr>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><hr>
 <p>压栈、弹栈、遍历。</p>
-<div class="hljs code-wrapper"><pre><code>public class Stack&lt;T&gt; implements Iterable&lt;T&gt;&#123;
+<pre><code>public class Stack&lt;T&gt; implements Iterable&lt;T&gt;&#123;
     //记录首结点
     private Node head;
     //栈中元素的个数
@@ -1674,8 +1674,8 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;-
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class StackTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class StackTest &#123;
     public static void main(String[] args) &#123;
         //创建栈对象
         Stack&lt;String&gt; stack = new Stack&lt;&gt;();
@@ -1694,11 +1694,11 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(&quot;剩余的元素个数：&quot;+stack.size());
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="括号匹配问题"><a href="#括号匹配问题" class="headerlink" title="括号匹配问题"></a>括号匹配问题</h3><hr>
 <p>给定一个字符串，里边可能包含”()”小括号和其他字符，请编写程序检查该字符串的中的小括号是否成对出现。</p>
 <p>创建一个栈用来存储左括号；从左往右遍历字符串，拿到每一个字符；判断该字符是不是左括号，如果是，放入栈中存储；判断该字符是不是右括号，如果不是，继续下一次循环；如果该字符是右括号，则从栈中弹出一个元素t；判断元素t是否为null，如果不是，则证明有对应的左括号，如果不是，则证明没有对应的左括号；循环结束后，判断栈中还有没有剩余的左括号，如果有，则不匹配，如果没有，则匹配。</p>
-<div class="hljs code-wrapper"><pre><code>public class BracketsMatchTest &#123;
+<pre><code>public class BracketsMatchTest &#123;
     public static void main(String[] args) &#123;
         String str = &quot;上海(长安)())&quot;;
         boolean match = isMatch(str);
@@ -1737,10 +1737,10 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="逆波兰表达式求值"><a href="#逆波兰表达式求值" class="headerlink" title="逆波兰表达式求值"></a>逆波兰表达式求值</h3><hr>
 <p>创建一个栈对象oprands存储操作数；从左往右遍历逆波兰表达式，得到每一个字符串；判断该字符串是不是运算符，如果不是，把该该操作数压入oprands栈中；如果是运算符，则从oprands栈中弹出两个操作数o1,o2；使用该运算符计算o1和o2，得到结果result；把该结果压入oprands栈中 ；遍历结束后，拿出栈中最终的结果返回。</p>
-<div class="hljs code-wrapper"><pre><code>public class ReversePolishNotationTest &#123;
+<pre><code>public class ReversePolishNotationTest &#123;
 
     public static void main(String[] args) &#123;
         //中缀表达式 3*（17-15）+18/6 的逆波兰表达式如下 6+3=9
@@ -1804,13 +1804,13 @@ public static void main(String[] args) throws Exception &#123;
         return result;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><hr>
 <p>队列是一种基于先进先出(FIFO)的数据结构，是一种只能在一端进行插入,在另一端进行删除操作的特殊线性表，它按照先进先出的原则存储数据，先进入的数据，在读取数据时先读被读出来。</p>
 <hr>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><hr>
 <p>插入、删除、遍历。</p>
-<div class="hljs code-wrapper"><pre><code>public class Queue&lt;T&gt; implements Iterable&lt;T&gt;&#123;
+<pre><code>public class Queue&lt;T&gt; implements Iterable&lt;T&gt;&#123;
     //记录首结点
     private Node head;
     //记录最后一个结点
@@ -1895,8 +1895,8 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class QueueTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class QueueTest &#123;
     public static void main(String[] args) &#123;
         //创建队列对象
         Queue&lt;String&gt; q = new Queue&lt;&gt;();
@@ -1915,12 +1915,12 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(&quot;剩余的元素个数：&quot;+q.size());
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h2><hr>
 <p>符号表最主要的目的就是将一个键和一个值联系起来，符号表能够将存储的数据元素是一个键和一个值共同组成的键值对数据，我们可以根据键来查找对应的值。<strong>符号表中，键具有唯一性</strong>。</p>
 <hr>
 <h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><hr>
-<div class="hljs code-wrapper"><pre><code>public class SymbolTable&lt;Key,Value&gt; &#123;
+<pre><code>public class SymbolTable&lt;Key,Value&gt; &#123;
     //记录首结点
     private Node head;
     //记录符号表中元素的个数
@@ -2001,8 +2001,8 @@ public static void main(String[] args) throws Exception &#123;
         return null;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class SymbolTableTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class SymbolTableTest &#123;
     public static void main(String[] args) &#123;
         //创建符号表对象
         SymbolTable&lt;Integer, String&gt; symbolTable = new SymbolTable&lt;&gt;();
@@ -2023,10 +2023,10 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(&quot;删除完毕后，元素的个数:&quot;+symbolTable.size());
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="有序符号表"><a href="#有序符号表" class="headerlink" title="有序符号表"></a>有序符号表</h3><hr>
 <p>要根据键的大小进行排序，插入数据时要考虑顺序。</p>
-<div class="hljs code-wrapper"><pre><code>public class OrderSymbolTable&lt;Key extends Comparable&lt;Key&gt;,Value&gt; &#123;
+<pre><code>public class OrderSymbolTable&lt;Key extends Comparable&lt;Key&gt;,Value&gt; &#123;
     //记录首结点
     private Node head;
     //记录符号表中元素的个数
@@ -2108,8 +2108,8 @@ public static void main(String[] args) throws Exception &#123;
         return null;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class OrderSymbolTableTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class OrderSymbolTableTest &#123;
     public static void main(String[] args) &#123;
         //创建有序符号表对象
         OrderSymbolTable&lt;Integer, String&gt; table = new OrderSymbolTable&lt;&gt;();
@@ -2120,7 +2120,7 @@ public static void main(String[] args) throws Exception &#123;
         table.put(3,&quot;王五&quot;);
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><hr>
 <p>树是由n（n&gt;=1）个有限结点组成一个具有层次关系的集合。树具有以下特点：每个结点有零个或多个子结点；没有父结点的结点为根结点；每一个非根结点只有一个父结点；每个结点及其后代结点整体上可以看做是一棵树，称为当前结点的父结点的一个子树。</p>
 <p>结点的度：一个结点含有的子树的个数称为该结点的度。</p>
@@ -2150,7 +2150,7 @@ public static void main(String[] args) throws Exception &#123;
 <p>后序遍历实现步骤：找到当前结点的左子树，如果不为空，递归遍历左子树；找到当前结点的右子树，如果不为空，递归遍历右子树；把当前结点的key放入到队列中。</p>
 <p><strong>层序遍历</strong>，就是从根节点（第一层）开始，依次向下，获取每一层所有结点的值。实现步骤：创建队列，存储每一层的结点；使用循环从队列中弹出一个结点：获取当前结点的key；如果当前结点的左子结点不为空，则把左子结点放入到队列中；如果当前结点的右子结点不为空，则把右子结点放入到队列中。</p>
 <p><strong>最大深度</strong>：如果根结点为空，则最大深度为0；计算左子树的最大深度；计算右子树的最大深度；当前树的最大深度=左子树的最大深度和右子树的最大深度中的较大者+1。</p>
-<div class="hljs code-wrapper"><pre><code>public class BinaryTree&lt;Key extends Comparable&lt;Key&gt;, Value&gt; &#123;
+<pre><code>public class BinaryTree&lt;Key extends Comparable&lt;Key&gt;, Value&gt; &#123;
     //记录根结点
     private Node root;
     //记录树中元素的个数
@@ -2439,8 +2439,8 @@ public static void main(String[] args) throws Exception &#123;
         return max;
     &#125;
 &#125;
-</code></pre></div><p>代码测试</p>
-<div class="hljs code-wrapper"><pre><code>public class BinaryTreeTest &#123;
+</code></pre><p>代码测试</p>
+<pre><code>public class BinaryTreeTest &#123;
     public static void main(String[] args) &#123;
         //创建二叉查找树对象
         BinaryTree&lt;Integer, String&gt; tree = new BinaryTree&lt;&gt;();
@@ -2457,8 +2457,8 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(&quot;删除后键3对应的元素:&quot;+tree.get(3));
     &#125;
 &#125;
-</code></pre></div><p>遍历测试</p>
-<div class="hljs code-wrapper"><pre><code>public class BinaryTreeErgodicTest &#123;
+</code></pre><p>遍历测试</p>
+<pre><code>public class BinaryTreeErgodicTest &#123;
 
     /*//测试前序遍历
     public static void main(String[] args) &#123;
@@ -2544,8 +2544,8 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>最大深度测试</p>
-<div class="hljs code-wrapper"><pre><code>public class BinaryTreeMaxDepthTest &#123;
+</code></pre><p>最大深度测试</p>
+<pre><code>public class BinaryTreeMaxDepthTest &#123;
     public static void main(String[] args) &#123;
         //创建树对象
         BinaryTree&lt;String, String&gt; tree = new BinaryTree&lt;&gt;();
@@ -2562,11 +2562,11 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(maxDepth);
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="折纸问题"><a href="#折纸问题" class="headerlink" title="折纸问题"></a>折纸问题</h3><hr>
 <p>纸条对折1次，压出折痕后展开。此时 折痕是凹下去的，即折痕突起的方向指向纸条的背面。如果从纸条的下边向上方连续对折2次，压出折痕后展开，此时有三条折痕，从上到下依次是下折痕、下折痕和上折痕。连续对折N次，请从上到下打印所有折痕的方向 例如：N=1时，打印： down；N=2时，打印： down down up。</p>
 <p>根结点为下折痕；每一个结点的左子结点为下折痕；每一个结点的右子结点为上折痕。</p>
-<div class="hljs code-wrapper"><pre><code>public class PagerFoldingTest &#123;
+<pre><code>public class PagerFoldingTest &#123;
 
     public static void main(String[] args) &#123;
         //模拟这只过程，产生树
@@ -2641,7 +2641,7 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><hr>
 <p>堆通常可以被看做是一棵<strong>完全二叉树</strong>的<strong>数组对象</strong>。</p>
 <p>完全二叉树，除了树的最后一层结点不需要是满的，其它的每一层从左到右都是满的，如果最后一层结点不是满的，那么要求左满右不满。</p>
@@ -2652,7 +2652,7 @@ public static void main(String[] args) throws Exception &#123;
 <h3 id="API实现"><a href="#API实现" class="headerlink" title="API实现"></a>API实现</h3><hr>
 <p>如果往堆中新插入元素，我们只需要不断的比较新结点a[k]和它的父结点a[k/2]的大小，然后根据结果完成数据元素的交换，就可以完成堆的有序调整。</p>
 <p>当删除掉最大元素后，只需要将最后一个元素放到索引1处，并不断的拿着当前结点a[k]与它的子结点a[2k]和a[2k+1]中的较大者交换位置，即可完成堆的有序调整。</p>
-<div class="hljs code-wrapper"><pre><code>public class Heap&lt;T extends Comparable&lt;T&gt;&gt; &#123;
+<pre><code>public class Heap&lt;T extends Comparable&lt;T&gt;&gt; &#123;
     //存储堆中的元素
     private T[] items;
     //记录堆中元素的个数
@@ -2748,8 +2748,8 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class HeapTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class HeapTest &#123;
     public static void main(String[] args) &#123;
         //创建堆对象
         Heap&lt;String&gt; heap = new Heap&lt;&gt;(10);
@@ -2768,13 +2768,13 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="利用堆进行排序"><a href="#利用堆进行排序" class="headerlink" title="利用堆进行排序"></a>利用堆进行排序</h3><hr>
 <p>构造堆；得到堆顶元素，这个值就是最大值；交换堆顶元素和数组中的最后一个元素，此时所有元素中的最大元素已经放到合适的位置；对堆进行调整，重新让除了最后一个元素的剩余元素中的最大值放到堆顶；重复上述步骤，直到堆中剩一个元素为止。</p>
 <p>堆构造过程：创建一个新数组，把原数组0~length-1的数据拷贝到新数组的1~length处，再从新数组长度的一半处开始往1索引处扫描（从右往左），然后对扫描到的每一个元素做下沉调整即可。</p>
 <p>堆排序过程：对构造好的堆，我们只需要做类似于堆的删除操作，就可以完成排序。将堆顶元素和堆中最后一个元素交换位置；通过对堆顶元素下沉调整堆，把最大的元素放到堆顶(此时最后一个元素不参与堆的调整，因为最大的数据已经到了数组的最右边)；重复上面步骤，直到堆中剩最后一个元素。</p>
 <p>实现：</p>
-<div class="hljs code-wrapper"><pre><code>public class HeapSort &#123;
+<pre><code>public class HeapSort &#123;
     //判断heap堆中索引i处的元素是否小于索引j处的元素
     private static  boolean less(Comparable[] heap, int i, int j) &#123;
         return heap[i].compareTo(heap[j])&lt;0;
@@ -2840,8 +2840,8 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class HeapSortTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class HeapSortTest &#123;
     public static void main(String[] args) &#123;
         //待排序数组
         String[] arr = &#123;&quot;S&quot;,&quot;O&quot;,&quot;R&quot;,&quot;T&quot;,&quot;E&quot;,&quot;X&quot;,&quot;A&quot;,&quot;M&quot;,&quot;P&quot;,&quot;L&quot;,&quot;E&quot;&#125;;
@@ -2851,10 +2851,10 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(Arrays.toString(arr));
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h2><h3 id="最大优先队列"><a href="#最大优先队列" class="headerlink" title="最大优先队列"></a>最大优先队列</h3><hr>
 <p>可以获取并删除队列中最大的值。基于堆区实现最大优先队列。</p>
-<div class="hljs code-wrapper"><pre><code>public class MaxPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; &#123;
+<pre><code>public class MaxPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; &#123;
     //存储堆中的元素
     private T[] items;
     //记录堆中元素的个数
@@ -2933,8 +2933,8 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class MaxPriorityQueueTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class MaxPriorityQueueTest &#123;
     public static void main(String[] args) &#123;
         //创建优先队列
         MaxPriorityQueue&lt;String&gt; queue = new MaxPriorityQueue&lt;&gt;(10);
@@ -2953,10 +2953,10 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="最小优先队列"><a href="#最小优先队列" class="headerlink" title="最小优先队列"></a>最小优先队列</h3><hr>
 <p>可以获取并删除队列中最小的值。基于堆来完成最小优先队列：最小的元素放在数组的索引1处；每个结点的数据总是小于等于它的两个子结点的数据。</p>
-<div class="hljs code-wrapper"><pre><code>public class MinPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; &#123;
+<pre><code>public class MinPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; &#123;
     //存储堆中的元素
     private T[] items;
     //记录堆中元素的个数
@@ -3039,8 +3039,8 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class MinPriorityQueueTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class MinPriorityQueueTest &#123;
     public static void main(String[] args) &#123;
         //创建最小优先队列对象
         MinPriorityQueue&lt;String&gt; queue = new MinPriorityQueue&lt;String&gt;(10);
@@ -3059,14 +3059,14 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="索引优先队列"><a href="#索引优先队列" class="headerlink" title="索引优先队列"></a>索引优先队列</h3><hr>
 <p>存储数据时，给每一个数据元素关联一个整数，例如insert(int k,T t),我们可以看做k是t关联的整数，那么我们的实现需要通过k这个值，快速获取到队列中t这个元素，此时有个k这个值需要具有唯一性。</p>
 <p>用一个<code>T[] items</code>数组来保存数据元素，在insert(int k,T t)完成插入时，可以把k看做是items数组的索引，把t元素放到items数组的索引k处，这样我们再根据k获取元素t时就很方便了，直接就可以拿到items[k]即可。</p>
 <p>数组<code>int[]pq</code>,来保存每个元素在items数组中的索引，pq数组需要堆有序，也就是说，pq[1]对应的数据元素items[pq[1]]要小于等于pq[2]和pq[3]对应的数据元素items[pq[2]]和items[pq[3]]。</p>
 <p>数组<code>int[] qp</code>,用来存储pq的逆序。例如：在pq数组中：pq[1]=6;那么在qp数组中，把6作为索引，1作为值，结果是：qp[6]=1。</p>
 <p>代码实现</p>
-<div class="hljs code-wrapper"><pre><code>public class IndexMinPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; &#123;
+<pre><code>public class IndexMinPriorityQueue&lt;T extends Comparable&lt;T&gt;&gt; &#123;
     //存储堆中的元素
     private T[] items;
     //保存每个元素在items数组中的索引，pq数组需要堆有序
@@ -3224,8 +3224,8 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>测试代码</p>
-<div class="hljs code-wrapper"><pre><code>public class IndexMinPriorityQueueTest &#123;
+</code></pre><p>测试代码</p>
+<pre><code>public class IndexMinPriorityQueueTest &#123;
     public static void main(String[] args) &#123;
         //创建索引最小优先队列对象
         IndexMinPriorityQueue&lt;String&gt; queue = new IndexMinPriorityQueue&lt;&gt;(10);
@@ -3242,7 +3242,7 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="平衡树"><a href="#平衡树" class="headerlink" title="平衡树"></a>平衡树</h2><h3 id="2-3查找树"><a href="#2-3查找树" class="headerlink" title="2-3查找树"></a>2-3查找树</h3><hr>
 <p>2-结点：含有一个键(及其对应的值)和两条链，左链接指向2-3树中的键都小于该结点，右链接指向的2-3树中的键都大于该结点。</p>
 <p>3-结点：含有两个键(及其对应的值)和三条链，左链接指向的2-3树中的键都小于该结点，中链接指向的2-3树中的键都位于该结点的两个键之间，右链接指向的2-3树中的键都大于该结点。</p>
@@ -3262,7 +3262,7 @@ public static void main(String[] args) throws Exception &#123;
 <p><strong>颜色反转</strong>：当一个结点的左子结点和右子结点的color都为RED时，也就是出现了临时的4-结点，此时只需要把左子结点和右子结点的颜色变为BLACK，同时让当前结点的颜色变为RED即可。</p>
 <p>由于根结点不存在父结点，所以每次插入操作后，我们都需要把根结点的颜色设置为黑色。</p>
 <p>代码实现</p>
-<div class="hljs code-wrapper"><pre><code>public class RedBlackTree&lt;Key extends Comparable&lt;Key&gt;, Value&gt; &#123;
+<pre><code>public class RedBlackTree&lt;Key extends Comparable&lt;Key&gt;, Value&gt; &#123;
     //根节点
     private Node root;
     //记录树中元素的个数
@@ -3439,8 +3439,8 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class RedBlackTreeTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class RedBlackTreeTest &#123;
     public static void main(String[] args) &#123;
         //创建红黑树
         RedBlackTree&lt;String, String&gt; tree = new RedBlackTree&lt;&gt;();
@@ -3457,7 +3457,7 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(r3);
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="B树和B-树"><a href="#B树和B-树" class="headerlink" title="B树和B+树"></a>B树和B+树</h2><h3 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h3><hr>
 <p>B树中允许一个结点中包含多个key，可以是3个、4个、5个甚至更多，并不确定，需要看具体的实现。现在我们选择一个参数M，来构造一个B树，我们可以把它称作是M阶的B树，那么该树会具有如下特点：每个结点最多有M-1个key，并且以升序排列；每个结点最多能有M个子结点；根结点至少有两个子结点。</p>
 <p>在实际应用中B树的阶数一般都比较大（通常大于100），所以，即使存储大量的数据，B树的高度仍然比较小，这样在某些应用场景下，就可以体现出它的优势。</p>
@@ -3475,7 +3475,7 @@ public static void main(String[] args) throws Exception &#123;
 <h3 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h3><hr>
 <p>初始情况下，并查集中的数据默认分为N个组；初始化数组eleAndGroup；把eleAndGroup数组的索引看做是每个结点存储的元素，把eleAndGroup数组每个索引处的值看做是该结点所在的分组，那么初始化情况下，i索引处存储的值就是i。</p>
 <p>如果p和q已经在同一个分组中，则无需合并；如果p和q不在同一个分组，则只需要将p元素所在组的所有的元素的组标识符修改为q元素所在组的标识符即可；分组数量-1。</p>
-<div class="hljs code-wrapper"><pre><code>public class UF &#123;
+<pre><code>public class UF &#123;
     //记录结点元素和该元素所在分组的标识
     private int[] eleAndGroup;
     //记录并查集中数据的分组个数
@@ -3527,8 +3527,8 @@ public static void main(String[] args) throws Exception &#123;
         this.count--;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class UFTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class UFTest &#123;
     public static void main(String[] args) &#123;
         //创建并查集对象
         UF uf = new UF(5);
@@ -3550,10 +3550,10 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="UF-Tree算法优化"><a href="#UF-Tree算法优化" class="headerlink" title="UF_Tree算法优化"></a>UF_Tree算法优化</h3><hr>
 <p>我们仍然让eleAndGroup数组的索引作为某个结点的元素；eleAndGroup[i]的值不再是当前结点所在的分组标识，而是该结点的父结点。</p>
-<div class="hljs code-wrapper"><pre><code>public class UF_Tree &#123;
+<pre><code>public class UF_Tree &#123;
     //记录结点元素和该元素所在分组的标识
     private int[] eleAndGroup;
     //记录并查集中数据的分组个数
@@ -3606,8 +3606,8 @@ public static void main(String[] args) throws Exception &#123;
         this.count--;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class UFTeeTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class UFTeeTest &#123;
     public static void main(String[] args) &#123;
         //创建并查集对象
         UF_Tree uf = new UF_Tree(5);
@@ -3629,10 +3629,10 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="路径压缩优化"><a href="#路径压缩优化" class="headerlink" title="路径压缩优化"></a>路径压缩优化</h3><hr>
 <p>在每次合并树的时候，把较小的树连接到较大的树上，就可以减小树的深度。</p>
-<div class="hljs code-wrapper"><pre><code>public class UF_Tree_Weighted &#123;
+<pre><code>public class UF_Tree_Weighted &#123;
     //记录结点元素和该元素所在分组的标识
     private int[] eleAndGroup;
     //记录并查集中数据的分组个数
@@ -3697,8 +3697,8 @@ public static void main(String[] args) throws Exception &#123;
         this.count--;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class UFTeeWeightedTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class UFTeeWeightedTest &#123;
     public static void main(String[] args) &#123;
         //创建并查集对象
         UF_Tree_Weighted uf = new UF_Tree_Weighted(5);
@@ -3720,9 +3720,9 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><hr>
-<div class="hljs code-wrapper"><pre><code>public class Traffic_Project_Test &#123;
+<pre><code>public class Traffic_Project_Test &#123;
 
     public static void main(String[] args) throws Exception&#123;
         //构建一个缓冲读取流BufferedReader
@@ -3748,7 +3748,7 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(&quot;还需要修建&quot;+roads+&quot;条道路，才能实现畅通工程&quot;);
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><hr>
 <p>图是由一组顶点和一组能够将两个顶点相连的边组成的。按照连接两个顶点的边的不同，可以把图分为以下两种：无向图：边仅仅连接两个顶点，没有其他含义；有向图：边不仅连接两个顶点，并且具有方向。</p>
 <p>相邻顶点：当两个顶点通过一条边相连时，我们称这两个顶点是相邻的，并且称这条边依附于这两个顶点。</p>
@@ -3766,7 +3766,7 @@ public static void main(String[] args) throws Exception &#123;
 <p>邻接表：使用一个大小为V的数组 <code>Queue[V] adj</code>，把索引看做是顶点；每个索引处<code>adj[v]</code>存储了一个队列，该队列中存储的是所有与该顶点相邻的其他顶点。</p>
 <hr>
 <h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><hr>
-<div class="hljs code-wrapper"><pre><code>public class Graph &#123;
+<pre><code>public class Graph &#123;
     //顶点数目
     private final int V;
     //边的数目
@@ -3810,10 +3810,10 @@ public static void main(String[] args) throws Exception &#123;
         return adj[v];
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="图的搜索"><a href="#图的搜索" class="headerlink" title="图的搜索"></a>图的搜索</h3><hr>
 <p><strong>深度优先搜索</strong>：在搜索时，如果遇到一个结点既有子结点，又有兄弟结点，那么先找子结点，然后找兄弟结点。</p>
-<div class="hljs code-wrapper"><pre><code>public class DepthFirstSearch &#123;
+<pre><code>public class DepthFirstSearch &#123;
     //索引代表顶点，值表示当前顶点是否已经被搜索
     private boolean[] marked;
     //记录有多少个顶点与s顶点相通
@@ -3852,8 +3852,8 @@ public static void main(String[] args) throws Exception &#123;
         return count;
     &#125;
 &#125;
-</code></pre></div><p>测试深度优先搜索</p>
-<div class="hljs code-wrapper"><pre><code>public class DepthFirstSearchTest &#123;
+</code></pre><p>测试深度优先搜索</p>
+<pre><code>public class DepthFirstSearchTest &#123;
     public static void main(String[] args) &#123;
         //准备Graph对象
         Graph G = new Graph(13);
@@ -3882,9 +3882,9 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(&quot;顶点7和顶点0是否相通：&quot;+marked2);
     &#125;
 &#125;
-</code></pre></div><p><strong>广度优先搜索</strong>:在搜索时，如果遇到一个结点既有子结点，又有兄弟结点，那么先找兄弟结点，然后找子结点。</p>
+</code></pre><p><strong>广度优先搜索</strong>:在搜索时，如果遇到一个结点既有子结点，又有兄弟结点，那么先找兄弟结点，然后找子结点。</p>
 <p>实现代码</p>
-<div class="hljs code-wrapper"><pre><code>public class BreadthFirstSearch &#123;
+<pre><code>public class BreadthFirstSearch &#123;
     //索引代表顶点，值表示当前顶点是否已经被搜索
     private boolean[] marked;
     //记录有多少个顶点与s顶点相通
@@ -3931,8 +3931,8 @@ public static void main(String[] args) throws Exception &#123;
         return count;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class BreadthFirstSearchTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class BreadthFirstSearchTest &#123;
     public static void main(String[] args) &#123;
         //准备Graph对象
         Graph G = new Graph(13);
@@ -3961,9 +3961,9 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(&quot;顶点7和顶点0是否相通：&quot;+marked2);
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="案例-1"><a href="#案例-1" class="headerlink" title="案例"></a>案例</h3><hr>
-<div class="hljs code-wrapper"><pre><code>public class Traffic_Project_Test2 &#123;
+<pre><code>public class Traffic_Project_Test2 &#123;
 
     public static void main(String[] args) throws Exception&#123;
         //构建一个缓冲读取流BufferedReader
@@ -3991,9 +3991,9 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(&quot;顶点10和顶点9是否相通：&quot;+search.marked(10));
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="路径查找"><a href="#路径查找" class="headerlink" title="路径查找"></a>路径查找</h3><hr>
-<div class="hljs code-wrapper"><pre><code>public class DepthFirstPaths &#123;
+<pre><code>public class DepthFirstPaths &#123;
     //索引代表顶点，值表示当前顶点是否已经被搜索
     private boolean[] marked;
     //起点
@@ -4047,8 +4047,8 @@ public static void main(String[] args) throws Exception &#123;
         return path;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class DepthFirstPathsTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class DepthFirstPathsTest &#123;
     public static void main(String[] args) throws Exception&#123;
         //构建缓冲读取流BufferedReader
         BufferedReader br = new BufferedReader(new InputStreamReader(DepthFirstPathsTest.class.getClassLoader().getResourceAsStream(&quot;road_find.txt&quot;)));
@@ -4079,7 +4079,7 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(sb);
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="有向图定义"><a href="#有向图定义" class="headerlink" title="有向图定义"></a>有向图定义</h3><hr>
 <p>有向图是一副具有方向性的图，是由一组顶点和一组有方向的边组成的，每条方向的边都连着一对有序的顶点。</p>
 <p>出度：由某个顶点指出的边的个数称为该顶点的出度。</p>
@@ -4089,7 +4089,7 @@ public static void main(String[] args) throws Exception &#123;
 <p>一副有向图中两个顶点v和w可能存在以下四种关系：没有边相连；存在从v到w的边v—&gt;w;存在从w到v的边w—&gt;v;既存在w到v的边，也存在v到w的边，即双向连接。</p>
 <hr>
 <h3 id="有向图实现"><a href="#有向图实现" class="headerlink" title="有向图实现"></a>有向图实现</h3><hr>
-<div class="hljs code-wrapper"><pre><code>public class Digraph &#123;
+<pre><code>public class Digraph &#123;
     //顶点数目
     private final int V;
     //边的数目
@@ -4145,13 +4145,13 @@ public static void main(String[] args) throws Exception &#123;
         return r;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="拓扑排序-检测有向图中的环"><a href="#拓扑排序-检测有向图中的环" class="headerlink" title="拓扑排序-检测有向图中的环"></a>拓扑排序-检测有向图中的环</h3><hr>
 <p>拓扑排序：给定一副有向图，将所有的顶点排序，使得所有的有向边均从排在前面的元素指向排在后面的元素，此时就可以明确的表示出每个顶点的优先级。</p>
 <p>如果我们要使用拓扑排序解决优先级问题，首先得保证图中没有环的存在。</p>
 <p><code>onStack[]</code> 布尔数组，索引为图的顶点，当我们深度搜索时：在如果当前顶点正在搜索，则把对应的onStack数组中的值改为true，标识进栈；如果当前顶点搜索完毕，则把对应的onStack数组中的值改为false，标识出栈；如果即将要搜索某个顶点，但该顶点已经在栈中，则图中有环。</p>
 <p>代码实现</p>
-<div class="hljs code-wrapper"><pre><code>public class DirectedCycle &#123;
+<pre><code>public class DirectedCycle &#123;
     //索引代表顶点，值表示当前顶点是否已经被搜索
     private boolean[] marked;
     //记录图中是否有环
@@ -4203,11 +4203,11 @@ public static void main(String[] args) throws Exception &#123;
         return hasCycle;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="拓扑排序-基于深度优先的顶点排序"><a href="#拓扑排序-基于深度优先的顶点排序" class="headerlink" title="拓扑排序-基于深度优先的顶点排序"></a>拓扑排序-基于深度优先的顶点排序</h3><hr>
 <p>栈reversePost用来存储顶点，当我们深度搜索图时，每搜索完毕一个顶点，把该顶点放入到reversePost中，这样就可以实现顶点排序。</p>
 <p>代码实现：</p>
-<div class="hljs code-wrapper"><pre><code>public class DepthFirstOrder &#123;
+<pre><code>public class DepthFirstOrder &#123;
     //索引代表顶点，值表示当前顶点是否已经被搜索
     private boolean[] marked;
     //使用栈，存储顶点序列
@@ -4247,9 +4247,9 @@ public static void main(String[] args) throws Exception &#123;
         return reversePost;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="拓扑排序实现"><a href="#拓扑排序实现" class="headerlink" title="拓扑排序实现"></a>拓扑排序实现</h3><hr>
-<div class="hljs code-wrapper"><pre><code>public class TopoLogical &#123;
+<pre><code>public class TopoLogical &#123;
     //顶点的拓扑排序
     private Stack&lt;Integer&gt; order;
 
@@ -4274,8 +4274,8 @@ public static void main(String[] args) throws Exception &#123;
         return order;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class TopoLogicalTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class TopoLogicalTest &#123;
     public static void main(String[] args) &#123;
         //准备有向图
         Digraph digraph = new Digraph(6);
@@ -4299,11 +4299,11 @@ public static void main(String[] args) throws Exception &#123;
         System.out.println(str);
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="加权无向图"><a href="#加权无向图" class="headerlink" title="加权无向图"></a>加权无向图</h3><hr>
 <p>加权无向图中的边我们就不能简单的使用v-w两个顶点表示了，而必须要给边关联一个权重值，因此我们可以使用对象来描述一条边。</p>
 <p>边的实现：</p>
-<div class="hljs code-wrapper"><pre><code>public class Edge implements Comparable&lt;Edge&gt; &#123;
+<pre><code>public class Edge implements Comparable&lt;Edge&gt; &#123;
     private final int v;//顶点一
     private final int w;//顶点二
     private final double weight;//当前边的权重
@@ -4351,8 +4351,8 @@ public static void main(String[] args) throws Exception &#123;
         return cmp;
     &#125;
 &#125;
-</code></pre></div><p>加权无向图的实现</p>
-<div class="hljs code-wrapper"><pre><code>public class EdgeWeightedGraph &#123;
+</code></pre><p>加权无向图的实现</p>
+<pre><code>public class EdgeWeightedGraph &#123;
     //顶点总数
     private final int V;
     //边的总数
@@ -4417,7 +4417,7 @@ public static void main(String[] args) throws Exception &#123;
         return allEdges;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h3><hr>
 <p>图的生成树是它的一棵含有其所有顶点的无环连通子图，一副加权无向图的最小生成树它的一棵权值(树中所有边的权重之和)最小的生成树。</p>
 <p>树的性质：用一条边接树中的任意两个顶点都会产生一个新的环；从树中删除任意一条边，将会得到两棵独立的树。</p>
@@ -4428,7 +4428,7 @@ public static void main(String[] args) throws Exception &#123;
 <hr>
 <h3 id="最小生成树Prim算法"><a href="#最小生成树Prim算法" class="headerlink" title="最小生成树Prim算法"></a>最小生成树Prim算法</h3><hr>
 <p><strong>Prim算法</strong>的切分规则：把最小生成树中的顶点看做是一个集合，把不在最小生成树中的顶点看做是另外一个集合。实现：</p>
-<div class="hljs code-wrapper"><pre><code>public class PrimMST &#123;
+<pre><code>public class PrimMST &#123;
     //索引代表顶点，值表示当前顶点和最小生成树之间的最短边
     private Edge[] edgeTo;
     //索引代表顶点，值表示当前顶点和最小生成树之间的最短边的权重
@@ -4499,8 +4499,8 @@ public static void main(String[] args) throws Exception &#123;
         return allEdges;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class PrimMSTTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class PrimMSTTest &#123;
     public static void main(String[] args) throws Exception&#123;
         //准备一副加权无向图
         BufferedReader br = new BufferedReader(new InputStreamReader(PrimMSTTest.class.getClassLoader().getResourceAsStream(&quot;min_create_tree_test.txt&quot;)));
@@ -4531,13 +4531,13 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="最小生成树kruskal算法"><a href="#最小生成树kruskal算法" class="headerlink" title="最小生成树kruskal算法"></a>最小生成树kruskal算法</h3><hr>
 <p><strong>kruskal算法</strong>是按照边的权重(从小到大)处理它们，将边加入最小生成树中，加入的边不会与已经加入最小生成树的边构成环，直到树中含有V-1条边为止。</p>
 <p>kruskal算法和prim算法的区别：Prim算法是一条边一条边的构造最小生成树，每一步都为一棵树添加一条边。kruskal算法构造最小生成树的时候<br>也是一条边一条边地构造，但它的切分规则是不一样的。它每一次寻找的边会连接一片森林中的两棵树。如果一副加权无向图由V个顶点组成，初始化情况下每个顶点都构成一棵独立的树，则V个顶点对应V棵树，组成一片森林，kruskal算法每一次处理都会将两棵树合并为一棵树，直到整个森林中只剩一棵树为止。</p>
 <p>取出权重最小的边，并得到该边关联的两个顶点v和w，通过uf.connect(v,w)判断v和w是否已经连通，如果连通，则证明这两个顶点在同一棵树中，那么就不能再把这条边添加到最小生成树中，因为在一棵树的任意两个顶点上添加一条边，都会形成环，而最小生成树不能有环的存在，如果不连通，则通过uf.connect(v,w)把顶点v所在的树和顶点w所在的树合并成一棵树，并把这条边加入到mst队列中，这样如果把所有的边处理完，最终mst中存储的就是最小生树的所有边。</p>
 <p><strong>kruskal算法</strong>实现:</p>
-<div class="hljs code-wrapper"><pre><code>public class KruskalMST &#123;
+<pre><code>public class KruskalMST &#123;
     //保存最小生成树的所有边
     private Queue&lt;Edge&gt; mst;
     //索引代表顶点，使用uf.connect(v,w)可以判断顶点v和顶点w是否在同一颗树中，使用uf.union(v,w)可以把顶点v所在的树和顶点w所在的树合并
@@ -4580,8 +4580,8 @@ public static void main(String[] args) throws Exception &#123;
         return mst;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class KruskalMSTTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class KruskalMSTTest &#123;
 
     public static void main(String[] args) throws Exception&#123;
         //准备一副加权无向图
@@ -4613,10 +4613,10 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="加权有向图"><a href="#加权有向图" class="headerlink" title="加权有向图"></a>加权有向图</h3><hr>
 <p>有向图边的表示：</p>
-<div class="hljs code-wrapper"><pre><code>public class DirectedEdge &#123;
+<pre><code>public class DirectedEdge &#123;
     private final int v;//起点
     private final int w;//终点
     private final double weight;//当前边的权重
@@ -4643,8 +4643,8 @@ public static void main(String[] args) throws Exception &#123;
         return w;
     &#125;
 &#125;
-</code></pre></div><p>有向图的实现：</p>
-<div class="hljs code-wrapper"><pre><code>public class EdgeWeightedDigraph &#123;
+</code></pre><p>有向图的实现：</p>
+<pre><code>public class EdgeWeightedDigraph &#123;
     //顶点总数
     private final int V;
     //边的总数
@@ -4700,14 +4700,14 @@ public static void main(String[] args) throws Exception &#123;
         return allEdges;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h3><hr>
 <p>最短路径定义及性质定义：在一副加权有向图中，从顶点s到顶点t的最短路径是所有从顶点s到顶点t的路径中总权重最小的那条路径。</p>
 <p>最短路径树：给定一副加权有向图和一个顶点s，以s为起点的一棵最短路径树是图的一副子图，它包含顶点s以及从s可达的所有顶点。这棵有向树的根结点为s，树的每条路径都是有向图中的一条最短路径。</p>
 <p>边的松弛：放松边v-&gt;w意味着检查从s到w的最短路径是否先从s到v，然后再从v到w。</p>
 <p>顶点的松弛：顶点的松弛是基于边的松弛完成的，只需要把某个顶点指出的所有边松弛，那么该顶点就松弛完毕。例如要松弛顶点v，只需要遍历v的邻接表，把每一条边都松弛，那么顶点v就松弛了。</p>
 <p>Disjstra算法的实现和Prim算法很类似，构造最短路径树的每一步都是向这棵树中添加一条新的边，而这条新的边是有效横切边pq队列中的权重最小的边。</p>
-<div class="hljs code-wrapper"><pre><code>public class DijkstraSP &#123;
+<pre><code>public class DijkstraSP &#123;
     //索引代表顶点，值表示从顶点s到当前顶点的最短路径上的最后一条边
     private DirectedEdge[] edgeTo;
     //索引代表顶点，值从顶点s到当前顶点的最短路径的总权重
@@ -4786,8 +4786,8 @@ public static void main(String[] args) throws Exception &#123;
         return allEdges;
     &#125;
 &#125;
-</code></pre></div><p>测试</p>
-<div class="hljs code-wrapper"><pre><code>public class DijkstraSPTest &#123;
+</code></pre><p>测试</p>
+<pre><code>public class DijkstraSPTest &#123;
 
     public static void main(String[] args) throws Exception&#123;
         //创建一副加权有向图
@@ -4814,7 +4814,7 @@ public static void main(String[] args) throws Exception &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 
             </div>
             <hr>

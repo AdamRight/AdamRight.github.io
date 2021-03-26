@@ -237,28 +237,28 @@
 <hr>
 <h3 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h3><hr>
 <p>进程使用：</p>
-<div class="hljs code-wrapper"><pre><code>#导入进程包
+<pre><code>#导入进程包
 import multiprocessing
 #创建子进程并指定执行的任务
 sub_process = multiprocessing.Process (target=任务名)
 #启动进程执行任务
 sub_process.start()
-</code></pre></div><hr>
+</code></pre><hr>
 <p>Process进程类的说明：</p>
-<div class="hljs code-wrapper"><pre><code>group：指定进程组，目前只能使用None
+<pre><code>group：指定进程组，目前只能使用None
 target：执行的目标任务名
 name：进程名字
 args：以元组方式给执行任务传参
 kwargs：以字典方式给执行任务传参
-</code></pre></div><p>Process创建的实例对象的常用方法:</p>
-<div class="hljs code-wrapper"><pre><code>start()：启动子进程实例（创建子进程）
+</code></pre><p>Process创建的实例对象的常用方法:</p>
+<pre><code>start()：启动子进程实例（创建子进程）
 join()：等待子进程执行结束
 terminate()：不管任务是否完成，立即终止子进程
-</code></pre></div><p>Process创建的实例对象的常用属性:</p>
-<div class="hljs code-wrapper"><pre><code>name：当前进程的别名，默认为Process-N，N为从1开始递增的整数
-</code></pre></div><hr>
+</code></pre><p>Process创建的实例对象的常用属性:</p>
+<pre><code>name：当前进程的别名，默认为Process-N，N为从1开始递增的整数
+</code></pre><hr>
 <p>代码：</p>
-<div class="hljs code-wrapper"><pre><code>import multiprocessing
+<pre><code>import multiprocessing
 import time
 
 # 跳舞任务
@@ -282,15 +282,15 @@ if __name__ == &apos;__main__&apos;:
     # 启动子进程执行对应的任务
     dance_process.start()
     sing_process.start()
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="进程编号"><a href="#进程编号" class="headerlink" title="进程编号"></a>进程编号</h3><hr>
 <p>获取进程编号的目的是验证主进程和子进程的关系，可以得知子进程是由那个主进程创建出来的。</p>
 <p>获取进程编号的两种操作:获取当前进程编号和获取当前父进程编号。</p>
 <hr>
 <p>获取当前进程编号</p>
-<div class="hljs code-wrapper"><pre><code>os.getpid() 
-</code></pre></div><p>示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>import multiprocessing
+<pre><code>os.getpid() 
+</code></pre><p>示例代码:</p>
+<pre><code>import multiprocessing
 import time
 import os
 
@@ -330,8 +330,8 @@ if __name__ == &apos;__main__&apos;:
     # 启动子进程执行对应的任务
     dance_process.start()
     sing_process.start()
-</code></pre></div><p>运行结果：</p>
-<div class="hljs code-wrapper"><pre><code>main: 10796
+</code></pre><p>运行结果：</p>
+<pre><code>main: 10796
 main: &lt;_MainProcess name=&apos;MainProcess&apos; parent=None started&gt;
 dance: 2388
 dance: &lt;Process name=&apos;myprocess1&apos; parent=10796 started&gt;
@@ -343,11 +343,11 @@ sing: &lt;Process name=&apos;Process-2&apos; parent=10796 started&gt;
 唱歌中...
 唱歌中...
 唱歌中...
-</code></pre></div><hr>
+</code></pre><hr>
 <p>获取当前父进程编号</p>
-<div class="hljs code-wrapper"><pre><code>os.getppid()
-</code></pre></div><p>示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>import multiprocessing
+<pre><code>os.getppid()
+</code></pre><p>示例代码:</p>
+<pre><code>import multiprocessing
 import time
 import os
 
@@ -391,8 +391,8 @@ if __name__ == &apos;__main__&apos;:
     # 启动子进程执行对应的任务
     dance_process.start()
     sing_process.start()
-</code></pre></div><p>运行结果：</p>
-<div class="hljs code-wrapper"><pre><code>main: 4832
+</code></pre><p>运行结果：</p>
+<pre><code>main: 4832
 main: &lt;_MainProcess name=&apos;MainProcess&apos; parent=None started&gt;
 dance: 14372
 dance: &lt;Process name=&apos;myprocess1&apos; parent=4832 started&gt;
@@ -406,12 +406,12 @@ sing的父进程编号: 4832
 唱歌中...
 唱歌中...
 唱歌中...
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="进程执行带有参数的任务"><a href="#进程执行带有参数的任务" class="headerlink" title="进程执行带有参数的任务"></a>进程执行带有参数的任务</h3><hr>
 <p>Process类执行任务并给任务传参数有两种方式:<code>args</code> 表示以元组的方式给执行任务传参;<code>kwargs</code> 表示以字典方式给执行任务传参。</p>
 <hr>
 <p>args参数的使用，示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>import multiprocessing
+<pre><code>import multiprocessing
 import time
 
 # 带有参数的任务
@@ -427,10 +427,10 @@ if __name__ == &apos;__main__&apos;:
     # args: 以元组的方式给任务传入参数
     sub_process = multiprocessing.Process(target=task, args=(5,))
     sub_process.start()
-</code></pre></div><p><strong>元组方式传参一定要和参数的顺序保持一致。</strong></p>
+</code></pre><p><strong>元组方式传参一定要和参数的顺序保持一致。</strong></p>
 <hr>
 <p>kwargs参数的使用,示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>import multiprocessing
+<pre><code>import multiprocessing
 import time
 
 # 带有参数的任务
@@ -446,18 +446,18 @@ if __name__ == &apos;__main__&apos;:
     # kwargs: 表示以字典方式传入参数
     sub_process = multiprocessing.Process(target=task, kwargs=&#123;&quot;count&quot;: 3&#125;)
     sub_process.start()
-</code></pre></div><p><strong>字典方式传参字典中的key一定要和参数名保持一致。</strong></p>
+</code></pre><p><strong>字典方式传参字典中的key一定要和参数名保持一致。</strong></p>
 <hr>
 <h3 id="进程的注意点"><a href="#进程的注意点" class="headerlink" title="进程的注意点"></a>进程的注意点</h3><hr>
 <p><strong>进程之间不共享全局变量：子线程和主线程之间，以及子线程和子线程之间都不共享。</strong>创建子进程会对主进程资源进行拷贝，也就是说子进程是主进程的一个副本，好比是一对双胞胎，之所以进程之间不共享全局变量，是因为操作的不是同一个进程里面的全局变量，只不过不同进程里面的全局变量名字相同而已。</p>
 <p>主进程会等待所有的子进程执行结束再结束。</p>
 <p>守护主进程就是主进程退出子进程销毁不再执行。</p>
-<div class="hljs code-wrapper"><pre><code>子进程对象.daemon = True
-</code></pre></div><p>子进程销毁:子进程执行结束。</p>
-<div class="hljs code-wrapper"><pre><code># 让子进程销毁
+<pre><code>子进程对象.daemon = True
+</code></pre><p>子进程销毁:子进程执行结束。</p>
+<pre><code># 让子进程销毁
 子进程对象.terminate()
-</code></pre></div><p>保证主进程正常退出的示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>import multiprocessing
+</code></pre><p>保证主进程正常退出的示例代码:</p>
+<pre><code>import multiprocessing
 import time
 
 # 定义进程所需要执行的任务
@@ -479,24 +479,24 @@ if __name__ == &apos;__main__&apos;:
     exit()
     # 总结： 主进程会等待所有的子进程执行完成以后程序再退出
     # 如果想要主进程退出子进程销毁，可以设置守护主进程或者在主进程退出之前让子进程销毁
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="多线程的使用"><a href="#多线程的使用" class="headerlink" title="多线程的使用"></a>多线程的使用</h3><hr>
 <p>线程是cpu调度的基本单位，每个进程至少都有一个线程，而这个线程就是我们通常说的主线程。</p>
 <p>多线程的使用</p>
-<div class="hljs code-wrapper"><pre><code>#导入线程模块
+<pre><code>#导入线程模块
 import threading
 #创建子线程并指定执行的任务
 sub_thread = threading.Thread(target=任务名)
 #启动线程执行任务
 sub_thread.start()
-</code></pre></div><p>线程类Thread参数说明</p>
-<div class="hljs code-wrapper"><pre><code>group: 线程组，目前只能使用None
+</code></pre><p>线程类Thread参数说明</p>
+<pre><code>group: 线程组，目前只能使用None
 target: 执行的目标任务名
 args: 以元组的方式给执行任务传参
 kwargs: 以字典方式给执行任务传参
 name: 线程名，一般不用设置
-</code></pre></div><p>代码</p>
-<div class="hljs code-wrapper"><pre><code>import threading
+</code></pre><p>代码</p>
+<pre><code>import threading
 import time
 
 # 唱歌任务
@@ -526,11 +526,11 @@ if __name__ == &apos;__main__&apos;:
     # 开启线程
     sing_thread.start()
     dance_thread.start()
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="线程执行带有参数的任务"><a href="#线程执行带有参数的任务" class="headerlink" title="线程执行带有参数的任务"></a>线程执行带有参数的任务</h3><hr>
 <p>Thread类执行任务并给任务传参数有两种方式:args表示以元组的方式给执行任务传参;kwargs表示以字典方式给执行任务传参。</p>
 <p>元组方式传参(args)，元组方式传参一定要和参数的顺序保持一致：</p>
-<div class="hljs code-wrapper"><pre><code>import threading
+<pre><code>import threading
 import time
 
 # 带有参数的任务
@@ -546,8 +546,8 @@ if __name__ == &apos;__main__&apos;:
     # args: 以元组的方式给任务传入参数
     sub_thread = threading.Thread(target=task, args=(5,))
     sub_thread.start()
-</code></pre></div><p>字典方式传参(kwargs),字典方式传参字典中的key一定要和参数名保持一致:</p>
-<div class="hljs code-wrapper"><pre><code>import threading
+</code></pre><p>字典方式传参(kwargs),字典方式传参字典中的key一定要和参数名保持一致:</p>
+<pre><code>import threading
 import time
 
 # 带有参数的任务
@@ -563,40 +563,40 @@ if __name__ == &apos;__main__&apos;:
     # kwargs: 表示以字典方式传入参数
     sub_thread = threading.Thread(target=task, kwargs=&#123;&quot;count&quot;: 3&#125;)
     sub_thread.start()
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="线程的注意点"><a href="#线程的注意点" class="headerlink" title="线程的注意点"></a>线程的注意点</h3><hr>
 <p>线程之间执行是无序的，它是由cpu调度决定的，cpu调度哪个线程，哪个线程就先执行，没有调度的线程不能执行。</p>
 <p>进程之间执行也是无序的，它是由操作系统调度决定的，操作系统调度哪个进程，哪个进程就先执行，没有调度的进程不能执行。</p>
 <p>主线程会等待所有的子线程执行结束再结束。</p>
 <p>守护主线程:主线程退出子线程销毁不再执行。</p>
-<div class="hljs code-wrapper"><pre><code>#设置守护主线程有两种方式：
+<pre><code>#设置守护主线程有两种方式：
 threading.Thread(target=show_info, daemon=True)
 线程对象.setDaemon(True)
-</code></pre></div><p>线程之间共享全局变量，多线程同时对全局变量操作数据会发生错误。</p>
+</code></pre><p>线程之间共享全局变量，多线程同时对全局变量操作数据会发生错误。</p>
 <p>全局变量数据错误的解决办法:线程同步: 保证同一时刻只能有一个线程去操作全局变量。</p>
 <p>线程同步的方式:线程等待(join)；互斥锁。</p>
 <p>线程等待的示例代码:</p>
-<div class="hljs code-wrapper"><pre><code># 启动线程
+<pre><code># 启动线程
 first_thread.start()
 # 主线程等待第一个线程执行完成以后代码再继续执行，让其执行第二个线程
 # 线程同步： 一个任务执行完成以后另外一个任务才能执行，同一个时刻只有一个任务在执行
 first_thread.join()
 # 启动线程
 second_thread.start()
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h3><hr>
 <p>互斥锁: 对共享数据进行锁定，保证同一时刻只能有一个线程去操作。互斥锁是多个线程一起去抢，抢到锁的线程先执行，没有抢到锁的线程需要等待，等互斥锁使用完释放后，其它等待的线程再去抢这个锁。</p>
 <p>互斥锁使用步骤:</p>
-<div class="hljs code-wrapper"><pre><code># 创建锁
+<pre><code># 创建锁
 mutex = threading.Lock()
 # 上锁
 mutex.acquire()
 ...这里编写代码能保证同一时刻只能有一个线程去操作, 对共享数据进行锁定...
 # 释放锁
 mutex.release()
-</code></pre></div><p>acquire和release方法之间的代码同一时刻只能有一个线程去操作。如果在调用acquire方法的时候，其他线程已经使用了这个互斥锁，那么此时acquire方法会堵塞，直到这个互斥锁释放后才能再次上锁。</p>
+</code></pre><p>acquire和release方法之间的代码同一时刻只能有一个线程去操作。如果在调用acquire方法的时候，其他线程已经使用了这个互斥锁，那么此时acquire方法会堵塞，直到这个互斥锁释放后才能再次上锁。</p>
 <p>示例代码：</p>
-<div class="hljs code-wrapper"><pre><code>import threading
+<pre><code>import threading
 
 # 定义全局变量
 g_num = 0
@@ -634,11 +634,11 @@ if __name__ == &apos;__main__&apos;:
     second_thread.start()
     # 提示：加上互斥锁，那个线程抢到这个锁我们决定不了，那线程抢到锁那个线程先执行，没有抢到的线程需要等待
     # 加上互斥锁多任务瞬间变成单任务，性能会下降，也就是说同一时刻只能有一个线程去执行
-</code></pre></div><p>互斥锁的作用就是保证同一时刻只能有一个线程去操作共享数据，保证共享数据不会出现错误问题。使用互斥锁会影响代码的执行效率，多任务改成了单任务执行。互斥锁如果没有使用好容易出现死锁的情况。</p>
+</code></pre><p>互斥锁的作用就是保证同一时刻只能有一个线程去操作共享数据，保证共享数据不会出现错误问题。使用互斥锁会影响代码的执行效率，多任务改成了单任务执行。互斥锁如果没有使用好容易出现死锁的情况。</p>
 <hr>
 <h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><hr>
 <p>死锁: 一直等待对方释放锁的情景就是死锁。死锁的结果会造成应用程序的停止响应，不能再处理其它任务了。</p>
-<div class="hljs code-wrapper"><pre><code>import threading
+<pre><code>import threading
 import time
 
 # 创建互斥锁
@@ -666,7 +666,7 @@ if __name__ == &apos;__main__&apos;:
     for i in range(30):
         sub_thread = threading.Thread(target=get_value, args=(i,))
         sub_thread.start()
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="进程和线程的对比"><a href="#进程和线程的对比" class="headerlink" title="进程和线程的对比"></a>进程和线程的对比</h3><hr>
 <p>线程是依附在进程里面的，没有进程就没有线程。一个进程默认提供一条线程，进程可以创建多个线程。</p>
 <p>多进程要比多线程消耗的资源多，但是多进程开发比单进程多线程开发稳定性要强，某个进程挂掉不会影响其它进程。</p>
@@ -678,18 +678,18 @@ if __name__ == &apos;__main__&apos;:
 <h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2><h3 id="TCP客户端程序开发"><a href="#TCP客户端程序开发" class="headerlink" title="TCP客户端程序开发"></a>TCP客户端程序开发</h3><hr>
 <p>TCP客户端程序开发步骤：创建客户端套接字对象、和服务端套接字建立连接、发送数据、接收数据、关闭客户端套接字。</p>
 <p>socket类：</p>
-<div class="hljs code-wrapper"><pre><code>#导入socket模块 
+<pre><code>#导入socket模块 
 import socket
 
 #创建客户端socket对象 
 socket.socket(AddressFamily, Type)
-</code></pre></div><p>参数说明:AddressFamily表示IP地址类型, 分为TPv4和IPv6。Type 表示传输协议类型。</p>
+</code></pre><p>参数说明:AddressFamily表示IP地址类型, 分为TPv4和IPv6。Type 表示传输协议类型。</p>
 <p>方法说明:</p>
-<div class="hljs code-wrapper"><pre><code>connect((host, port)) 表示和服务端套接字建立连接, host是服务器ip地址，port是应用程序的端口号
+<pre><code>connect((host, port)) 表示和服务端套接字建立连接, host是服务器ip地址，port是应用程序的端口号
 send(data) 表示发送数据，data是二进制数据
 recv(buffersize) 表示接收数据, buffersize是每次接收数据的长度
-</code></pre></div><p>示例代码：</p>
-<div class="hljs code-wrapper"><pre><code>import socket
+</code></pre><p>示例代码：</p>
+<pre><code>import socket
 
 if __name__ == &apos;__main__&apos;:
     # 创建tcp客户端套接字
@@ -714,23 +714,23 @@ if __name__ == &apos;__main__&apos;:
     tcp_client_socket.close()
     #str.encode(编码格式) 表示把字符串编码成为二进制
     #data.decode(编码格式) 表示把二进制解码成为字符串
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="TCP服务端程序开发"><a href="#TCP服务端程序开发" class="headerlink" title="TCP服务端程序开发"></a>TCP服务端程序开发</h3><hr>
 <p>TCP服务端程序开发步骤回顾:创建服务端端套接字对象、绑定端口号、设置监听、等待接受客户端的连接请求、接收数据、发送数据、关闭套接字。</p>
 <p>socket类：</p>
-<div class="hljs code-wrapper"><pre><code>#导入 socket 模块
+<pre><code>#导入 socket 模块
 import socket
 #创建服务端 socket 对象
 socket.socket(AddressFamily, Type)
-</code></pre></div><p>参数说明:AddressFamily表示IP地址类型, 分为TPv4和IPv6。Type表示传输协议类型。</p>
+</code></pre><p>参数说明:AddressFamily表示IP地址类型, 分为TPv4和IPv6。Type表示传输协议类型。</p>
 <p>方法说明:</p>
-<div class="hljs code-wrapper"><pre><code>bind((host, port)) 表示绑定端口号, host 是 ip 地址，port 是端口号，ip 地址一般不指定，表示本机的任何一个ip地址都可以。
+<pre><code>bind((host, port)) 表示绑定端口号, host 是 ip 地址，port 是端口号，ip 地址一般不指定，表示本机的任何一个ip地址都可以。
 listen (backlog) 表示设置监听，backlog参数表示最大等待建立连接的个数。
 accept() 表示等待接受客户端的连接请求
 send(data) 表示发送数据，data 是二进制数据
 recv(buffersize) 表示接收数据, buffersize 是每次接收数据的长度
-</code></pre></div><p>示例代码：</p>
-<div class="hljs code-wrapper"><pre><code>import socket
+</code></pre><p>示例代码：</p>
+<pre><code>import socket
 
 if __name__ == &apos;__main__&apos;:
     # 创建tcp服务端套接字
@@ -766,14 +766,14 @@ if __name__ == &apos;__main__&apos;:
     service_client_socket.close()
     # 关闭服务端的套接字, 终止和客户端提供建立连接请求的服务
     tcp_server_socket.close()
-</code></pre></div><p>说明:当客户端和服务端建立连接后，服务端程序退出后端口号不会立即释放，需要等待大概1-2分钟。</p>
+</code></pre><p>说明:当客户端和服务端建立连接后，服务端程序退出后端口号不会立即释放，需要等待大概1-2分钟。</p>
 <p>解决办法有两种:更换服务端端口号;设置端口号复用(推荐使用)，也就是说让服务端程序退出后端口号立即释放。</p>
 <p>设置端口号复用的代码如下:</p>
-<div class="hljs code-wrapper"><pre><code># 参数1: 表示当前套接字
+<pre><code># 参数1: 表示当前套接字
 # 参数2: 设置端口号复用选项
 # 参数3: 设置端口号复用选项对应的值
 tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="TCP网络应用程序的注意点"><a href="#TCP网络应用程序的注意点" class="headerlink" title="TCP网络应用程序的注意点"></a>TCP网络应用程序的注意点</h3><hr>
 <p>当 TCP 客户端程序想要和 TCP 服务端程序进行通信的时候必须要先建立连接。</p>
 <p>TCP 客户端程序一般不需要绑定端口号，因为客户端是主动发起建立连接的。</p>
@@ -793,7 +793,7 @@ tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
 <li>把创建的子线程设置成为守护主线程，防止主线程无法退出。</li>
 </ol>
 <p>示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>import socket
+<pre><code>import socket
 import threading
 
 # 处理客户端的请求操作
@@ -836,7 +836,7 @@ if __name__ == &apos;__main__&apos;:
         sub_thread.start()
     # tcp服务端套接字可以不需要关闭，因为服务端程序需要一直运行
     # tcp_server_socket.close()
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="socket之send和recv原理剖析"><a href="#socket之send和recv原理剖析" class="headerlink" title="socket之send和recv原理剖析"></a>socket之send和recv原理剖析</h3><hr>
 <p>当创建一个TCP socket对象的时候会有一个发送缓冲区和一个接收缓冲区，这个发送和接收缓冲区指的就是内存中的一片空间。</p>
 <p>send原理剖析：send是不是直接把数据发给服务端?不是，要想发数据，必须得通过网卡发送数据，应用程序是无法直接通过网卡发送数据的，它需要调用操作系统接口，也就是说，应用程序把发送的数据先写入到发送缓冲区(内存中的一片空间)，再由操作系统控制网卡把发送缓冲区的数据发送给服务端网卡。</p>
@@ -846,13 +846,13 @@ if __name__ == &apos;__main__&apos;:
 <h2 id="静态Web服务器"><a href="#静态Web服务器" class="headerlink" title="静态Web服务器"></a>静态Web服务器</h2><h3 id="启动python自带静态Web服务"><a href="#启动python自带静态Web服务" class="headerlink" title="启动python自带静态Web服务"></a>启动python自带静态Web服务</h3><hr>
 <p>静态Web服务器：可以为发出请求的浏览器提供静态文档的程序。</p>
 <p>搭建Python自带的静态Web服务器</p>
-<div class="hljs code-wrapper"><pre><code>python -m http.server 端口号
-</code></pre></div><p>-m表示运行包里面的模块，执行这个命令的时候，需要进入你自己指定静态文件的目录，然后通过浏览器就能访问对应的html文件了，这样一个静态的web服务器就搭建好了。</p>
+<pre><code>python -m http.server 端口号
+</code></pre><p>-m表示运行包里面的模块，执行这个命令的时候，需要进入你自己指定静态文件的目录，然后通过浏览器就能访问对应的html文件了，这样一个静态的web服务器就搭建好了。</p>
 <hr>
 <h3 id="开发自己的静态Web服务器"><a href="#开发自己的静态Web服务器" class="headerlink" title="开发自己的静态Web服务器"></a>开发自己的静态Web服务器</h3><hr>
 <p>实现步骤:编写一个TCP服务端程序、获取浏览器发送的http请求报文数据、读取固定页面数据，把页面数据组装成HTTP响应报文数据发送给浏览器。HTTP响应报文数据发送完成以后，关闭服务于客户端的套接字。</p>
 <p>示例代码：</p>
-<div class="hljs code-wrapper"><pre><code>import socket
+<pre><code>import socket
 
 if __name__ == &apos;__main__&apos;:
     # 创建tcp服务端套接字
@@ -886,10 +886,10 @@ if __name__ == &apos;__main__&apos;:
         new_socket.send(response_data)
         # 关闭服务与客户端的套接字
         new_socket.close()
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="开发自己的静态Web服务器返回指定页面数据"><a href="#开发自己的静态Web服务器返回指定页面数据" class="headerlink" title="开发自己的静态Web服务器返回指定页面数据"></a>开发自己的静态Web服务器返回指定页面数据</h3><hr>
 <p>返回指定页面数据的实现步骤:获取用户请求资源的路径；根据请求资源的路径，读取指定文件的数据；组装指定文件数据的响应报文，发送给浏览器；判断请求的文件在服务端不存在，组装404状态的响应报文，发送给浏览器。</p>
-<div class="hljs code-wrapper"><pre><code>import socket
+<pre><code>import socket
 
 def main():
     # 创建tcp服务端套接字
@@ -956,10 +956,10 @@ def main():
 
 if __name__ == &apos;__main__&apos;:
     main()
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="静态Web服务器-多任务版"><a href="#静态Web服务器-多任务版" class="headerlink" title="静态Web服务器-多任务版"></a>静态Web服务器-多任务版</h3><hr>
 <p>多任务版web服务器程序的实现步骤:当客户端和服务端建立连接成功，创建子线程，使用子线程专门处理客户端的请求，防止主线程阻塞。把创建的子线程设置成为守护主线程，防止主线程无法退出。</p>
-<div class="hljs code-wrapper"><pre><code>import socket
+<pre><code>import socket
 import threading
 
 # 处理客户端的请求
@@ -1038,10 +1038,10 @@ def main():
 
 if __name__ == &apos;__main__&apos;:
     main()
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="静态Web服务器-面向对象开发"><a href="#静态Web服务器-面向对象开发" class="headerlink" title="静态Web服务器-面向对象开发"></a>静态Web服务器-面向对象开发</h3><hr>
 <p>实现步骤:把提供服务的Web服务器抽象成一个类(HTTPWebServer)；提供Web服务器的初始化方法，在初始化方法里面创建socket对象；提供一个开启Web服务器的方法，让Web服务器处理客户端请求操作。</p>
-<div class="hljs code-wrapper"><pre><code>import socket
+<pre><code>import socket
 import threading
 
 # 定义web服务器类
@@ -1133,10 +1133,10 @@ def main():
 
 if __name__ == &apos;__main__&apos;:
     main()
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="命令行启动动态绑定端口号"><a href="#命令行启动动态绑定端口号" class="headerlink" title="命令行启动动态绑定端口号"></a>命令行启动动态绑定端口号</h3><hr>
 <p>实现步骤:获取执行python程序的终端命令行参数;判断参数的类型，设置端口号必须是整型;给Web服务器类的初始化方法添加一个端口号参数，用于绑定端口号。</p>
-<div class="hljs code-wrapper"><pre><code>import socket
+<pre><code>import socket
 import threading
 import sys
 
@@ -1240,7 +1240,7 @@ def main():
 
 if __name__ == &apos;__main__&apos;:
     main()
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>数据库就是存储和管理数据的仓库，数据按照一定的格式进行存储，用户可以对数据库中的数据进行增加、修改、删除、查询等操作。</p>
 <p>数据库的分类：关系型数据库和非关系型数据库。</p>
@@ -1253,23 +1253,23 @@ if __name__ == &apos;__main__&apos;:
 <p>SQL(Structured Query Language)是结构化查询语言，是一种用来操作RDBMS的数据库的语言。也就是说通过 SQL 可以操作 oracle,sql server,mysql,sqlite 等关系型的数据库。</p>
 <p>SQL的作用是实现数据库客户端和数据库服务端之间的通信，SQL就是通信的桥梁。</p>
 <p>SQL语言主要分为：</p>
-<div class="hljs code-wrapper"><pre><code>DQL：数据查询语言，用于对数据进行查询，如select
+<pre><code>DQL：数据查询语言，用于对数据进行查询，如select
 DML：数据操作语言，对数据进行增加、修改、删除，如insert、update、delete
 TPL：事务处理语言，对事务进行处理，包括begin transaction、commit、rollback
 DCL：数据控制语言，进行授权与权限回收，如grant、revoke
 DDL：数据定义语言，进行数据库、表的管理等，如create、drop
-</code></pre></div><p>对于程序员来讲，重点是数据的增、删、改、查，必须熟练编写DQL、DML，能够编写DDL完成数据库、表的操作，其它操作如TPL、DCL了解即可。SQL语言不区分大小写。</p>
+</code></pre><p>对于程序员来讲，重点是数据的增、删、改、查，必须熟练编写DQL、DML，能够编写DDL完成数据库、表的操作，其它操作如TPL、DCL了解即可。SQL语言不区分大小写。</p>
 <hr>
 <h3 id="数据类型和约束"><a href="#数据类型和约束" class="headerlink" title="数据类型和约束"></a>数据类型和约束</h3><hr>
 <p>数据库中的数据保存在数据表中，在表中为了更加准确的存储数据，保证数据的正确有效，可以在创建表的时候，为表添加一些强制性的验证，比如:数据类型和约束。</p>
 <p>数据类型是指在创建表的时候为表中字段指定数据类型，只有数据符合类型要求才能存储起来，使用数据类型的原则是:够用就行，尽量使用取值范围小的，而不用大的，这样可以更多的节省存储空间。</p>
 <p>常用数据类型如下:</p>
-<div class="hljs code-wrapper"><pre><code>整数：int，bit
+<pre><code>整数：int，bit
 小数：decimal
 字符串：varchar,char
 日期时间: date, time, datetime
 枚举类型(enum)
-</code></pre></div><ol>
+</code></pre><ol>
 <li>decimal表示浮点数，如 decimal(5, 2) 表示共存5位数，小数占 2 位.</li>
 <li>char表示固定长度的字符串，如char(3)，如果填充’ab’时会补一个空格为’ab ‘，3表示字符数</li>
 <li>varchar表示可变长度的字符串，如varchar(3)，填充’ab’时就会存储’ab’，3表示字符数</li>
@@ -1278,12 +1278,12 @@ DDL：数据定义语言，进行数据库、表的管理等，如create、drop
 </ol>
 <p>数据约束<br>约束是指数据在数据类型限定的基础上额外增加的要求.</p>
 <p>常见的约束如下:</p>
-<div class="hljs code-wrapper"><pre><code>主键 primary key: 物理上存储的顺序. MySQL 建议所有表的主键字段都叫 id, 类型为 int unsigned.
+<pre><code>主键 primary key: 物理上存储的顺序. MySQL 建议所有表的主键字段都叫 id, 类型为 int unsigned.
 非空 not null: 此字段不允许填写空值.
 惟一 unique: 此字段的值不允许重复.
 默认 default: 当不填写字段对应的值会使用默认值，如果填写时以填写为准.
 外键 foreign key: 对关系字段进行约束, 当为关系字段填写值时, 会到关联的表中查询此值是否存在, 如果存在则填写成功, 如果不存在则填写失败并抛出异常.
-</code></pre></div><p>整数类型：</p>
+</code></pre><p>整数类型：</p>
 <table>
 <thead>
 <tr>
@@ -1402,81 +1402,81 @@ DDL：数据定义语言，进行数据库、表的管理等，如create、drop
 <hr>
 <h3 id="命令行客户端MySQL的使用"><a href="#命令行客户端MySQL的使用" class="headerlink" title="命令行客户端MySQL的使用"></a>命令行客户端MySQL的使用</h3><hr>
 <p>登录数据库:</p>
-<div class="hljs code-wrapper"><pre><code>mysql -uroot -p
-</code></pre></div><p>显示当前时间：</p>
-<div class="hljs code-wrapper"><pre><code>select now();
-</code></pre></div><p>登出(退出)数据库:</p>
-<div class="hljs code-wrapper"><pre><code>quit 或 exit 或 ctrl + d
-</code></pre></div><hr>
+<pre><code>mysql -uroot -p
+</code></pre><p>显示当前时间：</p>
+<pre><code>select now();
+</code></pre><p>登出(退出)数据库:</p>
+<pre><code>quit 或 exit 或 ctrl + d
+</code></pre><hr>
 <p>数据库操作</p>
 <p>查看所有数据库：</p>
-<div class="hljs code-wrapper"><pre><code>show databases;
-</code></pre></div><p>创建数据库：</p>
-<div class="hljs code-wrapper"><pre><code>create database 数据库名 charset=utf8;
+<pre><code>show databases;
+</code></pre><p>创建数据库：</p>
+<pre><code>create database 数据库名 charset=utf8;
 例：
 create database python charset=utf8;
-</code></pre></div><p>使用数据库：</p>
-<div class="hljs code-wrapper"><pre><code>use 数据库名;
-</code></pre></div><p>查看当前使用的数据库：</p>
-<div class="hljs code-wrapper"><pre><code>select database();
-</code></pre></div><p>删除数据库-慎重：</p>
-<div class="hljs code-wrapper"><pre><code>drop database 数据库名;
+</code></pre><p>使用数据库：</p>
+<pre><code>use 数据库名;
+</code></pre><p>查看当前使用的数据库：</p>
+<pre><code>select database();
+</code></pre><p>删除数据库-慎重：</p>
+<pre><code>drop database 数据库名;
 例：
 drop database python;
-</code></pre></div><hr>
+</code></pre><hr>
 <p>表结构操作</p>
 <p>查看当前数据库中所有表：</p>
-<div class="hljs code-wrapper"><pre><code>show tables;
-</code></pre></div><p>创建表：</p>
-<div class="hljs code-wrapper"><pre><code>create table students(
+<pre><code>show tables;
+</code></pre><p>创建表：</p>
+<pre><code>create table students(
  id int unsigned primary key auto_increment not null,
  name varchar(20) not null,
  age tinyint unsigned default 0,
  height decimal(5,2),
  gender enum(&apos;男&apos;,&apos;女&apos;,&apos;人妖&apos;,&apos;保密&apos;)
 );
-</code></pre></div><p>说明:</p>
-<div class="hljs code-wrapper"><pre><code>create table 表名(
+</code></pre><p>说明:</p>
+<pre><code>create table 表名(
 字段名称 数据类型  可选的约束条件,
 column1 datatype contrai,
 ...
 );
-</code></pre></div><p>修改表-添加字段：</p>
-<div class="hljs code-wrapper"><pre><code>alter table 表名 add 列名 类型 约束;
+</code></pre><p>修改表-添加字段：</p>
+<pre><code>alter table 表名 add 列名 类型 约束;
 例：
 alter table students add birthday datetime;
-</code></pre></div><p>修改表-修改字段类型：</p>
-<div class="hljs code-wrapper"><pre><code>alter table 表名 modify 列名 类型 约束;
+</code></pre><p>修改表-修改字段类型：</p>
+<pre><code>alter table 表名 modify 列名 类型 约束;
 例：
 alter table students modify birthday date not null;
-</code></pre></div><p>说明:</p>
-<div class="hljs code-wrapper"><pre><code>modify: 只能修改字段类型或者约束，不能修改字段名
-</code></pre></div><p>修改表-修改字段名和字段类型：</p>
-<div class="hljs code-wrapper"><pre><code>alter table 表名 change 原名 新名 类型及约束;
+</code></pre><p>说明:</p>
+<pre><code>modify: 只能修改字段类型或者约束，不能修改字段名
+</code></pre><p>修改表-修改字段名和字段类型：</p>
+<pre><code>alter table 表名 change 原名 新名 类型及约束;
 例：
 alter table students change birthday birth datetime not null;
-</code></pre></div><p>说明:</p>
-<div class="hljs code-wrapper"><pre><code>change: 既能对字段重命名又能修改字段类型还能修改约束
-</code></pre></div><p>修改表-删除字段：</p>
-<div class="hljs code-wrapper"><pre><code>alter table 表名 drop 列名;
+</code></pre><p>说明:</p>
+<pre><code>change: 既能对字段重命名又能修改字段类型还能修改约束
+</code></pre><p>修改表-删除字段：</p>
+<pre><code>alter table 表名 drop 列名;
 例：
 alter table students drop birthday;
-</code></pre></div><p>查看创表SQL语句：</p>
-<div class="hljs code-wrapper"><pre><code>show create table 表名;
+</code></pre><p>查看创表SQL语句：</p>
+<pre><code>show create table 表名;
 例：
 show create table students;
-</code></pre></div><p>查看创库SQL语句：</p>
-<div class="hljs code-wrapper"><pre><code>show create database 数据库名;
+</code></pre><p>查看创库SQL语句：</p>
+<pre><code>show create database 数据库名;
 例：
 show create database mytest;
-</code></pre></div><p>删除表：</p>
-<div class="hljs code-wrapper"><pre><code>drop table 表名;
+</code></pre><p>删除表：</p>
+<pre><code>drop table 表名;
 例：
 drop table students;
-</code></pre></div><hr>
+</code></pre><hr>
 <p>表数据操作</p>
 <p>查询数据：</p>
-<div class="hljs code-wrapper"><pre><code>1. 查询所有列
+<pre><code>1. 查询所有列
 select * from 表名;
 例：
 select * from students;
@@ -1484,8 +1484,8 @@ select * from students;
 select 列1,列2,... from 表名;
 例：
 select id,name from students;
-</code></pre></div><p>添加数据：</p>
-<div class="hljs code-wrapper"><pre><code>1. 全列插入：值的顺序与表结构字段的顺序完全一一对应
+</code></pre><p>添加数据：</p>
+<pre><code>1. 全列插入：值的顺序与表结构字段的顺序完全一一对应
 insert into 表名 values (...)
 例:
 insert into students values(0, &apos;xx&apos;, default, default, &apos;男&apos;);
@@ -1501,29 +1501,29 @@ insert into students values(0, &apos;张飞&apos;, 55, 1.75, &apos;男&apos;),(0
 insert into 表名(列1,...) values(值1,...),(值1,...)...;
 例：
 insert into students(name, height) values(&apos;刘备&apos;, 1.75),(&apos;曹操&apos;, 1.6);
-</code></pre></div><p>说明:</p>
+</code></pre><p>说明:</p>
 <p>主键列是自动增长，但是在全列插入时需要占位，通常使用空值(0或者null或者default)。在全列插入时，如果字段列有默认值可以使用 default 来占位，插入后的数据就是之前设置的默认值</p>
 <p>修改数据：</p>
-<div class="hljs code-wrapper"><pre><code>update 表名 set 列1=值1,列2=值2... where 条件
+<pre><code>update 表名 set 列1=值1,列2=值2... where 条件
 例：
 update students set age = 18, gender = &apos;女&apos; where id = 6;
-</code></pre></div><p>删除数据：</p>
-<div class="hljs code-wrapper"><pre><code>delete from 表名 where 条件
+</code></pre><p>删除数据：</p>
+<pre><code>delete from 表名 where 条件
 例：
 delete from students where id=5;
-</code></pre></div><p>问题:上面的操作称之为物理删除，一旦删除就不容易恢复，我们可以使用逻辑删除的方式来解决这个问题。</p>
-<div class="hljs code-wrapper"><pre><code>添加删除表示字段，0表示未删除 1表示删除
+</code></pre><p>问题:上面的操作称之为物理删除，一旦删除就不容易恢复，我们可以使用逻辑删除的方式来解决这个问题。</p>
+<pre><code>添加删除表示字段，0表示未删除 1表示删除
 alter table students add isdelete bit default 0;
 逻辑删除数据
 update students set isdelete = 1 where id = 8;
-</code></pre></div><p>说明:逻辑删除，本质就是修改操作。</p>
+</code></pre><p>说明:逻辑删除，本质就是修改操作。</p>
 <hr>
 <h3 id="as和distinct关键字"><a href="#as和distinct关键字" class="headerlink" title="as和distinct关键字"></a>as和distinct关键字</h3><hr>
 <p>as关键字：在使用SQL语句显示结果的时候，往往在屏幕显示的字段名并不具备良好的可读性，此时可以使用 as 给字段起一个别名。</p>
 <p>使用 as 给字段起别名：</p>
-<div class="hljs code-wrapper"><pre><code>select id as 序号, name as 名字, gender as 性别 from students;
-</code></pre></div><p>可以通过 as 给表起别名</p>
-<div class="hljs code-wrapper"><pre><code>-- 如果是单表查询 可以省略表名
+<pre><code>select id as 序号, name as 名字, gender as 性别 from students;
+</code></pre><p>可以通过 as 给表起别名</p>
+<pre><code>-- 如果是单表查询 可以省略表名
 select id, name, gender from students;
 
 -- 表名.字段名
@@ -1531,24 +1531,24 @@ select students.id,students.name,students.gender from students;
 
 -- 可以通过 as 给表起别名 
 select s.id,s.name,s.gender from students as s;
-</code></pre></div><hr>
+</code></pre><hr>
 <p>distinct关键字：distinct可以去除重复数据行。</p>
-<div class="hljs code-wrapper"><pre><code>select distinct 列1,... from 表名;
+<pre><code>select distinct 列1,... from 表名;
 
 例： 查询班级中学生的性别
 select name, gender from students;
 
 -- 看到了很多重复数据 想要对其中重复数据行进行去重操作可以使用 distinct
 select distinct name, gender from students;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="where条件查询"><a href="#where条件查询" class="headerlink" title="where条件查询"></a>where条件查询</h3><hr>
 <p>使用where条件查询可以对表中的数据进行筛选，条件成立的记录会出现在结果集中。</p>
 <p>格式如下:</p>
-<div class="hljs code-wrapper"><pre><code>select * from 表名 where 条件;
+<pre><code>select * from 表名 where 条件;
 例：
 select * from students where id = 1;
-</code></pre></div><p>比较运算符查询（=、&gt;、&gt;=、&lt;、&lt;=、!= 或 &lt;&gt;）：</p>
-<div class="hljs code-wrapper"><pre><code>例1：查询编号大于3的学生:
+</code></pre><p>比较运算符查询（=、&gt;、&gt;=、&lt;、&lt;=、!= 或 &lt;&gt;）：</p>
+<pre><code>例1：查询编号大于3的学生:
 select * from students where id &gt; 3;
 
 例2：查询编号不大于4的学生:
@@ -1559,8 +1559,8 @@ select * from students where name != &apos;黄蓉&apos;;
 
 例4：查询没被删除的学生:
 select * from students where is_delete=0;
-</code></pre></div><p>逻辑运算符查询（and、or、not）</p>
-<div class="hljs code-wrapper"><pre><code>例1：查询编号大于3的女同学:
+</code></pre><p>逻辑运算符查询（and、or、not）</p>
+<pre><code>例1：查询编号大于3的女同学:
 select * from students where id &gt; 3 and gender=0;
 
 例2：查询编号小于4或没被删除的学生:
@@ -1568,9 +1568,9 @@ select * from students where id &lt; 4 or is_delete=0;
 
 例3：查询年龄不在10岁到15岁之间的学生:
 select * from students where not (age &gt;= 10 and age &lt;= 15);
-</code></pre></div><p>说明:多个条件判断想要作为一个整体，可以结合<code>()</code>。</p>
+</code></pre><p>说明:多个条件判断想要作为一个整体，可以结合<code>()</code>。</p>
 <p>模糊查询(like是模糊查询关键字、%表示任意多个任意字符、_表示一个任意字符）：</p>
-<div class="hljs code-wrapper"><pre><code>例1：查询姓黄的学生:
+<pre><code>例1：查询姓黄的学生:
 select * from students where name like &apos;黄%&apos;;
 
 例2：查询姓黄并且“名”是一个字的学生:
@@ -1578,132 +1578,132 @@ select * from students where name like &apos;黄_&apos;;
 
 例3：查询姓黄或叫靖的学生:
 select * from students where name like &apos;黄%&apos; or name like &apos;%靖&apos;;
-</code></pre></div><p>范围查询(between .. and .. 表示在一个连续的范围内查询、in 表示在一个非连续的范围内查询）：</p>
-<div class="hljs code-wrapper"><pre><code>例1：查询编号为3至8的学生:
+</code></pre><p>范围查询(between .. and .. 表示在一个连续的范围内查询、in 表示在一个非连续的范围内查询）：</p>
+<pre><code>例1：查询编号为3至8的学生:
 select * from students where id between 3 and 8;
 
 例2：查询编号不是3至8的男生:
 select * from students where (not id between 3 and 8) and gender=&apos;男&apos;;
-</code></pre></div><p>空判断查询（判断为空使用: is null、判断非空使用: is not null）：</p>
-<div class="hljs code-wrapper"><pre><code>例1：查询没有填写身高的学生:
+</code></pre><p>空判断查询（判断为空使用: is null、判断非空使用: is not null）：</p>
+<pre><code>例1：查询没有填写身高的学生:
 select * from students where height is null;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><hr>
 <p>排序查询语法：</p>
-<div class="hljs code-wrapper"><pre><code>select * from 表名 order by 列1 asc|desc [,列2 asc|desc,...]
-</code></pre></div><p>语法说明:先按照列1进行排序，如果列1的值相同时，则按照 列2 排序，以此类推。asc从小到大排列，即升序。desc从大到小排序，即降序。默认按照列值从小到大排列（即asc）。</p>
-<div class="hljs code-wrapper"><pre><code>例1：查询未删除男生信息，按学号降序:
+<pre><code>select * from 表名 order by 列1 asc|desc [,列2 asc|desc,...]
+</code></pre><p>语法说明:先按照列1进行排序，如果列1的值相同时，则按照 列2 排序，以此类推。asc从小到大排列，即升序。desc从大到小排序，即降序。默认按照列值从小到大排列（即asc）。</p>
+<pre><code>例1：查询未删除男生信息，按学号降序:
 select * from students where gender=1 and is_delete=0 order by id desc;
 
 例2：显示所有的学生信息，先按照年龄从大--&gt;小排序，当年龄相同时 按照身高从高--&gt;矮排序:
 select * from students  order by age desc,height desc;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h3><hr>
 <p>分页查询的语法</p>
-<div class="hljs code-wrapper"><pre><code>select * from 表名 limit start,count
-</code></pre></div><p>说明:limit是分页查询关键字；start表示开始行索引，默认是0；count表示查询条数。</p>
-<div class="hljs code-wrapper"><pre><code>查询前3行男生信息:
+<pre><code>select * from 表名 limit start,count
+</code></pre><p>说明:limit是分页查询关键字；start表示开始行索引，默认是0；count表示查询条数。</p>
+<pre><code>查询前3行男生信息:
 select * from students where gender=1 limit 0,3;
 简写：
 select * from students where gender=1 limit 3;
-</code></pre></div><p>已知每页显示m条数据，求第n页显示的数据</p>
-<div class="hljs code-wrapper"><pre><code>查询学生表，获取第n页数据的SQL语句:
+</code></pre><p>已知每页显示m条数据，求第n页显示的数据</p>
+<pre><code>查询学生表，获取第n页数据的SQL语句:
 select * from students limit (n-1)*m,m
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><hr>
 <p>聚合函数又叫组函数，通常是对表中的数据进行统计和计算，一般结合分组(group by)来使用，用于统计和计算分组数据。</p>
 <p>常用的聚合函数:</p>
-<div class="hljs code-wrapper"><pre><code>count(col): 表示求指定列的总行数
+<pre><code>count(col): 表示求指定列的总行数
 max(col): 表示求指定列的最大值
 min(col): 表示求指定列的最小值
 sum(col): 表示求指定列的和
 avg(col): 表示求指定列的平均值
-</code></pre></div><p>求总行数</p>
-<div class="hljs code-wrapper"><pre><code>-- 返回非NULL数据的总行数.
+</code></pre><p>求总行数</p>
+<pre><code>-- 返回非NULL数据的总行数.
 select count(height) from students; 
 -- 返回总行数，包含null值记录;
 select count(*) from students;
-</code></pre></div><p>求最大值</p>
-<div class="hljs code-wrapper"><pre><code>-- 查询女生的编号最大值
+</code></pre><p>求最大值</p>
+<pre><code>-- 查询女生的编号最大值
 select max(id) from students where gender = 2;
-</code></pre></div><p>求最小值</p>
-<div class="hljs code-wrapper"><pre><code>-- 查询未删除的学生最小编号
+</code></pre><p>求最小值</p>
+<pre><code>-- 查询未删除的学生最小编号
 select min(id) from students where is_delete = 0;
-</code></pre></div><p>求和</p>
-<div class="hljs code-wrapper"><pre><code>-- 查询男生的总身高
+</code></pre><p>求和</p>
+<pre><code>-- 查询男生的总身高
 select sum(height) from students where gender = 1;
 -- 平均身高
 select sum(height) / count(*) from students where gender = 1;
-</code></pre></div><p>求平均值</p>
-<div class="hljs code-wrapper"><pre><code>-- 求男生的平均身高, 聚合函数不统计null值，平均身高有误
+</code></pre><p>求平均值</p>
+<pre><code>-- 求男生的平均身高, 聚合函数不统计null值，平均身高有误
 select avg(height) from students where gender = 1;
 -- 求男生的平均身高, 包含身高是null的
 select avg(ifnull(height,0)) from students where gender = 1;
-</code></pre></div><p>说明：ifnull函数: 表示判断指定字段的值是否为null，如果为空使用自己提供的值。</p>
+</code></pre><p>说明：ifnull函数: 表示判断指定字段的值是否为null，如果为空使用自己提供的值。</p>
 <p>聚合函数的特点：聚合函数默认忽略字段为null的记录，要想列值为null的记录也参与计算，必须使用ifnull函数对null值做替换。</p>
 <hr>
 <h3 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h3><hr>
 <p>分组查询介绍：将查询结果按照指定字段进行分组，字段中数据相等的分为一组。</p>
 <p>语法格式如下：</p>
-<div class="hljs code-wrapper"><pre><code>GROUP BY 列名 [HAVING 条件表达式] [WITH ROLLUP]
-</code></pre></div><p>说明:列名: 是指按照指定字段的值进行分组。HAVING 条件表达式: 用来过滤分组后的数据。WITH ROLLUP：在所有记录的最后加上一条记录，显示select查询时聚合函数的统计和计算结果。</p>
+<pre><code>GROUP BY 列名 [HAVING 条件表达式] [WITH ROLLUP]
+</code></pre><p>说明:列名: 是指按照指定字段的值进行分组。HAVING 条件表达式: 用来过滤分组后的数据。WITH ROLLUP：在所有记录的最后加上一条记录，显示select查询时聚合函数的统计和计算结果。</p>
 <p>group by可用于单个字段分组，也可用于多个字段分组：</p>
-<div class="hljs code-wrapper"><pre><code>-- 根据gender字段来分组
+<pre><code>-- 根据gender字段来分组
 select gender from students group by gender;
 -- 根据name和gender字段进行分组
 select name, gender from students group by name, gender;
-</code></pre></div><p>group_concat(字段名): 统计每个分组指定字段的信息集合，每个信息之间使用逗号进行分割：</p>
-<div class="hljs code-wrapper"><pre><code>-- 根据gender字段进行分组， 查询gender字段和分组的name字段信息
+</code></pre><p>group_concat(字段名): 统计每个分组指定字段的信息集合，每个信息之间使用逗号进行分割：</p>
+<pre><code>-- 根据gender字段进行分组， 查询gender字段和分组的name字段信息
 select gender,group_concat(name) from students group by gender;
-</code></pre></div><p><code>group by + 聚合函数</code>的使用:</p>
-<div class="hljs code-wrapper"><pre><code>-- 统计不同性别的人的平均年龄
+</code></pre><p><code>group by + 聚合函数</code>的使用:</p>
+<pre><code>-- 统计不同性别的人的平均年龄
 select gender,avg(age) from students group by gender;
 -- 统计不同性别的人的个数
 select gender,count(*) from students group by gender;
-</code></pre></div><p><code>group by + having</code>的使用:</p>
-<div class="hljs code-wrapper"><pre><code>-- 根据gender字段进行分组，统计分组条数大于2的
+</code></pre><p><code>group by + having</code>的使用:</p>
+<pre><code>-- 根据gender字段进行分组，统计分组条数大于2的
 select gender,count(*) from students group by gender having count(*)&gt;2;
-</code></pre></div><p><code>group by + with rollup</code>的使用:</p>
-<div class="hljs code-wrapper"><pre><code>-- 根据gender字段进行分组，汇总总人数
+</code></pre><p><code>group by + with rollup</code>的使用:</p>
+<pre><code>-- 根据gender字段进行分组，汇总总人数
 select gender,count(*) from students group by gender with rollup;
 -- 根据gender字段进行分组，汇总所有人的年龄
 select gender,group_concat(age) from students group by gender with rollup;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="内连接查询"><a href="#内连接查询" class="headerlink" title="内连接查询"></a>内连接查询</h3><hr>
 <p>连接查询可以实现多个表的查询，当查询的字段数据来自不同的表就可以使用连接查询来完成。</p>
 <p>连接查询可以分为:内连接查询、左连接查询、右连接查询、自连接查询。</p>
 <p>内连接查询：查询<strong>两个表中符合条件的共有记录</strong>。</p>
 <p>语法格式:</p>
-<div class="hljs code-wrapper"><pre><code>select 字段 from 表1 inner join 表2 on 表1.字段1 = 表2.字段2
-</code></pre></div><p>说明:inner join 就是内连接查询关键字。on 就是连接查询条件</p>
-<div class="hljs code-wrapper"><pre><code>例1：使用内连接查询学生表与班级表:
+<pre><code>select 字段 from 表1 inner join 表2 on 表1.字段1 = 表2.字段2
+</code></pre><p>说明:inner join 就是内连接查询关键字。on 就是连接查询条件</p>
+<pre><code>例1：使用内连接查询学生表与班级表:
 select * from students as s inner join classes as c on s.cls_id = c.id;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="左连接查询"><a href="#左连接查询" class="headerlink" title="左连接查询"></a>左连接查询</h3><hr>
 <p>左连接查询：以左表为主根据条件查询右表数据，如果根据条件查询右表数据不存在使用null值填充。</p>
 <p>语法格式:</p>
-<div class="hljs code-wrapper"><pre><code>select 字段 from 表1 left join 表2 on 表1.字段1 = 表2.字段2
-</code></pre></div><p>说明:left join 就是左连接查询关键字；on 就是连接查询条件；表1是左表；表2是右表。</p>
-<div class="hljs code-wrapper"><pre><code>例1：使用左连接查询学生表与班级表:
+<pre><code>select 字段 from 表1 left join 表2 on 表1.字段1 = 表2.字段2
+</code></pre><p>说明:left join 就是左连接查询关键字；on 就是连接查询条件；表1是左表；表2是右表。</p>
+<pre><code>例1：使用左连接查询学生表与班级表:
 select * from students as s left join classes as c on s.cls_id = c.id;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="右连接查询"><a href="#右连接查询" class="headerlink" title="右连接查询"></a>右连接查询</h3><hr>
 <p>以右表为主根据条件查询左表数据，如果根据条件查询左表数据不存在使用null值填充。</p>
 <p>右连接查询语法格式:</p>
-<div class="hljs code-wrapper"><pre><code>select 字段 from 表1 right join 表2 on 表1.字段1 = 表2.字段2
-</code></pre></div><p>说明:right join 就是右连接查询关键字；on 就是连接查询条件；表1是左表；表2是右表。</p>
-<div class="hljs code-wrapper"><pre><code>使用右连接查询学生表与班级表:
+<pre><code>select 字段 from 表1 right join 表2 on 表1.字段1 = 表2.字段2
+</code></pre><p>说明:right join 就是右连接查询关键字；on 就是连接查询条件；表1是左表；表2是右表。</p>
+<pre><code>使用右连接查询学生表与班级表:
 select * from students as s right join classes as c on s.cls_id = c.id;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="自连接查询"><a href="#自连接查询" class="headerlink" title="自连接查询"></a>自连接查询</h3><hr>
 <p>左表和右表是<strong>同一个表</strong>，根据连接查询条件查询两个表中的数据。</p>
 <p>自连接查询的用法:</p>
-<div class="hljs code-wrapper"><pre><code>select c.id, c.title, c.pid, p.title from areas as c inner join areas as p on c.pid = p.id where p.title = &apos;山西省&apos;;
-</code></pre></div><hr>
+<pre><code>select c.id, c.title, c.pid, p.title from areas as c inner join areas as p on c.pid = p.id where p.title = &apos;山西省&apos;;
+</code></pre><hr>
 <h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h3><hr>
 <p>在一个 select 语句中,嵌入了另外一个 select 语句, 那么被嵌入的 select 语句称之为子查询语句，外部那个select语句则称为主查询.</p>
 <p>主查询和子查询的关系:子查询是嵌入到主查询中;子查询是辅助主查询的,要么充当条件,要么充当数据源;子查询是可以独立存在的语句,是一条完整的 select 语句。</p>
-<div class="hljs code-wrapper"><pre><code>例1. 查询大于平均年龄的学生:
+<pre><code>例1. 查询大于平均年龄的学生:
 select * from students where age &gt; (select avg(age) from students);
 
 例2. 查询学生在班的所有班级名字:
@@ -1711,7 +1711,7 @@ select name from classes where id in (select cls_id from students where cls_id i
 
 例3. 查找年龄最大,身高最高的学生:
 select * from students where (age, height) =  (select max(age), max(height) from students);
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="数据库设计之三范式"><a href="#数据库设计之三范式" class="headerlink" title="数据库设计之三范式"></a>数据库设计之三范式</h3><hr>
 <p>第一范式（1NF）: 强调的是列的原子性，即列不能够再分成其他几列。</p>
 <p>第二范式（2NF）: 满足 1NF，另外包含两部分内容，一是表必须有一个主键；二是非主键字段必须完全依赖于主键，而不能只依赖于主键的一部分。</p>
@@ -1721,14 +1721,14 @@ select * from students where (age, height) =  (select max(age), max(height) from
 <h3 id="外键SQL语句的编写"><a href="#外键SQL语句的编写" class="headerlink" title="外键SQL语句的编写"></a>外键SQL语句的编写</h3><hr>
 <p>外键约束:对外键字段的值进行更新和插入时会和引用表中字段的数据进行验证，数据如果不合法则更新和插入会失败，保证数据的有效性。</p>
 <p>添加外键约束: </p>
-<div class="hljs code-wrapper"><pre><code>alter table 从表 add foreign key(外键字段) references 主表(主键字段);
-</code></pre></div><p>删除外键约束: </p>
-<div class="hljs code-wrapper"><pre><code>alter table 表名 drop foreign key 外键名;
-</code></pre></div><p>对于已经存在的字段添加外键约束：</p>
-<div class="hljs code-wrapper"><pre><code>-- 为cls_id字段添加外键约束
+<pre><code>alter table 从表 add foreign key(外键字段) references 主表(主键字段);
+</code></pre><p>删除外键约束: </p>
+<pre><code>alter table 表名 drop foreign key 外键名;
+</code></pre><p>对于已经存在的字段添加外键约束：</p>
+<pre><code>-- 为cls_id字段添加外键约束
 alter table students add foreign key(cls_id) references classes(id);
-</code></pre></div><p>在创建数据表时设置外键约束：</p>
-<div class="hljs code-wrapper"><pre><code>-- 创建学校表
+</code></pre><p>在创建数据表时设置外键约束：</p>
+<pre><code>-- 创建学校表
 create table school(
     id int not null primary key auto_increment, 
     name varchar(10)
@@ -1741,18 +1741,18 @@ create table teacher(
     s_id int not null, 
     foreign key(s_id) references school(id)
 );
-</code></pre></div><p>删除外键约束</p>
-<div class="hljs code-wrapper"><pre><code>-- 需要先获取外键约束名称,该名称系统会自动生成,可以通过查看表创建语句来获取名称
+</code></pre><p>删除外键约束</p>
+<pre><code>-- 需要先获取外键约束名称,该名称系统会自动生成,可以通过查看表创建语句来获取名称
 show create table teacher;
 
 -- 获取名称之后就可以根据名称来删除外键约束
 alter table teacher drop foreign key 外键名;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="将查询结果插入到其它表中"><a href="#将查询结果插入到其它表中" class="headerlink" title="将查询结果插入到其它表中"></a>将查询结果插入到其它表中</h3><hr>
 <p>把查询结果插入到指定表中，也就是表复制:</p>
-<div class="hljs code-wrapper"><pre><code>insert into .. select .. SQL语句
-</code></pre></div><p>把goods表中的cate_name商品分类添加到good_cates商品分类表:</p>
-<div class="hljs code-wrapper"><pre><code>-- 查询goods表中商品的分类信息
+<pre><code>insert into .. select .. SQL语句
+</code></pre><p>把goods表中的cate_name商品分类添加到good_cates商品分类表:</p>
+<pre><code>-- 查询goods表中商品的分类信息
 select cate_name from goods group by cate_name;
 
 -- 将查询结果插入到good_cates表中
@@ -1760,22 +1760,22 @@ insert into good_cates(name) select cate_name from goods group by cate_name;
 
 -- 添加移动设备分类信息
 insert into good_cates(name) values(&apos;移动设备&apos;);
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="使用连接更新表中某个字段数据"><a href="#使用连接更新表中某个字段数据" class="headerlink" title="使用连接更新表中某个字段数据"></a>使用连接更新表中某个字段数据</h3><hr>
 <p>连接更新表中数据使用: </p>
-<div class="hljs code-wrapper"><pre><code>update .. join .. 
-</code></pre></div><p>将goods表中的分类名称更改成商品分类表中对应的分类id</p>
-<div class="hljs code-wrapper"><pre><code>-- 查看goods表中的商品分类名称对应的商品分类id
+<pre><code>update .. join .. 
+</code></pre><p>将goods表中的分类名称更改成商品分类表中对应的分类id</p>
+<pre><code>-- 查看goods表中的商品分类名称对应的商品分类id
 select * from goods inner join good_cates on goods.cate_name = good_cates.name;
 
 -- 把该语句中from 后的语句理解为一张虚表  
 update goods g inner join good_cates gc on g.cate_name=gc.name set g.cate_name=gc.id;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="创建表并给某个字段添加数据"><a href="#创建表并给某个字段添加数据" class="headerlink" title="创建表并给某个字段添加数据"></a>创建表并给某个字段添加数据</h3><hr>
 <p>创建表并给字段插入数据使用: </p>
-<div class="hljs code-wrapper"><pre><code>create table .. select 语句
-</code></pre></div><p>创建品牌表</p>
-<div class="hljs code-wrapper"><pre><code>-- 查询品牌信息 
+<pre><code>create table .. select 语句
+</code></pre><p>创建品牌表</p>
+<pre><code>-- 查询品牌信息 
 select brand_name from goods group by brand_name;
 
 -- 通过create table ...select来创建数据表并且同时插入数据
@@ -1783,30 +1783,30 @@ select brand_name from goods group by brand_name;
 create table good_brands (     
 id int unsigned primary key auto_increment,     
 name varchar(40) not null) select brand_name as name from goods group by brand_name;
-</code></pre></div><p>说明:<code>create table .. select 列名 ..</code>表示创建表并插入数据</p>
+</code></pre><p>说明:<code>create table .. select 列名 ..</code>表示创建表并插入数据</p>
 <p>更新goods表中的品牌信息</p>
-<div class="hljs code-wrapper"><pre><code>-- 将goods表中的品牌名称更改成品牌表中对应的品牌id
+<pre><code>-- 将goods表中的品牌名称更改成品牌表中对应的品牌id
 update goods as g inner join good_brands gb on g.brand_name = gb.name set g.brand_name = gb.id;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="修改表结构"><a href="#修改表结构" class="headerlink" title="修改表结构"></a>修改表结构</h3><hr>
-<div class="hljs code-wrapper"><pre><code>alter table 语句
-</code></pre></div><p>把 <code>cate_name</code> 和 <code>brand_name</code> 字段分别改成 <code>cate_id</code>和 <code>brand_id</code> 字段，类型都改成int类型:</p>
-<div class="hljs code-wrapper"><pre><code>-- 查看表结构
+<pre><code>alter table 语句
+</code></pre><p>把 <code>cate_name</code> 和 <code>brand_name</code> 字段分别改成 <code>cate_id</code>和 <code>brand_id</code> 字段，类型都改成int类型:</p>
+<pre><code>-- 查看表结构
 desc goods;
 -- 通过alter table语句修改表结构
 alter table goods change cate_name cate_id int not null, change brand_name brand_id int not null;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><hr>
 <p>事务就是用户定义的一系列执行SQL语句的操作, 这些操作要么完全地执行，要么完全地都不执行， 它是一个不可分割的工作执行单元。事务能够保证数据的完整性和一致性，让用户的操作更加安全。</p>
 <p>事务的特性:</p>
-<div class="hljs code-wrapper"><pre><code>原子性: 强调事务中的多个操作时一个整体
+<pre><code>原子性: 强调事务中的多个操作时一个整体
 一致性: 强调数据库中不会保存不一致状态
 隔离性: 强调数据库中事务之间相互不可见
 持久性: 强调数据库能永久保存数据，一旦提交就不可撤销
-</code></pre></div><p>MySQL数据库默认采用自动提交(autocommit)模式, 也就是说修改数据(insert、update、delete)的操作会自动的触发事务,完成事务的提交或者回滚。开启事务使用 begin 或者 start transaction;回滚事务使用 rollback。</p>
+</code></pre><p>MySQL数据库默认采用自动提交(autocommit)模式, 也就是说修改数据(insert、update、delete)的操作会自动的触发事务,完成事务的提交或者回滚。开启事务使用 begin 或者 start transaction;回滚事务使用 rollback。</p>
 <p>常用的表的存储引擎是 InnoDB 和 MyISAM。InnoDB 是支持事务的；MyISAM 不支持事务，优势是访问速度快，对事务没有要求或者以select、insert为主的都可以使用该存储引擎来创建表。</p>
 <p>事务演练的SQL语句:</p>
-<div class="hljs code-wrapper"><pre><code>begin;
+<pre><code>begin;
 insert into students(name) values(&apos;李白&apos;);
 -- 查询数据，此时有新增的数据, 注意: 如果这里后续没有执行提交事务操作，那么数据是没有真正的更新到物理表中
 select * from students;
@@ -1816,41 +1816,41 @@ commit;
 -- 新打开一个终端，重新连接MySQL数据库，查询students表,这时没有显示新增的数据，说明之前的事务没有提交，这就是事务的隔离性
 -- 一个事务所做的修改操作在提交事务之前，对于其他事务来说是不可见的
 select * from students;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><hr>
 <p>索引在MySQL中也叫做“键”，它是一个特殊的文件，它保存着数据表里所有记录的位置信息，更通俗的来说，数据库索引好比是一本书前面的目录，能加快数据库的查询速度。</p>
 <p>查看表中已有索引:</p>
-<div class="hljs code-wrapper"><pre><code>show index from 表名;
-</code></pre></div><p>说明:主键列会自动创建索引</p>
+<pre><code>show index from 表名;
+</code></pre><p>说明:主键列会自动创建索引</p>
 <p>索引的创建:</p>
-<div class="hljs code-wrapper"><pre><code>-- alter table 表名 add index 索引名[可选](列名, ..)
+<pre><code>-- alter table 表名 add index 索引名[可选](列名, ..)
 -- 给name字段添加索引
 alter table classes add index my_name (name);
-</code></pre></div><p>说明:索引名不指定，默认使用字段名。</p>
+</code></pre><p>说明:索引名不指定，默认使用字段名。</p>
 <p>索引的删除:</p>
-<div class="hljs code-wrapper"><pre><code>-- alter table 表名 drop index 索引名
+<pre><code>-- alter table 表名 drop index 索引名
 -- 如果不知道索引名，可以查看创表sql语句
 show create table classes;
 alter table classes drop index my_name;
-</code></pre></div><p>联合索引又叫复合索引，即一个索引覆盖表中两个或者多个字段，一般用在多个字段一起查询的时候。</p>
-<div class="hljs code-wrapper"><pre><code>-- 创建联合索引
+</code></pre><p>联合索引又叫复合索引，即一个索引覆盖表中两个或者多个字段，一般用在多个字段一起查询的时候。</p>
+<pre><code>-- 创建联合索引
 alter table teacher add index (name,age);
-</code></pre></div><p>联合索引的好处:减少磁盘空间开销，因为每创建一个索引，其实就是创建了一个索引文件，那么会增加磁盘空间的开销。</p>
+</code></pre><p>联合索引的好处:减少磁盘空间开销，因为每创建一个索引，其实就是创建了一个索引文件，那么会增加磁盘空间的开销。</p>
 <p>联合索引的最左原则：在使用联合索引的时候，我们要遵守一个最左原则,即index(name,age)支持name、name和age组合查询,而不支持单独age 查询，因为没有用到创建的联合索引。</p>
 <p>最左原则示例:</p>
-<div class="hljs code-wrapper"><pre><code>-- 下面的查询使用到了联合索引
+<pre><code>-- 下面的查询使用到了联合索引
 select * from stu where name=&apos;张三&apos; -- 这里使用了联合索引的name部分
 select * from stu where name=&apos;李四&apos; and age=10 -- 这里完整的使用联合索引，包括 name 和 age 部分 
 -- 下面的查询没有使用到联合索引
 select * from stu where age=10 -- 因为联合索引里面没有这个组合，只有 name | name age 这两种组合
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="PyMySQL的使用"><a href="#PyMySQL的使用" class="headerlink" title="PyMySQL的使用"></a>PyMySQL的使用</h2><hr>
 <p>使用代码的方式操作数据库就称为数据库编程。</p>
 <p>win电脑cd到python的安装目录Scripts文件夹下</p>
 <p>安装：</p>
-<div class="hljs code-wrapper"><pre><code>pip install pymysql
-</code></pre></div><p>pymysql的使用:</p>
-<div class="hljs code-wrapper"><pre><code>#导包
+<pre><code>pip install pymysql
+</code></pre><p>pymysql的使用:</p>
+<pre><code>#导包
 import pymysql
 #创建连接对象
 pymysql.connect(参数列表)
@@ -1868,9 +1868,9 @@ conn.rollback()
 cursor.close()
 #关闭连接
 conn.close()
-</code></pre></div><hr>
+</code></pre><hr>
 <p>查询操作:</p>
-<div class="hljs code-wrapper"><pre><code>import pymysql
+<pre><code>import pymysql
 
 # 创建连接对象
 conn = pymysql.connect(host=&apos;localhost&apos;, port=3306, user=&apos;root&apos;, password=&apos;*****&apos;, database=&apos;python&apos;, charset=&apos;utf8&apos;)
@@ -1891,9 +1891,9 @@ for line in cursor.fetchall():
 cursor.close()
 # 关闭连接
 conn.close()
-</code></pre></div><hr>
+</code></pre><hr>
 <p>增删改操作：</p>
-<div class="hljs code-wrapper"><pre><code>import pymysql
+<pre><code>import pymysql
 
 # 创建连接对象
 conn = pymysql.connect(host=&apos;localhost&apos;, port=3306, user=&apos;root&apos;, password=&apos;824699&apos;,database=&apos;python&apos;, charset=&apos;utf8&apos;)
@@ -1918,12 +1918,12 @@ except Exception as e:
 cursor.close()
 # 关闭连接
 conn.close()
-</code></pre></div><hr>
+</code></pre><hr>
 <p>什么是SQL注入?用户提交带有恶意的数据与SQL语句进行字符串方式的拼接，从而影响了SQL语句的语义，最终产生数据泄露的现象。</p>
 <p>如何防止SQL注入?SQL语句参数化</p>
 <p>SQL语言中的参数使用%s来占位，此处不是python中的字符串格式化操作。将SQL语句中%s占位所需要的参数存在一个列表中，把参数列表传递给。execute方法中第二个参数。</p>
 <p>防止SQL注入的示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>from pymysql import connect
+<pre><code>from pymysql import connect
 
 def main():
     find_name = input(&quot;请输入物品名称：&quot;)
@@ -1960,12 +1960,12 @@ def main():
 
 if __name__ == &apos;__main__&apos;:
     main()
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><hr>
 <p>闭包的定义:在函数嵌套的前提下，内部函数使用了外部函数的变量，并且外部函数返回了内部函数，我们把这个使用外部函数变量的内部函数称为闭包。</p>
 <p>闭包的形成条件:在函数嵌套(函数里面再定义函数)的前提下；内部函数使用了外部函数的变量(还包括外部函数的参数)；外部函数返回了内部函数。</p>
 <p>示例代码</p>
-<div class="hljs code-wrapper"><pre><code># 定义一个外部函数
+<pre><code># 定义一个外部函数
 def func_out(num1):
     # 定义一个内部函数
     def func_inner(num2):
@@ -1979,10 +1979,10 @@ f = func_out(1)
 # 执行闭包
 f(2) #结果是: 3
 f(3) #结果是: 4
-</code></pre></div><p>闭包不仅可以保存外部函数的变量还可以提高代码的可重用行。</p>
+</code></pre><p>闭包不仅可以保存外部函数的变量还可以提高代码的可重用行。</p>
 <hr>
 <p>修改闭包内使用的外部函数变量使用 nonlocal 关键字来完成。</p>
-<div class="hljs code-wrapper"><pre><code># 定义一个外部函数
+<pre><code># 定义一个外部函数
 def func_out(num1):
     # 定义一个内部函数
     def func_inner(num2):
@@ -2003,20 +2003,20 @@ def func_out(num1):
 f = func_out(1)
 # 执行闭包
 f(2) #结果是: 12
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h2><hr>
 <p>就是给已有函数增加额外功能的函数，它本质上就是一个闭包函数。</p>
 <p>装饰器的功能特点:不修改已有函数的源代码；不修改已有函数的调用方式；给已有函数增加额外的功能。</p>
 <p>装饰器的语法格式:</p>
-<div class="hljs code-wrapper"><pre><code># 装饰器
+<pre><code># 装饰器
 # def decorator(fn): # fn:被装饰的目标函数.
 #     def inner():
 #         &apos;&apos;&apos;执行函数之前&apos;&apos;&apos;
 #         fn() # 执行被装饰的目标函数
 #         &apos;&apos;&apos;执行函数之后&apos;&apos;&apos;
 #     return inner
-</code></pre></div><p>示例代码：</p>
-<div class="hljs code-wrapper"><pre><code># 添加一个登录验证的功能
+</code></pre><p>示例代码：</p>
+<pre><code># 添加一个登录验证的功能
 def check(fn):
     def inner():
         print(&quot;请先登录....&quot;)
@@ -2029,10 +2029,10 @@ def comment():
 # 使用装饰器来装饰函数
 comment = check(comment)
 comment()
-</code></pre></div><p>闭包函数有且只有一个参数，必须是函数类型，这样定义的函数才是装饰器。写代码要遵循开放封闭原则，它规定已经实现的功能代码不允许被修改，但可以被扩展。</p>
+</code></pre><p>闭包函数有且只有一个参数，必须是函数类型，这样定义的函数才是装饰器。写代码要遵循开放封闭原则，它规定已经实现的功能代码不允许被修改，但可以被扩展。</p>
 <hr>
 <p>语法糖的书写格式是: <code>@装饰器名字</code>，通过语法糖的方式也可以完成对已有函数的装饰:</p>
-<div class="hljs code-wrapper"><pre><code># 添加一个登录验证的功能
+<pre><code># 添加一个登录验证的功能
 def check(fn):
     print(&quot;装饰器函数执行了&quot;)
     def inner():
@@ -2044,9 +2044,9 @@ def check(fn):
 def comment():
     print(&quot;发表评论&quot;)
 comment()
-</code></pre></div><hr>
+</code></pre><hr>
 <p>装饰器实现已有函数执行时间的统计:</p>
-<div class="hljs code-wrapper"><pre><code>import time
+<pre><code>import time
 
 # 装饰器函数
 def get_time(func):
@@ -2063,9 +2063,9 @@ def func1():
         print(i)
 
 func1()
-</code></pre></div><hr>
+</code></pre><hr>
 <p>装饰带有参数的函数:</p>
-<div class="hljs code-wrapper"><pre><code># 添加输出日志的功能
+<pre><code># 添加输出日志的功能
 def logging(fn):
     def inner(num1, num2):
         print(&quot;--正在努力计算--&quot;)
@@ -2079,9 +2079,9 @@ def sum_num(a, b):
     print(result)
 
 sum_num(1, 2)
-</code></pre></div><hr>
+</code></pre><hr>
 <p>装饰带有返回值的函数:</p>
-<div class="hljs code-wrapper"><pre><code># 添加输出日志的功能
+<pre><code># 添加输出日志的功能
 def logging(fn):
     def inner(num1, num2):
         print(&quot;--正在努力计算--&quot;)
@@ -2097,9 +2097,9 @@ def sum_num(a, b):
 
 result = sum_num(1, 2)
 print(result)
-</code></pre></div><hr>
+</code></pre><hr>
 <p>装饰带有不定长参数的函数:</p>
-<div class="hljs code-wrapper"><pre><code># 添加输出日志的功能
+<pre><code># 添加输出日志的功能
 def logging(fn):
     def inner(*args, **kwargs):
         print(&quot;--正在努力计算--&quot;)
@@ -2117,9 +2117,9 @@ def sum_num(*args, **kwargs):
     print(result)
 
 sum_num(1, 2, a=10)
-</code></pre></div><hr>
+</code></pre><hr>
 <p>通用装饰器：</p>
-<div class="hljs code-wrapper"><pre><code># 添加输出日志的功能
+<pre><code># 添加输出日志的功能
 def logging(fn):
     def inner(*args, **kwargs):
         print(&quot;--正在努力计算--&quot;)
@@ -2145,9 +2145,9 @@ def subtraction(a, b):
 result = sum_num(1, 2, a=10)
 print(result)
 subtraction(4, 2)
-</code></pre></div><hr>
+</code></pre><hr>
 <p>多个装饰器的使用示例代码：</p>
-<div class="hljs code-wrapper"><pre><code>def make_div(func):
+<pre><code>def make_div(func):
     &quot;&quot;&quot;对被装饰的函数的返回值 div标签&quot;&quot;&quot;
     def inner(*args, **kwargs):
         return &quot;&lt;div&gt;&quot; + func() + &quot;&lt;/div&gt;&quot;
@@ -2168,10 +2168,10 @@ def content():
 
 result = content()
 print(result)
-</code></pre></div><p>多个装饰器的装饰过程是: 离函数最近的装饰器先装饰，然后外面的装饰器再进行装饰，由内到外的装饰过程</p>
+</code></pre><p>多个装饰器的装饰过程是: 离函数最近的装饰器先装饰，然后外面的装饰器再进行装饰，由内到外的装饰过程</p>
 <hr>
 <p>带有参数的装饰器:在装饰器外面再包裹上一个函数，让最外面的函数接收参数，返回的是装饰器，因为<code>@</code>符号后面必须是装饰器实例。</p>
-<div class="hljs code-wrapper"><pre><code># 添加输出日志的功能
+<pre><code># 添加输出日志的功能
 def logging(flag):
     def decorator(fn):
         def inner(num1, num2):
@@ -2200,9 +2200,9 @@ result = add(1, 2)
 print(result)
 result = sub(1, 2)
 print(result)
-</code></pre></div><hr>
+</code></pre><hr>
 <p>类装饰器：</p>
-<div class="hljs code-wrapper"><pre><code>class Check(object):
+<pre><code>class Check(object):
     def __init__(self, fn):
         # 初始化操作在此完成
         self.__fn = fn
@@ -2215,7 +2215,7 @@ print(result)
 def comment():
     print(&quot;发表评论&quot;)
 comment()
-</code></pre></div><p><code>@Check</code> 等价于 <code>comment = Check(comment)</code>, 所以需要提供一个init方法，并多增加一个fn参数。</p>
+</code></pre><p><code>@Check</code> 等价于 <code>comment = Check(comment)</code>, 所以需要提供一个init方法，并多增加一个fn参数。</p>
 <p>要想类的实例对象能够像函数一样调用，需要在类里面使用<code>call</code>方法，把类的实例变成可调用对象(callable)，也就是说可以像调用函数一样进行调用。</p>
 <p>在call方法里进行对fn函数的装饰，可以添加额外的功能。</p>
 <hr>
@@ -2228,7 +2228,7 @@ comment()
 <p>property属性就是负责把一个方法当做属性进行使用，这样做可以简化代码使用。定义property属性有两种方式：装饰器方式和类属性方式。</p>
 <hr>
 <p>装饰器方式：</p>
-<div class="hljs code-wrapper"><pre><code>class Person(object):
+<pre><code>class Person(object):
     def __init__(self):
         self.__age = 0
     # 装饰器方式的property, 把age方法当做属性使用, 表示当获取属性时会执行下面修饰的方法
@@ -2248,10 +2248,10 @@ print(p.age)
 p.age = 100
 print(p.age)
 p.age = 1000
-</code></pre></div><p><code>@property</code>表示把方法当做属性使用, 表示当获取属性时会执行下面修饰的方法。<code>@方法名.setter</code> 表示把方法当做属性使用,表示当设置属性时会执行下面修饰的方法。装饰器方式的property属性修饰的方法名一定要一样。</p>
+</code></pre><p><code>@property</code>表示把方法当做属性使用, 表示当获取属性时会执行下面修饰的方法。<code>@方法名.setter</code> 表示把方法当做属性使用,表示当设置属性时会执行下面修饰的方法。装饰器方式的property属性修饰的方法名一定要一样。</p>
 <hr>
 <p>类属性方式:</p>
-<div class="hljs code-wrapper"><pre><code>class Person(object):
+<pre><code>class Person(object):
     def __init__(self):
         self.__age = 0
     def get_age(self):
@@ -2272,11 +2272,11 @@ print(p.age)
 p.age = 100
 print(p.age)
 p.age = 1000
-</code></pre></div><p>property的参数说明:第一个参数是获取属性时要执行的方法;第二个参数是设置属性时要执行的方法。</p>
+</code></pre><p>property的参数说明:第一个参数是获取属性时要执行的方法;第二个参数是设置属性时要执行的方法。</p>
 <hr>
 <h3 id="with语句和上下文管理器"><a href="#with语句和上下文管理器" class="headerlink" title="with语句和上下文管理器"></a>with语句和上下文管理器</h3><hr>
 <p>向文件中写入数据的示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>try:
+<pre><code>try:
     # 1、以读的方式打开文件
     f = open(&quot;1.txt&quot;, &quot;r&quot;)
     # 2、读取文件内容
@@ -2286,16 +2286,16 @@ except IOError as e:
 finally:
     # 3、关闭文件
     f.close()
-</code></pre></div><p>这种方法代码过于冗长,Python提供了 with 语句的这种写法，既简单又安全，并且 with 语句执行完成以后自动调用关闭文件操作，即使出现异常也会自动调用关闭文件操作。</p>
+</code></pre><p>这种方法代码过于冗长,Python提供了 with 语句的这种写法，既简单又安全，并且 with 语句执行完成以后自动调用关闭文件操作，即使出现异常也会自动调用关闭文件操作。</p>
 <p>with 语句的示例代码:</p>
-<div class="hljs code-wrapper"><pre><code># 1、以写的方式打开文件
+<pre><code># 1、以写的方式打开文件
 with open(&quot;1.txt&quot;, &quot;w&quot;) as f:
 # 2、读取文件内容
 f.write(&quot;hello world&quot;)
-</code></pre></div><hr>
+</code></pre><hr>
 <p>一个类只要实现了<code>__enter__()</code>和<code>__exit__()</code>这个两个方法，通过该类创建的对象我们就称之为上下文管理器。上下文管理器可以使用 with 语句，with语句之所以这么强大，背后是由上下文管理器做支撑的。</p>
 <p>自定义上下文管理器类,模拟文件操作:</p>
-<div class="hljs code-wrapper"><pre><code>class File(object):
+<pre><code>class File(object):
     # 初始化方法
     def __init__(self, file_name, file_model):
         # 定义变量保存文件名和打开模式
@@ -2319,10 +2319,10 @@ if __name__ == &apos;__main__&apos;:
     with File(&quot;1.txt&quot;, &quot;r&quot;) as file:
         file_data = file.read()
         print(file_data)
-</code></pre></div><p><code>__enter__</code>表示上文方法，需要返回一个操作文件对象。<code>__exit__</code>表示下文方法，with语句执行完成会自动执行，即使出现异常也会执行该方法。</p>
+</code></pre><p><code>__enter__</code>表示上文方法，需要返回一个操作文件对象。<code>__exit__</code>表示下文方法，with语句执行完成会自动执行，即使出现异常也会执行该方法。</p>
 <hr>
 <p>假如想要让一个函数成为上下文管理器，Python 还提供了一个<code>@contextmanager</code>的装饰器，更进一步简化了上下文管理器的实现方式。通过 <code>yield</code> 将函数分割成两部分，yield 上面的语句在<code>__enter__</code>方法中执行，yield 下面的语句在<code>__exit__</code>方法中执行，紧跟在 yield 后面的参数是函数的返回值。</p>
-<div class="hljs code-wrapper"><pre><code># 导入装饰器
+<pre><code># 导入装饰器
 from contextlib import contextmanager
 # 装饰器装饰函数，让其称为一个上下文管理器对象
 @contextmanager
@@ -2342,12 +2342,12 @@ def my_open(path, mode):
 # 使用with语句
 with my_open(&apos;out.txt&apos;, &apos;w&apos;) as f:
     f.write(&quot;hello , the simplest context manager&quot;)
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="生成器的创建方式"><a href="#生成器的创建方式" class="headerlink" title="生成器的创建方式"></a>生成器的创建方式</h3><hr>
 <p>根据程序员制定的规则循环生成数据，当条件不成立时则生成数据结束。数据不是一次性全部生成处理，而是使用一个，再生成一个，可以节约大量的内存。创建生成器的方式：生成器推导式和 yield 关键字。</p>
 <hr>
 <p>生成器推导式:</p>
-<div class="hljs code-wrapper"><pre><code># 创建生成器
+<pre><code># 创建生成器
 my_generator = (i * 2 for i in range(5))
 print(my_generator)
 # next获取生成器下一个值
@@ -2356,11 +2356,11 @@ print(my_generator)
 # 遍历生成器
 for value in my_generator:
     print(value)
-</code></pre></div><p>代码说明:next 函数获取生成器中的下一个值;for 循环遍历生成器中的每一个值。</p>
+</code></pre><p>代码说明:next 函数获取生成器中的下一个值;for 循环遍历生成器中的每一个值。</p>
 <hr>
 <p>yield 关键字:</p>
 <p>只要在def函数里面看到有 yield 关键字那么就是生成器。</p>
-<div class="hljs code-wrapper"><pre><code>def mygenerater(n):
+<pre><code>def mygenerater(n):
     for i in range(n):
         print(&apos;开始生成...&apos;)
         yield i
@@ -2381,7 +2381,7 @@ if __name__ == &apos;__main__&apos;:
     # # for遍历生成器, for 循环内部自动处理了停止迭代异常，使用起来更加方便
     for i in g:
         print(i)
-</code></pre></div><p>代码说明:代码执行到 yield 会暂停，然后把结果返回出去，下次启动生成器会在暂停的位置继续往下执行。生成器如果把数据生成完成，再次获取生成器中的下一个数据会抛出一个StopIteration 异常，表示停止迭代异常。while 循环内部没有处理异常操作，需要手动添加处理异常操作。for 循环内部自动处理了停止迭代异常，使用起来更加方便，推荐大家使用。</p>
+</code></pre><p>代码说明:代码执行到 yield 会暂停，然后把结果返回出去，下次启动生成器会在暂停的位置继续往下执行。生成器如果把数据生成完成，再次获取生成器中的下一个数据会抛出一个StopIteration 异常，表示停止迭代异常。while 循环内部没有处理异常操作，需要手动添加处理异常操作。for 循环内部自动处理了停止迭代异常，使用起来更加方便，推荐大家使用。</p>
 <hr>
 <h2 id="深拷贝和浅拷贝"><a href="#深拷贝和浅拷贝" class="headerlink" title="深拷贝和浅拷贝"></a>深拷贝和浅拷贝</h2><hr>
 <hr>

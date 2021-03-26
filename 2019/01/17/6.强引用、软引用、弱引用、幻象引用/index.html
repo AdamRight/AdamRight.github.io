@@ -237,11 +237,11 @@
 <hr>
 <p>两种算法判断对象需不需要回收：引用计数法(用的少)和GcRoot可达分析算法(大多数)。回收(回收算法)分为两步:需要回收的对象加入队列；调用对象的<code>finalize</code>方法。</p>
 <p>常见回收算法</p>
-<div class="hljs code-wrapper"><pre><code>标记清除算法（效率低，节省一些内存）
+<pre><code>标记清除算法（效率低，节省一些内存）
 复制算法 （效率要高，浪费一些内存）
 标记整理算法
 分代算法 
-</code></pre></div><p>GC回收内存本质上是回收对象，运用<strong>可达性分析算法</strong>。</p>
+</code></pre><p>GC回收内存本质上是回收对象，运用<strong>可达性分析算法</strong>。</p>
 <p>在Java语言中，除了基本数据类型外，其他的都是指向各类对象的对象引用；Java中根据其生命周期的长短，将引用分为4类。</p>
 <p>实现的核心是Reference与ReferenceQueue两个类。</p>
 <h2 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h2><p>Strong Reference就是我们最常见的普通对象引用，<code>Object obj = new Object()</code>中的obj就是强引用。</p>
@@ -249,7 +249,7 @@
 <p>当JVM内存空间不足，JVM宁愿抛出OutOfMemoryError运行时错误（OOM），使程序异常终止，也不会靠随意回收具有强引用的“存活”对象来解决内存不足的问题。</p>
 <h2 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h2><p>SoftReference只有当 JVM 认为内存不足时，才会去试图回收软引用指向的对象。JVM 会确保在抛出OutOfMemoryError 之前，清理软引用指向的对象。</p>
 <p>软引用可以和一个引用队列（ReferenceQueue）联合使用，如果软引用所引用的对象被垃圾回收器回收，Java虚拟机就会把这个软引用加入到与之关联的引用队列中。后续，我们可以调用ReferenceQueue的poll()方法来检查是否有它所关心的对象被回收。如果队列为空，将返回一个null,否则该方法返回队列中前面的一个Reference对象。</p>
-<div class="hljs code-wrapper"><pre><code>Object aRef = new  Object();
+<pre><code>Object aRef = new  Object();
 SoftReference aSoftRef = new SoftReference(aRef);
 Object anotherRef = (Object)aSoftRef.get();
 
@@ -257,20 +257,20 @@ ReferenceQueue queue = new  ReferenceQueue();
 SoftReference  ref = new  SoftReference(aMyObject, queue);
 
 (ref = (EmployeeRef) q.poll()) != null
-</code></pre></div><p>应用场景：软引用通常用来实现内存敏感的缓存。比如图片缓存框架，从网络上获取图片，然后将获取的图片显示的同时，通过软引用缓存起来。当下次再去网络上获取图片时，首先会检查要获取的图片缓存中是否存在，若存在，直接取出来，不需要再去网络上获取。</p>
-<div class="hljs code-wrapper"><pre><code>View view = findViewById(R.id.button);
+</code></pre><p>应用场景：软引用通常用来实现内存敏感的缓存。比如图片缓存框架，从网络上获取图片，然后将获取的图片显示的同时，通过软引用缓存起来。当下次再去网络上获取图片时，首先会检查要获取的图片缓存中是否存在，若存在，直接取出来，不需要再去网络上获取。</p>
+<pre><code>View view = findViewById(R.id.button);
 Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
 Drawable drawable = new BitmapDrawable(bitmap);
 SoftReference&lt;Drawable&gt; drawableSoftReference = new SoftReference&lt;Drawable&gt;(drawable);
 if(drawableSoftReference != null) &#123;
     view.setBackground(drawableSoftReference.get());
 &#125;
-</code></pre></div><h2 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h2><p>WeakReference随时可能会被垃圾回收器回收，不一定要等到虚拟机内存不足时才强制回收。</p>
+</code></pre><h2 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h2><p>WeakReference随时可能会被垃圾回收器回收，不一定要等到虚拟机内存不足时才强制回收。</p>
 <p>由于垃圾回收器是一个优先级很低的线程，因此不一定会很快回收弱引用的对象。弱引用可以和一个引用队列（ReferenceQueue）联合使用，如果弱引用所引用的对象被垃圾回收，Java虚拟机就会把这个弱引用加入到与之关联的引用队列中。</p>
 <p>应用场景：弱应用同样可用于内存敏感的缓存。</p>
 <p>在静态内部类中，经常会使用弱引用。例如，一个类发送网络请求，承担callback的静态内部类，则常以虚引用的方式来保存外部类(宿主类)的引用，当外部类需要被JVM回收时，不会因为网络请求没有及时回来，导致外部类不能被回收，引起内存泄漏。</p>
 <p>Glide 图片加载框架的内存缓存就使用到了弱引用缓存机制。</p>
-<div class="hljs code-wrapper"><pre><code>private MyHandler handler = new MyHandler(this);
+<pre><code>private MyHandler handler = new MyHandler(this);
 private static class MyHandler extends Handler&#123;
     WeakReference&lt;FirstActivity&gt; weakReference;
     MyHandler(FirstActivity activity) &#123;
@@ -283,16 +283,16 @@ private static class MyHandler extends Handler&#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>当一个android主线程被创建的时候，同时会有一个Looper对象被创建，而这个Looper对象会实现一个MessageQueue(消息队列)，当我们创建一个handler对象时，而handler的作用就是放入和取出消息从这个消息队列中，每当我们通过handler将一个msg放入消息队列时，这个msg就会持有一个handler对象的引用。</p>
+</code></pre><p>当一个android主线程被创建的时候，同时会有一个Looper对象被创建，而这个Looper对象会实现一个MessageQueue(消息队列)，当我们创建一个handler对象时，而handler的作用就是放入和取出消息从这个消息队列中，每当我们通过handler将一个msg放入消息队列时，这个msg就会持有一个handler对象的引用。</p>
 <p>因此当Activity被结束后，这个msg在被取出来之前，这msg会继续存活，但是这个msg持有handler的引用，而handler在Activity中创建，会持有Activity的引用，因而当Activity结束后，Activity对象并不能够被gc回收，因而出现内存泄漏。</p>
 <p><strong>在java中所有非静态的对象都会持有当前类的强引用，而静态对象则只会持有当前类的弱引用。</strong></p>
 <p>声明为静态后，handler将会持有一个Activity的弱引用，而弱引用会很容易被gc回收，这样就能解决Activity结束后，gc却无法回收的情况。</p>
 <h2 id="幻象引用"><a href="#幻象引用" class="headerlink" title="幻象引用"></a>幻象引用</h2><p>PhantomReference也叫虚引用，不能通过它访问对象。幻象引用仅仅是提供了一种确保对象被finalize 以后，做某些事情的机制。这种引用的get()方法返回总是null。</p>
 <p>幻想引用是针对那些已经执行完析构函数之后，仍然需要在执行一些其它操作的对象：比如资源对象的关闭就可以用到这个引用。</p>
 <p>虚引用必须和引用队列 （ReferenceQueue）联合使用。当垃圾回收器准备回收一个对象时，如果发现它还有虚引用，就会在回收对象的内存之前，把这个虚引用加入到与之关联的引用队列中。</p>
-<div class="hljs code-wrapper"><pre><code>ReferenceQueue queue = new ReferenceQueue ();
+<pre><code>ReferenceQueue queue = new ReferenceQueue ();
 PhantomReference pr = new PhantomReference (object, queue);
-</code></pre></div><p>程序可以通过判断引用队列中是否已经加入了虚引用，来了解被引用的对象是否将要被垃圾回收。如果程序发现某个虚引用已经被加入到引用队列，那么就可以在所引用的对象的内存被回收之前采取一些程序行动。</p>
+</code></pre><p>程序可以通过判断引用队列中是否已经加入了虚引用，来了解被引用的对象是否将要被垃圾回收。如果程序发现某个虚引用已经被加入到引用队列，那么就可以在所引用的对象的内存被回收之前采取一些程序行动。</p>
 <p>应用场景：可用来跟踪对象被垃圾回收器回收的活动，当一个虚引用关联的对象被垃圾收集器回收之前会收到一条系统通知。</p>
 
             </div>

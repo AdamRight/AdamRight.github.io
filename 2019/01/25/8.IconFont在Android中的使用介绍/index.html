@@ -229,10 +229,10 @@
             
             <div class="markdown-body">
               <h2 id="iconfont介绍"><a href="#iconfont介绍" class="headerlink" title="iconfont介绍"></a>iconfont介绍</h2><p>常用iconfont字体库</p>
-<div class="hljs code-wrapper"><pre><code>https://www.iconfont.cn/
+<pre><code>https://www.iconfont.cn/
 http://fontawesome.dashgame.com/
 https://ionicons.com/
-</code></pre></div><p>优点：</p>
+</code></pre><p>优点：</p>
 <p>1.IconFont是矢量图标,可以随意设置大小。</p>
 <p>2.体积小可以减小APK的体积。</p>
 <p>3.一套图标资源可以在不同平台使用(android ,ios,web)</p>
@@ -245,21 +245,21 @@ https://ionicons.com/
 </blockquote>
 <h2 id="具体使用"><a href="#具体使用" class="headerlink" title="具体使用"></a>具体使用</h2><p>下载<code>iconfont.ttf</code>文件，放在项目<code>main/assets/iconfont/</code>下</p>
 <h3 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h3><p>xml中</p>
-<div class="hljs code-wrapper"><pre><code>&lt;TextView
+<pre><code>&lt;TextView
     android:id=&quot;@+id/tv1&quot;
     android:layout_width=&quot;wrap_content&quot;
     android:layout_height=&quot;wrap_content&quot;
     android:text=&quot;@string/home&quot;
     android:textColor=&quot;@android:color/holo_orange_light&quot;
     android:textSize=&quot;50sp&quot; /&gt;
-</code></pre></div><p>strings中Unicode</p>
-<div class="hljs code-wrapper"><pre><code>&lt;string name=&quot;home&quot;&gt;&amp;#xe664;&lt;/string&gt;
-</code></pre></div><p>最后直接设置</p>
-<div class="hljs code-wrapper"><pre><code>Typeface iconfont1 = Typeface.createFromAsset(getAssets(), &quot;iconfont/iconfont.ttf&quot;);
+</code></pre><p>strings中Unicode</p>
+<pre><code>&lt;string name=&quot;home&quot;&gt;&amp;#xe664;&lt;/string&gt;
+</code></pre><p>最后直接设置</p>
+<pre><code>Typeface iconfont1 = Typeface.createFromAsset(getAssets(), &quot;iconfont/iconfont.ttf&quot;);
 TextView textview1 = findViewById(R.id.tv1);
 textview1.setTypeface(iconfont1);
-</code></pre></div><h3 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h3><p>自定义TextView</p>
-<div class="hljs code-wrapper"><pre><code>public class IconFontView extends AppCompatTextView &#123;
+</code></pre><h3 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h3><p>自定义TextView</p>
+<pre><code>public class IconFontView extends AppCompatTextView &#123;
 
     private Context context;
     private boolean isFirst = true;
@@ -323,28 +323,28 @@ textview1.setTypeface(iconfont1);
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>在<code>res/values/attrs</code>中定义属性</p>
-<div class="hljs code-wrapper"><pre><code>&lt;!-- IconFontView属性 --&gt;
+</code></pre><p>在<code>res/values/attrs</code>中定义属性</p>
+<pre><code>&lt;!-- IconFontView属性 --&gt;
 &lt;declare-styleable name=&quot;IconFontViewAttr&quot;&gt;
     &lt;attr name=&quot;clicked_text&quot; format=&quot;string&quot; /&gt;
     &lt;attr name=&quot;clicked_textColor&quot; format=&quot;color&quot; /&gt;
 &lt;/declare-styleable&gt;
-</code></pre></div><p>使用</p>
-<div class="hljs code-wrapper"><pre><code>&lt;com.example.iconfont.IconFontView
+</code></pre><p>使用</p>
+<pre><code>&lt;com.example.iconfont.IconFontView
     android:id=&quot;@+id/tv2&quot;
     android:layout_width=&quot;wrap_content&quot;
     android:layout_height=&quot;wrap_content&quot;
     android:text=&quot;@string/hot&quot;
     android:textColor=&quot;@android:color/holo_red_dark&quot;
     android:textSize=&quot;50sp&quot; /&gt;
-</code></pre></div><p>strings中Unicode</p>
-<div class="hljs code-wrapper"><pre><code>&lt;string name=&quot;hot&quot;&gt;&amp;#xe614;&lt;/string&gt;
-</code></pre></div><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>可以图文混用</p>
-<div class="hljs code-wrapper"><pre><code>&lt;string name=&quot;my&quot;&gt;我可以图文混用&amp;#xe624;啦！！&lt;/string&gt;
-</code></pre></div><p>使用阿里iconfont可以在<code>demo_index.html</code>文件中查找对应的Unicode</p>
+</code></pre><p>strings中Unicode</p>
+<pre><code>&lt;string name=&quot;hot&quot;&gt;&amp;#xe614;&lt;/string&gt;
+</code></pre><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>可以图文混用</p>
+<pre><code>&lt;string name=&quot;my&quot;&gt;我可以图文混用&amp;#xe624;啦！！&lt;/string&gt;
+</code></pre><p>使用阿里iconfont可以在<code>demo_index.html</code>文件中查找对应的Unicode</p>
 <p>fontawesome查找Unicode对照表</p>
-<div class="hljs code-wrapper"><pre><code>https://fontawesome.com/cheatsheet?from=io
-</code></pre></div>
+<pre><code>https://fontawesome.com/cheatsheet?from=io
+</code></pre>
             </div>
             <hr>
             <div>
