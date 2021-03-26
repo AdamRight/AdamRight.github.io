@@ -30,15 +30,7 @@
     
     
       
-      
-        
-          
-        
-        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
-      
-      
-        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
-      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atom-one-dark.min.css" />
     
   
 
@@ -239,25 +231,25 @@
               <h2 id="1、介绍和环境搭建"><a href="#1、介绍和环境搭建" class="headerlink" title="1、介绍和环境搭建"></a>1、介绍和环境搭建</h2><p>DSL(domain specific language)：领域特定语言，解决特定问题，包括Groovy，xml等等。</p>
 <p>Groovy是一种基于JVM的敏捷开发语言，可以使用java所用的库。</p>
 <p>Groovy官网</p>
-<div class="code-wrapper"><pre><code>http://groovy-lang.org/
-</code></pre></div><p>下载最新稳定版本(the latest stable version of Groovy)-2.5.8版本。</p>
+<pre><code>http://groovy-lang.org/
+</code></pre><p>下载最新稳定版本(the latest stable version of Groovy)-2.5.8版本。</p>
 <p>检查环境变量配置</p>
-<div class="code-wrapper"><pre><code>groovy -version
-</code></pre></div><p>在Android studio中Tools - Groovy Console直接编写Groovy语言。</p>
-<div class="code-wrapper"><pre><code>println &quot;hello groovy&quot;
-</code></pre></div><h2 id="2、语法"><a href="#2、语法" class="headerlink" title="2、语法"></a>2、语法</h2><h3 id="2-1、基础语法"><a href="#2-1、基础语法" class="headerlink" title="2.1、基础语法"></a>2.1、基础语法</h3><p>groovy变量的类型都是对象类型，没有基本类型，因为基本类型都会装箱成对象类型。</p>
+<pre><code>groovy -version
+</code></pre><p>在Android studio中Tools - Groovy Console直接编写Groovy语言。</p>
+<pre><code>println &quot;hello groovy&quot;
+</code></pre><h2 id="2、语法"><a href="#2、语法" class="headerlink" title="2、语法"></a>2、语法</h2><h3 id="2-1、基础语法"><a href="#2-1、基础语法" class="headerlink" title="2.1、基础语法"></a>2.1、基础语法</h3><p>groovy变量的类型都是对象类型，没有基本类型，因为基本类型都会装箱成对象类型。</p>
 <p>变量的定义包括强类型定义和弱类型def定义。</p>
-<div class="code-wrapper"><pre><code>def x = 10
+<pre><code>def x = 10
 println x.class  //class java.lang.Integer
-</code></pre></div><p>字符串除了String还有GString，GString的常用三种定义方式</p>
-<div class="code-wrapper"><pre><code>def s1 = &#39;a single \&#39;a\&#39; String&#39;
-println s1  //a single &#39;a&#39; String
+</code></pre><p>字符串除了String还有GString，GString的常用三种定义方式</p>
+<pre><code>def s1 = &apos;a single \&apos;a\&apos; String&apos;
+println s1  //a single &apos;a&apos; String
 
-def s2 = &#39;&#39;&#39;\
+def s2 = &apos;&apos;&apos;\
 line one
 line two
 line three
-&#39;&#39;&#39;
+&apos;&apos;&apos;
 println s2  //line one
             //line two
             //line three
@@ -266,82 +258,82 @@ def s3 = &quot;a common String&quot;
 def say = &quot;this is $&#123;s3&#125;&quot;   //花括号可扩展任意的表达式
 println say  //this is a common String
 println say.class  //class org.codehaus.groovy.runtime.GStringImpl
-</code></pre></div><p>新增常用操作符</p>
-<div class="code-wrapper"><pre><code>def str = &quot;groovy&quot;
-//println str.center(9,&#39;a&#39;)   //agroovyaa
-//println str.padLeft(9,&#39;a&#39;)  //aaagroovy
-//println str.padRight(9,&#39;a&#39;)  //groovyaaa
+</code></pre><p>新增常用操作符</p>
+<pre><code>def str = &quot;groovy&quot;
+//println str.center(9,&apos;a&apos;)   //agroovyaa
+//println str.padLeft(9,&apos;a&apos;)  //aaagroovy
+//println str.padRight(9,&apos;a&apos;)  //groovyaaa
 
-def str2 = &#39;Hello&#39;
+def str2 = &apos;Hello&apos;
 println str &gt; str2  //true
 
 println str[0]  //g
 println str[0..1]  //gr
 
-def str3 = &#39;gro&#39;
+def str3 = &apos;gro&apos;
 println str.minus(str3) //ovy
 println str - str3 //ovy
 
 //println str.reverse()   //yvoorg
 println str.capitalize()   //Groovy
 println str.isNumber()   //false
-</code></pre></div><p>逻辑控制:</p>
+</code></pre><p>逻辑控制:</p>
 <p>switch</p>
-<div class="code-wrapper"><pre><code>def x = 1.23
+<pre><code>def x = 1.23
 def result
 switch (x)&#123;
     case &quot;str&quot;:
-        result = &#39;str&#39;
+        result = &apos;str&apos;
         break
-    case [4,6,7,&#39;inlist&#39;]:  //list
-        result = &#39;list&#39;
+    case [4,6,7,&apos;inlist&apos;]:  //list
+        result = &apos;list&apos;
         break
     case 12..30:    //范围
-        result = &#39;range&#39;
+        result = &apos;range&apos;
         break
     case Integer:
-        result = &#39;Integer&#39;
+        result = &apos;Integer&apos;
         break
     case BigDecimal:
-        result = &#39;BigDecimal&#39;
+        result = &apos;BigDecimal&apos;
         break
-    default:result = &#39;default&#39;
+    default:result = &apos;default&apos;
 &#125;
 println result  //BigDecimal
-</code></pre></div><p>for范围</p>
-<div class="code-wrapper"><pre><code>def sum = 0
+</code></pre><p>for范围</p>
+<pre><code>def sum = 0
 for (i in 0..9)&#123;
     sum += i
 &#125;
 println sum //45
-</code></pre></div><p>list循环</p>
-<div class="code-wrapper"><pre><code>def sum = 0
+</code></pre><p>list循环</p>
+<pre><code>def sum = 0
 for (i in [1,2,3,4,5,6,7,8,9])&#123;
     sum += i
 &#125;
 println sum //45
-</code></pre></div><p>map循环</p>
-<div class="code-wrapper"><pre><code>def sum = 0
-for (i in [&#39;wang&#39;:1,&#39;zhang&#39;:2,&#39;li&#39;:3])&#123;
+</code></pre><p>map循环</p>
+<pre><code>def sum = 0
+for (i in [&apos;wang&apos;:1,&apos;zhang&apos;:2,&apos;li&apos;:3])&#123;
     sum += i.value
 &#125;
 println sum //6
-</code></pre></div><h3 id="2-2、闭包"><a href="#2-2、闭包" class="headerlink" title="2.2、闭包"></a>2.2、闭包</h3><p>类似于方法</p>
-<div class="code-wrapper"><pre><code>def clouser = &#123; println &quot;Hello groovy&quot;&#125;
+</code></pre><h3 id="2-2、闭包"><a href="#2-2、闭包" class="headerlink" title="2.2、闭包"></a>2.2、闭包</h3><p>类似于方法</p>
+<pre><code>def clouser = &#123; println &quot;Hello groovy&quot;&#125;
 clouser.call()  //调用方式一，Hello groovy
 clouser()  //调用方式二，Hello groovy
-</code></pre></div><p>有参数的闭包<code>-&gt;</code>前的是参数,也可以有多个参数</p>
-<div class="code-wrapper"><pre><code>def clouser = &#123;String name -&gt; println &quot;$&#123;name&#125; Hello groovy&quot;&#125;
+</code></pre><p>有参数的闭包<code>-&gt;</code>前的是参数,也可以有多个参数</p>
+<pre><code>def clouser = &#123;String name -&gt; println &quot;$&#123;name&#125; Hello groovy&quot;&#125;
 clouser.call(&quot;this is&quot;)  //调用方式一，this is Hello groovy
 clouser(&quot;this is&quot;)  //调用方式二，this is Hello groovy
-</code></pre></div><p>隐式的it参数,不需要定义参数</p>
-<div class="code-wrapper"><pre><code>def clouser = &#123;println &quot;Hello $&#123;it&#125;&quot;&#125;
+</code></pre><p>隐式的it参数,不需要定义参数</p>
+<pre><code>def clouser = &#123;println &quot;Hello $&#123;it&#125;&quot;&#125;
 clouser(&quot;groovy&quot;)  //Hello groovy
-</code></pre></div><p>返回值</p>
-<div class="code-wrapper"><pre><code>def clouser = &#123;String name -&gt; return  &quot;Hello $&#123;name&#125;&quot;&#125;
+</code></pre><p>返回值</p>
+<pre><code>def clouser = &#123;String name -&gt; return  &quot;Hello $&#123;name&#125;&quot;&#125;
 println clouser(&quot;groovy&quot;)  //Hello groovy
-</code></pre></div><p>基本类型和闭包结合使用</p>
-<div class="code-wrapper"><pre><code>int x = cal(5)
+</code></pre><p>基本类型和闭包结合使用</p>
+<pre><code>int x = cal(5)
 println x   
 //num的阶乘
 int fab(int number) &#123;
@@ -366,8 +358,8 @@ int cal(int number) &#123;
     &#125;
     return result
 &#125;
-</code></pre></div><p>字符串和闭包结合使用</p>
-<div class="code-wrapper"><pre><code>String str = &#39;2 and 3 is 5&#39;
+</code></pre><p>字符串和闭包结合使用</p>
+<pre><code>String str = &apos;2 and 3 is 5&apos;
 
 //each遍历
 str.each &#123;
@@ -398,9 +390,9 @@ def list2 = str.collect&#123;
     it.toUpperCase()
 &#125;
 println list2.toListString()    //[2,  , A, N, D,  , 3,  , I, S,  , 5]
-</code></pre></div><p>闭包进阶</p>
+</code></pre><p>闭包进阶</p>
 <p>变量：this、owner、delegate</p>
-<div class="code-wrapper"><pre><code>def scriptClouser = &#123;
+<pre><code>def scriptClouser = &#123;
     println &quot;this:&quot; + this  //代表闭包定义处的类
     println &quot;owner:&quot; + owner    //代表闭包定义处的类或者对象
     println &quot;delegate:&quot; + delegate  //代表任意对象，默认与owner一致
@@ -437,8 +429,8 @@ def nextClouser = &#123;
     innerClouser.call()
 &#125;
 nextClouser.call()
-</code></pre></div><p>闭包委托策略</p>
-<div class="code-wrapper"><pre><code>class Student &#123;
+</code></pre><p>闭包委托策略</p>
+<pre><code>class Student &#123;
     String name
     def pretty = &#123;
         &quot;My name is $&#123;name&#125;&quot;
@@ -451,17 +443,17 @@ class Teacher &#123;
     String name
 &#125;
 
-def stu = new Student(name: &#39;Sarash&#39;)
-def tea = new Teacher(name: &#39;Qndroid&#39;)
+def stu = new Student(name: &apos;Sarash&apos;)
+def tea = new Teacher(name: &apos;Qndroid&apos;)
 stu.pretty.delegate = tea
 stu.pretty.resolveStrategy = Closure.DELEGATE_FIRST//delegate优先
 println stu.toSting()   //My name is Qndroid
-</code></pre></div><h3 id="2-3、列表list"><a href="#2-3、列表list" class="headerlink" title="2.3、列表list"></a>2.3、列表list</h3><p>数组和列表定义方式</p>
-<div class="code-wrapper"><pre><code>def array = [1, 2, 3, 4, 5, 6] as int[]
+</code></pre><h3 id="2-3、列表list"><a href="#2-3、列表list" class="headerlink" title="2.3、列表list"></a>2.3、列表list</h3><p>数组和列表定义方式</p>
+<pre><code>def array = [1, 2, 3, 4, 5, 6] as int[]
 int[] array2 = [1, 2, 3, 4, 5, 6]
 def list = [1, 2, 3, 4, 5, 6]
-</code></pre></div><p>主要介绍特有的</p>
-<div class="code-wrapper"><pre><code>//排序
+</code></pre><p>主要介绍特有的</p>
+<pre><code>//排序
 def sortList = [1, -4, 5, -6, 2, 3]
 //Collections.sort(sortList)
 //println sortList    //[-6, -4, 1, 2, 3, 5]
@@ -480,7 +472,7 @@ sortList.sort &#123; a, b -&gt;
 println sortList    //[1, 2, 3, -4, 5, -6]
 
 //字符串排序
-def sortStringList = [&#39;123&#39;, &#39;a&#39;, &#39;groovy&#39;]
+def sortStringList = [&apos;123&apos;, &apos;a&apos;, &apos;groovy&apos;]
 sortStringList.sort &#123; it -&gt; return it.size() &#125;
 println sortStringList  //[a, 123, groovy]
 
@@ -501,21 +493,21 @@ println findList.max()  //12
 
 def num = findList.count &#123; return it % 2 == 0 &#125; //符合条件的个数
 println num //4
-</code></pre></div><h3 id="2-4、映射map"><a href="#2-4、映射map" class="headerlink" title="2.4、映射map"></a>2.4、映射map</h3><p>定义和基本操作</p>
-<div class="code-wrapper"><pre><code>def colors = [red: &#39;ff0000&#39;, green: &#39;00ff00&#39;, blue: &#39;0000ff&#39;]
+</code></pre><h3 id="2-4、映射map"><a href="#2-4、映射map" class="headerlink" title="2.4、映射map"></a>2.4、映射map</h3><p>定义和基本操作</p>
+<pre><code>def colors = [red: &apos;ff0000&apos;, green: &apos;00ff00&apos;, blue: &apos;0000ff&apos;]
 println colors.getClass()   //class java.util.LinkedHashMap
 //索引
-println colors[&#39;red&#39;]   //ff0000
+println colors[&apos;red&apos;]   //ff0000
 println colors.red  //ff0000
 //添加
-colors.yellow = &#39;ffff00&#39;
+colors.yellow = &apos;ffff00&apos;
 println colors.toMapString()    //[red:ff0000, green:00ff00, blue:0000ff, yellow:ffff00]
-</code></pre></div><p>其他操作</p>
-<div class="code-wrapper"><pre><code>def students = [
-        1: [number: &#39;0001&#39;, name: &#39;zhang&#39;, score: 55, sex: &#39;male&#39;],
-        2: [number: &#39;0002&#39;, name: &#39;li&#39;, score: 62, sex: &#39;female&#39;],
-        3: [number: &#39;0003&#39;, name: &#39;wang&#39;, score: 63, sex: &#39;female&#39;],
-        4: [number: &#39;0004&#39;, name: &#39;zhao&#39;, score: 66, sex: &#39;male&#39;]
+</code></pre><p>其他操作</p>
+<pre><code>def students = [
+        1: [number: &apos;0001&apos;, name: &apos;zhang&apos;, score: 55, sex: &apos;male&apos;],
+        2: [number: &apos;0002&apos;, name: &apos;li&apos;, score: 62, sex: &apos;female&apos;],
+        3: [number: &apos;0003&apos;, name: &apos;wang&apos;, score: 63, sex: &apos;female&apos;],
+        4: [number: &apos;0004&apos;, name: &apos;zhao&apos;, score: 66, sex: &apos;male&apos;]
 ]
 //遍历
 students.each &#123;
@@ -523,14 +515,14 @@ students.each &#123;
 &#125;
 //带索引
 students.eachWithIndex &#123;
-    def student, int index -&gt; println index + &#39;::&#39; + student.key + &quot;:&quot; + student.value
+    def student, int index -&gt; println index + &apos;::&apos; + student.key + &quot;:&quot; + student.value
 &#125;
 //直接遍历
 students.each &#123;
     key, value -&gt; println key + &quot;:&quot; + value
 &#125;
 students.eachWithIndex &#123;
-    key, value, index -&gt; println index + &#39;:::&#39; + key + &quot;:&quot; + value
+    key, value, index -&gt; println index + &apos;:::&apos; + key + &quot;:&quot; + value
 &#125;
 //查找
 def entry = students.find &#123; def student -&gt;
@@ -544,7 +536,7 @@ def entry2 = students.findAll &#123; def student -&gt;
 println entry2
 //计数
 def count = students.count &#123;
-    def student -&gt; return student.value.score &gt;= 60 &amp;&amp; student.value.sex == &#39;male&#39;
+    def student -&gt; return student.value.score &gt;= 60 &amp;&amp; student.value.sex == &apos;male&apos;
 &#125;
 println count   //1
 //查找并筛选
@@ -556,7 +548,7 @@ def names = students.findAll &#123;
 println names   //[li, wang, zhao]
 //分组
 def group = students.groupBy &#123;
-    def student -&gt; return student.value.score &gt;= 60 ? &#39;及格&#39; : &#39;不及格&#39;
+    def student -&gt; return student.value.score &gt;= 60 ? &apos;及格&apos; : &apos;不及格&apos;
 &#125;
 println group.toMapString()
 //排序
@@ -567,8 +559,8 @@ def sort = students.sort&#123;
         return num1 == num2 ? 0 : num1 &lt; num2 ? -1 : 1
 &#125;
 println sort.toMapString()
-</code></pre></div><h3 id="2-5、范围range"><a href="#2-5、范围range" class="headerlink" title="2.5、范围range"></a>2.5、范围range</h3><p>定义和使用</p>
-<div class="code-wrapper"><pre><code>def range = 1..10
+</code></pre><h3 id="2-5、范围range"><a href="#2-5、范围range" class="headerlink" title="2.5、范围range"></a>2.5、范围range</h3><p>定义和使用</p>
+<pre><code>def range = 1..10
 println range[0]    //1
 println range.contains(10)    //true
 println range.from    //1
@@ -585,22 +577,22 @@ def getGrade(Number number)&#123;
     def result
     switch (number)&#123;
         case 0..&lt;60:
-            result = &#39;不及格&#39;
+            result = &apos;不及格&apos;
             break
         case 60..&lt;70:
-            result = &#39;及格&#39;
+            result = &apos;及格&apos;
             break
         case 70..&lt;80:
-            result = &#39;良好&#39;
+            result = &apos;良好&apos;
             break
         case 80..100:
-            result = &#39;优秀&#39;
+            result = &apos;优秀&apos;
             break
     &#125;
     return result
 &#125;
-</code></pre></div><h3 id="2-6、面向对象"><a href="#2-6、面向对象" class="headerlink" title="2.6、面向对象"></a>2.6、面向对象</h3><p>类、方法、接口</p>
-<div class="code-wrapper"><pre><code>//groovy中默认都是public类型
+</code></pre><h3 id="2-6、面向对象"><a href="#2-6、面向对象" class="headerlink" title="2.6、面向对象"></a>2.6、面向对象</h3><p>类、方法、接口</p>
+<pre><code>//groovy中默认都是public类型
 class Person implements Action&#123;
     String name
     Integer age
@@ -631,11 +623,11 @@ interface Action&#123;
 trait DefaultAction&#123;
     abstract void eat()
     void play()&#123;
-        println &#39;i can play&#39;
+        println &apos;i can play&apos;
     &#125;
 &#125;
-</code></pre></div><p>元编程</p>
-<div class="code-wrapper"><pre><code>class Person &#123;
+</code></pre><p>元编程</p>
+<pre><code>class Person &#123;
     String name
     Integer age
 
@@ -653,27 +645,27 @@ trait DefaultAction&#123;
     &#125;
 &#125;
 
-def person = new Person(name: &#39;zhang&#39;, age: 26)
+def person = new Person(name: &apos;zhang&apos;, age: 26)
 println person.cry()
 
 //为类动态添加属性
-Person.metaClass.sex = &#39;male&#39;
-def person1 = new Person(name: &#39;zhang&#39;, age: 26)
+Person.metaClass.sex = &apos;male&apos;
+def person1 = new Person(name: &apos;zhang&apos;, age: 26)
 println person1.sex     //male
 //为类动态添加方法
 Person.metaClass.sexUpperCase = &#123; -&gt; sex.toUpperCase() &#125;
-def personn2 = new Person(name: &#39;zhang&#39;, age: 26)
+def personn2 = new Person(name: &apos;zhang&apos;, age: 26)
 println personn2.sexUpperCase()     //MALE
 //添加静态方法
 Person.metaClass.static.createPerson = &#123;
     String name, int age -&gt; new Person(name: name, age: age)
 &#125;
-def personn3 = Person.createPerson(&#39;li&#39;, 18)
+def personn3 = Person.createPerson(&apos;li&apos;, 18)
 println personn3.name + personn3.age  //li18
-</code></pre></div><p>一次注入，应用程序其他方法都可以使用</p>
-<div class="code-wrapper"><pre><code>ExpandoMetaClass.enableGlobally()
-</code></pre></div><h2 id="3、高级用法"><a href="#3、高级用法" class="headerlink" title="3、高级用法"></a>3、高级用法</h2><h3 id="3-1、json文件处理"><a href="#3-1、json文件处理" class="headerlink" title="3.1、json文件处理"></a>3.1、json文件处理</h3><p>转换成json</p>
-<div class="code-wrapper"><pre><code>import groovy.json.JsonOutput
+</code></pre><p>一次注入，应用程序其他方法都可以使用</p>
+<pre><code>ExpandoMetaClass.enableGlobally()
+</code></pre><h2 id="3、高级用法"><a href="#3、高级用法" class="headerlink" title="3、高级用法"></a>3、高级用法</h2><h3 id="3-1、json文件处理"><a href="#3-1、json文件处理" class="headerlink" title="3.1、json文件处理"></a>3.1、json文件处理</h3><p>转换成json</p>
+<pre><code>import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
 class Person &#123;
@@ -681,29 +673,29 @@ class Person &#123;
     Integer age
 &#125;
 //转换成Json
-def list = [new Person(name: &#39;zhang&#39;, age: 26),
-            new Person(name: &#39;li&#39;, age: 22)]
+def list = [new Person(name: &apos;zhang&apos;, age: 26),
+            new Person(name: &apos;li&apos;, age: 22)]
 def json = JsonOutput.toJson(list)
 println JsonOutput.prettyPrint(json)
 //转成实体对象
 def jsonSlpuer = new JsonSlurper()
 jsonSlpuer.parseText()
-</code></pre></div><p>get请求</p>
-<div class="code-wrapper"><pre><code>import groovy.json.JsonSlurper
+</code></pre><p>get请求</p>
+<pre><code>import groovy.json.JsonSlurper
 
 def response = getNetworkData(&quot;http://httpbin.org/get?id=123&quot;)
 println response.args.id
 def getNetworkData(String url)&#123;
     def connection = new URL(url).openConnection()
-    connection.setRequestMethod(&#39;GET&#39;)
+    connection.setRequestMethod(&apos;GET&apos;)
     connection.connect()
     def response = connection.content.text
     def jsonSlurper = new JsonSlurper()
     return jsonSlurper.parseText(response)
 &#125;
-</code></pre></div><h3 id="3-2、xml读取和生成"><a href="#3-2、xml读取和生成" class="headerlink" title="3.2、xml读取和生成"></a>3.2、xml读取和生成</h3><p>解析xml格式数据，创建xml格式数据，都不再详解</p>
+</code></pre><h3 id="3-2、xml读取和生成"><a href="#3-2、xml读取和生成" class="headerlink" title="3.2、xml读取和生成"></a>3.2、xml读取和生成</h3><p>解析xml格式数据，创建xml格式数据，都不再详解</p>
 <h3 id="3-3、文件操作"><a href="#3-3、文件操作" class="headerlink" title="3.3、文件操作"></a>3.3、文件操作</h3><p>读取文件</p>
-<div class="code-wrapper"><pre><code>def file = new File(&quot;目标文件&quot;)
+<pre><code>def file = new File(&quot;目标文件&quot;)
 //方式一
 file.eachLine &#123;
     line -&gt; println line
@@ -721,8 +713,8 @@ def reader = file.withReader &#123;
         return buffer
 &#125;
 println reader
-</code></pre></div><p>拷贝文件</p>
-<div class="code-wrapper"><pre><code>def copy(String sourcePath, String destationPath) &#123;
+</code></pre><p>拷贝文件</p>
+<pre><code>def copy(String sourcePath, String destationPath) &#123;
     try &#123;
         def desFile = new File(destationPath)
         if (!desFile.exists()) &#123;
@@ -743,8 +735,8 @@ println reader
 
     &#125;
 &#125;
-</code></pre></div><p>对象的读写</p>
-<div class="code-wrapper"><pre><code>def saveObject(Object object, String path) &#123;
+</code></pre><p>对象的读写</p>
+<pre><code>def saveObject(Object object, String path) &#123;
     try &#123;
         def desFile = new File(path)
         if (!desFile.exists()) &#123;
@@ -773,39 +765,39 @@ def readObject(String path) &#123;
     &#125;
     return obj
 &#125;
-</code></pre></div><h2 id="4、Gradle介绍"><a href="#4、Gradle介绍" class="headerlink" title="4、Gradle介绍"></a>4、Gradle介绍</h2><p>Gradle用于构建应用程序，使用Groovy核心语法。</p>
+</code></pre><h2 id="4、Gradle介绍"><a href="#4、Gradle介绍" class="headerlink" title="4、Gradle介绍"></a>4、Gradle介绍</h2><p>Gradle用于构建应用程序，使用Groovy核心语法。</p>
 <p>在Terminal中执行</p>
-<div class="code-wrapper"><pre><code>gradlew clean    //win
+<pre><code>gradlew clean    //win
 gradlew build    //win
 
 ./gradlew clean    //mac
 ./gradlew build    //mac
-</code></pre></div><p>gradle的生命周期</p>
-<div class="code-wrapper"><pre><code>initialization初始化阶段：根据settings.gradle解析整个工程中所有的Project，构建所有的Project对应的project对象。
+</code></pre><p>gradle的生命周期</p>
+<pre><code>initialization初始化阶段：根据settings.gradle解析整个工程中所有的Project，构建所有的Project对应的project对象。
 Configuration配置阶段：解析所有的projects对象中的task，构建好所有的task的拓扑图
 Excution执行阶段：执行具体的task及其依赖task
-</code></pre></div><p>生命周期监听</p>
-<div class="code-wrapper"><pre><code>//配置阶段开始前的监听回调
+</code></pre><p>生命周期监听</p>
+<pre><code>//配置阶段开始前的监听回调
 this.beforeEvaluate &#123;
-    println &#39;------配置阶段开始------&#39;
+    println &apos;------配置阶段开始------&apos;
 &#125;
 //配置阶段完成以后的监听回调
 this.afterEvaluate &#123;
-    println &#39;------配置阶段完成------&#39;
+    println &apos;------配置阶段完成------&apos;
 &#125;
 //gradle执行完毕后的回调监听
 this.gradle.buildFinished &#123;
-    println &#39;------gradle执行完毕------&#39;
+    println &apos;------gradle执行完毕------&apos;
 &#125;
 //等同beforeEvaluate
 this.gradle.beforeProject &#123;&#125;
 //等同afterEvaluate
 this.gradle.afterProject &#123;&#125;
-</code></pre></div><h2 id="5、Project"><a href="#5、Project" class="headerlink" title="5、Project"></a>5、Project</h2><p>查看Project的个数</p>
-<div class="code-wrapper"><pre><code>gradlew projects
+</code></pre><h2 id="5、Project"><a href="#5、Project" class="headerlink" title="5、Project"></a>5、Project</h2><p>查看Project的个数</p>
+<pre><code>gradlew projects
 ./gradlew projects    //mac
-</code></pre></div><h3 id="5-1、Project相关API"><a href="#5-1、Project相关API" class="headerlink" title="5.1、Project相关API"></a>5.1、Project相关API</h3><p>在最外层的根的build.gradle中</p>
-<div class="code-wrapper"><pre><code>this.getProjects()
+</code></pre><h3 id="5-1、Project相关API"><a href="#5-1、Project相关API" class="headerlink" title="5.1、Project相关API"></a>5.1、Project相关API</h3><p>在最外层的根的build.gradle中</p>
+<pre><code>this.getProjects()
 def getProjects()&#123;
     //只输全部projects
     this.getAllprojects().eachWithIndex &#123;
@@ -824,88 +816,88 @@ def getProjects()&#123;
     //只输出根projects
     println &quot;this is Root project:&quot; + this.getRootProject().name
 &#125;
-</code></pre></div><p>在module的build.gradle中</p>
-<div class="code-wrapper"><pre><code>//只输出父projects
+</code></pre><p>在module的build.gradle中</p>
+<pre><code>//只输出父projects
 println &quot;this is parent project:&quot; + this.getParent().name
-</code></pre></div><p>根project中可以配置module的配置</p>
-<div class="code-wrapper"><pre><code>//根project配置module为app的配置
-project(&#39;app&#39;) &#123;
+</code></pre><p>根project中可以配置module的配置</p>
+<pre><code>//根project配置module为app的配置
+project(&apos;app&apos;) &#123;
     Project project -&gt;
         println project.name    //app
-        apply plugin: &#39;com.android.application&#39;
-        group &#39;com.tea&#39;
-        version &#39;1.0.0-release&#39;
+        apply plugin: &apos;com.android.application&apos;
+        group &apos;com.tea&apos;
+        version &apos;1.0.0-release&apos;
         dependencies &#123;&#125;
         android &#123;&#125;
 &#125;
-</code></pre></div><p>配置当前节点工程和subproject的所有project</p>
-<div class="code-wrapper"><pre><code>//配置当前节点工程和subproject的所有project
+</code></pre><p>配置当前节点工程和subproject的所有project</p>
+<pre><code>//配置当前节点工程和subproject的所有project
 allprojects &#123;
-    group &#39;com.tea&#39;
-    version &#39;1.0.0-release&#39;
+    group &apos;com.tea&apos;
+    version &apos;1.0.0-release&apos;
 &#125;
-println project(&#39;app&#39;).group
-</code></pre></div><p>不包括当前节点工程，只包括他的subproject</p>
-<div class="code-wrapper"><pre><code>//不包括当前节点工程，只包括他的subproject
+println project(&apos;app&apos;).group
+</code></pre><p>不包括当前节点工程，只包括他的subproject</p>
+<pre><code>//不包括当前节点工程，只包括他的subproject
 subprojects &#123;
     Project project -&gt;
-        if (project.plugins.hasPlugin(&#39;com.android.library&#39;)) &#123;
-            apply from: &#39;../publistTOMaven.gradle&#39;
+        if (project.plugins.hasPlugin(&apos;com.android.library&apos;)) &#123;
+            apply from: &apos;../publistTOMaven.gradle&apos;
         &#125;
 &#125;
-</code></pre></div><h3 id="5-2、属性相关API"><a href="#5-2、属性相关API" class="headerlink" title="5.2、属性相关API"></a>5.2、属性相关API</h3><p>定义扩展属性</p>
-<div class="code-wrapper"><pre><code>ext&#123;&#125;
-</code></pre></div><p>所以提供扩展属性定义方式:</p>
+</code></pre><h3 id="5-2、属性相关API"><a href="#5-2、属性相关API" class="headerlink" title="5.2、属性相关API"></a>5.2、属性相关API</h3><p>定义扩展属性</p>
+<pre><code>ext&#123;&#125;
+</code></pre><p>所以提供扩展属性定义方式:</p>
 <p>方式一：</p>
 <p>可以在根build中定义</p>
-<div class="code-wrapper"><pre><code>ext &#123;
+<pre><code>ext &#123;
     compileSdkVersion = 28
-    cardview = &#39;com.android.support:cardview-v7:28.0.0&#39;
+    cardview = &apos;com.android.support:cardview-v7:28.0.0&apos;
 &#125;
-</code></pre></div><p>然后在需要用的build中引用</p>
-<div class="code-wrapper"><pre><code>compileSdkVersion this.rootProject.compileSdkVersion
+</code></pre><p>然后在需要用的build中引用</p>
+<pre><code>compileSdkVersion this.rootProject.compileSdkVersion
 implementation this.cardview
-</code></pre></div><p>方式二：</p>
+</code></pre><p>方式二：</p>
 <p>和根build同级定义common.gradle</p>
-<div class="code-wrapper"><pre><code>ext &#123;
+<pre><code>ext &#123;
 
     android = [compileSdkVersion: 28,
-               buildToolsVersion: &#39;26.0.0&#39;,
-               applicationId    : &#39;com.tea&#39;,
+               buildToolsVersion: &apos;26.0.0&apos;,
+               applicationId    : &apos;com.tea&apos;,
                minSdkVersion    : 16,
                targetSdkVersion : 26,
                versionCode      : 1,
-               versionName      : &#39;1.0.0&#39;,
+               versionName      : &apos;1.0.0&apos;,
                multiDexEnabled  : true]
 
-    signConfigs = [&#39;storeFile&#39;    : &#39;tea.jks&#39;,
-                   &#39;storePassword&#39;: &#39;tea123456&#39;,
-                   &#39;keyAlias&#39;     : &#39;android&#39;,
-                   &#39;keyPassword&#39;  : &#39;tea123456&#39;]
+    signConfigs = [&apos;storeFile&apos;    : &apos;tea.jks&apos;,
+                   &apos;storePassword&apos;: &apos;tea123456&apos;,
+                   &apos;keyAlias&apos;     : &apos;android&apos;,
+                   &apos;keyPassword&apos;  : &apos;tea123456&apos;]
 
-    java = [&#39;javaVersion&#39;: JavaVersion.VERSION_1_8]
+    java = [&apos;javaVersion&apos;: JavaVersion.VERSION_1_8]
 
-    dependence = [&#39;libCardview&#39; : &#39;com.android.support:cardview-v7:28.0.0&#39;,
-                  &#39;libAppcompat&#39;: &#39;com.android.support:appcompat-v7:28.0.0&#39;]
+    dependence = [&apos;libCardview&apos; : &apos;com.android.support:cardview-v7:28.0.0&apos;,
+                  &apos;libAppcompat&apos;: &apos;com.android.support:appcompat-v7:28.0.0&apos;]
 &#125;
-</code></pre></div><p>在根build中引入</p>
-<div class="code-wrapper"><pre><code>apply from: this.file(&#39;common.gradle&#39;)
-</code></pre></div><p>在需要的build中使用</p>
-<div class="code-wrapper"><pre><code>compileSdkVersion rootProject.ext.android.compileSdkVersion
+</code></pre><p>在根build中引入</p>
+<pre><code>apply from: this.file(&apos;common.gradle&apos;)
+</code></pre><p>在需要的build中使用</p>
+<pre><code>compileSdkVersion rootProject.ext.android.compileSdkVersion
 implementation rootProject.ext.dependence.libCardview
-</code></pre></div><p>方式三：</p>
+</code></pre><p>方式三：</p>
 <p>在gradle.properties中定义<code>key:value</code>形式</p>
-<div class="code-wrapper"><pre><code>mCompileSdkVersion = 28
-</code></pre></div><p>build中使用，默认都是字符串，需要转换</p>
-<div class="code-wrapper"><pre><code>compileSdkVersion mCompileSdkVersion.toInteger()
-</code></pre></div><h3 id="5-3、file相关API"><a href="#5-3、file相关API" class="headerlink" title="5.3、file相关API"></a>5.3、file相关API</h3><p>文件路径获取</p>
-<div class="code-wrapper"><pre><code>println getRootDir().absolutePath
+<pre><code>mCompileSdkVersion = 28
+</code></pre><p>build中使用，默认都是字符串，需要转换</p>
+<pre><code>compileSdkVersion mCompileSdkVersion.toInteger()
+</code></pre><h3 id="5-3、file相关API"><a href="#5-3、file相关API" class="headerlink" title="5.3、file相关API"></a>5.3、file相关API</h3><p>文件路径获取</p>
+<pre><code>println getRootDir().absolutePath
 println getBuildDir().absolutePath
 println getProjectDir().absolutePath
-</code></pre></div><p>文件定位</p>
-<div class="code-wrapper"><pre><code>apply from: this.file(&#39;common.gradle&#39;)
+</code></pre><p>文件定位</p>
+<pre><code>apply from: this.file(&apos;common.gradle&apos;)
 
-println getContent(&#39;common.gradle&#39;)
+println getContent(&apos;common.gradle&apos;)
 def getContent(String path)&#123;
     try &#123;
         //路径是相对于当前project查找
@@ -916,96 +908,96 @@ def getContent(String path)&#123;
     &#125;
     return null
 &#125;
-</code></pre></div><p>文件拷贝,在app的build中拷贝文件或者文件夹</p>
-<div class="code-wrapper"><pre><code>copy &#123;
-    from file(&#39;build/outputs/apk/&#39;)
-    into getRootProject().getBuildDir().path + &#39;/apk/&#39;
+</code></pre><p>文件拷贝,在app的build中拷贝文件或者文件夹</p>
+<pre><code>copy &#123;
+    from file(&apos;build/outputs/apk/&apos;)
+    into getRootProject().getBuildDir().path + &apos;/apk/&apos;
     exclude &#123;&#125;//补拷贝的文件
     rename &#123;&#125;//重命名
 &#125;
-</code></pre></div><p>文件树</p>
-<div class="code-wrapper"><pre><code>fileTree(&#39;src/main/assets/&#39;)&#123;FileTree fileTree -&gt;
+</code></pre><p>文件树</p>
+<pre><code>fileTree(&apos;src/main/assets/&apos;)&#123;FileTree fileTree -&gt;
     fileTree.visit &#123;FileTreeElement element -&gt;
         println element.file.name
         copy &#123;
             from element.file
-            into getRootProject().getBuildDir().path + &#39;/test/&#39;
+            into getRootProject().getBuildDir().path + &apos;/test/&apos;
         &#125;
     &#125;
 &#125;
-</code></pre></div><h3 id="5-4、依赖相关API"><a href="#5-4、依赖相关API" class="headerlink" title="5.4、依赖相关API"></a>5.4、依赖相关API</h3><p>依赖</p>
-<div class="code-wrapper"><pre><code>buildscript &#123;    
+</code></pre><h3 id="5-4、依赖相关API"><a href="#5-4、依赖相关API" class="headerlink" title="5.4、依赖相关API"></a>5.4、依赖相关API</h3><p>依赖</p>
+<pre><code>buildscript &#123;    
     //配置工程的仓库地址
     repositories &#123;    &#125;
     //配置工程的gradle插件依赖地址，app中的是项目的第三库依赖
     dependencies &#123;    &#125;
 &#125;
-</code></pre></div><p>依赖冲突常用解决办法</p>
-<div class="code-wrapper"><pre><code>compile (&#39;rootProject.ext.dependence.libAutoScrollViewPager&#39;) &#123;
-    exclude module: &#39;support-v4&#39;//排除依赖
-    exclude group: &#39;com.android.support&#39;
+</code></pre><p>依赖冲突常用解决办法</p>
+<pre><code>compile (&apos;rootProject.ext.dependence.libAutoScrollViewPager&apos;) &#123;
+    exclude module: &apos;support-v4&apos;//排除依赖
+    exclude group: &apos;com.android.support&apos;
     transitive false//禁止传递依赖
 &#125;
-</code></pre></div><p>provided只在编译起作用，占位编译。</p>
+</code></pre><p>provided只在编译起作用，占位编译。</p>
 <h3 id="5-5、外部命令API"><a href="#5-5、外部命令API" class="headerlink" title="5.5、外部命令API"></a>5.5、外部命令API</h3><p>调用系统指令，执行<code>./gradlew apkcopy</code></p>
-<div class="code-wrapper"><pre><code>task(name: &#39;apkcopy&#39;) &#123;
+<pre><code>task(name: &apos;apkcopy&apos;) &#123;
     doLast &#123;
-        def srcPath = this.buildDir.path + &#39;/outputs/apk&#39;
-        def destPath = &#39;./target/apk&#39;
+        def srcPath = this.buildDir.path + &apos;/outputs/apk&apos;
+        def destPath = &apos;./target/apk&apos;
         def command = &quot;mv -f $&#123;srcPath&#125; $&#123;destPath&#125;&quot;
         exec &#123;
             try &#123;
-                executable &#39;bash&#39;
-                args &#39;-c&#39;, command
-                println &#39;this command exec success&#39;
+                executable &apos;bash&apos;
+                args &apos;-c&apos;, command
+                println &apos;this command exec success&apos;
             &#125;catch(GradleException e)&#123;
-                println &#39;this command exec error&#39;
+                println &apos;this command exec error&apos;
             &#125;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>调用脚本</p>
-<div class="code-wrapper"><pre><code>task stopTomcat(type:Exec) &#123;
+</code></pre><p>调用脚本</p>
+<pre><code>task stopTomcat(type:Exec) &#123;
     //dir
-    workingDir &#39;../tomcat/bin&#39;
+    workingDir &apos;../tomcat/bin&apos;
     //windows
-    commandLine &#39;cmd&#39;, &#39;/c&#39;, &#39;stop.bat&#39;
+    commandLine &apos;cmd&apos;, &apos;/c&apos;, &apos;stop.bat&apos;
     //linux
-    commandLine &#39;./stop.sh&#39;
+    commandLine &apos;./stop.sh&apos;
 &#125;
-</code></pre></div><h2 id="6、task"><a href="#6、task" class="headerlink" title="6、task"></a>6、task</h2><h3 id="两种定义方式"><a href="#两种定义方式" class="headerlink" title="两种定义方式"></a>两种定义方式</h3><div class="code-wrapper"><pre><code>task helloTask (group: &#39;com.tea&#39;,description: &#39;study&#39;)&#123;
-    println &#39;---------helloTask&#39;
+</code></pre><h2 id="6、task"><a href="#6、task" class="headerlink" title="6、task"></a>6、task</h2><h3 id="两种定义方式"><a href="#两种定义方式" class="headerlink" title="两种定义方式"></a>两种定义方式</h3><pre><code>task helloTask (group: &apos;com.tea&apos;,description: &apos;study&apos;)&#123;
+    println &apos;---------helloTask&apos;
 &#125;
 
-this.tasks.create(name : &#39;helloTask2&#39;)&#123;
-    setGroup(&#39;com.tea&#39;)
-    setDescription(&#39;study&#39;)
-    println &#39;---------helloTask2&#39;
+this.tasks.create(name : &apos;helloTask2&apos;)&#123;
+    setGroup(&apos;com.tea&apos;)
+    setDescription(&apos;study&apos;)
+    println &apos;---------helloTask2&apos;
 &#125;
-</code></pre></div><h3 id="doFirst和doLast"><a href="#doFirst和doLast" class="headerlink" title="doFirst和doLast"></a>doFirst和doLast</h3><div class="code-wrapper"><pre><code>task helloTask (group: &#39;com.tea&#39;,description: &#39;study&#39;)&#123;
-    println &#39;---------helloTask&#39;
+</code></pre><h3 id="doFirst和doLast"><a href="#doFirst和doLast" class="headerlink" title="doFirst和doLast"></a>doFirst和doLast</h3><pre><code>task helloTask (group: &apos;com.tea&apos;,description: &apos;study&apos;)&#123;
+    println &apos;---------helloTask&apos;
     doFirst &#123;
-        println &#39;---------helloTask---doFirst&#39;
+        println &apos;---------helloTask---doFirst&apos;
     &#125;
 &#125;
 helloTask.doFirst&#123;
-    println &#39;---------helloTask---doFirst2&#39;//比闭包的先执行
+    println &apos;---------helloTask---doFirst2&apos;//比闭包的先执行
 &#125;
-</code></pre></div><h3 id="统计Build时长"><a href="#统计Build时长" class="headerlink" title="统计Build时长"></a>统计Build时长</h3><div class="code-wrapper"><pre><code>def startTime,endTime
+</code></pre><h3 id="统计Build时长"><a href="#统计Build时长" class="headerlink" title="统计Build时长"></a>统计Build时长</h3><pre><code>def startTime,endTime
 this.afterEvaluate &#123;Project project -&gt;
-    def  preBuildTask = project.tasks.getByName(&#39;preBuild&#39;)
+    def  preBuildTask = project.tasks.getByName(&apos;preBuild&apos;)
     preBuildTask.doFirst &#123;
         startTime = System.currentTimeMillis()
         println &quot;==============:&quot; + startTime
     &#125;
-    def buildTask = project.tasks.getByName(&#39;build&#39;)
+    def buildTask = project.tasks.getByName(&apos;build&apos;)
     buildTask.doLast &#123;
         endTime = System.currentTimeMillis()
         println &quot;==============:&quot; + endTime
         println &quot;==============:&quot; + (endTime - startTime)
     &#125;
 &#125;
-</code></pre></div><h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><div class="code-wrapper"><pre><code>task taskX &#123;
+</code></pre><h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><pre><code>task taskX &#123;
     doLast &#123;
         println &quot;taskX&quot;
     &#125;
@@ -1020,7 +1012,7 @@ task taskZ &#123;
     dependsOn this.tasks.findAll &#123;
         task -&gt;
             println task.name
-            return task.name.startsWith(&#39;taskX&#39;)
+            return task.name.startsWith(&apos;taskX&apos;)
     &#125;
     doLast &#123;
         println &quot;taskZ&quot;
@@ -1029,7 +1021,7 @@ task taskZ &#123;
 //静态依赖
 task taskZ(dependsOn: [taskX, taskY]) &#123;
     dependsOn this.tasks.findAll &#123;
-        task -&gt; return task.name.startsWith(&#39;lib&#39;)
+        task -&gt; return task.name.startsWith(&apos;lib&apos;)
     &#125;
     doLast &#123;
         println &quot;taskZ&quot;
@@ -1037,7 +1029,7 @@ task taskZ(dependsOn: [taskX, taskY]) &#123;
 &#125;
 //或者
 taskZ.dependsOn(taskX, taskY)
-</code></pre></div><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><div class="code-wrapper"><pre><code>task writeTask&#123;
+</code></pre><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><pre><code>task writeTask&#123;
     //输入
     inputs.property(&quot;key&quot;,&quot;value&quot;)
     def data = inputs.getProperties()
@@ -1045,60 +1037,60 @@ taskZ.dependsOn(taskX, taskY)
     outputs.file 文件
     File file = outputs.getFiles().getSingleFile()
 &#125;
-</code></pre></div><h3 id="执行顺序指定"><a href="#执行顺序指定" class="headerlink" title="执行顺序指定"></a>执行顺序指定</h3><div class="code-wrapper"><pre><code>mustRunAfter
-</code></pre></div><h2 id="7、其他模块"><a href="#7、其他模块" class="headerlink" title="7、其他模块"></a>7、其他模块</h2><h3 id="7-1、SourceSet"><a href="#7-1、SourceSet" class="headerlink" title="7.1、SourceSet"></a>7.1、SourceSet</h3><p>修改资源路径</p>
-<div class="code-wrapper"><pre><code>sourceSets &#123;
+</code></pre><h3 id="执行顺序指定"><a href="#执行顺序指定" class="headerlink" title="执行顺序指定"></a>执行顺序指定</h3><pre><code>mustRunAfter
+</code></pre><h2 id="7、其他模块"><a href="#7、其他模块" class="headerlink" title="7、其他模块"></a>7、其他模块</h2><h3 id="7-1、SourceSet"><a href="#7-1、SourceSet" class="headerlink" title="7.1、SourceSet"></a>7.1、SourceSet</h3><p>修改资源路径</p>
+<pre><code>sourceSets &#123;
     main&#123;
-        jniLibs.srcDirs = [&#39;libs&#39;]//修改so库文件位置
+        jniLibs.srcDirs = [&apos;libs&apos;]//修改so库文件位置
     &#125;
 &#125;
-</code></pre></div><p>给res分模块分包</p>
-<div class="code-wrapper"><pre><code>sourceSets &#123;
+</code></pre><p>给res分模块分包</p>
+<pre><code>sourceSets &#123;
     main&#123;
-        res.srcDirs = [&#39;src/main/res&#39;,
-                       &#39;src/main/res-ad&#39;,
-                       &#39;src/main/res-tea&#39;]
+        res.srcDirs = [&apos;src/main/res&apos;,
+                       &apos;src/main/res-ad&apos;,
+                       &apos;src/main/res-tea&apos;]
     &#125;
 &#125;
-</code></pre></div><h3 id="7-2、自定义plugin"><a href="#7-2、自定义plugin" class="headerlink" title="7.2、自定义plugin"></a>7.2、自定义plugin</h3><hr>
+</code></pre><h3 id="7-2、自定义plugin"><a href="#7-2、自定义plugin" class="headerlink" title="7.2、自定义plugin"></a>7.2、自定义plugin</h3><hr>
 <p>main下的java替换成groovy，新建.groovy类：</p>
-<div class="code-wrapper"><pre><code>class GradleStudyPlugin implements Plugin&lt;Project&gt;&#123;
+<pre><code>class GradleStudyPlugin implements Plugin&lt;Project&gt;&#123;
     @Override
     void apply (Project project)&#123;
-        project.extensions.create(&#39;comTea&#39;,xxx（groovy类）)    
+        project.extensions.create(&apos;comTea&apos;,xxx（groovy类）)    
     &#125;
 
 &#125;
-</code></pre></div><p>自定义task的类</p>
-<div class="code-wrapper"><pre><code>class xxxxx extend DefaultTask&#123;
+</code></pre><p>自定义task的类</p>
+<pre><code>class xxxxx extend DefaultTask&#123;
     @TaskAction
     void doAction()&#123;
         //执行于gradle执行阶段的代码
     &#125;
 &#125;
-</code></pre></div><p>main/resources/META-INF.gradle/包名.properties:</p>
-<div class="code-wrapper"><pre><code>implementation-class=包名.类名
-</code></pre></div><p>build.gradle为：</p>
-<div class="code-wrapper"><pre><code>apply plugin: &#39;groovy&#39;
+</code></pre><p>main/resources/META-INF.gradle/包名.properties:</p>
+<pre><code>implementation-class=包名.类名
+</code></pre><p>build.gradle为：</p>
+<pre><code>apply plugin: &apos;groovy&apos;
 sourceSets &#123;
     main&#123;
         groovy &#123;
-            srcDir &#39;src/main/groovy&#39;
+            srcDir &apos;src/main/groovy&apos;
         &#125;
         resources &#123;
-            srcDir &#39;src/main/resources&#39;
+            srcDir &apos;src/main/resources&apos;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>引用和传参</p>
-<div class="code-wrapper"><pre><code>apply plugin: &#39;包名&#39;
+</code></pre><p>引用和传参</p>
+<pre><code>apply plugin: &apos;包名&apos;
 
 comTea&#123;
     //传参
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="7-3、修改apk名字"><a href="#7-3、修改apk名字" class="headerlink" title="7.3、修改apk名字"></a>7.3、修改apk名字</h3><p>app的build中</p>
-<div class="code-wrapper"><pre><code>this.afterEvaluate &#123;
+<pre><code>this.afterEvaluate &#123;
     this.android.applicationVariants.all &#123; variant -&gt;
         def output = variant.outputs.first()
         def apkName = &quot;app-$&#123;variant.baseName&#125;&quot; + &quot;-$&#123;variant.versionName&#125;.apk&quot;
@@ -1106,8 +1098,8 @@ comTea&#123;
         println &quot;------------------&quot;
     &#125;
 &#125; 
-</code></pre></div><h2 id="8、Jenkins"><a href="#8、Jenkins" class="headerlink" title="8、Jenkins"></a>8、Jenkins</h2><div class="code-wrapper"><pre><code>java -jar jenkins.war 
-</code></pre></div><h2 id="Android实战应用"><a href="#Android实战应用" class="headerlink" title="Android实战应用"></a>Android实战应用</h2><h3 id="buildTypes和productFlavors"><a href="#buildTypes和productFlavors" class="headerlink" title="buildTypes和productFlavors"></a>buildTypes和productFlavors</h3><hr>
+</code></pre><h2 id="8、Jenkins"><a href="#8、Jenkins" class="headerlink" title="8、Jenkins"></a>8、Jenkins</h2><pre><code>java -jar jenkins.war 
+</code></pre><h2 id="Android实战应用"><a href="#Android实战应用" class="headerlink" title="Android实战应用"></a>Android实战应用</h2><h3 id="buildTypes和productFlavors"><a href="#buildTypes和productFlavors" class="headerlink" title="buildTypes和productFlavors"></a>buildTypes和productFlavors</h3><hr>
 <p>和main同级别，同包名，创建文件，区别使用debug还是release。可以用来实现类似gradle调用java类。</p>
 <hr>
 <h3 id="implementation"><a href="#implementation" class="headerlink" title="implementation"></a>implementation</h3><hr>
@@ -1118,15 +1110,15 @@ comTea&#123;
 <p>参考上述<code>7.2、自定义plugin</code>。</p>
 <p>新建Module-<code>Java Library</code>-buildSrc模块</p>
 <p>创建目录<code>\buildSrc\src\main\resources\META-INF\gradle-plugins</code>，创建文件xxx.properties</p>
-<div class="code-wrapper"><pre><code>implementation-class=com.plugin.demo.PluginDemo
-</code></pre></div><p>目录<code>buildSrc\src\main\groovy\com\plugin\demo</code>创建文件PluginDemo.groovy</p>
-<div class="code-wrapper"><pre><code>import com.android.build.gradle.BaseExtension
+<pre><code>implementation-class=com.plugin.demo.PluginDemo
+</code></pre><p>目录<code>buildSrc\src\main\groovy\com\plugin\demo</code>创建文件PluginDemo.groovy</p>
+<pre><code>import com.android.build.gradle.BaseExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 public class PluginDemo implements Plugin&lt;Project&gt; &#123;
     @Override
     public void apply(Project project) &#123;
-        def extension = project.extensions.create(&#39;yyyy&#39;, ExtensionDemo)
+        def extension = project.extensions.create(&apos;yyyy&apos;, ExtensionDemo)
         project.afterEvaluate &#123;
             println &quot;Hello $&#123;extension.name&#125;!&quot;//Hello zzzzz
         &#125;
@@ -1135,23 +1127,23 @@ public class PluginDemo implements Plugin&lt;Project&gt; &#123;
         //baseExtension.registerTransform(transform)
     &#125;
 &#125;
-</code></pre></div><p>创建文件ExtensionDemo.groovy</p>
-<div class="code-wrapper"><pre><code>public class ExtensionDemo &#123;
+</code></pre><p>创建文件ExtensionDemo.groovy</p>
+<pre><code>public class ExtensionDemo &#123;
     def name = &quot;Author&quot;;
 &#125;
-</code></pre></div><p>在app的build中使用plugin</p>
-<div class="code-wrapper"><pre><code>apply plugin: &#39;xxx&#39;
+</code></pre><p>在app的build中使用plugin</p>
+<pre><code>apply plugin: &apos;xxx&apos;
 
 yyyy &#123;
-    name &#39;zzzzz&#39;
+    name &apos;zzzzz&apos;
 &#125;
-</code></pre></div><p>关于 buildSrc 目录：这是 gradle 的一个特殊目录，这个目录的 build.gradle 会自动被执行，即使不配配置进<code>settings.gradle</code>。buildSrc 的执行早于任何一个 project，也早于 settings.gradle。它是一个独立的存在。 buildSrc 所配置出来的 Plugin 会被自动添加到编译过程中的每一个 project 的 classpath，因此它们才可以直接使用 <code>apply plugin: &#39;xxx&#39;</code>的方式来便捷应用这些 plugin。</p>
+</code></pre><p>关于 buildSrc 目录：这是 gradle 的一个特殊目录，这个目录的 build.gradle 会自动被执行，即使不配配置进<code>settings.gradle</code>。buildSrc 的执行早于任何一个 project，也早于 settings.gradle。它是一个独立的存在。 buildSrc 所配置出来的 Plugin 会被自动添加到编译过程中的每一个 project 的 classpath，因此它们才可以直接使用 <code>apply plugin: &#39;xxx&#39;</code>的方式来便捷应用这些 plugin。</p>
 <p>settings.gradle 中如果配置了 ‘:buildSrc’ ，buildSrc 目录就会被当做是子 Project ，因此会被执行两遍。所以在 settings.gradle 里面应该删掉 <code>:buildSrc</code> 的配置。</p>
 <hr>
 <h3 id="Transform"><a href="#Transform" class="headerlink" title="Transform"></a>Transform</h3><hr>
 <p>Transform是由 Android 提供的，在项目构建过程中把编译后的文件（jar文件和 class文件）添加自定义的中间处理过程的工具。下面代码只是把编译完的内容原封不动搬运到目标位置，没有实际用处。要修改字节码，需要引入其他工具，例如 javassist。</p>
 <p>新建TransformDemo.groovy</p>
-<div class="code-wrapper"><pre><code>import com.android.build.api.transform.Format
+<pre><code>import com.android.build.api.transform.Format
 import com.android.build.api.transform.QualifiedContent
 import com.android.build.api.transform.Transform
 import com.android.build.api.transform.TransformException
@@ -1199,20 +1191,20 @@ public class TransformDemo extends Transform &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>buildSrc-build中改为：</p>
-<div class="code-wrapper"><pre><code>repositories &#123;
+</code></pre><p>buildSrc-build中改为：</p>
+<pre><code>repositories &#123;
     google()
     jcenter()
 &#125;
 
 dependencies &#123;
-    implementation &#39;com.android.tools.build:gradle:3.2.1&#39;
+    implementation &apos;com.android.tools.build:gradle:3.2.1&apos;
 &#125;
-</code></pre></div><p>PluginDemo.groovy中添加代码</p>
-<div class="code-wrapper"><pre><code>def transform = new TransformDemo()
+</code></pre><p>PluginDemo.groovy中添加代码</p>
+<pre><code>def transform = new TransformDemo()
 def baseExtension = project.extensions.getByType(BaseExtension)
 baseExtension.registerTransform(transform)
-</code></pre></div><p>修改app-build中的plugin放在android{}之后。</p>
+</code></pre><p>修改app-build中的plugin放在android{}之后。</p>
 <p>示例：<a target="_blank" rel="noopener" href="https://github.com/liangzhitao/consuming-collector">https://github.com/liangzhitao/consuming-collector</a></p>
 <hr>
 
@@ -1366,8 +1358,6 @@ baseExtension.registerTransform(transform)
 
 
 
-  
-    
   
 
 

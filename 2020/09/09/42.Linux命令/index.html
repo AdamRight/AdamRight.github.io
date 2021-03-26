@@ -30,15 +30,7 @@
     
     
       
-      
-        
-          
-        
-        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
-      
-      
-        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
-      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atom-one-dark.min.css" />
     
   
 
@@ -237,7 +229,7 @@
             
             <div class="markdown-body">
               <h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="Linux主要目录速查表"><a href="#Linux主要目录速查表" class="headerlink" title="Linux主要目录速查表"></a>Linux主要目录速查表</h3><hr>
-<div class="code-wrapper"><pre><code>/：根目录，一般根目录下只存放目录，在 linux 下有且只有一个根目录，所有的东西都是从这里开始。当在终端里输入 /home，其实是在告诉电脑，先从 /（根目录）开始，再进入到 home 目录
+<pre><code>/：根目录，一般根目录下只存放目录，在 linux 下有且只有一个根目录，所有的东西都是从这里开始。当在终端里输入 /home，其实是在告诉电脑，先从 /（根目录）开始，再进入到 home 目录
 
 /bin、/usr/bin：可执行二进制文件的目录，如常用的命令 ls、tar、mv、cat 等
 
@@ -287,7 +279,7 @@
     /var/log：随时更改的日志文件
     /var/spool/mail：邮件存放的目录
     /var/run：程序或服务启动后，其 PID 存放在该目录下
-</code></pre></div><p>Ubuntu操作系统是属于Linux操作系统中的一种。Ubuntu 没有盘符这个概念，只有一个根目录<code>/</code>，所有文件都在它下面。</p>
+</code></pre><p>Ubuntu操作系统是属于Linux操作系统中的一种。Ubuntu 没有盘符这个概念，只有一个根目录<code>/</code>，所有文件都在它下面。</p>
 <p>主要目录说明:<code>/</code>：根目录。<code>/bin</code>：可执行二进制文件的目录。<code>/etc</code>：系统配置文件存放的目录。<code>/home</code>：用户家目录。</p>
 <hr>
 <h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><hr>
@@ -299,7 +291,7 @@
 <p>后9个字母分别代表三组权限：文件所有者、用户者、其他用户拥有的权限。每一个用户都有它自身的读、写和执行权限。</p>
 <hr>
 <h3 id="常用Linux命令"><a href="#常用Linux命令" class="headerlink" title="常用Linux命令"></a>常用Linux命令</h3><hr>
-<div class="code-wrapper"><pre><code>ctrl + shift + =     //放大终端窗口的字体显示
+<pre><code>ctrl + shift + =     //放大终端窗口的字体显示
 ctrl + -     //缩小终端窗口的字体显示
 
 ls    //查看当前文件夹下的内容
@@ -311,75 +303,75 @@ rm [文件名]    //删除指定的文件名
 rm -r [文件夹名]    //删除指定的文件
 clear    //清屏
 tree    //以树状方式显示目录信息
-</code></pre></div><hr>
+</code></pre><hr>
 <p>Linux文件或者目录名称最长可以有256个字符，<code>.</code>代表当前目录，<code>..</code>代表上一级目录，以<code>.</code>开头的文件为隐藏文件，需要用<code>-a</code>参数才能显示。</p>
-<div class="code-wrapper"><pre><code>ls -a     //查看所有文件包含隐藏文件
+<pre><code>ls -a     //查看所有文件包含隐藏文件
 ls -l     //以列表形式查看文件，不包含隐藏文件
 ls -lh     //以列表形式查看文件，不包含隐藏文件 ，按照1024倍数显示&#123;KB MB GB&#125;
 ls -all    //以列表形式查看文件，包含隐藏文件 快捷方式【ll】
-</code></pre></div><p>通配符：</p>
-<div class="code-wrapper"><pre><code>【*】 匹配任意多个字符【0-256】  a*  一个以上字符 256以下 
+</code></pre><p>通配符：</p>
+<pre><code>【*】 匹配任意多个字符【0-256】  a*  一个以上字符 256以下 
 【?】 匹配任意一个字符  a？ 两个字符
 【[a-z]】 区间法 匹配a到z的所有字符 只能确定一个字符
 【[abcde]】 穷举法 权值法 匹配abcde的所有字符 只能确定一个字符
-</code></pre></div><p>重定向命令 </p>
-<div class="code-wrapper"><pre><code>//Linux允许将命令执行结果重定向到一个文件，本应显示在终端上的内容保存到指定文件中。
+</code></pre><p>重定向命令 </p>
+<pre><code>//Linux允许将命令执行结果重定向到一个文件，本应显示在终端上的内容保存到指定文件中。
 ls &gt; test.txt     //test.txt 如果不存在，则创建，存在则覆盖其内容。
 &gt;输出重定向会覆盖原来的内容，&gt;&gt;输出重定向则会追加到文件的尾部。
-</code></pre></div><hr>
+</code></pre><hr>
 <p>切换工作目录：</p>
-<div class="code-wrapper"><pre><code>cd ~ 切换到当前用户的主目录
+<pre><code>cd ~ 切换到当前用户的主目录
 cd .. 切换到上级目录 
 cd -  切换到上一次目录
-</code></pre></div><hr>
+</code></pre><hr>
 <p>查看或者合并文件内容：</p>
-<div class="code-wrapper"><pre><code>cat 文件名
+<pre><code>cat 文件名
 cat a.txt b.txt &gt; c.txt
-</code></pre></div><hr>
+</code></pre><hr>
 <p>建立链接文件：ln</p>
-<div class="code-wrapper"><pre><code>//如果没有-s选项代表建立一个硬链接文件，两个文件占用相同大小的硬盘空间，即使删除了源文件，链接文件还是存在。
+<pre><code>//如果没有-s选项代表建立一个硬链接文件，两个文件占用相同大小的硬盘空间，即使删除了源文件，链接文件还是存在。
 //硬链接和拷贝（复制）区别:无论修改了哪一个链接之后的文件,两个文件都会改变,保持一致,但是拷贝不会。
 ln 源文件 链接文件
 //软链接文件不占磁盘空间 但是删除源文件会影响软链接文件
 ln -s 源文件 链接文件
-</code></pre></div><hr>
+</code></pre><hr>
 <p>搜索文件里的文本内容：</p>
-<div class="code-wrapper"><pre><code>//行首,搜寻以a开头的行
-grep -n &#39;^a&#39; 1.txt
+<pre><code>//行首,搜寻以a开头的行
+grep -n &apos;^a&apos; 1.txt
 
 //行尾,搜寻以 ke 结束的行
-grep -n &#39;ke$&#39; 1.txt
+grep -n &apos;ke$&apos; 1.txt
 
 //匹配 [] 里中一系列字符中的一个:搜寻匹配单词signal、signaL、Signal、SignaL的行
-grep -n &#39;[Ss]igna[Ll]&#39; 1.txt
+grep -n &apos;[Ss]igna[Ll]&apos; 1.txt
 
 //匹配一个非换行符的字符:匹配 e 和 e 之间有任意一个字符，可以匹配 eee，eae，eve，但是不匹配 ee，eaae
-grep -n &#39;e.e&#39; 1.txt
-</code></pre></div><hr>
+grep -n &apos;e.e&apos; 1.txt
+</code></pre><hr>
 <p>计算文件行数或字数：</p>
-<div class="code-wrapper"><pre><code> wc 文件名
- -l    统计行数
- -w    统计字数。一个字被定义为由空白、跳格或换行字符分隔的字符串。
- -c    统计字节数
- -m    统计字符数。这个标志不能与 -c 标志一起使用。
-</code></pre></div><p>查找文件：</p>
-<div class="code-wrapper"><pre><code>find ./ -name test.sh    //查找当前目录下所有名为test.sh的文件
-find ./ -name &#39;*.sh&#39;    //查找当前目录下所有后缀为.sh的文件
+<pre><code>wc 文件名
+-l    统计行数
+-w    统计字数。一个字被定义为由空白、跳格或换行字符分隔的字符串。
+-c    统计字节数
+-m    统计字符数。这个标志不能与 -c 标志一起使用。
+</code></pre><p>查找文件：</p>
+<pre><code>find ./ -name test.sh    //查找当前目录下所有名为test.sh的文件
+find ./ -name &apos;*.sh&apos;    //查找当前目录下所有后缀为.sh的文件
 find ./ -name &quot;[A-Z]*&quot;    //查找当前目录下所有以大写字母开头的文件
 find  /tmp  -size   2M    //查找在/tmp 目录下等于2M的文件
 find  /tmp  -size  +2M    //查找在/tmp 目录下大于2M的文件
 find  /tmp  -size  -2M    //查找在/tmp 目录下小于2M的文件
 find ./ -size +4k -size -5M    //查找当前目录下大于4k，小于5M的文件
 find ./ -perm 0777    //查找当前目录下权限为 777 的文件或目录
-</code></pre></div><hr>
+</code></pre><hr>
 <p>拷贝文件：cp</p>
-<div class="code-wrapper"><pre><code>cp vim_configure/ code/ -ivr //把文件夹 vim_configure 拷贝到 code 目录里：
-</code></pre></div><p>移动文件：mv</p>
+<pre><code>cp vim_configure/ code/ -ivr //把文件夹 vim_configure 拷贝到 code 目录里：
+</code></pre><p>移动文件：mv</p>
 <hr>
 <p>获取文件类型：</p>
-<div class="code-wrapper"><pre><code>file 文件名
-</code></pre></div><p>归档管理：tar</p>
-<div class="code-wrapper"><pre><code>//tar  [参数]  打包文件名  文件
+<pre><code>file 文件名
+</code></pre><p>归档管理：tar</p>
+<pre><code>//tar  [参数]  打包文件名  文件
 tar -cvf text.tar 1.text 2.text 3.text
 //解归档
 tar -xvf test.tar
@@ -388,45 +380,45 @@ tar -xvf test.tar
 tar zcvf test.tar.gz 1.c 2.c 3.c 4.c
 //一步解归档压缩 
 tar zxvf 文件名.tar.gz
-</code></pre></div><hr>
+</code></pre><hr>
 <p>文件压缩解压：gzip</p>
-<div class="code-wrapper"><pre><code>//tar与gzip命令结合使用实现文件打包、压缩。tar只负责打包文件，但不压缩，用gzip压缩tar打包后的文件，其扩展名一般用xxxx.tar.gz。
+<pre><code>//tar与gzip命令结合使用实现文件打包、压缩。tar只负责打包文件，但不压缩，用gzip压缩tar打包后的文件，其扩展名一般用xxxx.tar.gz。
 gzip  text.tar
 //解压缩：生成了一个文件 归档文件名.tar
 gzip -d 归档文件名.tar.gz 
-</code></pre></div><p>文件压缩解压：bzip2</p>
-<div class="code-wrapper"><pre><code>//bzip2压缩：
+</code></pre><p>文件压缩解压：bzip2</p>
+<pre><code>//bzip2压缩：
 tar -cjvf 文件名.tar.bz2 文件1 文件2
 //bzip2解压缩：
 tar -xjvf 文件名.tar.bz2 -C 路径
-</code></pre></div><p>文件压缩解压：zip、unzip</p>
-<div class="code-wrapper"><pre><code>//压缩
+</code></pre><p>文件压缩解压：zip、unzip</p>
+<pre><code>//压缩
 zip 文件名 文件1 文件2 生成一个文件为：文件名.zip
 //unzip解压缩：
 unzip 文件名.zip -C 路径
-</code></pre></div><hr>
+</code></pre><hr>
 <p>查看命令位置：which</p>
 <hr>
 <h3 id="用户、权限管理"><a href="#用户、权限管理" class="headerlink" title="用户、权限管理"></a>用户、权限管理</h3><hr>
 <p>查看当前用户：<code>whoami</code></p>
 <p>查看登录用户：<code>who -m</code></p>
 <p>切换用户</p>
-<div class="code-wrapper"><pre><code>su    //切换到root用户
+<pre><code>su    //切换到root用户
 su root    //切换到root用户
 
 su 普通用户    //切换到普通用户
 su - 普通用户    //切换到普通用户，同时切换普通用户所在的目录
-</code></pre></div><p>添加、删除组账号：</p>
-<div class="code-wrapper"><pre><code>groupadd 新建组账号
+</code></pre><p>添加、删除组账号：</p>
+<pre><code>groupadd 新建组账号
 groupdel 组账号
-</code></pre></div><p>修改用户所在组：</p>
-<div class="code-wrapper"><pre><code>usermod -g 用户组 用户名
-</code></pre></div><p>添加组：</p>
-<div class="code-wrapper"><pre><code>groupadd 组名     //  添加组  需要用户权限
+</code></pre><p>修改用户所在组：</p>
+<pre><code>usermod -g 用户组 用户名
+</code></pre><p>添加组：</p>
+<pre><code>groupadd 组名     //  添加组  需要用户权限
 groupdel 组名    //删除组  需要用户权限和清空组成员
 usermod -g 组名 用户名1 用户名2】//修改用户所在组：需要用户权限
-</code></pre></div><p>修改文件权限：chmod 修改文件权限有两种使用格式：字母法与数字法。</p>
-<div class="code-wrapper"><pre><code>//字母法：
+</code></pre><p>修改文件权限：chmod 修改文件权限有两种使用格式：字母法与数字法。</p>
+<pre><code>//字母法：
 chmod u/g/o/a  +/-/=  rwx  文件
 
 [ u/g/o/a ]     含义
@@ -454,7 +446,7 @@ x    执行权限，数字代号为 &quot;1&quot;
 chmod u=rwx,g=rx,o=r filename //就等同于：chmod u=7,g=5,o=4 filename
 
 chmod 751 file    //文件所有者：读、写、执行权限、同组用户：读、执行的权限、其它用户：执行的权限
-</code></pre></div><p>修改文件所有者：chown</p>
+</code></pre><p>修改文件所有者：chown</p>
 <p>修改文件所属组：chgrp</p>
 <hr>
 <h3 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h3><hr>
@@ -468,24 +460,24 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 <hr>
 <h3 id="VI"><a href="#VI" class="headerlink" title="VI"></a>VI</h3><hr>
 <p>VI编辑器有两个模式：文本编辑模式 命令行处理模式：</p>
-<div class="code-wrapper"><pre><code>1、vi 文件名  2、vim 
-</code></pre></div><p>操作编辑器：</p>
-<div class="code-wrapper"><pre><code>【i】在光标当前位置插入
+<pre><code>1、vi 文件名  2、vim 
+</code></pre><p>操作编辑器：</p>
+<pre><code>【i】在光标当前位置插入
 【a】在光标右侧位置插入
 【o】在光标下一行位置开启新的一行插入
 【O】在光标上一行位置开启新的一行插入
 【I】在光标当前行行首插入
 【A】在光标当前行行尾插入
-</code></pre></div><p>退出编辑器：</p>
-<div class="code-wrapper"><pre><code>【ZZ】保存退出
+</code></pre><p>退出编辑器：</p>
+<pre><code>【ZZ】保存退出
 【:wq】保存退出
 【:x】保存退出
 【:w 文件名】保存到指定文件中
 【:q】 保存退出 针对未修改的文件 注意：未保存文件会提示 无法退出
 【:q!】 强制退出  退出 不保存
 【:! 命令】暂时离开vi 执行其他命令
-</code></pre></div><p>编辑器操作：</p>
-<div class="code-wrapper"><pre><code>【[n]x】删除光标位置后面n个字符
+</code></pre><p>编辑器操作：</p>
+<pre><code>【[n]x】删除光标位置后面n个字符
 【[n]X】删除光标位置前面n个字符
 【D】删除光标所在位置后面到行尾的所有字符
 【[n]dd】删除光标所在行及下面n行   剪切
@@ -495,8 +487,8 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 【J】合并光标所在行和下一行 中间用空格连接
 【.】执行上一次命令行操作
 【u】撤销
-</code></pre></div><p>编辑器定位：</p>
-<div class="code-wrapper"><pre><code>【ctrl+b】回滚 行号减小
+</code></pre><p>编辑器定位：</p>
+<pre><code>【ctrl+b】回滚 行号减小
 【ctrl+f】前滚 行号增加
 【gg】定位在文件第一行行首
 【G】定位在文件最后一行行首
@@ -511,18 +503,18 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 【/word$】 查找以word结尾的内容
 【/.】查找任意一个字符
 【/*】查找任意多个字符
-</code></pre></div><p>编辑器替换：</p>
-<div class="code-wrapper"><pre><code>【r】替换光标所在位置的字符
+</code></pre><p>编辑器替换：</p>
+<pre><code>【r】替换光标所在位置的字符
 【:r 文件名】在光标当前行的下一行插入一个文件 每次添加只能添加一个文件
 【:s/a/b/g】将光标所在行的a替换为b
 【:g/a/s//b/g】将文件中所有a替换为b
 【:n1,n2s/a/b/g】将行区间n1到n2的行中所有的a替换为b
-</code></pre></div><p>编辑器设置：</p>
-<div class="code-wrapper"><pre><code>【:set ic】搜索时不区分大小写
+</code></pre><p>编辑器设置：</p>
+<pre><code>【:set ic】搜索时不区分大小写
 【:set noic】搜索时区分大小写
 :set nu    //显示行号
 :set nonu    //不显示行号
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h3><hr>
 <p>使用SSH服务，需要安装相应的服务器和客户端。客户端和服务器的关系：如果，A机器想被B机器远程控制，那么，A机器需要安装SSH服务器，B机器需要安装SSH客户端。</p>
 <p>Xshell：是一个Windows平台下的SSH、TELNET和RLOGIN终端软件。它使得用户能轻松和安全地在Windows平台上访问Unix/Linux 主机。</p>
@@ -682,8 +674,6 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 
 
 
-  
-    
   
 
 

@@ -30,15 +30,7 @@
     
     
       
-      
-        
-          
-        
-        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
-      
-      
-        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
-      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atom-one-dark.min.css" />
     
   
 
@@ -242,7 +234,7 @@
 <h3 id="1-3、多类型条目"><a href="#1-3、多类型条目" class="headerlink" title="1.3、多类型条目"></a>1.3、多类型条目</h3><p><a target="_blank" rel="noopener" href="https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/rv/type">点我跳转</a></p>
 <h3 id="1-4、添加头部和底部"><a href="#1-4、添加头部和底部" class="headerlink" title="1.4、添加头部和底部"></a>1.4、添加头部和底部</h3><p><a target="_blank" rel="noopener" href="https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/rv/headandbottom">点我跳转</a></p>
 <h2 id="2、分割线"><a href="#2、分割线" class="headerlink" title="2、分割线"></a>2、分割线</h2><h3 id="2-1、条目相关"><a href="#2-1、条目相关" class="headerlink" title="2.1、条目相关"></a>2.1、条目相关</h3><p>设置分割线类中的<code>getItemOffsets</code>方法中</p>
-<div class="code-wrapper"><pre><code>//获取条目View在RecyclerView中的第几个位置：0、1、2、3...
+<pre><code>//获取条目View在RecyclerView中的第几个位置：0、1、2、3...
 int currentPosition = ((RecyclerView.LayoutParams) view.getLayoutParams()).getViewLayoutPosition();
 
 //获取条目的总个数
@@ -254,10 +246,10 @@ if (layoutManager instanceof GridLayoutManager) &#123;
     GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
     int spanCount = gridLayoutManager.getSpanCount();
 &#125;
-</code></pre></div><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h2 id="实例化View的3种方式"><a href="#实例化View的3种方式" class="headerlink" title="实例化View的3种方式"></a>实例化View的3种方式</h2><div class="code-wrapper"><pre><code>View.inflate(mContext, mLayoutId, null); 
+</code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h2 id="实例化View的3种方式"><a href="#实例化View的3种方式" class="headerlink" title="实例化View的3种方式"></a>实例化View的3种方式</h2><pre><code>View.inflate(mContext, mLayoutId, null); 
 LayoutInflater.from(mContext).inflate(mLayoutId, parent);
 LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
-</code></pre></div>
+</code></pre>
             </div>
             <hr>
             <div>
@@ -408,8 +400,6 @@ LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
 
 
 
-  
-    
   
 
 
