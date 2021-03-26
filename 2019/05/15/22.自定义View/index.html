@@ -30,7 +30,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -231,7 +239,7 @@
               <h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>一个参数<code>(Context context)</code>的构造函数会在代码里面new的时候调用，</p>
 <p>两个参数<code>(Context context, AttributeSet attrs)</code>的构造函数在布局layout中使用(调用)，</p>
 <p>三个参数<code>(Context context, AttributeSet attrs, int defStyleAttr)</code>的构造函数在布局layout中使用(调用)，但是会有style。</p>
-<pre><code>public MyView(Context context) &#123;
+<div class="code-wrapper"><pre><code>public MyView(Context context) &#123;
     this(context, null);
 &#125;
 public MyView(Context context, AttributeSet attrs) &#123;
@@ -240,9 +248,9 @@ public MyView(Context context, AttributeSet attrs) &#123;
 public MyView(Context context, AttributeSet attrs, int defStyleAttr) &#123;
     super(context, attrs, defStyleAttr);
 &#125;
-</code></pre><p><strong>xml布局通过LayoutInflate，解析的时候，实例化View是通过反射，显示加载到我们Activity。</strong></p>
+</code></pre></div><p><strong>xml布局通过LayoutInflate，解析的时候，实例化View是通过反射，显示加载到我们Activity。</strong></p>
 <h2 id="measure"><a href="#measure" class="headerlink" title="measure"></a>measure</h2><p>布局的宽高都是由这个方法指定，需要测量，获取宽高的模式。</p>
-<pre><code>@Override
+<div class="code-wrapper"><pre><code>@Override
 protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) &#123;
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
@@ -254,7 +262,7 @@ protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) &#123;
     int widthSize = MeasureSpec.getSize(widthMeasureSpec);// 获取后面30位
     int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 &#125;
-</code></pre><p>MeasureSpec：32位的二进制数字，前两位代表mode(测量模式)，后面30位才是他们的实际宽高的数值（size）。</p>
+</code></pre></div><p>MeasureSpec：32位的二进制数字，前两位代表mode(测量模式)，后面30位才是他们的实际宽高的数值（size）。</p>
 <p>三种模式：</p>
 <blockquote>
 <ul>
@@ -273,26 +281,26 @@ protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) &#123;
 </blockquote>
 <p>一般情况，wrap_content，即MeasureSpec.AT_MOST才需要重新计算。<strong>onMeasure方法最终调用setMeasuredDimension确定宽高值。</strong></p>
 <h2 id="layout"><a href="#layout" class="headerlink" title="layout"></a>layout</h2><h2 id="draw"><a href="#draw" class="headerlink" title="draw"></a>draw</h2><p>用于绘制</p>
-<pre><code>@Override
+<div class="code-wrapper"><pre><code>@Override
 protected void onDraw(Canvas canvas) &#123;
     super.onDraw(canvas);
     //canvas可以画文本、画弧、画圆等等
 &#125;
-</code></pre><h3 id="ViewGroup不会触发onDraw方法"><a href="#ViewGroup不会触发onDraw方法" class="headerlink" title="ViewGroup不会触发onDraw方法"></a>ViewGroup不会触发onDraw方法</h3><p>解决办法：</p>
+</code></pre></div><h3 id="ViewGroup不会触发onDraw方法"><a href="#ViewGroup不会触发onDraw方法" class="headerlink" title="ViewGroup不会触发onDraw方法"></a>ViewGroup不会触发onDraw方法</h3><p>解决办法：</p>
 <blockquote>
 <p>方式一：把onDraw方法替换为dispatchDraw；方式二：设置透明的背景<code>setBackgroundColor(Color.TRANSPARENT);</code>;方式三：设置<code>setWillNotDraw(false);</code></p>
 </blockquote>
 <h3 id="主要三个方法"><a href="#主要三个方法" class="headerlink" title="主要三个方法"></a>主要三个方法</h3><p>onDraw绘制自己；dispatchDraw绘制孩子；绘制背景</p>
-<pre><code>// Step 3, draw the content
-if (!dirtyOpaque) onDraw(canvas);
-// Step 4, draw the children
-dispatchDraw(canvas);
-// Step 6, draw decorations (foreground, scrollbars)
-onDrawForeground(canvas);
-</code></pre><h2 id="Path"><a href="#Path" class="headerlink" title="Path"></a>Path</h2><pre><code>void moveTo (float x1, float y1):直线的开始点；即将直线路径的绘制点定在（x1,y1）的位置；
+<div class="code-wrapper"><pre><code>    // Step 3, draw the content
+    if (!dirtyOpaque) onDraw(canvas);
+    // Step 4, draw the children
+    dispatchDraw(canvas);
+    // Step 6, draw decorations (foreground, scrollbars)
+    onDrawForeground(canvas);
+</code></pre></div><h2 id="Path"><a href="#Path" class="headerlink" title="Path"></a>Path</h2><div class="code-wrapper"><pre><code>void moveTo (float x1, float y1):直线的开始点；即将直线路径的绘制点定在（x1,y1）的位置；
 void lineTo (float x2, float y2)：直线的结束点，又是下一次绘制直线路径的开始点；lineTo（）可以一直用；
 void close ():如果连续画了几条直线，但没有形成闭环，调用Close()会将路径首尾点连接起来，形成闭环；
-</code></pre><h2 id="Paint"><a href="#Paint" class="headerlink" title="Paint"></a>Paint</h2><h3 id="相关属性"><a href="#相关属性" class="headerlink" title="相关属性"></a>相关属性</h3><pre><code>setAntiAlias(true);//抗锯齿功能
+</code></pre></div><h2 id="Paint"><a href="#Paint" class="headerlink" title="Paint"></a>Paint</h2><h3 id="相关属性"><a href="#相关属性" class="headerlink" title="相关属性"></a>相关属性</h3><div class="code-wrapper"><pre><code>setAntiAlias(true);//抗锯齿功能
 setColor(Color.RED);//设置画笔颜色
 //Style.FILL:填充内部;Style.FILL_AND_STROKE填充内部和描边;Style.STROKE仅描边
 setStyle(Style.FILL);//设置填充样式
@@ -303,41 +311,41 @@ setShadowLayer(float radius, float dx, float dy, int color)//添加阴影
 setStrokeCap(Paint.Cap cap) 
 setAlpha(int a) //设置画笔透明度 
 reset() //重置画笔
-</code></pre><h3 id="和文字相关"><a href="#和文字相关" class="headerlink" title="和文字相关"></a>和文字相关</h3><pre><code>//相对位置
+</code></pre></div><h3 id="和文字相关"><a href="#和文字相关" class="headerlink" title="和文字相关"></a>和文字相关</h3><div class="code-wrapper"><pre><code>//相对位置
 paint.setTextAlign(Paint.Align.LEFT);//Paint.Align.LEFT、Paint.Align.CENTER、Paint.Align.RIGHT
 setTextSize(float textSize) //设置文字大小 
 setFakeBoldText(boolean fakeBoldText) //设置是否为粗体文字 
 setStrikeThruText(boolean strikeThruText) //设置带有删除线效果 
 setUnderlineText(boolean underlineText) //设置下划线 
 setTextSkewX(float skewX) //设置字体水平倾斜度，普通斜体字是-0.25，可见往右斜
-</code></pre><h2 id="draw图形"><a href="#draw图形" class="headerlink" title="draw图形"></a>draw图形</h2><h3 id="画点"><a href="#画点" class="headerlink" title="画点"></a>画点</h3><pre><code>//参数：float X：点的X坐标； float Y：点的Y坐标
+</code></pre></div><h2 id="draw图形"><a href="#draw图形" class="headerlink" title="draw图形"></a>draw图形</h2><h3 id="画点"><a href="#画点" class="headerlink" title="画点"></a>画点</h3><div class="code-wrapper"><pre><code>//参数：float X：点的X坐标； float Y：点的Y坐标
 drawPoint (float x, float y, Paint paint)
-</code></pre><h3 id="多个点"><a href="#多个点" class="headerlink" title="多个点"></a>多个点</h3><pre><code>//参数：pts:点的合集｛x1,y1,x2,y2,x3,y3,……｝;  offset:集合中跳过的数值个数，
+</code></pre></div><h3 id="多个点"><a href="#多个点" class="headerlink" title="多个点"></a>多个点</h3><div class="code-wrapper"><pre><code>//参数：pts:点的合集｛x1,y1,x2,y2,x3,y3,……｝;  offset:集合中跳过的数值个数，
 //注意不是点的个数,一个点是两个数值; count:参与绘制的数值的个数。
 drawPoints (float[] pts, Paint paint)
 drawPoints (float[] pts, int offset, int count, Paint paint)
-</code></pre><h3 id="画直线"><a href="#画直线" class="headerlink" title="画直线"></a>画直线</h3><pre><code>//参数：startX:开始点X坐标;  startY:开始点Y坐标;  stopX:结束点X坐标;  stopY:结束点Y坐标
+</code></pre></div><h3 id="画直线"><a href="#画直线" class="headerlink" title="画直线"></a>画直线</h3><div class="code-wrapper"><pre><code>//参数：startX:开始点X坐标;  startY:开始点Y坐标;  stopX:结束点X坐标;  stopY:结束点Y坐标
 drawLine (float startX, float startY, float stopX, float stopY, Paint paint)
-</code></pre><h3 id="多条直线"><a href="#多条直线" class="headerlink" title="多条直线"></a>多条直线</h3><pre><code>//参数：pts是点的集合，每两个点形成一条直线，pts的组织方式为｛x1,y1,x2,y2,x3,y3,……｝
+</code></pre></div><h3 id="多条直线"><a href="#多条直线" class="headerlink" title="多条直线"></a>多条直线</h3><div class="code-wrapper"><pre><code>//参数：pts是点的集合，每两个点形成一条直线，pts的组织方式为｛x1,y1,x2,y2,x3,y3,……｝
 drawLines (float[] pts, Paint paint)
 drawLines (float[] pts, int offset, int count, Paint paint)
-</code></pre><h3 id="矩形工具类RectF和Rect"><a href="#矩形工具类RectF和Rect" class="headerlink" title="矩形工具类RectF和Rect"></a>矩形工具类RectF和Rect</h3><pre><code>//根据四个点构造出一个矩形；
+</code></pre></div><h3 id="矩形工具类RectF和Rect"><a href="#矩形工具类RectF和Rect" class="headerlink" title="矩形工具类RectF和Rect"></a>矩形工具类RectF和Rect</h3><div class="code-wrapper"><pre><code>//根据四个点构造出一个矩形；
 RectF(float left, float top, float right, float bottom)
 Rect(int left, int top, int right, int bottom)
-</code></pre><h3 id="画矩形"><a href="#画矩形" class="headerlink" title="画矩形"></a>画矩形</h3><pre><code>drawRect (float left, float top, float right, float bottom, Paint paint)
+</code></pre></div><h3 id="画矩形"><a href="#画矩形" class="headerlink" title="画矩形"></a>画矩形</h3><div class="code-wrapper"><pre><code>drawRect (float left, float top, float right, float bottom, Paint paint)
 drawRect (RectF rect, Paint paint)
 drawRect (Rect r, Paint paint)
-</code></pre><h3 id="画圆角矩形"><a href="#画圆角矩形" class="headerlink" title="画圆角矩形"></a>画圆角矩形</h3><pre><code>//参数：rx:生成圆角的椭圆的X轴半径； ry:生成圆角的椭圆的Y轴半径
+</code></pre></div><h3 id="画圆角矩形"><a href="#画圆角矩形" class="headerlink" title="画圆角矩形"></a>画圆角矩形</h3><div class="code-wrapper"><pre><code>//参数：rx:生成圆角的椭圆的X轴半径； ry:生成圆角的椭圆的Y轴半径
 drawRoundRect (RectF rect, float rx, float ry, Paint paint)
-</code></pre><h3 id="画圆形"><a href="#画圆形" class="headerlink" title="画圆形"></a>画圆形</h3><pre><code>//参数：cx：圆心点X轴坐标 ; cy：圆心点Y轴坐标; radius：圆的半径
+</code></pre></div><h3 id="画圆形"><a href="#画圆形" class="headerlink" title="画圆形"></a>画圆形</h3><div class="code-wrapper"><pre><code>//参数：cx：圆心点X轴坐标 ; cy：圆心点Y轴坐标; radius：圆的半径
 drawCircle (float cx, float cy, float radius, Paint paint)
-</code></pre><h3 id="画椭圆"><a href="#画椭圆" class="headerlink" title="画椭圆"></a>画椭圆</h3><pre><code>//椭圆是根据矩形生成的，以矩形的长为椭圆的X轴，矩形的宽为椭圆的Y轴，建立的椭圆图形
+</code></pre></div><h3 id="画椭圆"><a href="#画椭圆" class="headerlink" title="画椭圆"></a>画椭圆</h3><div class="code-wrapper"><pre><code>//椭圆是根据矩形生成的，以矩形的长为椭圆的X轴，矩形的宽为椭圆的Y轴，建立的椭圆图形
 drawOval (RectF oval, Paint paint)
-</code></pre><h3 id="画弧"><a href="#画弧" class="headerlink" title="画弧"></a>画弧</h3><p>弧当然也是根据矩形来生成的</p>
-<pre><code>//参数：oval:生成椭圆的矩形;  startAngle：弧开始的角度，X轴正方向为0度,顺时针为正;
+</code></pre></div><h3 id="画弧"><a href="#画弧" class="headerlink" title="画弧"></a>画弧</h3><p>弧当然也是根据矩形来生成的</p>
+<div class="code-wrapper"><pre><code>//参数：oval:生成椭圆的矩形;  startAngle：弧开始的角度，X轴正方向为0度,顺时针为正;
 //sweepAngle：弧持续的角度,顺时针; useCenter:是否有弧的两边，True，有两边，False，只有一条弧。
 drawArc (RectF oval, float startAngle, float sweepAngle, boolean useCenter, Paint paint)
-</code></pre><h3 id="画三角"><a href="#画三角" class="headerlink" title="画三角"></a>画三角</h3><pre><code>if (mPath == null) &#123;
+</code></pre></div><h3 id="画三角"><a href="#画三角" class="headerlink" title="画三角"></a>画三角</h3><div class="code-wrapper"><pre><code>if (mPath == null) &#123;
     // 画路径
     mPath = new Path();
     mPath.moveTo(getWidth() / 2, 0);
@@ -346,22 +354,22 @@ drawArc (RectF oval, float startAngle, float sweepAngle, boolean useCenter, Pain
     mPath.close();// 把路径闭合
 &#125;
 canvas.drawPath(mPath, mPaint);
-</code></pre><h3 id="画图片"><a href="#画图片" class="headerlink" title="画图片"></a>画图片</h3><pre><code>canvas.drawBitmap(bitmap, x, y, paint);
-</code></pre><h3 id="drawText画文字"><a href="#drawText画文字" class="headerlink" title="drawText画文字"></a>drawText画文字</h3><pre><code>//text:要绘制的文字; x：绘制原点x坐标; y：基线y坐标; paint:用来做画的画笔
+</code></pre></div><h3 id="画图片"><a href="#画图片" class="headerlink" title="画图片"></a>画图片</h3><div class="code-wrapper"><pre><code>canvas.drawBitmap(bitmap, x, y, paint);
+</code></pre></div><h3 id="drawText画文字"><a href="#drawText画文字" class="headerlink" title="drawText画文字"></a>drawText画文字</h3><div class="code-wrapper"><pre><code>//text:要绘制的文字; x：绘制原点x坐标; y：基线y坐标; paint:用来做画的画笔
 drawText(String text, float x, float y, Paint paint)
-</code></pre><p>从上往下依次为：top、ascent、baseLine、descent、bottom。</p>
-<pre><code>Paint paint = new Paint();
+</code></pre></div><p>从上往下依次为：top、ascent、baseLine、descent、bottom。</p>
+<div class="code-wrapper"><pre><code>Paint paint = new Paint();
 Paint.FontMetrics fm = paint.getFontMetrics();
 Paint.FontMetricsInt fmInt = paint.getFontMetricsInt();
-</code></pre><p>FontMetricsInt和FontMetrics完全相同，只是得到的值的类型不一样而已，FontMetricsInt中的四个成员变量的值都是Int类型，而FontMetrics得到的四个成员变量的值则都是float类型的。</p>
+</code></pre></div><p>FontMetricsInt和FontMetrics完全相同，只是得到的值的类型不一样而已，FontMetricsInt中的四个成员变量的值都是Int类型，而FontMetrics得到的四个成员变量的值则都是float类型的。</p>
 <p>获取基线</p>
-<pre><code>Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
+<div class="code-wrapper"><pre><code>Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
 int dy = (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
 int baseLine = getHeight() / 2 + dy;
-</code></pre><p>获取文字宽度</p>
-<pre><code>int width = paint.measureText(String text);
-</code></pre><h2 id="onTouch"><a href="#onTouch" class="headerlink" title="onTouch"></a>onTouch</h2><p>处理跟用户交互，手指触摸，事件分发事件拦截等等。</p>
-<pre><code>@Override
+</code></pre></div><p>获取文字宽度</p>
+<div class="code-wrapper"><pre><code>int width = paint.measureText(String text);
+</code></pre></div><h2 id="onTouch"><a href="#onTouch" class="headerlink" title="onTouch"></a>onTouch</h2><p>处理跟用户交互，手指触摸，事件分发事件拦截等等。</p>
+<div class="code-wrapper"><pre><code>@Override
 public boolean onTouchEvent(MotionEvent event) &#123;
     switch (event.getAction()) &#123;
         case MotionEvent.ACTION_DOWN:
@@ -376,9 +384,9 @@ public boolean onTouchEvent(MotionEvent event) &#123;
     &#125;
     return super.onTouchEvent(event);
 &#125;
-</code></pre><p>可以通过<code>event.getX()</code>获取相对于当前控件的位置,<code>event.getRawX()</code>获取距离屏幕的x位置。</p>
+</code></pre></div><p>可以通过<code>event.getX()</code>获取相对于当前控件的位置,<code>event.getRawX()</code>获取距离屏幕的x位置。</p>
 <h2 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h2><p>在res/values下面新建attrs.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<div class="code-wrapper"><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;resources&gt;
     &lt;!--name 自定义View的名字MyView--&gt;
     &lt;declare-styleable name=&quot;MyView&quot;&gt;
@@ -398,26 +406,26 @@ public boolean onTouchEvent(MotionEvent event) &#123;
         &lt;/attr&gt;
     &lt;/declare-styleable&gt;
 &lt;/resources&gt;
-</code></pre><p>在布局中使用，声明命名空间，然后在自己的自定义View中使用</p>
-<pre><code>xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+</code></pre></div><p>在布局中使用，声明命名空间，然后在自己的自定义View中使用</p>
+<div class="code-wrapper"><pre><code>xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
 
 &lt;com.view.MyView        
     app:myText=&quot;jt&quot;        
     app:myTextColor=&quot;@color/colorAccent&quot;        
     android:layout_width=&quot;wrap_content&quot;        
     android:layout_height=&quot;wrap_content&quot; /&gt;
-</code></pre><p>在自定义View中获取属性</p>
-<pre><code>//获取自定义属性
+</code></pre></div><p>在自定义View中获取属性</p>
+<div class="code-wrapper"><pre><code>//获取自定义属性
 TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.MyView);
 mText = array.getString(R.styleable.MyView_myText);
 mTextColor = array.getColor(R.styleable.MyView_myTextColor, mTextColor);
 mTextSize = array.getDimensionPixelSize(R.styleable.MyView_myTextSize, mTextSize);
 //回收
 array.recycle();
-</code></pre><p>系统有的自定义属性，我们是不能重新定义。</p>
+</code></pre></div><p>系统有的自定义属性，我们是不能重新定义。</p>
 <h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><h3 id="onFinishInflate"><a href="#onFinishInflate" class="headerlink" title="onFinishInflate"></a>onFinishInflate</h3><p>setContentView布局解析完毕之后会执行这个方法。而View的绘制流程是在Activity的onResume()之后才调用的。</p>
 <h3 id="requestDisallowInterceptTouchEvent"><a href="#requestDisallowInterceptTouchEvent" class="headerlink" title="requestDisallowInterceptTouchEvent"></a>requestDisallowInterceptTouchEvent</h3><p>改变的其实就是mGroupFlags的值</p>
-<pre><code>//事件分发
+<div class="code-wrapper"><pre><code>//事件分发
 //dispatchTouchEvent-&gt;onInterceptTouchEvent-&gt;onTouchEvent
 @Override
 public boolean dispatchTouchEvent(MotionEvent ev) &#123;
@@ -425,8 +433,8 @@ public boolean dispatchTouchEvent(MotionEvent ev) &#123;
     getParent().requestDisallowInterceptTouchEvent(true);
     return super.dispatchTouchEvent(ev);
 &#125;
-</code></pre><h3 id="canChildScrollUp"><a href="#canChildScrollUp" class="headerlink" title="canChildScrollUp"></a>canChildScrollUp</h3><p>SwipeRefreshLayout中方法，判断是否滚动到了最顶部。</p>
-<pre><code>public boolean canChildScrollUp() &#123;
+</code></pre></div><h3 id="canChildScrollUp"><a href="#canChildScrollUp" class="headerlink" title="canChildScrollUp"></a>canChildScrollUp</h3><p>SwipeRefreshLayout中方法，判断是否滚动到了最顶部。</p>
+<div class="code-wrapper"><pre><code>public boolean canChildScrollUp() &#123;
     if (mChildScrollUpCallback != null) &#123;
         return mChildScrollUpCallback.canChildScrollUp(this, mTarget);
     &#125;
@@ -443,44 +451,44 @@ public boolean dispatchTouchEvent(MotionEvent ev) &#123;
         return ViewCompat.canScrollVertically(mTarget, -1);
     &#125;
 &#125;
-</code></pre><h3 id="GestureDetector"><a href="#GestureDetector" class="headerlink" title="GestureDetector"></a>GestureDetector</h3><p>快速滑动，手势处理。</p>
+</code></pre></div><h3 id="GestureDetector"><a href="#GestureDetector" class="headerlink" title="GestureDetector"></a>GestureDetector</h3><p>快速滑动，手势处理。</p>
 <h2 id="在ScrollView中嵌入ListView"><a href="#在ScrollView中嵌入ListView" class="headerlink" title="在ScrollView中嵌入ListView"></a>在ScrollView中嵌入ListView</h2><p>在ScrollView添加一个ListView会导致listview控件显示不全，通常只会显示一条，这是因为两个控件的滚动事件冲突导致。</p>
 <p>ListView,ScrollView在测量子布局的时候会用UNSPECIFIED,需要重写listview中的onMeasure。</p>
-<pre><code>@Override
+<div class="code-wrapper"><pre><code>@Override
 protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) &#123;
     // 解决显示不全的问题
     heightMeasureSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE&gt;&gt; 2,MeasureSpec.AT_MOST);
     //heightMeasureSpec：32位的值，30位 是 Integer.MAX_VALUE，2位是MeasureSpec.AT_MOST
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 &#125;
-</code></pre><h2 id="invalidate源码分析"><a href="#invalidate源码分析" class="headerlink" title="invalidate源码分析"></a>invalidate源码分析</h2><p><code>invlidate()</code>一路向上，不断调用<code>invalidateChild(this, damage)</code>，调到最外层<code>ViewRootImpl</code>。最外层调用<code>draw()</code>、<code>dispatchDraw()</code>,一路往下画,最终画到当前调用invaldate的View的<code>onDraw()</code>方法。invlidate() 牵连着整个layout布局中的View。</p>
+</code></pre></div><h2 id="invalidate源码分析"><a href="#invalidate源码分析" class="headerlink" title="invalidate源码分析"></a>invalidate源码分析</h2><p><code>invlidate()</code>一路向上，不断调用<code>invalidateChild(this, damage)</code>，调到最外层<code>ViewRootImpl</code>。最外层调用<code>draw()</code>、<code>dispatchDraw()</code>,一路往下画,最终画到当前调用invaldate的View的<code>onDraw()</code>方法。invlidate() 牵连着整个layout布局中的View。</p>
 <p>ViewRootImpl中的重要方法</p>
-<pre><code>performTraversals()、performMeasure()、performLayout()、performDraw()
-</code></pre><h3 id="为什么不能在子线程中更新UI"><a href="#为什么不能在子线程中更新UI" class="headerlink" title="为什么不能在子线程中更新UI"></a>为什么不能在子线程中更新UI</h3><p>ViewRootImpl中checkThread()方法用来检测线程。</p>
-<pre><code>if (mThread != Thread.currentThread()) &#123;            
+<div class="code-wrapper"><pre><code>performTraversals()、performMeasure()、performLayout()、performDraw()
+</code></pre></div><h3 id="为什么不能在子线程中更新UI"><a href="#为什么不能在子线程中更新UI" class="headerlink" title="为什么不能在子线程中更新UI"></a>为什么不能在子线程中更新UI</h3><p>ViewRootImpl中checkThread()方法用来检测线程。</p>
+<div class="code-wrapper"><pre><code>if (mThread != Thread.currentThread()) &#123;            
     throw new CalledFromWrongThreadException(                    
     &quot;Only the original thread that created a view hierarchy can touch its views.&quot;);
 &#125;
-</code></pre><p>mThread在构造函数中初始化的主线程mainThread</p>
+</code></pre></div><p>mThread在构造函数中初始化的主线程mainThread</p>
 <h2 id="View的绘制流程"><a href="#View的绘制流程" class="headerlink" title="View的绘制流程"></a>View的绘制流程</h2><p>setContentView创建DecorView，把我们的布局加载到了DecorView。</p>
 <p>Activity的启动流程 </p>
-<pre><code>performLaunchActivity -&gt; Activity.onCreate()handleResumeActivity() -&gt; performResumeActivity() -&gt; 
+<div class="code-wrapper"><pre><code>performLaunchActivity -&gt; Activity.onCreate()handleResumeActivity() -&gt; performResumeActivity() -&gt; 
 Activity的onResume()方法   -&gt; wm.addView(decor, l);  才开始把我们的 DecorView 加载到 WindowManager,
  -&gt; View的绘制流程在这个时候才开始 measure() layout() draw()
-</code></pre><p>addView</p>
-<pre><code>wm.addView(decor, l); -&gt;  WindowManangerImpl.addView()-&gt; root.setView(view, wparams, panelParentView);  -&gt; 
+</code></pre></div><p>addView</p>
+<div class="code-wrapper"><pre><code>wm.addView(decor, l); -&gt;  WindowManangerImpl.addView()-&gt; root.setView(view, wparams, panelParentView);  -&gt; 
 requestLayout() -&gt; scheduleTraversals()-&gt; doTraversal() -&gt; performTraversals() 
-</code></pre><p>onmeasure:测量是从外往里递归</p>
-<pre><code>performMeasure(childWidthMeasureSpec, childHeightMeasureSpec);-&gt; mView.measure(childWidthMeasureSpec, childHeightMeasureSpec);-&gt; 
+</code></pre></div><p>onmeasure:测量是从外往里递归</p>
+<div class="code-wrapper"><pre><code>performMeasure(childWidthMeasureSpec, childHeightMeasureSpec);-&gt; mView.measure(childWidthMeasureSpec, childHeightMeasureSpec);-&gt; 
 onMeasure(widthMeasureSpec, heightMeasureSpec); 测量开始 -&gt; measureVertical(int widthMeasureSpec, int heightMeasureSpec)-&gt; 
 measureChildWithMargins
-</code></pre><p>childWidthMeasureSpec,childHeightMeasureSpec测量模式是通过getChildMeasureSpec计算。调用setMeasuredDimension()这个时候我们布局才真正指定宽度和高度，mMeasuredWidth和mMeasuredHeight才开始有值。</p>
+</code></pre></div><p>childWidthMeasureSpec,childHeightMeasureSpec测量模式是通过getChildMeasureSpec计算。调用setMeasuredDimension()这个时候我们布局才真正指定宽度和高度，mMeasuredWidth和mMeasuredHeight才开始有值。</p>
 <p>layout:摆放子布局for循环所有子View, 前提不是GONE，调用child.layout()</p>
-<pre><code>performLayout ：View -&gt; layout() -&gt; onLayout()
-</code></pre><p>draw</p>
-<pre><code>performDraw() : View -&gt; draw() -&gt; drawBackground();//画背景 onDraw(canvas);// 画自己 ViewGroup 默认情况下不会调用
+<div class="code-wrapper"><pre><code>performLayout ：View -&gt; layout() -&gt; onLayout()
+</code></pre></div><p>draw</p>
+<div class="code-wrapper"><pre><code>performDraw() : View -&gt; draw() -&gt; drawBackground();//画背景 onDraw(canvas);// 画自己 ViewGroup 默认情况下不会调用
 dispatchDraw(canvas);// 画子View 不断的循环调用子View的 draw()
-</code></pre><p>流程小结：</p>
+</code></pre></div><p>流程小结：</p>
 <blockquote>
 <p>第一步performMeasure()：用于指定和测量layout中所有控件的宽高，对于ViewGroup,先去测量里面的子孩子，根据子孩子的宽高再来计算和指定自己的宽高，对于View,它的宽高是由自己和父布局决定的。</p>
 </blockquote>
@@ -498,14 +506,14 @@ dispatchDraw(canvas);// 画子View 不断的循环调用子View的 draw()
 <p>addView、setVisibility、等，会调用requestLayout()重新走一遍View的绘制流程。</p>
 </blockquote>
 <h2 id="View的Touch事件分发"><a href="#View的Touch事件分发" class="headerlink" title="View的Touch事件分发"></a>View的Touch事件分发</h2><p>自定义view</p>
-<pre><code>@Override
+<div class="code-wrapper"><pre><code>@Override
 public boolean onTouchEvent(MotionEvent event) &#123;
     Log.e(&quot;TAG&quot;,&quot;onTouchEvent -&gt; &quot;+event.getAction());
 
     return super.onTouchEvent(event);
 &#125;
-</code></pre><p>添加listener</p>
-<pre><code>view.setOnTouchListener(new View.OnTouchListener() &#123;
+</code></pre></div><p>添加listener</p>
+<div class="code-wrapper"><pre><code>view.setOnTouchListener(new View.OnTouchListener() &#123;
     @Override
     public boolean onTouch(View v, MotionEvent event) &#123;
         Log.e(&quot;TAG&quot;, &quot;onTouch -&gt; &quot; + event.getAction());
@@ -519,23 +527,23 @@ view.setOnClickListener(new View.OnClickListener() &#123;
         Log.e(&quot;TAG&quot;, &quot;onClick&quot;);
     &#125;
 &#125;);
-</code></pre><p>现象：</p>
+</code></pre></div><p>现象：</p>
 <p>OnTouchListener返回false时：</p>
-<pre><code>OnTouchListener.DOWN -&gt; onTouchEvent.DOWN -&gt; OnTouchListener.MOVE -&gt; onTouchEvent.MOVE -&gt; OnTouchListener.UP-&gt;
+<div class="code-wrapper"><pre><code>OnTouchListener.DOWN -&gt; onTouchEvent.DOWN -&gt; OnTouchListener.MOVE -&gt; onTouchEvent.MOVE -&gt; OnTouchListener.UP-&gt;
 onTouchEvent.UP-&gt; OnClickListener
-</code></pre><p>OnTouchListener返回true时：</p>
-<pre><code>OnTouchListener.DOWN -&gt; OnTouchListener.MOVE -&gt; OnTouchListener.UP
-</code></pre><p>OnTouchListener没有，onTouchEvent返回true时：</p>
-<pre><code>onTouchEvent.DOWN -&gt; onTouchEvent.MOVE -&gt; onTouchEvent.UP
-</code></pre><p>自定义view中添加dispatchTouchEvent时候，如果不写super，就什么都不走了：</p>
-<pre><code>@Override
+</code></pre></div><p>OnTouchListener返回true时：</p>
+<div class="code-wrapper"><pre><code>OnTouchListener.DOWN -&gt; OnTouchListener.MOVE -&gt; OnTouchListener.UP
+</code></pre></div><p>OnTouchListener没有，onTouchEvent返回true时：</p>
+<div class="code-wrapper"><pre><code>onTouchEvent.DOWN -&gt; onTouchEvent.MOVE -&gt; onTouchEvent.UP
+</code></pre></div><p>自定义view中添加dispatchTouchEvent时候，如果不写super，就什么都不走了：</p>
+<div class="code-wrapper"><pre><code>@Override
 public boolean dispatchTouchEvent(MotionEvent event) &#123;
     //super.dispatchTouchEvent(event);
     return true;
 &#125;
-</code></pre><h3 id="dispatchTouchEvent事件分发"><a href="#dispatchTouchEvent事件分发" class="headerlink" title="dispatchTouchEvent事件分发"></a>dispatchTouchEvent事件分发</h3><pre><code>ListenerInfo li = mListenerInfo;  
-</code></pre><p>ListenerInfo: 存放了关于View的所有Listener信息，如：OnTouchListener、OnClickListener。</p>
-<pre><code>boolean result = false;
+</code></pre></div><h3 id="dispatchTouchEvent事件分发"><a href="#dispatchTouchEvent事件分发" class="headerlink" title="dispatchTouchEvent事件分发"></a>dispatchTouchEvent事件分发</h3><div class="code-wrapper"><pre><code>ListenerInfo li = mListenerInfo;  
+</code></pre></div><p>ListenerInfo: 存放了关于View的所有Listener信息，如：OnTouchListener、OnClickListener。</p>
+<div class="code-wrapper"><pre><code>boolean result = false;
 if (li != null &amp;&amp; li.mOnTouchListener != null 
     &amp;&amp; (mViewFlags &amp; ENABLED_MASK) == ENABLED     //是否是enable
     &amp;&amp; li.mOnTouchListener.onTouch(this, event)) &#123;//如果onTouch是false，result=false；如果是true，result=true    
@@ -547,9 +555,9 @@ if (!result &amp;&amp; onTouchEvent(event)) &#123;//如果result=false就会执�
 &#125;
 
 return result;
-</code></pre><p>在View的onTouchEvent中的<code>case MotionEvent.ACTION_UP</code>:里面调用了<code>performClick()</code>添加了点击事件<code>li.mOnClickListener.onClick(this)</code>。</p>
+</code></pre></div><p>在View的onTouchEvent中的<code>case MotionEvent.ACTION_UP</code>:里面调用了<code>performClick()</code>添加了点击事件<code>li.mOnClickListener.onClick(this)</code>。</p>
 <h3 id="onTouchEvent方法"><a href="#onTouchEvent方法" class="headerlink" title="onTouchEvent方法"></a>onTouchEvent方法</h3><h2 id="ViewGroup的事件分发"><a href="#ViewGroup的事件分发" class="headerlink" title="ViewGroup的事件分发"></a>ViewGroup的事件分发</h2><p>自定义View和上面view一样，自定义ViewGroup：</p>
-<pre><code>@Override
+<div class="code-wrapper"><pre><code>@Override
 public boolean dispatchTouchEvent(MotionEvent ev) &#123;
     Log.e(&quot;TAG&quot;, &quot;ViewGroup dispatchTouchEvent -&gt; &quot; + ev.getAction());
     return super.dispatchTouchEvent(ev);
@@ -566,22 +574,22 @@ public boolean onTouchEvent(MotionEvent event) &#123;
     Log.e(&quot;TAG&quot;, &quot;ViewGroup onTouchEvent -&gt; &quot; + event.getAction());
     return super.onTouchEvent(event);
 &#125;
-</code></pre><p>自定义ViewGroup包裹自定义View，点击View时候：</p>
-<pre><code>DOWN -&gt; ViewGroup.dispatchTouchEvent -&gt; ViewGroup.onInterceptTouchEvent -&gt; View.dispatchTouchEvent -&gt; View.onTouch -&gt; View.onTouchEvent -&gt;
+</code></pre></div><p>自定义ViewGroup包裹自定义View，点击View时候：</p>
+<div class="code-wrapper"><pre><code>DOWN -&gt; ViewGroup.dispatchTouchEvent -&gt; ViewGroup.onInterceptTouchEvent -&gt; View.dispatchTouchEvent -&gt; View.onTouch -&gt; View.onTouchEvent -&gt;
 MOVE -&gt; ViewGroup.dispatchTouchEvent -&gt; ViewGroup onInterceptTouchEvent -&gt; View.dispatchTouchEvent -&gt; View.onTouch -&gt; View.onTouchEvent -&gt;
 Up  -&gt; ViewGroup.dispatchTouchEvent -&gt; ViewGroup onInterceptTouchEvent -&gt; View.dispatchTouchEvent -&gt; View.onTouch -&gt; View.onTouchEvent -&gt; 
 View.onclick
-</code></pre><p>去掉自定义View的onClick：</p>
-<pre><code>ViewGroup.dispatchTouchEvent -&gt; ViewGroup.onInterceptTouchEvent -&gt; 
+</code></pre></div><p>去掉自定义View的onClick：</p>
+<div class="code-wrapper"><pre><code>ViewGroup.dispatchTouchEvent -&gt; ViewGroup.onInterceptTouchEvent -&gt; 
 View.dispatchTouchEvent -&gt; View.onTouch -&gt; View onTouchEvent -&gt; 
 ViewGroup.onTouchEvent
-</code></pre><p>自定义View的onTouchEvent()方法里面返回true时：</p>
-<pre><code>DOWN -&gt; ViewGroup.dispatchTouchEvent -&gt; ViewGroup.onInterceptTouchEvent -&gt; View.dispatchTouchEvent -&gt; View.onTouch -&gt; View.onTouchEvent -&gt;
+</code></pre></div><p>自定义View的onTouchEvent()方法里面返回true时：</p>
+<div class="code-wrapper"><pre><code>DOWN -&gt; ViewGroup.dispatchTouchEvent -&gt; ViewGroup.onInterceptTouchEvent -&gt; View.dispatchTouchEvent -&gt; View.onTouch -&gt; View.onTouchEvent -&gt;
 MOVE -&gt; ViewGroup.dispatchTouchEvent -&gt; ViewGroup onInterceptTouchEvent -&gt; View.dispatchTouchEvent -&gt; View.onTouch -&gt; View.onTouchEvent -&gt;
 Up  -&gt; ViewGroup.dispatchTouchEvent -&gt; ViewGroup onInterceptTouchEvent -&gt; View.dispatchTouchEvent -&gt; View.onTouch -&gt; View.onTouchEvent
-</code></pre><p>自定义ViewGroup的onInterceptTouchEvent()返回true时：</p>
-<pre><code>ViewGroup.dispatchTouchEvent -&gt; ViewGroup.onInterceptTouchEvent -&gt; ViewGroup.onTouchEvent
-</code></pre><h3 id="dispatchTouchEvent"><a href="#dispatchTouchEvent" class="headerlink" title="dispatchTouchEvent"></a>dispatchTouchEvent</h3><h3 id="onInterceptTouchEvent"><a href="#onInterceptTouchEvent" class="headerlink" title="onInterceptTouchEvent"></a>onInterceptTouchEvent</h3><p>onInterceptTouchEvent()默认情况下返回false。</p>
+</code></pre></div><p>自定义ViewGroup的onInterceptTouchEvent()返回true时：</p>
+<div class="code-wrapper"><pre><code>ViewGroup.dispatchTouchEvent -&gt; ViewGroup.onInterceptTouchEvent -&gt; ViewGroup.onTouchEvent
+</code></pre></div><h3 id="dispatchTouchEvent"><a href="#dispatchTouchEvent" class="headerlink" title="dispatchTouchEvent"></a>dispatchTouchEvent</h3><h3 id="onInterceptTouchEvent"><a href="#onInterceptTouchEvent" class="headerlink" title="onInterceptTouchEvent"></a>onInterceptTouchEvent</h3><p>onInterceptTouchEvent()默认情况下返回false。</p>
 <h3 id="onTouchEvent"><a href="#onTouchEvent" class="headerlink" title="onTouchEvent"></a>onTouchEvent</h3><p>如果子View没有一个地方返回true,只会进来一次只会响应DOWN事件,代表不需要消费该事件,如果你想响应MOVE,UP必须找个地方ture。</p>
 <p>对于ViewGroup,如果想拦截子View的Touch事件,可以覆写onInterceptTouchEvent返回true,执行该ViewGroup的onTouchEvent方法;如果子View没有消费Touch事件,也会调用该ViewGroup的onTouchEvent方法。</p>
 
@@ -735,6 +743,8 @@ Up  -&gt; ViewGroup.dispatchTouchEvent -&gt; ViewGroup onInterceptTouchEvent -&g
 
 
 
+  
+    
   
 
 
