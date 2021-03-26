@@ -30,7 +30,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atelier-heath-dark.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
     
   
 
@@ -242,16 +242,16 @@
 <h3 id="1-3、报文"><a href="#1-3、报文" class="headerlink" title="1.3、报文"></a>1.3、报文</h3><hr>
 <p>通信是以<strong>报文</strong>的形式。</p>
 <p>请求报文</p>
-<div class="hljs code-wrapper"><pre><code>请求行: method、path、Http version
+<pre><code>请求行: method、path、Http version
 Headers：Host、Content-Type、Content-Length
 Body
-</code></pre></div><p>响应报文</p>
-<div class="hljs code-wrapper"><pre><code>状态行: Http version、status code、status message
+</code></pre><p>响应报文</p>
+<pre><code>状态行: Http version、status code、status message
 Headers：Content-Type、cache-control、vary、etag、content-encoding
 Body
-</code></pre></div><p>请求头和响应头详细参考网站</p>
-<div class="hljs code-wrapper"><pre><code>http://tools.jb51.net/table/http_header
-</code></pre></div><p><strong>一个HTTP请求报文可以由请求行、请求头、空行和请求体4个部分组成。</strong></p>
+</code></pre><p>请求头和响应头详细参考网站</p>
+<pre><code>http://tools.jb51.net/table/http_header
+</code></pre><p><strong>一个HTTP请求报文可以由请求行、请求头、空行和请求体4个部分组成。</strong></p>
 <p><strong>请求行是由三部分组成:请求方式、请求资源路径、HTTP协议版本。</strong></p>
 <p>GET方式的请求报文没有请求体，只有请求行、请求头、空行组成。</p>
 <p>POST方式的请求报文可以有请求行、请求头、空行、请求体四部分组成，注意:POST方式可以允许没有请求体，但是这种格式很少见。</p>
@@ -260,37 +260,37 @@ Body
 <hr>
 <h3 id="1-4、请求方法"><a href="#1-4、请求方法" class="headerlink" title="1.4、请求方法"></a>1.4、请求方法</h3><hr>
 <p>GET：对服务器数据不进行修改、不发送Body。<strong>幂等（反复调用多次会得到相同的结果）</strong>。</p>
-<div class="hljs code-wrapper"><pre><code>@GET(&quot;/users/&#123;id&#125;&quot;)
+<pre><code>@GET(&quot;/users/&#123;id&#125;&quot;)
 Call&lt;User&gt; getUser(@Path(&quot;id&quot;) String id, @Query(&quot;gender&quot;) String gender);
-</code></pre></div><p>POST：用于增加或修改资源、不幂等。</p>
-<div class="hljs code-wrapper"><pre><code>@FormUrlEncoded
+</code></pre><p>POST：用于增加或修改资源、不幂等。</p>
+<pre><code>@FormUrlEncoded
 @POST(&quot;/users&quot;)
 Call&lt;User&gt; addUser(@Field(&quot;name&quot;) String name, @Field(&quot;gender&quot;) String gender);
-</code></pre></div><p>PUT:仅用于修改资源、发送给服务器的内容写在Body里面、幂等。</p>
-<div class="hljs code-wrapper"><pre><code>@FormUrlEncoded
+</code></pre><p>PUT:仅用于修改资源、发送给服务器的内容写在Body里面、幂等。</p>
+<pre><code>@FormUrlEncoded
 @PUT(&quot;/users/&#123;id&#125;&quot;)
 Call&lt;User&gt; updateGender(@Path(&quot;id&quot;) String id, @Field(&quot;gender&quot;) String gender);
-</code></pre></div><p>DELETE：用于删除资源、不发送Body、幂等。</p>
-<div class="hljs code-wrapper"><pre><code>@DELETE(&quot;/users/&#123;id&#125;&quot;)
+</code></pre><p>DELETE：用于删除资源、不发送Body、幂等。</p>
+<pre><code>@DELETE(&quot;/users/&#123;id&#125;&quot;)
 Call&lt;User&gt; getUser(@Path(&quot;id&quot;) String id, @Query(&quot;gender&quot;) String gender);
-</code></pre></div><p>HEAD：和GET使用方法完全相同，唯一区别在于，返回的响应中没有Body。</p>
+</code></pre><p>HEAD：和GET使用方法完全相同，唯一区别在于，返回的响应中没有Body。</p>
 <hr>
 <h3 id="1-5、HTTP状态码"><a href="#1-5、HTTP状态码" class="headerlink" title="1.5、HTTP状态码"></a>1.5、HTTP状态码</h3><hr>
-<div class="hljs code-wrapper"><pre><code>1xx:  Infomational (信息状态码) ，临时性消息，如：100 （继续发送）、101（正在切换协议）
+<pre><code>1xx:  Infomational (信息状态码) ，临时性消息，如：100 （继续发送）、101（正在切换协议）
 2xx:  Succeed(成功)，请求正常处理完毕,如 200
 3xx:  Redirection(重定向)，需要进行附加操作，一般是没有响应数据返回的，如 304（Not,modified）307 
 4xx:  Client Error (客户端的错误)，服务器无法处理请求，如 404
 5xx:  Server Error (服务端的错误)，服务器处理请求出错，如 500
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="1-5、Content-Type"><a href="#1-5、Content-Type" class="headerlink" title="1.5、Content-Type"></a>1.5、Content-Type</h3><hr>
 <p>指定Body的类型。主要有四类：</p>
 <p><strong>text/html</strong>：请求Web页面是返回响应的类型，Body中返回html文本。</p>
 <p><strong>x-www-form-urlencoded</strong>：Web页面纯文本表单的提交方式。</p>
-<div class="hljs code-wrapper"><pre><code>@FormUrlEncoded
+<pre><code>@FormUrlEncoded
 @POST(&quot;/users&quot;)
 Call&lt;User&gt; addUser(@Field(&quot;name&quot;) String name, @Field(&quot;gender&quot;) String gender);
-</code></pre></div><p><strong>multitype/form-data</strong>：Web页面含有二进制文件时的提交方式。</p>
-<div class="hljs code-wrapper"><pre><code>Content-Type: multipart/form-data; boundary=----
+</code></pre><p><strong>multitype/form-data</strong>：Web页面含有二进制文件时的提交方式。</p>
+<pre><code>Content-Type: multipart/form-data; boundary=----
 
 @Multipart
 @POST(&quot;/users&quot;)
@@ -299,8 +299,8 @@ Call&lt;User&gt; addUser(@Part(&quot;name&quot;) RequestBody name, @Part(&quot;a
 RequestBody namePart = RequestBody.create(MediaType.parse(&quot;text/plain&quot;),nameStr);
 RequestBody avatarPart = RequestBody.create(MediaType.parse(&quot;image/jpeg&quot;),avatarFile);
 api.addUser(namePart, avatarPart);
-</code></pre></div><p><strong>application/json,image/jpeg,application/zip…</strong>单项内容（文本或非文本都可以），用于Web Api的响应或者POST/PUT的请求。</p>
-<div class="hljs code-wrapper"><pre><code>@POST(&quot;/users&quot;)
+</code></pre><p><strong>application/json,image/jpeg,application/zip…</strong>单项内容（文本或非文本都可以），用于Web Api的响应或者POST/PUT的请求。</p>
+<pre><code>@POST(&quot;/users&quot;)
 Call&lt;User&gt; addUser(@Body(&quot;user&quot;) User user);
 
 
@@ -308,7 +308,7 @@ Call&lt;User&gt; addUser(@Body(&quot;user&quot;) User user);
 Call&lt;User&gt; updateAvatar(@Path(&quot;id&quot;) String id, @Body RequestBody avatar);
 RequestBody avatarBody = RequestBody.create(MediaType.parse(&quot;image/jpeg&quot;),avatarFile);
 api.updateAvatar(id, avatarBody)
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="1-6、Header"><a href="#1-6、Header" class="headerlink" title="1.6、Header"></a>1.6、Header</h3><hr>
 <p>HTTP消息的元数据 (meta data)</p>
 <p>User-Agent:用户代理，即是谁实际发送请求、接受响应的，例如收机浏览器、某款收机App。</p>
@@ -404,7 +404,7 @@ api.updateAvatar(id, avatarBody)
 <p>工作原理：在客户端和服务器之间协商出一套<strong>对称密钥</strong>，每次发送信息之前将内容加密，收到之后解密，达到内容的加密传输。<strong>因为对称加密性能更好。</strong></p>
 <p>为什么不直接用非对称加密？非对称加密由于使用了复杂了数学原理，因此计算相当复杂，如果完全使用非对称加密来加密通信内容，会严重影响网络通信的性能。</p>
 <p>HTTPS 连接建⽴的过程</p>
-<div class="hljs code-wrapper"><pre><code>客户端请求建立连接Client Hello
+<pre><code>客户端请求建立连接Client Hello
 服务端Server Hello
 服务器发送证书（非对称加密的公钥、签名等）- 信任建立
 客户端发给服务器Pre-master Secret（非对称加密随机数）
@@ -412,17 +412,17 @@ api.updateAvatar(id, avatarBody)
 客户端发送：Finished
 服务器通知：将使用加密通信
 服务器发送：Finished
-</code></pre></div><p>客户端加密密钥（客户端发送消息）、服务端加密密钥（服务端发送消息）、客户端MAC Secret（验证身份）、服务端MAC Secret（验证身份）。</p>
+</code></pre><p>客户端加密密钥（客户端发送消息）、服务端加密密钥（服务端发送消息）、客户端MAC Secret（验证身份）、服务端MAC Secret（验证身份）。</p>
 <hr>
 <h2 id="4、网络编程"><a href="#4、网络编程" class="headerlink" title="4、网络编程"></a>4、网络编程</h2><h3 id="4-1、IP地址"><a href="#4-1、IP地址" class="headerlink" title="4.1、IP地址"></a>4.1、IP地址</h3><hr>
 <p>IP地址的作用是标识网络中唯一的一台设备的。</p>
 <p>IP地址的表现形式分为: IPv4和IPv6。IPv4是目前使用的ip地址；IPv6是未来使用的ip地址；IPv4是由点分十进制组成；IPv6是由冒号十六进制组成。</p>
 <p>查看IP地址：Linux 和 mac OS 使用 <code>ifconfig</code> 这个命令;Windows 使用 <code>ipconfig</code> 这个命令。</p>
 <p>检查网络：ping</p>
-<div class="hljs code-wrapper"><pre><code>ping www.baidu.com 检查是否能上公网
+<pre><code>ping www.baidu.com 检查是否能上公网
 ping 当前局域网的ip地址 检查是否在同一个局域网内
 ping 127.0.0.1 检查本地网卡是否正常
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="4-2、端口和端口号"><a href="#4-2、端口和端口号" class="headerlink" title="4.2、端口和端口号"></a>4.2、端口和端口号</h3><hr>
 <p>端口的作用就是给运行的应用程序提供传输数据的通道。好比房间的门，是数据传输必经之路。</p>
 <p>每一个端口都会有一个对应的端口号，好比每个房间的门都有一个门牌号，想要找到端口通过端口号即可。</p>

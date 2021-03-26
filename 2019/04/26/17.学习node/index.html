@@ -30,7 +30,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atelier-heath-dark.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
     
   
 
@@ -229,19 +229,19 @@
             
             <div class="markdown-body">
               <h2 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h2><p>官网：</p>
-<div class="hljs code-wrapper"><pre><code>https://nodejs.org/en/
-</code></pre></div><p>检查安装版本</p>
-<div class="hljs code-wrapper"><pre><code>node --version
-</code></pre></div><p>Node.js既不是语言，也不是框架，它是一个平台。Node.js 中的 JavaScript没有 BOM、DOM，提供了一些服务器级别的 API：文件操作的能力、http 服务的能力。</p>
+<pre><code>https://nodejs.org/en/
+</code></pre><p>检查安装版本</p>
+<pre><code>node --version
+</code></pre><p>Node.js既不是语言，也不是框架，它是一个平台。Node.js 中的 JavaScript没有 BOM、DOM，提供了一些服务器级别的 API：文件操作的能力、http 服务的能力。</p>
 <p>helloworld.js</p>
-<div class="hljs code-wrapper"><pre><code>var f = &apos;hello nodejs&apos;
+<pre><code>var f = &apos;hello nodejs&apos;
 console.log(f)
-</code></pre></div><p>然后执行</p>
-<div class="hljs code-wrapper"><pre><code>node .../helloworld.js
-</code></pre></div><p><code>require</code> 是一个方法,它的作用就是用来加载模块的。在 Node 中，模块有三种：具名的核心模块，例如 fs、http；用户自己编写的文件模块；第三方模块。</p>
+</code></pre><p>然后执行</p>
+<pre><code>node .../helloworld.js
+</code></pre><p><code>require</code> 是一个方法,它的作用就是用来加载模块的。在 Node 中，模块有三种：具名的核心模块，例如 fs、http；用户自己编写的文件模块；第三方模块。</p>
 <h2 id="读和写文件"><a href="#读和写文件" class="headerlink" title="读和写文件"></a>读和写文件</h2><p>浏览器中的 JavaScript 是没有文件操作的能力的，但是 Node 中的JavaScript 具有文件操作的能力。fs 是 file-system 的简写，就是文件系统的意思，<code>fs.readFile</code> 就是用来读取文件的。</p>
 <p>node执行下面的js文件：</p>
-<div class="hljs code-wrapper"><pre><code>var fs = require(&apos;fs&apos;)
+<pre><code>var fs = require(&apos;fs&apos;)
 //    第一个参数就是要读取的文件路径,第二个参数是一个回调函数
 fs.readFile(&apos;./data/hello.txt&apos;, function (error, data) &#123;
   if (error) &#123;
@@ -250,8 +250,8 @@ fs.readFile(&apos;./data/hello.txt&apos;, function (error, data) &#123;
     console.log(data.toString())
   &#125;
 &#125;)
-</code></pre></div><p>写文件：</p>
-<div class="hljs code-wrapper"><pre><code>var fs = require(&apos;fs&apos;)
+</code></pre><p>写文件：</p>
+<pre><code>var fs = require(&apos;fs&apos;)
 fs.writeFile(&apos;./data/你好.md&apos;, &apos;我是Node.js&apos;, function (error) &#123;
   if (error) &#123;
     console.log(&apos;写入失败&apos;)
@@ -259,8 +259,8 @@ fs.writeFile(&apos;./data/你好.md&apos;, &apos;我是Node.js&apos;, function (
     console.log(&apos;写入成功了&apos;)
   &#125;
 &#125;)
-</code></pre></div><h2 id="http服务"><a href="#http服务" class="headerlink" title="http服务"></a>http服务</h2><p>简单的http服务</p>
-<div class="hljs code-wrapper"><pre><code>var http = require(&apos;http&apos;)
+</code></pre><h2 id="http服务"><a href="#http服务" class="headerlink" title="http服务"></a>http服务</h2><p>简单的http服务</p>
+<pre><code>var http = require(&apos;http&apos;)
 //使用 http.createServer() 方法创建一个 Web 服务器
 var server = http.createServer()
 //当客户端请求过来，就会自动触发服务器的 request 请求事件，然后执行第二个参数：回调处理函数
@@ -271,8 +271,8 @@ server.on(&apos;request&apos;, function () &#123;
 server.listen(3000, function () &#123;
   console.log(&apos;服务器启动成功了，可以通过 http://你的ip/ 来进行访问&apos;)
 &#125;)
-</code></pre></div><p>处理请求,request请求事件处理函数，需要接收两个参数：Request 请求对象,请求对象可以用来获取客户端的一些请求信息，例如请求路径;Response 响应对象,响应对象可以用来给客户端发送响应消息。</p>
-<div class="hljs code-wrapper"><pre><code>var http = require(&apos;http&apos;)
+</code></pre><p>处理请求,request请求事件处理函数，需要接收两个参数：Request 请求对象,请求对象可以用来获取客户端的一些请求信息，例如请求路径;Response 响应对象,响应对象可以用来给客户端发送响应消息。</p>
+<pre><code>var http = require(&apos;http&apos;)
 var server = http.createServer()
 
 server.on(&apos;request&apos;, function (request, response) &#123;
@@ -286,8 +286,8 @@ server.on(&apos;request&apos;, function (request, response) &#123;
 server.listen(3000, function () &#123;
   console.log(&apos;服务器启动成功了，可以通过 http://你的ip:3000/ 来进行访问&apos;)
 &#125;)
-</code></pre></div><p>根据不同请求路径返回不同数据：</p>
-<div class="hljs code-wrapper"><pre><code>var http = require(&apos;http&apos;)
+</code></pre><p>根据不同请求路径返回不同数据：</p>
+<pre><code>var http = require(&apos;http&apos;)
 var server = http.createServer()
 
 server.on(&apos;request&apos;, function (req, res) &#123;
@@ -322,29 +322,29 @@ server.on(&apos;request&apos;, function (req, res) &#123;
 server.listen(3000, function () &#123;
   console.log(&apos;服务器启动成功，可以访问了。。。&apos;)
 &#125;)
-</code></pre></div><p>在服务端默认发送的数据，其实是 utf8 编码的内容，中文操作系统默认是 gbk。在 http 协议中，Content-Type 就是用来告知对方我给你发送的数据内容是什么类型</p>
-<div class="hljs code-wrapper"><pre><code>// text/plain 就是普通文本
+</code></pre><p>在服务端默认发送的数据，其实是 utf8 编码的内容，中文操作系统默认是 gbk。在 http 协议中，Content-Type 就是用来告知对方我给你发送的数据内容是什么类型</p>
+<pre><code>// text/plain 就是普通文本
 res.setHeader(&apos;Content-Type&apos;, &apos;text/plain; charset=utf-8&apos;)
 // 如果你发送的是 html 格式的字符串，则也要告诉浏览器我给你发送是 text/html 格式的内容
 res.setHeader(&apos;Content-Type&apos;, &apos;text/html; charset=utf-8&apos;)
 // 图片就不需要指定编码了，因为我们常说的编码一般指的是：字符编码
 res.setHeader(&apos;Content-Type&apos;, &apos;image/jpeg&apos;)
-</code></pre></div><h2 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h2><p>读取文件目录</p>
-<div class="hljs code-wrapper"><pre><code>var fs = require(&apos;fs&apos;)
+</code></pre><h2 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h2><p>读取文件目录</p>
+<pre><code>var fs = require(&apos;fs&apos;)
 fs.readdir(&apos;D:/Movie/www&apos;, function (err, files) &#123;
   if (err) &#123;
     return console.log(&apos;目录不存在&apos;)
   &#125;
   console.log(files)
 &#125;)
-</code></pre></div><p><code>art-template</code>不仅可以在浏览器使用，也可以在 node 中使用。</p>
-<div class="hljs code-wrapper"><pre><code>https://github.com/aui/art-template
+</code></pre><p><code>art-template</code>不仅可以在浏览器使用，也可以在 node 中使用。</p>
+<pre><code>https://github.com/aui/art-template
 https://aui.github.io/art-template/
-</code></pre></div><p>安装：该命令在哪执行就会把包下载到哪里,下载到 node_modules 目录中。</p>
-<div class="hljs code-wrapper"><pre><code>npm install art-template
-</code></pre></div><p>注意：在浏览器中需要引用 lib/template-web.js 文件</p>
+</code></pre><p>安装：该命令在哪执行就会把包下载到哪里,下载到 node_modules 目录中。</p>
+<pre><code>npm install art-template
+</code></pre><p>注意：在浏览器中需要引用 lib/template-web.js 文件</p>
 <p>浏览器中使用art-template:</p>
-<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
+<pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -382,9 +382,9 @@ https://aui.github.io/art-template/
   &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre></div><p> 在 Node 中使用 art-template 模板引擎。在需要使用的文件模块中加载 art-template，只需要使用 require 方法加载就可以了：<code>require(&#39;art-template&#39;)</code></p>
+</code></pre><p> 在 Node 中使用 art-template 模板引擎。在需要使用的文件模块中加载 art-template，只需要使用 require 方法加载就可以了：<code>require(&#39;art-template&#39;)</code></p>
 <p>node执行js</p>
-<div class="hljs code-wrapper"><pre><code>var template = require(&apos;art-template&apos;)
+<pre><code>var template = require(&apos;art-template&apos;)
 var fs = require(&apos;fs&apos;)
 fs.readFile(&apos;./tpl.html&apos;, function (err, data) &#123;
   if (err) &#123;
@@ -403,8 +403,8 @@ fs.readFile(&apos;./tpl.html&apos;, function (err, data) &#123;
   &#125;)
   console.log(ret)
 &#125;)
-</code></pre></div><p>tpl.html</p>
-<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
+</code></pre><p>tpl.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -420,11 +420,11 @@ fs.readFile(&apos;./tpl.html&apos;, function (err, data) &#123;
   &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre></div><p>留言板小案例</p>
+</code></pre><p>留言板小案例</p>
 <h2 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h2><p>官网</p>
-<div class="hljs code-wrapper"><pre><code>https://www.npmjs.com/
-</code></pre></div><p>常用命令行工具</p>
-<div class="hljs code-wrapper"><pre><code>//查看版本
+<pre><code>https://www.npmjs.com/
+</code></pre><p>常用命令行工具</p>
+<pre><code>//查看版本
 npm --version
 
 //升级npm
@@ -447,17 +447,17 @@ npm uninstall --save 包名
 
 //帮助
 npm help
-</code></pre></div><p>解决翻墙：</p>
+</code></pre><p>解决翻墙：</p>
 <p>首先安装淘宝cnpm（可以再任意目录执行，–global表示安装到全局）</p>
-<div class="hljs code-wrapper"><pre><code>npm install --global cnpm
-</code></pre></div><p>接下来用cnpm替换npm。</p>
+<pre><code>npm install --global cnpm
+</code></pre><p>接下来用cnpm替换npm。</p>
 <p>如果不想安装npm又想使用淘宝镜像：</p>
-<div class="hljs code-wrapper"><pre><code>npm install jquery --registry=https://registry.npm.taobao.org
-</code></pre></div><p>加入配置文件中：</p>
-<div class="hljs code-wrapper"><pre><code>npm config set registry https://registry.npm.taobao.org
+<pre><code>npm install jquery --registry=https://registry.npm.taobao.org
+</code></pre><p>加入配置文件中：</p>
+<pre><code>npm config set registry https://registry.npm.taobao.org
 //查看配置成功
 npm config list
-</code></pre></div>
+</code></pre>
             </div>
             <hr>
             <div>

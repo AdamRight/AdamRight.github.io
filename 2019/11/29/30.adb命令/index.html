@@ -30,7 +30,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atelier-heath-dark.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
     
   
 
@@ -229,38 +229,38 @@
             
             <div class="markdown-body">
               <p>monkey测试</p>
-<div class="hljs code-wrapper"><pre><code>adb shell monkey -p 包名 -v 次数
-</code></pre></div><p>启动adb、关闭adb</p>
-<div class="hljs code-wrapper"><pre><code>adb start-server
+<pre><code>adb shell monkey -p 包名 -v 次数
+</code></pre><p>启动adb、关闭adb</p>
+<pre><code>adb start-server
 adb kill-server
-</code></pre></div><p>获取手机的系统版本</p>
-<div class="hljs code-wrapper"><pre><code>adb shell getprop ro.build.version.release
-</code></pre></div><p>清除apk的数据和缓存    </p>
-<div class="hljs code-wrapper"><pre><code>adb shell pm clear 包名
-</code></pre></div><p>安装和卸载apk</p>
-<div class="hljs code-wrapper"><pre><code>adb install 文件路径
+</code></pre><p>获取手机的系统版本</p>
+<pre><code>adb shell getprop ro.build.version.release
+</code></pre><p>清除apk的数据和缓存    </p>
+<pre><code>adb shell pm clear 包名
+</code></pre><p>安装和卸载apk</p>
+<pre><code>adb install 文件路径
 adb uninstall 包名
-</code></pre></div><p>电脑和手机文件互传</p>
-<div class="hljs code-wrapper"><pre><code>adb push C:\Users\win\Desktop\xx.png /sdcard
+</code></pre><p>电脑和手机文件互传</p>
+<pre><code>adb push C:\Users\win\Desktop\xx.png /sdcard
 adb pull /sdcard/xx.png C:\Users\win\Desktop
-</code></pre></div><p>查看保存app错误日志</p>
-<div class="hljs code-wrapper"><pre><code>adb logcat *:E | grep &quot;包名&quot; &gt; 电脑路径 //mac
+</code></pre><p>查看保存app错误日志</p>
+<pre><code>adb logcat *:E | grep &quot;包名&quot; &gt; 电脑路径 //mac
 adb logcat *:E | find &quot;包名&quot; &gt; 电脑路径 //win
-</code></pre></div><p>获取当前app包名和当前页面名(⼿机打开对应app)</p>
-<div class="hljs code-wrapper"><pre><code>adb shell dumpsys window windows | grep mFocusedApp //mac
+</code></pre><p>获取当前app包名和当前页面名(⼿机打开对应app)</p>
+<pre><code>adb shell dumpsys window windows | grep mFocusedApp //mac
 adb shell dumpsys window windows | findstr mFocusedApp //win
-</code></pre></div><p>log获取app的包名和activity名称</p>
-<div class="hljs code-wrapper"><pre><code>adb logcat | grep START //mac
+</code></pre><p>log获取app的包名和activity名称</p>
+<pre><code>adb logcat | grep START //mac
 adb logcat | findstr START //win
 然后点击app 
-</code></pre></div><p>关闭app后,获取app启动时间</p>
-<div class="hljs code-wrapper"><pre><code>关闭app
+</code></pre><p>关闭app后,获取app启动时间</p>
+<pre><code>关闭app
 adb shell am start -W 包名/启动名
 adb shell am start -W com.xxx.xxx/.LaunchActivity
 //TotalTime： app⾃身启动时间,WaitTime： 系统启动应⽤时间
-</code></pre></div><p>Appium</p>
-<div class="hljs code-wrapper"><pre><code>官⽹： www.appium.io,
-</code></pre></div><p>Appium是由nodejs的express框架写的Http Server,Appium使⽤WebDriver的json wire协议，来驱动Apple系统的UIAutomation库、Android系统的UIAutomator框架。</p>
+</code></pre><p>Appium</p>
+<pre><code>官⽹： www.appium.io,
+</code></pre><p>Appium是由nodejs的express框架写的Http Server,Appium使⽤WebDriver的json wire协议，来驱动Apple系统的UIAutomation库、Android系统的UIAutomator框架。</p>
 
             </div>
             <hr>

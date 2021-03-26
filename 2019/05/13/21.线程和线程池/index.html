@@ -30,7 +30,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atelier-heath-dark.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
     
   
 
@@ -237,7 +237,7 @@
 </blockquote>
 <p>共同点：都要用start()开启线程</p>
 <h3 id="创建子线程方式1："><a href="#创建子线程方式1：" class="headerlink" title="创建子线程方式1："></a>创建子线程方式1：</h3><hr>
-<div class="hljs code-wrapper"><pre><code>Thread thread = new Thread() &#123;
+<pre><code>Thread thread = new Thread() &#123;
     @Override
     public void run() &#123;
         //super.run();
@@ -245,9 +245,9 @@
     &#125;
 &#125;;
 thread.start();
-</code></pre></div><p>start调用了native方法。</p>
+</code></pre><p>start调用了native方法。</p>
 <p>或者</p>
-<div class="hljs code-wrapper"><pre><code>class MyThread1 extends Thread&#123;
+<pre><code>class MyThread1 extends Thread&#123;
     @Override
     public void run() &#123;
         super.run();
@@ -255,9 +255,9 @@ thread.start();
     &#125;
 &#125;
 new MyThread1().start();//创建并启动线程
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="创建子线程方式2："><a href="#创建子线程方式2：" class="headerlink" title="创建子线程方式2："></a>创建子线程方式2：</h3><hr>
-<div class="hljs code-wrapper"><pre><code>Runnable runnable = new Runnable() &#123;
+<pre><code>Runnable runnable = new Runnable() &#123;
     @Override
     public void run() &#123;
         System.out.println(&quot;Thread with Runnable started!&quot;);
@@ -265,8 +265,8 @@ new MyThread1().start();//创建并启动线程
 &#125;;
 Thread thread = new Thread(runnable);
 thread.start();
-</code></pre></div><p>或者</p>
-<div class="hljs code-wrapper"><pre><code>class MyThread2 implements Runnable&#123;
+</code></pre><p>或者</p>
+<pre><code>class MyThread2 implements Runnable&#123;
     @Override
     public void run() &#123;
         System.out.println(&quot;MyThread2:&quot;+Thread.currentThread().getName());
@@ -282,9 +282,9 @@ new Thread(new Runnable() &#123;
         System.out.println(&quot;MyThread3:&quot;+Thread.currentThread().getName());
     &#125;
 &#125;).start();
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="ThreadFactory"><a href="#ThreadFactory" class="headerlink" title="ThreadFactory"></a>ThreadFactory</h3><hr>
-<div class="hljs code-wrapper"><pre><code>ThreadFactory factory = new ThreadFactory() &#123;
+<pre><code>ThreadFactory factory = new ThreadFactory() &#123;
     AtomicInteger count = new AtomicInteger(0);
     @Override
     public Thread newThread(Runnable r) &#123;
@@ -303,9 +303,9 @@ Thread thread = factory.newThread(runnable);
 thread.start();
 Thread thread1 = factory.newThread(runnable);
 thread1.start();
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="Executors"><a href="#Executors" class="headerlink" title="Executors"></a>Executors</h3><hr>
-<div class="hljs code-wrapper"><pre><code>Runnable runnable = new Runnable() &#123;
+<pre><code>Runnable runnable = new Runnable() &#123;
     @Override
     public void run() &#123;
         System.out.println(&quot;Thread with Runnable started!&quot;);
@@ -315,20 +315,20 @@ Executor executor = Executors.newCachedThreadPool();
 executor.execute(runnable);
 executor.execute(runnable);
 executor.execute(runnable);
-</code></pre></div><p>除了newCachedThreadPool还有newSingleThreadExecutor单线程池、newFixedThreadPool指定固定线程数的线程池。</p>
-<div class="hljs code-wrapper"><pre><code>ExecutorService executor = Executors.newFixedThreadPool(20);
+</code></pre><p>除了newCachedThreadPool还有newSingleThreadExecutor单线程池、newFixedThreadPool指定固定线程数的线程池。</p>
+<pre><code>ExecutorService executor = Executors.newFixedThreadPool(20);
 for (Bitmap bitmap : bitmaps) &#123;
      executor.execute(bitmapProcessor(bitmap));
 &#125;
 executor.shutdown();
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h3><hr>
 <p>synchronized 的本质:保证方法内部或代码块内部资源（数据）的互斥访问。<strong>即同一时间、由同一个Monitor监视的代码，最多只能有一个线程在访问</strong>。</p>
 <blockquote>
 <p>synchronized定义在方法上，Monitor默认指定的是这个类；方法中使用<code>synchronized(this)</code>,Monitor指定的也是这个类；如果想更换Monitor，就要把this换成其他对象。即多个线程，访问同一个类的多个方法，就要处理Monitor是不是同一个。</p>
 </blockquote>
 <p>如果线程1正在访问count方法，那么线程2无法访问到minus方法，因为两个方法是同一个Monitor：</p>
-<div class="hljs code-wrapper"><pre><code>private synchronized void count(int newValue) &#123;
+<pre><code>private synchronized void count(int newValue) &#123;
     x = newValue;
     y = newValue;
 &#125;
@@ -339,8 +339,8 @@ private void minus(int delta) &#123;
         y -= delta;
     &#125;
 &#125;
-</code></pre></div><p>如果线程1正在访问count方法，线程2可以访问到minus方法，因为两个方法不是同一个Monitor，是两个Monitor：</p>
-<div class="hljs code-wrapper"><pre><code>private final Object monitor1 = new Object();
+</code></pre><p>如果线程1正在访问count方法，线程2可以访问到minus方法，因为两个方法不是同一个Monitor，是两个Monitor：</p>
+<pre><code>private final Object monitor1 = new Object();
 private synchronized void count(int newValue) &#123;
     x = newValue;
     y = newValue;
@@ -351,7 +351,7 @@ private void minus(int delta) &#123;
         y -= delta;
     &#125;
 &#125;
-</code></pre></div><p>保证线程之间对监视资源的数据同步。即，任何线程在获取到 Monitor 后的第一时间，会先将共享内存中的数据复制到自己的缓存中；任何线程在释放 Monitor 的第一时间，会先将缓存中的数据复制到共享内存中。</p>
+</code></pre><p>保证线程之间对监视资源的数据同步。即，任何线程在获取到 Monitor 后的第一时间，会先将共享内存中的数据复制到自己的缓存中；任何线程在释放 Monitor 的第一时间，会先将缓存中的数据复制到共享内存中。</p>
 <hr>
 <h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><hr>
 <p>保证加了 volatile 关键字的字段的操作具有原子性和同步性，其中原子性相当于实现了针对单一字段的线程间互斥访问。因此 volatile 可以看做是简化版的 synchronized。</p>
@@ -361,13 +361,13 @@ private void minus(int delta) &#123;
 <h3 id="atomic"><a href="#atomic" class="headerlink" title="atomic"></a>atomic</h3><hr>
 <p>java.util.concurrent.atomic 包：</p>
 <p>下面有 AtomicInteger AtomicBoolean 等类，作用和 volatile 基本一致，可以看做是通用版的 volatile。</p>
-<div class="hljs code-wrapper"><pre><code>AtomicInteger atomicInteger = new AtomicInteger(0);
+<pre><code>AtomicInteger atomicInteger = new AtomicInteger(0);
 ...
 atomicInteger.getAndIncrement();
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="lock"><a href="#lock" class="headerlink" title="lock"></a>lock</h3><hr>
 <p>同样是「加锁」机制。但使用方法更灵活，同时也更麻烦一些。</p>
-<div class="hljs code-wrapper"><pre><code>Lock lock = new ReentrantLock();
+<pre><code>Lock lock = new ReentrantLock();
 ...
 lock.lock();
 try &#123;
@@ -375,8 +375,8 @@ try &#123;
 &#125; finally &#123;
     lock.unlock();
 &#125;
-</code></pre></div><p>一般并不会只是使用Lock，而是会使用更复杂的锁ReentrantReadWriteLock：</p>
-<div class="hljs code-wrapper"><pre><code>public class ReadWriteLockDemo &#123;
+</code></pre><p>一般并不会只是使用Lock，而是会使用更复杂的锁ReentrantReadWriteLock：</p>
+<pre><code>public class ReadWriteLockDemo &#123;
     ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
     Lock readLock = lock.readLock();
     Lock writeLock = lock.writeLock();
@@ -444,8 +444,8 @@ try &#123;
         &#125;.start();
     &#125;
 &#125;
-</code></pre></div><h3 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h3><p>在未达到目标时 wait();用 while 循环检查;设置完成后 notifyAll();wait() 和 notify() / notifyAll() 都需要放在同步代码块里。</p>
-<div class="hljs code-wrapper"><pre><code>public class WaitDemo &#123;
+</code></pre><h3 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h3><p>在未达到目标时 wait();用 while 循环检查;设置完成后 notifyAll();wait() 和 notify() / notifyAll() 都需要放在同步代码块里。</p>
+<pre><code>public class WaitDemo &#123;
     private String sharedString;
     private synchronized void initString() &#123;
         sharedString = &quot;kkk&quot;;
@@ -491,9 +491,9 @@ try &#123;
         thread2.start();
     &#125;
 &#125;
-</code></pre></div><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>Service：后台任务的活动空间。适用场景：音乐播放器等。IntentService：执行单个任务后自动关闭的 Service。</p>
+</code></pre><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>Service：后台任务的活动空间。适用场景：音乐播放器等。IntentService：执行单个任务后自动关闭的 Service。</p>
 <p>如果在界面组件里创建 Executor 或者 HandlerThread，记得要在关闭的时候（例如Activity.onDestroy() ）关闭 Executor 和 HandlerThread。</p>
-<div class="hljs code-wrapper"><pre><code>@Override
+<pre><code>@Override
 protected void onDestroy() &#123;
  super.onDestroy();
  executor.shutdown();
@@ -504,16 +504,16 @@ protected void onDestroy() &#123;
  super.onDestroy();
  handlerThread.quit(); // 这个其实就是停⽌ Looper 的循环
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="线程池ThreadPoolExecutor"><a href="#线程池ThreadPoolExecutor" class="headerlink" title="线程池ThreadPoolExecutor"></a>线程池ThreadPoolExecutor</h2><p>构造方法参数</p>
-<div class="hljs code-wrapper"><pre><code>public ThreadPoolExecutor(int corePoolSize,
+<pre><code>public ThreadPoolExecutor(int corePoolSize,
                           int maximumPoolSize,
                           long keepAliveTime,
                           TimeUnit unit,
                           BlockingQueue&lt;Runnable&gt; workQueue,
                           ThreadFactory threadFactory,
                           RejectedExecutionHandler handler)
-</code></pre></div><blockquote>
+</code></pre><blockquote>
 <ul>
 <li>corePoolSize：线程基本大小</li>
 <li>maximumPoolSize：线程池最大所能容纳线程大小</li>
@@ -524,7 +524,7 @@ protected void onDestroy() &#123;
 </ul>
 </blockquote>
 <h2 id="手动创建线程池"><a href="#手动创建线程池" class="headerlink" title="手动创建线程池"></a>手动创建线程池</h2><p>仿照AsyncTask源码，写个线程池。缓存队列Runnable，加入到线程队列中去执行。</p>
-<div class="hljs code-wrapper"><pre><code>public class ThreadPoolDemo &#123;
+<pre><code>public class ThreadPoolDemo &#123;
 
     static ThreadPoolExecutor threadPoolExecutor;
 
@@ -565,17 +565,17 @@ protected void onDestroy() &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div><p>输出结果：</p>
+</code></pre><p>输出结果：</p>
 <p><img src="/2019/05/13/21.%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/21.线程和线程池/1.gif" srcset="/img/loading.gif" lazyload alt></p>
 <blockquote>
 <p>Runnable缓存队列大于WorkQueue线程队列就可能会报错。</p>
 </blockquote>
-<h3 id="workQueue的参数"><a href="#workQueue的参数" class="headerlink" title="workQueue的参数"></a>workQueue的参数</h3><div class="hljs code-wrapper"><pre><code>BlockingQueue: 先进先出的一个队列 FIFO（rxjava，AsyncTask）
+<h3 id="workQueue的参数"><a href="#workQueue的参数" class="headerlink" title="workQueue的参数"></a>workQueue的参数</h3><pre><code>BlockingQueue: 先进先出的一个队列 FIFO（rxjava，AsyncTask）
 SynchronousQueue: 线程安全的队列，它里面是没有固定的缓存的（OKHttp所使用的）
 PriorityBlockingQueue: 无序的可以根据优先级进行排序，指定的对象要实现Comparable作比较
-</code></pre></div><p>有限队列<code>SynchronousQueue</code>和<code>ArrayBlockingQueue</code>；无限队列<code>LinkedBloackingQueue</code>。</p>
+</code></pre><p>有限队列<code>SynchronousQueue</code>和<code>ArrayBlockingQueue</code>；无限队列<code>LinkedBloackingQueue</code>。</p>
 <p>PriorityBlockingQueue示例</p>
-<div class="hljs code-wrapper"><pre><code>public class Request implements Runnable,Comparable&lt;Request&gt;&#123;
+<pre><code>public class Request implements Runnable,Comparable&lt;Request&gt;&#123;
     @Override
     public void run() &#123;
         System.out.println(&quot;run&quot;);
@@ -615,7 +615,7 @@ public class ThreadPoolTest &#123;
         &#125;
     &#125;
 &#125;
-</code></pre></div>
+</code></pre>
             </div>
             <hr>
             <div>

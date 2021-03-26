@@ -30,7 +30,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atelier-heath-dark.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
     
   
 
@@ -233,7 +233,7 @@
 <p>js是一种脚本语言，解释型语言。</p>
 <hr>
 <h2 id="JavaScript三种写法"><a href="#JavaScript三种写法" class="headerlink" title="JavaScript三种写法"></a>JavaScript三种写法</h2><hr>
-<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
+<pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -247,30 +247,30 @@
     &lt;script language=&quot;JavaScript&quot; src=&quot;test.js&quot;&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre></div><p>test.js</p>
-<div class="hljs code-wrapper"><pre><code>alert(&quot;我是第三种写法&quot;);
-</code></pre></div><hr>
+</code></pre><p>test.js</p>
+<pre><code>alert(&quot;我是第三种写法&quot;);
+</code></pre><hr>
 <h2 id="变量和数据类型"><a href="#变量和数据类型" class="headerlink" title="变量和数据类型"></a>变量和数据类型</h2><hr>
 <p>js中声明变量都用var，js中字符串可以使用单引号，也可以使用双引号。</p>
 <p>原始数据类型：</p>
-<div class="hljs code-wrapper"><pre><code>number、string、boolean、null、undefined、object
-</code></pre></div><p>获取变量的数据类型(注意，null获取的类型为object)</p>
-<div class="hljs code-wrapper"><pre><code>typeof 变量名;//或者
+<pre><code>number、string、boolean、null、undefined、object
+</code></pre><p>获取变量的数据类型(注意，null获取的类型为object)</p>
+<pre><code>typeof 变量名;//或者
 typeof (变量名);
-</code></pre></div><p>判断是不是数字（不是数字返回true）</p>
-<div class="hljs code-wrapper"><pre><code>isNaN(变量名);
-</code></pre></div><p>判断字符串长度</p>
-<div class="hljs code-wrapper"><pre><code>字符串变量名.length
-</code></pre></div><p>其他类型转为数字，Number最严格</p>
-<div class="hljs code-wrapper"><pre><code>parseInt(&quot;10&quot;);
+</code></pre><p>判断是不是数字（不是数字返回true）</p>
+<pre><code>isNaN(变量名);
+</code></pre><p>判断字符串长度</p>
+<pre><code>字符串变量名.length
+</code></pre><p>其他类型转为数字，Number最严格</p>
+<pre><code>parseInt(&quot;10&quot;);
 parseFloat(&quot;10.02&quot;);
 Number(&quot;10&quot;);
-</code></pre></div><p>其他类型转为字符串</p>
-<div class="hljs code-wrapper"><pre><code>变量名.toString();//变量名一定要有意义
+</code></pre><p>其他类型转为字符串</p>
+<pre><code>变量名.toString();//变量名一定要有意义
 String(变量名);
-</code></pre></div><p>其他类型转为布尔()</p>
-<div class="hljs code-wrapper"><pre><code>Boolean(变量);
-</code></pre></div><blockquote>
+</code></pre><p>其他类型转为布尔()</p>
+<pre><code>Boolean(变量);
+</code></pre><blockquote>
 <p>注意:<code>==</code>和<code>===</code>区别，<code>==</code>只进行值的比较，<code>===</code>对比值和类型。</p>
 </blockquote>
 <blockquote>
@@ -278,19 +278,19 @@ String(变量名);
 </blockquote>
 <hr>
 <h2 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h2><hr>
-<div class="hljs code-wrapper"><pre><code>if(条件)&#123;
+<pre><code>if(条件)&#123;
 
 &#125; else if(条件)&#123;
 
 &#125; else &#123;
 
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="三元表达式"><a href="#三元表达式" class="headerlink" title="三元表达式"></a>三元表达式</h2><hr>
-<div class="hljs code-wrapper"><pre><code>var 变量 = 表达式1 ? 表达式2 : 表达式3;
-</code></pre></div><hr>
+<pre><code>var 变量 = 表达式1 ? 表达式2 : 表达式3;
+</code></pre><hr>
 <h2 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h2><hr>
-<div class="hljs code-wrapper"><pre><code>switch (表达式)&#123;
+<pre><code>switch (表达式)&#123;
     case 值1:
         代码1;
         break;
@@ -302,37 +302,37 @@ String(变量名);
         代码3;
         break;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="while循环-有可能一次都不执行"><a href="#while循环-有可能一次都不执行" class="headerlink" title="while循环(有可能一次都不执行)"></a>while循环(有可能一次都不执行)</h2><hr>
-<div class="hljs code-wrapper"><pre><code>while(循环的条件)&#123;
+<pre><code>while(循环的条件)&#123;
     循环体;
     计数器++;
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="do…while-至少执行一次"><a href="#do…while-至少执行一次" class="headerlink" title="do…while(至少执行一次)"></a>do…while(至少执行一次)</h2><hr>
-<div class="hljs code-wrapper"><pre><code>do&#123;
+<pre><code>do&#123;
     //循环体
 &#125;while(条件);
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><hr>
 <p>先执行表达式1，然后判断表达式2，如果不成立直接跳出循环。如果成立，执行循环体代码，结束后，跳到表达式3，然后判断表达式2。</p>
-<div class="hljs code-wrapper"><pre><code>for (表达式1; 表达式2; 表达式3) &#123;
+<pre><code>for (表达式1; 表达式2; 表达式3) &#123;
     循环体;
 &#125;
 
 for(var i = 0; i &lt; 10; i++)&#123;
 
 &#125;
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><hr>
-<div class="hljs code-wrapper"><pre><code>alert();
+<pre><code>alert();
 console.log();
 document.write(&quot;&quot;);
-</code></pre></div><p>代码调试</p>
+</code></pre><p>代码调试</p>
 <p><img src="/2018/11/25/1.JavaScript%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%92%8CDOM%E5%92%8CBOM/1.JavaScript基本语法和DOM和BOM/1.png" srcset="/img/loading.gif" lazyload alt></p>
 <hr>
 <h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><hr>
-<div class="hljs code-wrapper"><pre><code>var arr1 = new Array();//空数组
+<pre><code>var arr1 = new Array();//空数组
 
 var arr2 = new Array(5);//长度为5，每个值是undefined
 
@@ -341,24 +341,24 @@ var arr3 = [];//空数组
 var arr4 = new Array(10,20,40,55,35);//5个值
 
 var arr5 = [10,30,50,20,40];//5个值
-</code></pre></div><p>设置某个位置的值</p>
-<div class="hljs code-wrapper"><pre><code>数组名[下标] = 值;
-</code></pre></div><p>获取某个位置的值</p>
-<div class="hljs code-wrapper"><pre><code>var result = 数组名[下标];
-</code></pre></div><p>获取数组长度</p>
-<div class="hljs code-wrapper"><pre><code>数组名.length
-</code></pre></div><p>数组中存储的数据类型可以不一样。</p>
+</code></pre><p>设置某个位置的值</p>
+<pre><code>数组名[下标] = 值;
+</code></pre><p>获取某个位置的值</p>
+<pre><code>var result = 数组名[下标];
+</code></pre><p>获取数组长度</p>
+<pre><code>数组名.length
+</code></pre><p>数组中存储的数据类型可以不一样。</p>
 <p>从数组最后添加和删除数据：</p>
-<div class="hljs code-wrapper"><pre><code>var aList = [1,2,3,4];
+<pre><code>var aList = [1,2,3,4];
 aList.push(5);
 alert(aList); //弹出1,2,3,4,5
 aList.pop();
 alert(aList); // 弹出1,2,3,4
-</code></pre></div><p>根据下标添加和删除元素</p>
-<div class="hljs code-wrapper"><pre><code>arr.splice(start,num,element1,.....,elementN)
-</code></pre></div><p>参数解析：start：必需，开始删除的索引。num：可选，删除数组元素的个数。elementN：可选，在start索引位置要插入的新元素。</p>
+</code></pre><p>根据下标添加和删除元素</p>
+<pre><code>arr.splice(start,num,element1,.....,elementN)
+</code></pre><p>参数解析：start：必需，开始删除的索引。num：可选，删除数组元素的个数。elementN：可选，在start索引位置要插入的新元素。</p>
 <p>此方法会删除从start索引开始的num个元素，并将elementN参数插入到start索引位置。</p>
-<div class="hljs code-wrapper"><pre><code>var colors = [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;];
+<pre><code>var colors = [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;];
 colors.splice(0,1);  //删除第一项
 alert(colors);  //green,blue
 
@@ -367,52 +367,52 @@ alert(colors);  //green,yellow,organge,blue
 
 colors.splice(1, 1, &quot;red&quot;, &quot;purple&quot;);  //删除一项，插入两项数据
 alert(colors);  //green,red,purple,orange,blue
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><hr>
 <p>函数的定义</p>
-<div class="hljs code-wrapper"><pre><code>function 函数名()&#123;
+<pre><code>function 函数名()&#123;
     函数体
 &#125;
-</code></pre></div><p>函数的调用</p>
-<div class="hljs code-wrapper"><pre><code>函数名();
-</code></pre></div><p>函数的参数</p>
-<div class="hljs code-wrapper"><pre><code>function 函数名(参数名)&#123;
+</code></pre><p>函数的调用</p>
+<pre><code>函数名();
+</code></pre><p>函数的参数</p>
+<pre><code>function 函数名(参数名)&#123;
     函数体
 &#125;
-</code></pre></div><blockquote>
+</code></pre><blockquote>
 <p>注意:参数不需要定义var。形参指函数定义时小括号中的变量。实参指函数在调用时候小括号中传入的值。形参和实参个数可以不一致。</p>
 </blockquote>
 <p>函数的返回值</p>
-<div class="hljs code-wrapper"><pre><code>function getSum(x,y)&#123;
+<pre><code>function getSum(x,y)&#123;
     return x + y;
 &#125;
 var result = getSum(10,30);
-</code></pre></div><p>函数的数据类型是function</p>
+</code></pre><p>函数的数据类型是function</p>
 <hr>
 <h2 id="arguments对象伪数组"><a href="#arguments对象伪数组" class="headerlink" title="arguments对象伪数组"></a>arguments对象伪数组</h2><p>arguments可以获取传入的每个参数的值</p>
-<div class="hljs code-wrapper"><pre><code>function f1()&#123;
+<pre><code>function f1()&#123;
     arguments.length;
     console.log(arguments)
 &#125;
 f1(10,20,30,50);
-</code></pre></div><h2 id="匿名函数（函数表达式）"><a href="#匿名函数（函数表达式）" class="headerlink" title="匿名函数（函数表达式）"></a>匿名函数（函数表达式）</h2><div class="hljs code-wrapper"><pre><code>var f1 = function ()&#123;
+</code></pre><h2 id="匿名函数（函数表达式）"><a href="#匿名函数（函数表达式）" class="headerlink" title="匿名函数（函数表达式）"></a>匿名函数（函数表达式）</h2><pre><code>var f1 = function ()&#123;
     console.log(&quot;dsds&quot;);
 &#125;
 //匿名函数不能直接调用
 f1();
-</code></pre></div><h2 id="函数的自调用（一次性）"><a href="#函数的自调用（一次性）" class="headerlink" title="函数的自调用（一次性）"></a>函数的自调用（一次性）</h2><div class="hljs code-wrapper"><pre><code>(function ()&#123;
+</code></pre><h2 id="函数的自调用（一次性）"><a href="#函数的自调用（一次性）" class="headerlink" title="函数的自调用（一次性）"></a>函数的自调用（一次性）</h2><pre><code>(function ()&#123;
     console.log(&quot;ddddds&quot;);
 &#125;)();
-</code></pre></div><h2 id="函数作为参数（回调函数）"><a href="#函数作为参数（回调函数）" class="headerlink" title="函数作为参数（回调函数）"></a>函数作为参数（回调函数）</h2><p>注意f2不要加括号</p>
-<div class="hljs code-wrapper"><pre><code>function f1(fn)&#123;
+</code></pre><h2 id="函数作为参数（回调函数）"><a href="#函数作为参数（回调函数）" class="headerlink" title="函数作为参数（回调函数）"></a>函数作为参数（回调函数）</h2><p>注意f2不要加括号</p>
+<pre><code>function f1(fn)&#123;
    fn();
 &#125;
 function f2()&#123;
     console.log(&quot;原来这样&quot;);
 &#125;
 f1(f2);
-</code></pre></div><h2 id="函数作为返回值"><a href="#函数作为返回值" class="headerlink" title="函数作为返回值"></a>函数作为返回值</h2><p>注意<code>ff();</code></p>
-<div class="hljs code-wrapper"><pre><code>function f1()&#123;
+</code></pre><h2 id="函数作为返回值"><a href="#函数作为返回值" class="headerlink" title="函数作为返回值"></a>函数作为返回值</h2><p>注意<code>ff();</code></p>
+<pre><code>function f1()&#123;
     console.log(&quot;原来&quot;);
    return function ()&#123;
        console.log(&quot;原来这样&quot;);
@@ -420,53 +420,53 @@ f1(f2);
 &#125;
 var ff = f1();
 ff();
-</code></pre></div><h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>全局变量：用var声明的。可以在页面的任何位置使用。页面不关闭，全局变量不会释放，会占空间，消耗内存。</p>
+</code></pre><h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>全局变量：用var声明的。可以在页面的任何位置使用。页面不关闭，全局变量不会释放，会占空间，消耗内存。</p>
 <p>局部变量：函数function中定义的变量。外面不能使用。</p>
 <p>块级作用域：一对大括号中声明的变量。在js中，括号外面也能使用块级作用域中的变量。函数除外。</p>
 <p>全局作用域：全局变量的适用范围。</p>
 <p>局部作用域：局部变量的适用范围。</p>
 <p>隐式全局变量：声明变量没有用var。函数中声明的局部变量，函数外面不可以访问。函数中声明的隐式全局变量，函数外面可以访问。</p>
 <p>全局变量不能被删除，隐式全局变量可以被删除。使用var是不会被删除，没有var是可以删除。</p>
-<div class="hljs code-wrapper"><pre><code>var num1 = 10;
+<pre><code>var num1 = 10;
 num2 = 20;
 delete num1;
 delete num2;
 console.log(typeof num1);//number
 console.log(num1 + 10);//20
 console.log(typeof num2);//underfine
-</code></pre></div><h2 id="预解析"><a href="#预解析" class="headerlink" title="预解析"></a>预解析</h2><p>变量的声明和函数的声明被提前了。</p>
+</code></pre><h2 id="预解析"><a href="#预解析" class="headerlink" title="预解析"></a>预解析</h2><p>变量的声明和函数的声明被提前了。</p>
 <p>把变量的声明提前了。局部作用域中局部变量声明也会提前，只提前在局部作用域中。</p>
-<div class="hljs code-wrapper"><pre><code>console.log(num);//underfine
+<pre><code>console.log(num);//underfine
 var num = 10;
-</code></pre></div><p>函数的声明提前了。</p>
-<div class="hljs code-wrapper"><pre><code>f1();
+</code></pre><p>函数的声明提前了。</p>
+<pre><code>f1();
 function f1()&#123;
     console.log(&quot;dd&quot;);//dd
 &#125;
-</code></pre></div><blockquote>
+</code></pre><blockquote>
 <p>注意：</p>
 </blockquote>
 <p>结果为<code>underfine</code></p>
-<div class="hljs code-wrapper"><pre><code>f1();
+<pre><code>f1();
 var num = 20;
 function f1()&#123;
     console.log(num);//underfine
 &#125;
-</code></pre></div><p>结果为20</p>
-<div class="hljs code-wrapper"><pre><code>var num = 20;
+</code></pre><p>结果为20</p>
+<pre><code>var num = 20;
 function f1()&#123;
     console.log(num);//20
 &#125;
 f1();
-</code></pre></div><p>结果为<code>underfine</code></p>
-<div class="hljs code-wrapper"><pre><code>var num = 20;
+</code></pre><p>结果为<code>underfine</code></p>
+<pre><code>var num = 20;
 function f1()&#123;
     console.log(num);//underfine
     var num = 30;
 &#125;
 f1();
-</code></pre></div><p>结果为一个报错，其余为9，因为b和c为隐式全局变量，a是局部变量。</p>
-<div class="hljs code-wrapper"><pre><code>f1();
+</code></pre><p>结果为一个报错，其余为9，因为b和c为隐式全局变量，a是局部变量。</p>
+<pre><code>f1();
 console.log(c);
 console.log(b);
 console.log(a);//报错
@@ -475,14 +475,14 @@ function f1()&#123;
     console.log(c);
     console.log(b);
     console.log(a);
-</code></pre></div><p>结果为<code>f1();</code>报错，预解析f1是变量，调用<code>f1();</code>报错。</p>
-<div class="hljs code-wrapper"><pre><code>f1();
+</code></pre><p>结果为<code>f1();</code>报错，预解析f1是变量，调用<code>f1();</code>报错。</p>
+<pre><code>f1();
 var f1 = function ()&#123;
     console.log(a);
     var a = 9;
 &#125;
-</code></pre></div><h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p>1、调用系统的构造函数创建对象</p>
-<div class="hljs code-wrapper"><pre><code>var people = new Object();
+</code></pre><h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p>1、调用系统的构造函数创建对象</p>
+<pre><code>var people = new Object();
 //添加属性
 people.name = &quot;小李&quot;;
 people.age = 18;
@@ -492,10 +492,10 @@ people.eat = function()&#123;
 &#125;;
 //调用
 people.eat();
-</code></pre></div><p>获取变量或者对象属于什么类型</p>
-<div class="hljs code-wrapper"><pre><code>instanceof
-</code></pre></div><p>工厂模式创建对象</p>
-<div class="hljs code-wrapper"><pre><code>function createObject(name,age)&#123;
+</code></pre><p>获取变量或者对象属于什么类型</p>
+<pre><code>instanceof
+</code></pre><p>工厂模式创建对象</p>
+<pre><code>function createObject(name,age)&#123;
     var obj = new Object();
     obj.name = name;
     obj.age = age;
@@ -506,9 +506,9 @@ people.eat();
 &#125;
 var person1 = createObject(&quot;小李&quot;,20);
 person1.say();
-</code></pre></div><p>2、自定义构造函数创建对象</p>
+</code></pre><p>2、自定义构造函数创建对象</p>
 <p>函数和构造函数区别，首字母是不是大写</p>
-<div class="hljs code-wrapper"><pre><code>function Person(name,age)&#123;
+<pre><code>function Person(name,age)&#123;
     this.name = name;
     this.age = age;
     this.say = function ()&#123;
@@ -518,24 +518,24 @@ person1.say();
 var obj = new Person(&quot;小明&quot;,20);
 console.log(obj.age);
 obj.say();
-</code></pre></div><p>3、字面量的方式创建对象</p>
-<div class="hljs code-wrapper"><pre><code>var obj = &#123;
+</code></pre><p>3、字面量的方式创建对象</p>
+<pre><code>var obj = &#123;
     name : &quot;jsop&quot;,
     say : function ()&#123;
         console.log(&quot;I am &quot; + this.name);
     &#125;
 &#125;;
 obj.say();
-</code></pre></div><h2 id="JSON格式的数据遍历"><a href="#JSON格式的数据遍历" class="headerlink" title="JSON格式的数据遍历"></a>JSON格式的数据遍历</h2><p>访问属性的另一种写法：<code>[&quot;&quot;]</code></p>
-<div class="hljs code-wrapper"><pre><code>var obj = &#123;
+</code></pre><h2 id="JSON格式的数据遍历"><a href="#JSON格式的数据遍历" class="headerlink" title="JSON格式的数据遍历"></a>JSON格式的数据遍历</h2><p>访问属性的另一种写法：<code>[&quot;&quot;]</code></p>
+<pre><code>var obj = &#123;
     name : &quot;jsop&quot;,
     say : function ()&#123;
         console.log(&quot;I am &quot; + this.name);
     &#125;
 &#125;;
 obj.say();
-</code></pre></div><p>遍历</p>
-<div class="hljs code-wrapper"><pre><code>var json = &#123;
+</code></pre><p>遍历</p>
+<pre><code>var json = &#123;
     &quot;name&quot; : &quot;jsop&quot;,
     &quot;age&quot; : 18
 &#125;;
@@ -543,22 +543,22 @@ for(var key in json)&#123;
     console.log(key);
     console.log(json[key]);
 &#125;
-</code></pre></div><h2 id="内置对象-系统提供的"><a href="#内置对象-系统提供的" class="headerlink" title="内置对象(系统提供的)"></a>内置对象(系统提供的)</h2><div class="hljs code-wrapper"><pre><code>https://developer.mozilla.org/zh-CN/
-</code></pre></div><p>Math</p>
-<div class="hljs code-wrapper"><pre><code>Math.random()//[0,1)范围
-</code></pre></div><p>Date</p>
-<div class="hljs code-wrapper"><pre><code>var dt = new Date();//当前时间
+</code></pre><h2 id="内置对象-系统提供的"><a href="#内置对象-系统提供的" class="headerlink" title="内置对象(系统提供的)"></a>内置对象(系统提供的)</h2><pre><code>https://developer.mozilla.org/zh-CN/
+</code></pre><p>Math</p>
+<pre><code>Math.random()//[0,1)范围
+</code></pre><p>Date</p>
+<pre><code>var dt = new Date();//当前时间
 console.log(dt.valueOf());//毫秒值
-</code></pre></div><p>String</p>
-<div class="hljs code-wrapper"><pre><code>.replace(&quot;原来的字符串&quot;,&quot;新的字符串&quot;);
+</code></pre><p>String</p>
+<pre><code>.replace(&quot;原来的字符串&quot;,&quot;新的字符串&quot;);
 .slice(开始索引，结束索引)；//截取
 .split();//切割
-</code></pre></div><p>Array</p>
-<div class="hljs code-wrapper"><pre><code>.push(值);//给数组追加值，在最后添加，返回值是数组长度
+</code></pre><p>Array</p>
+<pre><code>.push(值);//给数组追加值，在最后添加，返回值是数组长度
 .unshift();//给数组追加值，在最前添加，返回值是数组长度
 .pop();//删除数组最后的值，返回删除的值
 .shift();//删除数组第一个的值，返回删除的值
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="DOM-文档对象模型"><a href="#DOM-文档对象模型" class="headerlink" title="DOM-文档对象模型"></a>DOM-文档对象模型</h2><p>文档：document</p>
 <p>元素element：页面中的每个标签，都是一个元素，每个元素都可以看成是一个对象。</p>
 <p>节点node：页面中所有的内容都是节点，包括标签，属性，文本。</p>
@@ -566,7 +566,7 @@ console.log(dt.valueOf());//毫秒值
 <hr>
 <h2 id="获取元素对象"><a href="#获取元素对象" class="headerlink" title="获取元素对象"></a>获取元素对象</h2><hr>
 <p><code>document.getElementById(&quot;id&quot;)</code></p>
-<div class="hljs code-wrapper"><pre><code>&lt;body&gt;
+<pre><code>&lt;body&gt;
     &lt;input type=&quot;button&quot; value=&quot;显示&quot; id=&quot;btn&quot;&gt;
 &lt;script &gt;
     document.getElementById(&quot;btn&quot;).onclick = function ()&#123;
@@ -574,15 +574,15 @@ console.log(dt.valueOf());//毫秒值
     &#125;;
 &lt;/script&gt;
 &lt;/body&gt;
-</code></pre></div><p><code>document.getElementsByTagName(&quot;标签名&quot;)</code></p>
+</code></pre><p><code>document.getElementsByTagName(&quot;标签名&quot;)</code></p>
 <p>返回一个伪数组</p>
-<div class="hljs code-wrapper"><pre><code>var pObjs = document.getElementsByTagName(&quot;p&quot;)
+<pre><code>var pObjs = document.getElementsByTagName(&quot;p&quot;)
 for (var i = 0; i &lt; pObjs.length;i++)&#123;
     pObjs[i].innerText = &quot;哈哈哈&quot;;
 &#125;
-</code></pre></div><p>和<code>document.getElementsByTagName</code>类似的有：<code>document.getElementsByName</code>获取的是<code>name</code>伪数组，<code>document.getElementsByClassName</code>获取的是<code>class</code>伪数组</p>
+</code></pre><p>和<code>document.getElementsByTagName</code>类似的有：<code>document.getElementsByName</code>获取的是<code>name</code>伪数组，<code>document.getElementsByClassName</code>获取的是<code>class</code>伪数组</p>
 <p><code>document.getElementsByTagName</code>–排他功能</p>
-<div class="hljs code-wrapper"><pre><code>&lt;input type=&quot;button&quot; value=&quot;显示&quot; &gt;
+<pre><code>&lt;input type=&quot;button&quot; value=&quot;显示&quot; &gt;
 &lt;input type=&quot;button&quot; value=&quot;显示&quot; &gt;
 &lt;input type=&quot;button&quot; value=&quot;显示&quot; &gt;
 &lt;input type=&quot;button&quot; value=&quot;显示&quot; &gt;
@@ -599,16 +599,16 @@ for (var i = 0; i &lt; pObjs.length;i++)&#123;
         &#125;;
     &#125;
 &lt;/script&gt;
-</code></pre></div><p>根据选择器的方式获取元素</p>
-<div class="hljs code-wrapper"><pre><code>&lt;input type=&quot;button&quot; value=&quot;show&quot; id=&quot;btn&quot; class=&quot;cls&quot;/&gt;
+</code></pre><p>根据选择器的方式获取元素</p>
+<pre><code>&lt;input type=&quot;button&quot; value=&quot;show&quot; id=&quot;btn&quot; class=&quot;cls&quot;/&gt;
 &lt;script &gt;
     document.querySelector(&quot;#btn&quot;).onclick = function()&#123;
       alert(&quot;哈哈&quot;);
     &#125;;
     var objs = document.querySelectorAll(&quot;cls&quot;);//伪数组
 &lt;/script&gt;
-</code></pre></div><p>小结</p>
-<div class="hljs code-wrapper"><pre><code>根据id属性的值获取元素，返回来的是一个元素对象document.getELementById(&quot;id属性的值&quot;);
+</code></pre><p>小结</p>
+<pre><code>根据id属性的值获取元素，返回来的是一个元素对象document.getELementById(&quot;id属性的值&quot;);
 
 根据标签名字获取元素，返回来的是一个伪数组，里面保存了多个的DOM对象document.getELementsByTagName(&quot;标签名字&quot;);
 
@@ -617,41 +617,41 @@ for (var i = 0; i &lt; pObjs.length;i++)&#123;
 根据name属性的值获取元素，返回来的是一个伪数组，里面保存了多个的DOM对象document.getELementsByName (&quot;name属性的值&quot;)
 
 根据类样式的名字来获取元素，返回来的是一个伪数组，里面保存了多个的DOM对象document.getELementsByClassName(&quot;类样式的名字&quot;)根据选择器获取元素，返回来的是一个元素对象document.querySelector( &quot;选择器的名字&quot;);
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="对象属性"><a href="#对象属性" class="headerlink" title="对象属性"></a>对象属性</h2><p><code>class</code>设置使用<code>className</code></p>
-<div class="hljs code-wrapper"><pre><code>document.getElementById(&quot;dd&quot;).className = &quot;cls&quot;;
-</code></pre></div><p>获取<code>body</code>、<code>title</code>、<code>html</code></p>
-<div class="hljs code-wrapper"><pre><code>document.body 
+<pre><code>document.getElementById(&quot;dd&quot;).className = &quot;cls&quot;;
+</code></pre><p>获取<code>body</code>、<code>title</code>、<code>html</code></p>
+<pre><code>document.body 
 document.title
 document.documentElement
-</code></pre></div><p>阻止超链接跳转</p>
-<div class="hljs code-wrapper"><pre><code>&lt;a href=&quot;http://www.baidu.com&quot; id=&quot;ak&quot;&gt;百度&lt;/a&gt;
+</code></pre><p>阻止超链接跳转</p>
+<pre><code>&lt;a href=&quot;http://www.baidu.com&quot; id=&quot;ak&quot;&gt;百度&lt;/a&gt;
 &lt;script &gt;
     document.getElementById(&quot;ak&quot;).onclick = function ()&#123;
         alert(&quot;哈啊哈&quot;);
         return false;
     &#125;;
 &lt;/script&gt;
-</code></pre></div><p>鼠标进入和离开</p>
-<div class="hljs code-wrapper"><pre><code>.onmouseover
+</code></pre><p>鼠标进入和离开</p>
+<pre><code>.onmouseover
 .onmouseout
-</code></pre></div><p>文本框获取焦点和失去焦点</p>
-<div class="hljs code-wrapper"><pre><code>.onfocus
+</code></pre><p>文本框获取焦点和失去焦点</p>
+<pre><code>.onfocus
 .onblur
-</code></pre></div><p>键盘弹起</p>
-<div class="hljs code-wrapper"><pre><code>.onkeyup
-</code></pre></div><p>获取输入框输入长度<code>value.length</code></p>
-<div class="hljs code-wrapper"><pre><code>&lt;input type=&quot;text&quot; value=&quot;&quot; id=&quot;txt&quot;/&gt;
+</code></pre><p>键盘弹起</p>
+<pre><code>.onkeyup
+</code></pre><p>获取输入框输入长度<code>value.length</code></p>
+<pre><code>&lt;input type=&quot;text&quot; value=&quot;&quot; id=&quot;txt&quot;/&gt;
 &lt;script &gt;
     document.getElementById(&quot;txt&quot;).onblur = function()&#123;
       alert(this.value.length);
     &#125;;
 &lt;/script&gt;
-</code></pre></div><h2 id="innerText和textContent、innerHTML"><a href="#innerText和textContent、innerHTML" class="headerlink" title="innerText和textContent、innerHTML"></a>innerText和textContent、innerHTML</h2><p>凡是成对的标签，设置文本内容，都使用<code>innerText</code>属性,同样，获取文本内容是<code>.innerText</code>。</p>
-<div class="hljs code-wrapper"><pre><code>document.getElementById(&quot;p1&quot;).innerText=&quot;这是设置文本p&quot;;
-</code></pre></div><p>单数不兼容。innerText：谷歌，火狐支持，IE8不支持；textContent：谷歌，火狐，IE8都支持。</p>
+</code></pre><h2 id="innerText和textContent、innerHTML"><a href="#innerText和textContent、innerHTML" class="headerlink" title="innerText和textContent、innerHTML"></a>innerText和textContent、innerHTML</h2><p>凡是成对的标签，设置文本内容，都使用<code>innerText</code>属性,同样，获取文本内容是<code>.innerText</code>。</p>
+<pre><code>document.getElementById(&quot;p1&quot;).innerText=&quot;这是设置文本p&quot;;
+</code></pre><p>单数不兼容。innerText：谷歌，火狐支持，IE8不支持；textContent：谷歌，火狐，IE8都支持。</p>
 <p>封装</p>
-<div class="hljs code-wrapper"><pre><code>//设置
+<pre><code>//设置
 function setInnerText(element,text)&#123;
     if(typeof element.textContent == &quot;underfined&quot;)&#123;//不支持
         element.innerText = text;
@@ -667,12 +667,12 @@ function getInnerText(element)&#123;
         return element.textContent;
     &#125;
 &#125;
-</code></pre></div><p>innerText和innerHTML都可以设置设置文本，innerHTML还可以设置标签。</p>
+</code></pre><p>innerText和innerHTML都可以设置设置文本，innerHTML还可以设置标签。</p>
 <p>innerText可以获取标签中的文本，但是标签中还有标签，那么最里面的标签文本内容也能获取。innerHTML可以获取标签中的所有文本，包括标签。</p>
-<div class="hljs code-wrapper"><pre><code>.innerHTML = &quot;haha&quot;;
+<pre><code>.innerHTML = &quot;haha&quot;;
 .innerHTML = &quot;&lt;p&gt;这是p&lt;/p&gt;&gt;&quot;;
-</code></pre></div><h2 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h2><p>自定义属性获取：getAttribute。自定义属性动态设置：setAttribute</p>
-<div class="hljs code-wrapper"><pre><code>&lt;!DOCTYPE html&gt;
+</code></pre><h2 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h2><p>自定义属性获取：getAttribute。自定义属性动态设置：setAttribute</p>
+<pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -702,45 +702,45 @@ function getInnerText(element)&#123;
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre></div><p>移除自定义属性</p>
-<div class="hljs code-wrapper"><pre><code>.removeAttribute(&quot;name&quot;)
-</code></pre></div><p>移除class</p>
-<div class="hljs code-wrapper"><pre><code>.removeAttribute(&quot;class&quot;);
-</code></pre></div><p>设置<code>backgroundImage</code></p>
-<div class="hljs code-wrapper"><pre><code>.style.backgroundImage = &quot;url(&quot; + src + &quot;)&quot;;
-</code></pre></div><h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><p>节点的类型</p>
-<div class="hljs code-wrapper"><pre><code>nodeType:1、标签，2、属性，3、文本。
-</code></pre></div><p>节点的名字</p>
-<div class="hljs code-wrapper"><pre><code>nodeName:标签节点：大写的标签名字；属性节点：小写的属性名字；文本节点：#text
-</code></pre></div><p>节点的值</p>
-<div class="hljs code-wrapper"><pre><code>nodeValue:标签节点：null;属性节点：属性值；文本节点：文本内容。
-</code></pre></div><p>获取父节点和父元素</p>
-<div class="hljs code-wrapper"><pre><code>.parentNode
+</code></pre><p>移除自定义属性</p>
+<pre><code>.removeAttribute(&quot;name&quot;)
+</code></pre><p>移除class</p>
+<pre><code>.removeAttribute(&quot;class&quot;);
+</code></pre><p>设置<code>backgroundImage</code></p>
+<pre><code>.style.backgroundImage = &quot;url(&quot; + src + &quot;)&quot;;
+</code></pre><h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><p>节点的类型</p>
+<pre><code>nodeType:1、标签，2、属性，3、文本。
+</code></pre><p>节点的名字</p>
+<pre><code>nodeName:标签节点：大写的标签名字；属性节点：小写的属性名字；文本节点：#text
+</code></pre><p>节点的值</p>
+<pre><code>nodeValue:标签节点：null;属性节点：属性值；文本节点：文本内容。
+</code></pre><p>获取父节点和父元素</p>
+<pre><code>.parentNode
 .parentElement
-</code></pre></div><p>子节点和子元素</p>
-<div class="hljs code-wrapper"><pre><code>.childNodes
+</code></pre><p>子节点和子元素</p>
+<pre><code>.childNodes
 .children
-</code></pre></div><p>第一个子节点和子元素</p>
-<div class="hljs code-wrapper"><pre><code>.firstChild//IE8是元素
+</code></pre><p>第一个子节点和子元素</p>
+<pre><code>.firstChild//IE8是元素
 .firstElementChild//IE8不支持
-</code></pre></div><p>最后一个子节点和子元素</p>
-<div class="hljs code-wrapper"><pre><code>.lastChild//IE8是元素
+</code></pre><p>最后一个子节点和子元素</p>
+<pre><code>.lastChild//IE8是元素
 .lastElementChild//IE8不支持
-</code></pre></div><p>某元素的前一个兄弟节点和元素</p>
-<div class="hljs code-wrapper"><pre><code>.previousSibling//IE8是元素
+</code></pre><p>某元素的前一个兄弟节点和元素</p>
+<pre><code>.previousSibling//IE8是元素
 .previousElementSlbling//IE8不支持
-</code></pre></div><p>某元素的后一个兄弟节点和元素</p>
-<div class="hljs code-wrapper"><pre><code>.nextSibling//IE8是元素
+</code></pre><p>某元素的后一个兄弟节点和元素</p>
+<pre><code>.nextSibling//IE8是元素
 .nextElementSlbling//IE8不支持
-</code></pre></div><p>获取节点</p>
-<div class="hljs code-wrapper"><pre><code>.getAttributeNode(&quot;属性名&quot;);
-</code></pre></div><h2 id="元素的创建"><a href="#元素的创建" class="headerlink" title="元素的创建"></a>元素的创建</h2><p>三种方式</p>
+</code></pre><p>获取节点</p>
+<pre><code>.getAttributeNode(&quot;属性名&quot;);
+</code></pre><h2 id="元素的创建"><a href="#元素的创建" class="headerlink" title="元素的创建"></a>元素的创建</h2><p>三种方式</p>
 <p>1、<code>document.write(&quot;标签的代码及内容&quot;)</code></p>
 <p>缺陷：如果是在页面加载完毕后，通过这种方式创建的，页面上存在的所有的内容全部被干掉。</p>
 <p>2、<code>对象.innerHTML = &quot;标签及代码&quot;</code></p>
 <p>3、<code>document.createElement(&quot;标签的名字&quot;)</code></p>
 <p>注意：要追加到父级元素，appendChild</p>
-<div class="hljs code-wrapper"><pre><code>&lt;input type=&quot;button&quot; value=&quot;追加&quot; id=&quot;btn&quot;/&gt;
+<pre><code>&lt;input type=&quot;button&quot; value=&quot;追加&quot; id=&quot;btn&quot;/&gt;
 &lt;div id=&quot;dv&quot;&gt;&lt;/div&gt;
 &lt;script &gt;
     document.getElementById(&quot;btn&quot;).onclick = function ()&#123;
@@ -749,16 +749,16 @@ function getInnerText(element)&#123;
         document.getElementById(&quot;dv&quot;).appendChild(pObj);
     &#125;;
 &lt;/script&gt;
-</code></pre></div><p>把新的子元素插到第一个子元素前面</p>
-<div class="hljs code-wrapper"><pre><code>.insertBefore(新元素，旧元素);
-</code></pre></div><p>移除父级元素中的第一个元素</p>
-<div class="hljs code-wrapper"><pre><code>.removeChild(父元素对象.firstElementChild);
-</code></pre></div><p>移除父级元素中的所有元素</p>
-<div class="hljs code-wrapper"><pre><code>while(父元素对象.firstElementChild)&#123;
+</code></pre><p>把新的子元素插到第一个子元素前面</p>
+<pre><code>.insertBefore(新元素，旧元素);
+</code></pre><p>移除父级元素中的第一个元素</p>
+<pre><code>.removeChild(父元素对象.firstElementChild);
+</code></pre><p>移除父级元素中的所有元素</p>
+<pre><code>while(父元素对象.firstElementChild)&#123;
     .removeChild(父元素对象.firstElementChild);
 &#125;
-</code></pre></div><p><code>createElement</code>只创建一个元素</p>
-<div class="hljs code-wrapper"><pre><code>&lt;input type=&quot;button&quot; value=&quot;追加&quot; id=&quot;btn&quot;/&gt;
+</code></pre><p><code>createElement</code>只创建一个元素</p>
+<pre><code>&lt;input type=&quot;button&quot; value=&quot;追加&quot; id=&quot;btn&quot;/&gt;
 &lt;div id=&quot;dv&quot;&gt;&lt;/div&gt;
 &lt;script &gt;
     document.getElementById(&quot;btn&quot;).onclick = function ()&#123;
@@ -769,7 +769,7 @@ function getInnerText(element)&#123;
         &#125;
     &#125;;
 &lt;/script&gt;
-</code></pre></div><h2 id="元素绑定多个事件-addEventListener和-attachEvent"><a href="#元素绑定多个事件-addEventListener和-attachEvent" class="headerlink" title="元素绑定多个事件.addEventListener和.attachEvent"></a>元素绑定多个事件<code>.addEventListener</code>和<code>.attachEvent</code></h2><div class="hljs code-wrapper"><pre><code>&lt;input type=&quot;button&quot; value=&quot;多个事件&quot; id=&quot;btn&quot;/&gt;
+</code></pre><h2 id="元素绑定多个事件-addEventListener和-attachEvent"><a href="#元素绑定多个事件-addEventListener和-attachEvent" class="headerlink" title="元素绑定多个事件.addEventListener和.attachEvent"></a>元素绑定多个事件<code>.addEventListener</code>和<code>.attachEvent</code></h2><pre><code>&lt;input type=&quot;button&quot; value=&quot;多个事件&quot; id=&quot;btn&quot;/&gt;
 &lt;script &gt;
     document.getElementById(&quot;btn&quot;).addEventListener(&quot;click&quot;,function()&#123;
         console.log(&quot;哈哈&quot;);
@@ -778,8 +778,8 @@ function getInnerText(element)&#123;
         console.log(&quot;嘻嘻&quot;);
     &#125;,false);
 &lt;/script&gt;
-</code></pre></div><p>兼容性<code>.addEventListener</code>支持谷歌火狐，<code>.attachEvent</code>支持IE</p>
-<div class="hljs code-wrapper"><pre><code>function commonAddEventListener(element,type,fn)&#123;
+</code></pre><p>兼容性<code>.addEventListener</code>支持谷歌火狐，<code>.attachEvent</code>支持IE</p>
+<pre><code>function commonAddEventListener(element,type,fn)&#123;
     if(element.addEventListener())&#123;
         element.addEventListener(type,fn,false);
     &#125; else if (element.attachEvent())&#123;
@@ -788,22 +788,22 @@ function getInnerText(element)&#123;
         element[&quot;on&quot; + type] = fn;
     &#125;
 &#125;
-</code></pre></div><p><code>addEventListener</code>和<code>attachEvent</code>都可以为元素绑定事件。它们的不同点有：参数个数不一样；<code>addEventListener</code>中事件类型没有<code>on</code>,<code>attachEvent</code>中事件类型有<code>on</code>;<code>addEventListener</code>中<code>this</code>指当前绑定的事件，<code>attachEvent</code>中<code>this</code>指<code>window</code>。</p>
+</code></pre><p><code>addEventListener</code>和<code>attachEvent</code>都可以为元素绑定事件。它们的不同点有：参数个数不一样；<code>addEventListener</code>中事件类型没有<code>on</code>,<code>attachEvent</code>中事件类型有<code>on</code>;<code>addEventListener</code>中<code>this</code>指当前绑定的事件，<code>attachEvent</code>中<code>this</code>指<code>window</code>。</p>
 <h2 id="元素解绑事件"><a href="#元素解绑事件" class="headerlink" title="元素解绑事件"></a>元素解绑事件</h2><p>解绑<code>onclick</code>、<code>addEventListener</code>、<code>attachEvent</code></p>
-<div class="hljs code-wrapper"><pre><code>.onclick = null;
+<pre><code>.onclick = null;
 .removeEventListener(&quot;click&quot;,&quot;解绑函数名&quot;,false);
 .detachEvent(&quot;onclick&quot;,&quot;解绑函数名&quot;);
-</code></pre></div><h2 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h2><p>指多个元素嵌套，有层次关系，这些元素都注册了相同事件，如果里面的元素事件触发了，那么外面的元素的该事件自动的触发了。</p>
+</code></pre><h2 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h2><p>指多个元素嵌套，有层次关系，这些元素都注册了相同事件，如果里面的元素事件触发了，那么外面的元素的该事件自动的触发了。</p>
 <p>阻止事件冒泡</p>
-<div class="hljs code-wrapper"><pre><code>window.event.cancelBubble = true;//谷歌和IE支持，火狐不支持
+<pre><code>window.event.cancelBubble = true;//谷歌和IE支持，火狐不支持
 window.event.stopPropagation();//谷歌和火狐支持，IE不支持
-</code></pre></div><h2 id="事件的三个阶段"><a href="#事件的三个阶段" class="headerlink" title="事件的三个阶段"></a>事件的三个阶段</h2><p><code>addEventListener</code>第三个参数控制事件阶段的。</p>
+</code></pre><h2 id="事件的三个阶段"><a href="#事件的三个阶段" class="headerlink" title="事件的三个阶段"></a>事件的三个阶段</h2><p><code>addEventListener</code>第三个参数控制事件阶段的。</p>
 <p>1、事件的捕获阶段，从外向内。</p>
 <p>2、事件的目标阶段，</p>
-<div class="hljs code-wrapper"><pre><code>.eventPhase
-</code></pre></div><p>3、事件的冒泡阶段，从内向外。</p>
+<pre><code>.eventPhase
+</code></pre><p>3、事件的冒泡阶段，从内向外。</p>
 <p>为同一个元素绑定多个不同事件，指定的是同一个事件处理函数</p>
-<div class="hljs code-wrapper"><pre><code>.onclick = f;
+<pre><code>.onclick = f;
 .onmouseover = f;
 .onmouseout = f;
 function f (e)&#123;
@@ -816,103 +816,103 @@ function f (e)&#123;
             break;
     &#125;
 &#125;
-</code></pre></div><h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><p>浏览器对象模型。</p>
+</code></pre><h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><p>浏览器对象模型。</p>
 <p>window:浏览器的顶级对象；</p>
 <p>document:页面中的顶级对象。</p>
 <p>页面中的所用内容都是属于浏览器的，页面中的内容也都是window的。</p>
-<div class="hljs code-wrapper"><pre><code>alert()
+<pre><code>alert()
 prompt()
 confirm()
-</code></pre></div><h2 id="onload"><a href="#onload" class="headerlink" title="onload"></a>onload</h2><p><code>onload</code>使用</p>
-<div class="hljs code-wrapper"><pre><code>window.onload = function()&#123;
+</code></pre><h2 id="onload"><a href="#onload" class="headerlink" title="onload"></a>onload</h2><p><code>onload</code>使用</p>
+<pre><code>window.onload = function()&#123;
     document.getElementById(&quot;btn&quot;).onclick = function ()&#123;
 
     &#125;;
 &#125;;
-</code></pre></div><p><code>onunload</code>页面关闭后触发的事件；<code>onbeforeunload</code>页面关闭前触发的事件(IE8支持)。</p>
+</code></pre><p><code>onunload</code>页面关闭后触发的事件；<code>onbeforeunload</code>页面关闭前触发的事件(IE8支持)。</p>
 <h2 id="location"><a href="#location" class="headerlink" title="location"></a>location</h2><p>属性</p>
-<div class="hljs code-wrapper"><pre><code>window.location.hash//#及后面内容
+<pre><code>window.location.hash//#及后面内容
 window.location.host//主机名及端口号
 window.location.hostname//主机名
 window.location.pathname//路径
 window.location.port//端口号
 window.location.protocol//协议，http
 window.location.search//？及后面内容
-</code></pre></div><p>方法</p>
-<div class="hljs code-wrapper"><pre><code>window.location.href = &quot;设置跳转页面地址&quot;;//可后退
+</code></pre><p>方法</p>
+<pre><code>window.location.href = &quot;设置跳转页面地址&quot;;//可后退
 window.location.assign(&quot;设置跳转页面地址&quot;);//可后退
 window.location.reload();//刷新，重新加载
 window.location.replace(&quot;设置跳转页面地址&quot;);//不可后退
-</code></pre></div><h2 id="history"><a href="#history" class="headerlink" title="history"></a>history</h2><div class="hljs code-wrapper"><pre><code>window.history.back();
+</code></pre><h2 id="history"><a href="#history" class="headerlink" title="history"></a>history</h2><pre><code>window.history.back();
 window.history.forward();
 window.history.go();//整数和负数代表前进和后退
-</code></pre></div><h2 id="navigator"><a href="#navigator" class="headerlink" title="navigator"></a>navigator</h2><div class="hljs code-wrapper"><pre><code>window.navigator.platform//判断浏览器所在的系统平台类型
+</code></pre><h2 id="navigator"><a href="#navigator" class="headerlink" title="navigator"></a>navigator</h2><pre><code>window.navigator.platform//判断浏览器所在的系统平台类型
 window.navigator.userAgent
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><hr>
 <p>js 定时器有两种创建方式：setTimeout和setInterval。</p>
-<div class="hljs code-wrapper"><pre><code>//以指定的时间间隔（以毫秒计）调用一次函数的定时器
+<pre><code>//以指定的时间间隔（以毫秒计）调用一次函数的定时器
 setTimeout(func[, delay, param1, param2, ...])
 
 //以指定的时间间隔（以毫秒计）重复调用一个函数的定时器
 setInterval(func[, delay, param1, param2, ...])
-</code></pre></div><p>setTimeout函数的参数说明:func, 表示定时器要执行的函数名；delay, 表示时间间隔，默认是0，单位是毫秒；param1, 表示定时器执行函数的第一个参数，一次类推传入多个执行函数对应的参数。</p>
+</code></pre><p>setTimeout函数的参数说明:func, 表示定时器要执行的函数名；delay, 表示时间间隔，默认是0，单位是毫秒；param1, 表示定时器执行函数的第一个参数，一次类推传入多个执行函数对应的参数。</p>
 <p>setInterval函数的参数说明:func , 表示定时器要执行的函数名;delay, 表示时间间隔，默认是0，单位是毫秒;param1, 表示定时器执行函数的第一个参数，一次类推传入多个执行函数对应的参数。</p>
 <p>反复执行</p>
-<div class="hljs code-wrapper"><pre><code>var timeId = window.setInterval(function()&#123;&#125;,1000);//设置定时
+<pre><code>var timeId = window.setInterval(function()&#123;&#125;,1000);//设置定时
 window.clearInterval(timeId);//停止定时
-</code></pre></div><p>一次性定时器</p>
-<div class="hljs code-wrapper"><pre><code>var timeId = window.setTimeout(function()&#123;&#125;,1000);
+</code></pre><p>一次性定时器</p>
+<pre><code>var timeId = window.setTimeout(function()&#123;&#125;,1000);
 clearTimeout(timeId);//清除定时缓存空间
-</code></pre></div><hr>
+</code></pre><hr>
 <h2 id="offset"><a href="#offset" class="headerlink" title="offset"></a>offset</h2><p>获取元素的宽和高（包含边框）</p>
-<div class="hljs code-wrapper"><pre><code>.offsetWidth;//数字类型，没有px
+<pre><code>.offsetWidth;//数字类型，没有px
 .offsetHeight;
-</code></pre></div><p>获取元素的left和top，</p>
-<div class="hljs code-wrapper"><pre><code>.offsetLeft;
+</code></pre><p>获取元素的left和top，</p>
+<pre><code>.offsetLeft;
 .offsetTop;
-</code></pre></div><p>注意：</p>
+</code></pre><p>注意：</p>
 <p>没有脱离文档流时，和父级元素的margin、padding、border，自己的margin，有关系。脱离文档流时，和自己的margin、left，有关系。</p>
 <h2 id="scroll"><a href="#scroll" class="headerlink" title="scroll"></a>scroll</h2><p>元素中内容实际的宽和高，不包含边框，没有内容，就是宽高</p>
-<div class="hljs code-wrapper"><pre><code>.scrollWidth;
+<pre><code>.scrollWidth;
 .scrollHeight;
-</code></pre></div><p>向左或者向上卷曲出去的距离</p>
-<div class="hljs code-wrapper"><pre><code>.scrollLeft;
+</code></pre><p>向左或者向上卷曲出去的距离</p>
+<pre><code>.scrollLeft;
 .scrollTop;
-</code></pre></div><p>滚动事件</p>
-<div class="hljs code-wrapper"><pre><code>.onscroll
-</code></pre></div><p>滚动距离计算</p>
-<div class="hljs code-wrapper"><pre><code>var top = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+</code></pre><p>滚动事件</p>
+<pre><code>.onscroll
+</code></pre><p>滚动距离计算</p>
+<pre><code>var top = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 var left = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
-</code></pre></div><h2 id="client"><a href="#client" class="headerlink" title="client"></a>client</h2><p>可视区域（没有边框）边框内的宽高</p>
-<div class="hljs code-wrapper"><pre><code>.clientWidth;
+</code></pre><h2 id="client"><a href="#client" class="headerlink" title="client"></a>client</h2><p>可视区域（没有边框）边框内的宽高</p>
+<pre><code>.clientWidth;
 .clientHeight;
-</code></pre></div><p>左边框和上边框的宽度</p>
-<div class="hljs code-wrapper"><pre><code>.clientLeft;
+</code></pre><p>左边框和上边框的宽度</p>
+<pre><code>.clientLeft;
 .clientTop;
-</code></pre></div><h2 id="获取元素的样式属性值"><a href="#获取元素的样式属性值" class="headerlink" title="获取元素的样式属性值"></a>获取元素的样式属性值</h2><div class="hljs code-wrapper"><pre><code>window.getComputedStyle(元素对象,null).属性;//谷歌，火狐
+</code></pre><h2 id="获取元素的样式属性值"><a href="#获取元素的样式属性值" class="headerlink" title="获取元素的样式属性值"></a>获取元素的样式属性值</h2><pre><code>window.getComputedStyle(元素对象,null).属性;//谷歌，火狐
 元素对象.currentStyle.属性;//IE8
-</code></pre></div><p>兼容代码</p>
-<div class="hljs code-wrapper"><pre><code>function getStyle(element,attr)&#123;
+</code></pre><p>兼容代码</p>
+<pre><code>function getStyle(element,attr)&#123;
    if(window.getComputedStyle)&#123;
        return window.getComputedStyle(element,attr)[attr];//谷歌，火狐
    &#125; else&#123;
        return element.currentStyle[attr];
    &#125;
 &#125;
-</code></pre></div><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>透明度</p>
-<div class="hljs code-wrapper"><pre><code>.style.opacity = 
-</code></pre></div><hr>
+</code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>透明度</p>
+<pre><code>.style.opacity = 
+</code></pre><hr>
 <h2 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>jQuery是对JavaScript的封装，它是免费、开源的JavaScript函数库，jQuery极大地简化了JavaScript编程。</p>
 <p>jQuery的作用和JavaScript一样，都是负责网页和用户的交互效果。jQuery的优点就是兼容主流浏览器，代码编写更加简单。</p>
 <hr>
 <h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><hr>
 <p>引入</p>
-<div class="hljs code-wrapper"><pre><code>&lt;script src=&quot;js/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
-</code></pre></div><p>使用js获取标签元素，需要页面加载完成以后再获取，我们通过给onload事件属性设置了一个函数来获取标签元素，而jquery提供了ready函数来解决这个问题，保证获取标签元素没有问题，它的速度比原生的 <code>window.onload</code> 更快。</p>
+<pre><code>&lt;script src=&quot;js/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>使用js获取标签元素，需要页面加载完成以后再获取，我们通过给onload事件属性设置了一个函数来获取标签元素，而jquery提供了ready函数来解决这个问题，保证获取标签元素没有问题，它的速度比原生的 <code>window.onload</code> 更快。</p>
 <p>入口函数示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>&lt;script src=&quot;js/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
+<pre><code>&lt;script src=&quot;js/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
     window.onload = function()&#123;
         var oDiv = document.getElementById(&apos;div01&apos;);
@@ -925,32 +925,32 @@ var left = window.pageXOffset || document.documentElement.scrollLeft || document
 &lt;/script&gt;
 
 &lt;div id=&quot;div01&quot;&gt;这是一个div&lt;/div&gt;
-</code></pre></div><p>入口函数的简写示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>// 上面ready的写法可以简写成下面的形式：
+</code></pre><p>入口函数的简写示例代码:</p>
+<pre><code>// 上面ready的写法可以简写成下面的形式：
 $(function()&#123;
     var $div = $(&apos;#div01&apos;);
     alert(&apos;jquery获取的div：&apos; + $div);
 &#125;); 
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h3><hr>
 <p>选择器就是快速选择标签元素，获取标签的，选择规则和css样式一样。</p>
 <p>标签选择器、类选择器、id选择器、层级选择器、属性选择器，示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>$(&apos;#myId&apos;) //选择id为myId的标签
+<pre><code>$(&apos;#myId&apos;) //选择id为myId的标签
 $(&apos;.myClass&apos;) // 选择class为myClass的标签
 $(&apos;li&apos;) //选择所有的li标签
 $(&apos;#ul1 li span&apos;) //选择id为ul1标签下的所有li标签下的span标签
 $(&apos;input[name=first]&apos;) // 选择name属性等于first的input标签
-</code></pre></div><p>可以使用length属性来判断标签是否选择成功, 如果length大于0表示选择成功，否则选择失败。</p>
-<div class="hljs code-wrapper"><pre><code>$(function()&#123;
+</code></pre><p>可以使用length属性来判断标签是否选择成功, 如果length大于0表示选择成功，否则选择失败。</p>
+<pre><code>$(function()&#123;
     result = $(&quot;div&quot;).length;
     alert(result);
 &#125;);
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="选择集过滤"><a href="#选择集过滤" class="headerlink" title="选择集过滤"></a>选择集过滤</h3><hr>
 <p>选择集过滤就是在选择标签的集合里面过滤自己需要的标签。</p>
 <p>选择集过滤的操作：has(选择器名称)方法，表示选取包含指定选择器的标签；eq(索引)方法，表示选取指定索引的标签。</p>
 <p>has方法的示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>&lt;script&gt;
+<pre><code>&lt;script&gt;
     $(function()&#123;
         //  has方法的使用
         var $div = $(&quot;div&quot;).has(&quot;#mytext&quot;);
@@ -968,8 +968,8 @@ $(&apos;input[name=first]&apos;) // 选择name属性等于first的input标签
     &lt;input type=&quot;text&quot;&gt;
     &lt;input type=&quot;button&quot;&gt;
 &lt;/div&gt;
-</code></pre></div><p>eq方法的示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>&lt;script&gt;
+</code></pre><p>eq方法的示例代码:</p>
+<pre><code>&lt;script&gt;
     $(function()&#123;
         //  has方法的使用
         var $div = $(&quot;div&quot;).has(&quot;#mytext&quot;);
@@ -992,11 +992,11 @@ $(&apos;input[name=first]&apos;) // 选择name属性等于first的input标签
     &lt;input type=&quot;text&quot;&gt;
     &lt;input type=&quot;button&quot;&gt;
 &lt;/div&gt;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="选择集转移"><a href="#选择集转移" class="headerlink" title="选择集转移"></a>选择集转移</h3><hr>
 <p>选择集转移就是以选择的标签为参照，然后获取转移后的标签。</p>
 <p>选择集转移操作：</p>
-<div class="hljs code-wrapper"><pre><code>$(&apos;#box&apos;).prev(); 表示选择id是box元素的上一个的同级元素
+<pre><code>$(&apos;#box&apos;).prev(); 表示选择id是box元素的上一个的同级元素
 $(&apos;#box&apos;).prevAll(); 表示选择id是box元素的上面所有的同级元素
 $(&apos;#box&apos;).next(); 表示选择id是box元素的下一个的同级元素
 $(&apos;#box&apos;).nextAll(); 表示选择id是box元素的下面所有的同级元素
@@ -1004,10 +1004,10 @@ $(&apos;#box&apos;).parent(); 表示选择id是box元素的父元素
 $(&apos;#box&apos;).children(); 表示选择id是box元素的所有子元素
 $(&apos;#box&apos;).siblings(); 表示选择id是box元素的其它同级元素
 $(&apos;#box&apos;).find(&apos;.myClass&apos;); 表示选择id是box元素的class等于myClass的元素
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="获取和设置元素内容"><a href="#获取和设置元素内容" class="headerlink" title="获取和设置元素内容"></a>获取和设置元素内容</h3><hr>
 <p>jquery中的html方法可以获取和设置标签的html内容。</p>
-<div class="hljs code-wrapper"><pre><code>&lt;script&gt;
+<pre><code>&lt;script&gt;
     $(function()&#123;
 
         var $div = $(&quot;#div1&quot;);
@@ -1024,10 +1024,10 @@ $(&apos;#box&apos;).find(&apos;.myClass&apos;); 表示选择id是box元素的cla
 &lt;div id=&quot;div1&quot;&gt;
     &lt;p&gt;hello&lt;/p&gt;
 &lt;/div&gt;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="获取和设置元素属性"><a href="#获取和设置元素属性" class="headerlink" title="获取和设置元素属性"></a>获取和设置元素属性</h3><hr>
 <p>使用css方法可以给标签设置样式属性，那么设置标签的其它属性可以使用prop方法了。</p>
-<div class="hljs code-wrapper"><pre><code>&lt;style&gt;
+<pre><code>&lt;style&gt;
     .a01&#123;
         color:red;
     &#125;
@@ -1059,17 +1059,17 @@ $(&apos;#box&apos;).find(&apos;.myClass&apos;); 表示选择id是box元素的cla
 
 &lt;a id=&quot;link01&quot;&gt;这是一个链接&lt;/a&gt;
 &lt;input type=&quot;text&quot; id=&quot;input01&quot; value=&quot;111111&quot;&gt;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="jQuery事件"><a href="#jQuery事件" class="headerlink" title="jQuery事件"></a>jQuery事件</h3><hr>
 <p>常用事件</p>
-<div class="hljs code-wrapper"><pre><code>click() 鼠标单击
+<pre><code>click() 鼠标单击
 blur() 元素失去焦点
 focus() 元素获得焦点
 mouseover() 鼠标进入（进入子元素也触发）
 mouseout() 鼠标离开（离开子元素也触发）
 ready() DOM加载完成
-</code></pre></div><p>示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>&lt;script&gt;
+</code></pre><p>示例代码:</p>
+<pre><code>&lt;script&gt;
     $(function()&#123;
         var $li = $(&apos;.list li&apos;);
         var $button = $(&apos;#button1&apos;)
@@ -1126,11 +1126,11 @@ ready() DOM加载完成
     &lt;input type=&quot;text&quot; id=&quot;text1&quot;&gt;
     &lt;input type=&quot;button&quot; id=&quot;button1&quot; value=&quot;点击&quot;&gt;
 &lt;/div&gt;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="事件代理"><a href="#事件代理" class="headerlink" title="事件代理"></a>事件代理</h3><hr>
 <p>事件代理就是利用事件冒泡的原理(事件冒泡就是事件会向它的父级一级一级传递),把事件加到父级上，通过判断事件来源，执行相应的子元素的操作，事件代理首先可以极大减少事件绑定次数，提高性能；其次可以让新加入的子元素也可以拥有相同的操作。</p>
 <p>事件冒泡代码:当点击子元素div，它的点击事件会向它父元素传递，也会触发了父元素的点击事件，这就是事件冒泡。</p>
-<div class="hljs code-wrapper"><pre><code>&lt;script&gt;
+<pre><code>&lt;script&gt;
     $(function()&#123;
         var $div1 = $(&apos;#div1&apos;);
         var $div2 = $(&apos;#div2&apos;);
@@ -1150,8 +1150,8 @@ ready() DOM加载完成
         哈哈
     &lt;/div&gt;
 &lt;/div&gt;
-</code></pre></div><p>事件代理的使用，一般绑定事件的写法:</p>
-<div class="hljs code-wrapper"><pre><code>$(function()&#123;
+</code></pre><p>事件代理的使用，一般绑定事件的写法:</p>
+<pre><code>$(function()&#123;
     $ali = $(&apos;#list li&apos;);
     $ali.click(function() &#123;
         $(this).css(&#123;background:&apos;red&apos;&#125;);
@@ -1165,8 +1165,8 @@ ready() DOM加载完成
     &lt;li&gt;4&lt;/li&gt;
     &lt;li&gt;5&lt;/li&gt;
 &lt;/ul&gt;
-</code></pre></div><p>事件代理的写法</p>
-<div class="hljs code-wrapper"><pre><code>$(function()&#123;
+</code></pre><p>事件代理的写法</p>
+<pre><code>$(function()&#123;
     $list = $(&apos;#list&apos;);
     // 父元素ul 来代理 子元素li的点击事件
     $list.delegate(&apos;li&apos;, &apos;click&apos;, function() &#123;
@@ -1182,17 +1182,17 @@ ready() DOM加载完成
     &lt;li&gt;4&lt;/li&gt;
     &lt;li&gt;5&lt;/li&gt;
 &lt;/ul&gt;
-</code></pre></div><p>delegate方法参数说明:</p>
-<div class="hljs code-wrapper"><pre><code>delegate(childSelector,event,function)
+</code></pre><p>delegate方法参数说明:</p>
+<pre><code>delegate(childSelector,event,function)
 //childSelector: 子元素的选择器
 //event: 事件名称，比如: &apos;click&apos;
 //function: 当事件触发执行的函数
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="JavaScript对象"><a href="#JavaScript对象" class="headerlink" title="JavaScript对象"></a>JavaScript对象</h3><hr>
 <p>JavaScript中的所有事物都是对象：字符串、数值、数组、函数等都可以认为是对象，此外，JavaScript 允许自定义对象，对象可以拥有属性和方法。</p>
 <p>创建自定义javascript对象有两种方式:通过顶级Object类型来实例化一个对象;通过对象字面量创建一个对象。</p>
 <p>Object类创建对象的示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>&lt;script&gt;
+<pre><code>&lt;script&gt;
     var person = new Object();
     // 添加属性：
     person.name = &apos;tom&apos;;
@@ -1207,8 +1207,8 @@ ready() DOM加载完成
     alert(person.age);
     person.sayName();
 &lt;/script&gt;
-</code></pre></div><p>对象字面量创建对象的示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>&lt;script&gt;
+</code></pre><p>对象字面量创建对象的示例代码:</p>
+<pre><code>&lt;script&gt;
     var person2 = &#123;
         name:&apos;Rose&apos;,
         age: 18,
@@ -1221,21 +1221,21 @@ ready() DOM加载完成
     alert(person2.age);
     person2.sayName();
 &lt;/script&gt;
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="json数据"><a href="#json数据" class="headerlink" title="json数据"></a>json数据</h3><hr>
 <p>json本质上是字符串，如果在js中操作json数据，可以将json字符串转化为JavaScript对象。</p>
 <p>示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>var sJson = &apos;&#123;&quot;name&quot;:&quot;tom&quot;,&quot;age&quot;:18&#125;&apos;;
+<pre><code>var sJson = &apos;&#123;&quot;name&quot;:&quot;tom&quot;,&quot;age&quot;:18&#125;&apos;;
 var oPerson = JSON.parse(sJson);
 // 操作属性
 alert(oPerson.name);
 alert(oPerson.age);
-</code></pre></div><hr>
+</code></pre><hr>
 <h3 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h3><hr>
 <p>ajax 是 <code>Asynchronous JavaScript and XML</code>的简写，ajax一个前后台配合的技术，它可以让 javascript 发送异步的 http 请求，与后台通信进行数据的获取，ajax 最大的优点是实现局部刷新，ajax可以发送http请求，当获取到后台数据的时候更新页面显示数据实现局部刷新，当前端页面想和后台服务器进行数据交互就可以使用ajax了。</p>
 <p>jquery将它封装成了一个方法<code>$.ajax()</code>，我们可以直接用这个方法来执行ajax请求。</p>
 <p>示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>&lt;script&gt;
+<pre><code>&lt;script&gt;
     $.ajax(&#123;
     // 1.url 请求地址
     url:&apos;http://t.weather.sojson.com/api/weather/city/101010100&apos;,
@@ -1256,9 +1256,9 @@ alert(oPerson.age);
     async:true
 &#125;);
 &lt;/script&gt;
-</code></pre></div><p>同步和异步说明：同步是一个ajax请求完成另外一个才可以请求，需要等待上一个ajax请求完成，好比线程同步。异步是多个ajax同时请求，不需要等待其它ajax请求完成，好比线程异步。</p>
+</code></pre><p>同步和异步说明：同步是一个ajax请求完成另外一个才可以请求，需要等待上一个ajax请求完成，好比线程同步。异步是多个ajax同时请求，不需要等待其它ajax请求完成，好比线程异步。</p>
 <p><code>$.ajax</code>按照请求方式可以简写成<code>$.get</code>或者<code>$.post</code>方式。示例代码:</p>
-<div class="hljs code-wrapper"><pre><code>&lt;script&gt;
+<pre><code>&lt;script&gt;
     $(function()&#123;
         /*
          1. url 请求地址
@@ -1288,7 +1288,7 @@ alert(oPerson.age);
         &#125;); 
     &#125;);
 &lt;/script&gt;
-</code></pre></div><hr>
+</code></pre><hr>
 
             </div>
             <hr>
