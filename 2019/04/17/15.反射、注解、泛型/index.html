@@ -231,14 +231,14 @@
               <h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><p><strong>.java文件，通过编译，生成.class文件，再通过类加载器，加载到jdk内存中并且生成字节码对象class。</strong></p>
 <p>所有的反射功能都是基于我们字节码（class），一个类的class在内存中只有一份，而且class其实也是一个对象Class。</p>
 <h3 id="获取class对象的三种方式"><a href="#获取class对象的三种方式" class="headerlink" title="获取class对象的三种方式"></a>获取class对象的三种方式</h3><p>方式一： 通过Object继承来的方法(getClass)获取对象对应的字节码文件对象</p>
-<pre><code>Person p = new Person();//创建Peron对象
+<div class="hljs code-wrapper"><pre><code>Person p = new Person();//创建Peron对象
 Class clazz = p.getClass();//1
-</code></pre><p>方式二：每一个类型都具备一个class静态属性，通过该属性即可获取该类的字节码文件对象。</p>
-<pre><code>Class clazz = Person.class;
-</code></pre><p>方式三：必须类全名,使用最多。</p>
-<pre><code>Class clazz = Class.forName(&quot;cn.bean.Person&quot;);//必须类全名
-</code></pre><h3 id="通过构造函数，获取对象"><a href="#通过构造函数，获取对象" class="headerlink" title="通过构造函数，获取对象"></a>通过构造函数，获取对象</h3><p>默认构造函数</p>
-<pre><code>public class Person &#123;
+</code></pre></div><p>方式二：每一个类型都具备一个class静态属性，通过该属性即可获取该类的字节码文件对象。</p>
+<div class="hljs code-wrapper"><pre><code>Class clazz = Person.class;
+</code></pre></div><p>方式三：必须类全名,使用最多。</p>
+<div class="hljs code-wrapper"><pre><code>Class clazz = Class.forName(&quot;cn.bean.Person&quot;);//必须类全名
+</code></pre></div><h3 id="通过构造函数，获取对象"><a href="#通过构造函数，获取对象" class="headerlink" title="通过构造函数，获取对象"></a>通过构造函数，获取对象</h3><p>默认构造函数</p>
+<div class="hljs code-wrapper"><pre><code>public class Person &#123;
     public Person() &#123;
         System.out.println(&quot;无参构造---&quot;);
     &#125;
@@ -250,8 +250,8 @@ try&#123;
 &#125; catch (Exception e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><p>有参公共构造函数</p>
-<pre><code>public class Person &#123;
+</code></pre></div><p>有参公共构造函数</p>
+<div class="hljs code-wrapper"><pre><code>public class Person &#123;
     private String name;
     public Person(String name) &#123;
         this.name = name;
@@ -266,8 +266,8 @@ try&#123;
 &#125; catch (Exception e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><p>无参私有构造</p>
-<pre><code>public class Person &#123;
+</code></pre></div><p>无参私有构造</p>
+<div class="hljs code-wrapper"><pre><code>public class Person &#123;
     private Person() &#123;
         System.out.println(&quot;无参私有构造---&quot; );
     &#125;
@@ -281,8 +281,8 @@ try&#123;
 &#125; catch (Exception e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><p>有参私有构造</p>
-<pre><code>public class Person &#123;
+</code></pre></div><p>有参私有构造</p>
+<div class="hljs code-wrapper"><pre><code>public class Person &#123;
     private String name;
     private Person(String name) &#123;
         this.name = name;
@@ -298,7 +298,7 @@ try&#123;
 &#125; catch (Exception e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><h3 id="获取属性"><a href="#获取属性" class="headerlink" title="获取属性"></a>获取属性</h3><pre><code>public class Person &#123;
+</code></pre></div><h3 id="获取属性"><a href="#获取属性" class="headerlink" title="获取属性"></a>获取属性</h3><div class="hljs code-wrapper"><pre><code>public class Person &#123;
     private String name = &quot;李四&quot;;
     public int age = 18;
 &#125;
@@ -318,8 +318,8 @@ try &#123;
 &#125; catch (Exception e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><h3 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h3><p>获取，私有有参方法和公有无参方法</p>
-<pre><code>public class Person &#123;
+</code></pre></div><h3 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h3><p>获取，私有有参方法和公有无参方法</p>
+<div class="hljs code-wrapper"><pre><code>public class Person &#123;
 
     private String name = &quot;李四&quot;;
 
@@ -349,22 +349,22 @@ try&#123;
 &#125; catch (Exception e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><h3 id="实例：调用静态属性"><a href="#实例：调用静态属性" class="headerlink" title="实例：调用静态属性"></a>实例：调用静态属性</h3><pre><code>Class clazz = Class.forName(&quot;android.app.ActivityThread&quot;);
+</code></pre></div><h3 id="实例：调用静态属性"><a href="#实例：调用静态属性" class="headerlink" title="实例：调用静态属性"></a>实例：调用静态属性</h3><div class="hljs code-wrapper"><pre><code>Class clazz = Class.forName(&quot;android.app.ActivityThread&quot;);
 Field sCurrentActivityThreadField =  clazz.getDeclaredField(&quot;sCurrentActivityThread&quot;);
 sCurrentActivityThreadField.setAccessible(true);
 //sCurrentActivityThread是静态的，可以传null
 Object sCurrentActivityThread = sCurrentActivityThreadField.get(null);
-</code></pre><h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>注解和反射没有什么必然联系。注解只是一个标识（标记），没有具体的功能逻辑代码。注解作用:给jvm看的，给机器看的。注解优点：开发效率高，成本低。注解缺点：耦合性大，并且不利于后期维护。</p>
-<h3 id="jdk5提供的注解"><a href="#jdk5提供的注解" class="headerlink" title="jdk5提供的注解"></a>jdk5提供的注解</h3><pre><code>@Override：告知编译器此方法是覆盖父类的 
+</code></pre></div><h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>注解和反射没有什么必然联系。注解只是一个标识（标记），没有具体的功能逻辑代码。注解作用:给jvm看的，给机器看的。注解优点：开发效率高，成本低。注解缺点：耦合性大，并且不利于后期维护。</p>
+<h3 id="jdk5提供的注解"><a href="#jdk5提供的注解" class="headerlink" title="jdk5提供的注解"></a>jdk5提供的注解</h3><div class="hljs code-wrapper"><pre><code>@Override：告知编译器此方法是覆盖父类的 
 @Deprecated：标注过时 
 @SuppressWarnings：压制警告
-</code></pre><h3 id="编写一个注解"><a href="#编写一个注解" class="headerlink" title="编写一个注解"></a>编写一个注解</h3><p>关键字：<code>@interface</code>。属性：<code>返回值 名称()</code> 。</p>
+</code></pre></div><h3 id="编写一个注解"><a href="#编写一个注解" class="headerlink" title="编写一个注解"></a>编写一个注解</h3><p>关键字：<code>@interface</code>。属性：<code>返回值 名称()</code> 。</p>
 <blockquote>
 <p>注意：如果属性的名字是value，并且注解的属性值有一个,那么在使用注解时可以省略value。</p>
 </blockquote>
 <p>注解属性类型只能是以下几种:基本类型、String、枚举类型、注解类型、Class类型、以上类型的一维数组类型。</p>
 <p>元注解：代表修饰注解的注解。作用：限制定义的注解的特性。</p>
-<pre><code>@Retention//代表注解什么时候起作用 
+<div class="hljs code-wrapper"><pre><code>@Retention//代表注解什么时候起作用 
 SOURCE: 注解在源码级别可见，编程阶段
 CLASS：注解在字节码文件级别可见，编译时（打包的时候） 
 RUNTIME：注解在整个运行阶段都可见 
@@ -373,11 +373,11 @@ RUNTIME：注解在整个运行阶段都可见
 FIELD:字段上可用此注解 
 METHOD:方法上可以用此注解 
 TYPE:类/接口上可以使用此注解
-</code></pre><p>例如</p>
-<pre><code>@Target(ElementType.FIELD)
+</code></pre></div><p>例如</p>
+<div class="hljs code-wrapper"><pre><code>@Target(ElementType.FIELD)
 @Target(&#123;ElementType.METHOD,ElementType.TYPE&#125;)
-</code></pre><p>注解例子</p>
-<pre><code>@Target(&#123;ElementType.METHOD,ElementType.TYPE&#125;)
+</code></pre></div><p>注解例子</p>
+<div class="hljs code-wrapper"><pre><code>@Target(&#123;ElementType.METHOD,ElementType.TYPE&#125;)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Anno &#123;
     int age() default 28;
@@ -396,10 +396,10 @@ public class Test&#123;
     public void test()&#123;
     &#125;
 &#125;
-</code></pre><p><code>default</code>作用是设置默认值,如果设置了<code>default</code>,注解时候可以不传。</p>
+</code></pre></div><p><code>default</code>作用是设置默认值,如果设置了<code>default</code>,注解时候可以不传。</p>
 <p>butterknife 用了反射没有？ 一个地方用了Class.fromName().newInstance();（new 对象的时候）。</p>
 <p>补充<code>@Target</code>注解的作用目标</p>
-<pre><code>@Target(ElementType.TYPE)   //接口、类、枚举、注解
+<div class="hljs code-wrapper"><pre><code>@Target(ElementType.TYPE)   //接口、类、枚举、注解
 
 @Target(ElementType.FIELD) //字段、枚举的常量
 
@@ -414,9 +414,9 @@ public class Test&#123;
 @Target(ElementType.ANNOTATION_TYPE)//注解
 
 @Target(ElementType.PACKAGE) ///包   
-</code></pre><h3 id="反射加注解实现"><a href="#反射加注解实现" class="headerlink" title="反射加注解实现"></a>反射加注解实现</h3><p><strong>要想解析使用了注解的类，那么该注解的Retention必须设置成Runtime。</strong>关于注解解析的实质：从注解中解析出属性值。字节码对象存在于获得注解相关的方法。</p>
+</code></pre></div><h3 id="反射加注解实现"><a href="#反射加注解实现" class="headerlink" title="反射加注解实现"></a>反射加注解实现</h3><p><strong>要想解析使用了注解的类，那么该注解的Retention必须设置成Runtime。</strong>关于注解解析的实质：从注解中解析出属性值。字节码对象存在于获得注解相关的方法。</p>
 <p>运行时注解，仿xutil获取Id（编译时注解-ButterKnife注解）:</p>
-<pre><code>@Target(ElementType.FIELD)
+<div class="hljs code-wrapper"><pre><code>@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ViewById &#123;
     int value();
@@ -454,18 +454,18 @@ protected void onCreate(Bundle savedInstanceState) &#123;
     ViewUtils.inject(this);
     tv.setText(&quot;ViewById&quot;);
 &#125;
-</code></pre><h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>泛型的好处：将运行时期的ClassCastException，转移到了编译时期变成了编译失败;避免了类型强转的麻烦。</p>
+</code></pre></div><h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>泛型的好处：将运行时期的ClassCastException，转移到了编译时期变成了编译失败;避免了类型强转的麻烦。</p>
 <p>缺点：泛型不能用于显性地引用运行时类型的操作之中，例如转型，instanceof和new操作。</p>
 <p>多泛型</p>
-<pre><code>class MorePoint&lt;T,U,A,B,C&gt;&#123;
+<div class="hljs code-wrapper"><pre><code>class MorePoint&lt;T,U,A,B,C&gt;&#123;
 &#125;
-</code></pre><p>任意一个大写字母都可以。他们的意义是完全相同的，但为了提高可读性，大家还是用有意义的字母比较好，一般来讲，在不同的情境下使用的字母意义如下：</p>
-<pre><code>E — Element，常用在java Collection里，如：List&lt;E&gt;,Iterator&lt;E&gt;,Set&lt;E&gt;
+</code></pre></div><p>任意一个大写字母都可以。他们的意义是完全相同的，但为了提高可读性，大家还是用有意义的字母比较好，一般来讲，在不同的情境下使用的字母意义如下：</p>
+<div class="hljs code-wrapper"><pre><code>E — Element，常用在java Collection里，如：List&lt;E&gt;,Iterator&lt;E&gt;,Set&lt;E&gt;
 K,V — Key，Value，代表Map的键值对
 N — Number，数字
 T — Type，类型，如String，Integer等等
-</code></pre><h3 id="类泛型"><a href="#类泛型" class="headerlink" title="类泛型"></a>类泛型</h3><p>在任何地方出现的，代表的是统一类型。<strong>创建对象时，确定泛型的类型</strong></p>
-<pre><code>class ArrayList&lt;T&gt; &#123;
+</code></pre></div><h3 id="类泛型"><a href="#类泛型" class="headerlink" title="类泛型"></a>类泛型</h3><p>在任何地方出现的，代表的是统一类型。<strong>创建对象时，确定泛型的类型</strong></p>
+<div class="hljs code-wrapper"><pre><code>class ArrayList&lt;T&gt; &#123;
     public boolean add(T e) &#123;
         return false;
     &#125;
@@ -474,19 +474,19 @@ T — Type，类型，如String，Integer等等
         return null;
     &#125;
 &#125;
-</code></pre><h3 id="方法泛型"><a href="#方法泛型" class="headerlink" title="方法泛型"></a>方法泛型</h3><p>定义格式：<code>修饰符 &lt;代表泛型的变量&gt; 返回值类型 方法名(参数)&#123;泛型类型 变量名&#125;</code></p>
+</code></pre></div><h3 id="方法泛型"><a href="#方法泛型" class="headerlink" title="方法泛型"></a>方法泛型</h3><p>定义格式：<code>修饰符 &lt;代表泛型的变量&gt; 返回值类型 方法名(参数)&#123;泛型类型 变量名&#125;</code></p>
 <p>例如，API中的ArrayList集合中的方法：</p>
-<pre><code>//该方法，用来把集合元素存储到指定数据类型的数组中，返回已存储集合元素的数组
+<div class="hljs code-wrapper"><pre><code>//该方法，用来把集合元素存储到指定数据类型的数组中，返回已存储集合元素的数组
 public &lt;T&gt; T[] toArray(T[] a)&#123;  &#125;  
 
 //使用格式：调用方法时，确定泛型的类型
 ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
 String[] arr = new String[100];
 String[] result = list.toArray(arr);
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 <p>方法泛型最好与类的泛型一致,如果不一致,需要在方法上声明该泛型静态方法必须声明自己的泛型</p>
 </blockquote>
-<h3 id="泛型的接口"><a href="#泛型的接口" class="headerlink" title="泛型的接口"></a>泛型的接口</h3><pre><code>//带有泛型的接口
+<h3 id="泛型的接口"><a href="#泛型的接口" class="headerlink" title="泛型的接口"></a>泛型的接口</h3><div class="hljs code-wrapper"><pre><code>//带有泛型的接口
 public interface List &lt;E&gt;&#123;
     abstract boolean add(E e);
 &#125;
@@ -496,8 +496,8 @@ public class ArrayList&lt;E&gt; implements List&lt;E&gt;&#123;
 //另一种实现类,实现接口的同时,也指定了数据类型
 public class XXX implements List&lt;String&gt;&#123;
 &#125;
-</code></pre><h3 id="泛型的通配"><a href="#泛型的通配" class="headerlink" title="泛型的通配"></a>泛型的通配</h3><p>匹配所有的数据类型:<code>&lt;?&gt;</code>。</p>
-<h3 id="泛型的上限和下限"><a href="#泛型的上限和下限" class="headerlink" title="泛型的上限和下限"></a>泛型的上限和下限</h3><pre><code>// 上限，限制的是父类,接收BaseActivity和它的子类
+</code></pre></div><h3 id="泛型的通配"><a href="#泛型的通配" class="headerlink" title="泛型的通配"></a>泛型的通配</h3><p>匹配所有的数据类型:<code>&lt;?&gt;</code>。</p>
+<h3 id="泛型的上限和下限"><a href="#泛型的上限和下限" class="headerlink" title="泛型的上限和下限"></a>泛型的上限和下限</h3><div class="hljs code-wrapper"><pre><code>// 上限，限制的是父类,接收BaseActivity和它的子类
 public void startActivity(Class&lt;? extends BaseActivity&gt; clazz) &#123;
     Intent intent = new Intent(this,clazz);
     startActivity(intent);
@@ -508,7 +508,7 @@ public void startActivity1(Class&lt;? super BaseActivity&gt; clazz) &#123;
     Intent intent = new Intent(this,clazz);
     startActivity(intent);
 &#125;
-</code></pre>
+</code></pre></div>
             </div>
             <hr>
             <div>

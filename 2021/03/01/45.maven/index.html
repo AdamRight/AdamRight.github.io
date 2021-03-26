@@ -285,23 +285,23 @@
 </tbody>
 </table>
 <p>通过<code>scope</code>指定依赖范围，默认是<code>compile</code>：</p>
-<pre><code>&lt;dependency&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;dependency&gt;
     &lt;groupId&gt;junit&lt;/groupId&gt;
     &lt;artifactId&gt;junit&lt;/artifactId&gt;
     &lt;version&gt;4.12&lt;/version&gt;
     &lt;scope&gt;compile&lt;/scope&gt;
 &lt;/dependency&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h2 id="maven的依赖冲突"><a href="#maven的依赖冲突" class="headerlink" title="maven的依赖冲突"></a>maven的依赖冲突</h2><hr>
 <p>排除依赖：可以使用<code>exclusions</code>标签将传递过来的依赖排除出去。</p>
-<pre><code>&lt;exclusions&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;exclusions&gt;
     &lt;exclusion&gt;
     ....
     &lt;/exclusion&gt;
 &lt;/exclusions&gt;
-</code></pre><p>版本锁定:采用直接锁定版本的方法确定依赖jar包的版本，版本锁定后则不考虑依赖的声明顺序或依赖的路径，以锁定的版本为准添加到工程中，此方法在企业开发中经常使用。</p>
+</code></pre></div><p>版本锁定:采用直接锁定版本的方法确定依赖jar包的版本，版本锁定后则不考虑依赖的声明顺序或依赖的路径，以锁定的版本为准添加到工程中，此方法在企业开发中经常使用。</p>
 <p>版本锁定的使用方式：第一步：在dependencyManagement标签中锁定依赖的版本;第二步：在dependencies标签中声明需要导入的maven坐标。</p>
-<pre><code>&lt;!--锁定jar包的版本--&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!--锁定jar包的版本--&gt;
 &lt;dependencyManagement&gt;
     &lt;dependencies&gt;
         &lt;dependency&gt;
@@ -335,27 +335,27 @@
     &lt;/dependency&gt;
 
 &lt;/dependencies&gt;
-</code></pre><hr>
+</code></pre></div><hr>
 <h2 id="maven分模块构建"><a href="#maven分模块构建" class="headerlink" title="maven分模块构建"></a>maven分模块构建</h2><hr>
 <p>分模块父工程的打包方式必须为pom：</p>
-<pre><code>&lt;!--父工程的打包方式必须为pom--&gt;
+<div class="hljs code-wrapper"><pre><code>&lt;!--父工程的打包方式必须为pom--&gt;
 &lt;packaging&gt;pom&lt;/packaging&gt;
-</code></pre><p>子工程：</p>
-<pre><code>&lt;!--表示当前maven工程继承了maven_parent父工程--&gt;
+</code></pre></div><p>子工程：</p>
+<div class="hljs code-wrapper"><pre><code>&lt;!--表示当前maven工程继承了maven_parent父工程--&gt;
 &lt;parent&gt;
     &lt;artifactId&gt;maven_parent&lt;/artifactId&gt;
     &lt;groupId&gt;com.study&lt;/groupId&gt;
     &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
 &lt;/parent&gt;
-</code></pre><p>当前子工程依赖 子工程maven_dao：</p>
-<pre><code>&lt;dependencies&gt;
+</code></pre></div><p>当前子工程依赖 子工程maven_dao：</p>
+<div class="hljs code-wrapper"><pre><code>&lt;dependencies&gt;
     &lt;dependency&gt;
         &lt;groupId&gt;com.study&lt;/groupId&gt;
         &lt;artifactId&gt;maven_dao&lt;/artifactId&gt;
         &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
     &lt;/dependency&gt;
 &lt;/dependencies&gt;
-</code></pre><p>maven工程的聚合：在maven工程的<code>pom.xml</code>文件中可以使用<code>&lt;modules&gt;</code>标签将其他maven工程聚合到一起，聚合的目的是为了进行统一操作。例如拆分后的maven工程有多个，如果要进行打包，就需要针对每个工程分别执行打包命令，操作起来非常繁琐。这时就可以使用<code>&lt;modules&gt;</code>标签将这些工程统一聚合到maven工程中，需要打包的时候，只需要在此工程中执行一次打包命令，其下被聚合的工程就都会被打包了。</p>
+</code></pre></div><p>maven工程的聚合：在maven工程的<code>pom.xml</code>文件中可以使用<code>&lt;modules&gt;</code>标签将其他maven工程聚合到一起，聚合的目的是为了进行统一操作。例如拆分后的maven工程有多个，如果要进行打包，就需要针对每个工程分别执行打包命令，操作起来非常繁琐。这时就可以使用<code>&lt;modules&gt;</code>标签将这些工程统一聚合到maven工程中，需要打包的时候，只需要在此工程中执行一次打包命令，其下被聚合的工程就都会被打包了。</p>
 <hr>
 
             </div>

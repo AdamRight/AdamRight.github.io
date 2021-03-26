@@ -238,7 +238,7 @@
 <p>signed:有符号数,可以表示负数;unsigned:无符号数,不可以表示负数。signed和unsigned只能用来修饰整形变量char、short、int、long。</p>
 <p>C没有boolean和byte，C用0和非0表示false和true。</p>
 <h3 id="2、占位符和字符串"><a href="#2、占位符和字符串" class="headerlink" title="2、占位符和字符串"></a>2、占位符和字符串</h3><p>占位符：</p>
-<pre><code>%d  -  int
+<div class="hljs code-wrapper"><pre><code>%d  -  int
 %ld – long int
 %lld - long long
 %hd – short
@@ -249,22 +249,22 @@
 %x – 十六进制输出 int 或者long int 或者short int
 %o -  八进制输出
 %s – 字符串
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 <p>占位符不要乱用,要选择正确的对应类型,否则可能会损失精度。</p>
 </blockquote>
 <p>C没有String类型,C的字符串实际就是字符数组。C字符串两种定义方式：</p>
-<pre><code>//注意&apos;\0&apos;字符串结束符, []只能再变量名之后
+<div class="hljs code-wrapper"><pre><code>//注意&apos;\0&apos;字符串结束符, []只能再变量名之后
 char str[] = &#123;&apos;q&apos;,&apos;w&apos;,&apos;e&apos;,&apos;r&apos;,&apos;t&apos;,&apos;\0&apos;&#125;;
 
 //这种定义方式不用写结束符,可以表示汉字
 char str[] = &quot;你好&quot;; 
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 <p>C字符串不检查下标越界,使用时要注意。</p>
 </blockquote>
 <p>C的控制台输入</p>
-<pre><code>scanf(&quot;占位符&quot;, &amp;地址);//&amp; 取地址符
-</code></pre><h3 id="3、内存地址的概念"><a href="#3、内存地址的概念" class="headerlink" title="3、内存地址的概念"></a>3、内存地址的概念</h3><p>声明一个变量,就会立即为这个变量申请内存,一定会有一个对应的内存地址；没有地址的内存是无法使用的；内存的每一个字节都有一个对应的地址；内存地址用一个16进制数来表示；32位操作系统最大可以支持4G内存。</p>
-<h3 id="4、指针"><a href="#4、指针" class="headerlink" title="4、指针"></a>4、指针</h3><pre><code>int i = 123;
+<div class="hljs code-wrapper"><pre><code>scanf(&quot;占位符&quot;, &amp;地址);//&amp; 取地址符
+</code></pre></div><h3 id="3、内存地址的概念"><a href="#3、内存地址的概念" class="headerlink" title="3、内存地址的概念"></a>3、内存地址的概念</h3><p>声明一个变量,就会立即为这个变量申请内存,一定会有一个对应的内存地址；没有地址的内存是无法使用的；内存的每一个字节都有一个对应的地址；内存地址用一个16进制数来表示；32位操作系统最大可以支持4G内存。</p>
+<h3 id="4、指针"><a href="#4、指针" class="headerlink" title="4、指针"></a>4、指针</h3><div class="hljs code-wrapper"><pre><code>int i = 123;
 //一般计算机中用16进制数来表示一个内存地址 
 printf(&quot;%#x\n&quot;,&amp;i); 
 //int* int类型的指针变量  pointer指针  指针变量只能用来保存内存地址
@@ -276,14 +276,14 @@ printf(&quot;*pointer的值%d\n&quot;,*pointer);
 *pointer = 456;
 printf(&quot;i的值是%d\n&quot;,i);
 system(&quot;pause&quot;); 
-</code></pre><p>未赋值的指针称为野指针。</p>
+</code></pre></div><p>未赋值的指针称为野指针。</p>
 <h3 id="5、指针交换两个数的值"><a href="#5、指针交换两个数的值" class="headerlink" title="5、指针交换两个数的值"></a>5、指针交换两个数的值</h3><p>所有传递其实本质都是值传递，引用传递本质是把地址传递过去，引用传递其实也是传递一个值，但是这个值是一个内存地址。</p>
-<pre><code>void swap(int* p, int* p2)&#123;
+<div class="hljs code-wrapper"><pre><code>void swap(int* p, int* p2)&#123;
     int temp = *p;
     *p = *p2;
     *p2 = temp;    
 &#125;
-</code></pre><h3 id="6、数组和指针的关系"><a href="#6、数组和指针的关系" class="headerlink" title="6、数组和指针的关系"></a>6、数组和指针的关系</h3><p><strong>数组占用的内存空间是连续的</strong></p>
+</code></pre></div><h3 id="6、数组和指针的关系"><a href="#6、数组和指针的关系" class="headerlink" title="6、数组和指针的关系"></a>6、数组和指针的关系</h3><p><strong>数组占用的内存空间是连续的</strong></p>
 <blockquote>
 <p>数组变量保存的地址，是第0个元素地址，也就是首地址。<code>&amp;array</code>和<code>&amp;array[0]</code>值一样。</p>
 </blockquote>
@@ -292,7 +292,7 @@ system(&quot;pause&quot;);
 </blockquote>
 <h3 id="7、指针的长度"><a href="#7、指针的长度" class="headerlink" title="7、指针的长度"></a>7、指针的长度</h3><p>不管变量的类型是什么，它的内存地址的长度一定是相同的；类型不同只决定变量占用的内存空间不同；32位环境下，内存地址长度都是4个字节，64位环境下，内存地址长度都是8个字节。</p>
 <h3 id="8、多级指针"><a href="#8、多级指针" class="headerlink" title="8、多级指针"></a>8、多级指针</h3><p>二级指针变量只能保存一级指针变量的地址，有几个<code>*</code>就是几级指针</p>
-<pre><code>int i = 123;
+<div class="hljs code-wrapper"><pre><code>int i = 123;
 //int类型一级指针 
 int* p = &amp;i;
 //int 类型 二级指针 二级指针只能保存一级指针的地址 
@@ -301,10 +301,10 @@ int** p2 = &amp;p;
 int*** p3 = &amp;p2;
 //通过p3 取出 i的值
 printf(&quot;***p3 = %d\n&quot;, ***p3);
-</code></pre><h3 id="9、堆、栈、静态内存、动态内存"><a href="#9、堆、栈、静态内存、动态内存" class="headerlink" title="9、堆、栈、静态内存、动态内存"></a>9、堆、栈、静态内存、动态内存</h3><p>栈内存:系统自动分配，系统自动销毁，连续的内存区域，向低地址扩展，大小固定，栈上分配的内存称为静态内存。</p>
+</code></pre></div><h3 id="9、堆、栈、静态内存、动态内存"><a href="#9、堆、栈、静态内存、动态内存" class="headerlink" title="9、堆、栈、静态内存、动态内存"></a>9、堆、栈、静态内存、动态内存</h3><p>栈内存:系统自动分配，系统自动销毁，连续的内存区域，向低地址扩展，大小固定，栈上分配的内存称为静态内存。</p>
 <p>静态内存分配：子函数执行完，子函数中的所有局部变量都会被销毁，内存释放，但内存地址不可能被销毁，只是地址上的值没了。</p>
 <p>堆内存：程序员手动分配（java：new，c：malloc），空间不连续，大小取决于系统的虚拟内存，C程序员手动回收free，java自动回收，堆上分配的内存称为动态内存。</p>
-<pre><code>#include&lt;stdio.h&gt;    
+<div class="hljs code-wrapper"><pre><code>#include&lt;stdio.h&gt;    
 #include&lt;stdlib.h&gt;    
 main()&#123; 
    printf(&quot;请输入班级的人数:&quot;);
@@ -338,11 +338,11 @@ main()&#123;
         &#125;
    system(&quot;pause&quot;); 
 &#125; 
-</code></pre><h3 id="10、结构体"><a href="#10、结构体" class="headerlink" title="10、结构体"></a>10、结构体</h3><p>结构体的大小大于等于结构体中每一变量的占字节数的和;结构体的大小是最大的那个变量所占字节数的整数倍。</p>
+</code></pre></div><h3 id="10、结构体"><a href="#10、结构体" class="headerlink" title="10、结构体"></a>10、结构体</h3><p>结构体的大小大于等于结构体中每一变量的占字节数的和;结构体的大小是最大的那个变量所占字节数的整数倍。</p>
 <blockquote>
 <p>c结构体类似java的class。struct来声明c的结构体。C结构体中不能定义函数，可以定义函数指针 。 </p>
 </blockquote>
-<pre><code>#include&lt;stdio.h&gt;    
+<div class="hljs code-wrapper"><pre><code>#include&lt;stdio.h&gt;    
 #include&lt;stdlib.h&gt;    
 void study()&#123;
            printf(&quot;good good study!\n&quot;);
@@ -368,10 +368,10 @@ main()&#123;
  // printf(&quot;结构体student占%d个字节\n&quot;,sizeof(stu));
        system(&quot;pause&quot;); 
 &#125; 
-</code></pre><h3 id="11、联合体"><a href="#11、联合体" class="headerlink" title="11、联合体"></a>11、联合体</h3><p><code>union</code>长度等于联合体中定义的变量当中最长的那个,联合体只能保存一个变量的值,联合体共用同一块内存</p>
+</code></pre></div><h3 id="11、联合体"><a href="#11、联合体" class="headerlink" title="11、联合体"></a>11、联合体</h3><p><code>union</code>长度等于联合体中定义的变量当中最长的那个,联合体只能保存一个变量的值,联合体共用同一块内存</p>
 <h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><p>c++开发jni代码时 env不再是结构体Jninativeinterface的二级指针。<code>_JNIEnv</code>是C++的结构体，C++的结构体可以定义函数。<code>env</code>是<code>JNIEnv</code>的一级指针,也就是结构体<code>_JNIEnv</code>的一级指针。<code>env-&gt;</code>来调用结构体里的函数。</p>
 <h2 id="am命令"><a href="#am命令" class="headerlink" title="am命令"></a>am命令</h2><p>am命令:在adb shell里可以通过am命令进行一些操作如启动activity Service 启动浏览器等等。</p>
-<pre><code>#include &lt;jni.h&gt;
+<div class="hljs code-wrapper"><pre><code>#include &lt;jni.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;android/log.h&gt;
@@ -415,11 +415,11 @@ JNIEXPORT void JNICALL Java_com__cfork_demo_MainActivity_cfork
     &#125;
 
 &#125;
-</code></pre><h2 id="JNI"><a href="#JNI" class="headerlink" title="JNI"></a>JNI</h2><p>c本地函数命名规则:<code>Java_包名_类名_本地方法名</code>。</p>
+</code></pre></div><h2 id="JNI"><a href="#JNI" class="headerlink" title="JNI"></a>JNI</h2><p>c本地函数命名规则:<code>Java_包名_类名_本地方法名</code>。</p>
 <p>参数<code>jobject thiz</code>：调用本地函数的java对象，在这个例子中，就是MainActivity的实例。</p>
 <p>参数<code>JNIEnv* env</code>：是结构体JNINativeInterface的二级指针。JNIEnv是结构体JNINativeInterface的一级指针，操作一级指针用<code>(*env)-&gt;</code>。JNINativeInterface结构体中定义了大量的函数指针，这些函数指针在jni开发中很常用。</p>
 <p>C代码</p>
-<pre><code>#include &lt;stdlib.h&gt;
+<div class="hljs code-wrapper"><pre><code>#include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;jni.h&gt;
 
@@ -427,8 +427,8 @@ jstring Java_com_vcredit_cdemo_MainActivity_stringFromJNI(JNIEnv* env,jobject th
     char* cstr = &quot;hello from c!&quot;;
     return (*env)-&gt;NewStringUTF(env,cstr);
 &#125;
-</code></pre><p>C++代码</p>
-<pre><code>#include &lt;jni.h&gt;
+</code></pre></div><p>C++代码</p>
+<div class="hljs code-wrapper"><pre><code>#include &lt;jni.h&gt;
 #include &lt;string&gt;
 
 extern &quot;C&quot; JNIEXPORT jstring JNICALL
@@ -438,8 +438,8 @@ Java_com_vcredit_cdemo_MainActivity_stringFromJNI(
     std::string hello = &quot;Hello from C++&quot;;
     return env-&gt;NewStringUTF(hello.c_str());
 &#125;
-</code></pre><h3 id="java传参数给c"><a href="#java传参数给c" class="headerlink" title="java传参数给c"></a>java传参数给c</h3><p>Java给C传递<code>int</code>，<code>String</code>和<code>int[]</code>，并且返回:</p>
-<pre><code>#include &lt;jni.h&gt;
+</code></pre></div><h3 id="java传参数给c"><a href="#java传参数给c" class="headerlink" title="java传参数给c"></a>java传参数给c</h3><p>Java给C传递<code>int</code>，<code>String</code>和<code>int[]</code>，并且返回:</p>
+<div class="hljs code-wrapper"><pre><code>#include &lt;jni.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 
@@ -491,15 +491,15 @@ Java_com_vcredit_cdemo_MainActivity_arrIncrease(JNIEnv *env, jobject thiz, jintA
     (*env)-&gt;SetIntArrayRegion(env, jArray, 0, length, arrayPointer);
     return jArray;
 &#125;
-</code></pre><h3 id="在C中打印log"><a href="#在C中打印log" class="headerlink" title="在C中打印log"></a>在C中打印log</h3><pre><code>#include &lt;android/log.h&gt;
+</code></pre></div><h3 id="在C中打印log"><a href="#在C中打印log" class="headerlink" title="在C中打印log"></a>在C中打印log</h3><div class="hljs code-wrapper"><pre><code>#include &lt;android/log.h&gt;
 #define LOG_TAG &quot;System.out&quot;
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 
 //使用
 LOGD(&quot;length = %d&quot;,length);
-</code></pre><h3 id="c调用Java"><a href="#c调用Java" class="headerlink" title="c调用Java"></a>c调用Java</h3><p>C调用Java空参方法</p>
-<pre><code>JNIEXPORT void JNICALL
+</code></pre></div><h3 id="c调用Java"><a href="#c调用Java" class="headerlink" title="c调用Java"></a>c调用Java</h3><p>C调用Java空参方法</p>
+<div class="hljs code-wrapper"><pre><code>JNIEXPORT void JNICALL
 Java_com_vcredit_cdemo_MainActivity_callbackvoidmethod(JNIEnv* env, jobject thiz) &#123;
     jclass claz = (*env)-&gt;FindClass(env, &quot;com/vcredit/cdemo/MainActivity&quot;);
     jmethodID methodID = (*env)-&gt;GetMethodID(env, claz, &quot;helloFromJava&quot;, &quot;()V&quot;);
@@ -509,11 +509,11 @@ Java_com_vcredit_cdemo_MainActivity_callbackvoidmethod(JNIEnv* env, jobject thiz
 public void helloFromJava() &#123;
     Log.d(&quot;-----rrrrr&quot;, &quot;hello from java&quot;);
 &#125;
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 <p>注意FindClass路径用<code>/</code>。</p>
 </blockquote>
 <p>C调用Java有Int参数方法并返回</p>
-<pre><code>JNIEXPORT void JNICALL
+<div class="hljs code-wrapper"><pre><code>JNIEXPORT void JNICALL
 Java_com_vcredit_cdemo_MainActivity_callbackintmethod(JNIEnv *env, jobject thiz) &#123;
     jclass claz = (*env)-&gt;FindClass(env, &quot;com/vcredit/cdemo/MainActivity&quot;);
     jmethodID methodID = (*env)-&gt;GetMethodID(env, claz, &quot;add&quot;, &quot;(II)I&quot;);
@@ -524,8 +524,8 @@ Java_com_vcredit_cdemo_MainActivity_callbackintmethod(JNIEnv *env, jobject thiz)
 public int add(int x, int y) &#123;
     return x + y;
 &#125;
-</code></pre><p>C调用Java有String参数方法</p>
-<pre><code>JNIEXPORT void JNICALL
+</code></pre></div><p>C调用Java有String参数方法</p>
+<div class="hljs code-wrapper"><pre><code>JNIEXPORT void JNICALL
 Java_com_vcredit_cdemo_MainActivity_callbackStringmethod(JNIEnv *env, jobject thiz) &#123;
     jclass claz = (*env)-&gt;FindClass(env, &quot;com/vcredit/cdemo/MainActivity&quot;);
     jmethodID methodID = (*env)-&gt;GetMethodID(env, claz, &quot;printString&quot;, &quot;(Ljava/lang/String;)V&quot;);
@@ -536,7 +536,7 @@ Java_com_vcredit_cdemo_MainActivity_callbackStringmethod(JNIEnv *env, jobject th
 public void printString(String s) &#123;
     Log.d(&quot;-----rrrrr&quot;, s);
 &#125;
-</code></pre>
+</code></pre></div>
             </div>
             <hr>
             <div>
