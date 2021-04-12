@@ -567,7 +567,6 @@ df[&apos;日期&apos;] = pd.to_datetime(df[&apos;日期&apos;])
 df = df[df[&apos;日期&apos;] &gt;= &apos;2009-04-12&apos;]
 df.reset_index(inplace=True, drop=True)
 
-
 # # =====计算复权价
 #df[&apos;复权因子&apos;] = (df[&apos;涨跌幅&apos;] + 1.0).cumprod()
 # initial_price = df.iloc[0][&apos;收盘价&apos;] / (1 + df.iloc[0][&apos;涨跌幅&apos;])  # 计算上市价格
