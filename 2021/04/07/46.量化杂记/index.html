@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.1k 字
+      6.3k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      68
+      84
        分钟
     </span>
   
@@ -549,6 +549,99 @@ def url_response(url):
             f.write(ch)
 for x in urls:
     url_response(x)
+</code></pre><p>操作</p>
+<pre><code>import pandas as pd
+import datetime
+import datetime
+
+pd.set_option(&apos;expand_frame_repr&apos;, False)  # 当列太多时不换行
+pd.set_option(&apos;max_row&apos;,4000)#最多行数
+
+# =====读入数据
+df = pd.read_csv(&apos;G:/share/04/note/.ipynb_checkpoints/000905中证500.csv&apos;, encoding=&apos;gbk&apos;)
+df.columns = [i for i in df.columns]
+df = df[[&apos;日期&apos;,&apos;收盘价&apos;,&apos;开盘价&apos;,&apos;最高价&apos;,&apos;最低价&apos;,&apos;涨跌幅&apos;]]
+df.sort_values(by=[&apos;日期&apos;], inplace=True)
+df[&apos;日期&apos;] = pd.to_datetime(df[&apos;日期&apos;])
+# 最近十二年数据
+df = df[df[&apos;日期&apos;] &gt;= &apos;2009-04-12&apos;]
+df.reset_index(inplace=True, drop=True)
+
+
+# # =====计算复权价
+#df[&apos;复权因子&apos;] = (df[&apos;涨跌幅&apos;] + 1.0).cumprod()
+# initial_price = df.iloc[0][&apos;收盘价&apos;] / (1 + df.iloc[0][&apos;涨跌幅&apos;])  # 计算上市价格
+# df[&apos;收盘价_后复权&apos;] = initial_price * df[&apos;复权因子&apos;]  # 相乘得到复权价
+# df[&apos;开盘价_后复权&apos;] = df[&apos;开盘价&apos;] / df[&apos;收盘价&apos;] * df[&apos;收盘价_后复权&apos;]
+# df[&apos;最高价_后复权&apos;] = df[&apos;最高价&apos;] / df[&apos;收盘价&apos;] * df[&apos;收盘价_后复权&apos;]
+# df[&apos;最低价_后复权&apos;] = df[&apos;最低价&apos;] / df[&apos;收盘价&apos;] * df[&apos;收盘价_后复权&apos;]
+# # df[[&apos;开盘价&apos;, &apos;最高价&apos;, &apos;最低价&apos;, &apos;收盘价&apos;]] = df[[&apos;开盘价_后复权&apos;, &apos;最高价_后复权&apos;, &apos;最低价_后复权&apos;, &apos;收盘价_后复权&apos;]]
+# # df = df[[&apos;日期&apos;, &apos;股票代码&apos;, &apos;开盘价&apos;, &apos;最高价&apos;, &apos;最低价&apos;, &apos;收盘价&apos;, &apos;涨跌幅&apos;, &apos;开盘价_后复权&apos;, &apos;最高价_后复权&apos;, &apos;最低价_后复权&apos;, &apos;收盘价_后复权&apos;]]
+# df = df[[&apos;日期&apos;, &apos;收盘价&apos;, &apos;涨跌幅&apos;, &apos;开盘价_后复权&apos;, &apos;最高价_后复权&apos;, &apos;最低价_后复权&apos;, &apos;收盘价_后复权&apos;]]
+
+
+# =====计算均线策略
+# 均线策略：
+# 当短期均线由下向上穿过长期均线的时候，第二天以开盘价全仓买入并在之后一直持有股票。
+# 当短期均线由上向下穿过长期均线的时候，第二天以开盘价卖出全部股票并在之后一直空仓，直到下一次买入。
+
+# ===计算均线
+ma_short = 1  # 短期均线。ma代表：moving_average
+ma_long = 20  # 长期均线
+df[&apos;ma_short&apos;] = df[&apos;收盘价&apos;].rolling(ma_short, min_periods=1).mean()
+df[&apos;ma_long&apos;] = df[&apos;收盘价&apos;].rolling(ma_long, min_periods=1).mean()
+
+# ===找出买入信号
+# 当天的短期均线大于等于长期均线
+condition1 = (df[&apos;ma_short&apos;] &gt;= df[&apos;ma_long&apos;])
+# 上个交易日的短期均线小于长期均线
+condition2 = (df[&apos;ma_short&apos;].shift(1) &lt; df[&apos;ma_long&apos;].shift(1))
+# 将买入信号当天的signal设置为1
+df.loc[condition1 &amp; condition2, &apos;signal&apos;] = 1
+
+# ===找出卖出信号
+# 当天的短期均线小于等于长期均线
+condition1 = (df[&apos;ma_short&apos;] &lt;= df[&apos;ma_long&apos;])
+# 上个交易日的短期均线大于长期均线
+condition2 = (df[&apos;ma_short&apos;].shift(1) &gt; df[&apos;ma_long&apos;].shift(1))
+# 将买入信号当天的signal设置为0
+df.loc[condition1 &amp; condition2, &apos;signal&apos;] = 0
+# 将无关的变量删除
+# df.drop([&apos;ma_short&apos;, &apos;ma_long&apos;], axis=1, inplace=True)
+
+# =====由signal计算出实际的每天持有股票仓位
+# ===计算仓位
+# signal的计算运用了收盘价，是每天收盘之后产生的信号，到第二天的时候，仓位position才会改变。
+# 例如2009-11-17产生买入信号，2009-11-18仓位才会编变成1。满仓用1表示，空仓用0表示
+df[&apos;pos&apos;] = df[&apos;signal&apos;].shift()
+df[&apos;pos&apos;].fillna(method=&apos;ffill&apos;, inplace=True)
+df[&apos;pos&apos;].fillna(value=0, inplace=True)  # 将初始行数的position补全为0
+
+
+# 涨跌幅定义为今日收盘价减去昨日收盘价
+#rise = df[&apos;收盘价&apos;].diff()
+#df[&apos;rise&apos;] = rise
+
+# 涨跌幅定义为今日收盘价减去昨日收盘价/昨日收盘价
+#rets = df[&apos;收盘价&apos;].pct_change() * 100
+#df[&apos;涨跌幅&apos;] = rets
+
+print(df)
+#print(df[(df.signal &gt; 0.5) | (df.signal == 0.0)]) 
+
+print(&quot;-----------------------------------------------------&quot;)
+
+print (df[&apos;收盘价&apos;].describe())
+
+print(&quot;-----------------------------------------------------&quot;)
+
+print(df[&apos;收盘价&apos;].max())  # 最大值
+print(df[&apos;收盘价&apos;].min())  # 最小值
+print(df[&apos;收盘价&apos;].std())  # 标准差
+print(df[&apos;收盘价&apos;].count())  # 非空的数据的数量
+print(df[&apos;收盘价&apos;].median())  # 中位数
+print(df[&apos;收盘价&apos;].quantile(0.25))  # 25%分位数
+print(df[&apos;收盘价&apos;].mean()) #平均值
 </code></pre><hr>
 <h2 id="杂记"><a href="#杂记" class="headerlink" title="杂记"></a>杂记</h2><hr>
 <p>下降行情-&gt;最低-&gt;上升行情-&gt;最高-&gt;下降行情</p>
