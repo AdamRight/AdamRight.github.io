@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6.3k 字
+      6.6k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      84
+      89
        分钟
     </span>
   
@@ -230,7 +230,6 @@
             <div class="markdown-body">
               <h2 id="启动jupyter"><a href="#启动jupyter" class="headerlink" title="启动jupyter"></a>启动jupyter</h2><hr>
 <p>启动：<code>jupyter notebook</code></p>
-<p>回测：Zipline</p>
 <hr>
 <h2 id="pandas基础"><a href="#pandas基础" class="headerlink" title="pandas基础"></a>pandas基础</h2><hr>
 <p>pandas基础：</p>
@@ -496,11 +495,56 @@ df = pd.read_csv(
 # 哪里可以看到全部的函数？http://pandas.pydata.org/pandas-docs/stable/api.html
 # 一般的使用方法
 </code></pre><hr>
+<h3 id="resample"><a href="#resample" class="headerlink" title="resample"></a>resample</h3><hr>
+<p>resample获取周、月数据。将数据转换为制定周期：开盘价（周期第1天）、收盘价（周期最后1天）、最高价（周期内）、最低价（周期内）。</p>
+<pre><code>import pandas as pd
+import datetime
+import time
+import os
+
+pd.set_option(&apos;expand_frame_repr&apos;, False)  # 当列太多时不换行
+pd.set_option(&apos;max_row&apos;,4000)#最多行数
+
+# =====读入数据
+df = pd.read_csv(&apos;G:/share//note/000001上证指数.csv&apos;, encoding=&apos;gbk&apos;)
+df.columns = [i for i in df.columns]
+df = df[[&apos;日期&apos;,&apos;收盘价&apos;,&apos;开盘价&apos;,&apos;最高价&apos;,&apos;最低价&apos;,&apos;涨跌幅&apos;]]
+df.sort_values(by=[&apos;日期&apos;], inplace=True)
+df[&apos;日期&apos;] = pd.to_datetime(df[&apos;日期&apos;])
+# 最近十二年数据
+df = df[df[&apos;日期&apos;] &gt;= &apos;2009-04-12&apos;]
+df.reset_index(inplace=True, drop=True)
+print(df)
+
+def transfer_price_freq(data, time_freq):
+    &quot;&quot;&quot;
+    将数据转换为制定周期：开盘价（周期第1天）、收盘价（周期最后1天）、最高价（周期内）、最低价（周期内）
+    :param data:
+    :param time_freq:
+    :return:
+    &quot;&quot;&quot;
+    df_trans = pd.DataFrame()
+    df_trans[&apos;开盘价&apos;] = data[&apos;开盘价&apos;].resample(time_freq).first()
+    df_trans[&apos;收盘价&apos;] = data[&apos;收盘价&apos;].resample(time_freq).last()
+    df_trans[&apos;最高价&apos;] = data[&apos;最高价&apos;].resample(time_freq).max()
+    df_trans[&apos;最低价&apos;] = data[&apos;最低价&apos;].resample(time_freq).min()
+    return df_trans
+
+# 转换index
+df = df.set_index(df[&apos;日期&apos;])
+#print(transfer_price_freq(df,&apos;M&apos;))
+print(transfer_price_freq(df,&apos;W&apos;))
+</code></pre><hr>
 <h2 id="资源网站"><a href="#资源网站" class="headerlink" title="资源网站"></a>资源网站</h2><hr>
 <p>github开源项目：</p>
 <pre><code>http://sunshowerc.github.io/fund/#/
 
 https://github.com/x2rr/funds
+</code></pre><p>东方财富：</p>
+<pre><code>//BOLL + MACD
+https://www.eastmoney.com/
+</code></pre><p>聚宽：</p>
+<pre><code>https://www.joinquant.com
 </code></pre><p>数据下载：</p>
 <pre><code>https://query1.finance.yahoo.com/v7/finance/download/000001.SS?period1=1262304000&amp;period2=1579106020&amp;interval=1d&amp;events=history&amp;crumb=t6/7IIwak4j 
 
