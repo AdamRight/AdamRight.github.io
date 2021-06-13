@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      7.8k 字
+      8.5k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      107
+      120
        分钟
     </span>
   
@@ -713,6 +713,119 @@ if __name__ == &apos;__main__&apos;:
     #计算夏普比率
     sharpe = calculate_sharpe(df)
     print(sharpe)
+</code></pre><hr>
+<h3 id="双曲均线多股比较"><a href="#双曲均线多股比较" class="headerlink" title="双曲均线多股比较"></a>双曲均线多股比较</h3><hr>
+<pre><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def get_single_price(code):
+    &quot;&quot;&quot;
+    获取单数据
+    &quot;&quot;&quot;
+    pd.set_option(&apos;expand_frame_repr&apos;, False)  # 当列太多时不换行
+    pd.set_option(&apos;max_row&apos;,4000)#最多行数
+
+    # =====读入数据
+    df = pd.read_csv(&apos;G:/share/04  Python股票量化投资课程（完结）/note/&apos; + code + &apos;.csv&apos;, encoding=&apos;gbk&apos;)
+    df.columns = [i for i in df.columns]
+    df = df[[&apos;日期&apos;,&apos;收盘价&apos;,&apos;开盘价&apos;,&apos;最高价&apos;,&apos;最低价&apos;,&apos;涨跌幅&apos;]]
+    df.sort_values(by=[&apos;日期&apos;], inplace=True)
+    df[&apos;日期&apos;] = pd.to_datetime(df[&apos;日期&apos;])
+    # 最近数据
+    df = df[df[&apos;日期&apos;] &gt;= &apos;2019-01-01&apos;]
+    df.reset_index(inplace=True, drop=True)
+    df = df.set_index(df[&apos;日期&apos;])
+    return df
+
+def compose_signal(data):
+    &quot;&quot;&quot;
+    整合信号
+    :param data:
+    :return:
+    &quot;&quot;&quot;
+    data[&apos;buy_signal&apos;] = np.where((data[&apos;buy_signal&apos;] == 1)
+                                  &amp; (data[&apos;buy_signal&apos;].shift(1) == 1), 0, data[&apos;buy_signal&apos;])
+    data[&apos;sell_signal&apos;] = np.where((data[&apos;sell_signal&apos;] == -1)
+                                   &amp; (data[&apos;sell_signal&apos;].shift(1) == -1), 0, data[&apos;sell_signal&apos;])
+    data[&apos;signal&apos;] = data[&apos;buy_signal&apos;] + data[&apos;sell_signal&apos;]
+    return data
+
+def calculate_prof_pct(data):
+    &quot;&quot;&quot;
+    计算单次收益率：开仓、平仓（开仓的全部股数）
+    :param data:
+    :return:
+    &quot;&quot;&quot;
+    data = data[data[&apos;signal&apos;] != 0]  # 筛选
+    data[&apos;profit_pct&apos;] = (data[&apos;收盘价&apos;] - data[&apos;收盘价&apos;].shift(1)) / data[&apos;收盘价&apos;].shift(1)
+    # 数据预览
+    #print(data[[&apos;收盘价&apos;, &apos;short_ma&apos;, &apos;long_ma&apos;,&apos;signal&apos;,&apos;profit_pct&apos;]])
+    data = data[data[&apos;signal&apos;] == -1]
+    return data
+
+def calculate_cum_prof(data):
+    &quot;&quot;&quot;
+    计算累计收益率
+    :param data: dataframe
+    :return:
+    &quot;&quot;&quot;
+    data[&apos;cum_profit&apos;] = pd.DataFrame(1 + data[&apos;profit_pct&apos;]).cumprod() - 1
+    return data
+
+def ma_strategy(data, short_window=5, long_window=20):
+    &quot;&quot;&quot;
+    双均线策略
+    :param data: dataframe, 投资标的行情数据（必须包含收盘价）
+    :param short_window: 短期n日移动平均线，默认5
+    :param long_window: 长期n日移动平均线，默认20
+    :return: 
+    &quot;&quot;&quot;
+    data = pd.DataFrame(data)
+    # 计算技术指标：ma短期、ma长期
+    data[&apos;short_ma&apos;] = data[&apos;收盘价&apos;].rolling(window=short_window).mean()
+    data[&apos;long_ma&apos;] = data[&apos;收盘价&apos;].rolling(window=long_window).mean()
+
+    # 生成信号：金叉买入、死叉卖出
+    data[&apos;buy_signal&apos;] = np.where(data[&apos;short_ma&apos;] &gt; data[&apos;long_ma&apos;], 1, 0)
+    data[&apos;sell_signal&apos;] = np.where(data[&apos;short_ma&apos;] &lt; data[&apos;long_ma&apos;], -1, 0)
+    # 过滤信号
+    data = compose_signal(data)
+    # 计算单次收益
+    data = calculate_prof_pct(data)
+    # print(data.describe())
+    # 计算累计收益
+    data = calculate_cum_prof(data)
+    # 删除多余的columns
+    data.drop(labels=[&apos;buy_signal&apos;, &apos;sell_signal&apos;], axis=1)
+    return data
+
+if __name__ == &apos;__main__&apos;:
+    # 股票列表
+    stocks = [&apos;000001上证指数&apos;, &apos;000300沪深300&apos;, &apos;000905中证500&apos;]
+    # 存放累计收益率
+    cum_profits = pd.DataFrame()
+    # 循环获取数据
+    for code in stocks:
+        df = get_single_price(code)
+        # 调用双均线策略
+        df = ma_strategy(df)  
+        cum_profits[code] = df[&apos;cum_profit&apos;].reset_index(drop=True)  # 存储累计收益率
+        # 折线图
+        df[&apos;cum_profit&apos;].plot(label=code)
+        # 筛选有信号点
+        # df = df[df[&apos;signal&apos;] != 0]
+        # 预览数据
+        print(&quot;开仓次数：&quot;, int(len(df)))
+        #print(df[[&apos;日期&apos;,&apos;收盘价&apos;, &apos;signal&apos;, &apos;cum_profit&apos;]])
+
+    # 预览
+    print(cum_profits)
+    # 可视化
+    # cum_profits.plot()
+    plt.legend()
+    plt.title(&apos;Comparison of Ma Strategy Profits&apos;)
+    plt.show()
 </code></pre><hr>
 <h2 id="资源网站"><a href="#资源网站" class="headerlink" title="资源网站"></a>资源网站</h2><hr>
 <p>github开源项目：</p>
