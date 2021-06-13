@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6.6k 字
+      7.8k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      89
+      108
        分钟
     </span>
   
@@ -534,6 +534,185 @@ def transfer_price_freq(data, time_freq):
 df = df.set_index(df[&apos;日期&apos;])
 #print(transfer_price_freq(df,&apos;M&apos;))
 print(transfer_price_freq(df,&apos;W&apos;))
+</code></pre><hr>
+<h3 id="shift涨跌幅"><a href="#shift涨跌幅" class="headerlink" title="shift涨跌幅"></a>shift涨跌幅</h3><hr>
+<pre><code>def calculate_change_pct(data):
+    &quot;&quot;&quot;
+    涨跌幅 = (当期收盘价-前期收盘价) / 前期收盘价
+    :param data: dataframe，带有收盘价
+    :return: dataframe，带有涨跌幅
+    &quot;&quot;&quot;
+    data[&apos;close_pct&apos;] = (data[&apos;close&apos;] - data[&apos;close&apos;].shift(1)) \
+                        / data[&apos;close&apos;].shift(1)
+    return data
+</code></pre><hr>
+<h3 id="数据存储和读取"><a href="#数据存储和读取" class="headerlink" title="数据存储和读取"></a>数据存储和读取</h3><hr>
+<pre><code>def update_daily_price(stock_code, type=&apos;price&apos;):
+    # 3.1是否存在文件：不存在-重新获取，存在-&gt;3.2
+    file_root = data_root + type + &apos;/&apos; + stock_code + &apos;.csv&apos;
+    if os.path.exists(file_root):  # 如果存在对应文件
+        # 3.2获取增量数据（code，startsdate=对应股票csv中最新日期，enddate=今天）
+        startdate = pd.read_csv(file_root, usecols=[&apos;date&apos;])[&apos;date&apos;].iloc[-1]
+        df = get_single_price(stock_code, &apos;daily&apos;, startdate, datetime.datetime.today())
+        # 3.3追加到已有文件中
+        export_data(df, stock_code, &apos;price&apos;, &apos;a&apos;)
+    else:
+        # 重新获取该股票行情数据
+        df = get_single_price(stock_code, &apos;daily&apos;)
+        export_data(df, stock_code, &apos;price&apos;)
+
+    print(&quot;股票数据已经更新成功：&quot;, stock_code)
+
+
+def export_data(data, filename, type, mode=None):
+    &quot;&quot;&quot;
+    导出股票相关数据
+    :param data:
+    :param filename:
+    :param type: 股票数据类型，可以是：price、finance
+    :param mode: a代表追加，none代表默认w写入
+    :return:
+    &quot;&quot;&quot;
+    file_root = data_root + type + &apos;/&apos; + filename + &apos;.csv&apos;
+    data.index.names = [&apos;date&apos;]
+    if mode == &apos;a&apos;:
+        data.to_csv(file_root, mode=mode, header=False)
+        # 删除重复值
+        data = pd.read_csv(file_root)  # 读取数据
+        data = data.drop_duplicates(subset=[&apos;date&apos;])  # 以日期列为准
+        data.to_csv(file_root, index=False)  # 重新写入
+    else:
+        data.to_csv(file_root)  # 判断一下file是否存在 &gt; 存在：追加 / 不存在：保持
+
+    print(&apos;已成功存储至：&apos;, file_root)
+</code></pre><hr>
+<h3 id="计算交易指标"><a href="#计算交易指标" class="headerlink" title="计算交易指标"></a>计算交易指标</h3><hr>
+<pre><code>import pandas as pd
+import numpy as np
+import datetime
+import matplotlib.pyplot as plt
+
+def get_single_price():
+    &quot;&quot;&quot;
+    获取单数据
+    &quot;&quot;&quot;
+    pd.set_option(&apos;expand_frame_repr&apos;, False)  # 当列太多时不换行
+    pd.set_option(&apos;max_row&apos;,4000)#最多行数
+
+    # =====读入数据
+    df = pd.read_csv(&apos;G:/share/04  Python股票量化投资课程（完结）/note/000001上证指数.csv&apos;, encoding=&apos;gbk&apos;)
+    df.columns = [i for i in df.columns]
+    df = df[[&apos;日期&apos;,&apos;收盘价&apos;,&apos;开盘价&apos;,&apos;最高价&apos;,&apos;最低价&apos;,&apos;涨跌幅&apos;]]
+    df.sort_values(by=[&apos;日期&apos;], inplace=True)
+    df[&apos;日期&apos;] = pd.to_datetime(df[&apos;日期&apos;])
+    # 最近十二年数据
+    df = df[df[&apos;日期&apos;] &gt;= &apos;2009-04-12&apos;]
+    df.reset_index(inplace=True, drop=True)
+    df = df.set_index(df[&apos;日期&apos;])
+    return df
+
+def compose_signal(data):
+    &quot;&quot;&quot;
+    整合信号
+    :param data:
+    :return:
+    &quot;&quot;&quot;
+    data[&apos;buy_signal&apos;] = np.where((data[&apos;buy_signal&apos;] == 1)
+                                  &amp; (data[&apos;buy_signal&apos;].shift(1) == 1), 0, data[&apos;buy_signal&apos;])
+    data[&apos;sell_signal&apos;] = np.where((data[&apos;sell_signal&apos;] == -1)
+                                   &amp; (data[&apos;sell_signal&apos;].shift(1) == -1), 0, data[&apos;sell_signal&apos;])
+    data[&apos;signal&apos;] = data[&apos;buy_signal&apos;] + data[&apos;sell_signal&apos;]
+    return data
+
+def calculate_prof_pct(data):
+    &quot;&quot;&quot;
+    计算单次收益率：开仓、平仓（开仓的全部股数）
+    :param data:
+    :return:
+    &quot;&quot;&quot;
+    data = data[data[&apos;signal&apos;] != 0]  # 筛选
+    data[&apos;profit_pct&apos;] = (data[&apos;收盘价&apos;] - data[&apos;收盘价&apos;].shift(1)) / data[&apos;收盘价&apos;].shift(1)
+    data = data[data[&apos;signal&apos;] == -1]
+    return data
+
+def calculate_cum_prof(data):
+    &quot;&quot;&quot;
+    计算累计收益率
+    :param data: dataframe
+    :return:
+    &quot;&quot;&quot;
+    data[&apos;cum_profit&apos;] = pd.DataFrame(1 + data[&apos;profit_pct&apos;]).cumprod() - 1
+    return data
+
+def caculate_max_drawdown(data):
+    &quot;&quot;&quot;
+    计算最大回撤比
+    :param data:
+    :return:
+    &quot;&quot;&quot;
+    # 选取时间周期（时间窗口）
+    window = 252
+    # 选取时间周期中的最大净值
+    data[&apos;roll_max&apos;] = data[&apos;收盘价&apos;].rolling(window=window, min_periods=1).max()
+    # 计算当天的回撤比 = (谷值 — 峰值)/峰值 = 谷值/峰值 - 1
+    data[&apos;daily_dd&apos;] = data[&apos;收盘价&apos;] / data[&apos;roll_max&apos;] - 1
+    # 选取时间周期内最大的回撤比，即最大回撤
+    data[&apos;max_dd&apos;] = data[&apos;daily_dd&apos;].rolling(window, min_periods=1).min()
+
+    return data
+
+def calculate_sharpe(data):
+    &quot;&quot;&quot;
+    计算夏普比率，返回的是年化的夏普比率
+    :param data: dataframe, stock
+    :return: float
+    &quot;&quot;&quot;
+    # 公式：sharpe = (回报率的均值 - 无风险利率) / 回报率的标准差
+    daily_return = data[&apos;收盘价&apos;].pct_change()
+    avg_return = daily_return.mean()
+    sd_reutrn = daily_return.std()
+    # 计算夏普：每日收益率 * 252 = 每年收益率
+    sharpe = avg_return / sd_reutrn
+    sharpe_year = sharpe * np.sqrt(252)
+    return sharpe, sharpe_year
+
+def week_period_strategy(data):
+    &quot;&quot;&quot;
+    周期选股（周四买，周一卖）
+    &quot;&quot;&quot;
+    # 新建周期字段
+    data[&apos;weekday&apos;] = data.index.weekday
+    # 周四买入
+    data[&apos;buy_signal&apos;] = np.where((data[&apos;weekday&apos;] == 3), 1, 0)
+    # 周一卖出
+    data[&apos;sell_signal&apos;] = np.where((data[&apos;weekday&apos;] == 0), -1, 0)
+
+    data = compose_signal(data)  # 整合信号
+    data = calculate_prof_pct(data)  # 计算收益
+    data = calculate_cum_prof(data)  # 计算累计收益率
+    # data = caculate_max_drawdown(data)  # 最大回撤
+    return data
+
+if __name__ == &apos;__main__&apos;:
+
+    df = get_single_price()
+    df = week_period_strategy(df)
+    df = df[[&apos;收盘价&apos;,&apos;开盘价&apos;,&apos;涨跌幅&apos;,&apos;signal&apos;,&apos;profit_pct&apos;,&apos;cum_profit&apos;]]
+
+    caculate_max_drawdown(df)
+    df[[&apos;daily_dd&apos;,&apos;daily_dd&apos;]].plot()
+    plt.show()
+    print(df)
+
+    df[&apos;profit_pct&apos;].plot()
+    plt.show()
+
+    df[&apos;cum_profit&apos;].plot()
+    plt.show()
+
+    #计算夏普比率
+    sharpe = calculate_sharpe(df)
+    print(sharpe)
 </code></pre><hr>
 <h2 id="资源网站"><a href="#资源网站" class="headerlink" title="资源网站"></a>资源网站</h2><hr>
 <p>github开源项目：</p>
