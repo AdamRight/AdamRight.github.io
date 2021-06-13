@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      108
+      107
        分钟
     </span>
   
@@ -600,7 +600,7 @@ def get_single_price():
     pd.set_option(&apos;max_row&apos;,4000)#最多行数
 
     # =====读入数据
-    df = pd.read_csv(&apos;G:/share/04  Python股票量化投资课程（完结）/note/000001上证指数.csv&apos;, encoding=&apos;gbk&apos;)
+    df = pd.read_csv(&apos;G:/share/note/000001上证指数.csv&apos;, encoding=&apos;gbk&apos;)
     df.columns = [i for i in df.columns]
     df = df[[&apos;日期&apos;,&apos;收盘价&apos;,&apos;开盘价&apos;,&apos;最高价&apos;,&apos;最低价&apos;,&apos;涨跌幅&apos;]]
     df.sort_values(by=[&apos;日期&apos;], inplace=True)
