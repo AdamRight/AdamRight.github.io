@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8.5k 字
+      8.7k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      120
+      123
        分钟
     </span>
   
@@ -727,7 +727,7 @@ def get_single_price(code):
     pd.set_option(&apos;max_row&apos;,4000)#最多行数
 
     # =====读入数据
-    df = pd.read_csv(&apos;G:/share/04  Python股票量化投资课程（完结）/note/&apos; + code + &apos;.csv&apos;, encoding=&apos;gbk&apos;)
+    df = pd.read_csv(&apos;G:/share/note/&apos; + code + &apos;.csv&apos;, encoding=&apos;gbk&apos;)
     df.columns = [i for i in df.columns]
     df = df[[&apos;日期&apos;,&apos;收盘价&apos;,&apos;开盘价&apos;,&apos;最高价&apos;,&apos;最低价&apos;,&apos;涨跌幅&apos;]]
     df.sort_values(by=[&apos;日期&apos;], inplace=True)
@@ -826,6 +826,43 @@ if __name__ == &apos;__main__&apos;:
     plt.legend()
     plt.title(&apos;Comparison of Ma Strategy Profits&apos;)
     plt.show()
+</code></pre><hr>
+<h3 id="P值计算"><a href="#P值计算" class="headerlink" title="P值计算"></a>P值计算</h3><hr>
+<p>p值越小，可能就越赚钱。<code>p_value &lt; 0.05</code>。</p>
+<pre><code>import matplotlib.pyplot as plt
+from scipy import stats
+
+def ttest(data_return):
+    &quot;&quot;&quot;
+    对策略收益进行t检验
+    :param strat_return: dataframe,单次收益率
+    :return: float,t值和p值
+    &quot;&quot;&quot;
+    # 调用假设检验ttest函数：scipy
+    t, p = stats.ttest_1samp(data_return, 0, nan_policy=&apos;omit&apos;)
+    # 判断是否与理论均值有显著性差异:α=0.05
+    p_value = p / 2  # 获取单边p值
+    # 打印
+    print(&quot;t-value:&quot;, t)
+    print(&quot;p-value:&quot;, p_value)
+    print(&quot;是否可以拒绝[H0]收益均值=0：&quot;, p_value &lt; 0.05)
+    return t, p_value
+
+if __name__ == &apos;__main__&apos;:
+    # 股票列表
+    stocks = [&apos;000001.XSHE&apos;, &apos;000858.XSHE&apos;, &apos;002594.XSHE&apos;]
+    for code in stocks:
+        print(code)
+        df = get_single_price(code, &apos;daily&apos;, &apos;2016-12-01&apos;, &apos;2021-01-01&apos;)
+        df = ma_strategy(df)  # 调用双均线策略
+        # 策略的单次收益率
+        returns = df[&apos;profit_pct&apos;]
+        # print(returns)
+        # 绘制一下分布图用于观察
+        # plt.hist(returns, bins=30)
+        # plt.show()
+        # 对多个股票进行计算、测试
+        ttest(returns)
 </code></pre><hr>
 <h2 id="资源网站"><a href="#资源网站" class="headerlink" title="资源网站"></a>资源网站</h2><hr>
 <p>github开源项目：</p>
