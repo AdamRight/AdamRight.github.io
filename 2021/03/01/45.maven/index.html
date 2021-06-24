@@ -18,7 +18,7 @@
   <meta name="author" content="">
   <meta name="keywords" content="">
   
-  <title>maven - Jiang Space</title>
+  <title>Spring Boot和maven - Jiang Space</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="maven">
+            <span class="h2" id="subtitle" title="Spring Boot和maven">
               
             </span>
 
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      884 字
+      1.4k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      20
        分钟
     </span>
   
@@ -225,16 +225,82 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">maven</h1>
+            <h1 style="display: none">Spring Boot和maven</h1>
             
             <div class="markdown-body">
-              <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><hr>
+              <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><hr>
+<p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
+<p>我们可以使用Spring Boot创建java应用，并使用<code>java –jar</code> 启动它，就能得到一个生产级别的web工程。</p>
+<hr>
+<h3 id="快速搭建"><a href="#快速搭建" class="headerlink" title="快速搭建"></a>快速搭建</h3><hr>
+<p><code>Spring Initializr</code>（jdk1.8默认即可）–&gt; 完善项目信息 –&gt; <code>spring web starter</code></p>
+<p>pom.xml文件：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.5.1&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+    &lt;groupId&gt;com.example&lt;/groupId&gt;
+    &lt;artifactId&gt;HelloSpringBoot&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;HelloSpringBoot&lt;/name&gt;
+    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+    &lt;properties&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre><p>Application文件：</p>
+<pre><code>@SpringBootApplication
+public class HelloSpringBootApplication &#123;
+    public static void main(String[] args) &#123;
+        SpringApplication.run(HelloSpringBootApplication.class, args);
+    &#125;
+&#125;
+</code></pre><p>Controller文件：</p>
+<pre><code>import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController &#123;
+    @GetMapping(value=&quot;/hello&quot;)
+    public String hello()&#123;
+        return &quot;Hello Spring Boot&quot;;
+    &#125;
+&#125;
+</code></pre><p>访问<code>http://localhost:8080/hello</code>即可以返回<code>Hello Spring Boot</code>。</p>
+<hr>
+<h2 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>maven 是一个项目管理工具，主要作用是在项目开发阶段对Java项目进行依赖管理和项目构建。</p>
 <p>依赖管理：就是对jar包的管理。通过导入maven坐标，就相当于将仓库中的jar包导入了当前项目中。</p>
 <p>项目构建：通过maven的一个命令就可以完成项目从清理、编译、测试、报告、打包，部署整个过程。</p>
 <p>maven常用命令：clean(清理)、compile(编译)、test(测试)、package(打包)、install(安装)。</p>
 <hr>
-<h2 id="maven的依赖范围"><a href="#maven的依赖范围" class="headerlink" title="maven的依赖范围"></a>maven的依赖范围</h2><hr>
+<h3 id="maven的依赖范围"><a href="#maven的依赖范围" class="headerlink" title="maven的依赖范围"></a>maven的依赖范围</h3><hr>
 <p>maven的依赖范围：</p>
 <table>
 <thead>
@@ -292,7 +358,7 @@
     &lt;scope&gt;compile&lt;/scope&gt;
 &lt;/dependency&gt;
 </code></pre><hr>
-<h2 id="maven的依赖冲突"><a href="#maven的依赖冲突" class="headerlink" title="maven的依赖冲突"></a>maven的依赖冲突</h2><hr>
+<h3 id="maven的依赖冲突"><a href="#maven的依赖冲突" class="headerlink" title="maven的依赖冲突"></a>maven的依赖冲突</h3><hr>
 <p>排除依赖：可以使用<code>exclusions</code>标签将传递过来的依赖排除出去。</p>
 <pre><code>&lt;exclusions&gt;
     &lt;exclusion&gt;
@@ -336,7 +402,7 @@
 
 &lt;/dependencies&gt;
 </code></pre><hr>
-<h2 id="maven分模块构建"><a href="#maven分模块构建" class="headerlink" title="maven分模块构建"></a>maven分模块构建</h2><hr>
+<h3 id="maven分模块构建"><a href="#maven分模块构建" class="headerlink" title="maven分模块构建"></a>maven分模块构建</h3><hr>
 <p>分模块父工程的打包方式必须为pom：</p>
 <pre><code>&lt;!--父工程的打包方式必须为pom--&gt;
 &lt;packaging&gt;pom&lt;/packaging&gt;
@@ -375,6 +441,8 @@
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/maven/">maven</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Spring-Boot/">Spring Boot</a>
                     
                   </div>
                 
