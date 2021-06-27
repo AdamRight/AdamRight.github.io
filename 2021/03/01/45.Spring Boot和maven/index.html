@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.6k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20
+      24
        分钟
     </span>
   
@@ -294,6 +294,54 @@ public class HelloController &#123;
 &#125;
 </code></pre><p>访问<code>http://localhost:8080/hello</code>即可以返回<code>Hello Spring Boot</code>。</p>
 <hr>
+<h3 id="Druid"><a href="#Druid" class="headerlink" title="Druid"></a>Druid</h3><hr>
+<p>引入：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;druid&lt;/artifactId&gt;
+    &lt;version&gt;1.1.16&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>创建数据库 <code>springboot_test</code> ，在项目resources下新建 <code>jdbc.properties</code> 文件：</p>
+<pre><code>jdbc.driverClassName=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://192.168.1.13:3306/springboot_test
+jdbc.username=root
+jdbc.password=123456
+</code></pre><p><code>JdbcConfig</code> 类:</p>
+<pre><code>import com.alibaba.druid.pool.DruidDataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import javax.sql.DataSource;
+
+@Configuration
+@PropertySource(&quot;classpath:jdbc.properties&quot;)
+public class JdbcConfig &#123;
+    @Value(&quot;$&#123;jdbc.url&#125;&quot;)
+    String url;
+    @Value(&quot;$&#123;jdbc.driverClassName&#125;&quot;)
+    String driverClassName;
+    @Value(&quot;$&#123;jdbc.username&#125;&quot;)
+    String username;
+    @Value(&quot;$&#123;jdbc.password&#125;&quot;)
+    String password;
+
+    @Bean
+    public DataSource dataSource() &#123;
+        DruidDataSource dataSource = new DruidDataSource();
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+        return dataSource;
+    &#125;
+&#125;
+</code></pre><p>使用：</p>
+<pre><code>@Autowired
+private DataSource dataSource;
+
+System.out.println(&quot;dataSource: &quot; + dataSource);
+</code></pre><hr>
 <h2 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>maven 是一个项目管理工具，主要作用是在项目开发阶段对Java项目进行依赖管理和项目构建。</p>
 <p>依赖管理：就是对jar包的管理。通过导入maven坐标，就相当于将仓库中的jar包导入了当前项目中。</p>
