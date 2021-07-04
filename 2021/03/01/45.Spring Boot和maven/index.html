@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.1k 字
+      2.5k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      31
+      38
        分钟
     </span>
   
@@ -408,6 +408,81 @@ server:
 </code></pre><p><code>application.properties</code>中修改端口和path：</p>
 <pre><code>server.port=8082
 server.servlet.context-path=/shiyanlou/
+</code></pre><hr>
+<h3 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h3><hr>
+<p>默认的静态资源路径为：</p>
+<pre><code>classpath:/META-INF/resources/
+classpath:/resources/
+classpath:/static/
+classpath:/public
+</code></pre><hr>
+<h3 id="SpringMVC拦截器"><a href="#SpringMVC拦截器" class="headerlink" title="SpringMVC拦截器"></a>SpringMVC拦截器</h3><hr>
+<p>编写拦截器（实现<code>HandlerInterceptor</code>）:</p>
+<pre><code>import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@Slf4j
+public class MyInterceptor implements HandlerInterceptor &#123;
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123;
+        log.debug(&quot;这是MyInterceptor的preHandle方法。&quot;);
+        return true;
+    &#125;
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception &#123;
+        log.debug(&quot;这是MyInterceptor的postHandle方法。&quot;);
+    &#125;
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception &#123;
+        log.debug(&quot;这是MyInterceptor的afterCompletion方法。&quot;);
+    &#125;
+&#125;
+</code></pre><p>编写配置类实现 <code>WebMvcConfigurer</code>，在该类中添加各种组件:</p>
+<pre><code>import com.jiangtea.interceptor.MyInterceptor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class MvcConfig implements WebMvcConfigurer &#123;
+
+    //注册拦截器
+    @Bean
+    public MyInterceptor myInterceptor()&#123;
+        return new MyInterceptor();
+    &#125;
+
+    //添加拦截器到spring mvc拦截器链
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) &#123;
+        registry.addInterceptor(myInterceptor()).addPathPatterns(&quot;/*&quot;);
+    &#125;
+&#125;
+</code></pre><p>设置日志级别：</p>
+<pre><code>#日志记录级别
+logging:
+  level:
+    com.jiangtea: debug
+    org.springframework: info
+</code></pre><hr>
+<h3 id="整合事务和连接池"><a href="#整合事务和连接池" class="headerlink" title="整合事务和连接池"></a>整合事务和连接池</h3><hr>
+<p>配置Spring Boot自带默认的 <code>hikari</code>数据库连接池和使用 <code>@Transactional</code>注解进行事务配置。</p>
+<p>pom.xml文件中：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    &lt;version&gt;5.1.35&lt;/version&gt;
+&lt;/dependency&gt;
 </code></pre><hr>
 <h2 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>maven 是一个项目管理工具，主要作用是在项目开发阶段对Java项目进行依赖管理和项目构建。</p>
