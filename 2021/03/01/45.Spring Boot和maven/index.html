@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      2.1k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      24
+      31
        分钟
     </span>
   
@@ -301,7 +301,8 @@ public class HelloController &#123;
     &lt;artifactId&gt;druid&lt;/artifactId&gt;
     &lt;version&gt;1.1.16&lt;/version&gt;
 &lt;/dependency&gt;
-</code></pre><p>创建数据库 <code>springboot_test</code> ，在项目resources下新建 <code>jdbc.properties</code> 文件：</p>
+</code></pre><p>写法一：</p>
+<p>创建数据库 <code>springboot_test</code> ，在项目resources下新建 <code>jdbc.properties</code> 文件：</p>
 <pre><code>jdbc.driverClassName=com.mysql.jdbc.Driver
 jdbc.url=jdbc:mysql://192.168.1.13:3306/springboot_test
 jdbc.username=root
@@ -336,11 +337,77 @@ public class JdbcConfig &#123;
         return dataSource;
     &#125;
 &#125;
-</code></pre><p>使用：</p>
+</code></pre><p>写法二：<code>@ConfigurationProperties</code>可以在类上，也可以在方法上：</p>
+<p>在项目resources下 <code>application.properties</code>：</p>
+<pre><code>jdbc.driverClassName=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://192.168.1.13:3306/springboot_test
+jdbc.username=root
+jdbc.password=123456
+</code></pre><p><code>JdbcConfig</code> 类:</p>
+<pre><code>import com.alibaba.druid.pool.DruidDataSource;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import javax.sql.DataSource;
+
+@Configuration
+public class JdbcConfig &#123;
+
+    //prefix = &quot;jdbc&quot; 中的jdbc指的是 jdbc.password=123456 中的jdbc
+    @Bean
+    @ConfigurationProperties(prefix = &quot;jdbc&quot;)
+    public DataSource dataSource() &#123;
+        return new DruidDataSource();
+    &#125;
+&#125;
+</code></pre><p>两种写法写完后，使用：</p>
 <pre><code>@Autowired
 private DataSource dataSource;
 
 System.out.println(&quot;dataSource: &quot; + dataSource);
+</code></pre><hr>
+<h3 id="yml文件配置"><a href="#yml文件配置" class="headerlink" title="yml文件配置"></a>yml文件配置</h3><hr>
+<p>yaml与properties配置文件除了展示形式不相同以外，其它功能和作用都是一样的；在项目中原路的读取方式不需要改变。</p>
+<p>yml配置文件的特征：树状层级结构展示配置项；配置项之间如果有关系的话需要分行空两格；配置项如果有值的话，那么需要在 <code>:</code>之后空一格再写配置项值；</p>
+<pre><code>jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://127.0.0.1:3306/heima
+  username: root
+  password: 123456
+
+key:
+  abc: cba
+  def:
+    - g
+    - h
+    - j
+</code></pre><p>多个yml配置文件，在spring boot中是被允许的。这些配置文件的名称必须为 <code>application-***.yml</code>，并且这些配置文件必须要在<code>application.yml</code>配置文件中激活之后才可以使用。</p>
+<pre><code>#激活配置文件;需要指定其它的配置文件名称,abc,def就是application-abc.yml，application-def.yml
+spring:
+  profiles:
+    active: abc,def
+</code></pre><p>如果properties和yml配置文件同时存在在<code>spring boot</code>项目中；那么这两类配置文件都有效。在两个配置文件中如果存在同名的配置项的话会以properties文件的为主。</p>
+<hr>
+<h3 id="lombok应用"><a href="#lombok应用" class="headerlink" title="lombok应用"></a>lombok应用</h3><hr>
+<p>添加lombok对应的依赖到项目pom.xml文件:</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+    &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>在Bean上使用：</p>
+<pre><code>@Data ：自动提供getter和setter、hashCode、equals、toString等方法
+@Getter：自动提供getter方法
+@Setter：自动提供setter方法
+@Slf4j：自动在bean中提供log变量，其实用的是slf4j的日志功能。
+</code></pre><hr>
+<h3 id="修改项目tomcat端口"><a href="#修改项目tomcat端口" class="headerlink" title="修改项目tomcat端口"></a>修改项目tomcat端口</h3><hr>
+<p>yml文件方式</p>
+<pre><code>#tomcat端口
+server:
+  port: 80
+</code></pre><p><code>application.properties</code>中修改端口和path：</p>
+<pre><code>server.port=8082
+server.servlet.context-path=/shiyanlou/
 </code></pre><hr>
 <h2 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>maven 是一个项目管理工具，主要作用是在项目开发阶段对Java项目进行依赖管理和项目构建。</p>
