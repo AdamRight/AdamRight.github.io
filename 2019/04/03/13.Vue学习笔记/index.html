@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      15.8k 字
+      16k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      246
+      252
        分钟
     </span>
   
@@ -273,71 +273,40 @@
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><p>文本插值使用双大括号: </p>
-<pre><code>&#123;&#123;&#125;&#125;
-
-### Vue调试
-
-谷歌应用商店搜索`Vue.js devtools`
-
-----------------------------------
-
-### 教程
-
-	https://cn.vuejs.org/v2/guide/
-	https://github.com/pagekit/vue-resource
-	http://cubic-bezier.com/#.17,.67,.83,.67
-
-----------------------------------
-
-## 指令
-
-----------------------------------
-
-指令是带有 `v-` 前缀的特殊属性。指令用于在表达式的值改变时，将某些行为应用到 `DOM` 上。
-
-----------------------------------
-
-### v-cloak
-
-解决插值表达式闪烁问题，只替换占位符。
-
-### v-text
-
-v-text默认没有闪烁问题，替换内容时会把整个元素替换。
-
-### v-html
-
-用于输出html格式的，也会替换全部内容。
-
-### v-bind
-
-**绑定属性的指令**，用于监听DOM事件。`v-bind:`可以省略为`:`。变量加常量的效果可以实现。
-
-### v-on
-
-**事件绑定机制**。`v-on:`可以省略为`@`。
-	
-代码：
-		
-	<!DOCTYPE html>
-	<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
-	<head>
-	    <meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	    <title>Document</title>
-	    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-	    <style>
-	        [v-cloak] &#123;
-	            display: none;
-	        &#125;
-	    </style>
-	</head>
-	<body>
-	<div id="app">
-	    <!-- 使用 v-cloak 能够解决 插值表达式闪烁的问题 -->
-	    <p v-cloak>++++++++ &#123;&#123; msg &#125;&#125; ----------&lt;/p&gt;
+</code></pre><p>文本插值使用双大括号: <code>&#123;&#123;      &#125;&#125;</code></p>
+<h3 id="Vue调试"><a href="#Vue调试" class="headerlink" title="Vue调试"></a>Vue调试</h3><p>谷歌应用商店搜索<code>Vue.js devtools</code></p>
+<hr>
+<h3 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h3><pre><code>https://cn.vuejs.org/v2/guide/
+https://github.com/pagekit/vue-resource
+http://cubic-bezier.com/#.17,.67,.83,.67
+</code></pre><hr>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><hr>
+<p>指令是带有 <code>v-</code> 前缀的特殊属性。指令用于在表达式的值改变时，将某些行为应用到 <code>DOM</code> 上。</p>
+<hr>
+<h3 id="v-cloak"><a href="#v-cloak" class="headerlink" title="v-cloak"></a>v-cloak</h3><p>解决插值表达式闪烁问题，只替换占位符。</p>
+<h3 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h3><p>v-text默认没有闪烁问题，替换内容时会把整个元素替换。</p>
+<h3 id="v-html"><a href="#v-html" class="headerlink" title="v-html"></a>v-html</h3><p>用于输出html格式的，也会替换全部内容。</p>
+<h3 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h3><p><strong>绑定属性的指令</strong>，用于监听DOM事件。<code>v-bind:</code>可以省略为<code>:</code>。变量加常量的效果可以实现。</p>
+<h3 id="v-on"><a href="#v-on" class="headerlink" title="v-on"></a>v-on</h3><p><strong>事件绑定机制</strong>。<code>v-on:</code>可以省略为<code>@</code>。</p>
+<p>代码：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; xmlns:v-bind=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;
+        [v-cloak] &#123;
+            display: none;
+        &#125;
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;!-- 使用 v-cloak 能够解决 插值表达式闪烁的问题 --&gt;
+    &lt;p v-cloak&gt;++++++++ &#123;&#123; msg &#125;&#125; ----------&lt;/p&gt;
     &lt;!-- 默认 v-text 是没有闪烁问题的 --&gt;
     &lt;!-- v-text会覆盖元素中原本的内容，但是 插值表达式  只会替换自己的这个占位符，不会把 整个元素的内容清空 --&gt;
     &lt;h4 v-text=&quot;msg&quot;&gt;==================&lt;/h4&gt;
@@ -372,7 +341,7 @@ v-text默认没有闪烁问题，替换内容时会把整个元素替换。
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</p></div></body></html></code></pre><hr>
+</code></pre><hr>
 <h3 id="示例之跑马灯"><a href="#示例之跑马灯" class="headerlink" title="示例之跑马灯"></a>示例之跑马灯</h3><hr>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
@@ -2255,9 +2224,40 @@ module.exports = &#123;
     new webpack.HotModuleReplacementPlugin()
 ]
 </code></pre><hr>
-<h2 id="Vue2-5开发去哪儿网App"><a href="#Vue2-5开发去哪儿网App" class="headerlink" title="Vue2.5开发去哪儿网App"></a>Vue2.5开发去哪儿网App</h2><hr>
-<p>vue官网</p>
-<pre><code>https://cn.vuejs.org/v2/guide/
+<h2 id="Vue2-5开发去哪儿网App"><a href="#Vue2-5开发去哪儿网App" class="headerlink" title="Vue2.5开发去哪儿网App"></a>Vue2.5开发去哪儿网App</h2><h3 id="TODOList"><a href="#TODOList" class="headerlink" title="TODOList"></a>TODOList</h3><hr>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;TODOList&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;input type=&quot;text&quot; v-model=&quot;inputValue&quot;/&gt;
+        &lt;button v-on:click=&quot;handleBtnClick&quot;&gt;提交&lt;/button&gt;
+        &lt;ul&gt;
+            &lt;li v-for=&quot;item in list&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        var app = new Vue(&#123;
+            el: &quot;#app&quot;,
+            data: &#123;
+                list:[],
+                inputValue: &quot;&quot;
+            &#125;,
+            methods: &#123;
+                handleBtnClick: function ()&#123;
+                    this.list.push(this.inputValue)
+                    this.inputValue = &apos;&apos;
+                &#125;
+            &#125;
+        &#125;)
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </code></pre><hr>
 
             </div>
