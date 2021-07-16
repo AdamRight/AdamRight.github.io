@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      16k 字
+      16.2k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      252
+      254
        分钟
     </span>
   
@@ -2225,6 +2225,7 @@ module.exports = &#123;
 ]
 </code></pre><hr>
 <h2 id="Vue2-5开发去哪儿网App"><a href="#Vue2-5开发去哪儿网App" class="headerlink" title="Vue2.5开发去哪儿网App"></a>Vue2.5开发去哪儿网App</h2><h3 id="TODOList"><a href="#TODOList" class="headerlink" title="TODOList"></a>TODOList</h3><hr>
+<p>指令，组件化，父子组件的传值，的使用：</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -2233,29 +2234,55 @@ module.exports = &#123;
     &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;div id=&quot;app&quot;&gt;
-        &lt;input type=&quot;text&quot; v-model=&quot;inputValue&quot;/&gt;
-        &lt;button v-on:click=&quot;handleBtnClick&quot;&gt;提交&lt;/button&gt;
-        &lt;ul&gt;
-            &lt;li v-for=&quot;item in list&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;input type=&quot;text&quot; v-model=&quot;inputValue&quot;/&gt;
+    &lt;button v-on:click=&quot;handleBtnClick&quot;&gt;提交&lt;/button&gt;
+    &lt;ul&gt;
+        &lt;todo-item v-bind:content=&quot;item&quot;
+                   v-bind:index = &quot;index&quot;
+                   v-for=&quot;(item, index) in list&quot;
+                   @delete=&quot;handleItemDelete&quot;&gt;
+        &lt;/todo-item&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
 
-    &lt;script&gt;
-        var app = new Vue(&#123;
-            el: &quot;#app&quot;,
-            data: &#123;
-                list:[],
-                inputValue: &quot;&quot;
-            &#125;,
-            methods: &#123;
-                handleBtnClick: function ()&#123;
-                    this.list.push(this.inputValue)
-                    this.inputValue = &apos;&apos;
-                &#125;
+&lt;script&gt;
+    //全局组件
+    // Vue.component(&quot;TodoItem&quot;, &#123;
+    //     props: [&apos;content&apos;],
+    //     template: &quot;&lt;li&gt;&#123;&#123;content&#125;&#125;&lt;/li&gt;&quot;
+    // &#125;)
+    //局部组件
+    var TodoItem = &#123;
+        props: [&apos;content&apos;,&apos;index&apos;],
+        template: &quot;&lt;li @click=&apos;handleItemDelete&apos;&gt;&#123;&#123;content&#125;&#125;&lt;/li&gt;&quot;,
+        methods: &#123;
+            handleItemDelete: function ()&#123;
+                this.$emit(&quot;delete&quot;, this.index);
             &#125;
-        &#125;)
-    &lt;/script&gt;
+        &#125;
+    &#125;
+    var app = new Vue(&#123;
+        el: &quot;#app&quot;,
+        //局部组件-注册
+        components: &#123;
+            TodoItem: TodoItem
+        &#125;,
+        data: &#123;
+            list: [],
+            inputValue: &quot;&quot;
+        &#125;,
+        methods: &#123;
+            handleBtnClick: function () &#123;
+                this.list.push(this.inputValue)
+                this.inputValue = &apos;&apos;
+            &#125;,
+            handleItemDelete: function (index)&#123;
+                this.list.splice(index, 1)
+            &#125;
+        &#125;
+    &#125;)
+&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><hr>
