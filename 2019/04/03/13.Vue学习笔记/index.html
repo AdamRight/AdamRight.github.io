@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      16.3k 字
+      16.9k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      257
+      269
        分钟
     </span>
   
@@ -2292,7 +2292,7 @@ module.exports = &#123;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;TODOList&lt;/title&gt;
+    &lt;title&gt;title&lt;/title&gt;
     &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -2319,6 +2319,143 @@ module.exports = &#123;
                 &#125;
             &#125;
        &#125;
+    &#125;)
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><hr>
+<h3 id="样式的绑定"><a href="#样式的绑定" class="headerlink" title="样式的绑定"></a>样式的绑定</h3><hr>
+<p>点击颜色切换。</p>
+<p>class方式一：定义class的名字是activated，但是class是否有名字是根据isActivated：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;title&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;
+        .activated &#123;
+            color: red;
+        &#125;
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;div @click=&quot;handleDivClick&quot; :class=&quot;&#123;activated: isActivated&#125;&quot;&gt;
+        Hello World
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var vm = new Vue(&#123;
+        el: &quot;#app&quot;,
+        data: &#123;
+            isActivated: false
+        &#125;,
+        methods: &#123;
+            handleDivClick: function ()&#123;
+                this.isActivated = !this.isActivated
+            &#125;
+        &#125;
+    &#125;)
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>class方式二：定义class的名字的key是activated，切换名字的value是否为activated和空值：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;title&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;
+        .activated &#123;
+            color: red;
+        &#125;
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;div @click=&quot;handleDivClick&quot; :class=&quot;[activated]&quot;&gt;
+        Hello World
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var vm = new Vue(&#123;
+        el: &quot;#app&quot;,
+        data: &#123;
+            activated: &quot;&quot;
+        &#125;,
+        methods: &#123;
+            handleDivClick: function ()&#123;
+                this.activated = this.activated === &quot;activated&quot; ? &quot;&quot; : &quot;activated&quot;
+            &#125;
+        &#125;
+    &#125;)
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>内联style样式，方式一：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;title&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;div @click=&quot;handleDivClick&quot; :style=&quot;styleObj&quot;&gt;
+        Hello World
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var vm = new Vue(&#123;
+        el: &quot;#app&quot;,
+        data: &#123;
+            styleObj: &#123;
+                color: &quot;black&quot;
+            &#125;
+        &#125;,
+        methods: &#123;
+            handleDivClick: function () &#123;
+                this.styleObj.color = this.styleObj.color === &quot;black&quot; ? &quot;red&quot; : &quot;black&quot;
+            &#125;
+        &#125;
+    &#125;)
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>内联style样式，方式二：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;title&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;div @click=&quot;handleDivClick&quot; :style=[styleObj]&gt;
+        Hello World
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var vm = new Vue(&#123;
+        el: &quot;#app&quot;,
+        data: &#123;
+            styleObj: &#123;
+                color: &quot;black&quot;
+            &#125;
+        &#125;,
+        methods: &#123;
+            handleDivClick: function () &#123;
+                this.styleObj.color = this.styleObj.color === &quot;black&quot; ? &quot;red&quot; : &quot;black&quot;
+            &#125;
+        &#125;
     &#125;)
 &lt;/script&gt;
 &lt;/body&gt;
