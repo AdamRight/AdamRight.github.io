@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      16.2k 字
+      16.3k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      254
+      257
        分钟
     </span>
   
@@ -2281,6 +2281,44 @@ module.exports = &#123;
                 this.list.splice(index, 1)
             &#125;
         &#125;
+    &#125;)
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><hr>
+<h3 id="setter和getter"><a href="#setter和getter" class="headerlink" title="setter和getter"></a>setter和getter</h3><hr>
+<p>setter和getter:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;TODOList&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &#123;&#123;fullName&#125;&#125;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var vm = new Vue(&#123;
+        el: &quot;#app&quot;,
+        data: &#123;
+            firstName: &quot;Dell&quot;,
+            lastName: &quot;Lee&quot;
+        &#125;,
+        computed: &#123;
+            fullName: &#123;
+                get: function ()&#123;
+                    return this.firstName + &quot; &quot; + this.lastName
+                &#125;,
+                set: function (value)&#123;
+                    var arr = value.splice(&quot; &quot;);
+                    this.firstName = arr[0];
+                    this.lastName = arr[1];
+                &#125;
+            &#125;
+       &#125;
     &#125;)
 &lt;/script&gt;
 &lt;/body&gt;
