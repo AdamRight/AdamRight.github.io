@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      18.3k 字
+      18.7k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      294
+      301
        分钟
     </span>
   
@@ -2733,6 +2733,65 @@ module.exports = &#123;
                 this_.selfContent = msg
             &#125;)
         &#125;
+    &#125;)
+    var vm = new Vue(&#123;
+        el: &quot;#app&quot;
+    &#125;)
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><hr>
+<h3 id="插槽slot"><a href="#插槽slot" class="headerlink" title="插槽slot"></a>插槽slot</h3><hr>
+<p>向子组件中插入标签：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;title&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;body-content&gt;
+        &lt;div class=&quot;header&quot; slot=&quot;header&quot;&gt;header&lt;/div&gt;
+        &lt;div class=&quot;footer&quot; slot=&quot;footer&quot;&gt;footer&lt;/div&gt;
+    &lt;/body-content&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    Vue.component(&apos;body-content&apos;, &#123;
+        template: &apos;&lt;div&gt;&lt;slot name=&quot;header&quot;&gt;&lt;/slot&gt;&lt;div class=&quot;content&quot;&gt;content&lt;/div&gt;&lt;slot name=&quot;footer&quot;&gt;&lt;/slot&gt;&lt;/div&gt;&apos;
+    &#125;)
+    var vm = new Vue(&#123;
+        el: &quot;#app&quot;
+    &#125;)
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>作用域插槽slot-scope：</p>
+<p>父组件向子组件插入标签，子组件向父组件传值item：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;title&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;body-content&gt;
+        &lt;template slot-scope=&quot;props&quot;&gt;
+            &lt;li&gt;&#123;&#123;props.item&#125;&#125;&lt;/li&gt;
+        &lt;/template&gt;
+    &lt;/body-content&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    Vue.component(&apos;body-content&apos;, &#123;
+        data: function ()&#123;
+          return &#123;list:[1,2,3,4]&#125;
+        &#125;,
+        template: &apos;&lt;div&gt;&lt;ul&gt;&lt;slot v-for=&quot;item of list&quot; :item=item&gt;&lt;/slot&gt;&lt;/ul&gt;&lt;/div&gt;&apos;
     &#125;)
     var vm = new Vue(&#123;
         el: &quot;#app&quot;
