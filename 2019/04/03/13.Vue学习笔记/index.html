@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      16.9k 字
+      18.3k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      269
+      294
        分钟
     </span>
   
@@ -2456,6 +2456,286 @@ module.exports = &#123;
                 this.styleObj.color = this.styleObj.color === &quot;black&quot; ? &quot;red&quot; : &quot;black&quot;
             &#125;
         &#125;
+    &#125;)
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><hr>
+<h3 id="组件化中的is"><a href="#组件化中的is" class="headerlink" title="组件化中的is"></a>组件化中的is</h3><hr>
+<p>组件化中的is使用：当某些标签下必须要固定标签，这时候使用组件化，可以用is：</p>
+<p>比如table下的tr，ul下的li，ol下的li，select下的option，等等</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;title&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;table&gt;
+        &lt;tbody&gt;
+            &lt;tr is=&quot;row&quot;&gt;&lt;/tr&gt;
+            &lt;tr is=&quot;row&quot;&gt;&lt;/tr&gt;
+            &lt;tr is=&quot;row&quot;&gt;&lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    Vue.component(
+        &quot;row&quot;,&#123;
+            template: &quot;&lt;tr&gt;&lt;td&gt;this is a row&lt;/td&gt;&lt;/tr&gt;&quot;
+        &#125;
+    )
+    var vm = new Vue(&#123;
+        el: &quot;#app&quot;
+    &#125;)
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><hr>
+<h3 id="组件化中的refs"><a href="#组件化中的refs" class="headerlink" title="组件化中的refs"></a>组件化中的refs</h3><hr>
+<p>子组件通过change通知父组件发生改变，利用refs获取document：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;title&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;counter ref=&quot;one&quot; @change=&quot;handleChange&quot;&gt;&lt;/counter&gt;
+    &lt;counter ref=&quot;two&quot; @change=&quot;handleChange&quot;&gt;&lt;/counter&gt;
+    &lt;div&gt;&#123;&#123;total&#125;&#125;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    Vue.component(
+        &quot;counter&quot;,&#123;
+            template: &quot;&lt;div @click=&apos;handlerClick&apos;&gt;&#123;&#123;number&#125;&#125;&lt;/div&gt;&quot;,
+            data: function ()&#123;
+                return &#123;number: 0&#125;
+            &#125;,
+            methods: &#123;
+                handlerClick: function ()&#123;
+                    this.number ++
+                    this.$emit(&apos;change&apos;)
+                &#125;
+            &#125;
+        &#125;
+    )
+    var vm = new Vue(&#123;
+        el: &quot;#app&quot;,
+        data: &#123;
+            total: 0
+        &#125;,
+        methods: &#123;
+            handleChange: function ()&#123;
+                this.total = this.$refs.one.number + this.$refs.two.number
+            &#125;
+        &#125;
+    &#125;)
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><hr>
+<h3 id="父子组件之间传值"><a href="#父子组件之间传值" class="headerlink" title="父子组件之间传值"></a>父子组件之间传值</h3><hr>
+<p>父组件通过属性形式，向子组件传值，子组件通过props接收。</p>
+<p>单向数据流：父组件向子组件传值的参数，子组件不要修改，可以让子组件用变量接收后，子组件修改变量。</p>
+<p>子组件向父组件传值，通过emit事件的形式。</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;title&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;counter :count=&quot;3&quot; @inc=&quot;handleIncrease&quot;&gt;&lt;/counter&gt;
+    &lt;counter :count=&quot;2&quot; @inc=&quot;handleIncrease&quot;&gt;&lt;/counter&gt;
+    &lt;div&gt;&#123;&#123;total&#125;&#125;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var counter = &#123;
+        props: [&apos;count&apos;],
+        data: function ()&#123;
+            return&#123;number: this.count&#125;
+        &#125;,
+        template: &apos;&lt;div @click=&quot;handleClick&quot;&gt;&#123;&#123;number&#125;&#125;&lt;/div&gt;&apos;,
+        methods: &#123;
+            handleClick: function ()&#123;
+                this.number = this.number + 2;
+                this.$emit(&apos;inc&apos;,2)
+            &#125;
+        &#125;
+    &#125;
+    var vm = new Vue(&#123;
+        el: &quot;#app&quot;,
+        components: &#123;
+          counter: counter
+        &#125;,
+        data: &#123;
+            total: 5
+        &#125;,
+        methods: &#123;
+            handleIncrease: function (step)&#123;
+                this.total += step
+            &#125;
+        &#125;
+    &#125;)
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><hr>
+<h3 id="子组件props"><a href="#子组件props" class="headerlink" title="子组件props"></a>子组件props</h3><hr>
+<p>约束父组件传递来的content必须为String：</p>
+<pre><code>props: &#123;
+    content: String
+&#125;
+</code></pre><p>另一种写法：</p>
+<pre><code>props: &#123;
+    content: &#123;
+        type: String
+    &#125;
+&#125;
+</code></pre><p>约束父组件传递来的content可以为数字或者字符串：</p>
+<pre><code>props: &#123;
+    content: [Number, String] 
+&#125;
+</code></pre><p>约束父组件必须传content：</p>
+<pre><code>props: &#123;
+    content: &#123;
+        type: String,
+        required: true
+    &#125;
+&#125;
+</code></pre><p>设置父组件传递的content有默认值：</p>
+<pre><code>props: &#123;
+    content: &#123;
+        type: String,
+        required: false,
+        default: &apos;default value&apos;
+    &#125;
+&#125;
+</code></pre><p>约束父组件传递来的content长度大于5：</p>
+<pre><code>props: &#123;
+    content: &#123;
+        type: String,
+        validator: function (value)&#123;
+            return (value.length &gt; 5)
+        &#125;
+    &#125;
+&#125;
+</code></pre><hr>
+<h3 id="组件绑定原生事件"><a href="#组件绑定原生事件" class="headerlink" title="组件绑定原生事件"></a>组件绑定原生事件</h3><hr>
+<p>在子组件中实现父组件中的点击事件：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;title&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;child @click=&quot;handlerClick&quot;&gt;&lt;/child&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    Vue.component(&apos;child&apos;, &#123;
+        template: &apos;&lt;div @click=&quot;handlerChildClick&quot;&gt;Child&lt;/div&gt;&apos;,
+        methods: &#123;
+            handlerChildClick: function () &#123;
+                this.$emit(&apos;click&apos;)
+            &#125;
+        &#125;
+    &#125;)
+    var vm = new Vue(&#123;
+        el: &quot;#app&quot;,
+        methods: &#123;
+            handlerClick: function () &#123;
+                alert(&quot;click&quot;)
+            &#125;
+        &#125;
+    &#125;)
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>组件绑定原生事件，另有一种native写法：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;title&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;child @click.native=&quot;handlerClick&quot;&gt;&lt;/child&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    Vue.component(&apos;child&apos;, &#123;
+        template: &apos;&lt;div&gt;Child&lt;/div&gt;&apos;
+    &#125;)
+    var vm = new Vue(&#123;
+        el: &quot;#app&quot;,
+        methods: &#123;
+            handlerClick: function () &#123;
+                alert(&quot;click&quot;)
+            &#125;
+        &#125;
+    &#125;)
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><hr>
+<h3 id="非父子组件传值"><a href="#非父子组件传值" class="headerlink" title="非父子组件传值"></a>非父子组件传值</h3><hr>
+<p>Bus/事件总线/发布订阅模式/观察者模式：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;title&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;child content=&quot;Dell&quot;&gt;&lt;/child&gt;
+    &lt;child content=&quot;Lee&quot;&gt;&lt;/child&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    Vue.prototype.bus = new Vue()
+
+    Vue.component(&apos;child&apos;, &#123;
+        data: function ()&#123;
+          return &#123;
+              selfContent: this.content
+          &#125;
+        &#125;,
+        props: &#123;
+            content: String
+        &#125;,
+        template: &apos;&lt;div @click=&quot;handleClick&quot;&gt;&#123;&#123;selfContent&#125;&#125;&lt;/div&gt;&apos;,
+        methods: &#123;
+            handleClick:function ()&#123;
+                this.bus.$emit(&apos;change&apos;, this.selfContent)
+            &#125;
+        &#125;,
+        mounted: function ()&#123;
+            var this_ = this
+            this.bus.$on(&apos;change&apos;,function (msg)&#123;
+                this_.selfContent = msg
+            &#125;)
+        &#125;
+    &#125;)
+    var vm = new Vue(&#123;
+        el: &quot;#app&quot;
     &#125;)
 &lt;/script&gt;
 &lt;/body&gt;
