@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      18.7k 字
+      18.8k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      301
+      303
        分钟
     </span>
   
@@ -2799,6 +2799,37 @@ module.exports = &#123;
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
+</code></pre><hr>
+<h3 id="项目准备"><a href="#项目准备" class="headerlink" title="项目准备"></a>项目准备</h3><hr>
+<p>命令行工具：</p>
+<pre><code>node -v
+
+npm -v
+
+git --version
+
+npm install --global vue-cli
+
+vue init webpack 项目文件夹
+
+//运行项目-项目目录下
+npm run dev
+</code></pre><p>代码结构介绍：</p>
+<pre><code>package.json---------------------项目依赖
+package-lock.json----------------依赖具体版本
+index.html-----------------------首页模板文件
+.postcssrc.js--------------------postcssrc配置项
+.eslintrc.js---------------------规范
+.eslintignore--------------------eslint检测忽略
+.editorconfig--------------------编译器语法
+.babelrc-------------------------babelrc配置
+static---------------------------静态资源
+node_modules---------------------依赖包
+src-main.js----------------------入口
+src-App.vue----------------------根组件
+src-router-----------------------路由
+src-components-------------------小组件
+src-assets-----------------------项目图片资源
 </code></pre><hr>
 
             </div>
