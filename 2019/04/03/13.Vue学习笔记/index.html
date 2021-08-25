@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      19.1k 字
+      19.2k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      306
+      309
        分钟
     </span>
   
@@ -2890,6 +2890,56 @@ https://www.webpackjs.com/
 minimize: true
 </code></pre><p>线上调试</p>
 <pre><code>source map
+</code></pre><hr>
+<h3 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h3><hr>
+<p>webpack.config.js文件中：</p>
+<p>入口：</p>
+<pre><code>entry: &#123;
+      app: &apos;./app/js/main.js&apos;
+&#125;
+</code></pre><p>配置解析构建：</p>
+<pre><code>module: &#123;
+  loaders: [
+    &#123;
+      test: /\.html$/,
+      loader: &apos;html-loader&apos;
+    &#125;, &#123;
+      test: /\.vue$/,
+      loader: &apos;vue-loader&apos;,
+    &#125;, &#123;
+      test: /\.scss$/,
+      loader: &apos;style-loader!css-loader!sass-loader&apos;
+    &#125;
+  ]
+&#125;,
+</code></pre><p>插件：</p>
+<pre><code>plugins:[]
+</code></pre><p>输出：</p>
+<pre><code>output: &#123;
+  filename: &apos;[name].min.js&apos;,
+  path: path.resolve(__dirname, &apos;dist&apos;)
+&#125;
+</code></pre><p>devServer(端口等配置):</p>
+<pre><code>devServer: &#123;
+  contentBase: &apos;./dist&apos;,
+  hot: true,
+  compress: true,
+  port: 9000,
+  clientLogLevel: &quot;none&quot;,
+  quiet: true
+&#125;,
+</code></pre><p>配置:</p>
+<pre><code>const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);
+const CleanWebpackPlugin = require(&apos;clean-webpack-plugin&apos;);
+</code></pre><p>resolve:</p>
+<pre><code>resolve: &#123;
+  extensions: [
+    &apos;.js&apos;, &apos;.vue&apos;, &apos;.json&apos;
+  ],
+  alias: &#123;
+    &apos;vue$&apos;: &apos;vue/dist/vue.esm.js&apos;
+  &#125;
+&#125;,
 </code></pre><hr>
 
             </div>
