@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      811 字
+      905 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      11
        分钟
     </span>
   
@@ -306,6 +306,26 @@ git stash pop //恢复工作现场
 git push origin 分支名称
 </code></pre><p>从远程分支上拉取代码：</p>
 <pre><code>git pull orgin 分支名称
+</code></pre><hr>
+<h2 id="git三剑客"><a href="#git三剑客" class="headerlink" title="git三剑客"></a>git三剑客</h2><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><hr>
+<p>作用域：</p>
+<pre><code>//local只对某个仓库有效
+git config --local
+
+//global对当前用户所有仓库有效
+git config --global
+
+//system对对系统所有登陆的用户有效
+git config --system
+</code></pre><p>显示config的配置-加<code>--list</code></p>
+<pre><code>git config --list --local
+
+git config --list --global
+
+git config --list --system
+</code></pre><p>配置user信息</p>
+<pre><code>git config --global user.name &apos;your_name&apos;
+git config --global user.email &apos;your_email&apos;
 </code></pre><hr>
 
             </div>
