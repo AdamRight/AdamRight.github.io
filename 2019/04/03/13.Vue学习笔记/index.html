@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      19.4k 字
+      19.5k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      313
+      315
        分钟
     </span>
   
@@ -2982,6 +2982,29 @@ Vue CLI v4.5.13
 </code></pre><p>vant：</p>
 <pre><code>http://github.com/youzan/vant
 https://youzan.github.io/vant/#/zh-CN/
+</code></pre><p>Rem 布局适配：</p>
+<pre><code>npm i amfe-flexible
+//main.js
+import &apos;amfe-flexible&apos;
+
+//-D 是 --save-dev 的简写
+npm install postcss-pxtorem -D
+npm install postcss-pxtorem@5.1.1 -D
+//项目根目录中创建 `.postcssrc.js` 文件
+module.exports = &#123;
+  plugins: &#123;
+    &apos;autoprefixer&apos;: &#123;
+      browsers: [&apos;Android &gt;= 4.0&apos;, &apos;iOS &gt;= 8&apos;]
+    &#125;,
+    &apos;postcss-pxtorem&apos;: &#123;
+      rootValue: 37.5,
+      propList: [&apos;*&apos;]
+    &#125;
+  &#125;
+&#125;
+</code></pre><p>注意：该工具的rem转换，行内样式不会转，例如 <code>&lt;div style=&quot;width: 200px;&quot;&gt;&lt;/div&gt;</code>。</p>
+<p>网络封装：</p>
+<pre><code>npm i axios
 </code></pre><hr>
 
             </div>
