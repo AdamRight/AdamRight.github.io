@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      3.5k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      44
+      53
        分钟
     </span>
   
@@ -282,6 +282,15 @@ var stringF = &quot;$&#123;stringG&#125;&quot; + &quot;dd&quot;
 println(stringF)//IamGdd
 </code></pre><h3 id="6、数组和遍历"><a href="#6、数组和遍历" class="headerlink" title="6、数组和遍历"></a>6、数组和遍历</h3><pre><code>val names: Array&lt;String&gt; = arrayOf(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)
 val emptyStrings: Array&lt;String?&gt; = arrayOfNulls(10)
+
+
+val array = arrayOf(1, 2, 3)
+val arrayOfNulls = arrayOfNulls&lt;Int&gt;(3)
+val array1 = Array(5) &#123; i: Int -&gt; (i * i).toString() &#125;//i为索引0-4
+val intArrayOf = intArrayOf(1, 2, 3)//[1,2,3]
+val intArray = IntArray(3)//[0,0,0]
+val intArray1 = IntArray(2) &#123; 99 &#125;//[99,99]
+val intArray2 = IntArray(3) &#123; it * 1 &#125;//it为索引0-4
 </code></pre><p><strong><code>String?</code>表示可以为null的String类型</strong></p>
 <p>基本数据类型定制版</p>
 <pre><code>val ints = intArrayOf(1, 3, 5)
@@ -297,7 +306,7 @@ for (int in ints) &#123;
     println(int)
 &#125;
 
-for (i in ints.indices)&#123;
+for (i in ints.indices)&#123;//i是角标
     print(ints[i])
 &#125;
 
@@ -326,19 +335,85 @@ ints.forEach&#123;
     println(it)
 &#125;
 ints.forEach(::println)
-</code></pre><h3 id="7、list和map"><a href="#7、list和map" class="headerlink" title="7、list和map"></a>7、list和map</h3><pre><code>var lists = listOf &lt;String&gt;(&quot;张三&quot;, &quot;李四&quot;, &quot;王五&quot;)
+
+ints.forEachIndexed &#123; index: Int, i: Int -&gt; println(&quot;$index:$i&quot;) &#125;
+ints.forEachIndexed &#123; index, i -&gt; println(&quot;$index:$i&quot;) &#125;
+</code></pre><h3 id="7、list"><a href="#7、list" class="headerlink" title="7、list"></a>7、list</h3><hr>
+<p>List：</p>
+<pre><code>var lists = listOf &lt;String&gt;(&quot;张三&quot;, &quot;李四&quot;, &quot;王五&quot;)
 for (list in lists) &#123;
     println(list)
 &#125;
 for ((index, valu) in lists.withIndex()) &#123;//角标从零开始，角标和值
     println(index.toString() + &quot;-----&quot; + valu)
 &#125;
-var map = TreeMap&lt;String, String&gt;()
+
+val list = listOf(&quot;one&quot;, &quot;two&quot;, &quot;one&quot;)
+println(list)
+val set = setOf(&quot;one&quot;, &quot;two&quot;, &quot;one&quot;)//不可重复
+println(set)
+
+//可变集合List
+val mutableListOf1 = mutableListOf(1, 2, 3, 4)
+val mutableListOf2 = mutableListOf&lt;String&gt;()
+
+//可变集合Set
+val hello = mutableSetOf(&quot;H&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot;)//Set自动过滤重复元素
+hello.remove(&quot;o&quot;)
+println(hello)
+hello += setOf(&quot;w&quot;, &quot;o&quot;, &quot;r&quot;, &quot;l&quot;, &quot;d&quot;)//集合相加合并，前面的必须为可变集合
+println(hello)
+</code></pre><p>排序：</p>
+<pre><code>val number3 = mutableListOf(1, 2, 3, 4)
+number3.shuffle()//洗牌，随机排序
+println(number3)
+number3.sort()//从小到大
+println(number3)
+number3.sortDescending()//从大到小
+println(number3)
+</code></pre><p>自定义排序：</p>
+<pre><code>data class Language(var name: String, var score: Int)
+
+val languageList = mutableListOf&lt;Language&gt;()
+languageList.add(Language(&quot;Java&quot;, 80))
+languageList.add(Language(&quot;Kotlin&quot;, 90))
+languageList.add(Language(&quot;Dart&quot;, 99))
+languageList.add(Language(&quot;C&quot;, 80))
+//使用sortBy进行排序，适合单条件排序
+languageList.sortBy &#123; it.score &#125;
+println(languageList)
+languageList.sortWith(compareBy(&#123; it.score &#125;, &#123; it.name &#125;))
+println(languageList)
+</code></pre><hr>
+<h3 id="7、map"><a href="#7、map" class="headerlink" title="7、map"></a>7、map</h3><hr>
+<p>Map：</p>
+<pre><code>var map = TreeMap&lt;String, String&gt;()
 map[&quot;姓名&quot;] = &quot;张三&quot;
 map[&quot;性别&quot;] = &quot;男&quot;
 map[&quot;年龄&quot;] = &quot;18&quot;
 map[&quot;爱好&quot;] = &quot;游泳&quot;
-</code></pre><h3 id="8、静态变量、方法"><a href="#8、静态变量、方法" class="headerlink" title="8、静态变量、方法"></a>8、静态变量、方法</h3><pre><code>companion object &#123; 
+</code></pre><p>map不是Collection接口的继承者，但是他也是kotlin的一种集合类型：</p>
+<pre><code>val map = mapOf(&quot;key1&quot; to 1, &quot;key2&quot; to 2, &quot;key3&quot; to 3, &quot;key4&quot; to 4, &quot;key5&quot; to 5)
+println(map.keys)
+println(map.values)
+if (&quot;key2&quot; in map) println(&quot;Value by key key2:$&#123;map[&quot;key2&quot;]&#125;&quot;)
+if (1 in map.values) println(&quot;1 is in the map&quot;)
+if (map.containsKey(&quot;key1&quot;)) &#123;
+    println()
+&#125;
+if (map.containsValue(1)) &#123;
+    println()
+&#125;
+</code></pre><p>两个具有相同键值对，但顺序不同的map相等吗？为什么？</p>
+<pre><code>/**
+ * Q1：两个具有相同键值对，但顺序不同的map相等吗？为什么？
+ * 无论键值对的顺序如何，包含相同键值对的两个 Map 是相等的
+ */
+val anotherMap = mapOf(&quot;key2&quot; to 2, &quot;key1&quot; to 1, &quot;key3&quot; to 3, &quot;key4&quot; to 4, &quot;key5&quot; to 5)
+println(&quot;anotherMap == numberMap:$&#123;anotherMap == map&#125;&quot;)
+anotherMap.equals(map)
+</code></pre><hr>
+<h3 id="8、静态变量、方法"><a href="#8、静态变量、方法" class="headerlink" title="8、静态变量、方法"></a>8、静态变量、方法</h3><pre><code>companion object &#123; 
 &#125;
 </code></pre><h3 id="9、方法函数"><a href="#9、方法函数" class="headerlink" title="9、方法函数"></a>9、方法函数</h3><p>定义方法带参及返回类型</p>
 <pre><code>fun stringD(string : String):Boolean&#123;
