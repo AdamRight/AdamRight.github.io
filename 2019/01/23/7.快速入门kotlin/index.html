@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.5k 字
+      4k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      53
+      61
        分钟
     </span>
   
@@ -420,7 +420,7 @@ anotherMap.equals(map)
     //...
     return true
 &#125;
-</code></pre><p>参数个数不固定</p>
+</code></pre><p><strong>参数个数不固定</strong>，vararg：</p>
 <pre><code>fun stringE(vararg names: String)&#123;
 &#125;
 
@@ -458,16 +458,30 @@ val clazz2 = dd.javaClass
     &#125;
 &#125;
 </code></pre><h3 id="13、AS转化"><a href="#13、AS转化" class="headerlink" title="13、AS转化"></a>13、AS转化</h3><p>as中直接转换：两次<code>shift</code>后输入<code>Convert Java File to Kotlin File</code>。</p>
-<h3 id="14、Lambda"><a href="#14、Lambda" class="headerlink" title="14、Lambda"></a>14、Lambda</h3><pre><code>函数入参 -&gt; 返回值
+<h3 id="14、Lambda"><a href="#14、Lambda" class="headerlink" title="14、Lambda"></a>14、Lambda</h3><p>无参数：</p>
+<pre><code>fun test() &#123;
+    println(&quot;no param&quot;)
+&#125;
+//转换成Lambda
+val test = &#123; println(&quot;no param&quot;) &#125;
+</code></pre><p>有参数：</p>
+<pre><code>函数入参 -&gt; 返回值
 
 val add = fun(num1: Int, num2: Int): Int &#123;
     return num1 + num2
 &#125;
-//可以写成
+
+//Lambda可以写成
+val add: (Int, Int) -&gt; Int = &#123; a, b -&gt; a + b &#125;
+//或者
 val add = &#123; num1: Int, num2: Int -&gt; num1 + num2 &#125;
 </code></pre><p>过滤空后的输出结果</p>
 <pre><code>var strArrays = arrayOf(&quot;1&quot;, &quot;2&quot;, &quot;&quot;, &quot;&quot;, &quot;3&quot;, &quot;4&quot;)
 strArrays.filter &#123; it.isNotEmpty() &#125;.forEach&#123; println(it)&#125;
+</code></pre><p>下划线，用不到的参数可以用下划线代替：</p>
+<pre><code>val map = mapOf(&quot;key1&quot; to &quot;value1&quot;, &quot;key2&quot; to &quot;value2&quot;, &quot;key3&quot; to &quot;value3&quot;, &quot;key4&quot; to &quot;value4&quot;, &quot;key5&quot; to &quot;value5&quot;)
+map.forEach &#123; (k, _) -&gt; println(k) &#125;
+map.forEach &#123; (_, v) -&gt; println(v) &#125;
 </code></pre><h3 id="15、空安全"><a href="#15、空安全" class="headerlink" title="15、空安全"></a>15、空安全</h3><p><strong><code>String?</code>表示可以为null的String类型</strong>。<code>!!</code>表示自己判断不会出现<code>null</code>，但如果出现了<code>null</code>会崩溃。<code>？</code>表示可能会返回<code>null</code>，不会崩溃。</p>
 <pre><code>var string: String? = null
 var len1 = string?.length
@@ -602,7 +616,7 @@ class People : Child, Parent &#123;
 &#125;
 
 class People1(child: Child,parent: Parent) : Child by child, Parent by parent
-</code></pre><h4 id="object类"><a href="#object类" class="headerlink" title="object类"></a>object类</h4><p>只有一个实例的类；不能自定义构造方法；可以实现接口，继承父类；本质上就是单例模式的最基本实现。</p>
+</code></pre><h4 id="object类"><a href="#object类" class="headerlink" title="object类"></a>object类</h4><p>只有一个实例的类；不能自定义构造方法；可以实现接口，继承父类；本质上就是单例模式的最基本实现。object类里面的方法都是静态方法。</p>
 <pre><code>object FF &#123;
     val ffv : String = &quot;ff&quot;
 &#125;
@@ -657,7 +671,8 @@ view.onclick = object : OnClickListener&#123;
     override fun onClick() &#123;
     &#125;
 &#125;
-</code></pre><h3 id="2、高阶函数"><a href="#2、高阶函数" class="headerlink" title="2、高阶函数"></a>2、高阶函数</h3><p>对每个元素操作返回新的list</p>
+</code></pre><h3 id="2、高阶函数"><a href="#2、高阶函数" class="headerlink" title="2、高阶函数"></a>2、高阶函数</h3><hr>
+<p>对每个元素操作返回新的list</p>
 <pre><code>val list = listOf(1, 3, 5, 7, 9, 11)
 val newList = list.map &#123;
     it * 2 + 3
@@ -668,8 +683,7 @@ let、apply、with、use、
 joinToString
 </code></pre><p>尾递归</p>
 <pre><code>tailrec
-</code></pre><h3 id="3、协程"><a href="#3、协程" class="headerlink" title="3、协程"></a>3、协程</h3><p>协作程序，解决异步问题。</p>
-<h2 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h2><p>如果一个函数接收另一个函数作为参数，或者返回值的类型是另一个函数的话，那么该函数就称为高阶函数。</p>
+</code></pre><p>高阶函数：如果一个函数接收另一个函数作为参数，或者返回值的类型是另一个函数的话，那么该函数就称为高阶函数。</p>
 <p>扩展函数-&gt;参考上文，18、方法扩展。</p>
 <p>定义函数变量,<code>-&gt;</code>左边是参数类型，右边是返回值，Unit相当于void，无返回值：</p>
 <pre><code>val a: (String, Int) -&gt; Unit
@@ -677,7 +691,75 @@ joinToString
 <pre><code>fun num1Andnum2(num1: Int, num2: Int, operation: (Int, Int) -&gt; Int): Int &#123;
     return operation(num1, num2)
 &#125;
-</code></pre><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>代码：<a target="_blank" rel="noopener" href="https://github.com/AdamRight/Android2021Code/tree/master/app/src/main/java/com/android/code/kotlin">https://github.com/AdamRight/Android2021Code/tree/master/app/src/main/java/com/android/code/kotlin</a></p>
+</code></pre><hr>
+<h4 id="函数作为参数"><a href="#函数作为参数" class="headerlink" title="函数作为参数"></a>函数作为参数</h4><hr>
+<pre><code>/**
+ * .sum扩展
+ */
+fun List&lt;Int&gt;.sum(callback: (Int) -&gt; Unit): Int &#123;
+    var result = 0
+    for (v in this) &#123;
+        result += v
+        callback(v)
+    &#125;
+    return result
+&#125;
+
+//使用
+val list = listOf(1, 2, 3, 4, 5)
+var result = list.sum &#123; println(it) &#125;//当lambda作为参数，且只有一个参数时，可用it代替此参数
+print(result)
+</code></pre><hr>
+<h4 id="函数作为返回值"><a href="#函数作为返回值" class="headerlink" title="函数作为返回值"></a>函数作为返回值</h4><hr>
+<p>实现一个能够对集合进行求和的高阶函数，并且返回一个<code>(scale: Int) -&gt; Float</code>的函数：</p>
+<pre><code>/**
+ * 函数作为返回值
+ */
+fun List&lt;String&gt;.toIntSum(): (scale: Int) -&gt; Float &#123;
+    println(&quot;第一层函数&quot;)
+    return fun(scale): Float &#123;
+        var result = 0f
+        for (v in this) &#123;
+            result += v.toInt() * scale
+        &#125;
+        return result
+    &#125;
+&#125;
+
+//使用
+val listString = listOf(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;)
+val toIntSum = listString.toIntSum()(2)
+</code></pre><hr>
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><hr>
+<p>实现一个接收一个testClosure方法，该方法要接收一个Int类型的v1参数，同时能够返回一个声名为<code>v2: Int, (Int) -&gt; Unit</code>的函数，并且这个函数能够计算v1和v2的和。</p>
+<pre><code>fun testClosure(v1: Int): (v2: Int, (Int) -&gt; Unit) -&gt; Unit &#123;
+    return fun(v2, printer: (Int) -&gt; Unit) &#123;
+        printer(v1 + v2)
+    &#125;
+&#125;
+
+//使用
+testClosure(1)(2)&#123;
+    println(it)
+&#125;
+</code></pre><hr>
+<h4 id="解构声明"><a href="#解构声明" class="headerlink" title="解构声明"></a>解构声明</h4><hr>
+<pre><code>data class Result(val msg: String, val code: Int)
+
+fun test11() &#123;
+    val result = Result(&quot;success&quot;, 200)
+    val (msg, code) = result
+    println(msg + code)
+&#125;
+</code></pre><hr>
+<h4 id="方法字面值"><a href="#方法字面值" class="headerlink" title="方法字面值"></a>方法字面值</h4><hr>
+<pre><code>var temp: ((Int) -&gt; Boolean)? = null //变量temp为(Int)-&gt;Boolean类型
+//&#123;num-&gt;(num&gt;10)&#125;方法字面值
+temp = &#123; num -&gt; (num &gt; 10) &#125;
+println(temp(11))
+</code></pre><hr>
+<h3 id="3、协程"><a href="#3、协程" class="headerlink" title="3、协程"></a>3、协程</h3><p>协作程序，解决异步问题。</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>代码：<a target="_blank" rel="noopener" href="https://github.com/AdamRight/Android2021Code/tree/master/app/src/main/java/com/android/code/kotlin">https://github.com/AdamRight/Android2021Code/tree/master/app/src/main/java/com/android/code/kotlin</a></p>
 <h3 id="1、静态函数和属性"><a href="#1、静态函数和属性" class="headerlink" title="1、静态函数和属性"></a>1、静态函数和属性</h3><h4 id="1-1-顶层函数"><a href="#1-1-顶层函数" class="headerlink" title="1.1 顶层函数"></a>1.1 顶层函数</h4><hr>
 <p>顶层函数直接在kotlin文件中定义函数和属性，会直接生成静态的。</p>
 <p>在其他kotlin类中可以直接使用函数名，在Java中通过 <code>文件名Kt</code>来使用。</p>
