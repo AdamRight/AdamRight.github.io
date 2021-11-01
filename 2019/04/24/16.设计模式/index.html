@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8.8k 字
+      9k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      116
+      118
        分钟
     </span>
   
@@ -233,6 +233,7 @@
 <p>套路：1、构造函数私有，防止在外部new对象；2、内部必须提供一个静态的方法，让外部调用。</p>
 <hr>
 <h3 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h3><hr>
+<p>java实现：</p>
 <pre><code>public class SingletonEHan &#123;
 
     private SingletonEHan() &#123;
@@ -245,6 +246,9 @@
     &#125;
 //  SingletonEHan instance= SingletonEHan.getInstance();
 &#125;
+</code></pre><p>kotlin实现：</p>
+<pre><code>object SingletonEHan &#123;
+&#125;
 </code></pre><blockquote>
 <ul>
 <li>优点：比较简单，在类加载的时候就完成了实例化，避免了线程的同步问题。</li>
@@ -253,6 +257,7 @@
 </blockquote>
 <hr>
 <h3 id="懒汉模式，四种方式"><a href="#懒汉模式，四种方式" class="headerlink" title="懒汉模式，四种方式"></a>懒汉模式，四种方式</h3><hr>
+<p>java实现：</p>
 <pre><code>public class SingletonLanHan &#123;
 
     private SingletonLanHan() &#123;
@@ -312,11 +317,30 @@
         return singletonLanHanFour;
     &#125;
 &#125;
+</code></pre><p>kotlin实现：</p>
+<pre><code>class SingletonDemo private constructor() &#123;
+    companion object &#123;
+        private var instance: SingletonDemo? = null
+            get() &#123;
+                if (field == null) &#123;
+                    field = SingletonDemo()
+                &#125;
+                return field
+            &#125;
+
+        @Synchronized//线程安全的懒汉式
+        fun get(): SingletonDemo&#123;
+        //细心的小伙伴肯定发现了，这里不用getInstance作为为方法名，是因为在伴生对象声明时，内部已有getInstance方法，所以只能取其他名字
+         return instance!!
+        &#125;
+    &#125;
+&#125;
 </code></pre><blockquote>
 <p>1、开辟一块内存空间，2、初始化对象，3、给变量赋值，指向内存地址。在java中2和3的顺序不一定，也可能先3再2。用volatile保证123的顺序执行，防止重排序。</p>
 </blockquote>
 <hr>
 <h3 id="volatile-同步锁DCL"><a href="#volatile-同步锁DCL" class="headerlink" title="volatile[同步锁DCL]"></a>volatile[同步锁DCL]</h3><hr>
+<p>Java实现:</p>
 <pre><code>public class SingletonLanHan &#123;
 
     private SingletonLanHan() &#123;
@@ -334,6 +358,13 @@
             &#125;
         &#125;
         return singletonLanHanFour;
+    &#125;
+&#125;
+</code></pre><p>kotlin实现：</p>
+<pre><code>class SingletonDemo private constructor() &#123;
+    companion object &#123;
+        val instance: SingletonDemo by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) &#123;
+        SingletonDemo() &#125;
     &#125;
 &#125;
 </code></pre><blockquote>
@@ -373,6 +404,7 @@ class ThreadDemo implements Runnable &#123;
 &#125;
 </code></pre><hr>
 <h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><hr>
+<p>Java实现:</p>
 <pre><code>/**
  * 内部类[推荐用]
  * 在饿汉式方式是只要Singleton类被装载就会实例化,
@@ -390,6 +422,15 @@ public class SingletonIn &#123;
 
     public static SingletonIn getSingletonIn() &#123;
         return SingletonInHodler.singletonIn;
+    &#125;
+&#125;
+</code></pre><p>kotlin实现：</p>
+<pre><code>class SingletonDemo private constructor() &#123;
+    companion object &#123;
+        val instance = SingletonHolder.holder
+    &#125;
+    private object SingletonHolder &#123;
+        val holder= SingletonDemo()
     &#125;
 &#125;
 </code></pre><hr>
