@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2k 字
+      2.5k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      29
+      37
        分钟
     </span>
   
@@ -228,7 +228,116 @@
             <h1 style="display: none">线程和线程池</h1>
             
             <div class="markdown-body">
-              <h2 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h2><p>两种方法：</p>
+              <h2 id="异步任务的方式"><a href="#异步任务的方式" class="headerlink" title="异步任务的方式"></a>异步任务的方式</h2><hr>
+<p>new Thread 、AsyncTask 、HandlerThread 、IntentService 、ThreadPoolExecutor。</p>
+<p>AsyncTask：</p>
+<pre><code>static class MyAsyncTask extends AsyncTask&lt;String,Integer,String&gt;&#123;
+    @Override
+    protected String doInBackground(String... params) &#123;
+        for (int i = 0; i &lt; 10; i++) &#123;
+            publishProgress(i*10);
+        &#125;
+        return params[0];
+    &#125;
+
+    @Override
+    protected void onProgressUpdate(Integer... values) &#123;//主线程回调
+        Log.e(TAG, &quot;onProgressUpdate: &quot; + values[0]);
+    &#125;
+
+    @Override
+    protected void onPostExecute(String result) &#123;//执行结果
+        Log.e(TAG, &quot;onPostExecute: &quot; + result);
+    &#125;
+&#125;
+
+MyAsyncTask asyncTask = new MyAsyncTask();
+asyncTask.execute(&quot;execute mytask&quot;);
+
+//方式二：串联执行，如果其中有一条任务休眠了，或者执行时间过长，后面任务将会被阻塞
+AsyncTask.execute(new Runnable() &#123;
+    @Override
+    public void run() &#123;
+        Log.e(TAG, &quot;run: AsyncTask execute&quot;);
+    &#125;
+&#125;);
+
+//方式三：并发任务执行
+AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() &#123;
+    @Override
+    public void run() &#123;
+        Log.e(TAG, &quot;run: THREAD_POOL_EXECUTOR AsyncTask execute&quot;);
+    &#125;
+&#125;);
+</code></pre><p>HandlerThread：</p>
+<pre><code>static class MyHandler extends Handler&#123;
+    @Override
+    public void handleMessage(@NonNull Message msg) &#123;
+        super.handleMessage(msg);
+        Log.e(TAG, &quot;handleMessage: &quot; + msg.what);
+        Log.e(TAG, &quot;handleMessage: &quot; + Thread.currentThread().getName());
+    &#125;
+
+    public MyHandler(@NonNull Looper looper) &#123;
+        super(looper);
+    &#125;
+&#125;
+
+//1、先开启handlerThread-适用于主线程需要和子线程通信的场景，应用于持续性任务，比如轮训，
+HandlerThread handlerThread=new HandlerThread(&quot;handler-thread&quot;);
+handlerThread.start();
+MyHandler myHandler= new MyHandler(handlerThread.getLooper());
+myHandler.sendEmptyMessage(MSG_WHAT_1);//主线程向子线程handler-thread发送消息
+
+//只能quit
+//handlerThread.quit();
+//handlerThread.quitSafely();
+</code></pre><p>手写主线程向子线程发送消息：</p>
+<pre><code>class LooperThread extends Thread &#123;
+        private Looper looper;
+
+        public LooperThread(String name) &#123;
+            super(name);
+        &#125;
+
+        public Looper getLooper() &#123;
+            synchronized (this)&#123;
+                if (looper==null&amp;&amp;isAlive()) &#123;
+                    try &#123;
+                        wait();
+                    &#125; catch (InterruptedException e) &#123;
+                        e.printStackTrace();
+                    &#125;
+                &#125;
+            &#125;
+            return looper;
+        &#125;
+
+        @Override
+        public void run() &#123;
+            Looper.prepare();
+            synchronized (this)&#123;
+                looper=Looper.myLooper();
+                notify();
+            &#125;
+            Looper.loop();
+        &#125;
+    &#125;
+
+LooperThread thread=new LooperThread(&quot;child-looper&quot;);
+thread.start();
+
+Handler handler = new Handler(thread.getLooper()) &#123;
+    @Override
+    public void handleMessage(@NonNull Message msg) &#123;
+        super.handleMessage(msg);
+        Log.e(TAG, &quot;handleMessage: &quot; + msg.what);
+        Log.e(TAG, &quot;handleMessage: &quot; + Thread.currentThread().getName());
+    &#125;
+&#125;;
+handler.sendEmptyMessage(MSG_WHAT_1);
+</code></pre><hr>
+<h2 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h2><p>两种方法：</p>
 <blockquote>
 <ul>
 <li>继承Thread类</li>
@@ -615,7 +724,7 @@ public class ThreadPoolTest &#123;
         &#125;
     &#125;
 &#125;
-</code></pre>
+</code></pre><h3 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h3><h3 id="线程间通讯"><a href="#线程间通讯" class="headerlink" title="线程间通讯"></a>线程间通讯</h3><h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><h3 id="线程流程控制"><a href="#线程流程控制" class="headerlink" title="线程流程控制"></a>线程流程控制</h3><h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><h3 id="携程"><a href="#携程" class="headerlink" title="携程"></a>携程</h3>
             </div>
             <hr>
             <div>
