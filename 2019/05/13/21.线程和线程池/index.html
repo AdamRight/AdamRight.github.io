@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      3.7k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      44
+      57
        分钟
     </span>
   
@@ -791,7 +791,147 @@ public class ThreadPoolTest &#123;
         &#125;
     &#125;
 &#125;
-</code></pre><h3 id="线程流程控制"><a href="#线程流程控制" class="headerlink" title="线程流程控制"></a>线程流程控制</h3><h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><h3 id="携程"><a href="#携程" class="headerlink" title="携程"></a>携程</h3>
+</code></pre><h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h2><hr>
+<p>协程是一种解决方案，是一种解决嵌套，并发，弱化线程概念的方案。能让多个任务之间更好的协作，能够以同步的方式编排代码完成异步工作。将异步代码写的像同步代码一样直观。</p>
+<p>引入</p>
+<pre><code>//在kotlin项目配合jetpack架构项目中引入协程
+implementation  &apos;androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0&apos;
+implementation &apos;androidx.lifecycle:lifecycle-runtime-ktx:2.2.0&apos;
+implementation &apos;androidx.lifecycle:lifecycle-livedata-ktx:2.2.0&apos;
+
+//在kotlin项目但非jetpack架构项目中引入
+implementation &apos;org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1&apos;
+implementation &apos;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1&apos;
+</code></pre><p>startScene1:线程1、2、3依次按顺序，在主线程执行，最后执行updateUI，startScene2：线程1在主线程执行，然后同步执行子线程2、3，最后执行updateUI：</p>
+<pre><code>import android.util.Log
+import kotlinx.coroutines.*
+
+object CoroutineScene &#123;
+    private val TAG: String = &quot;CoroutineScene&quot;
+    fun startScene1() &#123;
+        GlobalScope.launch(Dispatchers.Main) &#123;
+            Log.e(TAG, &quot;coroutine is running&quot;)
+            val result1 = request1()
+            val result2 = request2(result1)
+            val result3 = request3(result2)
+            updateUI(result3)
+        &#125;
+        Log.e(TAG, &quot;coroutine has launched&quot;)
+    &#125;
+    fun startScene2()&#123;
+        GlobalScope.launch(Dispatchers.Main)&#123;
+            Log.e(TAG, &quot;coroutine is running&quot;)
+            val result1 = request1()
+            val deferred2 = GlobalScope.async &#123; request2(result1) &#125;
+            val deferred3 = GlobalScope.async &#123; request3(result1) &#125;
+            updateUI(deferred2.await(),deferred3.await())
+        &#125;
+        Log.e(TAG, &quot;coroutine has launched&quot;)
+    &#125;
+    private fun updateUI(result2: String, result3: String) &#123;
+        Log.e(TAG, &quot;updateui work on $&#123;Thread.currentThread().name&#125;&quot;)
+        Log.e(TAG, &quot;paramter:&quot; + result3 + &quot;---&quot; + result2)
+    &#125;
+
+    private fun updateUI(result3: String) &#123;
+        Log.e(TAG, &quot;updateui work on $&#123;Thread.currentThread().name&#125;&quot;)
+        Log.e(TAG, &quot;paramter:&quot; + result3)
+    &#125;
+
+    suspend fun request1(): String &#123;
+        //不会暂停线程,但会暂停当前所在的协程
+        delay(2 * 1000)
+        //Thread.sleep(2000)  让线程休眠
+        Log.e(TAG, &quot;request1 work on $&#123;Thread.currentThread().name&#125;&quot;)
+        return &quot;result from request1&quot;
+    &#125;
+
+    suspend fun request2(result1: String): String &#123;
+        delay(2 * 1000)
+        Log.e(TAG, &quot;request2 work on $&#123;Thread.currentThread().name&#125;&quot;)
+        return &quot;result from request2&quot;
+    &#125;
+
+    suspend fun request3(result2: String): String &#123;
+        delay(2 * 1000)
+        Log.e(TAG, &quot;request3 work on $&#123;Thread.currentThread().name&#125;&quot;)
+        return &quot;result from request3&quot;
+    &#125;
+&#125;
+</code></pre><p>协程的核心是挂起和恢复，挂起是方法的挂起，方法的挂起本质是 <code>return</code> ，恢复是方法的恢复，恢复的本质是 <code>callback</code>回调：</p>
+<pre><code>//kotlin源代码
+suspend fun request2(): String &#123;
+    delay(2 * 1000)
+    Log.e(TAG, &quot;request2 completed&quot;)
+    return &quot;result from request2&quot;
+&#125;
+
+//手写实现kotlin编译后代码
+import android.util.Log;
+import androidx.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.CoroutineContext;
+import kotlin.coroutines.intrinsics.IntrinsicsKt;
+import kotlinx.coroutines.DelayKt;
+
+public class CoroutineScene2_decompiled &#123;
+    private static final String TAG = &quot;CoroutineScene2&quot;;
+    public static final Object request2(Continuation preCallback)&#123;
+        ContinuationImpl request2CallBack;
+        if (!(preCallback instanceof ContinuationImpl)||(((ContinuationImpl) preCallback).label&amp;Integer.MIN_VALUE)==0)&#123;
+            request2CallBack=new ContinuationImpl(preCallback) &#123;
+                @Override
+                Object invokeSuspend(@NonNull Object resumeResult) &#123;
+                    this.result=resumeResult;
+                    this.label|=Integer.MIN_VALUE;
+                    return request2(this);
+                &#125;
+            &#125;;
+        &#125;else &#123;
+            request2CallBack= (ContinuationImpl) preCallback;
+        &#125;
+        switch (request2CallBack.label) &#123;
+            case 0:&#123;
+                Object delay = DelayKt.delay(2000, request2CallBack);
+                if (delay== IntrinsicsKt.getCOROUTINE_SUSPENDED()) &#123;
+                    return IntrinsicsKt.getCOROUTINE_SUSPENDED();
+                &#125;
+            &#125;
+        &#125;
+        Log.e(TAG, &quot;request1 completed&quot;);
+
+        return &quot;result from request2&quot;;
+    &#125;
+
+    static abstract class ContinuationImpl&lt;T&gt;implements Continuation&lt;T&gt;&#123;
+        private Continuation preCallback;
+        int label;
+        Object result;
+
+        public ContinuationImpl(Continuation preCallback) &#123;
+            this.preCallback = preCallback;
+        &#125;
+
+        @NotNull
+        @Override
+        public CoroutineContext getContext() &#123;
+            return preCallback.getContext();
+        &#125;
+
+        @Override
+        public void resumeWith(@NotNull Object resumeResult) &#123;
+            Object suspend = invokeSuspend(resumeResult);
+            if (suspend== IntrinsicsKt.getCOROUTINE_SUSPENDED()) &#123;
+                return;
+            &#125;
+            preCallback.resumeWith(suspend);
+        &#125;
+        abstract Object invokeSuspend(@NonNull Object resumeResult);
+    &#125;
+&#125;
+</code></pre><hr>
+
             </div>
             <hr>
             <div>
