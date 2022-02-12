@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.5k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18
+      20
        分钟
     </span>
   
@@ -351,7 +351,7 @@ not-数据类型=&gt;求反
 and/or/xor  与/或/非
 sh1/shr/ushr    有符号左移/有符号右移/无符号右移
 </code></pre><hr>
-<h3 id="实战修改案例"><a href="#实战修改案例" class="headerlink" title="实战修改案例"></a>实战修改案例</h3><hr>
+<h3 id="实战案例技巧"><a href="#实战案例技巧" class="headerlink" title="实战案例技巧"></a>实战案例技巧</h3><hr>
 <p>1、修改bean里get的int值：</p>
 <pre><code>//原smali代码
 return v0
@@ -363,7 +363,18 @@ return v0
 if-eqz v1, :cond 4
 //修改后
 if-nez v1, :cond 4
-</code></pre><hr>
+</code></pre><p>3、DDMS使用</p>
+<p><code>/sdk/tools/</code> 目录下双击 <code>monitor.bat</code> 即可。</p>
+<p>4、Log日志插入</p>
+<p>AndroidKiller中，右键/插入代码/Log信息输出。</p>
+<p><strong>但是注意：locals 要大于0 ，不能在等于零的地方插桩。在 <code>.prologue</code> 之后插入</strong>。</p>
+<p>5、栈跟踪和方法抛析</p>
+<p>AndroidKiller中，右键/插入代码/StackTrace栈跟踪。然后调用顺序是从下往上。</p>
+<p>Traceview的使用，查看调用，可以看到Parents和Children。</p>
+<p>6、JEB2的静态分析动态调试</p>
+<p>7、AS+smalidea插件动态调试</p>
+<p>安装本地插件： <code>File/Settings/Plugins/</code> 。</p>
+<hr>
 <h3 id="adb常用命令"><a href="#adb常用命令" class="headerlink" title="adb常用命令"></a>adb常用命令</h3><hr>
 <p>monkey测试</p>
 <pre><code>adb shell monkey -p 包名 -v 次数
@@ -398,9 +409,6 @@ adb shell am start -W com.xxx.xxx/.LaunchActivity
 </code></pre><p>Appium</p>
 <pre><code>官⽹： www.appium.io,
 </code></pre><p>Appium是由nodejs的express框架写的Http Server,Appium使⽤WebDriver的json wire协议，来驱动Apple系统的UIAutomation库、Android系统的UIAutomator框架。</p>
-<hr>
-<h3 id="DDMS使用"><a href="#DDMS使用" class="headerlink" title="DDMS使用"></a>DDMS使用</h3><hr>
-<p><code>/sdk/tools/</code> 目录下双击 <code>monitor.bat</code> 即可。</p>
 <hr>
 
             </div>
