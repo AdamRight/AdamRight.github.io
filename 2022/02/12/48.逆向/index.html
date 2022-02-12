@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      14
        分钟
     </span>
   
@@ -350,6 +350,19 @@ not-数据类型=&gt;求反
 <pre><code>add/sub/mul/div/rem     加/减/乘/除/模
 and/or/xor  与/或/非
 sh1/shr/ushr    有符号左移/有符号右移/无符号右移
+</code></pre><hr>
+<h3 id="实战修改案例"><a href="#实战修改案例" class="headerlink" title="实战修改案例"></a>实战修改案例</h3><hr>
+<p>1、修改bean里get的int值：</p>
+<pre><code>//原smali代码
+return v0
+//修改后
+const v0, 0x1
+return v0
+</code></pre><p>2、修改判断条件，判断条件取反：</p>
+<pre><code>//原smali代码
+if-eqz v1, :cond 4
+//修改后
+if-nez v1, :cond 4
 </code></pre><hr>
 
             </div>
