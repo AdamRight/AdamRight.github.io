@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      55 字
+      259 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      3
        分钟
     </span>
   
@@ -233,6 +233,41 @@
 <p>新建文件夹AndroidKiller/apktool,将apktool.jar拷贝进去；</p>
 <p>打开AndroidKiller，在主页/配置/Java，中配置jdk；</p>
 <p>打开AndroidKiller，在Android/APKTOOL管理器中配置apktool.jar。</p>
+<hr>
+<h3 id="dalvik字节码"><a href="#dalvik字节码" class="headerlink" title="dalvik字节码"></a>dalvik字节码</h3><hr>
+<p><code>.java</code> 编译成 <code>.class</code> 在编译成 <code>.dex</code> 最后反编译得到 <code>samli</code>文件。</p>
+<pre><code>dx.jar:将.class打包.dex
+    dx --dex --output=Decrypt.dex com/yijinda/demo/Decrypt.class
+
+Baksmali.jar:将.dex反编译成smali
+    java -jar baksmali.jar -o smali_out/ classes.dex
+
+Samli.jar:将.smali打包成.dex
+    java -jar smali.jar smali_out/ -o classes.dex
+</code></pre><p>dalvik字节码类型对应java：</p>
+<pre><code>Dalvik  →    java
+B            byte
+C            char
+S            short
+I            int
+J            long
+F            float
+D            double
+Z            boolean
+V            void
+L            java类类型
+[            数组类型
+</code></pre><p>寄存器的命名法：</p>
+<pre><code>v:局部变量寄存器 v0-vn  参数寄存器 vn-vn+m      
+p：参数寄存器p0 -pn     变量寄存器  v0-vn
+</code></pre><p>字段：</p>
+<pre><code>Lpackage/name/ObjectName;-&gt;FieldName:Ljava/lang/String;
+字段格式：包名/类名;-&gt;字段名称:字段类型;
+</code></pre><p>方法:</p>
+<pre><code>Lpackage/name/ObjectName;-&gt;MethodName (III) Z
+包名/类名;-&gt;方法名(参数):返回值类型
+</code></pre><hr>
+<h3 id="dalvik指令"><a href="#dalvik指令" class="headerlink" title="dalvik指令"></a>dalvik指令</h3><hr>
 <hr>
 
             </div>
