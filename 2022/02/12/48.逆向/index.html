@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      259 字
+      993 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      12
        分钟
     </span>
   
@@ -268,6 +268,49 @@ p：参数寄存器p0 -pn     变量寄存器  v0-vn
 包名/类名;-&gt;方法名(参数):返回值类型
 </code></pre><hr>
 <h3 id="dalvik指令"><a href="#dalvik指令" class="headerlink" title="dalvik指令"></a>dalvik指令</h3><hr>
+<p>格式：</p>
+<pre><code>基础字节码-名称后缀/字节码后缀 目的寄存器 源寄存器
+</code></pre><p>格式解释：</p>
+<pre><code>名称后缀是wide，表示数据宽度为64位
+
+字节码后缀是from16，表示源寄存器为16位
+字节码后缀是16，表示目的寄存器和源寄存器都为16位
+
+目的寄存器始终在源寄存器前面
+目的寄存器的取值范围是v0-v255
+源寄存器的取值范围是v0-v65535
+
+A/B/C/D/E/F/G/H代表一个4位的数值
+AA/BB/CC/DD/EE/FF/GG/HH代表一个8位的数值
+AAAA/BBBB/CCCC/DDDD/EEEE/FFFF/GGGG/HHHH代表一个16位的数值
+</code></pre><p>13种dalvik指令：</p>
+<p>空操作指令：</p>
+<pre><code>nop
+</code></pre><p>数据操作指令：</p>
+<pre><code>move(-wide/-object/-result/-result-object/-result-wide/-exception)
+move(-wide/-object)/from16
+move(-object)/16
+
+object是对象的意思-为对象赋值。
+move指令的三种作用：赋值；move-result接收方法返回操作；处理异常。
+</code></pre><p>返回指令(重点)：</p>
+<pre><code>return-void(表示方法的放回值为空)
+return(表示方法的反回值为32位非对象类型的值)
+return-wide(表示方法的反回值为64位非对象类型的值)
+return-object(表示方法的反回值为对象类型的值)
+</code></pre><p>数据定义指令(重点)：定义程序中用到常量</p>
+<pre><code>const(-wide/-string/-class)
+const/4（数值符号扩展为32位） 
+const/16（数据符号扩展为64位）
+const(-wide)/16
+const(-wide)/32
+const(-wide)/high16
+</code></pre><p>实例操作指令：</p>
+<pre><code>check-cast(类型转换)
+instance-of(检查)  
+new-instance(新建) 
+</code></pre><p>数组操作指令<br>    array-length(获取数组长度)<br>    new-array(新建数组)<br>    filled-new-array(定义数组并初始化)<br>    filled-new-array/range(定义数组并初始化/指定取值范围)<br>    filled-array-data(数组元素取值与赋值)<br>异常指令(throw)</p>
+<p>跳转指令(重点)<br>    goto 紧跟一个标签直接跳转到标签所在位置<br>    packed-switch(有规律)、sparse-switch(无规律)<br>    if-eq(等于)/if-ne(不等于)<br>    if-lt(小于)/if-le(小于等于)<br>    if-gt(大于)/if-ge(大于等于)<br>比较指令(cmp)<br>    大于(1)/等于(0)/小于(-1)=&gt;cmpg、cmp<br>    大于(-1)/等于(0)/小于(1)=&gt;cmpl<br>字段操作指令<br>    普通字段=&gt;iget(读)/iput(写)<br>    静态字段=&gt;sget(读)/sput(写)<br>方法调用指令(重点)<br>    invoke-virtual(调用实例的虚方法) Java当中的普通方法<br>    invoke-super(调用实例的父类/基类方法)<br>    invoke-direct(调用实例的直接方法) 调用java当中的构造方法<br>    invoke-static(调用实例的静态方法)<br>    invoke-interface(调用实例的接口方法)<br>数据转换指令<br>    neg-数据类型=&gt;求补<br>    not-数据类型=&gt;求反<br>    数据类型1-to-数据类型2=&gt;将数据类型1转换为数据类型2<br>数据运算指令<br>    add/sub/mul/div/rem     加/减/乘/除/模<br>    and/or/xor  与/或/非<br>    sh1/shr/ushr    有符号左移/有符号右移/无符号右移</p>
 <hr>
 
             </div>
