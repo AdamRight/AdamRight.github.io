@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      1.6k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20
+      21
        分钟
     </span>
   
@@ -373,7 +373,9 @@ if-nez v1, :cond 4
 <p>Traceview的使用，查看调用，可以看到Parents和Children。</p>
 <p>6、JEB2的静态分析动态调试</p>
 <p>7、AS+smalidea插件动态调试</p>
-<p>安装本地插件： <code>File/Settings/Plugins/</code> 。</p>
+<p>安装本地插件： <code>File/Settings/Plugins/</code> 。设置AndroidManifest文件中 <code>android:debuggable=&quot;true&quot;</code>。然后在 <code>File/Import Settings</code>中导入Smali代码。右击项目中的smali <code>Mark Directory as/Sources Root</code>。配置远程调试，菜单栏 <code>Run/Edit Configurations</code> 添加Remote，配置name、port、classpath。</p>
+<p>获取PID：<code>adb shell ps</code>查找注册机PID。</p>
+<p>转发：<code>adb forward tcp:你设置的端口号 jdwp:你的PID号</code>。</p>
 <hr>
 <h3 id="adb常用命令"><a href="#adb常用命令" class="headerlink" title="adb常用命令"></a>adb常用命令</h3><hr>
 <p>monkey测试</p>
