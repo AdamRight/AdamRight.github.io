@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      2.7k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      30
+      34
        分钟
     </span>
   
@@ -477,6 +477,39 @@ CMP R0 #0         R0寄存器中的值与0比较
 </code></pre><p>对 <code>int a=0;</code> 这一句简单高级语言的汇编理解，首先会开辟一个内存存储单元，然后把0x0这个数放入R0寄存器，然后再把R0寄存器的数据放入内存存储单元。所以：</p>
 <pre><code>MOV R0,#0
 STR R0，[R11,#0x14+var_20]
+</code></pre><hr>
+<h3 id="IDA工具"><a href="#IDA工具" class="headerlink" title="IDA工具"></a>IDA工具</h3><hr>
+<p>IDA Pro工具介绍：交互式反汇编器，是典型的递归下降反汇编器。</p>
+<p>导航条：</p>
+<pre><code>蓝色 ：表示常规的指令函数
+黑色 ：节与节之间的间隙
+银白色 ：数据内容
+粉色 ：表示外部导入符号
+暗黄色： 表示ida未识别的内容
+</code></pre><p>IDA主界面：</p>
+<pre><code>IDA View三种反汇编视图:文本视图、图表视图、路径视图
+Hex View 十六进制窗口
+Struceures 结构体窗口
+Enums 枚举窗口
+Imports 导入函数窗口
+Exports 导出函数窗口
+Strings 字符串窗口
+</code></pre><p>IDA常用功能及快捷键：</p>
+<pre><code>空格键:切换文本视图与图表视图
+ESC:返回上一个操作地址
+G:搜索地址和符号
+N:对符号进行重命名
+冒号键:常规注释 
+分号键:可重复注释
+Alt+M:添加标签
+Ctrl+M:查看标签
+Ctrl+S:查看段的信息
+代码数据切换
+    C=&gt;代码  D=&gt;数据  A=&gt;ascii字符串 U=&gt;解析成未定义的内容
+X:查看交叉应用
+F5:查看伪代码
+Alt+T:搜索文本
+   Alt+B:搜索十六进制
 </code></pre><hr>
 
             </div>
