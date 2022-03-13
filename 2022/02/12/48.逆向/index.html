@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.7k 字
+      3.1k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      34
+      38
        分钟
     </span>
   
@@ -415,9 +415,9 @@ adb shell am start -W com.xxx.xxx/.LaunchActivity
 <h3 id="ARM汇编指令"><a href="#ARM汇编指令" class="headerlink" title="ARM汇编指令"></a>ARM汇编指令</h3><hr>
 <p>1.跳转指令</p>
 <pre><code>B 无条件跳转       
-BL 带链接的无条件跳转  
-BX 带状态切换的无条件跳转   根据目标地址最低位切换状态（arm/thumb）
-BLX 带链接和状态切换的无条件跳转
+BL 带链接的无条件跳转。LR和pc会变。  
+BX 带状态切换的无条件跳转   根据目标地址最低位切换状态（arm/thumb）。T和pc会变。
+BLX 带链接和状态切换的无条件跳转。LR、T、pc会变。
 B loc_地址
 BEQ,BNE
 </code></pre><p>2.存储器与寄存器交互数据指令（核心）</p>
@@ -510,6 +510,68 @@ X:查看交叉应用
 F5:查看伪代码
 Alt+T:搜索文本
    Alt+B:搜索十六进制
+</code></pre><hr>
+<h3 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h3><hr>
+<p>散列函数:用于数据完整性校验</p>
+<pre><code>MD  消息摘要算法
+SHA 安全散列算法
+MAC 消息认证算法
+CRC 循环冗余校验算法
+</code></pre><p>对称加密算法:加密密钥==解密密钥。</p>
+<pre><code>DES
+DESede/3DES/Triple DES 
+AES 
+TEA
+DEA    
+PBE    
+</code></pre><p>非对称加密算法：</p>
+<pre><code>加密密钥!=解密密钥
+公钥==&gt;对外公开
+私钥==&gt;对外保密
+私钥加密==&gt;公钥解密
+公钥加密==&gt;私钥解密
+
+DH 密钥交换算法
+基于因子分解
+    RSA 数据加密/解密 数字签名
+基于离散对数
+    ElGameal 数据加密/解密 数字签名 
+    DSS数据签名标准=&gt;DSA 数字签名
+    ECC 椭圆曲线加密算法
+</code></pre><p>数字签名</p>
+<pre><code>私钥==&gt;签名
+公钥==&gt;验证    
+单向认证
+双向认证
+RSA
+DSA
+ECC+DSA==&gt;ECDSA 椭圆曲线数字签名算法
+认证/鉴别服务
+数据完整性服务
+抗否认性服务
+</code></pre><p>数字证书</p>
+<pre><code>消息摘要算法
+对称加密算法
+非对称加密算法
+数字签名
+鉴别/认证
+数据保密性
+数据完整性
+抗否认性
+</code></pre><p>证书管理</p>
+<pre><code>KeyTool
+    构建自签名证书
+    构建CA签发证书
+OpenSSL
+    根证书
+    服务器证书
+    客户端证书
+密钥库==&gt;管理私钥
+数字证书==&gt;管理公钥
+加密/解密
+签名/验证
+X.509
+服务器数字证书
 </code></pre><hr>
 
             </div>
