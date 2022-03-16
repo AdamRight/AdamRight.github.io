@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.1k 字
+      3.3k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      38
+      41
        分钟
     </span>
   
@@ -511,6 +511,38 @@ F5:查看伪代码
 Alt+T:搜索文本
    Alt+B:搜索十六进制
 </code></pre><hr>
+<h3 id="IDA动态调试"><a href="#IDA动态调试" class="headerlink" title="IDA动态调试"></a>IDA动态调试</h3><hr>
+<p>将<code>dbgsrv/android_server</code>push到手机。</p>
+<pre><code>adb push ...\dbgsrv\android_server data/local/tmp
+</code></pre><p>查看是否成功并给权限：</p>
+<pre><code>adb shell
+su
+cd data/local/tmp
+ls
+如果改名字，android_server可以运行:  mv android_server as ab
+如果想改端口号，可以运行:  ./android_server -p端口号
+chmod 777 android_server
+</code></pre><p>新打开cmd，端口转发：</p>
+<pre><code>adb forward tcp:端口号 tcp:端口号
+</code></pre><p>安装apk</p>
+<p>打开ddms(红色甲壳虫)</p>
+<p>挂起程序：</p>
+<pre><code>adb shell am start -D -n 包名/.类名
+</code></pre><p>打开IDA，<code>Debugger -&gt; Attach -&gt; Remote ARMLinux/Android debugger</code> 设置:</p>
+<pre><code>127.0.0.1  端口
+不用输入密码
+</code></pre><p>选择app进程即可使用了。</p>
+<p>设置 <code>Debugger -&gt; Debugger options</code> 勾选:</p>
+<pre><code>Suspend on process entry point
+Suspend on thread start/exit
+Suspend on library load/unload 
+</code></pre><p>执行命令：</p>
+<pre><code>jdb -connect com.sun.jdi.SocketAttach:hostname=127.0.0.1,port=端口号
+
+ddms的红色甲壳虫自动变成了绿色
+</code></pre><p>点击IDA左上角运行。</p>
+<p>等待so库加载，在IDA模块中找到该so库，在so库中找方法 <code>jni_onload</code> (动态注册) 或者 <code>java开头的方法</code> (静态注册)。f2下断点，f9运行。</p>
+<hr>
 <h3 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h3><hr>
 <p>散列函数:用于数据完整性校验</p>
 <pre><code>MD  消息摘要算法
