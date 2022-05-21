@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -234,9 +234,10 @@
 <p>定义变量：</p>
 <pre><code>变量名 = 值
 
-my_name = &apos;TOM&apos;
+my_name = &#39;TOM&#39;
 print(my_name)#TOM
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><hr>
 <p>数据类型</p>
 <ul>
@@ -253,188 +254,190 @@ print(my_name)#TOM
 <p>检测数据类型的方法：<code>type()</code></p>
 </blockquote>
 <pre><code>a = 1
-print(type(a))  # &lt;class &apos;int&apos;&gt; -- 整型
+print(type(a))  # &lt;class &#39;int&#39;&gt; -- 整型
 
 b = 1.1
-print(type(b))  # &lt;class &apos;float&apos;&gt; -- 浮点型
+print(type(b))  # &lt;class &#39;float&#39;&gt; -- 浮点型
 
 c = True
-print(type(c))  # &lt;class &apos;bool&apos;&gt; -- 布尔型
+print(type(c))  # &lt;class &#39;bool&#39;&gt; -- 布尔型
 
-d = &apos;12345&apos;
-print(type(d))  # &lt;class &apos;str&apos;&gt; -- 字符串
+d = &#39;12345&#39;
+print(type(d))  # &lt;class &#39;str&#39;&gt; -- 字符串
 
 e = [10, 20, 30]
-print(type(e))  # &lt;class &apos;list&apos;&gt; -- 列表
+print(type(e))  # &lt;class &#39;list&#39;&gt; -- 列表
 
 f = (10, 20, 30)
-print(type(f))  # &lt;class &apos;tuple&apos;&gt; -- 元组
+print(type(f))  # &lt;class &#39;tuple&#39;&gt; -- 元组
 
 h = &#123;10, 20, 30&#125;
-print(type(h))  # &lt;class &apos;set&apos;&gt; -- 集合
+print(type(h))  # &lt;class &#39;set&#39;&gt; -- 集合
 
-g = &#123;&apos;name&apos;: &apos;TOM&apos;, &apos;age&apos;: 20&#125;
-print(type(g))  # &lt;class &apos;dict&apos;&gt; -- 字典
-</code></pre><hr>
+g = &#123;&#39;name&#39;: &#39;TOM&#39;, &#39;age&#39;: 20&#125;
+print(type(g))  # &lt;class &#39;dict&#39;&gt; -- 字典
+</code></pre>
+<hr>
 <h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><hr>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">格式符号</th>
-<th style="text-align:center">转换</th>
+<th align="center">格式符号</th>
+<th align="center">转换</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">%s</td>
-<td style="text-align:center">字符串</td>
+<tbody><tr>
+<td align="center">%s</td>
+<td align="center">字符串</td>
 </tr>
 <tr>
-<td style="text-align:center">%d</td>
-<td style="text-align:center">有符号的十进制整数</td>
+<td align="center">%d</td>
+<td align="center">有符号的十进制整数</td>
 </tr>
 <tr>
-<td style="text-align:center">%f</td>
-<td style="text-align:center">浮点数</td>
+<td align="center">%f</td>
+<td align="center">浮点数</td>
 </tr>
 <tr>
-<td style="text-align:center">%c</td>
-<td style="text-align:center">字符</td>
+<td align="center">%c</td>
+<td align="center">字符</td>
 </tr>
 <tr>
-<td style="text-align:center">%u</td>
-<td style="text-align:center">无符号十进制整数</td>
+<td align="center">%u</td>
+<td align="center">无符号十进制整数</td>
 </tr>
 <tr>
-<td style="text-align:center">%o</td>
-<td style="text-align:center">八进制整数</td>
+<td align="center">%o</td>
+<td align="center">八进制整数</td>
 </tr>
 <tr>
-<td style="text-align:center">%x</td>
-<td style="text-align:center">十六进制整数（小写ox）</td>
+<td align="center">%x</td>
+<td align="center">十六进制整数（小写ox）</td>
 </tr>
 <tr>
-<td style="text-align:center">%X</td>
-<td style="text-align:center">十六进制整数（大写OX）</td>
+<td align="center">%X</td>
+<td align="center">十六进制整数（大写OX）</td>
 </tr>
 <tr>
-<td style="text-align:center">%e</td>
-<td style="text-align:center">科学计数法（小写’e’）</td>
+<td align="center">%e</td>
+<td align="center">科学计数法（小写’e’）</td>
 </tr>
 <tr>
-<td style="text-align:center">%E</td>
-<td style="text-align:center">科学计数法（大写’E’）</td>
+<td align="center">%E</td>
+<td align="center">科学计数法（大写’E’）</td>
 </tr>
 <tr>
-<td style="text-align:center">%g</td>
-<td style="text-align:center">%f和%e的简写</td>
+<td align="center">%g</td>
+<td align="center">%f和%e的简写</td>
 </tr>
 <tr>
-<td style="text-align:center">%G</td>
-<td style="text-align:center">%f和%E的简写</td>
+<td align="center">%G</td>
+<td align="center">%f和%E的简写</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <blockquote>
 <p>技巧</p>
 </blockquote>
 <ul>
-<li>%06d，表示输出的整数显示位数，不足以0补全，超出当前位数则原样输出</li>
-<li>%.2f，表示小数点后显示的小数位数。</li>
+<li><p>%06d，表示输出的整数显示位数，不足以0补全，超出当前位数则原样输出</p>
+</li>
+<li><p>%.2f，表示小数点后显示的小数位数。</p>
+</li>
 <li><p>格式化字符串除了%s，还可以写为<code>f&#39;&#123;表达式&#125;&#39;</code></p>
-<pre><code>age = 18
-name = &apos;TOM&apos;
-weight = 75.5
-student_id = 1
-
-# 我的名字是TOM
-print(&apos;我的名字是%s&apos; % name)
-
-# 我的学号是0001
-print(&apos;我的学号是%4d&apos; % student_id)
-
-# 我的体重是75.50公斤
-print(&apos;我的体重是%.2f公斤&apos; % weight)
-
-# 我的名字是TOM，明年19岁了
-print(&apos;我的名字是%s，明年%d岁了&apos; % (name, age + 1))
-
-# 我的名字是TOM，明年19岁了
-print(f&apos;我的名字是&#123;name&#125;, 明年&#123;age + 1&#125;岁了&apos;)
-</code></pre></li>
+<pre><code>  age = 18
+  name = &#39;TOM&#39;
+  weight = 75.5
+  student_id = 1
+  
+  # 我的名字是TOM
+  print(&#39;我的名字是%s&#39; % name)
+  
+  # 我的学号是0001
+  print(&#39;我的学号是%4d&#39; % student_id)
+  
+  # 我的体重是75.50公斤
+  print(&#39;我的体重是%.2f公斤&#39; % weight)
+  
+  # 我的名字是TOM，明年19岁了
+  print(&#39;我的名字是%s，明年%d岁了&#39; % (name, age + 1))
+  
+  # 我的名字是TOM，明年19岁了
+  print(f&#39;我的名字是&#123;name&#125;, 明年&#123;age + 1&#125;岁了&#39;)
+</code></pre>
+</li>
 </ul>
 <hr>
 <h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><hr>
 <pre><code>input(&quot;提示信息&quot;)
-</code></pre><p>在Python中，<code>input</code>会把接收到的任意用户输入的数据都当做字符串处理。</p>
-<pre><code>password = input(&apos;请输入您的密码：&apos;)
-print(f&apos;您输入的密码是&#123;password&#125;&apos;)
-# &lt;class &apos;str&apos;&gt;
+</code></pre>
+<p>在Python中，<code>input</code>会把接收到的任意用户输入的数据都当做字符串处理。</p>
+<pre><code>password = input(&#39;请输入您的密码：&#39;)
+print(f&#39;您输入的密码是&#123;password&#125;&#39;)
+# &lt;class &#39;str&#39;&gt;
 print(type(password))
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="转换数据类型"><a href="#转换数据类型" class="headerlink" title="转换数据类型"></a>转换数据类型</h2><hr>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">函数</th>
-<th style="text-align:center">说明</th>
+<th align="center">函数</th>
+<th align="center">说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">int(x [,base ])</td>
-<td style="text-align:center">将x转换为一个整数</td>
+<tbody><tr>
+<td align="center">int(x [,base ])</td>
+<td align="center">将x转换为一个整数</td>
 </tr>
 <tr>
-<td style="text-align:center">float(x)</td>
-<td style="text-align:center">将x转换为一个浮点数</td>
+<td align="center">float(x)</td>
+<td align="center">将x转换为一个浮点数</td>
 </tr>
 <tr>
-<td style="text-align:center">complex(real [,imag ])</td>
-<td style="text-align:center">创建一个复数，real为实部，imag为虚部</td>
+<td align="center">complex(real [,imag ])</td>
+<td align="center">创建一个复数，real为实部，imag为虚部</td>
 </tr>
 <tr>
-<td style="text-align:center">str(x )</td>
-<td style="text-align:center">将对象 x 转换为字符串</td>
+<td align="center">str(x )</td>
+<td align="center">将对象 x 转换为字符串</td>
 </tr>
 <tr>
-<td style="text-align:center">repr(x )</td>
-<td style="text-align:center">将对象 x 转换为表达式字符串</td>
+<td align="center">repr(x )</td>
+<td align="center">将对象 x 转换为表达式字符串</td>
 </tr>
 <tr>
-<td style="text-align:center">eval(str )</td>
-<td style="text-align:center">用来计算在字符串中的有效Python表达式,并返回一个对象</td>
+<td align="center">eval(str )</td>
+<td align="center">用来计算在字符串中的有效Python表达式,并返回一个对象</td>
 </tr>
 <tr>
-<td style="text-align:center">tuple(s )</td>
-<td style="text-align:center">将序列 s 转换为一个元组</td>
+<td align="center">tuple(s )</td>
+<td align="center">将序列 s 转换为一个元组</td>
 </tr>
 <tr>
-<td style="text-align:center">list(s )</td>
-<td style="text-align:center">将序列 s 转换为一个列表</td>
+<td align="center">list(s )</td>
+<td align="center">将序列 s 转换为一个列表</td>
 </tr>
 <tr>
-<td style="text-align:center">chr(x )</td>
-<td style="text-align:center">将一个整数转换为一个Unicode字符</td>
+<td align="center">chr(x )</td>
+<td align="center">将一个整数转换为一个Unicode字符</td>
 </tr>
 <tr>
-<td style="text-align:center">ord(x )</td>
-<td style="text-align:center">将一个字符转换为它的ASCII整数值</td>
+<td align="center">ord(x )</td>
+<td align="center">将一个字符转换为它的ASCII整数值</td>
 </tr>
 <tr>
-<td style="text-align:center">hex(x )</td>
-<td style="text-align:center">将一个整数转换为一个十六进制字符串</td>
+<td align="center">hex(x )</td>
+<td align="center">将一个整数转换为一个十六进制字符串</td>
 </tr>
 <tr>
-<td style="text-align:center">oct(x )</td>
-<td style="text-align:center">将一个整数转换为一个八进制字符串</td>
+<td align="center">oct(x )</td>
+<td align="center">将一个整数转换为一个八进制字符串</td>
 </tr>
 <tr>
-<td style="text-align:center">bin(x )</td>
-<td style="text-align:center">将一个整数转换为一个二进制字符串</td>
+<td align="center">bin(x )</td>
+<td align="center">将一个整数转换为一个二进制字符串</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre><code># 1. float() -- 转换成浮点型
 num1 = 1
 print(float(num1))
@@ -455,75 +458,76 @@ print(list(t1))
 print(type(list(t1)))
 
 # 5. eval() -- 将字符串中的数据转换成Python表达式原本类型
-str1 = &apos;10&apos;
-str2 = &apos;[1, 2, 3]&apos;
-str3 = &apos;(1000, 2000, 3000)&apos;
+str1 = &#39;10&#39;
+str2 = &#39;[1, 2, 3]&#39;
+str3 = &#39;(1000, 2000, 3000)&#39;
 print(type(eval(str1)))
 print(type(eval(str2)))
 print(type(eval(str3)))
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><hr>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">运算符</th>
-<th style="text-align:center">描述</th>
+<th align="center">运算符</th>
+<th align="center">描述</th>
 <th>实例</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:center">加</td>
+<tbody><tr>
+<td align="center">+</td>
+<td align="center">加</td>
 <td>1 + 1 输出结果为 2</td>
 </tr>
 <tr>
-<td style="text-align:center">-</td>
-<td style="text-align:center">减</td>
+<td align="center">-</td>
+<td align="center">减</td>
 <td>1-1 输出结果为 0</td>
 </tr>
 <tr>
-<td style="text-align:center">*</td>
-<td style="text-align:center">乘</td>
+<td align="center">*</td>
+<td align="center">乘</td>
 <td>2 * 2 输出结果为 4</td>
 </tr>
 <tr>
-<td style="text-align:center">/</td>
-<td style="text-align:center">除</td>
-<td>10 / 2 输出结果为 5</td>
+<td align="center">&#x2F;</td>
+<td align="center">除</td>
+<td>10 &#x2F; 2 输出结果为 5</td>
 </tr>
 <tr>
-<td style="text-align:center">//</td>
-<td style="text-align:center">整除</td>
-<td>9 // 4 输出结果为2</td>
+<td align="center">&#x2F;&#x2F;</td>
+<td align="center">整除</td>
+<td>9 &#x2F;&#x2F; 4 输出结果为2</td>
 </tr>
 <tr>
-<td style="text-align:center">%</td>
-<td style="text-align:center">取余</td>
+<td align="center">%</td>
+<td align="center">取余</td>
 <td>9 % 4 输出结果为 1</td>
 </tr>
 <tr>
-<td style="text-align:center">**</td>
-<td style="text-align:center">指数</td>
-<td>2 *<em> 4 输出结果为 16，即 2 </em> 2 <em> 2 </em> 2</td>
+<td align="center">**</td>
+<td align="center">指数</td>
+<td>2 ** 4 输出结果为 16，即 2 * 2 * 2 * 2</td>
 </tr>
 <tr>
-<td style="text-align:center">()</td>
-<td style="text-align:center">小括号</td>
+<td align="center">()</td>
+<td align="center">小括号</td>
 <td>小括号用来提高运算优先级，即 (1 + 2) * 3 输出结果为 9</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>多个变量赋值</p>
-<pre><code>num1, float1, str1 = 10, 0.5, &apos;hello world&apos;
+<pre><code>num1, float1, str1 = 10, 0.5, &#39;hello world&#39;
 print(num1)
 print(float1)
 print(str1)
-</code></pre><p>多变量赋相同值</p>
+</code></pre>
+<p>多变量赋相同值</p>
 <pre><code>a = b = 10
 print(a)
 print(b)
-</code></pre><table>
+</code></pre>
+<table>
 <thead>
 <tr>
 <th>运算符</th>
@@ -532,8 +536,7 @@ print(b)
 <th>实例</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>and</td>
 <td>x and y</td>
 <td>布尔”与”：如果 x 为 False，x and y 返回 False，否则它返回 y 的值。</td>
@@ -551,8 +554,7 @@ print(b)
 <td>布尔”非”：如果 x 为 True，返回 False 。如果 x 为 False，它返回 True。</td>
 <td>not True 返回 False, not False 返回 True</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>数字之间的逻辑运算</p>
 <pre><code>a = 0
 b = 1
@@ -568,7 +570,8 @@ print(c and b)  # 1
 print(a or b)  # 1
 print(a or c)  # 2
 print(b or c)  # 1
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><hr>
 <p>语法：</p>
 <pre><code>if 条件1:
@@ -580,15 +583,17 @@ elif 条件2：
 ......
 else:
     以上条件都不成立执行执行的代码
-</code></pre><p>实例：</p>
-<pre><code>age = int(input(&apos;请输入您的年龄：&apos;))
+</code></pre>
+<p>实例：</p>
+<pre><code>age = int(input(&#39;请输入您的年龄：&#39;))
 if age &lt; 18:
-    print(f&apos;您的年龄是&#123;age&#125;,童工一枚&apos;)
+    print(f&#39;您的年龄是&#123;age&#125;,童工一枚&#39;)
 elif (age &gt;= 18) and (age &lt;= 60):
-    print(f&apos;您的年龄是&#123;age&#125;,合法工龄&apos;)
+    print(f&#39;您的年龄是&#123;age&#125;,合法工龄&#39;)
 elif age &gt; 60:
-    print(f&apos;您的年龄是&#123;age&#125;,可以退休&apos;)
-</code></pre><hr>
+    print(f&#39;您的年龄是&#123;age&#125;,可以退休&#39;)
+</code></pre>
+<hr>
 <h3 id="猜拳游戏"><a href="#猜拳游戏" class="headerlink" title="猜拳游戏"></a>猜拳游戏</h3><hr>
 <pre><code># 导入random模块
 import random
@@ -597,17 +602,18 @@ import random
 computer = random.randint(0, 2)
 print(computer)
 
-player = int(input(&apos;请出拳：0-石头，1-剪刀，2-布：&apos;))
+player = int(input(&#39;请出拳：0-石头，1-剪刀，2-布：&#39;))
 
 # 玩家胜利 p0:c1 或 p1:c2 或 p2:c0
 if (player == 0 and computer == 1) or (player == 1 and computer == 2) or (player == 2 and computer == 0):
-    print(&apos;玩家获胜&apos;)
+    print(&#39;玩家获胜&#39;)
 # 平局：玩家 == 电脑
 elif player == computer:
-    print(&apos;平局&apos;)
+    print(&#39;平局&#39;)
 else:
-    print(&apos;电脑获胜&apos;)
-</code></pre><hr>
+    print(&#39;电脑获胜&#39;)
+</code></pre>
+<hr>
 <h3 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h3><hr>
 <p>语法：</p>
 <pre><code>值1 if 条件 else 值2
@@ -616,37 +622,43 @@ a = 1
 b = 2
 c = a if a &gt; b else b
 print(c)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><hr>
 <p>while的语法</p>
 <pre><code>while 条件:
     代码
     ......
-</code></pre><p>计算1-100累加和：</p>
+</code></pre>
+<p>计算1-100累加和：</p>
 <pre><code>i = 1
 result = 0
 while i &lt;= 100:
     result += i
     i += 1
 print(result)#5050
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><hr>
 <p>语法</p>
 <pre><code>for 临时变量 in 序列:
     代码
     ......
-</code></pre><p>使用</p>
-<pre><code>str1 = &apos;HelloWorld&apos;
+</code></pre>
+<p>使用</p>
+<pre><code>str1 = &#39;HelloWorld&#39;
 for i in str1:
     print(i)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="while…else"><a href="#while…else" class="headerlink" title="while…else"></a>while…else</h3><hr>
 <p>语法</p>
 <pre><code>while 条件:
     代码
 else:
     循环正常结束之后要执行的代码
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>所谓else指的是循环正常结束之后要执行的代码，即如果是break终止循环的情况，else下方缩进的代码将不执行。</p>
 </blockquote>
 <blockquote>
@@ -660,19 +672,21 @@ else:
     ...
 else:
     循环正常结束之后要执行的代码
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>break终止循环不会执行else下方缩进的代码。continue退出循环的方式，执行else下方缩进的代码。</p>
 </blockquote>
 <hr>
 <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="三引号字符串"><a href="#三引号字符串" class="headerlink" title="三引号字符串"></a>三引号字符串</h3><hr>
-<pre><code>name3 = &apos;&apos;&apos; Tom &apos;&apos;&apos;
+<pre><code>name3 = &#39;&#39;&#39; Tom &#39;&#39;&#39;
 name4 = &quot;&quot;&quot; Rose &quot;&quot;&quot;
-a = &apos;&apos;&apos; i am Tom, 
-        nice to meet you! &apos;&apos;&apos;
+a = &#39;&#39;&#39; i am Tom, 
+        nice to meet you! &#39;&#39;&#39;
 
 b = &quot;&quot;&quot; i am Rose, 
         nice to meet you! &quot;&quot;&quot;
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：三引号形式的字符串支持换行。</p>
 </blockquote>
 <hr>
@@ -682,7 +696,8 @@ b = &quot;&quot;&quot; i am Rose,
 </blockquote>
 <p>切片语法</p>
 <pre><code>序列[开始位置下标:结束位置下标:步长]
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意:不包含结束位置下标对应的数据， 正负整数均可；步长是选取间隔，正负整数均可，默认步长为1。</p>
 </blockquote>
 <pre><code>name = &quot;abcdefg&quot;
@@ -696,17 +711,19 @@ print(name[::2])  # aceg
 print(name[:-1])  # abcdef, 负1表示倒数第一个数据
 print(name[-4:-1])  # def
 print(name[::-1])  # gfedcba
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><hr>
 <p>检测某个子串是否包含在这个字符串中，如果在返回这个子串开始的位置下标，否则则返回-1。</p>
 <pre><code>#开始和结束位置下标可以省略，表示在整个字符串序列中查找
 字符串序列.find(子串, 开始位置下标, 结束位置下标)
 
 mystr = &quot;hello world and Python&quot;
-print(mystr.find(&apos;and&apos;))  # 12
-print(mystr.find(&apos;and&apos;, 15, 30))  # -1
-print(mystr.find(&apos;ands&apos;))  # -1
-</code></pre><p>rfind()和find()功能相同，但查找方向为右侧开始。</p>
+print(mystr.find(&#39;and&#39;))  # 12
+print(mystr.find(&#39;and&#39;, 15, 30))  # -1
+print(mystr.find(&#39;ands&#39;))  # -1
+</code></pre>
+<p>rfind()和find()功能相同，但查找方向为右侧开始。</p>
 <hr>
 <h3 id="index"><a href="#index" class="headerlink" title="index"></a>index</h3><hr>
 <p>检测某个子串是否包含在这个字符串中，如果在返回这个子串开始的位置下标，否则则报异常。</p>
@@ -714,9 +731,10 @@ print(mystr.find(&apos;ands&apos;))  # -1
 字符串序列.index(子串, 开始位置下标, 结束位置下标)
 
 mystr = &quot;hello world and Python&quot;
-print(mystr.index(&apos;and&apos;))  # 12
-print(mystr.index(&apos;ands&apos;))  # 报错
-</code></pre><p>rindex()index()功能相同，但查找方向为右侧开始。</p>
+print(mystr.index(&#39;and&#39;))  # 12
+print(mystr.index(&#39;ands&#39;))  # 报错
+</code></pre>
+<p>rindex()index()功能相同，但查找方向为右侧开始。</p>
 <hr>
 <h3 id="count"><a href="#count" class="headerlink" title="count"></a>count</h3><hr>
 <p>返回某个子串在字符串中出现的次数。</p>
@@ -724,9 +742,10 @@ print(mystr.index(&apos;ands&apos;))  # 报错
 字符串序列.count(子串, 开始位置下标, 结束位置下标)
 
 mystr = &quot;hello world and Python&quot;
-print(mystr.count(&apos;and&apos;))  # 1
-print(mystr.count(&apos;ands&apos;))  # 0
-</code></pre><hr>
+print(mystr.count(&#39;and&#39;))  # 1
+print(mystr.count(&#39;ands&#39;))  # 0
+</code></pre>
+<hr>
 <h3 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h3><hr>
 <p>替换</p>
 <pre><code>#替换次数如果查出子串出现次数，则替换次数为该子串出现次数。
@@ -735,32 +754,35 @@ print(mystr.count(&apos;ands&apos;))  # 0
 mystr = &quot;hello world and Python and&quot;
 
 # 结果：hello world he Python he
-print(mystr.replace(&apos;and&apos;, &apos;he&apos;))
+print(mystr.replace(&#39;and&#39;, &#39;he&#39;))
 # 结果：hello world he Python he
-print(mystr.replace(&apos;and&apos;, &apos;he&apos;, 10))
+print(mystr.replace(&#39;and&#39;, &#39;he&#39;, 10))
 # 结果：hello world and Python and
 print(mystr)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：数据按照是否能直接修改分为可变类型和不可变类型两种。字符串类型的数据修改的时候不能改变原有字符串，属于不能直接修改数据的类型即是不可变类型。</p>
 </blockquote>
 <hr>
 <h3 id="split"><a href="#split" class="headerlink" title="split"></a>split</h3><hr>
 <p>按照指定字符分割字符串。</p>
 <pre><code>字符串序列.split(分割字符, num)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：num表示的是分割字符出现的次数，即将来返回数据个数为num+1个。</p>
 </blockquote>
 <pre><code>mystr = &quot;hello world and Python and it&quot;
 
-# [&apos;hello world &apos;, &apos; Python &apos;, &apos; it&apos;]
-print(mystr.split(&apos;and&apos;))
-# [&apos;hello world &apos;, &apos; Python &apos;, &apos; it&apos;]
-print(mystr.split(&apos;and&apos;, 2))
-# [&apos;hello&apos;, &apos;world&apos;, &apos;and&apos;, &apos;Python&apos;, &apos;and&apos;, &apos;it&apos;]
-print(mystr.split(&apos; &apos;))
-# [&apos;hello&apos;, &apos;world&apos;, &apos;and Python and it&apos;]
-print(mystr.split(&apos; &apos;, 2))
-</code></pre><blockquote>
+# [&#39;hello world &#39;, &#39; Python &#39;, &#39; it&#39;]
+print(mystr.split(&#39;and&#39;))
+# [&#39;hello world &#39;, &#39; Python &#39;, &#39; it&#39;]
+print(mystr.split(&#39;and&#39;, 2))
+# [&#39;hello&#39;, &#39;world&#39;, &#39;and&#39;, &#39;Python&#39;, &#39;and&#39;, &#39;it&#39;]
+print(mystr.split(&#39; &#39;))
+# [&#39;hello&#39;, &#39;world&#39;, &#39;and Python and it&#39;]
+print(mystr.split(&#39; &#39;, 2))
+</code></pre>
+<blockquote>
 <p>注意：如果分割字符是原有字符串中的子串，分割后则丢失该子串。</p>
 </blockquote>
 <hr>
@@ -768,19 +790,21 @@ print(mystr.split(&apos; &apos;, 2))
 <p>用一个字符或子串合并字符串，即是将多个字符串合并为一个新的字符串。</p>
 <pre><code>字符或子串.join(多字符串组成的序列)
 
-list1 = [&apos;mm&apos;, &apos;nn&apos;, &apos;bb&apos;, &apos;vv&apos;]
-t1 = (&apos;aa&apos;, &apos;b&apos;, &apos;cc&apos;, &apos;ddd&apos;)
+list1 = [&#39;mm&#39;, &#39;nn&#39;, &#39;bb&#39;, &#39;vv&#39;]
+t1 = (&#39;aa&#39;, &#39;b&#39;, &#39;cc&#39;, &#39;ddd&#39;)
 # 结果：mm_nn_bb_vv
-print(&apos;_&apos;.join(list1))
+print(&#39;_&#39;.join(list1))
 # 结果：aa...b...cc...ddd
-print(&apos;...&apos;.join(t1))
-</code></pre><hr>
+print(&#39;...&#39;.join(t1))
+</code></pre>
+<hr>
 <h3 id="capitalize"><a href="#capitalize" class="headerlink" title="capitalize"></a>capitalize</h3><hr>
 <p>将字符串第一个字符转换成大写。</p>
 <pre><code>mystr = &quot;hello world and Python and it&quot;
 # 结果：Hello world and python and it
 print(mystr.capitalize())
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：capitalize()函数转换后，只字符串第一个字符大写，其他的字符全都小写。</p>
 </blockquote>
 <hr>
@@ -789,17 +813,20 @@ print(mystr.capitalize())
 <pre><code>mystr = &quot;hello world and Python and it&quot;
 # 结果：Hello World And Python And It
 print(mystr.title())
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="lower和upper"><a href="#lower和upper" class="headerlink" title="lower和upper"></a>lower和upper</h3><hr>
 <p>lower()：将字符串中大写转小写。</p>
 <pre><code>mystr = &quot;hello world and Python and it&quot;
 # 结果：hello world and python and it
 print(mystr.lower())
-</code></pre><p>upper()：将字符串中小写转大写。</p>
+</code></pre>
+<p>upper()：将字符串中小写转大写。</p>
 <pre><code>mystr = &quot;hello world and Python and it&quot;
 # 结果：HELLO WORLD AND PYTHON AND IT
 print(mystr.upper())
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="lstrip和rstrip和strip"><a href="#lstrip和rstrip和strip" class="headerlink" title="lstrip和rstrip和strip"></a>lstrip和rstrip和strip</h3><hr>
 <p>lstrip()：删除字符串左侧空白字符。</p>
 <p>rstrip()：删除字符串右侧空白字符。</p>
@@ -811,236 +838,264 @@ print(mystr.upper())
 <p>center()：返回一个原字符串居中对齐,并使用指定字符(默认空格)填充至对应长度 的新字符串，语法和ljust()相同。</p>
 <pre><code>mystr = &quot;hello world and Python and it&quot;
 # 结果：hello world and Python and it.......
-print(mystr.ljust(36,&apos;.&apos;))
+print(mystr.ljust(36,&#39;.&#39;))
 # 结果：.......hello world and Python and it
-print(mystr.rjust(36,&apos;.&apos;))
+print(mystr.rjust(36,&#39;.&#39;))
 # 结果：...hello world and Python and it....
-print(mystr.center(36,&apos;.&apos;))
-</code></pre><hr>
+print(mystr.center(36,&#39;.&#39;))
+</code></pre>
+<hr>
 <h3 id="startswith和endswith"><a href="#startswith和endswith" class="headerlink" title="startswith和endswith"></a>startswith和endswith</h3><hr>
 <p>startswith()：检查字符串是否是以指定子串开头，是则返回True，否则返回False。如果设置开始和结束位置下标，则在指定范围内检查。</p>
 <pre><code>字符串序列.startswith(子串, 开始位置下标, 结束位置下标)
 
 mystr = &quot;hello world and Python and it&quot;
 # 结果：True
-print(mystr.startswith(&apos;hello&apos;))
+print(mystr.startswith(&#39;hello&#39;))
 # 结果False
-print(mystr.startswith(&apos;hello&apos;, 5, 20))
-</code></pre><p>endswith()：检查字符串是否是以指定子串结尾，是则返回True，否则返回False。如果设置开始和结束位置下标，则在指定范围内检查。</p>
+print(mystr.startswith(&#39;hello&#39;, 5, 20))
+</code></pre>
+<p>endswith()：检查字符串是否是以指定子串结尾，是则返回True，否则返回False。如果设置开始和结束位置下标，则在指定范围内检查。</p>
 <pre><code>字符串序列.endswith(子串, 开始位置下标, 结束位置下标)
 
 mystr = &quot;hello world and Python and it&quot;
 # 结果：True
-print(mystr.endswith(&apos;it&apos;))
+print(mystr.endswith(&#39;it&#39;))
 # 结果：False
-print(mystr.endswith(&apos;Python&apos;, 2, 20))
-</code></pre><hr>
+print(mystr.endswith(&#39;Python&#39;, 2, 20))
+</code></pre>
+<hr>
 <h3 id="isalpha"><a href="#isalpha" class="headerlink" title="isalpha"></a>isalpha</h3><hr>
 <p>如果字符串至少有一个字符并且所有字符都是字母则返回True, 否则返回 False。</p>
-<pre><code>mystr1 = &apos;hello&apos;
-mystr2 = &apos;hello12345&apos;
+<pre><code>mystr1 = &#39;hello&#39;
+mystr2 = &#39;hello12345&#39;
 
 # 结果：True
 print(mystr1.isalpha())
 # 结果：False
 print(mystr2.isalpha())
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="isdigit"><a href="#isdigit" class="headerlink" title="isdigit"></a>isdigit</h3><hr>
 <p>如果字符串只包含数字则返回True否则返回 False。</p>
-<pre><code>mystr1 = &apos;aaa12345&apos;
-mystr2 = &apos;12345&apos;
+<pre><code>mystr1 = &#39;aaa12345&#39;
+mystr2 = &#39;12345&#39;
 
 # 结果： False
 print(mystr1.isdigit())
 # 结果：False
 print(mystr2.isdigit())
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="isalnum"><a href="#isalnum" class="headerlink" title="isalnum"></a>isalnum</h3><hr>
 <p>如果字符串至少有一个字符并且所有字符都是字母或数字则返回True,否则返回False。</p>
-<pre><code>mystr1 = &apos;aaa12345&apos;
-mystr2 = &apos;12345-&apos;
+<pre><code>mystr1 = &#39;aaa12345&#39;
+mystr2 = &#39;12345-&#39;
 
 # 结果：True
 print(mystr1.isalnum())
 # 结果：False
 print(mystr2.isalnum())
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="isspace"><a href="#isspace" class="headerlink" title="isspace"></a>isspace</h3><hr>
 <p>如果字符串中只包含空白，则返回True，否则返回False。</p>
-<pre><code>mystr1 = &apos;1 2 3 4 5&apos;
-mystr2 = &apos;     &apos;
+<pre><code>mystr1 = &#39;1 2 3 4 5&#39;
+mystr2 = &#39;     &#39;
 
 # 结果：False
 print(mystr1.isspace())
 # 结果：True
 print(mystr2.isspace())
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><hr>
 <p>列表可以一次性存储多个数据，且可以为不同数据类型。可以对这些数据进行的操作有：增、删、改、查。</p>
 <h3 id="下标"><a href="#下标" class="headerlink" title="下标"></a>下标</h3><hr>
-<pre><code>name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
+<pre><code>name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
 print(name_list[0])  # Tom
 print(name_list[1])  # Lily
 print(name_list[2])  # Rose
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="index-1"><a href="#index-1" class="headerlink" title="index"></a>index</h3><hr>
 <p>返回指定数据所在位置的下标 。</p>
 <pre><code>列表序列.index(数据, 开始位置下标, 结束位置下标)
 
-name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
-print(name_list.index(&apos;Lily&apos;, 0, 2))  # 1
-</code></pre><blockquote>
+name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
+print(name_list.index(&#39;Lily&#39;, 0, 2))  # 1
+</code></pre>
+<blockquote>
 <p>注意：如果查找的数据不存在则报错。</p>
 </blockquote>
 <hr>
 <h3 id="count-1"><a href="#count-1" class="headerlink" title="count"></a>count</h3><hr>
 <p>统计指定数据在当前列表中出现的次数。</p>
-<pre><code>name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
-print(name_list.count(&apos;Lily&apos;))  # 1
-</code></pre><hr>
+<pre><code>name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
+print(name_list.count(&#39;Lily&#39;))  # 1
+</code></pre>
+<hr>
 <h3 id="len"><a href="#len" class="headerlink" title="len"></a>len</h3><hr>
 <p>访问列表长度，即列表中数据的个数。</p>
-<pre><code>name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
+<pre><code>name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
 print(len(name_list))  # 3
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="in和not-in"><a href="#in和not-in" class="headerlink" title="in和not in"></a>in和not in</h3><hr>
 <p>in：判断指定数据在某个列表序列，如果在返回True，否则返回False</p>
-<pre><code>name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
+<pre><code>name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
 
 # 结果：True
-print(&apos;Lily&apos; in name_list)
+print(&#39;Lily&#39; in name_list)
 # 结果：False
-print(&apos;Lilys&apos; in name_list)
-</code></pre><p>not in：判断指定数据不在某个列表序列，如果不在返回True，否则返回False</p>
-<pre><code>name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
+print(&#39;Lilys&#39; in name_list)
+</code></pre>
+<p>not in：判断指定数据不在某个列表序列，如果不在返回True，否则返回False</p>
+<pre><code>name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
 
 # 结果：False
-print(&apos;Lily&apos; not in name_list)
+print(&#39;Lily&#39; not in name_list)
 # 结果：True
-print(&apos;Lilys&apos; not in name_list)
-</code></pre><hr>
+print(&#39;Lilys&#39; not in name_list)
+</code></pre>
+<hr>
 <h3 id="append"><a href="#append" class="headerlink" title="append"></a>append</h3><hr>
 <p>列表结尾追加数据。</p>
 <pre><code>列表序列.append(数据)
 
-name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
-name_list.append(&apos;xiaoming&apos;)
-# 结果：[&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;, &apos;xiaoming&apos;]
+name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
+name_list.append(&#39;xiaoming&#39;)
+# 结果：[&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;, &#39;xiaoming&#39;]
 print(name_list)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>列表追加数据的时候，直接在原列表里面追加了指定数据，即修改了原列表，<strong>故列表为可变类型数据</strong>。</p>
 </blockquote>
 <p>如果append()追加的数据是一个序列，则追加整个序列到列表</p>
-<pre><code>name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
-name_list.append([&apos;xiaoming&apos;, &apos;xiaohong&apos;])
-# 结果：[&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;, [&apos;xiaoming&apos;, &apos;xiaohong&apos;]]
+<pre><code>name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
+name_list.append([&#39;xiaoming&#39;, &#39;xiaohong&#39;])
+# 结果：[&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;, [&#39;xiaoming&#39;, &#39;xiaohong&#39;]]
 print(name_list)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="extend"><a href="#extend" class="headerlink" title="extend"></a>extend</h3><hr>
 <p>列表结尾追加数据，如果数据是一个序列，则将这个序列的数据逐一添加到列表。</p>
 <pre><code>列表序列.extend(数据)
 
 #单个数据
-name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
-name_list.extend(&apos;xiaoming&apos;)
-# 结果：[&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;, &apos;x&apos;, &apos;i&apos;, &apos;a&apos;, &apos;o&apos;, &apos;m&apos;, &apos;i&apos;, &apos;n&apos;, &apos;g&apos;]
+name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
+name_list.extend(&#39;xiaoming&#39;)
+# 结果：[&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;, &#39;x&#39;, &#39;i&#39;, &#39;a&#39;, &#39;o&#39;, &#39;m&#39;, &#39;i&#39;, &#39;n&#39;, &#39;g&#39;]
 print(name_list)
 
 ​#序列数据
-name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
-name_list.extend([&apos;xiaoming&apos;, &apos;xiaohong&apos;])
-# 结果：[&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;, &apos;xiaoming&apos;, &apos;xiaohong&apos;]
+name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
+name_list.extend([&#39;xiaoming&#39;, &#39;xiaohong&#39;])
+# 结果：[&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;, &#39;xiaoming&#39;, &#39;xiaohong&#39;]
 print(name_list)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h3><hr>
 <p>指定位置新增数据。</p>
 <pre><code>列表序列.insert(位置下标, 数据)
 
-name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
-name_list.insert(1, &apos;xiaoming&apos;)
-# 结果：[&apos;Tom&apos;, &apos;xiaoming&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
+name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
+name_list.insert(1, &#39;xiaoming&#39;)
+# 结果：[&#39;Tom&#39;, &#39;xiaoming&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
 print(name_list)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="del"><a href="#del" class="headerlink" title="del"></a>del</h3><hr>
 <pre><code>#del 目标
 
-name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
-# 结果：报错提示：name &apos;name_list&apos; is not defined
+name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
+# 结果：报错提示：name &#39;name_list&#39; is not defined
 del name_list
 print(name_list)
 
 ​#删除指定数据
-name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
+name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
 del name_list[0]
-# 结果：[&apos;Lily&apos;, &apos;Rose&apos;]
+# 结果：[&#39;Lily&#39;, &#39;Rose&#39;]
 print(name_list)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="pop"><a href="#pop" class="headerlink" title="pop"></a>pop</h3><hr>
 <p>删除指定下标的数据(默认为最后一个)，并返回该数据。</p>
 <pre><code>#列表序列.pop(下标)
 
-name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
+name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
 del_name = name_list.pop(1)
 # 结果：Lily
 print(del_name)
-# 结果：[&apos;Tom&apos;, &apos;Rose&apos;]
+# 结果：[&#39;Tom&#39;, &#39;Rose&#39;]
 print(name_list)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h3><hr>
 <p>移除列表中某个数据的第一个匹配项。</p>
 <pre><code>#列表序列.remove(数据)
 
-name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
-name_list.remove(&apos;Rose&apos;)
-# 结果：[&apos;Tom&apos;, &apos;Lily&apos;]
+name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
+name_list.remove(&#39;Rose&#39;)
+# 结果：[&#39;Tom&#39;, &#39;Lily&#39;]
 print(name_list)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h3><hr>
 <p>清空列表</p>
-<pre><code>name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
+<pre><code>name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
 name_list.clear()
 print(name_list) # 结果： []
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="修改指定下标数据"><a href="#修改指定下标数据" class="headerlink" title="修改指定下标数据"></a>修改指定下标数据</h3><hr>
-<pre><code>name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
-name_list[0] = &apos;aaa&apos;
-# 结果：[&apos;aaa&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
+<pre><code>name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
+name_list[0] = &#39;aaa&#39;
+# 结果：[&#39;aaa&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
 print(name_list)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="逆置reverse"><a href="#逆置reverse" class="headerlink" title="逆置reverse"></a>逆置reverse</h3><hr>
 <pre><code>num_list = [1, 5, 2, 3, 6, 8]
 num_list.reverse()
 # 结果：[8, 6, 3, 2, 5, 1]
 print(num_list)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="排序sort"><a href="#排序sort" class="headerlink" title="排序sort"></a>排序sort</h3><hr>
 <pre><code>列表序列.sort( key=None, reverse=False)
-</code></pre><blockquote>
-<p>注意：reverse表示排序规则，<strong>reverse = True</strong> 降序， <strong>reverse = False</strong> 升序（默认）</p>
+</code></pre>
+<blockquote>
+<p>注意：reverse表示排序规则，<strong>reverse &#x3D; True</strong> 降序， <strong>reverse &#x3D; False</strong> 升序（默认）</p>
 </blockquote>
 <pre><code>num_list = [1, 5, 2, 3, 6, 8]
 num_list.sort()
 # 结果：[1, 2, 3, 5, 6, 8]
 print(num_list)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="复制copy"><a href="#复制copy" class="headerlink" title="复制copy"></a>复制copy</h3><hr>
-<pre><code>name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
+<pre><code>name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
 name_li2 = name_list.copy()
-# 结果：[&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
+# 结果：[&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
 print(name_li2)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="while遍历列表"><a href="#while遍历列表" class="headerlink" title="while遍历列表"></a>while遍历列表</h3><hr>
-<pre><code>name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
+<pre><code>name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
 i = 0
 while i &lt; len(name_list):
     print(name_list[i])
     i += 1
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="for遍历列表"><a href="#for遍历列表" class="headerlink" title="for遍历列表"></a>for遍历列表</h3><hr>
-<pre><code>name_list = [&apos;Tom&apos;, &apos;Lily&apos;, &apos;Rose&apos;]
+<pre><code>name_list = [&#39;Tom&#39;, &#39;Lily&#39;, &#39;Rose&#39;]
 for i in name_list:
     print(i)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h2><hr>
 <p>一个元组可以存储多个数据，<strong>元组内的数据是不能修改的</strong>。元组特点：定义元组使用小括号，且逗号隔开各个数据，数据可以是不同的数据类型。</p>
 <pre><code>#多个数据元组
@@ -1052,122 +1107,142 @@ print(type(t2))  # tuple
 
 t3 = (20)
 print(type(t3))  # int
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：如果定义的元组只有一个数据，那么这个数据后面也要添加逗号，否则数据类型为唯一的这个数据的数据类型。</p>
 </blockquote>
 <p>按下标查找数据</p>
-<pre><code>tuple1 = (&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;bb&apos;)
+<pre><code>tuple1 = (&#39;aa&#39;, &#39;bb&#39;, &#39;cc&#39;, &#39;bb&#39;)
 print(tuple1[0])  # aa
-</code></pre><p>index()：查找某个数据，如果数据存在返回对应的下标，否则报错，语法和列表、字符串的index方法相同。</p>
-<pre><code>tuple1 = (&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;bb&apos;)
-print(tuple1.index(&apos;aa&apos;))  # 0
-</code></pre><p>count()：统计某个数据在当前元组出现的次数。</p>
-<pre><code>tuple1 = (&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;bb&apos;)
-print(tuple1.count(&apos;bb&apos;))  # 2
-</code></pre><p>len()：统计元组中数据的个数。</p>
-<pre><code>tuple1 = (&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;bb&apos;)
+</code></pre>
+<p>index()：查找某个数据，如果数据存在返回对应的下标，否则报错，语法和列表、字符串的index方法相同。</p>
+<pre><code>tuple1 = (&#39;aa&#39;, &#39;bb&#39;, &#39;cc&#39;, &#39;bb&#39;)
+print(tuple1.index(&#39;aa&#39;))  # 0
+</code></pre>
+<p>count()：统计某个数据在当前元组出现的次数。</p>
+<pre><code>tuple1 = (&#39;aa&#39;, &#39;bb&#39;, &#39;cc&#39;, &#39;bb&#39;)
+print(tuple1.count(&#39;bb&#39;))  # 2
+</code></pre>
+<p>len()：统计元组中数据的个数。</p>
+<pre><code>tuple1 = (&#39;aa&#39;, &#39;bb&#39;, &#39;cc&#39;, &#39;bb&#39;)
 print(len(tuple1))  # 4
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：元组内的直接数据如果修改则立即报错</p>
 </blockquote>
 <blockquote>
 <p>但是如果元组里面有列表，修改列表里面的数据则是支持的，故自觉很重要。</p>
 </blockquote>
-<pre><code>tuple2 = (10, 20, [&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;], 50, 30)
+<pre><code>tuple2 = (10, 20, [&#39;aa&#39;, &#39;bb&#39;, &#39;cc&#39;], 50, 30)
 print(tuple2[2])  # 访问到列表
-# 结果：(10, 20, [&apos;aaaaa&apos;, &apos;bb&apos;, &apos;cc&apos;], 50, 30)
-tuple2[2][0] = &apos;aaaaa&apos;
+# 结果：(10, 20, [&#39;aaaaa&#39;, &#39;bb&#39;, &#39;cc&#39;], 50, 30)
+tuple2[2][0] = &#39;aaaaa&#39;
 print(tuple2)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><hr>
 <p>字典里面的数据是以键值对形式出现，字典数据和数据顺序没有关系，即字典不支持下标，后期无论数据如何变化，只需要按照对应的键的名字查找数据即可。</p>
 <p>字典特点：符号为大括号；数据为键值对形式出现；各个键值对之间用逗号隔开。</p>
 <pre><code># 有数据字典
-dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
+dict1 = &#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
 # 空字典
 dict2 = &#123;&#125;
-</code></pre><p>一般称冒号前面的为键(key)，简称k；冒号后面的为值(value)，简称v。</p>
+</code></pre>
+<p>一般称冒号前面的为键(key)，简称k；冒号后面的为值(value)，简称v。</p>
 <hr>
 <h3 id="增和改"><a href="#增和改" class="headerlink" title="增和改"></a>增和改</h3><hr>
-<p>写法：字典序列[key] = 值</p>
+<p>写法：字典序列[key] &#x3D; 值</p>
 <blockquote>
 <p>注意：如果key存在则修改这个key对应的值；如果key不存在则新增此键值对。</p>
 </blockquote>
-<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
+<pre><code>dict1 = &#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
 
-dict1[&apos;name&apos;] = &apos;Rose&apos;
-# 结果：&#123;&apos;name&apos;: &apos;Rose&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
+dict1[&#39;name&#39;] = &#39;Rose&#39;
+# 结果：&#123;&#39;name&#39;: &#39;Rose&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
 print(dict1)
 
-dict1[&apos;id&apos;] = 110
-# &#123;&apos;name&apos;: &apos;Rose&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;, &apos;id&apos;: 110&#125;
+dict1[&#39;id&#39;] = 110
+# &#123;&#39;name&#39;: &#39;Rose&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;, &#39;id&#39;: 110&#125;
 print(dict1)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：<strong>字典为可变类型</strong>。</p>
 </blockquote>
 <hr>
 <h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><hr>
-<p>del()/del：删除字典或删除字典中指定键值对。</p>
-<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
+<p>del()&#x2F;del：删除字典或删除字典中指定键值对。</p>
+<pre><code>dict1 = &#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
 
-del dict1[&apos;gender&apos;]
-# 结果：&#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20&#125;
+del dict1[&#39;gender&#39;]
+# 结果：&#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20&#125;
 print(dict1)
-</code></pre><p>clear()：清空字典</p>
-<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
+</code></pre>
+<p>clear()：清空字典</p>
+<pre><code>dict1 = &#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
 dict1.clear()
 print(dict1)  # &#123;&#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="key值查找"><a href="#key值查找" class="headerlink" title="key值查找"></a>key值查找</h3><hr>
-<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
-print(dict1[&apos;name&apos;])  # Tom
-print(dict1[&apos;id&apos;])  # 报错
-</code></pre><blockquote>
+<pre><code>dict1 = &#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
+print(dict1[&#39;name&#39;])  # Tom
+print(dict1[&#39;id&#39;])  # 报错
+</code></pre>
+<blockquote>
 <p>如果当前查找的key存在，则返回对应的值；否则则报错。</p>
 </blockquote>
 <hr>
 <h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><hr>
 <pre><code>字典序列.get(key, 默认值)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：如果当前查找的key不存在则返回第二个参数(默认值)，如果省略第二个参数，则返回None。</p>
 </blockquote>
-<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
-print(dict1.get(&apos;name&apos;))  # Tom
-print(dict1.get(&apos;id&apos;, 110))  # 110
-print(dict1.get(&apos;id&apos;))  # None
-</code></pre><hr>
+<pre><code>dict1 = &#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
+print(dict1.get(&#39;name&#39;))  # Tom
+print(dict1.get(&#39;id&#39;, 110))  # 110
+print(dict1.get(&#39;id&#39;))  # None
+</code></pre>
+<hr>
 <h3 id="keys"><a href="#keys" class="headerlink" title="keys"></a>keys</h3><hr>
-<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
-print(dict1.keys())  # dict_keys([&apos;name&apos;, &apos;age&apos;, &apos;gender&apos;])
-</code></pre><hr>
+<pre><code>dict1 = &#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
+print(dict1.keys())  # dict_keys([&#39;name&#39;, &#39;age&#39;, &#39;gender&#39;])
+</code></pre>
+<hr>
 <h3 id="values"><a href="#values" class="headerlink" title="values"></a>values</h3><hr>
-<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
-print(dict1.values())  # dict_values([&apos;Tom&apos;, 20, &apos;男&apos;])
-</code></pre><hr>
+<pre><code>dict1 = &#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
+print(dict1.values())  # dict_values([&#39;Tom&#39;, 20, &#39;男&#39;])
+</code></pre>
+<hr>
 <h3 id="items"><a href="#items" class="headerlink" title="items"></a>items</h3><hr>
-<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
-print(dict1.items())  # dict_items([(&apos;name&apos;, &apos;Tom&apos;), (&apos;age&apos;, 20), (&apos;gender&apos;, &apos;男&apos;)])
-</code></pre><hr>
+<pre><code>dict1 = &#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
+print(dict1.items())  # dict_items([(&#39;name&#39;, &#39;Tom&#39;), (&#39;age&#39;, 20), (&#39;gender&#39;, &#39;男&#39;)])
+</code></pre>
+<hr>
 <h3 id="遍历字典的key"><a href="#遍历字典的key" class="headerlink" title="遍历字典的key"></a>遍历字典的key</h3><hr>
-<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
+<pre><code>dict1 = &#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
 for key in dict1.keys():
     print(key)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="遍历字典的value"><a href="#遍历字典的value" class="headerlink" title="遍历字典的value"></a>遍历字典的value</h3><hr>
-<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
+<pre><code>dict1 = &#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
 for value in dict1.values():
     print(value)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="遍历字典的元素"><a href="#遍历字典的元素" class="headerlink" title="遍历字典的元素"></a>遍历字典的元素</h3><hr>
-<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
+<pre><code>dict1 = &#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
 for item in dict1.items():
     print(item)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="遍历字典的键值对"><a href="#遍历字典的键值对" class="headerlink" title="遍历字典的键值对"></a>遍历字典的键值对</h3><hr>
-<pre><code>dict1 = &#123;&apos;name&apos;: &apos;Tom&apos;, &apos;age&apos;: 20, &apos;gender&apos;: &apos;男&apos;&#125;
+<pre><code>dict1 = &#123;&#39;name&#39;: &#39;Tom&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;男&#39;&#125;
 for key, value in dict1.items():
-    print(f&apos;&#123;key&#125; = &#123;value&#125;&apos;)
-</code></pre><hr>
+    print(f&#39;&#123;key&#125; = &#123;value&#125;&#39;)
+</code></pre>
+<hr>
 <h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><hr>
 <p>创建集合使用<code>&#123;&#125;</code>或<code>set()</code>，但是如果要创建空集合只能使用<code>set()</code>，因为<code>&#123;&#125;</code>用来创建空字典。</p>
 <pre><code>s1 = &#123;10, 20, 30, 40, 50&#125;
@@ -1176,7 +1251,7 @@ print(s1)#&#123;40, 10, 50, 20, 30&#125;
 s2 = &#123;10, 30, 20, 10, 30, 40, 30, 50&#125;
 print(s2)#&#123;40, 10, 50, 20, 30&#125;
 
-s3 = set(&apos;abcdefg&apos;)
+s3 = set(&#39;abcdefg&#39;)
 print(s3)
 
 s4 = set()
@@ -1184,7 +1259,8 @@ print(type(s4))  # set
 
 s5 = &#123;&#125;
 print(type(s5))  # dict
-</code></pre><p>特点：集合可以去掉重复数据；集合数据是无序的，故不支持下标。</p>
+</code></pre>
+<p>特点：集合可以去掉重复数据；集合数据是无序的，故不支持下标。</p>
 <hr>
 <h3 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h3><hr>
 <p>add()</p>
@@ -1192,16 +1268,18 @@ print(type(s5))  # dict
 s1.add(100)
 s1.add(10)
 print(s1)  # &#123;100, 10, 20&#125;
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>因为集合有去重功能，所以，当向集合内追加的数据是当前集合已有数据的话，则不进行任何操作。</p>
 </blockquote>
 <p>update(), 追加的数据是序列。</p>
 <pre><code>s1 = &#123;10, 20&#125;
 # s1.update(100)  # 报错
 s1.update([100, 200])
-s1.update(&apos;abc&apos;)
+s1.update(&#39;abc&#39;)
 print(s1)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><hr>
 <p>remove()，删除集合中的指定数据，如果数据不存在则报错。</p>
 <pre><code>s1 = &#123;10, 20&#125;
@@ -1210,7 +1288,8 @@ s1.remove(10)
 print(s1)
 s1.remove(10)  # 报错
 print(s1)
-</code></pre><p>discard()，删除集合中的指定数据，如果数据不存在也不会报错。</p>
+</code></pre>
+<p>discard()，删除集合中的指定数据，如果数据不存在也不会报错。</p>
 <pre><code>s1 = &#123;10, 20&#125;
 
 s1.discard(10)
@@ -1218,56 +1297,57 @@ print(s1)
 
 s1.discard(10)
 print(s1)
-</code></pre><p>pop()，随机删除集合中的某个数据，并返回这个数据。</p>
+</code></pre>
+<p>pop()，随机删除集合中的某个数据，并返回这个数据。</p>
 <pre><code>s1 = &#123;10, 20, 30, 40, 50&#125;
 del_num = s1.pop()
 print(del_num)
 print(s1)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="查找数据"><a href="#查找数据" class="headerlink" title="查找数据"></a>查找数据</h3><hr>
 <p>in：判断数据在集合序列。not in：判断数据不在集合序列</p>
 <pre><code>s1 = &#123;10, 20, 30, 40, 50&#125;
 
 print(10 in s1)
 print(10 not in s1)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="公共操作"><a href="#公共操作" class="headerlink" title="公共操作"></a>公共操作</h2><h3 id="运算符-1"><a href="#运算符-1" class="headerlink" title="运算符"></a>运算符</h3><hr>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">运算符</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">支持的容器类型</th>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">支持的容器类型</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:center">合并</td>
-<td style="text-align:center">字符串、列表、元组</td>
+<tbody><tr>
+<td align="center">+</td>
+<td align="center">合并</td>
+<td align="center">字符串、列表、元组</td>
 </tr>
 <tr>
-<td style="text-align:center">*</td>
-<td style="text-align:center">复制</td>
-<td style="text-align:center">字符串、列表、元组</td>
+<td align="center">*</td>
+<td align="center">复制</td>
+<td align="center">字符串、列表、元组</td>
 </tr>
 <tr>
-<td style="text-align:center">in</td>
-<td style="text-align:center">元素是否存在</td>
-<td style="text-align:center">字符串、列表、元组、字典</td>
+<td align="center">in</td>
+<td align="center">元素是否存在</td>
+<td align="center">字符串、列表、元组、字典</td>
 </tr>
 <tr>
-<td style="text-align:center">not in</td>
-<td style="text-align:center">元素是否不存在</td>
-<td style="text-align:center">字符串、列表、元组、字典</td>
+<td align="center">not in</td>
+<td align="center">元素是否不存在</td>
+<td align="center">字符串、列表、元组、字典</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr>
 <p><code>+</code>:</p>
 <pre><code># 1. 字符串 
-str1 = &apos;aa&apos;
-str2 = &apos;bb&apos;
+str1 = &#39;aa&#39;
+str2 = &#39;bb&#39;
 str3 = str1 + str2
 print(str3)  # aabb
 
@@ -1282,34 +1362,37 @@ t1 = (1, 2)
 t2 = (10, 20)
 t3 = t1 + t2
 print(t3)  #(1, 2, 10, 20)
-</code></pre><hr>
+</code></pre>
+<hr>
 <p><code>*</code>:</p>
 <pre><code># 1. 字符串
-print(&apos;-&apos; * 10)  # ----------
+print(&#39;-&#39; * 10)  # ----------
 
 # 2. 列表
-list1 = [&apos;hello&apos;]
-print(list1 * 4)  # [&apos;hello&apos;, &apos;hello&apos;, &apos;hello&apos;, &apos;hello&apos;]
+list1 = [&#39;hello&#39;]
+print(list1 * 4)  # [&#39;hello&#39;, &#39;hello&#39;, &#39;hello&#39;, &#39;hello&#39;]
 
 # 3. 元组
-t1 = (&apos;world&apos;,)
-print(t1 * 4)  # (&apos;world&apos;, &apos;world&apos;, &apos;world&apos;, &apos;world&apos;)
-</code></pre><hr>
+t1 = (&#39;world&#39;,)
+print(t1 * 4)  # (&#39;world&#39;, &#39;world&#39;, &#39;world&#39;, &#39;world&#39;)
+</code></pre>
+<hr>
 <p><code>in</code>或<code>not in</code>:</p>
 <pre><code># 1. 字符串
-print(&apos;a&apos; in &apos;abcd&apos;)  # True
-print(&apos;a&apos; not in &apos;abcd&apos;)  # False
+print(&#39;a&#39; in &#39;abcd&#39;)  # True
+print(&#39;a&#39; not in &#39;abcd&#39;)  # False
 
 # 2. 列表
-list1 = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;]
-print(&apos;a&apos; in list1)  # True
-print(&apos;a&apos; not in list1)  # False
+list1 = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
+print(&#39;a&#39; in list1)  # True
+print(&#39;a&#39; not in list1)  # False
 
 # 3. 元组
-t1 = (&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;)
-print(&apos;aa&apos; in t1)  # False
-print(&apos;aa&apos; not in t1)  # True
-</code></pre><hr>
+t1 = (&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;)
+print(&#39;aa&#39; in t1)  # False
+print(&#39;aa&#39; not in t1)  # True
+</code></pre>
+<hr>
 <h3 id="公共方法"><a href="#公共方法" class="headerlink" title="公共方法"></a>公共方法</h3><hr>
 <table>
 <thead>
@@ -1318,8 +1401,7 @@ print(&apos;aa&apos; not in t1)  # True
 <th>描述</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>len()</td>
 <td>计算容器中元素个数</td>
 </tr>
@@ -1343,12 +1425,11 @@ print(&apos;aa&apos; not in t1)  # True
 <td>enumerate()</td>
 <td>函数用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标，一般用在 for 循环当中。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr>
 <p>len()</p>
 <pre><code># 1. 字符串
-str1 = &apos;abcdefg&apos;
+str1 = &#39;abcdefg&#39;
 print(len(str1))  # 7
 
 # 2. 列表
@@ -1364,12 +1445,13 @@ s1 = &#123;10, 20, 30&#125;
 print(len(s1))  # 3
 
 # 5. 字典
-dict1 = &#123;&apos;name&apos;: &apos;Rose&apos;, &apos;age&apos;: 18&#125;
+dict1 = &#123;&#39;name&#39;: &#39;Rose&#39;, &#39;age&#39;: 18&#125;
 print(len(dict1))  # 2
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>del()</p>
 <pre><code># 1. 字符串
-str1 = &apos;abcdefg&apos;
+str1 = &#39;abcdefg&#39;
 del str1
 print(str1)#error
 
@@ -1377,25 +1459,28 @@ print(str1)#error
 list1 = [10, 20, 30, 40]
 del(list1[0])
 print(list1)  # [20, 30, 40]
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>max()</p>
 <pre><code># 1. 字符串
-str1 = &apos;abcdefg&apos;
+str1 = &#39;abcdefg&#39;
 print(max(str1))  # g
 
 # 2. 列表
 list1 = [10, 20, 30, 40]
 print(max(list1))  # 40
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>min()</p>
 <pre><code># 1. 字符串
-str1 = &apos;abcdefg&apos;
+str1 = &#39;abcdefg&#39;
 print(min(str1))  # a
 
 # 2. 列表
 list1 = [10, 20, 30, 40]
 print(min(list1))  # 10
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>range()</p>
 <pre><code># 1 2 3 4 5 6 7 8 9
 for i in range(1, 10, 1):
@@ -1408,23 +1493,26 @@ for i in range(1, 10, 2):
 # 0 1 2 3 4 5 6 7 8 9
 for i in range(10):
     print(i)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：range()生成的序列不包含end数字。</p>
 </blockquote>
 <hr>
 <p>enumerate()</p>
 <pre><code>enumerate(可遍历对象, start=0)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：start参数用来设置遍历数据的下标的起始值，默认为0。</p>
 </blockquote>
-<pre><code>list1 = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;]
+<pre><code>list1 = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]
 
 for i in enumerate(list1):
-    print(i)#(0, &apos;a&apos;)(1, &apos;b&apos;)(2, &apos;c&apos;)(4, &apos;e&apos;)
+    print(i)#(0, &#39;a&#39;)(1, &#39;b&#39;)(2, &#39;c&#39;)(4, &#39;e&#39;)
 
 for index, char in enumerate(list1, start=1):
-    print(f&apos;下标是&#123;index&#125;, 对应的字符是&#123;char&#125;&apos;)#下标是1, 对应的字符是a...
-</code></pre><hr>
+    print(f&#39;下标是&#123;index&#125;, 对应的字符是&#123;char&#125;&#39;)#下标是1, 对应的字符是a...
+</code></pre>
+<hr>
 <h3 id="容器类型转换"><a href="#容器类型转换" class="headerlink" title="容器类型转换"></a>容器类型转换</h3><hr>
 <p>tuple()：将某个序列转换成元组</p>
 <pre><code>list1 = [10, 20, 30, 40, 50, 20]
@@ -1432,19 +1520,22 @@ s1 = &#123;100, 200, 300, 400, 500&#125;
 
 print(tuple(list1))#(10, 20, 30, 40, 50, 20)
 print(tuple(s1))#(100, 200, 300, 400, 500)
-</code></pre><p>list()：将某个序列转换成列表</p>
-<pre><code>t1 = (&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;)
+</code></pre>
+<p>list()：将某个序列转换成列表</p>
+<pre><code>t1 = (&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;)
 s1 = &#123;100, 200, 300, 400, 500&#125;
 
-print(list(t1))#[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;]
+print(list(t1))#[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]
 print(list(s1))#[100, 200, 300, 400, 500]
-</code></pre><p>set()：将某个序列转换成集合</p>
+</code></pre>
+<p>set()：将某个序列转换成集合</p>
 <pre><code>list1 = [10, 20, 30, 40, 50, 20]
-t1 = (&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;)
+t1 = (&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;)
 
 print(set(list1))#&#123;40, 10, 50, 20, 30&#125;
-print(set(t1))#&#123;&apos;c&apos;, &apos;d&apos;, &apos;a&apos;, &apos;b&apos;, &apos;e&apos;&#125;
-</code></pre><blockquote>
+print(set(t1))#&#123;&#39;c&#39;, &#39;d&#39;, &#39;a&#39;, &#39;b&#39;, &#39;e&#39;&#125;
+</code></pre>
+<blockquote>
 <p>注意：集合可以快速完成列表去重；集合不支持下标</p>
 </blockquote>
 <hr>
@@ -1470,7 +1561,8 @@ print(list1)
 #列表推导式实现
 list1 = [i for i in range(10)]
 print(list1)
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>带if的列表推导式</p>
 <p>创建0-10的偶数列表:</p>
 <pre><code>#range()步长实现
@@ -1480,42 +1572,51 @@ print(list1)
 #if实现
 list1 = [i for i in range(10) if i % 2 == 0]
 print(list1)
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>多个for循环实现列表推导式</p>
 <p>创建列表如下：</p>
 <pre><code>[(1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2)]
-</code></pre><p>代码如下：</p>
+</code></pre>
+<p>代码如下：</p>
 <pre><code>list1 = [(i, j) for i in range(1, 3) for j in range(3)]
 print(list1)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="字典推导式"><a href="#字典推导式" class="headerlink" title="字典推导式"></a>字典推导式</h3><hr>
 <p>如下两个列表，如何快速合并为一个字典？</p>
-<pre><code>list1 = [&apos;name&apos;, &apos;age&apos;, &apos;gender&apos;]
-list2 = [&apos;Tom&apos;, 20, &apos;man&apos;]
-</code></pre><p>字典推导式作用：快速合并列表为字典或提取字典中目标数据。</p>
+<pre><code>list1 = [&#39;name&#39;, &#39;age&#39;, &#39;gender&#39;]
+list2 = [&#39;Tom&#39;, 20, &#39;man&#39;]
+</code></pre>
+<p>字典推导式作用：快速合并列表为字典或提取字典中目标数据。</p>
 <p>创建一个字典：字典key是1-5数字，value是这个数字的2次方：</p>
 <pre><code>dict1 = &#123;i: i**2 for i in range(1, 5)&#125;
 print(dict1)  # &#123;1: 1, 2: 4, 3: 9, 4: 16&#125;
-</code></pre><p>将两个列表合并为一个字典：</p>
-<pre><code>list1 = [&apos;name&apos;, &apos;age&apos;, &apos;gender&apos;]
-list2 = [&apos;Tom&apos;, 20, &apos;man&apos;]
+</code></pre>
+<p>将两个列表合并为一个字典：</p>
+<pre><code>list1 = [&#39;name&#39;, &#39;age&#39;, &#39;gender&#39;]
+list2 = [&#39;Tom&#39;, 20, &#39;man&#39;]
 dict1 = &#123;list1[i]: list2[i] for i in range(len(list1))&#125;
 print(dict1)
-</code></pre><p>提取字典中目标数据</p>
-<pre><code>counts = &#123;&apos;MBP&apos;: 268, &apos;HP&apos;: 125, &apos;DELL&apos;: 201, &apos;Lenovo&apos;: 199, &apos;acer&apos;: 99&#125;
+</code></pre>
+<p>提取字典中目标数据</p>
+<pre><code>counts = &#123;&#39;MBP&#39;: 268, &#39;HP&#39;: 125, &#39;DELL&#39;: 201, &#39;Lenovo&#39;: 199, &#39;acer&#39;: 99&#125;
 
 # 需求：提取上述电脑数量大于等于200的字典数据
 count1 = &#123;key: value for key, value in counts.items() if value &gt;= 200&#125;
-print(count1)  # &#123;&apos;MBP&apos;: 268, &apos;DELL&apos;: 201&#125;
-</code></pre><hr>
+print(count1)  # &#123;&#39;MBP&#39;: 268, &#39;DELL&#39;: 201&#125;
+</code></pre>
+<hr>
 <h3 id="集合推导式"><a href="#集合推导式" class="headerlink" title="集合推导式"></a>集合推导式</h3><hr>
 <p>创建一个集合，数据为下方列表的2次方。</p>
 <pre><code>list1 = [1, 1, 2]
-</code></pre><p>代码如下：</p>
+</code></pre>
+<p>代码如下：</p>
 <pre><code>list1 = [1, 1, 2]
 set1 = &#123;i ** 2 for i in list1&#125;
 print(set1)  # &#123;1, 4&#125;
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：集合有数据去重功能。</p>
 </blockquote>
 <hr>
@@ -1526,9 +1627,11 @@ print(set1)  # &#123;1, 4&#125;
     代码1
     代码2
     ......
-</code></pre><p>调用函数</p>
+</code></pre>
+<p>调用函数</p>
 <pre><code>函数名(参数)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：不同的需求，参数可有可无。在Python中，函数必须先定义后使用。<strong>一定是先定义函数，后调用函数。</strong></p>
 </blockquote>
 <p>代码</p>
@@ -1537,12 +1640,14 @@ print(set1)  # &#123;1, 4&#125;
 # 用result变量保存函数返回值
 result = sum_num(1, 2)
 print(result)
-</code></pre><p>函数的说明文档help(函数名)</p>
+</code></pre>
+<p>函数的说明文档help(函数名)</p>
 <pre><code>def sum_num(a, b):
     &quot;&quot;&quot; 求和函数 &quot;&quot;&quot;
     return a + b
 help(sum_num)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="函数提高"><a href="#函数提高" class="headerlink" title="函数提高"></a>函数提高</h2><h3 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h3><hr>
 <p>变量作用域指的是变量生效的范围，主要分为两类：局部变量和全局变量。</p>
 <p>局部变量：定义在函数体内部的变量，即只在函数体内部生效。局部变量的作用：在函数体内部，临时保存数据，即当函数调用完成后，则销毁局部变量。</p>
@@ -1555,8 +1660,9 @@ def testB():
     print(a)
 testA()  # 100
 testB()  # 200
-print(f&apos;全局变量a = &#123;a&#125;&apos;)  # 全局变量a = 100
-</code></pre><p>在<code>testB</code>函数内部的<code>a = 200</code>中的变量a是在修改全局变量<code>a</code>吗？不是。<code>testB</code>函数内部的<code>a = 200</code>是定义了一个局部变量。</p>
+print(f&#39;全局变量a = &#123;a&#125;&#39;)  # 全局变量a = 100
+</code></pre>
+<p>在<code>testB</code>函数内部的<code>a = 200</code>中的变量a是在修改全局变量<code>a</code>吗？不是。<code>testB</code>函数内部的<code>a = 200</code>是定义了一个局部变量。</p>
 <p>如何在函数体内部修改全局变量？</p>
 <pre><code>a = 100
 
@@ -1571,8 +1677,9 @@ def testB():
 
 testA()  # 100
 testB()  # 200
-print(f&apos;全局变量a = &#123;a&#125;&apos;)  # 全局变量a = 200
-</code></pre><hr>
+print(f&#39;全局变量a = &#123;a&#125;&#39;)  # 全局变量a = 200
+</code></pre>
+<hr>
 <h3 id="函数的返回值"><a href="#函数的返回值" class="headerlink" title="函数的返回值"></a>函数的返回值</h3><hr>
 <p>如果一个函数要有多个返回值，该如何书写代码？</p>
 <pre><code>def return_num():
@@ -1580,49 +1687,55 @@ print(f&apos;全局变量a = &#123;a&#125;&apos;)  # 全局变量a = 200
 
 result = return_num()
 print(result)  # (1, 2)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：<code>return a, b</code>写法，返回多个数据的时候，默认是元组类型。return后面可以连接列表、元组或字典，以返回多个值。</p>
 </blockquote>
 <hr>
 <h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><hr>
 <p>位置参数：调用函数时根据函数定义的参数位置来传递参数。</p>
 <pre><code>def user_info(name, age, gender):
-    print(f&apos;您的名字是&#123;name&#125;, 年龄是&#123;age&#125;, 性别是&#123;gender&#125;&apos;)
-user_info(&apos;TOM&apos;, 20, &apos;男&apos;)
-</code></pre><blockquote>
+    print(f&#39;您的名字是&#123;name&#125;, 年龄是&#123;age&#125;, 性别是&#123;gender&#125;&#39;)
+user_info(&#39;TOM&#39;, 20, &#39;男&#39;)
+</code></pre>
+<blockquote>
 <p>注意：传递和定义参数的顺序及个数必须一致。</p>
 </blockquote>
-<p>关键字参数：函数调用，通过“键=值”形式加以指定。可以让函数更加清晰、容易使用，<strong>同时也清除了参数的顺序需求</strong>。</p>
+<p>关键字参数：函数调用，通过“键&#x3D;值”形式加以指定。可以让函数更加清晰、容易使用，<strong>同时也清除了参数的顺序需求</strong>。</p>
 <pre><code>def user_info(name, age, gender):
-    print(f&apos;您的名字是&#123;name&#125;, 年龄是&#123;age&#125;, 性别是&#123;gender&#125;&apos;)
+    print(f&#39;您的名字是&#123;name&#125;, 年龄是&#123;age&#125;, 性别是&#123;gender&#125;&#39;)
 
 
-user_info(&apos;Rose&apos;, age=20, gender=&apos;女&apos;)
-user_info(&apos;小明&apos;, gender=&apos;男&apos;, age=16)
-</code></pre><p>注意：<strong>函数调用时，如果有位置参数时，位置参数必须在关键字参数的前面，但关键字参数之间不存在先后顺序。</strong></p>
+user_info(&#39;Rose&#39;, age=20, gender=&#39;女&#39;)
+user_info(&#39;小明&#39;, gender=&#39;男&#39;, age=16)
+</code></pre>
+<p>注意：<strong>函数调用时，如果有位置参数时，位置参数必须在关键字参数的前面，但关键字参数之间不存在先后顺序。</strong></p>
 <p>缺省参数也叫默认参数，用于定义函数，为参数提供默认值，调用函数时可不传该默认参数的值（注意：所有位置参数必须出现在默认参数前，包括函数定义和调用）。</p>
-<pre><code>def user_info(name, age, gender=&apos;男&apos;):
-    print(f&apos;您的名字是&#123;name&#125;, 年龄是&#123;age&#125;, 性别是&#123;gender&#125;&apos;)
-user_info(&apos;TOM&apos;, 20)
-user_info(&apos;Rose&apos;, 18, &apos;女&apos;)
-</code></pre><p>不定长参数也叫可变参数。用于不确定调用的时候会传递多少个参数(不传参也可以)的场景。此时，可用包裹(packing)位置参数，或者包裹关键字参数，来进行参数传递，会显得非常方便。</p>
+<pre><code>def user_info(name, age, gender=&#39;男&#39;):
+    print(f&#39;您的名字是&#123;name&#125;, 年龄是&#123;age&#125;, 性别是&#123;gender&#125;&#39;)
+user_info(&#39;TOM&#39;, 20)
+user_info(&#39;Rose&#39;, 18, &#39;女&#39;)
+</code></pre>
+<p>不定长参数也叫可变参数。用于不确定调用的时候会传递多少个参数(不传参也可以)的场景。此时，可用包裹(packing)位置参数，或者包裹关键字参数，来进行参数传递，会显得非常方便。</p>
 <pre><code>def user_info(*args):
     print(args)
 
-# (&apos;TOM&apos;,)
-user_info(&apos;TOM&apos;)
-# (&apos;TOM&apos;, 18)
-user_info(&apos;TOM&apos;, 18)
-</code></pre><blockquote>
+# (&#39;TOM&#39;,)
+user_info(&#39;TOM&#39;)
+# (&#39;TOM&#39;, 18)
+user_info(&#39;TOM&#39;, 18)
+</code></pre>
+<blockquote>
 <p>注意：传进的所有参数都会被args变量收集，它会根据传进参数的位置合并为一个元组(tuple)，args是元组类型，这就是包裹位置传递。</p>
 </blockquote>
 <p>包裹关键字传递</p>
 <pre><code>def user_info(**kwargs):
     print(kwargs)
 
-# &#123;&apos;name&apos;: &apos;TOM&apos;, &apos;age&apos;: 18, &apos;id&apos;: 110&#125;
-user_info(name=&apos;TOM&apos;, age=18, id=110)
-</code></pre><blockquote>
+# &#123;&#39;name&#39;: &#39;TOM&#39;, &#39;age&#39;: 18, &#39;id&#39;: 110&#125;
+user_info(name=&#39;TOM&#39;, age=18, id=110)
+</code></pre>
+<blockquote>
 <p>综上：无论是包裹位置传递还是包裹关键字传递，都是一个组包的过程。</p>
 </blockquote>
 <hr>
@@ -1634,8 +1747,9 @@ user_info(name=&apos;TOM&apos;, age=18, id=110)
 num1, num2 = return_num()
 print(num1)  # 100
 print(num2)  # 200
-</code></pre><p>拆包：字典</p>
-<pre><code>dict1 = &#123;&apos;name&apos;: &apos;TOM&apos;, &apos;age&apos;: 18&#125;
+</code></pre>
+<p>拆包：字典</p>
+<pre><code>dict1 = &#123;&#39;name&#39;: &#39;TOM&#39;, &#39;age&#39;: 18&#125;
 a, b = dict1
 
 # 对字典进行拆包，取出来的是字典的key
@@ -1644,7 +1758,8 @@ print(b)  # age
 
 print(dict1[a])  # TOM
 print(dict1[b])  # 18
-</code></pre><p>交换变量值</p>
+</code></pre>
+<p>交换变量值</p>
 <p>交换两个变量的值。借助第三变量存储数据。</p>
 <pre><code># 1. 定义中间变量
 c = 0
@@ -1656,12 +1771,14 @@ a = b
 b = c
 print(a)  # 20
 print(b)  # 10
-</code></pre><p>交换两个变量的值。方法二</p>
+</code></pre>
+<p>交换两个变量的值。方法二</p>
 <pre><code>a, b = 1, 2
 a, b = b, a
 print(a)  # 2
 print(b)  # 1
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><hr>
 <p>在python中，值是靠引用来传递来的。<strong>我们可以用<code>id()</code>来判断两个变量是否为同一个值的引用。</strong> 我们可以将id值理解为那块内存的地址标识。</p>
 <pre><code># 1. int类型
@@ -1684,7 +1801,8 @@ aa.append(30)
 print(bb)  # [10, 20, 30], 列表为可变类型
 print(id(aa))  # 2325297783432
 print(id(bb))  # 2325297783432
-</code></pre><p>引用当做实参，代码如下：</p>
+</code></pre>
+<p>引用当做实参，代码如下：</p>
 <pre><code>def test1(a):
     print(a)
     print(id(a))
@@ -1699,7 +1817,8 @@ test1(b)
 # 列表：计算前后id值相同
 c = [11, 22]
 test1(c)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="可变和不可变类型"><a href="#可变和不可变类型" class="headerlink" title="可变和不可变类型"></a>可变和不可变类型</h3><hr>
 <p>所谓可变类型与不可变类型是指：数据能够直接进行修改，如果能直接修改那么就是可变，否则是不可变。</p>
 <p>可变类型：列表、字典、集合。</p>
@@ -1717,12 +1836,14 @@ def sum_numbers(num):
 sum_result = sum_numbers(3)
 # 输出结果为6
 print(sum_result)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><hr>
 <p>如果一个函数有一个返回值，并且只有一句代码，可以使用lambda简化。</p>
 <p>lambda语法</p>
 <pre><code>lambda 参数列表 ： 表达式
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：lambda表达式的参数可有可无，函数的参数在lambda表达式中完全适用。lambda表达式能接收任何数量的参数但只能返回一个表达式的值。</p>
 </blockquote>
 <pre><code># 函数
@@ -1736,7 +1857,8 @@ print(fn1())
 fn2 = lambda: 100
 print(fn2)
 print(fn2())
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：直接打印lambda表达式，输出的是此lambda的内存地址</p>
 </blockquote>
 <p>计算a + b</p>
@@ -1748,40 +1870,46 @@ print(result)
 #lambda实现,有参数
 fn1 = lambda a, b: a + b
 print(fn1(1, 2))
-</code></pre><p>lambda的参数形式，默认参数</p>
+</code></pre>
+<p>lambda的参数形式，默认参数</p>
 <pre><code>fn1 = lambda a, b, c=100: a + b + c
 print(fn1(10, 20))
-</code></pre><p>可变参数：<code>*args</code></p>
+</code></pre>
+<p>可变参数：<code>*args</code></p>
 <pre><code>fn1 = lambda *args: args
 print(fn1(10, 20, 30))
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：这里的可变参数传入到lambda之后，返回值为元组。</p>
 </blockquote>
 <p>可变参数：<code>**kwargs</code></p>
 <pre><code>fn1 = lambda **kwargs: kwargs
-print(fn1(name=&apos;python&apos;, age=20))
-</code></pre><p>lambda的应用，带判断的lambda</p>
+print(fn1(name=&#39;python&#39;, age=20))
+</code></pre>
+<p>lambda的应用，带判断的lambda</p>
 <pre><code>fn1 = lambda a, b: a if a &gt; b else b
 print(fn1(1000, 500))
-</code></pre><p>lambda的应用，列表数据按字典key的值排序</p>
+</code></pre>
+<p>lambda的应用，列表数据按字典key的值排序</p>
 <pre><code>students = [
-    &#123;&apos;name&apos;: &apos;TOM&apos;, &apos;age&apos;: 20&#125;,
-    &#123;&apos;name&apos;: &apos;ROSE&apos;, &apos;age&apos;: 19&#125;,
-    &#123;&apos;name&apos;: &apos;Jack&apos;, &apos;age&apos;: 22&#125;
+    &#123;&#39;name&#39;: &#39;TOM&#39;, &#39;age&#39;: 20&#125;,
+    &#123;&#39;name&#39;: &#39;ROSE&#39;, &#39;age&#39;: 19&#125;,
+    &#123;&#39;name&#39;: &#39;Jack&#39;, &#39;age&#39;: 22&#125;
 ]
 
 # 按name值升序排列
-students.sort(key=lambda x: x[&apos;name&apos;])
+students.sort(key=lambda x: x[&#39;name&#39;])
 print(students)
 
 # 按name值降序排列
-students.sort(key=lambda x: x[&apos;name&apos;], reverse=True)
+students.sort(key=lambda x: x[&#39;name&#39;], reverse=True)
 print(students)
 
 # 按age值升序排列
-students.sort(key=lambda x: x[&apos;age&apos;])
+students.sort(key=lambda x: x[&#39;age&#39;])
 print(students)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h2><hr>
 <p><strong>把函数作为参数传入，这样的函数称为高阶函数</strong>，高阶函数是函数式编程的体现。函数式编程就是指这种高度抽象的编程范式。</p>
 <p>体验高阶函数:</p>
@@ -1805,11 +1933,12 @@ def sum_num(a, b, f):
     return f(a) + f(b)
 result = sum_num(-1, 2, abs)
 print(result)  # 3
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：两种方法对比之后，发现，方法2的代码会更加简洁，函数灵活性更高。函数式编程大量使用函数，减少了代码的重复，因此程序比较短，开发速度较快。</p>
 </blockquote>
 <hr>
-<p>内置高阶函数map():map(func, lst)，将传入的函数变量func作用到lst变量的每个元素中，并将结果组成新的列表(Python2)/迭代器(Python3)返回。</p>
+<p>内置高阶函数map():map(func, lst)，将传入的函数变量func作用到lst变量的每个元素中，并将结果组成新的列表(Python2)&#x2F;迭代器(Python3)返回。</p>
 <pre><code>#计算`list1`序列中各个数字的2次方。
 
 list1 = [1, 2, 3, 4, 5]
@@ -1818,7 +1947,8 @@ def func(x):
 result = map(func, list1)
 print(result)  # &lt;map object at 0x0000013769653198&gt;
 print(list(result))  # [1, 4, 9, 16, 25]
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>reduce():reduce(func，lst)，<strong>其中func必须有两个参数</strong>。每次func计算的结果继续和序列的下一个元素做累积计算。</p>
 <pre><code>#计算`list1`序列中各个数字的累加和。
 import functools
@@ -1827,7 +1957,8 @@ def func(a, b):
     return a + b
 result = functools.reduce(func, list1)
 print(result)  # 15
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>filter():filter(func, lst)函数用于过滤序列, 过滤掉不符合条件的元素, 返回一个filter对象。如果要转换为列表, 可以使用list()来转换。</p>
 <pre><code>list1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 def func(x):
@@ -1835,7 +1966,8 @@ def func(x):
 result = filter(func, list1)
 print(result)  # &lt;filter object at 0x0000017AF9DC3198&gt;
 print(list(result))  # [2, 4, 6, 8, 10]
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><hr>
 <p>文件操作的作用就是把一些内容(数据)存储存放起来，可以让程序下一次执行的时候直接使用，而不必重新制作一份，省时省力。</p>
 <p>关闭文件 <code>f.close()</code>。</p>
@@ -1843,118 +1975,122 @@ print(list(result))  # [2, 4, 6, 8, 10]
 <pre><code>open(name, mode)
 #name：是要打开的目标文件名的字符串(可以包含文件所在的具体路径)。
 #mode：设置打开文件的模式(访问模式)：只读、写入、追加等。
-</code></pre><p>打开文件模式</p>
+</code></pre>
+<p>打开文件模式</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">模式</th>
+<th align="center">模式</th>
 <th>描述</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">r</td>
+<tbody><tr>
+<td align="center">r</td>
 <td>以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。</td>
 </tr>
 <tr>
-<td style="text-align:center">rb</td>
+<td align="center">rb</td>
 <td>以二进制格式打开一个文件用于只读。文件指针将会放在文件的开头。这是默认模式。</td>
 </tr>
 <tr>
-<td style="text-align:center">r+</td>
+<td align="center">r+</td>
 <td>打开一个文件用于读写。文件指针将会放在文件的开头。</td>
 </tr>
 <tr>
-<td style="text-align:center">rb+</td>
+<td align="center">rb+</td>
 <td>以二进制格式打开一个文件用于读写。文件指针将会放在文件的开头。</td>
 </tr>
 <tr>
-<td style="text-align:center">w</td>
+<td align="center">w</td>
 <td>打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
 </tr>
 <tr>
-<td style="text-align:center">wb</td>
+<td align="center">wb</td>
 <td>以二进制格式打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
 </tr>
 <tr>
-<td style="text-align:center">w+</td>
+<td align="center">w+</td>
 <td>打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
 </tr>
 <tr>
-<td style="text-align:center">wb+</td>
+<td align="center">wb+</td>
 <td>以二进制格式打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
 </tr>
 <tr>
-<td style="text-align:center">a</td>
+<td align="center">a</td>
 <td>打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</td>
 </tr>
 <tr>
-<td style="text-align:center">ab</td>
+<td align="center">ab</td>
 <td>以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</td>
 </tr>
 <tr>
-<td style="text-align:center">a+</td>
+<td align="center">a+</td>
 <td>打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。</td>
 </tr>
 <tr>
-<td style="text-align:center">ab+</td>
+<td align="center">ab+</td>
 <td>以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。如果该文件不存在，创建新文件用于读写。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr>
 <p>写:</p>
 <pre><code>#语法
-对象对象.write(&apos;内容&apos;)
+对象对象.write(&#39;内容&#39;)
 
 # 1. 打开文件
-f = open(&apos;test.txt&apos;, &apos;w&apos;)
+f = open(&#39;test.txt&#39;, &#39;w&#39;)
 # 2.文件写入
-f.write(&apos;hello world&apos;)
+f.write(&#39;hello world&#39;)
 # 3. 关闭文件
 f.close()
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：<code>w</code>和<code>a</code>模式：如果文件不存在则创建该文件；如果文件存在，<code>w</code>模式先清空再写入，<code>a</code>模式直接末尾追加。<code>r</code>模式：如果文件不存在则报错。</p>
 </blockquote>
 <hr>
 <p>读：</p>
 <p>read()</p>
 <pre><code>文件对象.read(num)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>num表示要从文件中读取的数据的长度（单位是字节），如果没有传入num，那么就表示读取文件中所有的数据。</p>
 </blockquote>
 <p>readlines()：可以按照行的方式把整个文件中的内容进行一次性读取，并且返回的是一个列表，其中每一行的数据为一个元素。</p>
-<pre><code>f = open(&apos;test.txt&apos;)
+<pre><code>f = open(&#39;test.txt&#39;)
 content = f.readlines()
-# [&apos;hello world\n&apos;, &apos;abcdefg\n&apos;, &apos;aaa\n&apos;, &apos;bbb\n&apos;, &apos;ccc&apos;]
+# [&#39;hello world\n&#39;, &#39;abcdefg\n&#39;, &#39;aaa\n&#39;, &#39;bbb\n&#39;, &#39;ccc&#39;]
 print(content)
 # 关闭文件
 f.close()
-</code></pre><p>readline()一次读取一行内容。</p>
-<pre><code>f = open(&apos;test.txt&apos;)
+</code></pre>
+<p>readline()一次读取一行内容。</p>
+<pre><code>f = open(&#39;test.txt&#39;)
 content = f.readline()
-print(f&apos;第一行：&#123;content&#125;&apos;)
+print(f&#39;第一行：&#123;content&#125;&#39;)
 content = f.readline()
-print(f&apos;第二行：&#123;content&#125;&apos;)
-</code></pre><p>seek()：用来移动文件指针。</p>
+print(f&#39;第二行：&#123;content&#125;&#39;)
+</code></pre>
+<p>seek()：用来移动文件指针。</p>
 <pre><code>文件对象.seek(偏移量, 起始位置)
 #起始位置：0：文件开头；1：当前位置；2：文件结尾
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>文件备份：用户输入当前目录下任意文件名，程序完成对该文件的备份功能(备份文件名为xx[备份]后缀，例如：test[备份].txt)。</p>
-<pre><code>old_name = input(&apos;请输入您要备份的文件名：&apos;)
+<pre><code>old_name = input(&#39;请输入您要备份的文件名：&#39;)
 
 # 提取文件后缀点的下标
-index = old_name.rfind(&apos;.&apos;)
+index = old_name.rfind(&#39;.&#39;)
 # print(index)  # 后缀中.的下标
 # print(old_name[:index])  # 源文件名（无后缀）
 # 组织新文件名 旧文件名 + [备份] + 后缀
-new_name = old_name[:index] + &apos;[备份]&apos; + old_name[index:]
+new_name = old_name[:index] + &#39;[备份]&#39; + old_name[index:]
 # 打印新文件名（带后缀）
 # print(new_name)
 
 # 打开文件
-old_f = open(old_name, &apos;rb&apos;)
-new_f = open(new_name, &apos;wb&apos;)
+old_f = open(old_name, &#39;rb&#39;)
+new_f = open(new_name, &#39;wb&#39;)
 # 将源文件数据写入备份文件
 while True:
     con = old_f.read(1024)
@@ -1965,35 +2101,44 @@ while True:
 # 关闭文件
 old_f.close()
 new_f.close()
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>文件和文件夹的操作:在Python中文件和文件夹的操作要借助os模块里面的相关功能，具体步骤如下：</p>
 <pre><code>#导入os模块
 import os
 
 #使用os模块相关功能
 os.函数名()
-</code></pre><p>文件重命名</p>
+</code></pre>
+<p>文件重命名</p>
 <pre><code>os.rename(目标文件名, 新文件名)
-</code></pre><p>删除文件</p>
+</code></pre>
+<p>删除文件</p>
 <pre><code>os.remove(目标文件名)
-</code></pre><p>创建文件夹</p>
+</code></pre>
+<p>创建文件夹</p>
 <pre><code>os.mkdir(文件夹名字)
-</code></pre><p>删除文件夹</p>
+</code></pre>
+<p>删除文件夹</p>
 <pre><code>os.rmdir(文件夹名字)
-</code></pre><p>获取当前目录</p>
+</code></pre>
+<p>获取当前目录</p>
 <pre><code>os.getcwd()
-</code></pre><p>改变默认目录</p>
+</code></pre>
+<p>改变默认目录</p>
 <pre><code>os.chdir(目录)
-</code></pre><p>获取目录列表</p>
+</code></pre>
+<p>获取目录列表</p>
 <pre><code>os.listdir(目录)
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>批量修改文件名，既可添加指定字符串，又能删除指定字符串。</p>
 <pre><code>import os
 
 # 设置重命名标识：如果为1则添加指定字符，flag取值为2则删除指定字符
 flag = 1
 # 获取指定目录
-dir_name = &apos;./&apos;
+dir_name = &#39;./&#39;
 
 # 获取指定目录的文件列表
 file_list = os.listdir(dir_name)
@@ -2003,18 +2148,19 @@ file_list = os.listdir(dir_name)
 for name in file_list:
     # 添加指定字符
     if flag == 1:
-        new_name = &apos;Python-&apos; + name
+        new_name = &#39;Python-&#39; + name
     # 删除指定字符
     elif flag == 2:
-        num = len(&apos;Python-&apos;)
+        num = len(&#39;Python-&#39;)
         new_name = name[num:]
 
     # 打印新文件名，测试程序正确性
     print(new_name)
-
+    
     # 重命名
     os.rename(dir_name+name, dir_name+new_name)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="面向对象基础"><a href="#面向对象基础" class="headerlink" title="面向对象基础"></a>面向对象基础</h2><hr>
 <p>面向对象就是将编程当成是一个事物，对外界来说，事物是直接使用的，不用去管他内部的情况。而编程就是设置事物能够做什么事。</p>
 <p>类和对象的关系：用类去创建一个对象。</p>
@@ -2026,15 +2172,17 @@ for name in file_list:
 
 class Washer():
     def wash(self):
-        print(&apos;我会洗衣服&apos;)
-</code></pre><blockquote>
+        print(&#39;我会洗衣服&#39;)
+</code></pre>
+<blockquote>
 <p>注意：类名要满足标识符命名规则，同时遵循大驼峰命名习惯。</p>
 </blockquote>
 <p>经典类：不由任意内置类型派生出的类，称之为经典类</p>
 <pre><code>class 类名:
     代码
     ......
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>创建对象：对象又名实例。</p>
 <pre><code>对象名 = 类名()
 
@@ -2046,7 +2194,8 @@ print(haier1)
 
 # haier对象调用实例方法
 haier1.wash()
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：创建对象的过程也叫实例化对象。</p>
 </blockquote>
 <hr>
@@ -2054,7 +2203,7 @@ haier1.wash()
 <pre><code># 1. 定义类
 class Washer():
     def wash(self):
-        print(&apos;我会洗衣服&apos;)
+        print(&#39;我会洗衣服&#39;)
         # &lt;__main__.Washer object at 0x0000024BA2B34240&gt;
         print(self)
 
@@ -2068,7 +2217,8 @@ haier1.wash()
 haier2 = Washer()
 # &lt;__main__.Washer object at 0x0000022005857EF0&gt;
 print(haier2)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：打印对象和self得到的结果是一致的，都是当前对象的内存中存储地址。</p>
 </blockquote>
 <hr>
@@ -2077,20 +2227,22 @@ print(haier2)
 
 haier1.width = 500
 haier1.height = 800
-</code></pre><p>类外面获取对象属性</p>
+</code></pre>
+<p>类外面获取对象属性</p>
 <pre><code>对象名.属性名
 
-print(f&apos;haier1洗衣机的宽度是&#123;haier1.width&#125;&apos;)
-print(f&apos;haier1洗衣机的高度是&#123;haier1.height&#125;&apos;)
-</code></pre><p>类里面获取对象属性</p>
+print(f&#39;haier1洗衣机的宽度是&#123;haier1.width&#125;&#39;)
+print(f&#39;haier1洗衣机的高度是&#123;haier1.height&#125;&#39;)
+</code></pre>
+<p>类里面获取对象属性</p>
 <pre><code>self.属性名
 
 # 定义类
 class Washer():
     def print_info(self):
         # 类里面获取实例属性
-        print(f&apos;haier1洗衣机的宽度是&#123;self.width&#125;&apos;)
-        print(f&apos;haier1洗衣机的高度是&#123;self.height&#125;&apos;)
+        print(f&#39;haier1洗衣机的宽度是&#123;self.width&#125;&#39;)
+        print(f&#39;haier1洗衣机的高度是&#123;self.height&#125;&#39;)
 
 # 创建对象
 haier1 = Washer()
@@ -2099,13 +2251,14 @@ haier1 = Washer()
 haier1.width = 500
 haier1.height = 800
 haier1.print_info()
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="魔法方法"><a href="#魔法方法" class="headerlink" title="魔法方法"></a>魔法方法</h3><hr>
 <p>在Python中，<code>__xx__()</code>的函数叫做魔法方法，指的是具有特殊功能的函数。</p>
 <hr>
 <p><code>__init__()</code>方法的作用：初始化对象。</p>
 <pre><code>class Washer():
-
+    
     # 定义初始化功能的函数
     def __init__(self):
         # 添加实例属性
@@ -2114,11 +2267,12 @@ haier1.print_info()
 
     def print_info(self):
         # 类里面调用实例属性
-        print(f&apos;洗衣机的宽度是&#123;self.width&#125;, 高度是&#123;self.height&#125;&apos;)
+        print(f&#39;洗衣机的宽度是&#123;self.width&#125;, 高度是&#123;self.height&#125;&#39;)
 
 haier1 = Washer()
 haier1.print_info()
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：<code>__init__()</code>方法，在创建一个对象时默认被调用，不需要手动调用。<code>__init__(self)</code>中的self参数，不需要开发者传递，python解释器会自动把当前的对象引用传递过去。</p>
 </blockquote>
 <hr>
@@ -2129,15 +2283,16 @@ haier1.print_info()
         self.height = height
 
     def print_info(self):
-        print(f&apos;洗衣机的宽度是&#123;self.width&#125;&apos;)
-        print(f&apos;洗衣机的高度是&#123;self.height&#125;&apos;)
+        print(f&#39;洗衣机的宽度是&#123;self.width&#125;&#39;)
+        print(f&#39;洗衣机的高度是&#123;self.height&#125;&#39;)
 
 haier1 = Washer(10, 20)
 haier1.print_info()
 
 haier2 = Washer(30, 40)
 haier2.print_info()
-</code></pre><hr>
+</code></pre>
+<hr>
 <p> <code>__str__()</code>：当使用print输出对象的时候，默认打印对象的内存地址。如果类定义了<code>__str__</code>方法，那么就会打印从在这个方法中return的数据。</p>
 <pre><code>class Washer():
     def __init__(self, width, height):
@@ -2145,13 +2300,14 @@ haier2.print_info()
         self.height = height
 
     def __str__(self):
-        return &apos;这是海尔洗衣机的说明书&apos;
+        return &#39;这是海尔洗衣机的说明书&#39;
 
 
 haier1 = Washer(10, 20)
 # 这是海尔洗衣机的说明书
 print(haier1)
-</code></pre><hr>
+</code></pre>
+<hr>
 <p><code>__del__()</code>：当删除对象时，python解释器也会默认调用<code>__del__()</code>方法。</p>
 <pre><code>class Washer():
     def __init__(self, width, height):
@@ -2159,21 +2315,24 @@ print(haier1)
         self.height = height
 
     def __del__(self):
-        print(f&apos;&#123;self&#125;对象已经被删除&apos;)
+        print(f&#39;&#123;self&#125;对象已经被删除&#39;)
 
 haier1 = Washer(10, 20)
 # &lt;__main__.Washer object at 0x0000026118223278&gt;对象已经被删除
 del haier1
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="面向对象之继承"><a href="#面向对象之继承" class="headerlink" title="面向对象之继承"></a>面向对象之继承</h2><hr>
 <p>经典类或旧式类：不由任意内置类型派生出的类，称之为经典类。</p>
 <pre><code>class 类名:
     代码
     ......
-</code></pre><p>新式类</p>
+</code></pre>
+<p>新式类</p>
 <pre><code>class 类名(object):
   代码
-</code></pre><p>Python面向对象的继承指的是多个类之间的所属关系，即子类默认继承父类的所有属性和方法，具体如下：</p>
+</code></pre>
+<p>Python面向对象的继承指的是多个类之间的所属关系，即子类默认继承父类的所有属性和方法，具体如下：</p>
 <pre><code># 父类A
 class A(object):
     def __init__(self):
@@ -2188,7 +2347,8 @@ class B(A):
 
 result = B()
 result.info_print()  # 1
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>在Python中，所有类默认继承object类，object类是顶级类或基类；其他子类叫做派生类。</p>
 </blockquote>
 <hr>
@@ -2196,11 +2356,11 @@ result.info_print()  # 1
 <pre><code># 1. 师父类
 class Master(object):
     def __init__(self):
-        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+        self.kongfu = &#39;[古法煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
-
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
+        
 # 2. 徒弟类
 class Prentice(Master):
     pass
@@ -2211,23 +2371,24 @@ daqiu = Prentice()
 print(daqiu.kongfu)
 # 5. 对象调用实例方法
 daqiu.make_cake()
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h3><hr>
 <p>所谓多继承意思就是一个类同时继承了多个父类。</p>
 <pre><code>class Master(object):
     def __init__(self):
-        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+        self.kongfu = &#39;[古法煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 # 创建学校类
 class School(object):
     def __init__(self):
-        self.kongfu = &apos;[school煎饼果子配方]&apos;
+        self.kongfu = &#39;[school煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 class Prentice(School, Master):
     pass
@@ -2235,64 +2396,66 @@ class Prentice(School, Master):
 daqiu = Prentice()
 print(daqiu.kongfu)
 daqiu.make_cake()
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：当一个类有多个父类的时候，默认使用第一个父类的同名属性和方法。</p>
 </blockquote>
 <hr>
 <h3 id="子类重写父类同名方法和属性"><a href="#子类重写父类同名方法和属性" class="headerlink" title="子类重写父类同名方法和属性"></a>子类重写父类同名方法和属性</h3><hr>
 <pre><code>class Master(object):
     def __init__(self):
-        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+        self.kongfu = &#39;[古法煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 class School(object):
     def __init__(self):
-        self.kongfu = &apos;[school煎饼果子配方]&apos;
+        self.kongfu = &#39;[school煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 # 独创配方
 class Prentice(School, Master):
     def __init__(self):
-        self.kongfu = &apos;[独创煎饼果子配方]&apos;
+        self.kongfu = &#39;[独创煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 daqiu = Prentice()
 print(daqiu.kongfu)
 daqiu.make_cake()
 print(Prentice.__mro__)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>子类和父类具有同名属性和方法，默认使用子类的同名属性和方法。</p>
 </blockquote>
 <hr>
 <h3 id="子类调用父类的同名方法和属性"><a href="#子类调用父类的同名方法和属性" class="headerlink" title="子类调用父类的同名方法和属性"></a>子类调用父类的同名方法和属性</h3><hr>
 <pre><code>class Master(object):
     def __init__(self):
-        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+        self.kongfu = &#39;[古法煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 class School(object):
     def __init__(self):
-        self.kongfu = &apos;[school煎饼果子配方]&apos;
+        self.kongfu = &#39;[school煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 class Prentice(School, Master):
     def __init__(self):
-        self.kongfu = &apos;[独创煎饼果子配方]&apos;
+        self.kongfu = &#39;[独创煎饼果子配方]&#39;
 
     def make_cake(self):
         # 如果是先调用了父类的属性和方法，父类属性会覆盖子类属性，故在调用属性前，先调用自己子类的初始化
         self.__init__()
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
     # 调用父类方法，但是为保证调用到的也是父类的属性，必须在调用方法前调用父类的初始化
     def make_master_cake(self):
@@ -2308,29 +2471,30 @@ daqiu.make_cake()
 daqiu.make_master_cake()
 daqiu.make_school_cake()
 daqiu.make_cake()
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="多层继承"><a href="#多层继承" class="headerlink" title="多层继承"></a>多层继承</h3><hr>
 <pre><code>class Master(object):
     def __init__(self):
-        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+        self.kongfu = &#39;[古法煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 class School(object):
     def __init__(self):
-        self.kongfu = &apos;[school煎饼果子配方]&apos;
+        self.kongfu = &#39;[school煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 class Prentice(School, Master):
     def __init__(self):
-        self.kongfu = &apos;[独创煎饼果子配方]&apos;
+        self.kongfu = &#39;[独创煎饼果子配方]&#39;
 
     def make_cake(self):
         self.__init__()
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
     def make_master_cake(self):
         Master.__init__(self)
@@ -2339,7 +2503,7 @@ class Prentice(School, Master):
     def make_school_cake(self):
         School.__init__(self)
         School.make_cake(self)
-
+        
 # 徒孙类
 class Tusun(Prentice):
     pass
@@ -2348,21 +2512,22 @@ xiaoqiu = Tusun()
 xiaoqiu.make_cake()
 xiaoqiu.make_school_cake()
 xiaoqiu.make_master_cake()
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="super-调用父类方法"><a href="#super-调用父类方法" class="headerlink" title="super()调用父类方法"></a>super()调用父类方法</h3><hr>
 <pre><code>class Master(object):
     def __init__(self):
-        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+        self.kongfu = &#39;[古法煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 class School(Master):
     def __init__(self):
-        self.kongfu = &apos;[school煎饼果子配方]&apos;
+        self.kongfu = &#39;[school煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
         # 方法2.1
         # super(School, self).__init__()
@@ -2374,11 +2539,11 @@ class School(Master):
 
 class Prentice(School):
     def __init__(self):
-        self.kongfu = &apos;[独创煎饼果子技术]&apos;
+        self.kongfu = &#39;[独创煎饼果子技术]&#39;
 
     def make_cake(self):
         self.__init__()
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
     # 子类调用父类的同名方法和属性：把父类的同名属性和方法再次封装
     def make_master_cake(self):
@@ -2408,7 +2573,8 @@ class Prentice(School):
 
 daqiu = Prentice()
 daqiu.make_old_cake()
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：使用super() 可以自动查找父类。调用顺序遵循 <code>__mro__</code> 类属性的顺序。比较适合单继承使用。</p>
 </blockquote>
 <hr>
@@ -2418,21 +2584,21 @@ daqiu.make_old_cake()
 <p>设置私有权限的方法：在属性名和方法名前面加上两个下划线__。</p>
 <pre><code>class Master(object):
     def __init__(self):
-        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+        self.kongfu = &#39;[古法煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 class School(object):
     def __init__(self):
-        self.kongfu = &apos;[school煎饼果子配方]&apos;
+        self.kongfu = &#39;[school煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 class Prentice(School, Master):
     def __init__(self):
-        self.kongfu = &apos;[独创煎饼果子配方]&apos;
+        self.kongfu = &#39;[独创煎饼果子配方]&#39;
         # 定义私有属性
         self.__money = 2000000
 
@@ -2443,7 +2609,7 @@ class Prentice(School, Master):
 
     def make_cake(self):
         self.__init__()
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
     def make_master_cake(self):
         Master.__init__(self)
@@ -2466,7 +2632,8 @@ xiaoqiu = Tusun()
 # 子类无法继承父类的私有属性和私有方法
 # print(xiaoqiu.__money)  # 无法访问实例属性__money
 # xiaoqiu.__info_print()
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>注意：私有属性和私有方法只能在类里面访问和修改。</p>
 </blockquote>
 <hr>
@@ -2474,21 +2641,21 @@ xiaoqiu = Tusun()
 <p>在Python中，一般定义函数名<code>get_xx</code>用来获取私有属性，定义<code>set_xx</code>用来修改私有属性值。</p>
 <pre><code>class Master(object):
     def __init__(self):
-        self.kongfu = &apos;[古法煎饼果子配方]&apos;
+        self.kongfu = &#39;[古法煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 class School(object):
     def __init__(self):
-        self.kongfu = &apos;[school煎饼果子配方]&apos;
+        self.kongfu = &#39;[school煎饼果子配方]&#39;
 
     def make_cake(self):
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
 class Prentice(School, Master):
     def __init__(self):
-        self.kongfu = &apos;[独创煎饼果子配方]&apos;
+        self.kongfu = &#39;[独创煎饼果子配方]&#39;
         self.__money = 2000000
 
     # 获取私有属性
@@ -2505,7 +2672,7 @@ class Prentice(School, Master):
 
     def make_cake(self):
         self.__init__()
-        print(f&apos;运用&#123;self.kongfu&#125;制作煎饼果子&apos;)
+        print(f&#39;运用&#123;self.kongfu&#125;制作煎饼果子&#39;)
 
     def make_master_cake(self):
         Master.__init__(self)
@@ -2526,7 +2693,8 @@ print(xiaoqiu.get_money())
 # 调用set_money函数修改私有属性money的值
 xiaoqiu.set_money()
 print(xiaoqiu.get_money())
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="面向对象之其他"><a href="#面向对象之其他" class="headerlink" title="面向对象之其他"></a>面向对象之其他</h2><h3 id="面向对象三大特性"><a href="#面向对象三大特性" class="headerlink" title="面向对象三大特性"></a>面向对象三大特性</h3><hr>
 <p>封装：将属性和方法书写到类的里面的操作即为封装，封装可以为属性和方法添加私有权限。</p>
 <p>继承：子类默认继承父类的所有属性和方法，子类可以重写父类属性和方法。</p>
@@ -2537,15 +2705,15 @@ print(xiaoqiu.get_money())
 <p>多态是一种使用对象的方式，子类重写父类方法，调用不同子类对象的相同父类方法，可以产生不同的执行结果</p>
 <pre><code>class Dog(object):
     def work(self):  # 父类提供统一的方法，哪怕是空方法
-        print(&apos;指哪打哪...&apos;)
+        print(&#39;指哪打哪...&#39;)
 
 class ArmyDog(Dog):  # 继承Dog类
     def work(self):  # 子类重写父类同名方法
-        print(&apos;追击敌人...&apos;)
+        print(&#39;追击敌人...&#39;)
 
 class DrugDog(Dog):
     def work(self):
-        print(&apos;追查毒品...&apos;)
+        print(&#39;追查毒品...&#39;)
 
 class Person(object):
     def work_with_dog(self, dog):  # 传入不同的对象，执行不同的代码，即不同的work函数
@@ -2556,7 +2724,8 @@ dd = DrugDog()
 daqiu = Person()
 daqiu.work_with_dog(ad)
 daqiu.work_with_dog(dd)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="类属性和实例属性"><a href="#类属性和实例属性" class="headerlink" title="类属性和实例属性"></a>类属性和实例属性</h3><hr>
 <p>类属性就是类对象所拥有的属性，它被该类的所有实例对象所共有。类属性可以使用类对象或实例对象访问。</p>
 <pre><code>class Dog(object):
@@ -2567,7 +2736,8 @@ xiaohei = Dog()
 print(Dog.tooth)  # 10
 print(wangcai.tooth)  # 10
 print(xiaohei.tooth)  # 10
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="修改类属性"><a href="#修改类属性" class="headerlink" title="修改类属性"></a>修改类属性</h3><hr>
 <p>类属性只能通过类对象修改，不能通过实例对象修改，如果通过实例对象修改类属性，表示的是创建了一个实例属性。</p>
 <pre><code>class Dog(object):
@@ -2587,7 +2757,8 @@ wangcai.tooth = 20
 print(Dog.tooth)  # 12
 print(wangcai.tooth)  # 20
 print(xiaohei.tooth)  # 12
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="实例属性"><a href="#实例属性" class="headerlink" title="实例属性"></a>实例属性</h3><hr>
 <pre><code>class Dog(object):
     def __init__(self):
@@ -2600,7 +2771,8 @@ wangcai = Dog()
 print(wangcai.age)  # 5
 # print(Dog.age)  # 报错：实例属性不能通过类访问
 wangcai.info_print()  # 5
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h3><hr>
 <p>类方法特点:需要用装饰器<code>@classmethod</code>来标识其为类方法，对于类方法，<strong>第一个参数必须是类对象</strong>，一般以<code>cls</code>作为第一个参数。</p>
 <p>当方法中需要使用类对象(如访问私有类属性等)时，定义类方法。类方法一般和类属性配合使用。</p>
@@ -2610,82 +2782,93 @@ wangcai.info_print()  # 5
     @classmethod
     def get_tooth(cls):
         return cls.__tooth
-
+        
 wangcai = Dog()
 result = wangcai.get_tooth()
 print(result)  # 10
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h3><hr>
-<p>静态方法特点：需要通过装饰器<code>@staticmethod</code>来进行修饰，<strong>静态方法既不需要传递类对象也不需要传递实例对象（形参没有self/cls）</strong>。静态方法也能够通过 <strong>实例对象</strong> 和 <strong>类对象</strong> 去访问。</p>
+<p>静态方法特点：需要通过装饰器<code>@staticmethod</code>来进行修饰，<strong>静态方法既不需要传递类对象也不需要传递实例对象（形参没有self&#x2F;cls）</strong>。静态方法也能够通过 <strong>实例对象</strong> 和 <strong>类对象</strong> 去访问。</p>
 <p>当方法中 <strong>既不需要使用实例对象</strong>(如实例对象，实例属性)，<strong>也不需要使用类对象</strong> (如类属性、类方法、创建实例等)时，定义静态方法。取消不需要的参数传递，有利于减少不必要的内存占用和性能消耗。</p>
 <pre><code>class Dog(object):
     @staticmethod
     def info_print():
-        print(&apos;这是一个狗类，用于创建狗实例....&apos;)
+        print(&#39;这是一个狗类，用于创建狗实例....&#39;)
 
 wangcai = Dog()
 # 静态方法既可以使用对象访问又可以使用类访问
 wangcai.info_print()
 Dog.info_print()
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><hr>
 <p>当检测到一个错误时，解释器就无法继续执行了，反而出现了一些错误的提示，这就是所谓的”异常”。</p>
 <p>例如：以<code>r</code>方式打开一个不存在的文件。</p>
-<pre><code>open(&apos;test.txt&apos;, &apos;r&apos;)
-</code></pre><p>异常的写法</p>
+<pre><code>open(&#39;test.txt&#39;, &#39;r&#39;)
+</code></pre>
+<p>异常的写法</p>
 <pre><code>try:
     可能发生错误的代码
 except:
     如果出现异常执行的代码
-</code></pre><p>需求：尝试以<code>r</code>模式打开文件，如果文件不存在，则以<code>w</code>方式打开。</p>
+</code></pre>
+<p>需求：尝试以<code>r</code>模式打开文件，如果文件不存在，则以<code>w</code>方式打开。</p>
 <pre><code>try:
-    f = open(&apos;test.txt&apos;, &apos;r&apos;)
+    f = open(&#39;test.txt&#39;, &#39;r&#39;)
 except:
-    f = open(&apos;test.txt&apos;, &apos;w&apos;)
-</code></pre><hr>
+    f = open(&#39;test.txt&#39;, &#39;w&#39;)
+</code></pre>
+<hr>
 <p>捕获指定异常</p>
 <pre><code>try:
     可能发生错误的代码
 except 异常类型:
     如果捕获到该异常类型执行的代码
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>捕获多个指定异常：当捕获多个异常时，可以把要捕获的异常类型的名字，放到except 后，并使用元组的方式进行书写。</p>
 <pre><code>try:
     print(1/0)
 except (NameError, ZeroDivisionError):
-    print(&apos;有错误&apos;)
-</code></pre><hr>
+    print(&#39;有错误&#39;)
+</code></pre>
+<hr>
 <p>捕获异常描述信息</p>
 <pre><code>try:
     print(num)
 except (NameError, ZeroDivisionError) as result:
     print(result)
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>捕获所有异常：Exception是所有程序异常类的父类。</p>
 <pre><code>try:
     print(num)
 except Exception as result:
     print(result)
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>异常的else：else表示的是如果没有异常要执行的代码。</p>
 <pre><code>try:
     print(1)
 except Exception as result:
     print(result)
 else:
-    print(&apos;我是else，是没有异常的时候执行的代码&apos;)
-</code></pre><hr>
+    print(&#39;我是else，是没有异常的时候执行的代码&#39;)
+</code></pre>
+<hr>
 <p>异常的finally:finally表示的是无论是否异常都要执行的代码，例如关闭文件。</p>
 <pre><code>try:
-    f = open(&apos;test.txt&apos;, &apos;r&apos;)
+    f = open(&#39;test.txt&#39;, &#39;r&#39;)
 except Exception as result:
-    f = open(&apos;test.txt&apos;, &apos;w&apos;)
+    f = open(&#39;test.txt&#39;, &#39;w&#39;)
 else:
-    print(&apos;没有异常，真开心&apos;)
+    print(&#39;没有异常，真开心&#39;)
 finally:
     f.close()
-</code></pre><hr>
-<p>自定义异常:在Python中，抛出自定义异常的语法为<code>raise 异常类对象</code>。</p>
+</code></pre>
+<hr>
+<p>自定义异常:在Python中，抛出自定义异常的语法为<code> raise 异常类对象</code>。</p>
 <p>需求：密码长度不足，则报异常（用户输入密码，如果输入的长度不足3位，则报错，即抛出自定义异常，并捕获该异常）。</p>
 <pre><code># 自定义异常类，继承Exception
 class ShortInputError(Exception):
@@ -2695,19 +2878,20 @@ class ShortInputError(Exception):
 
     # 设置抛出异常的描述信息
     def __str__(self):
-        return f&apos;你输入的长度是&#123;self.length&#125;, 不能少于&#123;self.min_len&#125;个字符&apos;
+        return f&#39;你输入的长度是&#123;self.length&#125;, 不能少于&#123;self.min_len&#125;个字符&#39;
 
 def main():
     try:
-        con = input(&apos;请输入密码：&apos;)
+        con = input(&#39;请输入密码：&#39;)
         if len(con) &lt; 3:
             raise ShortInputError(len(con), 3)
     except Exception as result:
         print(result)
     else:
-        print(&apos;密码已经输入完成&apos;)
+        print(&#39;密码已经输入完成&#39;)
 main()
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><hr>
 <p>Python模块(Module)，是一个Python文件，以 <code>.py</code> 结尾，包含了 Python 对象定义和Python语句。</p>
 <p>模块能定义函数，类和变量，模块里也能包含可执行的代码。</p>
@@ -2730,21 +2914,24 @@ import 模块名1, 模块名2...
 # 体验
 import math
 print(math.sqrt(9))  # 3.0
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>from..import..</p>
 <pre><code>from 模块名 import 功能1, 功能2, 功能3...
 
 # 体验
 from math import sqrt
 print(sqrt(9))
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>from .. import *</p>
 <pre><code>from 模块名 import *
 
 # 体验
 from math import *
 print(sqrt(9))
-</code></pre><hr>
+</code></pre>
+<hr>
 <p>as定义别名</p>
 <pre><code># 模块定义别名
 import 模块名 as 别名
@@ -2755,34 +2942,39 @@ from 模块名 import 功能 as 别名
 # 模块别名
 import time as tt
 tt.sleep(2)
-print(&apos;hello&apos;)
+print(&#39;hello&#39;)
 
 # 功能别名
 from time import sleep as sl
 sl(2)
-print(&apos;hello&apos;)
-</code></pre><hr>
+print(&#39;hello&#39;)
+</code></pre>
+<hr>
 <h3 id="制作模块"><a href="#制作模块" class="headerlink" title="制作模块"></a>制作模块</h3><hr>
 <p>制作模块:在Python中，每个Python文件都可以作为一个模块，模块的名字就是文件的名字。<strong>也就是说自定义模块名必须要符合标识符命名规则。</strong></p>
 <p>新建一个Python文件，命名为<code>my_module1.py</code>，并定义<code>testA</code>函数。</p>
 <pre><code>def testA(a, b):
     print(a + b)
-</code></pre><p>在实际开中，当一个开发人员编写完一个模块后，为了让模块能够在项目中达到想要的效果，这个开发人员会自行在py文件中添加一些测试信息。例如，在<code>my_module1.py</code>文件中添加测试代码。</p>
+</code></pre>
+<p>在实际开中，当一个开发人员编写完一个模块后，为了让模块能够在项目中达到想要的效果，这个开发人员会自行在py文件中添加一些测试信息。例如，在<code>my_module1.py</code>文件中添加测试代码。</p>
 <pre><code>def testA(a, b):
     print(a + b)
 testA(1, 1)
-</code></pre><p>此时，无论是当前文件，还是其他已经导入了该模块的文件，在运行的时候都会自动执行<code>testA</code>函数的调用。</p>
+</code></pre>
+<p>此时，无论是当前文件，还是其他已经导入了该模块的文件，在运行的时候都会自动执行<code>testA</code>函数的调用。</p>
 <p>解决办法如下：</p>
 <pre><code>def testA(a, b):
     print(a + b)
 
 # 只在当前文件中调用该函数，其他导入的文件内不符合该条件，则不执行testA函数调用
-if __name__ == &apos;__main__&apos;:
+if __name__ == &#39;__main__&#39;:
     testA(1, 1)
-</code></pre><p>调用模块</p>
+</code></pre>
+<p>调用模块</p>
 <pre><code>import my_module1
 my_module1.testA(1, 1)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="模块定位顺序"><a href="#模块定位顺序" class="headerlink" title="模块定位顺序"></a>模块定位顺序</h3><hr>
 <p>如果使用<code>from .. import ..</code>或<code>from .. import *</code>导入多个模块的时候，且模块内有同名功能。当调用这个同名功能的时候，调用到的是后面导入的模块的功能。</p>
 <pre><code># 模块1代码
@@ -2792,18 +2984,19 @@ def my_test(a, b):
 # 模块2代码
 def my_test(a, b):
     print(a - b)
-
+   
 # 导入模块和调用功能代码
 from my_module1 import my_test
 from my_module2 import my_test
 
 # my_test函数是模块2中的函数
 my_test(1, 1)
-</code></pre><p>当导入一个模块，Python解析器对模块位置的搜索顺序是：</p>
+</code></pre>
+<p>当导入一个模块，Python解析器对模块位置的搜索顺序是：</p>
 <ol>
 <li>当前目录</li>
 <li>如果不在当前目录，Python则搜索在shell变量PYTHONPATH下的每个目录。</li>
-<li>如果都找不到，Python会察看默认路径。UNIX下，默认路径一般为/usr/local/lib/python/</li>
+<li>如果都找不到，Python会察看默认路径。UNIX下，默认路径一般为&#x2F;usr&#x2F;local&#x2F;lib&#x2F;python&#x2F;</li>
 </ol>
 <p>模块搜索路径存储在system模块的sys.path变量中。变量里包含当前目录，PYTHONPATH和由安装过程决定的默认目录。</p>
 <ul>
@@ -2817,18 +3010,19 @@ my_test(1, 1)
 <h3 id="all"><a href="#all" class="headerlink" title="__all__"></a><code>__all__</code></h3><hr>
 <p>如果一个模块文件中有<code>__all__</code>变量，当使用<code>from xxx import *</code>导入时，只能导入这个列表中的元素。</p>
 <pre><code># my_module1模块代码
-__all__ = [&apos;testA&apos;]
+__all__ = [&#39;testA&#39;]
 def testA():
-    print(&apos;testA&apos;)
+    print(&#39;testA&#39;)
 
 def testB():
-    print(&apos;testB&apos;)
+    print(&#39;testB&#39;)
 
 # 导入模块的文件代码
 from my_module1 import *
 testA()
 testB()# 报错
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><hr>
 <p>包将有联系的模块组织在一起，即放到同一个文件夹下，并且在这个文件夹创建一个名字为<code>__init__.py</code> 文件，那么这个文件夹就称之为包。</p>
 <p>制作包：[New] — [Python Package] — 输入包名 — [OK] — 新建功能模块(有联系的模块)。</p>
@@ -2837,13 +3031,14 @@ testB()# 报错
 <pre><code># my_module1
 print(1)
 def info_print1():
-    print(&apos;my_module1&apos;)
+    print(&#39;my_module1&#39;)
 
 # my_module2
 print(2)
 def info_print2():
-    print(&apos;my_module2&apos;)
-</code></pre><p>导入包</p>
+    print(&#39;my_module2&#39;)
+</code></pre>
+<p>导入包</p>
 <pre><code># 方法一
 import 包名.模块名
 包名.模块名.目标
@@ -2860,7 +3055,8 @@ from 包名 import *
 # 体验
 from my_package import *
 my_module1.info_print1()
-</code></pre><hr>
+</code></pre>
+<hr>
 
             </div>
             <hr>

@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      970 字
+      977 字
     </span>
   
 
@@ -230,10 +230,12 @@
             <div class="markdown-body">
               <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Butterknife源码地址</p>
 <pre><code>https://github.com/JakeWharton/butterknife
-</code></pre><p>引入</p>
-<pre><code>implementation &apos;com.jakewharton:butterknife:8.5.1&apos;
-annotationProcessor &apos;com.jakewharton:butterknife-compiler:8.5.1&apos;
-</code></pre><p>主要是解决掉findViewById、setOnclick 、资源的注入等。反射造成大量的临时文件，造成gc，影响性能。<strong>而Butterknife采用编译时注解，即用APT mirror生成代码。</strong></p>
+</code></pre>
+<p>引入</p>
+<pre><code>implementation &#39;com.jakewharton:butterknife:8.5.1&#39;
+annotationProcessor &#39;com.jakewharton:butterknife-compiler:8.5.1&#39;
+</code></pre>
+<p>主要是解决掉findViewById、setOnclick 、资源的注入等。反射造成大量的临时文件，造成gc，影响性能。<strong>而Butterknife采用编译时注解，即用APT mirror生成代码。</strong></p>
 <p>ButterKnife的工作原理:</p>
 <p>声明的注解的生命周期为CLASS。继承AbstractProcessor类，再调用AbstractProcessor的process方法。</p>
 <p>编译的时候扫描注解，调用javapoet库，生成java代码。</p>
@@ -258,7 +260,8 @@ annotationProcessor &apos;com.jakewharton:butterknife-compiler:8.5.1&apos;
         target.textView = null;
     &#125;
 &#125;
-</code></pre><p>在Activity中不需要再findViewById：</p>
+</code></pre>
+<p>在Activity中不需要再findViewById：</p>
 <pre><code>public class ButterknifeActivity extends AppCompatActivity &#123;
     public TextView textView;
     @Override
@@ -270,20 +273,24 @@ annotationProcessor &apos;com.jakewharton:butterknife-compiler:8.5.1&apos;
         textView.setText(&quot;我是伪代码&quot;);
     &#125;
 &#125;
-</code></pre><p>所以，我们的思路就是用APT实现伪代码，就实现了手写Butterknife。</p>
+</code></pre>
+<p>所以，我们的思路就是用APT实现伪代码，就实现了手写Butterknife。</p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="前奏"><a href="#前奏" class="headerlink" title="前奏"></a>前奏</h3><p>新建Module-Library</p>
 <pre><code>Android Library:butterknife
 Java Library:butterknife-annotations(运行时的注解)和butterknife-compiler(编译，生成代码)
-</code></pre><p>配置</p>
+</code></pre>
+<p>配置</p>
 <p>app的build中引入</p>
-<pre><code>implementation project(&apos;:butterknife-annotations&apos;)
-implementation project(&apos;:butterknife&apos;)
-annotationProcessor project(&apos;:butterknife-compiler&apos;)
-</code></pre><p>butterknife-compiler中引入</p>
-<pre><code>implementation &apos;com.google.auto.service:auto-service:1.0-rc3&apos;//注解
-implementation &apos;com.squareup:javapoet:1.8.0&apos;//生成代码文件
-implementation project(&apos;:butterknife-annotations&apos;)//依赖butterknife-annotations
-</code></pre><blockquote>
+<pre><code>implementation project(&#39;:butterknife-annotations&#39;)
+implementation project(&#39;:butterknife&#39;)
+annotationProcessor project(&#39;:butterknife-compiler&#39;)
+</code></pre>
+<p>butterknife-compiler中引入</p>
+<pre><code>implementation &#39;com.google.auto.service:auto-service:1.0-rc3&#39;//注解
+implementation &#39;com.squareup:javapoet:1.8.0&#39;//生成代码文件
+implementation project(&#39;:butterknife-annotations&#39;)//依赖butterknife-annotations
+</code></pre>
+<blockquote>
 <p>注解处理器是（Annotation Processor）是javac的一个工具，用来在编译时扫描和编译和处理注解（Annotation）。在编译时把标记了注解的类，变量等作为输入内容，经过注解处理器处理，生成想要生成的java代码。处理器都是继承于<code>AbstractProcessor</code>。</p>
 </blockquote>
 <blockquote>
@@ -329,7 +336,8 @@ public class ButterKnifeProcessor extends AbstractProcessor &#123;
         return false;
     &#125;
 &#125;
-</code></pre><p>APT流程：编译开始 → 拿到元素(添加指定的注解元素) → 处理分解元素以及注解信息 → 通过JAVAPOET拼装生成Java文件 → 交给编译器。</p>
+</code></pre>
+<p>APT流程：编译开始 → 拿到元素(添加指定的注解元素) → 处理分解元素以及注解信息 → 通过JAVAPOET拼装生成Java文件 → 交给编译器。</p>
 <p>AbstractProcessor中的init方法中的参数ProcessingEnvironment</p>
 <pre><code>public interface ProcessingEnvironment &#123;
     Map&lt;String, String&gt; getOptions();
@@ -340,17 +348,21 @@ public class ButterKnifeProcessor extends AbstractProcessor &#123;
     SourceVersion getSourceVersion();
     Locale getLocale();
 &#125;
-</code></pre><p>ProcessingEnvironment提供了一些工具类，Filer用于创建文件，Elements获取所有源文件元素，Types获取源代码类型信息。</p>
+</code></pre>
+<p>ProcessingEnvironment提供了一些工具类，Filer用于创建文件，Elements获取所有源文件元素，Types获取源代码类型信息。</p>
 <h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><p>唯一使用反射的地方：</p>
 <p>不在class中写入</p>
 <pre><code>Class_ViewBinding viewBinding = new Class_ViewBinding(this);
-</code></pre><p>而是通过</p>
+</code></pre>
+<p>而是通过</p>
 <pre><code>ButterKnife.bind(this)//中对Class_ViewBinding进行有参构造反射
-</code></pre><h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><p>生成的类在/build/generated/source/apt/base/包名/ClassName_ViewBinding类。</p>
+</code></pre>
+<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><p>生成的类在&#x2F;build&#x2F;generated&#x2F;source&#x2F;apt&#x2F;base&#x2F;包名&#x2F;ClassName_ViewBinding类。</p>
 <p>代码</p>
 <pre><code>https://github.com/AdamRight/TeaTool/tree/master/app/src/main/java/com/tea/teatool/teabutterknife
 https://github.com/AdamRight/TeaTool
 </code></pre>
+
             </div>
             <hr>
             <div>

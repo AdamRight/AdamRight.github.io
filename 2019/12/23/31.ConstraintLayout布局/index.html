@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -252,16 +252,19 @@ layout_constraintStart_toEndOf
 layout_constraintStart_toStartOf
 layout_constraintEnd_toStartOf
 layout_constraintEnd_toEndOf
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="尺寸约束0dp"><a href="#尺寸约束0dp" class="headerlink" title="尺寸约束0dp"></a>尺寸约束0dp</h3><hr>
 <p><code>ConstraintLayout</code> 中不支持 <code>MATCH_PARENT</code> 这个值，如果需要实现跟<code>MATCH_PARENT</code>同样的效果，可以使用<code>0dp</code>来代替，其表示<code>MATCH_CONSTRAINT</code>,即适应约束。其跟<code>MATCH_PARENT</code>还是有区别的。</p>
 <pre><code>android:layout_width=&quot;0dp&quot;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="权重weight"><a href="#权重weight" class="headerlink" title="权重weight"></a>权重weight</h3><hr>
 <p>通过设置以下两个属性：</p>
 <pre><code>app:layout_constraintHorizontal_weight //水平权重
 app:layout_constraintVertical_weight //竖直权重
-</code></pre><p>比如</p>
+</code></pre>
+<p>比如</p>
 <pre><code>&lt;View
     android:background=&quot;@color/black&quot;
     android:id=&quot;@+id/view1&quot;
@@ -281,11 +284,13 @@ app:layout_constraintVertical_weight //竖直权重
     app:layout_constraintHorizontal_weight=&quot;2&quot;
     app:layout_constraintStart_toEndOf=&quot;@+id/view1&quot;
     app:layout_constraintTop_toTopOf=&quot;parent&quot; /&gt;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="文字基准线对齐Baseline"><a href="#文字基准线对齐Baseline" class="headerlink" title="文字基准线对齐Baseline"></a>文字基准线对齐Baseline</h3><hr>
 <pre><code># 底部对齐
 layout_constraintBaseline_toBaselineOf
-</code></pre><p>主要用于和文字底部对齐样式，<code>app:layout_constraintBaseline_toBaselineOf</code>主要和 <code>app:layout_constraintBottom_toBottomOf</code>做区分。</p>
+</code></pre>
+<p>主要用于和文字底部对齐样式，<code>app:layout_constraintBaseline_toBaselineOf</code>主要和 <code>app:layout_constraintBottom_toBottomOf</code>做区分。</p>
 <pre><code>&lt;TextView
     android:id=&quot;@+id/textView1&quot;
     android:layout_width=&quot;wrap_content&quot;
@@ -314,17 +319,20 @@ layout_constraintBaseline_toBaselineOf
     android:textSize=&quot;26sp&quot;
     app:layout_constraintBottom_toBottomOf=&quot;@+id/textView1&quot;
     app:layout_constraintStart_toEndOf=&quot;@+id/textView1&quot; /&gt;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="圆形定位-角度布局Circl"><a href="#圆形定位-角度布局Circl" class="headerlink" title="圆形定位-角度布局Circl"></a>圆形定位-角度布局Circl</h3><hr>
 <p>三个属性确定位置：以谁为圆心，半径，角度：</p>
 <pre><code>app:layout_constraintCircleAngle
 app:layout_constraintCircleRadius
 app:layout_constraintCircle
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="约束限制constrained"><a href="#约束限制constrained" class="headerlink" title="约束限制constrained"></a>约束限制constrained</h3><hr>
 <pre><code>app:layout_constrainedWidth=&quot;true&quot;
 app:layout_constrainedHeight=&quot;true&quot;
-</code></pre><p>一般控制TextView的宽度不超过限定的距离。</p>
+</code></pre>
+<p>一般控制TextView的宽度不超过限定的距离。</p>
 <pre><code>&lt;TextView
     android:layout_width=&quot;wrap_content&quot;
     android:layout_height=&quot;wrap_content&quot;
@@ -336,12 +344,14 @@ app:layout_constrainedHeight=&quot;true&quot;
     app:layout_constraintEnd_toEndOf=&quot;@+id/sun&quot;
     app:layout_constraintStart_toStartOf=&quot;@+id/sun&quot;
     app:layout_constraintTop_toBottomOf=&quot;@+id/sun&quot; /&gt;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="位置偏向bias"><a href="#位置偏向bias" class="headerlink" title="位置偏向bias"></a>位置偏向bias</h3><hr>
 <p>如果想让view的位置偏向某一侧,其值同样也是0到1之间：</p>
 <pre><code>layout_constraintHorizontal_bias  //水平偏向
 layout_constraintVertical_bias  //竖直偏向
-</code></pre><p><code>bias</code>可以和<code>constrained</code>一起使用：</p>
+</code></pre>
+<p><code>bias</code>可以和<code>constrained</code>一起使用：</p>
 <pre><code>&lt;TextView
     android:layout_width=&quot;wrap_content&quot;
     android:layout_height=&quot;wrap_content&quot;
@@ -354,7 +364,8 @@ layout_constraintVertical_bias  //竖直偏向
     app:layout_constraintHorizontal_bias=&quot;0.508&quot;
     app:layout_constraintStart_toStartOf=&quot;@+id/sun&quot;
     app:layout_constraintTop_toBottomOf=&quot;@+id/sun&quot; /&gt;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="goneMargin"><a href="#goneMargin" class="headerlink" title="goneMargin"></a>goneMargin</h3><hr>
 <p>当某个控件A存在时，下面的控件B距离A需要一个<code>margin_top=20dp</code>。 当A消失时(gone掉了)，此时<code>margin_top=0dp</code>。<code>layout_goneMarginTop</code>就有用了。</p>
 <pre><code>&lt;TextView
@@ -378,12 +389,14 @@ layout_constraintVertical_bias  //竖直偏向
     android:src=&quot;@mipmap/ic_launcher_round&quot;
     app:layout_constraintStart_toEndOf=&quot;@id/textview&quot;
     app:layout_constraintTop_toTopOf=&quot;@id/textview&quot; /&gt;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="约束链chain"><a href="#约束链chain" class="headerlink" title="约束链chain"></a>约束链chain</h3><hr>
 <p>设置链样式的属性是：</p>
 <pre><code>app:layout_constraintVertical_chainStyle=&quot;spread|spread_inside|packed&quot;
 app:layout_constraintHorizontal_chainStyle=&quot;spread|spread_inside|packed&quot;
-</code></pre><p>默认是<code>spread</code>（扩散），<code>packed</code>意思是打包在一起，<code>spread_inside</code>（内部扩散）。使用时候，给第一个控件view添加chainStyle即可。</p>
+</code></pre>
+<p>默认是<code>spread</code>（扩散），<code>packed</code>意思是打包在一起，<code>spread_inside</code>（内部扩散）。使用时候，给第一个控件view添加chainStyle即可。</p>
 <hr>
 <h3 id="宽高比DimensionRatio"><a href="#宽高比DimensionRatio" class="headerlink" title="宽高比DimensionRatio"></a>宽高比DimensionRatio</h3><hr>
 <p>默认的都是<code>宽：搞</code>，然后根据另外一条边和比例算出。需要将宽或者高中的的<strong>至少一个</strong>设置为<code>0dp</code>（即<code>MATCH_CONSTRAINT</code>），即要适应约束条件。然后通过<code>layout_constraintDimensionRatio</code>属性设置一个比率即可。这个比率可以是一个浮点数，表示宽度和高度之间的比率；也可以是“宽度：高度”形式的比率。</p>
@@ -394,7 +407,9 @@ app:layout_constraintHorizontal_chainStyle=&quot;spread|spread_inside|packed&quo
     app:layout_constraintDimensionRatio=&quot;2:1&quot;
     app:layout_constraintLeft_toLeftOf=&quot;parent&quot;
     app:layout_constraintRight_toRightOf=&quot;parent&quot;/&gt;
-</code></pre><p>如果宽和高都设置为<code>0dp（MATCH_CONSTRAINT）</code>，那么<code>layout_constraintDimensionRatio</code>的值需要先加一个<code>W,或H,</code>来表示约束宽度或高度。如下：</p>
+    
+</code></pre>
+<p>如果宽和高都设置为<code>0dp（MATCH_CONSTRAINT）</code>，那么<code>layout_constraintDimensionRatio</code>的值需要先加一个<code>W,或H,</code>来表示约束宽度或高度。如下：</p>
 <pre><code>&lt;Button
     android:layout_width=&quot;0dp&quot;
     android:layout_height=&quot;0dp&quot;
@@ -403,7 +418,8 @@ app:layout_constraintHorizontal_chainStyle=&quot;spread|spread_inside|packed&quo
     app:layout_constraintLeft_toLeftOf=&quot;parent&quot;
     app:layout_constraintRight_toRightOf=&quot;parent&quot;
     app:layout_constraintTop_toTopOf=&quot;parent&quot;/&gt;
-</code></pre><p>这里例子是说，首先宽度将满足自适应的约束，然后将按照16：9的比例设置高度。</p>
+</code></pre>
+<p>这里例子是说，首先宽度将满足自适应的约束，然后将按照16：9的比例设置高度。</p>
 <hr>
 <h3 id="百分比宽高percent"><a href="#百分比宽高percent" class="headerlink" title="百分比宽高percent"></a>百分比宽高percent</h3><hr>
 <p>要使用百分比，宽或高同样要设置为<code>0dp（MATCH_CONSTRAINT）</code>。</p>
@@ -413,7 +429,8 @@ app:layout_constraintWidth_percent=&quot;0.3&quot; //0到1之间的值
 或
 app:layout_constraintHeight_default=&quot;percent&quot; //设置高为百分比
 app:layout_constraintHeight_percent=&quot;0.3&quot; //0到1之间的值
-</code></pre><p>例子</p>
+</code></pre>
+<p>例子</p>
 <pre><code>&lt;Button
     android:layout_width=&quot;0dp&quot;
     android:layout_height=&quot;wrap_content&quot;
@@ -421,7 +438,9 @@ app:layout_constraintHeight_percent=&quot;0.3&quot; //0到1之间的值
     app:layout_constraintWidth_default=&quot;percent&quot;
     app:layout_constraintLeft_toLeftOf=&quot;parent&quot;
     app:layout_constraintWidth_percent=&quot;0.5&quot;/&gt;
-</code></pre><p><code>layout_constraintWidth_default</code> 设置为 <code>percent</code> 即采用百分比的方式布局，然后设置 <code>layout_constraintWidth_percent</code> 的属性值，来改变水平方向的百分比。</p>
+    
+</code></pre>
+<p><code>layout_constraintWidth_default</code> 设置为 <code>percent</code> 即采用百分比的方式布局，然后设置 <code>layout_constraintWidth_percent</code> 的属性值，来改变水平方向的百分比。</p>
 <hr>
 <h3 id="控件统一Group"><a href="#控件统一Group" class="headerlink" title="控件统一Group"></a>控件统一Group</h3><hr>
 <p>通过<code>constraint_referenced_ids</code>使用引用的方式来避免布局嵌套。可以为一组控件统一设置 <code>setVisibility</code>，只有设置可见度的功能，不能设置点击事件。</p>
@@ -430,16 +449,18 @@ app:layout_constraintHeight_percent=&quot;0.3&quot; //0到1之间的值
         android:layout_width=&quot;wrap_content&quot;
         android:layout_height=&quot;wrap_content&quot;
         app:constraint_referenced_ids=&quot;view,view1,view7,view8&quot; /&gt;  
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="控件统一Layer"><a href="#控件统一Layer" class="headerlink" title="控件统一Layer"></a>控件统一Layer</h3><hr>
-<p>和Group类似，通过引用的方式来避免布局嵌套，可以为一组控件统一设置旋转/缩放/位移。</p>
+<p>和Group类似，通过引用的方式来避免布局嵌套，可以为一组控件统一设置旋转&#x2F;缩放&#x2F;位移。</p>
 <pre><code>&lt;androidx.constraintlayout.helper.widget.Layer
         android:id=&quot;@+id/layer&quot;
         android:layout_width=&quot;wrap_content&quot;
         android:layout_height=&quot;wrap_content&quot;
         app:constraint_referenced_ids=&quot;view,view1,view7,view8&quot;
         tools:ignore=&quot;MissingConstraints&quot; /&gt;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="控件统一Flow"><a href="#控件统一Flow" class="headerlink" title="控件统一Flow"></a>控件统一Flow</h3><hr>
 <p>Flow统一控制控件的排列方向<code>orientation</code>和方式<code>flow_wrapMode</code>。<code>flow_wrapMode</code>的属性有<code>chain</code>、<code>aligned</code>、<code>none</code>(默认)。</p>
 <pre><code>&lt;androidx.constraintlayout.helper.widget.Flow
@@ -456,7 +477,8 @@ app:layout_constraintHeight_percent=&quot;0.3&quot; //0到1之间的值
     app:constraint_referenced_ids=&quot;view1,view2,view3,view4,view5,view6&quot;
     app:layout_constraintStart_toStartOf=&quot;parent&quot;
     app:layout_constraintTop_toTopOf=&quot;parent&quot; /&gt;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="辅助线Guideline"><a href="#辅助线Guideline" class="headerlink" title="辅助线Guideline"></a>辅助线Guideline</h3><hr>
 <p>Guideline主要的属性有：</p>
 <pre><code>//水平或垂直引导线
@@ -470,7 +492,8 @@ app:layout_constraintGuide_end=&quot;30dp&quot;
 
 //如果是水平引导线，则距离布局顶部为整个布局高度的50%，如果是垂直引导线，则距离布局左边文这个布局宽度的50%
 app:layout_constraintGuide_percent=&quot;0.5&quot;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="辅助线Barrier"><a href="#辅助线Barrier" class="headerlink" title="辅助线Barrier"></a>辅助线Barrier</h3><hr>
 <p>通过设置一组控件的某个方向的屏障，来避免布局嵌套。比如view1和view2谁的宽度长，就以谁的宽度为基准，设置垂直的辅助线。</p>
 <pre><code>&lt;androidx.constraintlayout.widget.Barrier
@@ -479,7 +502,8 @@ app:layout_constraintGuide_percent=&quot;0.5&quot;
     android:layout_height=&quot;wrap_content&quot;
     app:barrierDirection=&quot;end&quot;
     app:constraint_referenced_ids=&quot;view1,view2&quot; /&gt;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="自定义ConstraintHelper"><a href="#自定义ConstraintHelper" class="headerlink" title="自定义ConstraintHelper"></a>自定义ConstraintHelper</h3><hr>
 <p>通过继承ConstraintHelper类，自定义统一操作的控件组。</p>
 <p>代码：<a target="_blank" rel="noopener" href="https://github.com/AdamRight/Android2021Code/blob/master/app/src/main/java/com/android/code/constraintlayout/CircularRevealHelper.kt">https://github.com/AdamRight/Android2021Code/blob/master/app/src/main/java/com/android/code/constraintlayout/CircularRevealHelper.kt</a></p>

@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -241,7 +241,8 @@
 复制算法 （效率要高，浪费一些内存）
 标记整理算法
 分代算法 
-</code></pre><p>GC回收内存本质上是回收对象，运用<strong>可达性分析算法</strong>。</p>
+</code></pre>
+<p>GC回收内存本质上是回收对象，运用<strong>可达性分析算法</strong>。</p>
 <p>在Java语言中，除了基本数据类型外，其他的都是指向各类对象的对象引用；Java中根据其生命周期的长短，将引用分为4类。</p>
 <p>实现的核心是Reference与ReferenceQueue两个类。</p>
 <h2 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h2><p>Strong Reference就是我们最常见的普通对象引用，<code>Object obj = new Object()</code>中的obj就是强引用。</p>
@@ -257,7 +258,8 @@ ReferenceQueue queue = new  ReferenceQueue();
 SoftReference  ref = new  SoftReference(aMyObject, queue);
 
 (ref = (EmployeeRef) q.poll()) != null
-</code></pre><p>应用场景：软引用通常用来实现内存敏感的缓存。比如图片缓存框架，从网络上获取图片，然后将获取的图片显示的同时，通过软引用缓存起来。当下次再去网络上获取图片时，首先会检查要获取的图片缓存中是否存在，若存在，直接取出来，不需要再去网络上获取。</p>
+</code></pre>
+<p>应用场景：软引用通常用来实现内存敏感的缓存。比如图片缓存框架，从网络上获取图片，然后将获取的图片显示的同时，通过软引用缓存起来。当下次再去网络上获取图片时，首先会检查要获取的图片缓存中是否存在，若存在，直接取出来，不需要再去网络上获取。</p>
 <pre><code>View view = findViewById(R.id.button);
 Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
 Drawable drawable = new BitmapDrawable(bitmap);
@@ -265,7 +267,8 @@ SoftReference&lt;Drawable&gt; drawableSoftReference = new SoftReference&lt;Drawa
 if(drawableSoftReference != null) &#123;
     view.setBackground(drawableSoftReference.get());
 &#125;
-</code></pre><h2 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h2><p>WeakReference随时可能会被垃圾回收器回收，不一定要等到虚拟机内存不足时才强制回收。</p>
+</code></pre>
+<h2 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h2><p>WeakReference随时可能会被垃圾回收器回收，不一定要等到虚拟机内存不足时才强制回收。</p>
 <p>由于垃圾回收器是一个优先级很低的线程，因此不一定会很快回收弱引用的对象。弱引用可以和一个引用队列（ReferenceQueue）联合使用，如果弱引用所引用的对象被垃圾回收，Java虚拟机就会把这个弱引用加入到与之关联的引用队列中。</p>
 <p>应用场景：弱应用同样可用于内存敏感的缓存。</p>
 <p>在静态内部类中，经常会使用弱引用。例如，一个类发送网络请求，承担callback的静态内部类，则常以虚引用的方式来保存外部类(宿主类)的引用，当外部类需要被JVM回收时，不会因为网络请求没有及时回来，导致外部类不能被回收，引起内存泄漏。</p>
@@ -283,7 +286,8 @@ private static class MyHandler extends Handler&#123;
         &#125;
     &#125;
 &#125;
-</code></pre><p>当一个android主线程被创建的时候，同时会有一个Looper对象被创建，而这个Looper对象会实现一个MessageQueue(消息队列)，当我们创建一个handler对象时，而handler的作用就是放入和取出消息从这个消息队列中，每当我们通过handler将一个msg放入消息队列时，这个msg就会持有一个handler对象的引用。</p>
+</code></pre>
+<p>当一个android主线程被创建的时候，同时会有一个Looper对象被创建，而这个Looper对象会实现一个MessageQueue(消息队列)，当我们创建一个handler对象时，而handler的作用就是放入和取出消息从这个消息队列中，每当我们通过handler将一个msg放入消息队列时，这个msg就会持有一个handler对象的引用。</p>
 <p>因此当Activity被结束后，这个msg在被取出来之前，这msg会继续存活，但是这个msg持有handler的引用，而handler在Activity中创建，会持有Activity的引用，因而当Activity结束后，Activity对象并不能够被gc回收，因而出现内存泄漏。</p>
 <p><strong>在java中所有非静态的对象都会持有当前类的强引用，而静态对象则只会持有当前类的弱引用。</strong></p>
 <p>声明为静态后，handler将会持有一个Activity的弱引用，而弱引用会很容易被gc回收，这样就能解决Activity结束后，gc却无法回收的情况。</p>
@@ -292,7 +296,8 @@ private static class MyHandler extends Handler&#123;
 <p>虚引用必须和引用队列 （ReferenceQueue）联合使用。当垃圾回收器准备回收一个对象时，如果发现它还有虚引用，就会在回收对象的内存之前，把这个虚引用加入到与之关联的引用队列中。</p>
 <pre><code>ReferenceQueue queue = new ReferenceQueue ();
 PhantomReference pr = new PhantomReference (object, queue);
-</code></pre><p>程序可以通过判断引用队列中是否已经加入了虚引用，来了解被引用的对象是否将要被垃圾回收。如果程序发现某个虚引用已经被加入到引用队列，那么就可以在所引用的对象的内存被回收之前采取一些程序行动。</p>
+</code></pre>
+<p>程序可以通过判断引用队列中是否已经加入了虚引用，来了解被引用的对象是否将要被垃圾回收。如果程序发现某个虚引用已经被加入到引用队列，那么就可以在所引用的对象的内存被回收之前采取一些程序行动。</p>
 <p>应用场景：可用来跟踪对象被垃圾回收器回收的活动，当一个虚引用关联的对象被垃圾收集器回收之前会收到一条系统通知。</p>
 
             </div>

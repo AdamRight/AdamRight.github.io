@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -235,13 +235,15 @@
 android:keyHeight//每一个按键的高
 android:verticalGap//行与行之间的间隙
 android:horizontalGap//列与列之间的间隙
-</code></pre><p>Row的作用是按键的换行，每一个按键Key都在Row中。</p>
+</code></pre>
+<p>Row的作用是按键的换行，每一个按键Key都在Row中。</p>
 <p>Key中</p>
 <pre><code>android:keyLabel//按键上的文字
 android:codes//输出的文字，对应ASCII表
 android:keyIcon//按键放置图片
 android:isRepeatable//删除键长按连续删除
-</code></pre><p>宽高、间距的单位既可以是像素，英寸等，也可以是相对于基础取值的百分比，以<code>%p</code>结尾。</p>
+</code></pre>
+<p>宽高、间距的单位既可以是像素，英寸等，也可以是相对于基础取值的百分比，以<code>%p</code>结尾。</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;Keyboard xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     android:horizontalGap=&quot;0px&quot;
@@ -330,7 +332,8 @@ android:isRepeatable//删除键长按连续删除
         &lt;/Key&gt;
     &lt;/Row&gt;
 &lt;/Keyboard&gt;
-</code></pre><h2 id="KeyboardView"><a href="#KeyboardView" class="headerlink" title="KeyboardView"></a>KeyboardView</h2><p>KeyboardView</p>
+</code></pre>
+<h2 id="KeyboardView"><a href="#KeyboardView" class="headerlink" title="KeyboardView"></a>KeyboardView</h2><p>KeyboardView</p>
 <pre><code>android:keyBackground//键盘背景图
 android:keyPreviewLayout//键盘点击时候预览图的布局
 android:keyPreviewHeight//键盘点击时候预览图的高度
@@ -339,7 +342,8 @@ android:keyTextSize//按键文字大小
 android:labelTextSize//如果同时设置了文字+图片的按键
 android:shadowColor 
 android:shadowRadius
-</code></pre><p>代码</p>
+</code></pre>
+<p>代码</p>
 <pre><code>&lt;android.inputmethodservice.KeyboardView
     android:id=&quot;@+id/kbv&quot;
     android:layout_width=&quot;match_parent&quot;
@@ -359,12 +363,14 @@ android:shadowRadius
     android:shadowRadius=&quot;0.0&quot;
     android:visibility=&quot;gone&quot;
     /&gt;
-</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>设置</p>
+</code></pre>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>设置</p>
 <pre><code>Keyboard keyboard = new Keyboard(this,R.xml.tea_keyboard_num);
 keyboardView.setKeyboard(keyboard);
 keyboardView.setPreviewEnabled(true);
 keyboardView.setOnKeyboardActionListener(onKeyboardActionListener);
-</code></pre><p>OnKeyboardActionListener</p>
+</code></pre>
+<p>OnKeyboardActionListener</p>
 <pre><code>KeyboardView.OnKeyboardActionListener onKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() &#123;
     ......
     @Override
@@ -382,7 +388,8 @@ keyboardView.setOnKeyboardActionListener(onKeyboardActionListener);
         &#125;
     &#125;
 &#125;;
-</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://github.com/onlyloveyd/LazyKeyboard">https://github.com/onlyloveyd/LazyKeyboard</a></p>
+</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://github.com/onlyloveyd/LazyKeyboard">https://github.com/onlyloveyd/LazyKeyboard</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/r17171709/android_demo/tree/master/KeyBoardDemo">https://github.com/r17171709/android_demo/tree/master/KeyBoardDemo</a></p>
 
             </div>

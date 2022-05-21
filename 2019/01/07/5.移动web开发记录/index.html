@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -230,36 +230,43 @@
             <div class="markdown-body">
               <h2 id="像素"><a href="#像素" class="headerlink" title="像素"></a>像素</h2><p>设备独立像素</p>
 <pre><code>window.devicePixelRatio
-</code></pre><p>屏幕的物理像素尺寸 </p>
+</code></pre>
+<p>屏幕的物理像素尺寸 </p>
 <pre><code>window.screen.width
 window.screen.height
-</code></pre><h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>模拟调试</p>
+</code></pre>
+<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>模拟调试</p>
 <p>谷歌：</p>
-<p><img src="/2019/01/07/5.%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/5.移动web开发记录/1.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2019/01/07/5/1.png" srcset="/img/loading.gif" lazyload></p>
 <p>火狐：</p>
-<p><img src="/2019/01/07/5.%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/5.移动web开发记录/2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2019/01/07/5/2.png" srcset="/img/loading.gif" lazyload></p>
 <p>真机调试：weinre、debuggap、ghostlab。同时保证设备和服务器的网络相通。</p>
 <h2 id="视口viewport"><a href="#视口viewport" class="headerlink" title="视口viewport"></a>视口viewport</h2><p>获取<code>viewport</code>大小</p>
 <pre><code>document.documentElement.clientWidth;
 document.documentElement.clientHeight;
-</code></pre><p>pc端:浏览器的可视大小。<code>viewport</code>中子元素当超出<code>viewport</code>的大小时：<code>viewport</code>为具体值时，会出现滚动条；当<code>viewport</code>宽高设为100%时，会自动换行；当子元素也设为百分比，可以不出现滚动条和换行。</p>
+</code></pre>
+<p>pc端:浏览器的可视大小。<code>viewport</code>中子元素当超出<code>viewport</code>的大小时：<code>viewport</code>为具体值时，会出现滚动条；当<code>viewport</code>宽高设为100%时，会自动换行；当子元素也设为百分比，可以不出现滚动条和换行。</p>
 <p>移动端：<code>layout viewport</code>和<code>ideal viewport</code></p>
 <p>默认视口大小，<code>layout viewport</code>同样是</p>
 <pre><code>document.documentElement.clientWidth;
 document.documentElement.clientHeight;
-</code></pre><p>理想视口<code>ideal viewport</code>，即设备屏幕区域</p>
+</code></pre>
+<p>理想视口<code>ideal viewport</code>，即设备屏幕区域</p>
 <pre><code>window.screen.width
 window.screen.height
-</code></pre><h2 id="屏幕适配"><a href="#屏幕适配" class="headerlink" title="屏幕适配"></a>屏幕适配</h2><p><code>name=&quot;viewport&quot;</code>说明当前<code>meta</code>标签是用来设置<code>viewport</code>的属性的，这个属性只有在移动端才会有效。</p>
+</code></pre>
+<h2 id="屏幕适配"><a href="#屏幕适配" class="headerlink" title="屏幕适配"></a>屏幕适配</h2><p><code>name=&quot;viewport&quot;</code>说明当前<code>meta</code>标签是用来设置<code>viewport</code>的属性的，这个属性只有在移动端才会有效。</p>
 <p>控制缩放：<code>nitial-scale = ideal viewport/layout viewport</code></p>
 <p>控制缩放</p>
 <pre><code>maximum-scale//最大缩放比例
 minimum-scale//最小缩放比例，也是打开默认状态下的
 user-scalable//是否可以缩放，yes，no
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,minimum-scale=1,user-scalable=no&quot;&gt;
-</code></pre><p>webstorm中快捷键<code>meta:vp+tab</code></p>
+</code></pre>
+<p>webstorm中快捷键<code>meta:vp+tab</code></p>
 <pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;/&gt;
 </code></pre>
+
             </div>
             <hr>
             <div>

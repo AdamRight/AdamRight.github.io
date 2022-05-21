@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -230,119 +230,132 @@
             <div class="markdown-body">
               <h2 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h2><p>官网：</p>
 <pre><code>https://nodejs.org/en/
-</code></pre><p>检查安装版本</p>
+</code></pre>
+<p>检查安装版本</p>
 <pre><code>node --version
-</code></pre><p>Node.js既不是语言，也不是框架，它是一个平台。Node.js 中的 JavaScript没有 BOM、DOM，提供了一些服务器级别的 API：文件操作的能力、http 服务的能力。</p>
+</code></pre>
+<p>Node.js既不是语言，也不是框架，它是一个平台。Node.js 中的 JavaScript没有 BOM、DOM，提供了一些服务器级别的 API：文件操作的能力、http 服务的能力。</p>
 <p>helloworld.js</p>
-<pre><code>var f = &apos;hello nodejs&apos;
+<pre><code>var f = &#39;hello nodejs&#39;
 console.log(f)
-</code></pre><p>然后执行</p>
+</code></pre>
+<p>然后执行</p>
 <pre><code>node .../helloworld.js
-</code></pre><p><code>require</code> 是一个方法,它的作用就是用来加载模块的。在 Node 中，模块有三种：具名的核心模块，例如 fs、http；用户自己编写的文件模块；第三方模块。</p>
+</code></pre>
+<p><code>require</code> 是一个方法,它的作用就是用来加载模块的。在 Node 中，模块有三种：具名的核心模块，例如 fs、http；用户自己编写的文件模块；第三方模块。</p>
 <h2 id="读和写文件"><a href="#读和写文件" class="headerlink" title="读和写文件"></a>读和写文件</h2><p>浏览器中的 JavaScript 是没有文件操作的能力的，但是 Node 中的JavaScript 具有文件操作的能力。fs 是 file-system 的简写，就是文件系统的意思，<code>fs.readFile</code> 就是用来读取文件的。</p>
 <p>node执行下面的js文件：</p>
-<pre><code>var fs = require(&apos;fs&apos;)
+<pre><code>var fs = require(&#39;fs&#39;)
 //    第一个参数就是要读取的文件路径,第二个参数是一个回调函数
-fs.readFile(&apos;./data/hello.txt&apos;, function (error, data) &#123;
+fs.readFile(&#39;./data/hello.txt&#39;, function (error, data) &#123;
   if (error) &#123;
-    console.log(&apos;读取文件失败了&apos;)
+    console.log(&#39;读取文件失败了&#39;)
   &#125; else &#123;
     console.log(data.toString())
   &#125;
 &#125;)
-</code></pre><p>写文件：</p>
-<pre><code>var fs = require(&apos;fs&apos;)
-fs.writeFile(&apos;./data/你好.md&apos;, &apos;我是Node.js&apos;, function (error) &#123;
+</code></pre>
+<p>写文件：</p>
+<pre><code>var fs = require(&#39;fs&#39;)
+fs.writeFile(&#39;./data/你好.md&#39;, &#39;我是Node.js&#39;, function (error) &#123;
   if (error) &#123;
-    console.log(&apos;写入失败&apos;)
+    console.log(&#39;写入失败&#39;)
   &#125; else &#123;
-    console.log(&apos;写入成功了&apos;)
+    console.log(&#39;写入成功了&#39;)
   &#125;
 &#125;)
-</code></pre><h2 id="http服务"><a href="#http服务" class="headerlink" title="http服务"></a>http服务</h2><p>简单的http服务</p>
-<pre><code>var http = require(&apos;http&apos;)
+</code></pre>
+<h2 id="http服务"><a href="#http服务" class="headerlink" title="http服务"></a>http服务</h2><p>简单的http服务</p>
+<pre><code>var http = require(&#39;http&#39;)
 //使用 http.createServer() 方法创建一个 Web 服务器
 var server = http.createServer()
 //当客户端请求过来，就会自动触发服务器的 request 请求事件，然后执行第二个参数：回调处理函数
-server.on(&apos;request&apos;, function () &#123;
-  console.log(&apos;收到客户端的请求了&apos;)
+server.on(&#39;request&#39;, function () &#123;
+  console.log(&#39;收到客户端的请求了&#39;)
 &#125;)
 //绑定端口号，启动服务器
 server.listen(3000, function () &#123;
-  console.log(&apos;服务器启动成功了，可以通过 http://你的ip/ 来进行访问&apos;)
+  console.log(&#39;服务器启动成功了，可以通过 http://你的ip/ 来进行访问&#39;)
 &#125;)
-</code></pre><p>处理请求,request请求事件处理函数，需要接收两个参数：Request 请求对象,请求对象可以用来获取客户端的一些请求信息，例如请求路径;Response 响应对象,响应对象可以用来给客户端发送响应消息。</p>
-<pre><code>var http = require(&apos;http&apos;)
+</code></pre>
+<p>处理请求,request请求事件处理函数，需要接收两个参数：Request 请求对象,请求对象可以用来获取客户端的一些请求信息，例如请求路径;Response 响应对象,响应对象可以用来给客户端发送响应消息。</p>
+<pre><code>var http = require(&#39;http&#39;)
 var server = http.createServer()
 
-server.on(&apos;request&apos;, function (request, response) &#123;
-  console.log(&apos;收到客户端的请求了，请求路径是：&apos; + request.url)
+server.on(&#39;request&#39;, function (request, response) &#123;
+  console.log(&#39;收到客户端的请求了，请求路径是：&#39; + request.url)
   // response 对象有一个方法：write 可以用来给客户端发送响应数据,write 可以使用多次，但是最后一定要使用 end 来结束响应，否则客户端会一直等待
-  response.write(&apos;hello&apos;)
-  response.write(&apos; nodejs&apos;)
+  response.write(&#39;hello&#39;)
+  response.write(&#39; nodejs&#39;)
   response.end()
 &#125;)
 
 server.listen(3000, function () &#123;
-  console.log(&apos;服务器启动成功了，可以通过 http://你的ip:3000/ 来进行访问&apos;)
+  console.log(&#39;服务器启动成功了，可以通过 http://你的ip:3000/ 来进行访问&#39;)
 &#125;)
-</code></pre><p>根据不同请求路径返回不同数据：</p>
-<pre><code>var http = require(&apos;http&apos;)
+</code></pre>
+<p>根据不同请求路径返回不同数据：</p>
+<pre><code>var http = require(&#39;http&#39;)
 var server = http.createServer()
 
-server.on(&apos;request&apos;, function (req, res) &#123;
-  console.log(&apos;收到请求了，请求路径是：&apos; + req.url)
-  console.log(&apos;请求我的客户端的地址是：&apos;, req.socket.remoteAddress, req.socket.remotePort)
+server.on(&#39;request&#39;, function (req, res) &#123;
+  console.log(&#39;收到请求了，请求路径是：&#39; + req.url)
+  console.log(&#39;请求我的客户端的地址是：&#39;, req.socket.remoteAddress, req.socket.remotePort)
   var url = req.url
-  if (url === &apos;/&apos;) &#123;
-    res.end(&apos;index page&apos;)
-  &#125; else if (url === &apos;/login&apos;) &#123;
-    res.end(&apos;login page&apos;)
-  &#125; else if (url === &apos;/products&apos;) &#123;
+  if (url === &#39;/&#39;) &#123;
+    res.end(&#39;index page&#39;)
+  &#125; else if (url === &#39;/login&#39;) &#123;
+    res.end(&#39;login page&#39;)
+  &#125; else if (url === &#39;/products&#39;) &#123;
     var products = [&#123;
-        name: &apos;苹果 X&apos;,
+        name: &#39;苹果 X&#39;,
         price: 8888
       &#125;,
       &#123;
-        name: &apos;菠萝 X&apos;,
+        name: &#39;菠萝 X&#39;,
         price: 5000
       &#125;,
       &#123;
-        name: &apos;小辣椒 X&apos;,
+        name: &#39;小辣椒 X&#39;,
         price: 1999
       &#125;
     ]
-    res.setHeader(&apos;Content-Type&apos;, &apos;text/plain; charset=utf-8&apos;)
+    res.setHeader(&#39;Content-Type&#39;, &#39;text/plain; charset=utf-8&#39;)
     // 响应内容只能是二进制数据或者字符串、 数字、 对象、数组、布尔值
     res.end(JSON.stringify(products))
   &#125; else &#123;
-    res.end(&apos;404 Not Found.&apos;)
+    res.end(&#39;404 Not Found.&#39;)
   &#125;
 &#125;)
 server.listen(3000, function () &#123;
-  console.log(&apos;服务器启动成功，可以访问了。。。&apos;)
+  console.log(&#39;服务器启动成功，可以访问了。。。&#39;)
 &#125;)
-</code></pre><p>在服务端默认发送的数据，其实是 utf8 编码的内容，中文操作系统默认是 gbk。在 http 协议中，Content-Type 就是用来告知对方我给你发送的数据内容是什么类型</p>
+</code></pre>
+<p>在服务端默认发送的数据，其实是 utf8 编码的内容，中文操作系统默认是 gbk。在 http 协议中，Content-Type 就是用来告知对方我给你发送的数据内容是什么类型</p>
 <pre><code>// text/plain 就是普通文本
-res.setHeader(&apos;Content-Type&apos;, &apos;text/plain; charset=utf-8&apos;)
+res.setHeader(&#39;Content-Type&#39;, &#39;text/plain; charset=utf-8&#39;)
 // 如果你发送的是 html 格式的字符串，则也要告诉浏览器我给你发送是 text/html 格式的内容
-res.setHeader(&apos;Content-Type&apos;, &apos;text/html; charset=utf-8&apos;)
+res.setHeader(&#39;Content-Type&#39;, &#39;text/html; charset=utf-8&#39;)
 // 图片就不需要指定编码了，因为我们常说的编码一般指的是：字符编码
-res.setHeader(&apos;Content-Type&apos;, &apos;image/jpeg&apos;)
-</code></pre><h2 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h2><p>读取文件目录</p>
-<pre><code>var fs = require(&apos;fs&apos;)
-fs.readdir(&apos;D:/Movie/www&apos;, function (err, files) &#123;
+res.setHeader(&#39;Content-Type&#39;, &#39;image/jpeg&#39;)
+</code></pre>
+<h2 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h2><p>读取文件目录</p>
+<pre><code>var fs = require(&#39;fs&#39;)
+fs.readdir(&#39;D:/Movie/www&#39;, function (err, files) &#123;
   if (err) &#123;
-    return console.log(&apos;目录不存在&apos;)
+    return console.log(&#39;目录不存在&#39;)
   &#125;
   console.log(files)
 &#125;)
-</code></pre><p><code>art-template</code>不仅可以在浏览器使用，也可以在 node 中使用。</p>
+</code></pre>
+<p><code>art-template</code>不仅可以在浏览器使用，也可以在 node 中使用。</p>
 <pre><code>https://github.com/aui/art-template
 https://aui.github.io/art-template/
-</code></pre><p>安装：该命令在哪执行就会把包下载到哪里,下载到 node_modules 目录中。</p>
+</code></pre>
+<p>安装：该命令在哪执行就会把包下载到哪里,下载到 node_modules 目录中。</p>
 <pre><code>npm install art-template
-</code></pre><p>注意：在浏览器中需要引用 lib/template-web.js 文件</p>
+</code></pre>
+<p>注意：在浏览器中需要引用 lib&#x2F;template-web.js 文件</p>
 <p>浏览器中使用art-template:</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
@@ -368,42 +381,44 @@ https://aui.github.io/art-template/
     &lt;/html&gt;
   &lt;/script&gt;
   &lt;script&gt;
-    var ret = template(&apos;tpl&apos;, &#123;
-      name: &apos;Jack&apos;,
+    var ret = template(&#39;tpl&#39;, &#123;
+      name: &#39;Jack&#39;,
       age: 18,
-      province: &apos;北京市&apos;,
+      province: &#39;北京市&#39;,
       hobbies: [
-        &apos;写代码&apos;,
-        &apos;唱歌&apos;,
-        &apos;打游戏&apos;
+        &#39;写代码&#39;,
+        &#39;唱歌&#39;,
+        &#39;打游戏&#39;
       ]
     &#125;)
     console.log(ret)
   &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><p> 在 Node 中使用 art-template 模板引擎。在需要使用的文件模块中加载 art-template，只需要使用 require 方法加载就可以了：<code>require(&#39;art-template&#39;)</code></p>
+</code></pre>
+<p> 在 Node 中使用 art-template 模板引擎。在需要使用的文件模块中加载 art-template，只需要使用 require 方法加载就可以了：<code>require(&#39;art-template&#39;)</code></p>
 <p>node执行js</p>
-<pre><code>var template = require(&apos;art-template&apos;)
-var fs = require(&apos;fs&apos;)
-fs.readFile(&apos;./tpl.html&apos;, function (err, data) &#123;
+<pre><code>var template = require(&#39;art-template&#39;)
+var fs = require(&#39;fs&#39;)
+fs.readFile(&#39;./tpl.html&#39;, function (err, data) &#123;
   if (err) &#123;
-    return console.log(&apos;读取文件失败了&apos;)
+    return console.log(&#39;读取文件失败了&#39;)
   &#125;
   var ret = template.render(data.toString(), &#123;
-    name: &apos;Jack&apos;,
+    name: &#39;Jack&#39;,
     age: 18,
-    province: &apos;北京市&apos;,
+    province: &#39;北京市&#39;,
     hobbies: [
-      &apos;写代码&apos;,
-      &apos;唱歌&apos;,
-      &apos;打游戏&apos;
+      &#39;写代码&#39;,
+      &#39;唱歌&#39;,
+      &#39;打游戏&#39;
     ],
-    title: &apos;个人信息&apos;
+    title: &#39;个人信息&#39;
   &#125;)
   console.log(ret)
 &#125;)
-</code></pre><p>tpl.html</p>
+</code></pre>
+<p>tpl.html</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -416,14 +431,16 @@ fs.readFile(&apos;./tpl.html&apos;, function (err, data) &#123;
   &lt;h1&gt;我来自 &#123;&#123; province &#125;&#125;&lt;/h1&gt;
   &lt;p&gt;我喜欢：&#123;&#123;each hobbies&#125;&#125; &#123;&#123; $value &#125;&#125; &#123;&#123;/each&#125;&#125;&lt;/p&gt;
   &lt;script&gt;
-    var foo = &apos;&#123;&#123; title &#125;&#125;&apos;
+    var foo = &#39;&#123;&#123; title &#125;&#125;&#39;
   &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><p>留言板小案例</p>
+</code></pre>
+<p>留言板小案例</p>
 <h2 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h2><p>官网</p>
 <pre><code>https://www.npmjs.com/
-</code></pre><p>常用命令行工具</p>
+</code></pre>
+<p>常用命令行工具</p>
 <pre><code>//查看版本
 npm --version
 
@@ -447,17 +464,21 @@ npm uninstall --save 包名
 
 //帮助
 npm help
-</code></pre><p>解决翻墙：</p>
+</code></pre>
+<p>解决翻墙：</p>
 <p>首先安装淘宝cnpm（可以再任意目录执行，–global表示安装到全局）</p>
 <pre><code>npm install --global cnpm
-</code></pre><p>接下来用cnpm替换npm。</p>
+</code></pre>
+<p>接下来用cnpm替换npm。</p>
 <p>如果不想安装npm又想使用淘宝镜像：</p>
 <pre><code>npm install jquery --registry=https://registry.npm.taobao.org
-</code></pre><p>加入配置文件中：</p>
+</code></pre>
+<p>加入配置文件中：</p>
 <pre><code>npm config set registry https://registry.npm.taobao.org
 //查看配置成功
 npm config list
 </code></pre>
+
             </div>
             <hr>
             <div>

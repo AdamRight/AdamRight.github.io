@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -269,7 +269,8 @@ AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() &#123;
         Log.e(TAG, &quot;run: THREAD_POOL_EXECUTOR AsyncTask execute&quot;);
     &#125;
 &#125;);
-</code></pre><p>HandlerThread：</p>
+</code></pre>
+<p>HandlerThread：</p>
 <pre><code>static class MyHandler extends Handler&#123;
     @Override
     public void handleMessage(@NonNull Message msg) &#123;
@@ -292,7 +293,8 @@ myHandler.sendEmptyMessage(MSG_WHAT_1);//主线程向子线程handler-thread发�
 //只能quit
 //handlerThread.quit();
 //handlerThread.quitSafely();
-</code></pre><p>手写主线程向子线程发送消息：</p>
+</code></pre>
+<p>手写主线程向子线程发送消息：</p>
 <pre><code>class LooperThread extends Thread &#123;
         private Looper looper;
 
@@ -336,7 +338,8 @@ Handler handler = new Handler(thread.getLooper()) &#123;
     &#125;
 &#125;;
 handler.sendEmptyMessage(MSG_WHAT_1);
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h2><p>两种方法：</p>
 <blockquote>
 <ul>
@@ -354,7 +357,8 @@ handler.sendEmptyMessage(MSG_WHAT_1);
     &#125;
 &#125;;
 thread.start();
-</code></pre><p>start调用了native方法。</p>
+</code></pre>
+<p>start调用了native方法。</p>
 <p>或者</p>
 <pre><code>class MyThread1 extends Thread&#123;
     @Override
@@ -364,7 +368,8 @@ thread.start();
     &#125;
 &#125;
 new MyThread1().start();//创建并启动线程
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="创建子线程方式2："><a href="#创建子线程方式2：" class="headerlink" title="创建子线程方式2："></a>创建子线程方式2：</h3><hr>
 <pre><code>Runnable runnable = new Runnable() &#123;
     @Override
@@ -374,7 +379,8 @@ new MyThread1().start();//创建并启动线程
 &#125;;
 Thread thread = new Thread(runnable);
 thread.start();
-</code></pre><p>或者</p>
+</code></pre>
+<p>或者</p>
 <pre><code>class MyThread2 implements Runnable&#123;
     @Override
     public void run() &#123;
@@ -391,7 +397,8 @@ new Thread(new Runnable() &#123;
         System.out.println(&quot;MyThread3:&quot;+Thread.currentThread().getName());
     &#125;
 &#125;).start();
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="ThreadFactory"><a href="#ThreadFactory" class="headerlink" title="ThreadFactory"></a>ThreadFactory</h3><hr>
 <pre><code>ThreadFactory factory = new ThreadFactory() &#123;
     AtomicInteger count = new AtomicInteger(0);
@@ -412,7 +419,8 @@ Thread thread = factory.newThread(runnable);
 thread.start();
 Thread thread1 = factory.newThread(runnable);
 thread1.start();
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="Executors"><a href="#Executors" class="headerlink" title="Executors"></a>Executors</h3><hr>
 <pre><code>Runnable runnable = new Runnable() &#123;
     @Override
@@ -424,13 +432,15 @@ Executor executor = Executors.newCachedThreadPool();
 executor.execute(runnable);
 executor.execute(runnable);
 executor.execute(runnable);
-</code></pre><p>除了newCachedThreadPool还有newSingleThreadExecutor单线程池、newFixedThreadPool指定固定线程数的线程池。</p>
+</code></pre>
+<p>除了newCachedThreadPool还有newSingleThreadExecutor单线程池、newFixedThreadPool指定固定线程数的线程池。</p>
 <pre><code>ExecutorService executor = Executors.newFixedThreadPool(20);
 for (Bitmap bitmap : bitmaps) &#123;
-     executor.execute(bitmapProcessor(bitmap));
+ 	executor.execute(bitmapProcessor(bitmap));
 &#125;
 executor.shutdown();
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="lock"><a href="#lock" class="headerlink" title="lock"></a>lock</h3><hr>
 <p>同样是「加锁」机制。但使用方法更灵活，同时也更麻烦一些。</p>
 <pre><code>Lock lock = new ReentrantLock();
@@ -441,7 +451,8 @@ try &#123;
 &#125; finally &#123;
     lock.unlock();
 &#125;
-</code></pre><p>一般并不会只是使用Lock，而是会使用更复杂的锁ReentrantReadWriteLock：</p>
+</code></pre>
+<p>一般并不会只是使用Lock，而是会使用更复杂的锁ReentrantReadWriteLock：</p>
 <pre><code>public class ReadWriteLockDemo &#123;
     ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
     Lock readLock = lock.readLock();
@@ -510,7 +521,8 @@ try &#123;
         &#125;.start();
     &#125;
 &#125;
-</code></pre><h3 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h3><p>在未达到目标时 wait();用 while 循环检查;设置完成后 notifyAll();wait() 和 notify() / notifyAll() 都需要放在同步代码块里。</p>
+</code></pre>
+<h3 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h3><p>在未达到目标时 wait();用 while 循环检查;设置完成后 notifyAll();wait() 和 notify() &#x2F; notifyAll() 都需要放在同步代码块里。</p>
 <pre><code>public class WaitDemo &#123;
     private String sharedString;
     private synchronized void initString() &#123;
@@ -557,7 +569,8 @@ try &#123;
         thread2.start();
     &#125;
 &#125;
-</code></pre><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>Service：后台任务的活动空间。适用场景：音乐播放器等。IntentService：执行单个任务后自动关闭的 Service。</p>
+</code></pre>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>Service：后台任务的活动空间。适用场景：音乐播放器等。IntentService：执行单个任务后自动关闭的 Service。</p>
 <p>如果在界面组件里创建 Executor 或者 HandlerThread，记得要在关闭的时候（例如Activity.onDestroy() ）关闭 Executor 和 HandlerThread。</p>
 <pre><code>@Override
 protected void onDestroy() &#123;
@@ -570,7 +583,8 @@ protected void onDestroy() &#123;
  super.onDestroy();
  handlerThread.quit(); // 这个其实就是停⽌ Looper 的循环
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><hr>
 <h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h3><hr>
 <p>synchronized 的本质:保证方法内部或代码块内部资源（数据）的互斥访问。<strong>即同一时间、由同一个Monitor监视的代码，最多只能有一个线程在访问</strong>。</p>
@@ -589,7 +603,8 @@ private void minus(int delta) &#123;
         y -= delta;
     &#125;
 &#125;
-</code></pre><p>如果线程1正在访问count方法，线程2可以访问到minus方法，因为两个方法不是同一个Monitor，是两个Monitor：</p>
+</code></pre>
+<p>如果线程1正在访问count方法，线程2可以访问到minus方法，因为两个方法不是同一个Monitor，是两个Monitor：</p>
 <pre><code>private final Object monitor1 = new Object();
 private synchronized void count(int newValue) &#123;
     x = newValue;
@@ -601,7 +616,8 @@ private void minus(int delta) &#123;
         y -= delta;
     &#125;
 &#125;
-</code></pre><p>保证线程之间对监视资源的数据同步。即，任何线程在获取到 Monitor 后的第一时间，会先将共享内存中的数据复制到自己的缓存中；任何线程在释放 Monitor 的第一时间，会先将缓存中的数据复制到共享内存中。</p>
+</code></pre>
+<p>保证线程之间对监视资源的数据同步。即，任何线程在获取到 Monitor 后的第一时间，会先将共享内存中的数据复制到自己的缓存中；任何线程在释放 Monitor 的第一时间，会先将缓存中的数据复制到共享内存中。</p>
 <p>如果 synchronized加在代码块上面，为获取到对象锁的线程，可以访问同步代码块之外的代码。</p>
 <p>如果synchronized加载方法上，为获取到对象锁的线程，只能排队，不能访问。</p>
 <p>加在static 方法上面，就相对是给Class对象加锁，由于在jvm中只会存在一份class对象。所以此时无论是不是同一个java对象，去访问同步访问，都只能排队。</p>
@@ -618,7 +634,8 @@ private void minus(int delta) &#123;
 <pre><code>AtomicInteger atomicInteger = new AtomicInteger(0);
 ...
 atomicInteger.getAndIncrement();
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="volatile和atomic对比"><a href="#volatile和atomic对比" class="headerlink" title="volatile和atomic对比"></a>volatile和atomic对比</h3><hr>
 <pre><code>public class AtomicDemo &#123;
     public static void main(String[] args) throws InterruptedException &#123;
@@ -654,33 +671,38 @@ atomicInteger.getAndIncrement();
         &#125;
     &#125;
 &#125;
-</code></pre><p>结果：atomicInteger值为20000，而volatileCount值不是20000。</p>
+</code></pre>
+<p>结果：atomicInteger值为20000，而volatileCount值不是20000。</p>
 <hr>
 <h3 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h3><hr>
 <p>基本用法：</p>
 <pre><code>ReentrantLock reentrantLock = new ReentrantLock();
 try &#123;
     reentrantLock.lock();
-
+    
 &#125; catch (Exception e) &#123;
     e.printStackTrace();
 &#125; finally &#123;
     reentrantLock.unlock();
 &#125;
-</code></pre><p>ReentrantLock可以重复调用lock，不会发生死锁，比如递归。</p>
+</code></pre>
+<p>ReentrantLock可以重复调用lock，不会发生死锁，比如递归。</p>
 <p>公平锁和非公平锁:</p>
 <pre><code>//公平锁，即进入阻塞的线程依次排队去获取锁，均有机会执行
 //默认是非公平锁 后加入的线程，尝试插队一次去获取锁，若获取到直接执行，不用进入阻塞。
 // 允许线程插队，避免每个线程都阻塞再唤醒的资源消耗。但也有可能线程饿死（即一直得不到锁无法执行）
 ReentrantLock lock = new ReentrantLock(true/false);
-</code></pre><p>condition 条件对象:</p>
-<pre><code>Condition condition = lock.newCondition();
-</code></pre><p>ReadLock和WriteLock：</p>
-<pre><code>ReentrantReadWriteLock lock=new ReentrantReadWriteLock();
+</code></pre>
+<p>condition 条件对象:</p>
+<pre><code>    Condition condition = lock.newCondition();
+</code></pre>
+<p>ReadLock和WriteLock：</p>
+<pre><code>    ReentrantReadWriteLock lock=new ReentrantReadWriteLock();
 
-ReentrantReadWriteLock.ReadLock readLock = lock.readLock();//共享锁;
-ReentrantReadWriteLock.WriteLock writeLock = lock.writeLock();//排他锁
-</code></pre><hr>
+    ReentrantReadWriteLock.ReadLock readLock = lock.readLock();//共享锁;
+    ReentrantReadWriteLock.WriteLock writeLock = lock.writeLock();//排他锁
+</code></pre>
+<hr>
 <h2 id="线程池ThreadPoolExecutor"><a href="#线程池ThreadPoolExecutor" class="headerlink" title="线程池ThreadPoolExecutor"></a>线程池ThreadPoolExecutor</h2><p>构造方法参数</p>
 <pre><code>public ThreadPoolExecutor(int corePoolSize,
                           int maximumPoolSize,
@@ -689,7 +711,8 @@ ReentrantReadWriteLock.WriteLock writeLock = lock.writeLock();//排他锁
                           BlockingQueue&lt;Runnable&gt; workQueue,
                           ThreadFactory threadFactory,
                           RejectedExecutionHandler handler)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <ul>
 <li>corePoolSize：线程基本大小</li>
 <li>maximumPoolSize：线程池最大所能容纳线程大小</li>
@@ -741,15 +764,17 @@ ReentrantReadWriteLock.WriteLock writeLock = lock.writeLock();//排他锁
         &#125;
     &#125;
 &#125;
-</code></pre><p>输出结果：</p>
-<p><img src="/2019/05/13/21.%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/21.线程和线程池/1.gif" srcset="/img/loading.gif" lazyload alt></p>
+</code></pre>
+<p>输出结果：</p>
+<p><img src="/2019/05/13/21/1.gif" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>Runnable缓存队列大于WorkQueue线程队列就可能会报错。</p>
 </blockquote>
 <h3 id="workQueue的参数"><a href="#workQueue的参数" class="headerlink" title="workQueue的参数"></a>workQueue的参数</h3><pre><code>BlockingQueue: 先进先出的一个队列 FIFO（rxjava，AsyncTask）
 SynchronousQueue: 线程安全的队列，它里面是没有固定的缓存的（OKHttp所使用的）
 PriorityBlockingQueue: 无序的可以根据优先级进行排序，指定的对象要实现Comparable作比较
-</code></pre><p>有限队列<code>SynchronousQueue</code>和<code>ArrayBlockingQueue</code>；无限队列<code>LinkedBloackingQueue</code>。</p>
+</code></pre>
+<p>有限队列<code>SynchronousQueue</code>和<code>ArrayBlockingQueue</code>；无限队列<code>LinkedBloackingQueue</code>。</p>
 <p>PriorityBlockingQueue示例</p>
 <pre><code>public class Request implements Runnable,Comparable&lt;Request&gt;&#123;
     @Override
@@ -791,18 +816,20 @@ public class ThreadPoolTest &#123;
         &#125;
     &#125;
 &#125;
-</code></pre><h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h2><hr>
+</code></pre>
+<h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h2><hr>
 <p>协程是一种解决方案，是一种解决嵌套，并发，弱化线程概念的方案。能让多个任务之间更好的协作，能够以同步的方式编排代码完成异步工作。将异步代码写的像同步代码一样直观。</p>
 <p>引入</p>
 <pre><code>//在kotlin项目配合jetpack架构项目中引入协程
-implementation  &apos;androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0&apos;
-implementation &apos;androidx.lifecycle:lifecycle-runtime-ktx:2.2.0&apos;
-implementation &apos;androidx.lifecycle:lifecycle-livedata-ktx:2.2.0&apos;
+implementation  &#39;androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0&#39;
+implementation &#39;androidx.lifecycle:lifecycle-runtime-ktx:2.2.0&#39;
+implementation &#39;androidx.lifecycle:lifecycle-livedata-ktx:2.2.0&#39;
 
 //在kotlin项目但非jetpack架构项目中引入
-implementation &apos;org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1&apos;
-implementation &apos;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1&apos;
-</code></pre><p>startScene1:线程1、2、3依次按顺序，在主线程执行，最后执行updateUI，startScene2：线程1在主线程执行，然后同步执行子线程2、3，最后执行updateUI：</p>
+implementation &#39;org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1&#39;
+implementation &#39;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1&#39;
+</code></pre>
+<p>startScene1:线程1、2、3依次按顺序，在主线程执行，最后执行updateUI，startScene2：线程1在主线程执行，然后同步执行子线程2、3，最后执行updateUI：</p>
 <pre><code>import android.util.Log
 import kotlinx.coroutines.*
 
@@ -858,7 +885,8 @@ object CoroutineScene &#123;
         return &quot;result from request3&quot;
     &#125;
 &#125;
-</code></pre><p>协程的核心是挂起和恢复，挂起是方法的挂起，方法的挂起本质是 <code>return</code> ，恢复是方法的恢复，恢复的本质是 <code>callback</code>回调：</p>
+</code></pre>
+<p>协程的核心是挂起和恢复，挂起是方法的挂起，方法的挂起本质是 <code>return</code> ，恢复是方法的恢复，恢复的本质是 <code>callback</code>回调：</p>
 <pre><code>//kotlin源代码
 suspend fun request2(): String &#123;
     delay(2 * 1000)
@@ -930,7 +958,8 @@ public class CoroutineScene2_decompiled &#123;
         abstract Object invokeSuspend(@NonNull Object resumeResult);
     &#125;
 &#125;
-</code></pre><p>lifecycleScope</p>
+</code></pre>
+<p>lifecycleScope</p>
 <p>countDownLatch这个类使一个线程等待其他线程各自执行完毕后再执行。</p>
 <p>Semaphore 通常我们叫它信号量， 可以用来控制同时访问特定资源的线程数量。</p>
 <hr>

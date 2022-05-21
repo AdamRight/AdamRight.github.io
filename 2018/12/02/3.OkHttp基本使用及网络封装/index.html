@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -238,12 +238,13 @@
 <h3 id="1-5、Https"><a href="#1-5、Https" class="headerlink" title="1.5、Https"></a>1.5、Https</h3><p>Http和Https的区别：</p>
 <pre><code>Https = Http + 加密 + 验证身份 + 完整
 端口：Http (80)  Https (443)
-</code></pre><p>Http的缺点：数据是没有加密传输，可能遭遇窃听；不验证通信方的身份，可能会遭遇伪装；无法验证报文的完整性，可能会遭遇篡改。</p>
-<p>TLS/SSL协议：加密：对称加密（AES，DES）+ 非对称加密 (RSA，DSA)；证书：要钱（便宜），建立连接的速度会拖慢，TCP由3次握手变为8次握手。</p>
-<p>Http/1.1和Http/2.0的区别：</p>
-<p>Http/2.0采用二进制格式而非文本格式；Http/2.0支持完全的多路复用；Http/2.0使用报头压缩，降低开销Http/2.0让服务器将响应主动推送给客户端，（带内容推送，不带内容推送的通知）。</p>
+</code></pre>
+<p>Http的缺点：数据是没有加密传输，可能遭遇窃听；不验证通信方的身份，可能会遭遇伪装；无法验证报文的完整性，可能会遭遇篡改。</p>
+<p>TLS&#x2F;SSL协议：加密：对称加密（AES，DES）+ 非对称加密 (RSA，DSA)；证书：要钱（便宜），建立连接的速度会拖慢，TCP由3次握手变为8次握手。</p>
+<p>Http&#x2F;1.1和Http&#x2F;2.0的区别：</p>
+<p>Http&#x2F;2.0采用二进制格式而非文本格式；Http&#x2F;2.0支持完全的多路复用；Http&#x2F;2.0使用报头压缩，降低开销Http&#x2F;2.0让服务器将响应主动推送给客户端，（带内容推送，不带内容推送的通知）。</p>
 <h2 id="2、OkHttp"><a href="#2、OkHttp" class="headerlink" title="2、OkHttp"></a>2、OkHttp</h2><p><strong>异步和同步：跟线程没什么关系，打电话，同步：打电话 -&gt; 处理（没挂断） -&gt; 反馈；异步：打电话 -&gt; 处理（挂断）-&gt; 打回来</strong></p>
-<p>网络框架要怎么处理：网络是耗时的，因此需要开线程，用线程池；处理网络，HttpUrlConnection(简单) 或者输入流+Socket(麻烦)；网络请求头信息处理，缓存的处理，文件格式上传的方式（表单提交，拼格式）；路由的一些操作，Http/2.0复用等等。</p>
+<p>网络框架要怎么处理：网络是耗时的，因此需要开线程，用线程池；处理网络，HttpUrlConnection(简单) 或者输入流+Socket(麻烦)；网络请求头信息处理，缓存的处理，文件格式上传的方式（表单提交，拼格式）；路由的一些操作，Http&#x2F;2.0复用等等。</p>
 <p>OkHttp要点——okio：原生的JavaIO+自定义封装，其实就是对于io的封装;Socket:连接；拦截器。</p>
 <p>OkHttp流程：</p>
 <p>1、Request里面封装了url，method，header等基本信息，然后通过<code>okhttpClient.newCall(request)</code>,将Request转化成了RealCall。</p>
@@ -262,14 +263,18 @@
         readyAsyncCalls.add(call);    
     &#125;  
 &#125;
-</code></pre><h3 id="2-1、官网和导入"><a href="#2-1、官网和导入" class="headerlink" title="2.1、官网和导入"></a>2.1、官网和导入</h3><p>官网</p>
+</code></pre>
+<h3 id="2-1、官网和导入"><a href="#2-1、官网和导入" class="headerlink" title="2.1、官网和导入"></a>2.1、官网和导入</h3><p>官网</p>
 <pre><code>http://square.github.io/okhttp/
-</code></pre><p>引入</p>
-<pre><code>compile &apos;com.squareup.okhttp3:okhttp:3.11.0&apos;
-</code></pre><h3 id="2-2、测试地址"><a href="#2-2、测试地址" class="headerlink" title="2.2、测试地址"></a>2.2、测试地址</h3><pre><code>http://httpbin.org/
+</code></pre>
+<p>引入</p>
+<pre><code>compile &#39;com.squareup.okhttp3:okhttp:3.11.0&#39;
+</code></pre>
+<h3 id="2-2、测试地址"><a href="#2-2、测试地址" class="headerlink" title="2.2、测试地址"></a>2.2、测试地址</h3><pre><code>http://httpbin.org/
 http://httpbin.org/get?id=123
 http://httpbin.org/post
-</code></pre><h3 id="2-3、get请求"><a href="#2-3、get请求" class="headerlink" title="2.3、get请求"></a>2.3、get请求</h3><p>同步请求</p>
+</code></pre>
+<h3 id="2-3、get请求"><a href="#2-3、get请求" class="headerlink" title="2.3、get请求"></a>2.3、get请求</h3><p>同步请求</p>
 <pre><code>OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder().url(&quot;http://httpbin.org/get?id=123&quot;).build();
 try &#123;
@@ -280,7 +285,8 @@ try &#123;
 &#125; catch (IOException e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><p>异步请求</p>
+</code></pre>
+<p>异步请求</p>
 <pre><code>System.out.println(Thread.currentThread().getId());
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder().url(&quot;http://httpbin.org/get?id=123&quot;).build();
@@ -295,7 +301,8 @@ client.newCall(request).enqueue(new Callback() &#123;
         &#125;
     &#125;
 &#125;);
-</code></pre><h3 id="2-4、post请求"><a href="#2-4、post请求" class="headerlink" title="2.4、post请求"></a>2.4、post请求</h3><p>同步请求，提交表单</p>
+</code></pre>
+<h3 id="2-4、post请求"><a href="#2-4、post请求" class="headerlink" title="2.4、post请求"></a>2.4、post请求</h3><p>同步请求，提交表单</p>
 <pre><code>OkHttpClient client = new OkHttpClient();
 FormBody body = new FormBody
         .Builder()
@@ -311,13 +318,14 @@ try &#123;
 &#125; catch (IOException e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><p>异步提交，提交json</p>
+</code></pre>
+<p>异步提交，提交json</p>
 <pre><code>OkHttpClient okHttpClient  = new OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10,TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
             .build();
-
+ 
 Book book = new Book();
 book.setName(&quot;android&quot;);
 //使用Gson
@@ -343,7 +351,8 @@ call.enqueue(new Callback() &#123;
     public void onResponse(Call call, Response response) throws IOException &#123;
         System.out.println(response.body().string());
     &#125;
-</code></pre><h3 id="2-5、设置url参数-HttpUrl"><a href="#2-5、设置url参数-HttpUrl" class="headerlink" title="2.5、设置url参数-HttpUrl"></a>2.5、设置url参数-HttpUrl</h3><pre><code>OkHttpClient client = new OkHttpClient();
+</code></pre>
+<h3 id="2-5、设置url参数-HttpUrl"><a href="#2-5、设置url参数-HttpUrl" class="headerlink" title="2.5、设置url参数-HttpUrl"></a>2.5、设置url参数-HttpUrl</h3><pre><code>OkHttpClient client = new OkHttpClient();
 HttpUrl httpUrl = HttpUrl.parse(&quot;http://httpbin.org/get&quot;).
         newBuilder().
         addQueryParameter(&quot;city&quot;, &quot;beijing&quot;).
@@ -360,7 +369,8 @@ try &#123;
 &#125; catch (IOException e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><h3 id="2-6、请求头的设置-addHeader"><a href="#2-6、请求头的设置-addHeader" class="headerlink" title="2.6、请求头的设置-addHeader"></a>2.6、请求头的设置-addHeader</h3><pre><code>OkHttpClient client = new OkHttpClient();
+</code></pre>
+<h3 id="2-6、请求头的设置-addHeader"><a href="#2-6、请求头的设置-addHeader" class="headerlink" title="2.6、请求头的设置-addHeader"></a>2.6、请求头的设置-addHeader</h3><pre><code>OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder().
         url(&quot;http://httpbin.org/get?id=123&quot;).
         addHeader(&quot;User-Agent&quot;, &quot;this my head&quot;).
@@ -374,7 +384,8 @@ try &#123;
 &#125; catch (IOException e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><h3 id="2-7、上传文件"><a href="#2-7、上传文件" class="headerlink" title="2.7、上传文件"></a>2.7、上传文件</h3><pre><code>RequestBody imageBody = RequestBody.create(MediaType.parse(&quot;image/jpeg&quot;), new File(&quot;文件路径+文件名&quot;));
+</code></pre>
+<h3 id="2-7、上传文件"><a href="#2-7、上传文件" class="headerlink" title="2.7、上传文件"></a>2.7、上传文件</h3><pre><code>RequestBody imageBody = RequestBody.create(MediaType.parse(&quot;image/jpeg&quot;), new File(&quot;文件路径+文件名&quot;));
 MultipartBody body = new MultipartBody.Builder()
         .setType(MultipartBody.FORM)
         .addFormDataPart(&quot;name&quot;, &quot;name&quot;)
@@ -389,7 +400,8 @@ try &#123;
 &#125; catch (IOException e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><p><strong>boundary</strong></p>
+</code></pre>
+<p><strong>boundary</strong></p>
 <h3 id="2-8、定义拦截器"><a href="#2-8、定义拦截器" class="headerlink" title="2.8、定义拦截器"></a>2.8、定义拦截器</h3><pre><code>//定义拦截器
 Interceptor interceptor = new Interceptor() &#123;
     @Override
@@ -406,7 +418,8 @@ Interceptor interceptor = new Interceptor() &#123;
 OkHttpClient client = new OkHttpClient.Builder()
         .addInterceptor(interceptor)
         .build();
-</code></pre><h3 id="2-9、缓存"><a href="#2-9、缓存" class="headerlink" title="2.9、缓存"></a>2.9、缓存</h3><p>使用缓存的前提是服务器支持缓存</p>
+</code></pre>
+<h3 id="2-9、缓存"><a href="#2-9、缓存" class="headerlink" title="2.9、缓存"></a>2.9、缓存</h3><p>使用缓存的前提是服务器支持缓存</p>
 <pre><code>// 创建缓存对象，缓存文件和缓存大小
 Cache cache = new Cache(new File(&quot;cache.cache&quot;), 1024 * 1024);
 // 创建 OkHttpClient 对象
@@ -438,7 +451,8 @@ try &#123;
 &#125; catch (IOException e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><p><strong>Okhttp实现缓存方式：在<code>CacheInterceptor</code>缓存拦截器中，根据缓存策略<code>CacheStrategy</code>分配。<code>Cache</code>和<code>DiskLruCache</code>。</strong></p>
+</code></pre>
+<p><strong>Okhttp实现缓存方式：在<code>CacheInterceptor</code>缓存拦截器中，根据缓存策略<code>CacheStrategy</code>分配。<code>Cache</code>和<code>DiskLruCache</code>。</strong></p>
 <h3 id="2-10、文件下载"><a href="#2-10、文件下载" class="headerlink" title="2.10、文件下载"></a>2.10、文件下载</h3><pre><code>OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder().url(&quot;文件地址&quot;).
         addHeader(&quot;Accept-Encoding&quot;,&quot;identity&quot;).
@@ -456,7 +470,8 @@ try &#123;
 &#125; catch (IOException e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><p><strong><code>content-length</code>和<code>Range</code>。</strong></p>
+</code></pre>
+<p><strong><code>content-length</code>和<code>Range</code>。</strong></p>
 <h2 id="3、源码分析"><a href="#3、源码分析" class="headerlink" title="3、源码分析"></a>3、源码分析</h2><p>Volley是基于HttpUrlConnection；OkHttp基于Okio(原生的JavaIO + 自定义封装) + Socket连接。</p>
 <h3 id="3-1、OkHttpClient"><a href="#3-1、OkHttpClient" class="headerlink" title="3.1、OkHttpClient"></a>3.1、OkHttpClient</h3><hr>
 <p>OkHttpClient相当于配置中心，所有的请求都会共享这些配置，比如出错是否重试、共享的连接池。主要配置有：</p>
@@ -508,25 +523,29 @@ final int readTimeout;
 
 //发起请求并被目标服务器接受的超时时间
 final int writeTimeout;
-</code></pre><p>CertificatePinner的配置公钥示例：</p>
-<pre><code>String hostname = &quot;publicobject.com&quot;;
-CertificatePinner certificatePinner = new CertificatePinner.Builder()
-.add(hostname, &quot;sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=&quot;)
-.build();
-OkHttpClient client = OkHttpClient.Builder()
-.certificatePinner(certificatePinner)
-.build();
-Request request = new Request.Builder()
-.url(&quot;https://&quot; + hostname)
-.build();
-client.newCall(request).execute();
-</code></pre><hr>
+</code></pre>
+<p>CertificatePinner的配置公钥示例：</p>
+<pre><code> String hostname = &quot;publicobject.com&quot;;
+ CertificatePinner certificatePinner = new CertificatePinner.Builder()
+ .add(hostname, &quot;sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=&quot;)
+ .build();
+ OkHttpClient client = OkHttpClient.Builder()
+ .certificatePinner(certificatePinner)
+ .build();
+ Request request = new Request.Builder()
+ .url(&quot;https://&quot; + hostname)
+ .build();
+ client.newCall(request).execute();
+</code></pre>
+<hr>
 <h3 id="3-2、RealCall"><a href="#3-2、RealCall" class="headerlink" title="3.2、RealCall"></a>3.2、RealCall</h3><hr>
 <p>newCall(Request)方法会返回一个RealCall对象，它是Call接口的实现。</p>
 <pre><code>final class RealCall implements Call &#123;
-</code></pre><p>当调用RealCall.execute()的时候，getResponseWithInterceptorChain()会被调用，它会发起网络请求并拿到返回的响应，装进一个Response对象并作为返回值返回。</p>
+</code></pre>
+<p>当调用RealCall.execute()的时候，getResponseWithInterceptorChain()会被调用，它会发起网络请求并拿到返回的响应，装进一个Response对象并作为返回值返回。</p>
 <pre><code>Response result = getResponseWithInterceptorChain();
-</code></pre><p>RealCall.enqueue()被调用的时候大同小异，区别在于enqueue会使用Dispatcher的线程池来把请求放在后台线程进行，但实质上使用的同样也是getResponseWithInterceptorChain()方法。</p>
+</code></pre>
+<p>RealCall.enqueue()被调用的时候大同小异，区别在于enqueue会使用Dispatcher的线程池来把请求放在后台线程进行，但实质上使用的同样也是getResponseWithInterceptorChain()方法。</p>
 <p>getResponseWithInterceptorChain()方法里做的事：把所有配置好的Interceptor放在一个List里，然后作为参数，创建一个RealInterceptorChain对象，并调用chain.proceed(request)发起请求和获取响应。</p>
 <p>RealCall类中的<code>getResponseWithInterceptorChain()</code>方法作用：<strong>将请求Request转变成响应Response</strong>。</p>
 <pre><code>Response getResponseWithInterceptorChain() throws IOException &#123;
@@ -546,7 +565,8 @@ client.newCall(request).execute();
 
     return chain.proceed(originalRequest);
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="3-3、拦截器"><a href="#3-3、拦截器" class="headerlink" title="3.3、拦截器"></a>3.3、拦截器</h3><p>在RealInterceptorChain中，多个Interceptor会依次调用自己的intercepter方法，方法会做三件事情</p>
 <p>1、对请求进行预处理</p>
 <p>2、预处理之后，重新调用RealInterceptorChain.proceed()把请求交给下一个Interceptor。</p>
@@ -564,13 +584,13 @@ client.newCall(request).execute();
 <p>TCP连接（如果是HTTP）或者是建立在TCP连接之上的TLS连接（如果是HTTPS），并且会创建出对应的HttpCodec对象（用于编码解码HTTP请求）。</p>
 <p>6、addNetworkInterceptor：开发者自己设置的，这里设置的Interceptor会看到每个请求和响应的数据（包括重定向以及重试的一些中间请求和响应），并且看到的是完整原始数据，而不死没加Content-Length的请求数据，或者Body还没有被gzip解压的响应数据。</p>
 <p>7、CallServerInterceptor</p>
-<p>它负责实质的请求和响应的I/O操作，即往Socket里写入请求数据和从Socket里读取响应数据。Socket就是TCP的端口。</p>
+<p>它负责实质的请求和响应的I&#x2F;O操作，即往Socket里写入请求数据和从Socket里读取响应数据。Socket就是TCP的端口。</p>
 <p>连接三个核心类（连接复用）</p>
 <p>RealConnection: 建立连接的一个对象的封装</p>
 <p>ConnectionPool：保存了连接</p>
 <p>StreamAllocation: 找一些连接，做一下封装</p>
 <h2 id="4、Okio"><a href="#4、Okio" class="headerlink" title="4、Okio"></a>4、Okio</h2><p>程序内部（内存）和外部（本地文件和网络）进行数据交互的过程，就叫输入输出。</p>
-<p>从文件里或者从网络上读数据到内存里，就叫输入；从内存里写到文件里或者发送到网络上，就叫输出。Java I/O 作用只有一个：和外界做数据交互。使用流，例如 <code>FileInputStream / FileOutputStream</code>。</p>
+<p>从文件里或者从网络上读数据到内存里，就叫输入；从内存里写到文件里或者发送到网络上，就叫输出。Java I&#x2F;O 作用只有一个：和外界做数据交互。使用流，例如 <code>FileInputStream / FileOutputStream</code>。</p>
 <p>Okio特点：基于插管的，而且是单向的，输入源叫 Source，输出目标叫 Sink，支持 Buffer，可以对 Buffer 进行操作，但不强制使用Buffer。</p>
 <pre><code>try (Source source = Okio.buffer(Okio.source(new File(&quot;./io/text.txt&quot;)))) &#123;
     Buffer buffer = new Buffer();
@@ -581,6 +601,7 @@ client.newCall(request).execute();
     e.printStackTrace();
 &#125;
 </code></pre>
+
             </div>
             <hr>
             <div>

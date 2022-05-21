@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -246,10 +246,12 @@ if (layoutManager instanceof GridLayoutManager) &#123;
     GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
     int spanCount = gridLayoutManager.getSpanCount();
 &#125;
-</code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h2 id="实例化View的3种方式"><a href="#实例化View的3种方式" class="headerlink" title="实例化View的3种方式"></a>实例化View的3种方式</h2><pre><code>View.inflate(mContext, mLayoutId, null); 
+</code></pre>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h2 id="实例化View的3种方式"><a href="#实例化View的3种方式" class="headerlink" title="实例化View的3种方式"></a>实例化View的3种方式</h2><pre><code>View.inflate(mContext, mLayoutId, null); 
 LayoutInflater.from(mContext).inflate(mLayoutId, parent);
 LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
 </code></pre>
+
             </div>
             <hr>
             <div>

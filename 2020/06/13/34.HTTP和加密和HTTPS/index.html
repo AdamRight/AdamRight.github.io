@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.2k 字
+      4.3k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      48
+      49
        分钟
     </span>
   
@@ -229,7 +229,7 @@
             
             <div class="markdown-body">
               <h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><h3 id="1-1、HTTP的概念"><a href="#1-1、HTTP的概念" class="headerlink" title="1.1、HTTP的概念"></a>1.1、HTTP的概念</h3><hr>
-<p>HTTP是一种网络传输协议，位于TCP/IP协议族的最顶层——应用层。<code>Hypertext Transfer Protocol</code>超文本传输协议，和 <code>HTML (Hypertext Markup Language</code> 超文本标记语言一起诞生，用于在网络上请求和传输HTML内容。</p>
+<p>HTTP是一种网络传输协议，位于TCP&#x2F;IP协议族的最顶层——应用层。<code>Hypertext Transfer Protocol</code>超文本传输协议，和 <code>HTML (Hypertext Markup Language</code> 超文本标记语言一起诞生，用于在网络上请求和传输HTML内容。</p>
 <p>OSI的7层协议：从下到上分别是:7-应用层、6-表示层、5-会话层、4-传输层、3-网络层、2-数据链路层、1-物理层。</p>
 <p>TCP三次握手（作用是建立连接）和四次挥手（作用是断开连接）——保证数据传输可靠性。</p>
 <p><strong>HTTP协议是一个超文本传输协议。HTTP协议是一个基于TCP传输协议传输数据的。HTTP协议规定了浏览器和Web服务器通信数据的格式。</strong></p>
@@ -237,7 +237,7 @@
 <h3 id="1-2、URL"><a href="#1-2、URL" class="headerlink" title="1.2、URL"></a>1.2、URL</h3><hr>
 <p>URL的英文全拼是(Uniform Resoure Locator),表达的意思是统一资源定位符，通俗理解就是网络资源地址，也就是我们常说的网址。</p>
 <p><strong>URL三部分组成：协议类型、服务器地址(和端口号)、资源路径(Path)，查询参数部分（可选）。</strong></p>
-<p>协议类型://服务器地址[:端口号]路径</p>
+<p>协议类型:&#x2F;&#x2F;服务器地址[:端口号]路径</p>
 <hr>
 <h3 id="1-3、报文"><a href="#1-3、报文" class="headerlink" title="1.3、报文"></a>1.3、报文</h3><hr>
 <p>通信是以<strong>报文</strong>的形式。</p>
@@ -245,13 +245,16 @@
 <pre><code>请求行: method、path、Http version
 Headers：Host、Content-Type、Content-Length
 Body
-</code></pre><p>响应报文</p>
+</code></pre>
+<p>响应报文</p>
 <pre><code>状态行: Http version、status code、status message
 Headers：Content-Type、cache-control、vary、etag、content-encoding
 Body
-</code></pre><p>请求头和响应头详细参考网站</p>
+</code></pre>
+<p>请求头和响应头详细参考网站</p>
 <pre><code>http://tools.jb51.net/table/http_header
-</code></pre><p><strong>一个HTTP请求报文可以由请求行、请求头、空行和请求体4个部分组成。</strong></p>
+</code></pre>
+<p><strong>一个HTTP请求报文可以由请求行、请求头、空行和请求体4个部分组成。</strong></p>
 <p><strong>请求行是由三部分组成:请求方式、请求资源路径、HTTP协议版本。</strong></p>
 <p>GET方式的请求报文没有请求体，只有请求行、请求头、空行组成。</p>
 <p>POST方式的请求报文可以有请求行、请求头、空行、请求体四部分组成，注意:POST方式可以允许没有请求体，但是这种格式很少见。</p>
@@ -262,18 +265,22 @@ Body
 <p>GET：对服务器数据不进行修改、不发送Body。<strong>幂等（反复调用多次会得到相同的结果）</strong>。</p>
 <pre><code>@GET(&quot;/users/&#123;id&#125;&quot;)
 Call&lt;User&gt; getUser(@Path(&quot;id&quot;) String id, @Query(&quot;gender&quot;) String gender);
-</code></pre><p>POST：用于增加或修改资源、不幂等。</p>
+</code></pre>
+<p>POST：用于增加或修改资源、不幂等。</p>
 <pre><code>@FormUrlEncoded
 @POST(&quot;/users&quot;)
 Call&lt;User&gt; addUser(@Field(&quot;name&quot;) String name, @Field(&quot;gender&quot;) String gender);
-</code></pre><p>PUT:仅用于修改资源、发送给服务器的内容写在Body里面、幂等。</p>
+</code></pre>
+<p>PUT:仅用于修改资源、发送给服务器的内容写在Body里面、幂等。</p>
 <pre><code>@FormUrlEncoded
 @PUT(&quot;/users/&#123;id&#125;&quot;)
 Call&lt;User&gt; updateGender(@Path(&quot;id&quot;) String id, @Field(&quot;gender&quot;) String gender);
-</code></pre><p>DELETE：用于删除资源、不发送Body、幂等。</p>
+</code></pre>
+<p>DELETE：用于删除资源、不发送Body、幂等。</p>
 <pre><code>@DELETE(&quot;/users/&#123;id&#125;&quot;)
 Call&lt;User&gt; getUser(@Path(&quot;id&quot;) String id, @Query(&quot;gender&quot;) String gender);
-</code></pre><p>HEAD：和GET使用方法完全相同，唯一区别在于，返回的响应中没有Body。</p>
+</code></pre>
+<p>HEAD：和GET使用方法完全相同，唯一区别在于，返回的响应中没有Body。</p>
 <hr>
 <h3 id="1-5、HTTP状态码"><a href="#1-5、HTTP状态码" class="headerlink" title="1.5、HTTP状态码"></a>1.5、HTTP状态码</h3><hr>
 <pre><code>1xx:  Infomational (信息状态码) ，临时性消息，如：100 （继续发送）、101（正在切换协议）
@@ -281,15 +288,17 @@ Call&lt;User&gt; getUser(@Path(&quot;id&quot;) String id, @Query(&quot;gender&qu
 3xx:  Redirection(重定向)，需要进行附加操作，一般是没有响应数据返回的，如 304（Not,modified）307 
 4xx:  Client Error (客户端的错误)，服务器无法处理请求，如 404
 5xx:  Server Error (服务端的错误)，服务器处理请求出错，如 500
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="1-5、Content-Type"><a href="#1-5、Content-Type" class="headerlink" title="1.5、Content-Type"></a>1.5、Content-Type</h3><hr>
 <p>指定Body的类型。主要有四类：</p>
-<p><strong>text/html</strong>：请求Web页面是返回响应的类型，Body中返回html文本。</p>
+<p><strong>text&#x2F;html</strong>：请求Web页面是返回响应的类型，Body中返回html文本。</p>
 <p><strong>x-www-form-urlencoded</strong>：Web页面纯文本表单的提交方式。</p>
 <pre><code>@FormUrlEncoded
 @POST(&quot;/users&quot;)
 Call&lt;User&gt; addUser(@Field(&quot;name&quot;) String name, @Field(&quot;gender&quot;) String gender);
-</code></pre><p><strong>multitype/form-data</strong>：Web页面含有二进制文件时的提交方式。</p>
+</code></pre>
+<p><strong>multitype&#x2F;form-data</strong>：Web页面含有二进制文件时的提交方式。</p>
 <pre><code>Content-Type: multipart/form-data; boundary=----
 
 @Multipart
@@ -299,7 +308,8 @@ Call&lt;User&gt; addUser(@Part(&quot;name&quot;) RequestBody name, @Part(&quot;a
 RequestBody namePart = RequestBody.create(MediaType.parse(&quot;text/plain&quot;),nameStr);
 RequestBody avatarPart = RequestBody.create(MediaType.parse(&quot;image/jpeg&quot;),avatarFile);
 api.addUser(namePart, avatarPart);
-</code></pre><p><strong>application/json,image/jpeg,application/zip…</strong>单项内容（文本或非文本都可以），用于Web Api的响应或者POST/PUT的请求。</p>
+</code></pre>
+<p>**application&#x2F;json,image&#x2F;jpeg,application&#x2F;zip…**单项内容（文本或非文本都可以），用于Web Api的响应或者POST&#x2F;PUT的请求。</p>
 <pre><code>@POST(&quot;/users&quot;)
 Call&lt;User&gt; addUser(@Body(&quot;user&quot;) User user);
 
@@ -308,16 +318,17 @@ Call&lt;User&gt; addUser(@Body(&quot;user&quot;) User user);
 Call&lt;User&gt; updateAvatar(@Path(&quot;id&quot;) String id, @Body RequestBody avatar);
 RequestBody avatarBody = RequestBody.create(MediaType.parse(&quot;image/jpeg&quot;),avatarFile);
 api.updateAvatar(id, avatarBody)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="1-6、Header"><a href="#1-6、Header" class="headerlink" title="1.6、Header"></a>1.6、Header</h3><hr>
 <p>HTTP消息的元数据 (meta data)</p>
 <p>User-Agent:用户代理，即是谁实际发送请求、接受响应的，例如收机浏览器、某款收机App。</p>
 <p>Host：服务器主机地址</p>
 <p>Content-Length：长度</p>
 <p>Location：重定向的目标 URL</p>
-<p>Cookie/Set-Cookie：发送Cookie/设置Cookie</p>
+<p>Cookie&#x2F;Set-Cookie：发送Cookie&#x2F;设置Cookie</p>
 <p>Authorization：授权信息</p>
-<p>Accept: 客户端能接受的数据类型。如 text/html</p>
+<p>Accept: 客户端能接受的数据类型。如 text&#x2F;html</p>
 <p>Accept-Charset: 客户端接受的字符集。如 utf-8</p>
 <p>Accept-Encoding: 客户端接受的压缩编码类型。如 gzip</p>
 <p>Content-Encoding：压缩类型。如 gzip</p>
@@ -335,7 +346,7 @@ api.updateAvatar(id, avatarBody)
 <p>If-Modified-Since</p>
 <p>Etag</p>
 <p>If-None-Match</p>
-<p>Cache-Control: private / public</p>
+<p>Cache-Control: private &#x2F; public</p>
 <hr>
 <h2 id="2、加密"><a href="#2、加密" class="headerlink" title="2、加密"></a>2、加密</h2><h3 id="2-1、对称加密"><a href="#2-1、对称加密" class="headerlink" title="2.1、对称加密"></a>2.1、对称加密</h3><hr>
 <p>DES（56位密钥，密钥太短而逐渐被弃用）、AES（128位、192位、256位密钥，现在最流行）。</p>
@@ -351,9 +362,9 @@ api.updateAvatar(id, avatarBody)
 <h3 id="2-3、Base64"><a href="#2-3、Base64" class="headerlink" title="2.3、Base64"></a>2.3、Base64</h3><hr>
 <p>将二进制数据转换成由64个字符组成的字符串的编码算法。64个字符：<code>a-z</code>、<code>A-Z</code>、<code>0-9</code>、<code>+</code>、<code>/</code>。</p>
 <p>作用：让原数据具有字符串所具有的特性，如可以放在URL中传输、可以保存到文本文件。</p>
-<p>Base64的缺点：因为自身的原理（6位变8位），因此每次Base64编码之后，数据都会增大约1/3，所以会影响存储和传输性能。</p>
+<p>Base64的缺点：因为自身的原理（6位变8位），因此每次Base64编码之后，数据都会增大约1&#x2F;3，所以会影响存储和传输性能。</p>
 <p><strong>Base64并不是加密</strong>。</p>
-<p>Base58：比特币使用的编码方式，去掉了Base64中的数字<code>0</code>，字母大写<code>O</code>，字母大写<code>I</code>，和字母小写<code>l</code>，以及 “+” 和 “/“ 符号，用于比特币地址的表示。</p>
+<p>Base58：比特币使用的编码方式，去掉了Base64中的数字<code>0</code>，字母大写<code>O</code>，字母大写<code>I</code>，和字母小写<code>l</code>，以及 “+” 和 “&#x2F;“ 符号，用于比特币地址的表示。</p>
 <p><code>URL encoding</code>:在URL的字符串中，对一些不用于特殊用途的保留字符，使⽤百分号<code>%</code>为前缀进行单独编码，以避免出现解析错误。</p>
 <hr>
 <h3 id="2-4、序列化"><a href="#2-4、序列化" class="headerlink" title="2.4、序列化"></a>2.4、序列化</h3><hr>
@@ -387,7 +398,7 @@ api.updateAvatar(id, avatarBody)
 <p>Hash是单向过程，往往是不可逆的，无法进行逆向恢复操作，因此<strong>Hash不属于编码</strong>。</p>
 <p>Hash是单向过程，无法进行逆向回复操作，因此<strong>Hash不属于加密。（MD5不是加密！）</strong></p>
 <hr>
-<h2 id="3、HTTPS"><a href="#3、HTTPS" class="headerlink" title="3、HTTPS"></a>3、HTTPS</h2><h3 id="3-1、TCP-IP协议"><a href="#3-1、TCP-IP协议" class="headerlink" title="3.1、TCP/IP协议"></a>3.1、TCP/IP协议</h3><hr>
+<h2 id="3、HTTPS"><a href="#3、HTTPS" class="headerlink" title="3、HTTPS"></a>3、HTTPS</h2><h3 id="3-1、TCP-x2F-IP协议"><a href="#3-1、TCP-x2F-IP协议" class="headerlink" title="3.1、TCP&#x2F;IP协议"></a>3.1、TCP&#x2F;IP协议</h3><hr>
 <p>具体分层：</p>
 <p><code>Application Layer</code>应用层：HTTP、FTP、DNS。</p>
 <p><code>Transport Layer</code>传输层：TCP、UDP。</p>
@@ -412,7 +423,8 @@ api.updateAvatar(id, avatarBody)
 客户端发送：Finished
 服务器通知：将使用加密通信
 服务器发送：Finished
-</code></pre><p>客户端加密密钥（客户端发送消息）、服务端加密密钥（服务端发送消息）、客户端MAC Secret（验证身份）、服务端MAC Secret（验证身份）。</p>
+</code></pre>
+<p>客户端加密密钥（客户端发送消息）、服务端加密密钥（服务端发送消息）、客户端MAC Secret（验证身份）、服务端MAC Secret（验证身份）。</p>
 <hr>
 <h2 id="4、网络编程"><a href="#4、网络编程" class="headerlink" title="4、网络编程"></a>4、网络编程</h2><h3 id="4-1、IP地址"><a href="#4-1、IP地址" class="headerlink" title="4.1、IP地址"></a>4.1、IP地址</h3><hr>
 <p>IP地址的作用是标识网络中唯一的一台设备的。</p>
@@ -422,7 +434,8 @@ api.updateAvatar(id, avatarBody)
 <pre><code>ping www.baidu.com 检查是否能上公网
 ping 当前局域网的ip地址 检查是否在同一个局域网内
 ping 127.0.0.1 检查本地网卡是否正常
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="4-2、端口和端口号"><a href="#4-2、端口和端口号" class="headerlink" title="4.2、端口和端口号"></a>4.2、端口和端口号</h3><hr>
 <p>端口的作用就是给运行的应用程序提供传输数据的通道。好比房间的门，是数据传输必经之路。</p>
 <p>每一个端口都会有一个对应的端口号，好比每个房间的门都有一个门牌号，想要找到端口通过端口号即可。</p>

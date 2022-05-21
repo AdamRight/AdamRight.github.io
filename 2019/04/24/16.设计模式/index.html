@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -238,18 +238,20 @@
 
     private SingletonEHan() &#123;
     &#125;
-
+    
     private static SingletonEHan singletonEHan = new SingletonEHan();
-
+    
     public static SingletonEHan getInstance() &#123;
         return singletonEHan;
     &#125;
 //  SingletonEHan instance= SingletonEHan.getInstance();
 &#125;
-</code></pre><p>kotlin实现：</p>
+</code></pre>
+<p>kotlin实现：</p>
 <pre><code>object SingletonEHan &#123;
 &#125;
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <ul>
 <li>优点：比较简单，在类加载的时候就完成了实例化，避免了线程的同步问题。</li>
 <li>缺点：由于在类加载的时候就实例化了，也就是说可能我没有用到这个实例，但是它也会加载，会造成内存的浪费(但是这个浪费可以忽略)。</li>
@@ -262,7 +264,7 @@
 
     private SingletonLanHan() &#123;
     &#125;
-
+    
     /**
      * 单例模式的懒汉式[线程不安全，不可用]
      */
@@ -317,7 +319,8 @@
         return singletonLanHanFour;
     &#125;
 &#125;
-</code></pre><p>kotlin实现：</p>
+</code></pre>
+<p>kotlin实现：</p>
 <pre><code>class SingletonDemo private constructor() &#123;
     companion object &#123;
         private var instance: SingletonDemo? = null
@@ -335,7 +338,8 @@
         &#125;
     &#125;
 &#125;
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>1、开辟一块内存空间，2、初始化对象，3、给变量赋值，指向内存地址。在java中2和3的顺序不一定，也可能先3再2。用volatile保证123的顺序执行，防止重排序。</p>
 </blockquote>
 <hr>
@@ -345,7 +349,7 @@
 
     private SingletonLanHan() &#123;
     &#125;
-
+    
     //volatile解决了gvm指令重排序优化
     private static volatile SingletonLanHan singletonLanHanFour;
 
@@ -360,14 +364,16 @@
         return singletonLanHanFour;
     &#125;
 &#125;
-</code></pre><p>kotlin实现：</p>
+</code></pre>
+<p>kotlin实现：</p>
 <pre><code>class SingletonDemo private constructor() &#123;
     companion object &#123;
         val instance: SingletonDemo by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) &#123;
         SingletonDemo() &#125;
     &#125;
 &#125;
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>volatile关键字作用:防止重排序,线程可见性。</p>
 </blockquote>
 <p>线程可见性:某一个线程改了公用对象(变量)，短时间内另一个线程可能是不可见的，因为每一个线程都有自己的缓存区(线程工作区)。</p>
@@ -402,7 +408,8 @@ class ThreadDemo implements Runnable &#123;
         this.flag = flag;
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><hr>
 <p>Java实现:</p>
 <pre><code>/**
@@ -424,7 +431,8 @@ public class SingletonIn &#123;
         return SingletonInHodler.singletonIn;
     &#125;
 &#125;
-</code></pre><p>kotlin实现：</p>
+</code></pre>
+<p>kotlin实现：</p>
 <pre><code>class SingletonDemo private constructor() &#123;
     companion object &#123;
         val instance = SingletonHolder.holder
@@ -433,7 +441,8 @@ public class SingletonIn &#123;
         val holder= SingletonDemo()
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><hr>
 <pre><code>/**
  * 枚举[推荐使用]
@@ -452,7 +461,8 @@ public enum SingletonEnum &#123;
     &#125;
     // SingletonEnum.instance.method();
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="容器管理"><a href="#容器管理" class="headerlink" title="容器管理"></a>容器管理</h3><hr>
 <p><code>SystemServiceRegistry.getSystemService</code>系统的服务就是用的这种</p>
 <pre><code>public class Singleton &#123;
@@ -470,7 +480,8 @@ public enum SingletonEnum &#123;
         return mSingleMap.get(serviceName);
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="补充复习static"><a href="#补充复习static" class="headerlink" title="补充复习static"></a>补充复习static</h3><hr>
 <p>static关键字的特点：随着类的加载而加载，随着类的消失而消失；优先于对象存在；被类的所有对象共享。</p>
 <p>静态变量存储于方法区的静态区；成员变量存储于堆内存。</p>
@@ -479,11 +490,11 @@ public enum SingletonEnum &#123;
     static &#123;
         System.out.println(&quot;Student 静态代码块&quot;);
     &#125;
-
+    
     &#123;
         System.out.println(&quot;Student 构造代码块&quot;);
     &#125;
-
+    
     public Student() &#123;
         System.out.println(&quot;Student 构造方法&quot;);
     &#125;
@@ -492,15 +503,16 @@ class Demo2_Student &#123;
     static &#123;
         System.out.println(&quot;Demo2_Student静态代码块&quot;);
     &#125;
-
+    
     public static void main(String[] args) &#123;
         System.out.println(&quot;我是main方法&quot;);
-
+        
         Student s1 = new Student();
         Student s2 = new Student();
     &#125;
 &#125;
-</code></pre><p>输出结果：</p>
+</code></pre>
+<p>输出结果：</p>
 <pre><code>Demo2_Student静态代码块
 我是main方法
 Student 静态代码块
@@ -508,12 +520,14 @@ Student 构造代码块
 Student 构造方法
 Student 构造代码块
 Student 构造方法
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><hr>
 <p>简单工厂模式：提供专门的工厂类用于创建对象，将对象的创建和对象的使用分离开。客户端只知道传入工厂类的参数，不需要关心具体的实现。它不属于GoF23种设计模式，但在软件开发中应用也较为频繁。</p>
 <p>实例</p>
 <pre><code>Bitmap bitmap = BitmapFatory.deresources(res,id);
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="简单工厂场景"><a href="#简单工厂场景" class="headerlink" title="简单工厂场景"></a>简单工厂场景</h3><hr>
 <p>使用简单工厂模式设计一个可以创建圆形、方形和三角形的绘图工具。</p>
 <pre><code>//抽象类 
@@ -566,7 +580,8 @@ public class Client &#123;
         mPain.draw();
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="在简单工厂模式包含如下几个角色："><a href="#在简单工厂模式包含如下几个角色：" class="headerlink" title="在简单工厂模式包含如下几个角色："></a>在简单工厂模式包含如下几个角色：</h3><hr>
 <ol>
 <li><p>工厂类，负责实现创建所有产品实例，在工厂类中提供了静态方法，可以被外界直接调用，返回抽象产品类Product。</p>
@@ -586,7 +601,8 @@ public class Client &#123;
 //Iterator:抽象产品Product，ArrayListIterator:具体的产品
 List&lt;String&gt; list = new ArrayList&lt;String&gt;();
 list.iterator();
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="工厂方法场景"><a href="#工厂方法场景" class="headerlink" title="工厂方法场景"></a>工厂方法场景</h3><hr>
 <p>玩具工厂生产动物玩具，发出不同叫声。</p>
 <pre><code>//抽象产品-玩具
@@ -636,7 +652,8 @@ class Client &#123;
         //factory.createToy().makeNoise(&quot;我是cat。&quot;);
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="工厂方法模式的几个角色："><a href="#工厂方法模式的几个角色：" class="headerlink" title="工厂方法模式的几个角色："></a>工厂方法模式的几个角色：</h3><hr>
 <ol>
 <li><p>Product抽象产品角色和具体产品角色，和简单工厂模式类似，不再累述。</p>
@@ -772,7 +789,8 @@ class Client &#123;
         System.out.println(&quot;服装：&quot; + robot.getCostume());
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h3><hr>
 <p>建造者模式的变形，也是在源码和开源项目中长用的，比如：AlertDialog</p>
 <pre><code>//产品,包含很多组件
@@ -831,7 +849,8 @@ class Client &#123;
          System.out.println(product.toString());
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="Java和Kotlin"><a href="#Java和Kotlin" class="headerlink" title="Java和Kotlin"></a>Java和Kotlin</h3><hr>
 <p>Java：</p>
 <pre><code>public class PenJava &#123;
@@ -871,7 +890,8 @@ class Client &#123;
         &#125;
     &#125;
 &#125;
-</code></pre><p>Kotlin:</p>
+</code></pre>
+<p>Kotlin:</p>
 <pre><code>class Pen &#123;
     var color = &quot;white&quot;
     var width = 1.0f
@@ -903,7 +923,8 @@ fun main()&#123;
         write()
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>职责链模式(Chain of Responsibility Pattern，职责链模式)：避免请求发送者与接收者耦合在一起，让多个对象都有可能接收请求，将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。职责链模式是一种对象行为型模式。职责链模式结构的核心在于引入了一个抽象处理者。</p>
 <p>重点：上一个处理对象必须含有下一个处理对象的引用，形成一个单向链表。</p>
@@ -959,7 +980,7 @@ class PurchaseRequest &#123;
 
 //审批者类：抽象处理者
 abstract class ApproverHander &#123;
-
+    
     protected ApproverHander hander; //定义后继对象
     protected String name; //审批者姓名
 
@@ -1016,10 +1037,11 @@ class President extends ApproverHander &#123;
     //具体请求处理方法
     public void processRequest(PurchaseRequest request) &#123;
             System.out.println(&quot;董事长&quot; + this.name + &quot;审批金额：&quot; + request.getAmount());  //处理请求
-
+       
     &#125;
-&#125;    
-</code></pre><hr>
+&#125;	
+</code></pre>
+<hr>
 <h3 id="和观察者模式区别"><a href="#和观察者模式区别" class="headerlink" title="和观察者模式区别"></a>和观察者模式区别</h3><hr>
 <p>受众数量不同。观察者广播链式可以 1:N 的方式广播，而责任链则要求是的 1:1 的传递，必然有一个且只有一个类完成请求的处理;</p>
 <p>请求内容不同。观察者广播链中的信息可以在传播中改变，但是责任链中的请求是不可改变的;</p>
@@ -1070,7 +1092,7 @@ class Floor extends Home &#123;
 //抽象装饰类
 class HomeDecorator extends Home &#123;
     private Home component;  //维持对抽象构件类型对象的引用
-
+    
     public HomeDecorator(Home component)&#123;//注入抽象构件类型的对象
         this.component = component;
     &#125;
@@ -1095,7 +1117,8 @@ class TakeHomeDecorator extends HomeDecorator &#123;
         System.out.println(&quot;搬进去很多家具&quot;);
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="Java和Kotlin-1"><a href="#Java和Kotlin-1" class="headerlink" title="Java和Kotlin"></a>Java和Kotlin</h3><hr>
 <p>java：</p>
 <pre><code>class Client &#123;
@@ -1174,7 +1197,8 @@ class CarrotFood extends Food &#123;
         System.out.println(&quot;吃葫芦卜&quot;);
     &#125;
 &#125;
-</code></pre><p>kotlin</p>
+</code></pre>
+<p>kotlin</p>
 <pre><code>/**
  * 抽象组件
  */
@@ -1212,7 +1236,8 @@ fun main()&#123;
         &#125;
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="安卓实例"><a href="#安卓实例" class="headerlink" title="安卓实例"></a>安卓实例</h3><hr>
 <p>ListView中的HeaderViewListAdapter，添加头部和底部。</p>
 <p>ContextWrapper。</p>
@@ -1243,9 +1268,9 @@ abstract class EatModel &#123;
     protected abstract void eatMeal();
 
     protected abstract void addMoney();
-
+    
     protected abstract void payBill();
-
+    
     final public void havaEat() &#123;
         this.orderFood();
         this.eatMeal();
@@ -1259,7 +1284,7 @@ abstract class EatModel &#123;
 class PeopleEat extends EatModel &#123;
 
     private boolean addMoneyFlag = true;
-
+    
     @Override
     protected void addMoney() &#123;
         System.out.println(&quot;充值200元...&quot;);
@@ -1289,7 +1314,8 @@ class PeopleEat extends EatModel &#123;
         this.addMoneyFlag = isAdd;
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="安卓实例-1"><a href="#安卓实例-1" class="headerlink" title="安卓实例"></a>安卓实例</h3><hr>
 <p>Activity的生命周期采用了模板方法模式：首先都是继承自Activity，而且所有要自己定义写的Activity的生命周期的流程都是一样的，每个Activity可以设置不同的界面，可以实现自己的具体交互逻辑。</p>
 <p>AsyncTask</p>
@@ -1366,7 +1392,9 @@ class OldManDiscount implements Discount &#123;
         return price - 10;
     &#125;
 &#125;
-</code></pre><p>策略模式定义了一系列算法，并将每一个算法封装起来，而且是他们之间可以相互切换。</p>
+    
+</code></pre>
+<p>策略模式定义了一系列算法，并将每一个算法封装起来，而且是他们之间可以相互切换。</p>
 <hr>
 <h3 id="安卓实例-2"><a href="#安卓实例-2" class="headerlink" title="安卓实例"></a>安卓实例</h3><hr>
 <p>第三方的：Glide的缓存策略，ImageLoader的生成图片文件的命名策略，timber日志打印工具的策略，OKhttp部分</p>
@@ -1428,12 +1456,12 @@ class TrafficLight implements Observable &#123;
             observer.update(context);
         &#125;
     &#125;
-
+    
     public void havaRed() &#123;
         System.out.println(&quot;红灯...&quot;); //通知所有的观察者
         this.notifyObservers(&quot;红灯停车啦&quot;);
     &#125;
-
+    
     public void havaGreen() &#123;
         System.out.println(&quot;绿灯...&quot;);
         this.notifyObservers(&quot;绿灯开车啦&quot;);
@@ -1461,7 +1489,8 @@ class SmallCar implements Observer &#123;
         System.out.println(&quot;我是小汽车---&gt;&quot; + reportContext);
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="推拉模式"><a href="#推拉模式" class="headerlink" title="推拉模式"></a>推拉模式</h3><hr>
 <p>推拉模式：上面是推模式，即被观察者变化的时候，推送给观察者。拉模式，即被观察者变化的时候，观察者主动查看下被观察者。可以分开使用，也可以结合使用。</p>
 <hr>
@@ -1494,7 +1523,7 @@ class TrafficLight extends Observable &#123;
         super.setChanged();
         super.notifyObservers(&quot;红灯停车啦&quot;);
     &#125;
-
+    
     public void havaGreen() &#123;
         System.out.println(&quot;绿灯...&quot;);
         super.setChanged();
@@ -1527,11 +1556,13 @@ class SmallCar implements Observer &#123;
         this.makeCar(arg.toString());
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="安卓实例-3"><a href="#安卓实例-3" class="headerlink" title="安卓实例"></a>安卓实例</h3><hr>
 <p>ListView的Adapter的setDataChange方法。给Adapter注册一个mDataSetObserver。</p>
-<pre><code>mAdapter.registerDataSetObserver(mDataSetObserver); 
-</code></pre><hr>
+<pre><code>mAdapter.registerDataSetObserver(mDataSetObserver); 
+</code></pre>
+<hr>
 <h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><h3 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h3><hr>
 <p>目标接口、代理对象、被代理的对象。</p>
 <pre><code>/**
@@ -1604,7 +1635,8 @@ public class Client &#123;
         bankWorker.applyBank();
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><hr>
 <p>形式</p>
 <pre><code>Proxy.newProxyInstance(
@@ -1612,7 +1644,8 @@ public class Client &#123;
     new Class&lt;?&gt;[]&#123;IBank.class&#125;,//目标接口
     null//InvocationHandler-关键
 );
-</code></pre><p>代码</p>
+</code></pre>
+<p>代码</p>
 <pre><code>/**
  * 银行办理业务 - 动态代理 - InvocationHandler
  */
@@ -1705,7 +1738,8 @@ public class Man implements IBank &#123;
         System.out.println(name + &quot; 额外业务&quot;);
     &#125;
 &#125;
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="开发用到的地方"><a href="#开发用到的地方" class="headerlink" title="开发用到的地方"></a>开发用到的地方</h3><hr>
 <pre><code>Android 插件化架构之绕过 AndroidManifest 检测（动态代理）
 Android 数据库实现数据的懒加载（静态代理）
@@ -1714,7 +1748,8 @@ Android Xutils 实现 View 事件注入（动态代理）
 Android Retrofit 的 create 创建接口对象 （动态代理）
 Android Framework 层的 AMS
 Android Framework 层的 Binder 驱动
-</code></pre><p>Retrofit的create</p>
+</code></pre>
+<p>Retrofit的create</p>
 <pre><code>public &lt;T&gt; T create(final Class&lt;T&gt; service) &#123;
     // 验证当前类是否是接口
     Utils.validateServiceInterface(service);
@@ -1753,7 +1788,8 @@ Android Framework 层的 Binder 驱动
                 &#125;
             &#125;);
 &#125;
-</code></pre><p>自己实现create的思路</p>
+</code></pre>
+<p>自己实现create的思路</p>
 <pre><code>public &lt;T&gt; T create(Class&lt;T&gt; clazz)&#123;
     // 动态代理
     return (T) Proxy.newProxyInstance(clazz.getClassLoader(),
@@ -1770,18 +1806,22 @@ Android Framework 层的 Binder 驱动
                 &#125;
             &#125;);
 &#125;
-</code></pre><p>通过<code>Retrofit.create(class)</code>方法创建出Service interface的实例，从而使得Service中配置的方法变得可用，这是Retrofit代码结构的核心。</p>
+</code></pre>
+<p>通过<code>Retrofit.create(class)</code>方法创建出Service interface的实例，从而使得Service中配置的方法变得可用，这是Retrofit代码结构的核心。</p>
 <p><code>Retrofit.create(class)</code>方法内部，使用<code>Proxy.newProxyInstance()</code>方法创建Service实例。create方法会为参数中的interface创建一个对象，这个对象实现了interface中的每一个方法，并且每个方法的实现都是类似的：调用对象实例内部的一个<code>InvocationHandler</code>成员变量的<code>invoke()</code>方法，并把自己的方法信息传递进去。实质上就是动态代理：interface中的方法全部由一个另外设定的<code>InvocationHandler</code>对象来进行代理操作。并且，这些方法的具体实现是在运行时生成interface实例时才确定的，而不是在编译时。</p>
 <p><code>invoke()</code>方法中创建interface实例，有三行关键代码：</p>
 <p>1、ServiceMethod的创建：</p>
 <pre><code>ServiceMethod&lt;Object, Object&gt; serviceMethod = （ServiceMethod&lt;Object, Object&gt;）loadServiceMethod(method);
-</code></pre><p>这行代码负责读取interface中原方法的信息，包括返回值、方法注解、参数类型、参数注解，并将这些信息做初步分支。</p>
+</code></pre>
+<p>这行代码负责读取interface中原方法的信息，包括返回值、方法注解、参数类型、参数注解，并将这些信息做初步分支。</p>
 <p>2、OkHttpCall的创建</p>
 <pre><code>OkHttpCall&lt;Object&gt; okHttpCall = new OkHttpCall&lt;&gt;(serviceMethod, args);
-</code></pre><p>OkHttpCall是<code>retrofit2.Call</code>的子类。这行代码负责将ServiceMethod封装进<code>retrofit2.Call</code>对象，这个对象可以在需要的时候，例如<code>enqueue()</code>方法被调用的时候，利用ServiceMethod中包含的信息来创建一个<code>okhttp3.Call</code>对象，并调用这个<code>okhttp3.Call</code>对象来进行网络请求的发起，然后对结果进行预处理，如类型转换。</p>
+</code></pre>
+<p>OkHttpCall是<code>retrofit2.Call</code>的子类。这行代码负责将ServiceMethod封装进<code>retrofit2.Call</code>对象，这个对象可以在需要的时候，例如<code>enqueue()</code>方法被调用的时候，利用ServiceMethod中包含的信息来创建一个<code>okhttp3.Call</code>对象，并调用这个<code>okhttp3.Call</code>对象来进行网络请求的发起，然后对结果进行预处理，如类型转换。</p>
 <p>3、<code>adapt()</code>方法</p>
 <pre><code>return serviceMethod.callAdapter.adapt(okHttpCall);
-</code></pre><p>这个方法会使用ServiceMethod中的callAdapter对象来把okHttpCall对象进行转换,生成一个新的<code>retrofit2.Call</code>对象，在这个新的Call对象中，后台线程发起的请求，会在相应返回后，从主线程中调用回调方法，实现线程的自动切换。</p>
+</code></pre>
+<p>这个方法会使用ServiceMethod中的callAdapter对象来把okHttpCall对象进行转换,生成一个新的<code>retrofit2.Call</code>对象，在这个新的Call对象中，后台线程发起的请求，会在相应返回后，从主线程中调用回调方法，实现线程的自动切换。</p>
 <p>另外这个方法不止可以生成新的<code>retrofit2.Call</code>对象，也可以生成别的类型对象，例如RaJava的Obervable，来让Retrofit可以和RaJava结合使用。</p>
 <hr>
 

@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -243,23 +243,23 @@ import pandas as pd  # 将pandas作为第三方库导入，我们一般为pandas
 # =====导入数据
 df = pd.read_csv(
     # 该参数为数据在电脑中的路径，可以不填写
-    filepath_or_buffer=&apos;/Users/jxing/Desktop/201704课程/20170423_class3/data/sz000002.csv&apos;,
-    # 该参数代表数据的分隔符，csv文件默认是逗号。其他常见的是&apos;\t&apos;
-    sep=&apos;,&apos;,
+    filepath_or_buffer=&#39;/Users/jxing/Desktop/201704课程/20170423_class3/data/sz000002.csv&#39;,
+    # 该参数代表数据的分隔符，csv文件默认是逗号。其他常见的是&#39;\t&#39;
+    sep=&#39;,&#39;,
     # 该参数代表跳过数据文件的的第1行不读入
     skiprows=1,
     # nrows，只读取前n行数据，若不指定，读入全部的数据
     nrows=15,
     # 将指定列的数据识别为日期格式。若不指定，时间数据将会以字符串形式读入。一开始先不用。
-    # parse_dates=[&apos;交易日期&apos;],
+    # parse_dates=[&#39;交易日期&#39;],
     # 将指定列设置为index。若不指定，index默认为0, 1, 2, 3, 4...
-    # index_col=[&apos;交易日期&apos;],
+    # index_col=[&#39;交易日期&#39;],
     # 读取指定的这几列数据，其他数据不读取。若不指定，读入全部列
-    usecols=[&apos;交易日期&apos;, &apos;股票代码&apos;, &apos;股票名称&apos;, &apos;收盘价&apos;, &apos;涨跌幅&apos;, &apos;成交量&apos;, &apos;新浪概念&apos;, &apos;MACD_金叉死叉&apos;],
+    usecols=[&#39;交易日期&#39;, &#39;股票代码&#39;, &#39;股票名称&#39;, &#39;收盘价&#39;, &#39;涨跌幅&#39;, &#39;成交量&#39;, &#39;新浪概念&#39;, &#39;MACD_金叉死叉&#39;],
     # 当某行数据有问题时，报错。设定为False时即不报错，直接跳过该行。当数据比较脏乱的时候用这个。
     error_bad_lines=False,
     # 将数据中的null识别为空值
-    na_values=&apos;NULL&apos;,
+    na_values=&#39;NULL&#39;,
 
     # 更多其他参数，请直接搜索&quot;pandas read_csv&quot;，要去逐个查看一下。比较重要的，header等
 )
@@ -286,23 +286,23 @@ df = pd.read_csv(
 # print df.describe()  # 非常方便的函数，对每一列数据有直观感受；只会对数字类型的列有效
 
 # 对print出的数据格式进行修正
-# pd.set_option(&apos;expand_frame_repr&apos;, False)  # 当列太多时不换行
-# pd.set_option(&apos;max_colwidth&apos;, 8) # 设定每一列的最大宽度，恢复原设置的方法，pd.reset_option(&apos;max_colwidth&apos;)
+# pd.set_option(&#39;expand_frame_repr&#39;, False)  # 当列太多时不换行
+# pd.set_option(&#39;max_colwidth&#39;, 8) # 设定每一列的最大宽度，恢复原设置的方法，pd.reset_option(&#39;max_colwidth&#39;)
 # 更多设置请见http://pandas.pydata.org/pandas-docs/stable/options.html
 
 
 # =====如何选取指定的行、列
-# print df[&apos;股票代码&apos;]  # 根据列名称来选取，读取的数据是Series类型
-# print df[[&apos;股票代码&apos;, &apos;收盘价&apos;]]  # 同时选取多列，需要两个括号，读取的数据是DataFrame类型
+# print df[&#39;股票代码&#39;]  # 根据列名称来选取，读取的数据是Series类型
+# print df[[&#39;股票代码&#39;, &#39;收盘价&#39;]]  # 同时选取多列，需要两个括号，读取的数据是DataFrame类型
 # print df[[0, 1, 2]]  # 也可以通过列的position来选取
 
 # loc操作：通过label（columns和index的名字）来读取数据
-# print df.loc[&apos;12/12/2016&apos;]  # 选取指定的某一行，读取的数据是Series类型
-# print df.loc[&apos;13/12/2016&apos;: &apos;06/12/2016&apos;]  # 选取在此范围内的多行，和在list中slice操作类似，读取的数据是DataFrame类型
-# print df.loc[:, &apos;股票代码&apos;:&apos;收盘价&apos;]  # 选取在此范围内的多列，读取的数据是DataFrame类型
-# print df.loc[&apos;13/12/2016&apos;: &apos;06/12/2016&apos;, &apos;股票代码&apos;:&apos;收盘价&apos;]  # 读取指定的多行、多列。逗号之前是行的范围，逗号之后是列的范围。读取的数据是DataFrame类型
+# print df.loc[&#39;12/12/2016&#39;]  # 选取指定的某一行，读取的数据是Series类型
+# print df.loc[&#39;13/12/2016&#39;: &#39;06/12/2016&#39;]  # 选取在此范围内的多行，和在list中slice操作类似，读取的数据是DataFrame类型
+# print df.loc[:, &#39;股票代码&#39;:&#39;收盘价&#39;]  # 选取在此范围内的多列，读取的数据是DataFrame类型
+# print df.loc[&#39;13/12/2016&#39;: &#39;06/12/2016&#39;, &#39;股票代码&#39;:&#39;收盘价&#39;]  # 读取指定的多行、多列。逗号之前是行的范围，逗号之后是列的范围。读取的数据是DataFrame类型
 # print df.loc[:, :]  # 读取所有行、所有列，读取的数据是DataFrame类型
-# print df.at[&apos;12/12/2016&apos;, &apos;股票代码&apos;]  # 使用at读取指定的某个元素。loc也行，但是at更高效。
+# print df.at[&#39;12/12/2016&#39;, &#39;股票代码&#39;]  # 使用at读取指定的某个元素。loc也行，但是at更高效。
 
 # iloc操作：通过position来读取数据
 # print df.iloc[0]  # 以index选取某一行，读取的数据是Series类型
@@ -315,89 +315,89 @@ df = pd.read_csv(
 
 # =====列操作
 # 行列加减乘除
-# print df[&apos;股票名称&apos;] + &apos;_地产&apos;  # 字符串列可以直接加上字符串，对整列进行操作
-# print df[&apos;收盘价&apos;] * 100  # 数字列直接加上或者乘以数字，对整列进行操作。
-# print df[&apos;收盘价&apos;] * df[&apos;成交量&apos;]  # 两列之间可以直接操作。收盘价*成交量计算出的是什么？
+# print df[&#39;股票名称&#39;] + &#39;_地产&#39;  # 字符串列可以直接加上字符串，对整列进行操作
+# print df[&#39;收盘价&#39;] * 100  # 数字列直接加上或者乘以数字，对整列进行操作。
+# print df[&#39;收盘价&#39;] * df[&#39;成交量&#39;]  # 两列之间可以直接操作。收盘价*成交量计算出的是什么？
 # 新增一列
-# df[&apos;股票名称+行业&apos;] = df[&apos;股票名称&apos;] + &apos;_地产&apos;
+# df[&#39;股票名称+行业&#39;] = df[&#39;股票名称&#39;] + &#39;_地产&#39;
 
 # =====统计函数
-# print df[&apos;收盘价&apos;].mean()  # 求一整列的均值，返回一个数。会自动排除空值。
-# print df[[&apos;收盘价&apos;, &apos;成交量&apos;]].mean()  # 求两列的均值，返回两个数，Series
-# print df[[&apos;收盘价&apos;, &apos;成交量&apos;]]
-# print df[[&apos;收盘价&apos;, &apos;成交量&apos;]].mean(axis=1)  # 求两列的均值，返回DataFrame。axis=0或者1要搞清楚。
+# print df[&#39;收盘价&#39;].mean()  # 求一整列的均值，返回一个数。会自动排除空值。
+# print df[[&#39;收盘价&#39;, &#39;成交量&#39;]].mean()  # 求两列的均值，返回两个数，Series
+# print df[[&#39;收盘价&#39;, &#39;成交量&#39;]]
+# print df[[&#39;收盘价&#39;, &#39;成交量&#39;]].mean(axis=1)  # 求两列的均值，返回DataFrame。axis=0或者1要搞清楚。
 # axis=1，代表对整几列进行操作。axis=0（默认）代表对几行进行操作。实际中弄混很正常，到时候试一下就知道了。
 
-# print df[&apos;收盘价&apos;].max()  # 最大值
-# print df[&apos;收盘价&apos;].min()  # 最小值
-# print df[&apos;收盘价&apos;].std()  # 标准差
-# print df[&apos;收盘价&apos;].count()  # 非空的数据的数量
-# print df[&apos;收盘价&apos;].median()  # 中位数
-# print df[&apos;收盘价&apos;].quantile(0.25)  # 25%分位数
+# print df[&#39;收盘价&#39;].max()  # 最大值
+# print df[&#39;收盘价&#39;].min()  # 最小值
+# print df[&#39;收盘价&#39;].std()  # 标准差
+# print df[&#39;收盘价&#39;].count()  # 非空的数据的数量
+# print df[&#39;收盘价&#39;].median()  # 中位数
+# print df[&#39;收盘价&#39;].quantile(0.25)  # 25%分位数
 # 肯定还有其他的函数计算其他的指标，在实际使用中遇到可以自己搜索
 
 
 # =====shift类函数、删除列的方式
-# df[&apos;昨天收盘价&apos;] = df[&apos;收盘价&apos;].shift(-1)  # 读取上一行的数据，若参数设定为3，就是读取上三行的数据；若参数设定为-1，就是读取下一行的数据；
-# print df[[&apos;收盘价&apos;, &apos;昨天收盘价&apos;]]
-# del df[&apos;昨天收盘价&apos;]  # 删除某一列的方法
+# df[&#39;昨天收盘价&#39;] = df[&#39;收盘价&#39;].shift(-1)  # 读取上一行的数据，若参数设定为3，就是读取上三行的数据；若参数设定为-1，就是读取下一行的数据；
+# print df[[&#39;收盘价&#39;, &#39;昨天收盘价&#39;]]
+# del df[&#39;昨天收盘价&#39;]  # 删除某一列的方法
 
-# df[&apos;涨跌&apos;] = df[&apos;收盘价&apos;].diff(-1)  # 求本行数据和上一行数据相减得到的值
-# print df[[&apos;收盘价&apos;, &apos;涨跌&apos;]]
-# df.drop([&apos;涨跌&apos;], axis=1, inplace=True)  # 删除某一列的另外一种方式，inplace参数指是否替代原来的df
+# df[&#39;涨跌&#39;] = df[&#39;收盘价&#39;].diff(-1)  # 求本行数据和上一行数据相减得到的值
+# print df[[&#39;收盘价&#39;, &#39;涨跌&#39;]]
+# df.drop([&#39;涨跌&#39;], axis=1, inplace=True)  # 删除某一列的另外一种方式，inplace参数指是否替代原来的df
 # print df
-# df[&apos;涨跌幅_计算&apos;] = df[&apos;收盘价&apos;].pct_change(-1)  # 类似于diff，但是求的是两个数直接的比例，相当于求涨跌幅
+# df[&#39;涨跌幅_计算&#39;] = df[&#39;收盘价&#39;].pct_change(-1)  # 类似于diff，但是求的是两个数直接的比例，相当于求涨跌幅
 
 
 # =====cum(cumulative)类函数
-# df[&apos;成交量_cum&apos;] = df[&apos;成交量&apos;].cumsum()  # 该列的累加值
-# print df[[&apos;成交量&apos;, &apos;成交量_cum&apos;]]
-# print (df[&apos;涨跌幅&apos;] + 1.0).cumprod()  # 该列的累乘值，此处计算的就是资金曲线，假设初始1元钱。
+# df[&#39;成交量_cum&#39;] = df[&#39;成交量&#39;].cumsum()  # 该列的累加值
+# print df[[&#39;成交量&#39;, &#39;成交量_cum&#39;]]
+# print (df[&#39;涨跌幅&#39;] + 1.0).cumprod()  # 该列的累乘值，此处计算的就是资金曲线，假设初始1元钱。
 
 
 # =====其他列函数
-# df[&apos;收盘价_排名&apos;] = df[&apos;收盘价&apos;].rank(ascending=True, pct=False)  # 输出排名。ascending参数代表是顺序还是逆序。pct参数代表输出的是排名还是排名比例
-# print df[[&apos;收盘价&apos;, &apos;收盘价_排名&apos;]]
-# del df[&apos;收盘价_排名&apos;]
-# print df[&apos;股票代码&apos;].value_counts()  # 计数。统计该列中每个元素出现的次数。返回的数据是Series
+# df[&#39;收盘价_排名&#39;] = df[&#39;收盘价&#39;].rank(ascending=True, pct=False)  # 输出排名。ascending参数代表是顺序还是逆序。pct参数代表输出的是排名还是排名比例
+# print df[[&#39;收盘价&#39;, &#39;收盘价_排名&#39;]]
+# del df[&#39;收盘价_排名&#39;]
+# print df[&#39;股票代码&#39;].value_counts()  # 计数。统计该列中每个元素出现的次数。返回的数据是Series
 
 
 # =====筛选操作，根据指定的条件，筛选出相关拿数据。
-# print df[&apos;股票代码&apos;] == &apos;sh000002&apos;  # 判断股票代码是否等于sz000002
-# print df[df[&apos;股票代码&apos;] == &apos;sz000002&apos;]  # 将判断为True的输出：选取股票代码等于sz000002的行
-# print df[df[&apos;股票代码&apos;].isin([&apos;sz000002&apos;, &apos;sz000003 &apos;, &apos;sz000004&apos;])]  # 选取股票代码等于sz000002的行
-# print df[df[&apos;收盘价&apos;] &gt;= 24.0]  # 选取收盘价大于24的行
-# print df[(df.index &gt;= &apos;03/12/2016&apos;) &amp; (df.index &lt;= &apos;06/12/2016&apos;)]  # 两个条件，或者的话就是|
+# print df[&#39;股票代码&#39;] == &#39;sh000002&#39;  # 判断股票代码是否等于sz000002
+# print df[df[&#39;股票代码&#39;] == &#39;sz000002&#39;]  # 将判断为True的输出：选取股票代码等于sz000002的行
+# print df[df[&#39;股票代码&#39;].isin([&#39;sz000002&#39;, &#39;sz000003 &#39;, &#39;sz000004&#39;])]  # 选取股票代码等于sz000002的行
+# print df[df[&#39;收盘价&#39;] &gt;= 24.0]  # 选取收盘价大于24的行
+# print df[(df.index &gt;= &#39;03/12/2016&#39;) &amp; (df.index &lt;= &#39;06/12/2016&#39;)]  # 两个条件，或者的话就是|
 
 
 # =====缺失值处理：原始数据中存在缺失值，如何处理？
 # 删除缺失值
-# print df.dropna(how=&apos;any&apos;)  # 将带有空值的行删除。how=&apos;any&apos;意味着，该行中只要有一个空值，就会删除，可以改成all。
-# print df.dropna(subset=[&apos;MACD_金叉死叉&apos;, &apos;涨跌幅&apos;], how=&apos;all&apos;)  # subset参数指定在特定的列中判断空值。
+# print df.dropna(how=&#39;any&#39;)  # 将带有空值的行删除。how=&#39;any&#39;意味着，该行中只要有一个空值，就会删除，可以改成all。
+# print df.dropna(subset=[&#39;MACD_金叉死叉&#39;, &#39;涨跌幅&#39;], how=&#39;all&#39;)  # subset参数指定在特定的列中判断空值。
 # all代表全部为空，才会删除该行；any只要一个为空，就删除该行。
 
 # 补全缺失值
-# print df.fillna(value=&apos;没有金叉死叉&apos;)  # 直接将缺失值赋值为固定的值
-# df[&apos;MACD_金叉死叉&apos;].fillna(value=df[&apos;收盘价&apos;], inplace=True)  # 直接将缺失值赋值其他列的数据
-# print df.fillna(method=&apos;ffill&apos;)  # 向上寻找最近的一个非空值，以该值来填充缺失的位置，全称forward fill，非常有用
-# print df.fillna(method=&apos;bfill&apos;)  # 向下寻找最近的一个非空值，以该值来填充确实的位置，全称backward fill
+# print df.fillna(value=&#39;没有金叉死叉&#39;)  # 直接将缺失值赋值为固定的值
+# df[&#39;MACD_金叉死叉&#39;].fillna(value=df[&#39;收盘价&#39;], inplace=True)  # 直接将缺失值赋值其他列的数据
+# print df.fillna(method=&#39;ffill&#39;)  # 向上寻找最近的一个非空值，以该值来填充缺失的位置，全称forward fill，非常有用
+# print df.fillna(method=&#39;bfill&#39;)  # 向下寻找最近的一个非空值，以该值来填充确实的位置，全称backward fill
 
 # 找出缺失值
 # print df.notnull()  # 判断是否为空值，反向函数为isnull()
-# print df[df[&apos;MACD_金叉死叉&apos;].notnull()]  # 将&apos;MACD_金叉死叉&apos;列为空的行输出
+# print df[df[&#39;MACD_金叉死叉&#39;].notnull()]  # 将&#39;MACD_金叉死叉&#39;列为空的行输出
 
 
 # =====排序函数
 # df.reset_index(inplace=True)
-# print df.sort_values(by=[&apos;交易日期&apos;], ascending=1)  # by参数指定按照什么进行排序，acsending参数指定是顺序还是逆序，1顺序，0逆序
-# print df.sort_values(by=[&apos;股票名称&apos;, &apos;交易日期&apos;], ascending=[1, 1])  # 按照多列进行排序
+# print df.sort_values(by=[&#39;交易日期&#39;], ascending=1)  # by参数指定按照什么进行排序，acsending参数指定是顺序还是逆序，1顺序，0逆序
+# print df.sort_values(by=[&#39;股票名称&#39;, &#39;交易日期&#39;], ascending=[1, 1])  # 按照多列进行排序
 
 
 # =====两个df上下合并操作，append操作
 # df.reset_index(inplace=True)
-# df1 = df.iloc[0:10][[&apos;交易日期&apos;, &apos;股票代码&apos;, &apos;收盘价&apos;, &apos;涨跌幅&apos;]]
+# df1 = df.iloc[0:10][[&#39;交易日期&#39;, &#39;股票代码&#39;, &#39;收盘价&#39;, &#39;涨跌幅&#39;]]
 # print df1
-# df2 = df.iloc[5:15][[&apos;交易日期&apos;, &apos;股票名称&apos;, &apos;收盘价&apos;, &apos;涨跌幅&apos;]]
+# df2 = df.iloc[5:15][[&#39;交易日期&#39;, &#39;股票名称&#39;, &#39;收盘价&#39;, &#39;涨跌幅&#39;]]
 # print df2
 # print df1.append(df2)  # append操作，将df1和df2上下拼接起来。注意观察拼接之后的index
 # df3 = df1.append(df2, ignore_index=True)  # ignore_index参数，用户重新确定index
@@ -407,94 +407,95 @@ df = pd.read_csv(
 # =====对数据进行去重
 # df3中有重复的行数，我们如何将重复的行数去除？
 # df3.drop_duplicates(
-#     subset=[&apos;收盘价&apos;, &apos;交易日期&apos;],  # subset参数用来指定根据哪类类数据来判断是否重复。若不指定，则用全部列的数据来判断是否重复
-#     keep=&apos;first&apos;,  # 在去除重复值的时候，我们是保留上面一行还是下面一行？first保留上面一行，last保留下面一行，False就是一行都不保留
+#     subset=[&#39;收盘价&#39;, &#39;交易日期&#39;],  # subset参数用来指定根据哪类类数据来判断是否重复。若不指定，则用全部列的数据来判断是否重复
+#     keep=&#39;first&#39;,  # 在去除重复值的时候，我们是保留上面一行还是下面一行？first保留上面一行，last保留下面一行，False就是一行都不保留
 #     inplace=True
 # )
 # print df3
 
 
 # =====其他常用重要函数
-# print df.rename(columns=&#123;&apos;MACD_金叉死叉&apos;: &apos;金叉死叉&apos;, &apos;涨跌幅&apos;: &apos;涨幅&apos;&#125;)  # rename函数给变量修改名字。使用dict将要修改的名字传给columns参数
+# print df.rename(columns=&#123;&#39;MACD_金叉死叉&#39;: &#39;金叉死叉&#39;, &#39;涨跌幅&#39;: &#39;涨幅&#39;&#125;)  # rename函数给变量修改名字。使用dict将要修改的名字传给columns参数
 # print df.empty  # 判断一个df是不是为空，此处输出不为空
 # print pd.DataFrame().empty  # pd.DataFrame()创建一个空的DataFrame，此处输出为空
 # print df.T  # 将数据转置，行变成列，很有用
 
 
 # =====字符串处理
-# print df[&apos;股票代码&apos;]
-# print &apos;sz000002&apos;[:2]
-# print df[&apos;股票代码&apos;].str[:2]
-# print df[&apos;股票代码&apos;].str.upper()  # 加上str之后可以使用常见的字符串函数对整列进行操作
-# print df[&apos;股票代码&apos;].str.lower()
-# print df[&apos;股票代码&apos;].str.len()  # 计算字符串的长度,length
-# df[&apos;股票代码&apos;].str.strip()  # strip操作，把字符串两边的空格去掉
-# print df[&apos;股票代码&apos;].str.contains(&apos;sh&apos;)  # 判断字符串中是否包含某些特定字符
-# print df[&apos;股票代码&apos;].str.replace(&apos;sz&apos;, &apos;sh&apos;)  # 进行替换，将sz替换成sh
+# print df[&#39;股票代码&#39;]
+# print &#39;sz000002&#39;[:2]
+# print df[&#39;股票代码&#39;].str[:2]
+# print df[&#39;股票代码&#39;].str.upper()  # 加上str之后可以使用常见的字符串函数对整列进行操作
+# print df[&#39;股票代码&#39;].str.lower()
+# print df[&#39;股票代码&#39;].str.len()  # 计算字符串的长度,length
+# df[&#39;股票代码&#39;].str.strip()  # strip操作，把字符串两边的空格去掉
+# print df[&#39;股票代码&#39;].str.contains(&#39;sh&#39;)  # 判断字符串中是否包含某些特定字符
+# print df[&#39;股票代码&#39;].str.replace(&#39;sz&#39;, &#39;sh&#39;)  # 进行替换，将sz替换成sh
 # split操作
-# print df[&apos;新浪概念&apos;].str.split(&apos;；&apos;)  # 对字符串进行分割
-# print df[&apos;新浪概念&apos;].str.split(&apos;；&apos;).str[:2]  # 分割后取第一个位置
-# print df[&apos;新浪概念&apos;].str.split(&apos;；&apos;, expand=True)  # 分割后并且将数据分列
+# print df[&#39;新浪概念&#39;].str.split(&#39;；&#39;)  # 对字符串进行分割
+# print df[&#39;新浪概念&#39;].str.split(&#39;；&#39;).str[:2]  # 分割后取第一个位置
+# print df[&#39;新浪概念&#39;].str.split(&#39;；&#39;, expand=True)  # 分割后并且将数据分列
 # # 更多字符串函数请见：http://pandas.pydata.org/pandas-docs/stable/text.html#method-summary
 
 
 # =====时间处理
 # 导入数据时将index参数注释掉
 
-# df[&apos;交易日期&apos;] = pd.to_datetime(df[&apos;交易日期&apos;])  # 将交易日期由字符串改为时间变量
-# print df[&apos;交易日期&apos;]
-# print df.iloc[0][&apos;交易日期&apos;]
+# df[&#39;交易日期&#39;] = pd.to_datetime(df[&#39;交易日期&#39;])  # 将交易日期由字符串改为时间变量
+# print df[&#39;交易日期&#39;]
+# print df.iloc[0][&#39;交易日期&#39;]
 # print df.dtypes
-# print pd.to_datetime(&apos;1999年01月01日&apos;)  # pd.to_datetime函数：将字符串转变为时间变量
-# print df.at[0, &apos;交易日期&apos;]
+# print pd.to_datetime(&#39;1999年01月01日&#39;)  # pd.to_datetime函数：将字符串转变为时间变量
+# print df.at[0, &#39;交易日期&#39;]
 
-# print df[&apos;交易日期&apos;].dt.year  # 输出这个日期的年份。相应的month是月份，day是天数，还有hour, minute, second
-# print df[&apos;交易日期&apos;].dt.week  # 这一天是一年当中的第几周
-# print df[&apos;交易日期&apos;].dt.dayofyear  # 这一天是一年当中的第几天
-# print df[&apos;交易日期&apos;].dt.dayofweek  # 这一天是这一周当中的第几天，0代表星期一
-# print df[&apos;交易日期&apos;].dt.weekday  # 和上面函数相同，更加常用
-# print df[&apos;交易日期&apos;].dt.weekday_name  # 和上面函数相同，返回的是星期几的英文，用于报表的制作。
-# print df[&apos;交易日期&apos;].dt.days_in_month  # 这一天是这一月当中的第几天
-# print df[&apos;交易日期&apos;].dt.is_month_end  # 这一天是否是该月的开头，是否存在is_month_end？
-# print df[&apos;交易日期&apos;] + pd.Timedelta(days=1)  # 增加一天，Timedelta用于表示时间差数据
-# print (df[&apos;交易日期&apos;] + pd.Timedelta(days=1)) - df[&apos;交易日期&apos;]  # 增加一天然后再减去今天的日期
+# print df[&#39;交易日期&#39;].dt.year  # 输出这个日期的年份。相应的month是月份，day是天数，还有hour, minute, second
+# print df[&#39;交易日期&#39;].dt.week  # 这一天是一年当中的第几周
+# print df[&#39;交易日期&#39;].dt.dayofyear  # 这一天是一年当中的第几天
+# print df[&#39;交易日期&#39;].dt.dayofweek  # 这一天是这一周当中的第几天，0代表星期一
+# print df[&#39;交易日期&#39;].dt.weekday  # 和上面函数相同，更加常用
+# print df[&#39;交易日期&#39;].dt.weekday_name  # 和上面函数相同，返回的是星期几的英文，用于报表的制作。
+# print df[&#39;交易日期&#39;].dt.days_in_month  # 这一天是这一月当中的第几天
+# print df[&#39;交易日期&#39;].dt.is_month_end  # 这一天是否是该月的开头，是否存在is_month_end？
+# print df[&#39;交易日期&#39;] + pd.Timedelta(days=1)  # 增加一天，Timedelta用于表示时间差数据
+# print (df[&#39;交易日期&#39;] + pd.Timedelta(days=1)) - df[&#39;交易日期&#39;]  # 增加一天然后再减去今天的日期
 
 
 # =====rolling、expanding操作
-# 计算&apos;收盘价&apos;这一列的均值
-# print df[&apos;收盘价&apos;].mean()
+# 计算&#39;收盘价&#39;这一列的均值
+# print df[&#39;收盘价&#39;].mean()
 # 如何得到每一天的最近3天收盘价的均值呢？即如何计算常用的移动平均线？
 # 使用rolling函数
-# df[&apos;收盘价_3天均值&apos;] = df[&apos;收盘价&apos;].rolling(5).mean()
-# print df[[&apos;收盘价&apos;, &apos;收盘价_3天均值&apos;]]
+# df[&#39;收盘价_3天均值&#39;] = df[&#39;收盘价&#39;].rolling(5).mean()
+# print df[[&#39;收盘价&#39;, &#39;收盘价_3天均值&#39;]]
 # rolling(n)即为取最近n行数据的意思，只计算这n行数据。后面可以接各类计算函数，例如max、min、std等
-# print df[&apos;收盘价&apos;].rolling(3).max()
-# print df[&apos;收盘价&apos;].rolling(3).min()
-# print df[&apos;收盘价&apos;].rolling(3).std()
+# print df[&#39;收盘价&#39;].rolling(3).max()
+# print df[&#39;收盘价&#39;].rolling(3).min()
+# print df[&#39;收盘价&#39;].rolling(3).std()
 
 # rolling可以计算每天的最近3天的均值，如果想计算每天的从一开始至今的均值，应该如何计算？
 # 使用expanding操作
-# df[&apos;收盘价_至今均值&apos;] = df[&apos;收盘价&apos;].expanding().mean()
-# print df[[&apos;收盘价&apos;, &apos;收盘价_至今均值&apos;]]
+# df[&#39;收盘价_至今均值&#39;] = df[&#39;收盘价&#39;].expanding().mean()
+# print df[[&#39;收盘价&#39;, &#39;收盘价_至今均值&#39;]]
 
 # expanding即为取从头至今的数据。后面可以接各类计算函数
-# print df[&apos;收盘价&apos;].expanding().max()
-# print df[&apos;收盘价&apos;].expanding().min()
-# print df[&apos;收盘价&apos;].expanding().std()
+# print df[&#39;收盘价&#39;].expanding().max()
+# print df[&#39;收盘价&#39;].expanding().min()
+# print df[&#39;收盘价&#39;].expanding().std()
 
 # rolling和expanding简直是为量化领域量身定制的方法，经常会用到。
 
 
 # =====输出
 # print df
-# df.to_csv(&apos;output.csv&apos;, encoding=&apos;gbk&apos;, index=False)
+# df.to_csv(&#39;output.csv&#39;, encoding=&#39;gbk&#39;, index=False)
 
 
 # =====文档
 # 以上是我认为最常用的函数
 # 哪里可以看到全部的函数？http://pandas.pydata.org/pandas-docs/stable/api.html
 # 一般的使用方法
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="resample"><a href="#resample" class="headerlink" title="resample"></a>resample</h3><hr>
 <p>resample获取周、月数据。将数据转换为制定周期：开盘价（周期第1天）、收盘价（周期最后1天）、最高价（周期内）、最低价（周期内）。</p>
 <pre><code>import pandas as pd
@@ -502,17 +503,17 @@ import datetime
 import time
 import os
 
-pd.set_option(&apos;expand_frame_repr&apos;, False)  # 当列太多时不换行
-pd.set_option(&apos;max_row&apos;,4000)#最多行数
+pd.set_option(&#39;expand_frame_repr&#39;, False)  # 当列太多时不换行
+pd.set_option(&#39;max_row&#39;,4000)#最多行数
 
 # =====读入数据
-df = pd.read_csv(&apos;G:/share//note/000001上证指数.csv&apos;, encoding=&apos;gbk&apos;)
+df = pd.read_csv(&#39;G:/share//note/000001上证指数.csv&#39;, encoding=&#39;gbk&#39;)
 df.columns = [i for i in df.columns]
-df = df[[&apos;日期&apos;,&apos;收盘价&apos;,&apos;开盘价&apos;,&apos;最高价&apos;,&apos;最低价&apos;,&apos;涨跌幅&apos;]]
-df.sort_values(by=[&apos;日期&apos;], inplace=True)
-df[&apos;日期&apos;] = pd.to_datetime(df[&apos;日期&apos;])
+df = df[[&#39;日期&#39;,&#39;收盘价&#39;,&#39;开盘价&#39;,&#39;最高价&#39;,&#39;最低价&#39;,&#39;涨跌幅&#39;]]
+df.sort_values(by=[&#39;日期&#39;], inplace=True)
+df[&#39;日期&#39;] = pd.to_datetime(df[&#39;日期&#39;])
 # 最近十二年数据
-df = df[df[&apos;日期&apos;] &gt;= &apos;2009-04-12&apos;]
+df = df[df[&#39;日期&#39;] &gt;= &#39;2009-04-12&#39;]
 df.reset_index(inplace=True, drop=True)
 print(df)
 
@@ -524,17 +525,18 @@ def transfer_price_freq(data, time_freq):
     :return:
     &quot;&quot;&quot;
     df_trans = pd.DataFrame()
-    df_trans[&apos;开盘价&apos;] = data[&apos;开盘价&apos;].resample(time_freq).first()
-    df_trans[&apos;收盘价&apos;] = data[&apos;收盘价&apos;].resample(time_freq).last()
-    df_trans[&apos;最高价&apos;] = data[&apos;最高价&apos;].resample(time_freq).max()
-    df_trans[&apos;最低价&apos;] = data[&apos;最低价&apos;].resample(time_freq).min()
+    df_trans[&#39;开盘价&#39;] = data[&#39;开盘价&#39;].resample(time_freq).first()
+    df_trans[&#39;收盘价&#39;] = data[&#39;收盘价&#39;].resample(time_freq).last()
+    df_trans[&#39;最高价&#39;] = data[&#39;最高价&#39;].resample(time_freq).max()
+    df_trans[&#39;最低价&#39;] = data[&#39;最低价&#39;].resample(time_freq).min()
     return df_trans
 
 # 转换index
-df = df.set_index(df[&apos;日期&apos;])
-#print(transfer_price_freq(df,&apos;M&apos;))
-print(transfer_price_freq(df,&apos;W&apos;))
-</code></pre><hr>
+df = df.set_index(df[&#39;日期&#39;])
+#print(transfer_price_freq(df,&#39;M&#39;))
+print(transfer_price_freq(df,&#39;W&#39;))
+</code></pre>
+<hr>
 <h3 id="shift涨跌幅"><a href="#shift涨跌幅" class="headerlink" title="shift涨跌幅"></a>shift涨跌幅</h3><hr>
 <pre><code>def calculate_change_pct(data):
     &quot;&quot;&quot;
@@ -542,24 +544,25 @@ print(transfer_price_freq(df,&apos;W&apos;))
     :param data: dataframe，带有收盘价
     :return: dataframe，带有涨跌幅
     &quot;&quot;&quot;
-    data[&apos;close_pct&apos;] = (data[&apos;close&apos;] - data[&apos;close&apos;].shift(1)) \
-                        / data[&apos;close&apos;].shift(1)
+    data[&#39;close_pct&#39;] = (data[&#39;close&#39;] - data[&#39;close&#39;].shift(1)) \
+                        / data[&#39;close&#39;].shift(1)
     return data
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="数据存储和读取"><a href="#数据存储和读取" class="headerlink" title="数据存储和读取"></a>数据存储和读取</h3><hr>
-<pre><code>def update_daily_price(stock_code, type=&apos;price&apos;):
+<pre><code>def update_daily_price(stock_code, type=&#39;price&#39;):
     # 3.1是否存在文件：不存在-重新获取，存在-&gt;3.2
-    file_root = data_root + type + &apos;/&apos; + stock_code + &apos;.csv&apos;
+    file_root = data_root + type + &#39;/&#39; + stock_code + &#39;.csv&#39;
     if os.path.exists(file_root):  # 如果存在对应文件
         # 3.2获取增量数据（code，startsdate=对应股票csv中最新日期，enddate=今天）
-        startdate = pd.read_csv(file_root, usecols=[&apos;date&apos;])[&apos;date&apos;].iloc[-1]
-        df = get_single_price(stock_code, &apos;daily&apos;, startdate, datetime.datetime.today())
+        startdate = pd.read_csv(file_root, usecols=[&#39;date&#39;])[&#39;date&#39;].iloc[-1]
+        df = get_single_price(stock_code, &#39;daily&#39;, startdate, datetime.datetime.today())
         # 3.3追加到已有文件中
-        export_data(df, stock_code, &apos;price&apos;, &apos;a&apos;)
+        export_data(df, stock_code, &#39;price&#39;, &#39;a&#39;)
     else:
         # 重新获取该股票行情数据
-        df = get_single_price(stock_code, &apos;daily&apos;)
-        export_data(df, stock_code, &apos;price&apos;)
+        df = get_single_price(stock_code, &#39;daily&#39;)
+        export_data(df, stock_code, &#39;price&#39;)
 
     print(&quot;股票数据已经更新成功：&quot;, stock_code)
 
@@ -573,19 +576,20 @@ def export_data(data, filename, type, mode=None):
     :param mode: a代表追加，none代表默认w写入
     :return:
     &quot;&quot;&quot;
-    file_root = data_root + type + &apos;/&apos; + filename + &apos;.csv&apos;
-    data.index.names = [&apos;date&apos;]
-    if mode == &apos;a&apos;:
+    file_root = data_root + type + &#39;/&#39; + filename + &#39;.csv&#39;
+    data.index.names = [&#39;date&#39;]
+    if mode == &#39;a&#39;:
         data.to_csv(file_root, mode=mode, header=False)
         # 删除重复值
         data = pd.read_csv(file_root)  # 读取数据
-        data = data.drop_duplicates(subset=[&apos;date&apos;])  # 以日期列为准
+        data = data.drop_duplicates(subset=[&#39;date&#39;])  # 以日期列为准
         data.to_csv(file_root, index=False)  # 重新写入
     else:
         data.to_csv(file_root)  # 判断一下file是否存在 &gt; 存在：追加 / 不存在：保持
 
-    print(&apos;已成功存储至：&apos;, file_root)
-</code></pre><hr>
+    print(&#39;已成功存储至：&#39;, file_root)
+</code></pre>
+<hr>
 <h3 id="计算交易指标"><a href="#计算交易指标" class="headerlink" title="计算交易指标"></a>计算交易指标</h3><hr>
 <pre><code>import pandas as pd
 import numpy as np
@@ -596,19 +600,19 @@ def get_single_price():
     &quot;&quot;&quot;
     获取单数据
     &quot;&quot;&quot;
-    pd.set_option(&apos;expand_frame_repr&apos;, False)  # 当列太多时不换行
-    pd.set_option(&apos;max_row&apos;,4000)#最多行数
+    pd.set_option(&#39;expand_frame_repr&#39;, False)  # 当列太多时不换行
+    pd.set_option(&#39;max_row&#39;,4000)#最多行数
 
     # =====读入数据
-    df = pd.read_csv(&apos;G:/share/note/000001上证指数.csv&apos;, encoding=&apos;gbk&apos;)
+    df = pd.read_csv(&#39;G:/share/note/000001上证指数.csv&#39;, encoding=&#39;gbk&#39;)
     df.columns = [i for i in df.columns]
-    df = df[[&apos;日期&apos;,&apos;收盘价&apos;,&apos;开盘价&apos;,&apos;最高价&apos;,&apos;最低价&apos;,&apos;涨跌幅&apos;]]
-    df.sort_values(by=[&apos;日期&apos;], inplace=True)
-    df[&apos;日期&apos;] = pd.to_datetime(df[&apos;日期&apos;])
+    df = df[[&#39;日期&#39;,&#39;收盘价&#39;,&#39;开盘价&#39;,&#39;最高价&#39;,&#39;最低价&#39;,&#39;涨跌幅&#39;]]
+    df.sort_values(by=[&#39;日期&#39;], inplace=True)
+    df[&#39;日期&#39;] = pd.to_datetime(df[&#39;日期&#39;])
     # 最近十二年数据
-    df = df[df[&apos;日期&apos;] &gt;= &apos;2009-04-12&apos;]
+    df = df[df[&#39;日期&#39;] &gt;= &#39;2009-04-12&#39;]
     df.reset_index(inplace=True, drop=True)
-    df = df.set_index(df[&apos;日期&apos;])
+    df = df.set_index(df[&#39;日期&#39;])
     return df
 
 def compose_signal(data):
@@ -617,11 +621,11 @@ def compose_signal(data):
     :param data:
     :return:
     &quot;&quot;&quot;
-    data[&apos;buy_signal&apos;] = np.where((data[&apos;buy_signal&apos;] == 1)
-                                  &amp; (data[&apos;buy_signal&apos;].shift(1) == 1), 0, data[&apos;buy_signal&apos;])
-    data[&apos;sell_signal&apos;] = np.where((data[&apos;sell_signal&apos;] == -1)
-                                   &amp; (data[&apos;sell_signal&apos;].shift(1) == -1), 0, data[&apos;sell_signal&apos;])
-    data[&apos;signal&apos;] = data[&apos;buy_signal&apos;] + data[&apos;sell_signal&apos;]
+    data[&#39;buy_signal&#39;] = np.where((data[&#39;buy_signal&#39;] == 1)
+                                  &amp; (data[&#39;buy_signal&#39;].shift(1) == 1), 0, data[&#39;buy_signal&#39;])
+    data[&#39;sell_signal&#39;] = np.where((data[&#39;sell_signal&#39;] == -1)
+                                   &amp; (data[&#39;sell_signal&#39;].shift(1) == -1), 0, data[&#39;sell_signal&#39;])
+    data[&#39;signal&#39;] = data[&#39;buy_signal&#39;] + data[&#39;sell_signal&#39;]
     return data
 
 def calculate_prof_pct(data):
@@ -630,9 +634,9 @@ def calculate_prof_pct(data):
     :param data:
     :return:
     &quot;&quot;&quot;
-    data = data[data[&apos;signal&apos;] != 0]  # 筛选
-    data[&apos;profit_pct&apos;] = (data[&apos;收盘价&apos;] - data[&apos;收盘价&apos;].shift(1)) / data[&apos;收盘价&apos;].shift(1)
-    data = data[data[&apos;signal&apos;] == -1]
+    data = data[data[&#39;signal&#39;] != 0]  # 筛选
+    data[&#39;profit_pct&#39;] = (data[&#39;收盘价&#39;] - data[&#39;收盘价&#39;].shift(1)) / data[&#39;收盘价&#39;].shift(1)
+    data = data[data[&#39;signal&#39;] == -1]
     return data
 
 def calculate_cum_prof(data):
@@ -641,7 +645,7 @@ def calculate_cum_prof(data):
     :param data: dataframe
     :return:
     &quot;&quot;&quot;
-    data[&apos;cum_profit&apos;] = pd.DataFrame(1 + data[&apos;profit_pct&apos;]).cumprod() - 1
+    data[&#39;cum_profit&#39;] = pd.DataFrame(1 + data[&#39;profit_pct&#39;]).cumprod() - 1
     return data
 
 def caculate_max_drawdown(data):
@@ -653,11 +657,11 @@ def caculate_max_drawdown(data):
     # 选取时间周期（时间窗口）
     window = 252
     # 选取时间周期中的最大净值
-    data[&apos;roll_max&apos;] = data[&apos;收盘价&apos;].rolling(window=window, min_periods=1).max()
+    data[&#39;roll_max&#39;] = data[&#39;收盘价&#39;].rolling(window=window, min_periods=1).max()
     # 计算当天的回撤比 = (谷值 — 峰值)/峰值 = 谷值/峰值 - 1
-    data[&apos;daily_dd&apos;] = data[&apos;收盘价&apos;] / data[&apos;roll_max&apos;] - 1
+    data[&#39;daily_dd&#39;] = data[&#39;收盘价&#39;] / data[&#39;roll_max&#39;] - 1
     # 选取时间周期内最大的回撤比，即最大回撤
-    data[&apos;max_dd&apos;] = data[&apos;daily_dd&apos;].rolling(window, min_periods=1).min()
+    data[&#39;max_dd&#39;] = data[&#39;daily_dd&#39;].rolling(window, min_periods=1).min()
 
     return data
 
@@ -668,7 +672,7 @@ def calculate_sharpe(data):
     :return: float
     &quot;&quot;&quot;
     # 公式：sharpe = (回报率的均值 - 无风险利率) / 回报率的标准差
-    daily_return = data[&apos;收盘价&apos;].pct_change()
+    daily_return = data[&#39;收盘价&#39;].pct_change()
     avg_return = daily_return.mean()
     sd_reutrn = daily_return.std()
     # 计算夏普：每日收益率 * 252 = 每年收益率
@@ -681,11 +685,11 @@ def week_period_strategy(data):
     周期选股（周四买，周一卖）
     &quot;&quot;&quot;
     # 新建周期字段
-    data[&apos;weekday&apos;] = data.index.weekday
+    data[&#39;weekday&#39;] = data.index.weekday
     # 周四买入
-    data[&apos;buy_signal&apos;] = np.where((data[&apos;weekday&apos;] == 3), 1, 0)
+    data[&#39;buy_signal&#39;] = np.where((data[&#39;weekday&#39;] == 3), 1, 0)
     # 周一卖出
-    data[&apos;sell_signal&apos;] = np.where((data[&apos;weekday&apos;] == 0), -1, 0)
+    data[&#39;sell_signal&#39;] = np.where((data[&#39;weekday&#39;] == 0), -1, 0)
 
     data = compose_signal(data)  # 整合信号
     data = calculate_prof_pct(data)  # 计算收益
@@ -693,27 +697,28 @@ def week_period_strategy(data):
     # data = caculate_max_drawdown(data)  # 最大回撤
     return data
 
-if __name__ == &apos;__main__&apos;:
+if __name__ == &#39;__main__&#39;:
 
     df = get_single_price()
     df = week_period_strategy(df)
-    df = df[[&apos;收盘价&apos;,&apos;开盘价&apos;,&apos;涨跌幅&apos;,&apos;signal&apos;,&apos;profit_pct&apos;,&apos;cum_profit&apos;]]
-
+    df = df[[&#39;收盘价&#39;,&#39;开盘价&#39;,&#39;涨跌幅&#39;,&#39;signal&#39;,&#39;profit_pct&#39;,&#39;cum_profit&#39;]]
+    
     caculate_max_drawdown(df)
-    df[[&apos;daily_dd&apos;,&apos;daily_dd&apos;]].plot()
+    df[[&#39;daily_dd&#39;,&#39;daily_dd&#39;]].plot()
     plt.show()
     print(df)
-
-    df[&apos;profit_pct&apos;].plot()
+    
+    df[&#39;profit_pct&#39;].plot()
     plt.show()
-
-    df[&apos;cum_profit&apos;].plot()
+    
+    df[&#39;cum_profit&#39;].plot()
     plt.show()
 
     #计算夏普比率
     sharpe = calculate_sharpe(df)
     print(sharpe)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="双曲均线多股比较"><a href="#双曲均线多股比较" class="headerlink" title="双曲均线多股比较"></a>双曲均线多股比较</h3><hr>
 <pre><code>import pandas as pd
 import numpy as np
@@ -723,19 +728,19 @@ def get_single_price(code):
     &quot;&quot;&quot;
     获取单数据
     &quot;&quot;&quot;
-    pd.set_option(&apos;expand_frame_repr&apos;, False)  # 当列太多时不换行
-    pd.set_option(&apos;max_row&apos;,4000)#最多行数
+    pd.set_option(&#39;expand_frame_repr&#39;, False)  # 当列太多时不换行
+    pd.set_option(&#39;max_row&#39;,4000)#最多行数
 
     # =====读入数据
-    df = pd.read_csv(&apos;G:/share/note/&apos; + code + &apos;.csv&apos;, encoding=&apos;gbk&apos;)
+    df = pd.read_csv(&#39;G:/share/note/&#39; + code + &#39;.csv&#39;, encoding=&#39;gbk&#39;)
     df.columns = [i for i in df.columns]
-    df = df[[&apos;日期&apos;,&apos;收盘价&apos;,&apos;开盘价&apos;,&apos;最高价&apos;,&apos;最低价&apos;,&apos;涨跌幅&apos;]]
-    df.sort_values(by=[&apos;日期&apos;], inplace=True)
-    df[&apos;日期&apos;] = pd.to_datetime(df[&apos;日期&apos;])
+    df = df[[&#39;日期&#39;,&#39;收盘价&#39;,&#39;开盘价&#39;,&#39;最高价&#39;,&#39;最低价&#39;,&#39;涨跌幅&#39;]]
+    df.sort_values(by=[&#39;日期&#39;], inplace=True)
+    df[&#39;日期&#39;] = pd.to_datetime(df[&#39;日期&#39;])
     # 最近数据
-    df = df[df[&apos;日期&apos;] &gt;= &apos;2019-01-01&apos;]
+    df = df[df[&#39;日期&#39;] &gt;= &#39;2019-01-01&#39;]
     df.reset_index(inplace=True, drop=True)
-    df = df.set_index(df[&apos;日期&apos;])
+    df = df.set_index(df[&#39;日期&#39;])
     return df
 
 def compose_signal(data):
@@ -744,11 +749,11 @@ def compose_signal(data):
     :param data:
     :return:
     &quot;&quot;&quot;
-    data[&apos;buy_signal&apos;] = np.where((data[&apos;buy_signal&apos;] == 1)
-                                  &amp; (data[&apos;buy_signal&apos;].shift(1) == 1), 0, data[&apos;buy_signal&apos;])
-    data[&apos;sell_signal&apos;] = np.where((data[&apos;sell_signal&apos;] == -1)
-                                   &amp; (data[&apos;sell_signal&apos;].shift(1) == -1), 0, data[&apos;sell_signal&apos;])
-    data[&apos;signal&apos;] = data[&apos;buy_signal&apos;] + data[&apos;sell_signal&apos;]
+    data[&#39;buy_signal&#39;] = np.where((data[&#39;buy_signal&#39;] == 1)
+                                  &amp; (data[&#39;buy_signal&#39;].shift(1) == 1), 0, data[&#39;buy_signal&#39;])
+    data[&#39;sell_signal&#39;] = np.where((data[&#39;sell_signal&#39;] == -1)
+                                   &amp; (data[&#39;sell_signal&#39;].shift(1) == -1), 0, data[&#39;sell_signal&#39;])
+    data[&#39;signal&#39;] = data[&#39;buy_signal&#39;] + data[&#39;sell_signal&#39;]
     return data
 
 def calculate_prof_pct(data):
@@ -757,11 +762,11 @@ def calculate_prof_pct(data):
     :param data:
     :return:
     &quot;&quot;&quot;
-    data = data[data[&apos;signal&apos;] != 0]  # 筛选
-    data[&apos;profit_pct&apos;] = (data[&apos;收盘价&apos;] - data[&apos;收盘价&apos;].shift(1)) / data[&apos;收盘价&apos;].shift(1)
+    data = data[data[&#39;signal&#39;] != 0]  # 筛选
+    data[&#39;profit_pct&#39;] = (data[&#39;收盘价&#39;] - data[&#39;收盘价&#39;].shift(1)) / data[&#39;收盘价&#39;].shift(1)
     # 数据预览
-    #print(data[[&apos;收盘价&apos;, &apos;short_ma&apos;, &apos;long_ma&apos;,&apos;signal&apos;,&apos;profit_pct&apos;]])
-    data = data[data[&apos;signal&apos;] == -1]
+    #print(data[[&#39;收盘价&#39;, &#39;short_ma&#39;, &#39;long_ma&#39;,&#39;signal&#39;,&#39;profit_pct&#39;]])
+    data = data[data[&#39;signal&#39;] == -1]
     return data
 
 def calculate_cum_prof(data):
@@ -770,7 +775,7 @@ def calculate_cum_prof(data):
     :param data: dataframe
     :return:
     &quot;&quot;&quot;
-    data[&apos;cum_profit&apos;] = pd.DataFrame(1 + data[&apos;profit_pct&apos;]).cumprod() - 1
+    data[&#39;cum_profit&#39;] = pd.DataFrame(1 + data[&#39;profit_pct&#39;]).cumprod() - 1
     return data
 
 def ma_strategy(data, short_window=5, long_window=20):
@@ -783,12 +788,12 @@ def ma_strategy(data, short_window=5, long_window=20):
     &quot;&quot;&quot;
     data = pd.DataFrame(data)
     # 计算技术指标：ma短期、ma长期
-    data[&apos;short_ma&apos;] = data[&apos;收盘价&apos;].rolling(window=short_window).mean()
-    data[&apos;long_ma&apos;] = data[&apos;收盘价&apos;].rolling(window=long_window).mean()
+    data[&#39;short_ma&#39;] = data[&#39;收盘价&#39;].rolling(window=short_window).mean()
+    data[&#39;long_ma&#39;] = data[&#39;收盘价&#39;].rolling(window=long_window).mean()
 
     # 生成信号：金叉买入、死叉卖出
-    data[&apos;buy_signal&apos;] = np.where(data[&apos;short_ma&apos;] &gt; data[&apos;long_ma&apos;], 1, 0)
-    data[&apos;sell_signal&apos;] = np.where(data[&apos;short_ma&apos;] &lt; data[&apos;long_ma&apos;], -1, 0)
+    data[&#39;buy_signal&#39;] = np.where(data[&#39;short_ma&#39;] &gt; data[&#39;long_ma&#39;], 1, 0)
+    data[&#39;sell_signal&#39;] = np.where(data[&#39;short_ma&#39;] &lt; data[&#39;long_ma&#39;], -1, 0)
     # 过滤信号
     data = compose_signal(data)
     # 计算单次收益
@@ -797,12 +802,12 @@ def ma_strategy(data, short_window=5, long_window=20):
     # 计算累计收益
     data = calculate_cum_prof(data)
     # 删除多余的columns
-    data.drop(labels=[&apos;buy_signal&apos;, &apos;sell_signal&apos;], axis=1)
+    data.drop(labels=[&#39;buy_signal&#39;, &#39;sell_signal&#39;], axis=1)
     return data
 
-if __name__ == &apos;__main__&apos;:
+if __name__ == &#39;__main__&#39;:
     # 股票列表
-    stocks = [&apos;000001上证指数&apos;, &apos;000300沪深300&apos;, &apos;000905中证500&apos;]
+    stocks = [&#39;000001上证指数&#39;, &#39;000300沪深300&#39;, &#39;000905中证500&#39;]
     # 存放累计收益率
     cum_profits = pd.DataFrame()
     # 循环获取数据
@@ -810,23 +815,24 @@ if __name__ == &apos;__main__&apos;:
         df = get_single_price(code)
         # 调用双均线策略
         df = ma_strategy(df)  
-        cum_profits[code] = df[&apos;cum_profit&apos;].reset_index(drop=True)  # 存储累计收益率
+        cum_profits[code] = df[&#39;cum_profit&#39;].reset_index(drop=True)  # 存储累计收益率
         # 折线图
-        df[&apos;cum_profit&apos;].plot(label=code)
+        df[&#39;cum_profit&#39;].plot(label=code)
         # 筛选有信号点
-        # df = df[df[&apos;signal&apos;] != 0]
+        # df = df[df[&#39;signal&#39;] != 0]
         # 预览数据
         print(&quot;开仓次数：&quot;, int(len(df)))
-        #print(df[[&apos;日期&apos;,&apos;收盘价&apos;, &apos;signal&apos;, &apos;cum_profit&apos;]])
+        #print(df[[&#39;日期&#39;,&#39;收盘价&#39;, &#39;signal&#39;, &#39;cum_profit&#39;]])
 
     # 预览
     print(cum_profits)
     # 可视化
     # cum_profits.plot()
     plt.legend()
-    plt.title(&apos;Comparison of Ma Strategy Profits&apos;)
+    plt.title(&#39;Comparison of Ma Strategy Profits&#39;)
     plt.show()
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="P值计算"><a href="#P值计算" class="headerlink" title="P值计算"></a>P值计算</h3><hr>
 <p>p值越小，可能就越赚钱。<code>p_value &lt; 0.05</code>。</p>
 <pre><code>import matplotlib.pyplot as plt
@@ -839,7 +845,7 @@ def ttest(data_return):
     :return: float,t值和p值
     &quot;&quot;&quot;
     # 调用假设检验ttest函数：scipy
-    t, p = stats.ttest_1samp(data_return, 0, nan_policy=&apos;omit&apos;)
+    t, p = stats.ttest_1samp(data_return, 0, nan_policy=&#39;omit&#39;)
     # 判断是否与理论均值有显著性差异:α=0.05
     p_value = p / 2  # 获取单边p值
     # 打印
@@ -848,44 +854,50 @@ def ttest(data_return):
     print(&quot;是否可以拒绝[H0]收益均值=0：&quot;, p_value &lt; 0.05)
     return t, p_value
 
-if __name__ == &apos;__main__&apos;:
+if __name__ == &#39;__main__&#39;:
     # 股票列表
-    stocks = [&apos;000001.XSHE&apos;, &apos;000858.XSHE&apos;, &apos;002594.XSHE&apos;]
+    stocks = [&#39;000001.XSHE&#39;, &#39;000858.XSHE&#39;, &#39;002594.XSHE&#39;]
     for code in stocks:
         print(code)
-        df = get_single_price(code, &apos;daily&apos;, &apos;2016-12-01&apos;, &apos;2021-01-01&apos;)
+        df = get_single_price(code, &#39;daily&#39;, &#39;2016-12-01&#39;, &#39;2021-01-01&#39;)
         df = ma_strategy(df)  # 调用双均线策略
         # 策略的单次收益率
-        returns = df[&apos;profit_pct&apos;]
+        returns = df[&#39;profit_pct&#39;]
         # print(returns)
         # 绘制一下分布图用于观察
         # plt.hist(returns, bins=30)
         # plt.show()
         # 对多个股票进行计算、测试
         ttest(returns)
-</code></pre><hr>
+</code></pre>
+<hr>
 <h2 id="资源网站"><a href="#资源网站" class="headerlink" title="资源网站"></a>资源网站</h2><hr>
 <p>github开源项目：</p>
 <pre><code>http://sunshowerc.github.io/fund/#/
 
 https://github.com/x2rr/funds
-</code></pre><p>东方财富：</p>
+</code></pre>
+<p>东方财富：</p>
 <pre><code>//BOLL + MACD
 https://www.eastmoney.com/
-</code></pre><p>聚宽：</p>
+</code></pre>
+<p>聚宽：</p>
 <pre><code>https://www.joinquant.com
-</code></pre><p>数据下载：</p>
+</code></pre>
+<p>数据下载：</p>
 <pre><code>https://query1.finance.yahoo.com/v7/finance/download/000001.SS?period1=1262304000&amp;period2=1579106020&amp;interval=1d&amp;events=history&amp;crumb=t6/7IIwak4j 
 
 https://fundsuggest.eastmoney.com/FundSearch/api/FundSearchAPI.ashx?m=10&amp;t=700&amp;IsNeedBaseInfo=0&amp;IsNeedZTInfo=0&amp;key=$&#123;key&#125;&amp;_=$&#123;Date.now()&#125;
 
-http://quotes.money.163.com/service/chddata.html?code=0000905&amp;start=19901219&amp;end=20200913&apos;
-</code></pre><p>我们从得到的链接入手来分析：<code>http://quotes.money.163.com/service/chddata.html?code=1000002&amp;start=19910129&amp;end=20161006&amp;fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP</code> 其中：</p>
+http://quotes.money.163.com/service/chddata.html?code=0000905&amp;start=19901219&amp;end=20200913&#39;
+</code></pre>
+<p>我们从得到的链接入手来分析：<code>http://quotes.money.163.com/service/chddata.html?code=1000002&amp;start=19910129&amp;end=20161006&amp;fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP</code> 其中：</p>
 <pre><code>code: 深市六位代码前加“1”，沪市股票代码前加“0”
 start: 开始日期，如果想得到每只股票的所有历史交易数据，可以以公司上市日期来表达，8位数字，分别为yyyymmdd
 end: 结束日期，表示的也是yyyymmdd八位数字
 fields字段包括了开盘价、最高价、最低价、收盘价等。。。
-</code></pre><p>code的另一种获取方式：访问 <code>http://quotes.money.163.com/stock</code>，然后搜索股票，然后再浏览器的链接上获得股票code。</p>
+</code></pre>
+<p>code的另一种获取方式：访问 <code>http://quotes.money.163.com/stock</code>，然后搜索股票，然后再浏览器的链接上获得股票code。</p>
 <p>举例-下载数据文件：</p>
 <pre><code>import os
 import requests
@@ -895,62 +907,63 @@ import time
 timeParams = time.strftime(&quot;%Y%m%d&quot;, time.localtime())
 
 # 文件名和文件路径
-urls = [(&apos;000905中证500.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000905&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;000016上证50.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000016&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;000300沪深300.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000300&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;000922中证红利.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000922&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;399812养老产业.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399812&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;000991全指医药.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000991&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;000827中证环保.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000827&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;399975证券公司.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399975&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;399971中证传媒.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399971&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;399006创业板指.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399006&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;000932中证消费.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000932&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;399986中证银行.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399986&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;399967中证军工.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399967&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;000001上证指数.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000001&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;399001深证成指.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399001&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;000993全指信息.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000993&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;399330深证100.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399330&amp;start=19901219&amp;end=%s&quot; % timeParams),
-       (&apos;000903中证100.csv&apos;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000903&amp;start=19901219&amp;end=%s&quot; % timeParams)]
+urls = [(&#39;000905中证500.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000905&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;000016上证50.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000016&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;000300沪深300.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000300&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;000922中证红利.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000922&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;399812养老产业.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399812&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;000991全指医药.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000991&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;000827中证环保.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000827&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;399975证券公司.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399975&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;399971中证传媒.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399971&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;399006创业板指.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399006&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;000932中证消费.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000932&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;399986中证银行.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399986&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;399967中证军工.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399967&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;000001上证指数.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000001&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;399001深证成指.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399001&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;000993全指信息.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000993&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;399330深证100.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=1399330&amp;start=19901219&amp;end=%s&quot; % timeParams),
+       (&#39;000903中证100.csv&#39;,&quot;http://quotes.money.163.com/service/chddata.html?code=0000903&amp;start=19901219&amp;end=%s&quot; % timeParams)]
 
 def url_response(url):
     path,url = url
     print(url)
     r = requests.get(url,stream= True)
-    with open(path,&apos;wb&apos;) as f:
+    with open(path,&#39;wb&#39;) as f:
         for ch in r:
             f.write(ch)
 for x in urls:
     url_response(x)
-</code></pre><p>操作</p>
+</code></pre>
+<p>操作</p>
 <pre><code>import pandas as pd
 import datetime
 import datetime
 
-pd.set_option(&apos;expand_frame_repr&apos;, False)  # 当列太多时不换行
-pd.set_option(&apos;max_row&apos;,4000)#最多行数
+pd.set_option(&#39;expand_frame_repr&#39;, False)  # 当列太多时不换行
+pd.set_option(&#39;max_row&#39;,4000)#最多行数
 
 # =====读入数据
-df = pd.read_csv(&apos;G:/share/04/note/.ipynb_checkpoints/000905中证500.csv&apos;, encoding=&apos;gbk&apos;)
+df = pd.read_csv(&#39;G:/share/04/note/.ipynb_checkpoints/000905中证500.csv&#39;, encoding=&#39;gbk&#39;)
 df.columns = [i for i in df.columns]
-df = df[[&apos;日期&apos;,&apos;收盘价&apos;,&apos;开盘价&apos;,&apos;最高价&apos;,&apos;最低价&apos;,&apos;涨跌幅&apos;]]
-df.sort_values(by=[&apos;日期&apos;], inplace=True)
-df[&apos;日期&apos;] = pd.to_datetime(df[&apos;日期&apos;])
+df = df[[&#39;日期&#39;,&#39;收盘价&#39;,&#39;开盘价&#39;,&#39;最高价&#39;,&#39;最低价&#39;,&#39;涨跌幅&#39;]]
+df.sort_values(by=[&#39;日期&#39;], inplace=True)
+df[&#39;日期&#39;] = pd.to_datetime(df[&#39;日期&#39;])
 # 最近十二年数据
-df = df[df[&apos;日期&apos;] &gt;= &apos;2009-04-12&apos;]
+df = df[df[&#39;日期&#39;] &gt;= &#39;2009-04-12&#39;]
 df.reset_index(inplace=True, drop=True)
 
 # # =====计算复权价
-#df[&apos;复权因子&apos;] = (df[&apos;涨跌幅&apos;] + 1.0).cumprod()
-# initial_price = df.iloc[0][&apos;收盘价&apos;] / (1 + df.iloc[0][&apos;涨跌幅&apos;])  # 计算上市价格
-# df[&apos;收盘价_后复权&apos;] = initial_price * df[&apos;复权因子&apos;]  # 相乘得到复权价
-# df[&apos;开盘价_后复权&apos;] = df[&apos;开盘价&apos;] / df[&apos;收盘价&apos;] * df[&apos;收盘价_后复权&apos;]
-# df[&apos;最高价_后复权&apos;] = df[&apos;最高价&apos;] / df[&apos;收盘价&apos;] * df[&apos;收盘价_后复权&apos;]
-# df[&apos;最低价_后复权&apos;] = df[&apos;最低价&apos;] / df[&apos;收盘价&apos;] * df[&apos;收盘价_后复权&apos;]
-# # df[[&apos;开盘价&apos;, &apos;最高价&apos;, &apos;最低价&apos;, &apos;收盘价&apos;]] = df[[&apos;开盘价_后复权&apos;, &apos;最高价_后复权&apos;, &apos;最低价_后复权&apos;, &apos;收盘价_后复权&apos;]]
-# # df = df[[&apos;日期&apos;, &apos;股票代码&apos;, &apos;开盘价&apos;, &apos;最高价&apos;, &apos;最低价&apos;, &apos;收盘价&apos;, &apos;涨跌幅&apos;, &apos;开盘价_后复权&apos;, &apos;最高价_后复权&apos;, &apos;最低价_后复权&apos;, &apos;收盘价_后复权&apos;]]
-# df = df[[&apos;日期&apos;, &apos;收盘价&apos;, &apos;涨跌幅&apos;, &apos;开盘价_后复权&apos;, &apos;最高价_后复权&apos;, &apos;最低价_后复权&apos;, &apos;收盘价_后复权&apos;]]
+#df[&#39;复权因子&#39;] = (df[&#39;涨跌幅&#39;] + 1.0).cumprod()
+# initial_price = df.iloc[0][&#39;收盘价&#39;] / (1 + df.iloc[0][&#39;涨跌幅&#39;])  # 计算上市价格
+# df[&#39;收盘价_后复权&#39;] = initial_price * df[&#39;复权因子&#39;]  # 相乘得到复权价
+# df[&#39;开盘价_后复权&#39;] = df[&#39;开盘价&#39;] / df[&#39;收盘价&#39;] * df[&#39;收盘价_后复权&#39;]
+# df[&#39;最高价_后复权&#39;] = df[&#39;最高价&#39;] / df[&#39;收盘价&#39;] * df[&#39;收盘价_后复权&#39;]
+# df[&#39;最低价_后复权&#39;] = df[&#39;最低价&#39;] / df[&#39;收盘价&#39;] * df[&#39;收盘价_后复权&#39;]
+# # df[[&#39;开盘价&#39;, &#39;最高价&#39;, &#39;最低价&#39;, &#39;收盘价&#39;]] = df[[&#39;开盘价_后复权&#39;, &#39;最高价_后复权&#39;, &#39;最低价_后复权&#39;, &#39;收盘价_后复权&#39;]]
+# # df = df[[&#39;日期&#39;, &#39;股票代码&#39;, &#39;开盘价&#39;, &#39;最高价&#39;, &#39;最低价&#39;, &#39;收盘价&#39;, &#39;涨跌幅&#39;, &#39;开盘价_后复权&#39;, &#39;最高价_后复权&#39;, &#39;最低价_后复权&#39;, &#39;收盘价_后复权&#39;]]
+# df = df[[&#39;日期&#39;, &#39;收盘价&#39;, &#39;涨跌幅&#39;, &#39;开盘价_后复权&#39;, &#39;最高价_后复权&#39;, &#39;最低价_后复权&#39;, &#39;收盘价_后复权&#39;]]
 
 
 # =====计算均线策略
@@ -961,61 +974,62 @@ df.reset_index(inplace=True, drop=True)
 # ===计算均线
 ma_short = 1  # 短期均线。ma代表：moving_average
 ma_long = 20  # 长期均线
-df[&apos;ma_short&apos;] = df[&apos;收盘价&apos;].rolling(ma_short, min_periods=1).mean()
-df[&apos;ma_long&apos;] = df[&apos;收盘价&apos;].rolling(ma_long, min_periods=1).mean()
+df[&#39;ma_short&#39;] = df[&#39;收盘价&#39;].rolling(ma_short, min_periods=1).mean()
+df[&#39;ma_long&#39;] = df[&#39;收盘价&#39;].rolling(ma_long, min_periods=1).mean()
 
 # ===找出买入信号
 # 当天的短期均线大于等于长期均线
-condition1 = (df[&apos;ma_short&apos;] &gt;= df[&apos;ma_long&apos;])
+condition1 = (df[&#39;ma_short&#39;] &gt;= df[&#39;ma_long&#39;])
 # 上个交易日的短期均线小于长期均线
-condition2 = (df[&apos;ma_short&apos;].shift(1) &lt; df[&apos;ma_long&apos;].shift(1))
+condition2 = (df[&#39;ma_short&#39;].shift(1) &lt; df[&#39;ma_long&#39;].shift(1))
 # 将买入信号当天的signal设置为1
-df.loc[condition1 &amp; condition2, &apos;signal&apos;] = 1
+df.loc[condition1 &amp; condition2, &#39;signal&#39;] = 1
 
 # ===找出卖出信号
 # 当天的短期均线小于等于长期均线
-condition1 = (df[&apos;ma_short&apos;] &lt;= df[&apos;ma_long&apos;])
+condition1 = (df[&#39;ma_short&#39;] &lt;= df[&#39;ma_long&#39;])
 # 上个交易日的短期均线大于长期均线
-condition2 = (df[&apos;ma_short&apos;].shift(1) &gt; df[&apos;ma_long&apos;].shift(1))
+condition2 = (df[&#39;ma_short&#39;].shift(1) &gt; df[&#39;ma_long&#39;].shift(1))
 # 将买入信号当天的signal设置为0
-df.loc[condition1 &amp; condition2, &apos;signal&apos;] = 0
+df.loc[condition1 &amp; condition2, &#39;signal&#39;] = 0
 # 将无关的变量删除
-# df.drop([&apos;ma_short&apos;, &apos;ma_long&apos;], axis=1, inplace=True)
+# df.drop([&#39;ma_short&#39;, &#39;ma_long&#39;], axis=1, inplace=True)
 
 # =====由signal计算出实际的每天持有股票仓位
 # ===计算仓位
 # signal的计算运用了收盘价，是每天收盘之后产生的信号，到第二天的时候，仓位position才会改变。
 # 例如2009-11-17产生买入信号，2009-11-18仓位才会编变成1。满仓用1表示，空仓用0表示
-df[&apos;pos&apos;] = df[&apos;signal&apos;].shift()
-df[&apos;pos&apos;].fillna(method=&apos;ffill&apos;, inplace=True)
-df[&apos;pos&apos;].fillna(value=0, inplace=True)  # 将初始行数的position补全为0
+df[&#39;pos&#39;] = df[&#39;signal&#39;].shift()
+df[&#39;pos&#39;].fillna(method=&#39;ffill&#39;, inplace=True)
+df[&#39;pos&#39;].fillna(value=0, inplace=True)  # 将初始行数的position补全为0
 
 
 # 涨跌幅定义为今日收盘价减去昨日收盘价
-#rise = df[&apos;收盘价&apos;].diff()
-#df[&apos;rise&apos;] = rise
+#rise = df[&#39;收盘价&#39;].diff()
+#df[&#39;rise&#39;] = rise
 
 # 涨跌幅定义为今日收盘价减去昨日收盘价/昨日收盘价
-#rets = df[&apos;收盘价&apos;].pct_change() * 100
-#df[&apos;涨跌幅&apos;] = rets
+#rets = df[&#39;收盘价&#39;].pct_change() * 100
+#df[&#39;涨跌幅&#39;] = rets
 
 print(df)
 #print(df[(df.signal &gt; 0.5) | (df.signal == 0.0)]) 
 
 print(&quot;-----------------------------------------------------&quot;)
 
-print (df[&apos;收盘价&apos;].describe())
+print (df[&#39;收盘价&#39;].describe())
 
 print(&quot;-----------------------------------------------------&quot;)
 
-print(df[&apos;收盘价&apos;].max())  # 最大值
-print(df[&apos;收盘价&apos;].min())  # 最小值
-print(df[&apos;收盘价&apos;].std())  # 标准差
-print(df[&apos;收盘价&apos;].count())  # 非空的数据的数量
-print(df[&apos;收盘价&apos;].median())  # 中位数
-print(df[&apos;收盘价&apos;].quantile(0.25))  # 25%分位数
-print(df[&apos;收盘价&apos;].mean()) #平均值
-</code></pre><hr>
+print(df[&#39;收盘价&#39;].max())  # 最大值
+print(df[&#39;收盘价&#39;].min())  # 最小值
+print(df[&#39;收盘价&#39;].std())  # 标准差
+print(df[&#39;收盘价&#39;].count())  # 非空的数据的数量
+print(df[&#39;收盘价&#39;].median())  # 中位数
+print(df[&#39;收盘价&#39;].quantile(0.25))  # 25%分位数
+print(df[&#39;收盘价&#39;].mean()) #平均值
+</code></pre>
+<hr>
 <h2 id="杂记"><a href="#杂记" class="headerlink" title="杂记"></a>杂记</h2><hr>
 <p>下降行情-&gt;最低-&gt;上升行情-&gt;最高-&gt;下降行情</p>
 <p>量化投资：本质是数据里面找规律。市场越不成熟越有效。</p>
@@ -1023,7 +1037,7 @@ print(df[&apos;收盘价&apos;].mean()) #平均值
 <p>股票的量化投资可以说是一种价值投资，我们所做的也是去挖掘市场中的价值股票，而并非去预测股票涨跌来进行投资等等（至少目前机构不会采取这种方式指导投资）。</p>
 <p>量化投资涵盖了整个交易过程，需要一个完整的作为研究的<strong>量化回测框架和实盘交易系统</strong>作为支撑。</p>
 <p><a target="_blank" rel="noopener" href="https://www.ricequant.com/">https://www.ricequant.com/</a></p>
-<p>每个投资策略的收益率可以分解成为两部分:一部分与市场完全相关，整个市场的平均收益率乘以一个<strong>贝塔系数</strong>。贝塔可以称为这个投资组合的系统风险。另一部分和整个市场无关的叫做<strong>阿尔法(Alpha)</strong>。</p>
+<p>每个投资策略的收益率可以分解成为两部分:一部分与市场完全相关，整个市场的平均收益率乘以一个<strong>贝塔系数</strong>。贝塔可以称为这个投资组合的系统风险。另一部分和整个市场无关的叫做**阿尔法(Alpha)**。</p>
 <p>1、Alpha很难得，Beta很容易。2、Alpha就是精选个股，跑赢市场。3、Beta就是有市场行情时跟上，有风险时候躲避。</p>
 <p>多因子选股策略是一种应用十分广泛的选股策略，其基本思想就是<strong>找到某些和收益率最相关的因子</strong>。</p>
 <hr>

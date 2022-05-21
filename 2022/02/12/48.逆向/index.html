@@ -60,7 +60,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      41
+      42
        分钟
     </span>
   
@@ -229,10 +229,10 @@
             
             <div class="markdown-body">
               <h2 id="Android逆向"><a href="#Android逆向" class="headerlink" title="Android逆向"></a>Android逆向</h2><h3 id="AndroidKiller安装"><a href="#AndroidKiller安装" class="headerlink" title="AndroidKiller安装"></a>AndroidKiller安装</h3><hr>
-<p>AndroidKiller/cfgs目录下的injectcode换成新的injectcode；</p>
-<p>新建文件夹AndroidKiller/apktool,将apktool.jar拷贝进去；</p>
-<p>打开AndroidKiller，在主页/配置/Java，中配置jdk；</p>
-<p>打开AndroidKiller，在Android/APKTOOL管理器中配置apktool.jar。</p>
+<p>AndroidKiller&#x2F;cfgs目录下的injectcode换成新的injectcode；</p>
+<p>新建文件夹AndroidKiller&#x2F;apktool,将apktool.jar拷贝进去；</p>
+<p>打开AndroidKiller，在主页&#x2F;配置&#x2F;Java，中配置jdk；</p>
+<p>打开AndroidKiller，在Android&#x2F;APKTOOL管理器中配置apktool.jar。</p>
 <hr>
 <h3 id="dalvik字节码"><a href="#dalvik字节码" class="headerlink" title="dalvik字节码"></a>dalvik字节码</h3><hr>
 <p><code>.java</code> 编译成 <code>.class</code> 在编译成 <code>.dex</code> 最后反编译得到 <code>samli</code>文件。</p>
@@ -244,34 +244,40 @@ Baksmali.jar:将.dex反编译成smali
 
 Samli.jar:将.smali打包成.dex
     java -jar smali.jar smali_out/ -o classes.dex
-</code></pre><p>dalvik字节码类型对应java：</p>
-<pre><code>Dalvik  →    java
-B            byte
-C            char
-S            short
-I            int
-J            long
-F            float
-D            double
-Z            boolean
-V            void
-L            java类类型
-[            数组类型
-</code></pre><p>寄存器的命名法：</p>
-<pre><code>v:局部变量寄存器 v0-vn  参数寄存器 vn-vn+m      
+</code></pre>
+<p>dalvik字节码类型对应java：</p>
+<pre><code>Dalvik  →	java
+B			byte
+C			char
+S			short
+I			int
+J			long
+F			float
+D			double
+Z			boolean
+V			void
+L			java类类型
+[			数组类型
+</code></pre>
+<p>寄存器的命名法：</p>
+<pre><code>v:局部变量寄存器 v0-vn  参数寄存器 vn-vn+m  	
 p：参数寄存器p0 -pn     变量寄存器  v0-vn
 p0没有被定义成参数，那么它代表this
-</code></pre><p>字段：</p>
+</code></pre>
+<p>字段：</p>
 <pre><code>Lpackage/name/ObjectName;-&gt;FieldName:Ljava/lang/String;
 字段格式：包名/类名;-&gt;字段名称:字段类型;
-</code></pre><p>方法:</p>
+</code></pre>
+<p>方法:</p>
 <pre><code>Lpackage/name/ObjectName;-&gt;MethodName (III) Z
 包名/类名;-&gt;方法名(参数):返回值类型
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="dalvik指令"><a href="#dalvik指令" class="headerlink" title="dalvik指令"></a>dalvik指令</h3><hr>
 <p>格式：</p>
 <pre><code>基础字节码-名称后缀/字节码后缀 目的寄存器 源寄存器
-</code></pre><p>格式解释：</p>
+</code></pre>
+<p>格式解释：</p>
 <pre><code>名称后缀是wide，表示数据宽度为64位
 
 字节码后缀是from16，表示源寄存器为16位
@@ -284,41 +290,49 @@ p0没有被定义成参数，那么它代表this
 A/B/C/D/E/F/G/H代表一个4位的数值
 AA/BB/CC/DD/EE/FF/GG/HH代表一个8位的数值
 AAAA/BBBB/CCCC/DDDD/EEEE/FFFF/GGGG/HHHH代表一个16位的数值
-</code></pre><p>13种dalvik指令：</p>
+</code></pre>
+<p>13种dalvik指令：</p>
 <p>1、空操作指令：</p>
 <pre><code>nop
-</code></pre><p>2、数据操作指令：</p>
+</code></pre>
+<p>2、数据操作指令：</p>
 <pre><code>move(-wide/-object/-result/-result-object/-result-wide/-exception)
 move(-wide/-object)/from16
 move(-object)/16
 
 object是对象的意思-为对象赋值。
 move指令的三种作用：赋值；move-result接收方法返回操作；处理异常。
-</code></pre><p>3、返回指令(重点)：</p>
+</code></pre>
+<p>3、返回指令(重点)：</p>
 <pre><code>return-void(表示方法的放回值为空)
 return(表示方法的反回值为32位非对象类型的值)
 return-wide(表示方法的反回值为64位非对象类型的值)
 return-object(表示方法的反回值为对象类型的值)
-</code></pre><p>4、数据定义指令(重点)：定义程序中用到常量</p>
+</code></pre>
+<p>4、数据定义指令(重点)：定义程序中用到常量</p>
 <pre><code>const(-wide/-string/-class)
 const/4（数值符号扩展为32位） 
 const/16（数据符号扩展为64位）
 const(-wide)/16
 const(-wide)/32
 const(-wide)/high16
-</code></pre><p>5、实例操作指令：</p>
+</code></pre>
+<p>5、实例操作指令：</p>
 <pre><code>check-cast(类型转换)
 instance-of(检查)  
 new-instance(新建) 
-</code></pre><p>6、数组操作指令：</p>
+</code></pre>
+<p>6、数组操作指令：</p>
 <pre><code>array-length(获取数组长度)
 new-array(新建数组)
 filled-new-array(定义数组并初始化)
 filled-new-array/range(定义数组并初始化/指定取值范围)
 filled-array-data(数组元素取值与赋值)
-</code></pre><p>7、异常指令：</p>
+</code></pre>
+<p>7、异常指令：</p>
 <pre><code>throw
-</code></pre><p>8、跳转指令(重点)：</p>
+</code></pre>
+<p>8、跳转指令(重点)：</p>
 <pre><code>goto 紧跟一个标签直接跳转到标签所在位置
 packed-switch(有规律)、sparse-switch(无规律)
 if-eq(等于)/if-ne(不等于)
@@ -327,30 +341,36 @@ if-gt(大于)/if-ge(大于等于)
 if-eqz(等于零)/if-nez(不等于零)
 if-ltz(小于0)/if-lze(小于等于0)
 if-gtz(大于0)/if-gez(大于等于0)
-</code></pre><p>9、比较指令(cmp):</p>
+</code></pre>
+<p>9、比较指令(cmp):</p>
 <pre><code>大于(1)/等于(0)/小于(-1)=&gt;cmpg、cmp
 大于(-1)/等于(0)/小于(1)=&gt;cmpl
-</code></pre><p>10、字段操作指令:</p>
+</code></pre>
+<p>10、字段操作指令:</p>
 <pre><code>普通字段=&gt;iget(读)/iput(写)
 静态字段=&gt;sget(读)/sput(写)
 
 get(读)：从后往前读
 put(写)：从前往后走
-</code></pre><p>11、方法调用指令(重点):</p>
+</code></pre>
+<p>11、方法调用指令(重点):</p>
 <pre><code>invoke-virtual(调用实例的虚方法) Java当中的普通方法
 invoke-super(调用实例的父类/基类方法) 
 invoke-direct(调用实例的直接方法) 调用java当中的构造方法
 invoke-static(调用实例的静态方法)
 invoke-interface(调用实例的接口方法)
-</code></pre><p>12、数据转换指令：</p>
+</code></pre>
+<p>12、数据转换指令：</p>
 <pre><code>neg-数据类型=&gt;求补
 not-数据类型=&gt;求反
 数据类型1-to-数据类型2=&gt;将数据类型1转换为数据类型2
-</code></pre><p>13、数据运算指令：</p>
-<pre><code>add/sub/mul/div/rem     加/减/乘/除/模
+</code></pre>
+<p>13、数据运算指令：</p>
+<pre><code>add/sub/mul/div/rem	 加/减/乘/除/模
 and/or/xor  与/或/非
-sh1/shr/ushr    有符号左移/有符号右移/无符号右移
-</code></pre><hr>
+sh1/shr/ushr	有符号左移/有符号右移/无符号右移
+</code></pre>
+<hr>
 <h3 id="实战案例技巧"><a href="#实战案例技巧" class="headerlink" title="实战案例技巧"></a>实战案例技巧</h3><hr>
 <p>1、修改bean里get的int值：</p>
 <pre><code>//原smali代码
@@ -358,18 +378,20 @@ return v0
 //修改后
 const v0, 0x1
 return v0
-</code></pre><p>2、修改判断条件，判断条件取反：</p>
+</code></pre>
+<p>2、修改判断条件，判断条件取反：</p>
 <pre><code>//原smali代码
 if-eqz v1, :cond 4
 //修改后
 if-nez v1, :cond 4
-</code></pre><p>3、DDMS使用</p>
+</code></pre>
+<p>3、DDMS使用</p>
 <p><code>/sdk/tools/</code> 目录下双击 <code>monitor.bat</code> 即可。</p>
 <p>4、Log日志插入</p>
-<p>AndroidKiller中，右键/插入代码/Log信息输出。</p>
+<p>AndroidKiller中，右键&#x2F;插入代码&#x2F;Log信息输出。</p>
 <p><strong>但是注意：locals 要大于0 ，不能在等于零的地方插桩。在 <code>.prologue</code> 之后插入</strong>。</p>
 <p>5、栈跟踪和方法抛析</p>
-<p>AndroidKiller中，右键/插入代码/StackTrace栈跟踪。然后调用顺序是从下往上。</p>
+<p>AndroidKiller中，右键&#x2F;插入代码&#x2F;StackTrace栈跟踪。然后调用顺序是从下往上。</p>
 <p>Traceview的使用，查看调用，可以看到Parents和Children。</p>
 <p>6、JEB2的静态分析动态调试</p>
 <p>7、AS+smalidea插件动态调试</p>
@@ -380,37 +402,48 @@ if-nez v1, :cond 4
 <h3 id="adb常用命令"><a href="#adb常用命令" class="headerlink" title="adb常用命令"></a>adb常用命令</h3><hr>
 <p>monkey测试</p>
 <pre><code>adb shell monkey -p 包名 -v 次数
-</code></pre><p>启动adb、关闭adb</p>
+</code></pre>
+<p>启动adb、关闭adb</p>
 <pre><code>adb start-server
 adb kill-server
-</code></pre><p>获取手机的系统版本</p>
+</code></pre>
+<p>获取手机的系统版本</p>
 <pre><code>adb shell getprop ro.build.version.release
-</code></pre><p>清除apk的数据和缓存    </p>
+</code></pre>
+<p>清除apk的数据和缓存	</p>
 <pre><code>adb shell pm clear 包名
-</code></pre><p>安装和卸载apk</p>
+</code></pre>
+<p>安装和卸载apk</p>
 <pre><code>adb install 文件路径
 adb uninstall 包名
-</code></pre><p>电脑和手机文件互传</p>
+</code></pre>
+<p>电脑和手机文件互传</p>
 <pre><code>adb push C:\Users\win\Desktop\xx.png /sdcard
 adb pull /sdcard/xx.png C:\Users\win\Desktop
-</code></pre><p>查看保存app错误日志</p>
+</code></pre>
+<p>查看保存app错误日志</p>
 <pre><code>adb logcat *:E | grep &quot;包名&quot; &gt; 电脑路径 //mac
 adb logcat *:E | find &quot;包名&quot; &gt; 电脑路径 //win
-</code></pre><p>获取当前app包名和当前页面名(⼿机打开对应app)</p>
+</code></pre>
+<p>获取当前app包名和当前页面名(⼿机打开对应app)</p>
 <pre><code>adb shell dumpsys window windows | grep mFocusedApp //mac
 adb shell dumpsys window windows | findstr mFocusedApp //win
-</code></pre><p>log获取app的包名和activity名称</p>
+</code></pre>
+<p>log获取app的包名和activity名称</p>
 <pre><code>adb logcat | grep START //mac
 adb logcat | findstr START //win
 然后点击app 
-</code></pre><p>关闭app后,获取app启动时间</p>
+</code></pre>
+<p>关闭app后,获取app启动时间</p>
 <pre><code>关闭app
 adb shell am start -W 包名/启动名
 adb shell am start -W com.xxx.xxx/.LaunchActivity
 //TotalTime： app⾃身启动时间,WaitTime： 系统启动应⽤时间
-</code></pre><p>Appium</p>
+</code></pre>
+<p>Appium</p>
 <pre><code>官⽹： www.appium.io,
-</code></pre><p>Appium是由nodejs的express框架写的Http Server,Appium使⽤WebDriver的json wire协议，来驱动Apple系统的UIAutomation库、Android系统的UIAutomator框架。</p>
+</code></pre>
+<p>Appium是由nodejs的express框架写的Http Server,Appium使⽤WebDriver的json wire协议，来驱动Apple系统的UIAutomation库、Android系统的UIAutomator框架。</p>
 <hr>
 <h3 id="ARM汇编指令"><a href="#ARM汇编指令" class="headerlink" title="ARM汇编指令"></a>ARM汇编指令</h3><hr>
 <p>1.跳转指令</p>
@@ -420,7 +453,8 @@ BX 带状态切换的无条件跳转   根据目标地址最低位切换状态�
 BLX 带链接和状态切换的无条件跳转。LR、T、pc会变。
 B loc_地址
 BEQ,BNE
-</code></pre><p>2.存储器与寄存器交互数据指令（核心）</p>
+</code></pre>
+<p>2.存储器与寄存器交互数据指令（核心）</p>
 <pre><code>存储器（主存，内存）
 寄存器中放的数据：可以是字符串，可以是数，也可以是一个地址，它可以放各种类型的数据 
 存储地址单元：地址（如0x00004000）与地址中存在的值
@@ -443,14 +477,17 @@ SWP：将寄存器与存储器之间的数据进行交换
 SWP R1, R1 [R0] 将R1寄存器与R0指向的存储单元的内容进行交换
 
 堆，队列：数据结构，栈是竖的，后进先出，且只能从栈顶依次填入数据
-</code></pre><p>3.数据传送指令</p>
+</code></pre>
+<p>3.数据传送指令</p>
 <pre><code>MOV：将立即数或寄存器的数据传送到目标寄存器 ←
 MOV R0, #8        R0=8
-</code></pre><p>4.数据算术运算指令</p>
+</code></pre>
+<p>4.数据算术运算指令</p>
 <pre><code>←
 ADD,SUB,MUL,DIV
 有符号，无符号运算；带进位运算
-</code></pre><p>5.数据逻辑运算指令</p>
+</code></pre>
+<p>5.数据逻辑运算指令</p>
 <pre><code>与：AND
 或：ORR
 异或：EOR                                    
@@ -461,32 +498,38 @@ LSR：逻辑右移←
 
 LSL R0,R1，#2 R0=R1*4   
 LSR R0,R1，#2   R0=R1*2
-</code></pre><p>6.比较指令</p>
+</code></pre>
+<p>6.比较指令</p>
 <pre><code>CMP：比较
-CMP R0 #0         R0寄存器中的值与0比较
+CMP R0 #0 		R0寄存器中的值与0比较
 标志位：如z位，这个都可以在动态调试时，寄存器窗口看到
-</code></pre><p>7.其他指令</p>
+</code></pre>
+<p>7.其他指令</p>
 <pre><code>协处理器指令：SWT （切换用户模式）
 伪指令：DCB
-</code></pre><p>8.寄存器寻址方式</p>
+</code></pre>
+<p>8.寄存器寻址方式</p>
 <pre><code>立即寻址：MOV R0,#1234 R0=0X1234
 寄存器寻址：MOV R0,R1 R0=R1
-寄存器移位寻址：MOV R0,R1,LSL #2     R0=R1*4
+寄存器移位寻址：MOV R0,R1,LSL #2 	R0=R1*4
 寄存器间接寻址：LDR R0,[R1] 将R1寄存器中的值作为地址，取出地址中的值赋予R0
 寄存器间接基址偏移寻址：LDR R0,[R1，#-4]将R1寄存器的值-0x4的值作为地址，取出地址中的值给R0
-</code></pre><p>对 <code>int a=0;</code> 这一句简单高级语言的汇编理解，首先会开辟一个内存存储单元，然后把0x0这个数放入R0寄存器，然后再把R0寄存器的数据放入内存存储单元。所以：</p>
+</code></pre>
+<p>对 <code>int a=0;</code> 这一句简单高级语言的汇编理解，首先会开辟一个内存存储单元，然后把0x0这个数放入R0寄存器，然后再把R0寄存器的数据放入内存存储单元。所以：</p>
 <pre><code>MOV R0,#0
 STR R0，[R11,#0x14+var_20]
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="IDA工具"><a href="#IDA工具" class="headerlink" title="IDA工具"></a>IDA工具</h3><hr>
 <p>IDA Pro工具介绍：交互式反汇编器，是典型的递归下降反汇编器。</p>
 <p>导航条：</p>
-<pre><code>蓝色 ：表示常规的指令函数
-黑色 ：节与节之间的间隙
-银白色 ：数据内容
-粉色 ：表示外部导入符号
-暗黄色： 表示ida未识别的内容
-</code></pre><p>IDA主界面：</p>
+<pre><code>    蓝色 ：表示常规的指令函数
+    黑色 ：节与节之间的间隙
+    银白色 ：数据内容
+    粉色 ：表示外部导入符号
+    暗黄色： 表示ida未识别的内容
+</code></pre>
+<p>IDA主界面：</p>
 <pre><code>IDA View三种反汇编视图:文本视图、图表视图、路径视图
 Hex View 十六进制窗口
 Struceures 结构体窗口
@@ -494,7 +537,8 @@ Enums 枚举窗口
 Imports 导入函数窗口
 Exports 导出函数窗口
 Strings 字符串窗口
-</code></pre><p>IDA常用功能及快捷键：</p>
+</code></pre>
+<p>IDA常用功能及快捷键：</p>
 <pre><code>空格键:切换文本视图与图表视图
 ESC:返回上一个操作地址
 G:搜索地址和符号
@@ -510,11 +554,13 @@ X:查看交叉应用
 F5:查看伪代码
 Alt+T:搜索文本
    Alt+B:搜索十六进制
-</code></pre><hr>
+</code></pre>
+<hr>
 <h3 id="IDA动态调试"><a href="#IDA动态调试" class="headerlink" title="IDA动态调试"></a>IDA动态调试</h3><hr>
 <p>将<code>dbgsrv/android_server</code>push到手机。</p>
 <pre><code>adb push ...\dbgsrv\android_server data/local/tmp
-</code></pre><p>查看是否成功并给权限：</p>
+</code></pre>
+<p>查看是否成功并给权限：</p>
 <pre><code>adb shell
 su
 cd data/local/tmp
@@ -522,25 +568,31 @@ ls
 如果改名字，android_server可以运行:  mv android_server as ab
 如果想改端口号，可以运行:  ./android_server -p端口号
 chmod 777 android_server
-</code></pre><p>新打开cmd，端口转发：</p>
+</code></pre>
+<p>新打开cmd，端口转发：</p>
 <pre><code>adb forward tcp:端口号 tcp:端口号
-</code></pre><p>安装apk</p>
+</code></pre>
+<p>安装apk</p>
 <p>打开ddms(红色甲壳虫)</p>
 <p>挂起程序：</p>
 <pre><code>adb shell am start -D -n 包名/.类名
-</code></pre><p>打开IDA，<code>Debugger -&gt; Attach -&gt; Remote ARMLinux/Android debugger</code> 设置:</p>
+</code></pre>
+<p>打开IDA，<code>Debugger -&gt; Attach -&gt; Remote ARMLinux/Android debugger</code> 设置:</p>
 <pre><code>127.0.0.1  端口
 不用输入密码
-</code></pre><p>选择app进程即可使用了。</p>
-<p>设置 <code>Debugger -&gt; Debugger options</code> 勾选:</p>
+</code></pre>
+<p>选择app进程即可使用了。</p>
+<p>设置 <code>Debugger -&gt; Debugger options </code> 勾选:</p>
 <pre><code>Suspend on process entry point
 Suspend on thread start/exit
 Suspend on library load/unload 
-</code></pre><p>执行命令：</p>
+</code></pre>
+<p>执行命令：</p>
 <pre><code>jdb -connect com.sun.jdi.SocketAttach:hostname=127.0.0.1,port=端口号
 
 ddms的红色甲壳虫自动变成了绿色
-</code></pre><p>点击IDA左上角运行。</p>
+</code></pre>
+<p>点击IDA左上角运行。</p>
 <p>等待so库加载，在IDA模块中找到该so库，在so库中找方法 <code>jni_onload</code> (动态注册) 或者 <code>java开头的方法</code> (静态注册)。f2下断点，f9运行。</p>
 <hr>
 <h3 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h3><hr>
@@ -549,14 +601,16 @@ ddms的红色甲壳虫自动变成了绿色
 SHA 安全散列算法
 MAC 消息认证算法
 CRC 循环冗余校验算法
-</code></pre><p>对称加密算法:加密密钥==解密密钥。</p>
+</code></pre>
+<p>对称加密算法:加密密钥&#x3D;&#x3D;解密密钥。</p>
 <pre><code>DES
 DESede/3DES/Triple DES 
 AES 
 TEA
-DEA    
-PBE    
-</code></pre><p>非对称加密算法：</p>
+DEA	
+PBE	
+</code></pre>
+<p>非对称加密算法：</p>
 <pre><code>加密密钥!=解密密钥
 公钥==&gt;对外公开
 私钥==&gt;对外保密
@@ -570,9 +624,10 @@ DH 密钥交换算法
     ElGameal 数据加密/解密 数字签名 
     DSS数据签名标准=&gt;DSA 数字签名
     ECC 椭圆曲线加密算法
-</code></pre><p>数字签名</p>
+</code></pre>
+<p>数字签名</p>
 <pre><code>私钥==&gt;签名
-公钥==&gt;验证    
+公钥==&gt;验证	
 单向认证
 双向认证
 RSA
@@ -581,7 +636,8 @@ ECC+DSA==&gt;ECDSA 椭圆曲线数字签名算法
 认证/鉴别服务
 数据完整性服务
 抗否认性服务
-</code></pre><p>数字证书</p>
+</code></pre>
+<p>数字证书</p>
 <pre><code>消息摘要算法
 对称加密算法
 非对称加密算法
@@ -590,7 +646,8 @@ ECC+DSA==&gt;ECDSA 椭圆曲线数字签名算法
 数据保密性
 数据完整性
 抗否认性
-</code></pre><p>证书管理</p>
+</code></pre>
+<p>证书管理</p>
 <pre><code>KeyTool
     构建自签名证书
     构建CA签发证书
@@ -604,7 +661,8 @@ OpenSSL
 签名/验证
 X.509
 服务器数字证书
-</code></pre><hr>
+</code></pre>
+<hr>
 
             </div>
             <hr>
