@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=dark>
 
 
 
@@ -9,40 +9,47 @@
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
+  
+    <meta name="description" content="多任务编程 多任务是指在同一时间内执行多个任务，例如: 现在电脑安装的操作系统都是多任务操作系统，可以同时运行着多个软件。 多任务的执行方式：并发和并行。 并发:在一段时间内交替去执行任务。 并行:对于多核cpu处理多任务，操作系统会给cpu的每个内核安排一个执行的软件，多个内核是真正的一起执行软件。这里需要注意多核cpu是并行的执行多任务，始终有多个软件一起执行。 一个程序运行后至少有一个进程，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python高级">
+<meta property="og:url" content="http://yoursite.com/2020/09/09/43.python%E9%AB%98%E7%BA%A7/index.html">
+<meta property="og:site_name" content="Jiang Space">
+<meta property="og:description" content="多任务编程 多任务是指在同一时间内执行多个任务，例如: 现在电脑安装的操作系统都是多任务操作系统，可以同时运行着多个软件。 多任务的执行方式：并发和并行。 并发:在一段时间内交替去执行任务。 并行:对于多核cpu处理多任务，操作系统会给cpu的每个内核安排一个执行的软件，多个内核是真正的一起执行软件。这里需要注意多核cpu是并行的执行多任务，始终有多个软件一起执行。 一个程序运行后至少有一个进程，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/img/12.png">
+<meta property="article:published_time" content="2020-09-09T13:27:06.765Z">
+<meta property="article:modified_time" content="2021-03-26T14:41:55.008Z">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/img/12.png">
+  
+  
   
   <title>python高级 - Jiang Space</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
+
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
 
@@ -51,24 +58,44 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
+
+  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Jiang Space</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">
+      <strong>Jiang Space</strong>
+    </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -142,13 +169,15 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -157,60 +186,71 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="python高级">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-09-09 21:27" pubdate>
-        2020年9月9日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      19.9k 字
-    </span>
   
 
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      248
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="python高级"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-09-09 21:27" pubdate>
+          2020年9月9日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          47k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          390 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
@@ -219,15 +259,20 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">python高级</h1>
             
             <div class="markdown-body">
+              
               <h2 id="多任务编程"><a href="#多任务编程" class="headerlink" title="多任务编程"></a>多任务编程</h2><hr>
 <p>多任务是指在同一时间内执行多个任务，例如: 现在电脑安装的操作系统都是多任务操作系统，可以同时运行着多个软件。</p>
 <p>多任务的执行方式：并发和并行。</p>
@@ -237,7 +282,7 @@
 <hr>
 <h3 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h3><hr>
 <p>进程使用：</p>
-<pre><code>#导入进程包
+<pre><code class="hljs">#导入进程包
 import multiprocessing
 #创建子进程并指定执行的任务
 sub_process = multiprocessing.Process (target=任务名)
@@ -245,20 +290,20 @@ sub_process = multiprocessing.Process (target=任务名)
 sub_process.start()
 </code></pre><hr>
 <p>Process进程类的说明：</p>
-<pre><code>group：指定进程组，目前只能使用None
+<pre><code class="hljs">group：指定进程组，目前只能使用None
 target：执行的目标任务名
 name：进程名字
 args：以元组方式给执行任务传参
 kwargs：以字典方式给执行任务传参
 </code></pre><p>Process创建的实例对象的常用方法:</p>
-<pre><code>start()：启动子进程实例（创建子进程）
+<pre><code class="hljs">start()：启动子进程实例（创建子进程）
 join()：等待子进程执行结束
 terminate()：不管任务是否完成，立即终止子进程
 </code></pre><p>Process创建的实例对象的常用属性:</p>
-<pre><code>name：当前进程的别名，默认为Process-N，N为从1开始递增的整数
+<pre><code class="hljs">name：当前进程的别名，默认为Process-N，N为从1开始递增的整数
 </code></pre><hr>
 <p>代码：</p>
-<pre><code>import multiprocessing
+<pre><code class="hljs">import multiprocessing
 import time
 
 # 跳舞任务
@@ -288,9 +333,9 @@ if __name__ == &apos;__main__&apos;:
 <p>获取进程编号的两种操作:获取当前进程编号和获取当前父进程编号。</p>
 <hr>
 <p>获取当前进程编号</p>
-<pre><code>os.getpid() 
+<pre><code class="hljs">os.getpid() 
 </code></pre><p>示例代码:</p>
-<pre><code>import multiprocessing
+<pre><code class="hljs">import multiprocessing
 import time
 import os
 
@@ -331,7 +376,7 @@ if __name__ == &apos;__main__&apos;:
     dance_process.start()
     sing_process.start()
 </code></pre><p>运行结果：</p>
-<pre><code>main: 10796
+<pre><code class="hljs">main: 10796
 main: &lt;_MainProcess name=&apos;MainProcess&apos; parent=None started&gt;
 dance: 2388
 dance: &lt;Process name=&apos;myprocess1&apos; parent=10796 started&gt;
@@ -345,9 +390,9 @@ sing: &lt;Process name=&apos;Process-2&apos; parent=10796 started&gt;
 唱歌中...
 </code></pre><hr>
 <p>获取当前父进程编号</p>
-<pre><code>os.getppid()
+<pre><code class="hljs">os.getppid()
 </code></pre><p>示例代码:</p>
-<pre><code>import multiprocessing
+<pre><code class="hljs">import multiprocessing
 import time
 import os
 
@@ -392,7 +437,7 @@ if __name__ == &apos;__main__&apos;:
     dance_process.start()
     sing_process.start()
 </code></pre><p>运行结果：</p>
-<pre><code>main: 4832
+<pre><code class="hljs">main: 4832
 main: &lt;_MainProcess name=&apos;MainProcess&apos; parent=None started&gt;
 dance: 14372
 dance: &lt;Process name=&apos;myprocess1&apos; parent=4832 started&gt;
@@ -411,7 +456,7 @@ sing的父进程编号: 4832
 <p>Process类执行任务并给任务传参数有两种方式:<code>args</code> 表示以元组的方式给执行任务传参;<code>kwargs</code> 表示以字典方式给执行任务传参。</p>
 <hr>
 <p>args参数的使用，示例代码:</p>
-<pre><code>import multiprocessing
+<pre><code class="hljs">import multiprocessing
 import time
 
 # 带有参数的任务
@@ -430,7 +475,7 @@ if __name__ == &apos;__main__&apos;:
 </code></pre><p><strong>元组方式传参一定要和参数的顺序保持一致。</strong></p>
 <hr>
 <p>kwargs参数的使用,示例代码:</p>
-<pre><code>import multiprocessing
+<pre><code class="hljs">import multiprocessing
 import time
 
 # 带有参数的任务
@@ -452,12 +497,12 @@ if __name__ == &apos;__main__&apos;:
 <p><strong>进程之间不共享全局变量：子线程和主线程之间，以及子线程和子线程之间都不共享。</strong>创建子进程会对主进程资源进行拷贝，也就是说子进程是主进程的一个副本，好比是一对双胞胎，之所以进程之间不共享全局变量，是因为操作的不是同一个进程里面的全局变量，只不过不同进程里面的全局变量名字相同而已。</p>
 <p>主进程会等待所有的子进程执行结束再结束。</p>
 <p>守护主进程就是主进程退出子进程销毁不再执行。</p>
-<pre><code>子进程对象.daemon = True
+<pre><code class="hljs">子进程对象.daemon = True
 </code></pre><p>子进程销毁:子进程执行结束。</p>
-<pre><code># 让子进程销毁
+<pre><code class="hljs"># 让子进程销毁
 子进程对象.terminate()
 </code></pre><p>保证主进程正常退出的示例代码:</p>
-<pre><code>import multiprocessing
+<pre><code class="hljs">import multiprocessing
 import time
 
 # 定义进程所需要执行的任务
@@ -483,20 +528,20 @@ if __name__ == &apos;__main__&apos;:
 <h3 id="多线程的使用"><a href="#多线程的使用" class="headerlink" title="多线程的使用"></a>多线程的使用</h3><hr>
 <p>线程是cpu调度的基本单位，每个进程至少都有一个线程，而这个线程就是我们通常说的主线程。</p>
 <p>多线程的使用</p>
-<pre><code>#导入线程模块
+<pre><code class="hljs">#导入线程模块
 import threading
 #创建子线程并指定执行的任务
 sub_thread = threading.Thread(target=任务名)
 #启动线程执行任务
 sub_thread.start()
 </code></pre><p>线程类Thread参数说明</p>
-<pre><code>group: 线程组，目前只能使用None
+<pre><code class="hljs">group: 线程组，目前只能使用None
 target: 执行的目标任务名
 args: 以元组的方式给执行任务传参
 kwargs: 以字典方式给执行任务传参
 name: 线程名，一般不用设置
 </code></pre><p>代码</p>
-<pre><code>import threading
+<pre><code class="hljs">import threading
 import time
 
 # 唱歌任务
@@ -530,7 +575,7 @@ if __name__ == &apos;__main__&apos;:
 <h3 id="线程执行带有参数的任务"><a href="#线程执行带有参数的任务" class="headerlink" title="线程执行带有参数的任务"></a>线程执行带有参数的任务</h3><hr>
 <p>Thread类执行任务并给任务传参数有两种方式:args表示以元组的方式给执行任务传参;kwargs表示以字典方式给执行任务传参。</p>
 <p>元组方式传参(args)，元组方式传参一定要和参数的顺序保持一致：</p>
-<pre><code>import threading
+<pre><code class="hljs">import threading
 import time
 
 # 带有参数的任务
@@ -547,7 +592,7 @@ if __name__ == &apos;__main__&apos;:
     sub_thread = threading.Thread(target=task, args=(5,))
     sub_thread.start()
 </code></pre><p>字典方式传参(kwargs),字典方式传参字典中的key一定要和参数名保持一致:</p>
-<pre><code>import threading
+<pre><code class="hljs">import threading
 import time
 
 # 带有参数的任务
@@ -569,14 +614,14 @@ if __name__ == &apos;__main__&apos;:
 <p>进程之间执行也是无序的，它是由操作系统调度决定的，操作系统调度哪个进程，哪个进程就先执行，没有调度的进程不能执行。</p>
 <p>主线程会等待所有的子线程执行结束再结束。</p>
 <p>守护主线程:主线程退出子线程销毁不再执行。</p>
-<pre><code>#设置守护主线程有两种方式：
+<pre><code class="hljs">#设置守护主线程有两种方式：
 threading.Thread(target=show_info, daemon=True)
 线程对象.setDaemon(True)
 </code></pre><p>线程之间共享全局变量，多线程同时对全局变量操作数据会发生错误。</p>
 <p>全局变量数据错误的解决办法:线程同步: 保证同一时刻只能有一个线程去操作全局变量。</p>
 <p>线程同步的方式:线程等待(join)；互斥锁。</p>
 <p>线程等待的示例代码:</p>
-<pre><code># 启动线程
+<pre><code class="hljs"># 启动线程
 first_thread.start()
 # 主线程等待第一个线程执行完成以后代码再继续执行，让其执行第二个线程
 # 线程同步： 一个任务执行完成以后另外一个任务才能执行，同一个时刻只有一个任务在执行
@@ -587,7 +632,7 @@ second_thread.start()
 <h3 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h3><hr>
 <p>互斥锁: 对共享数据进行锁定，保证同一时刻只能有一个线程去操作。互斥锁是多个线程一起去抢，抢到锁的线程先执行，没有抢到锁的线程需要等待，等互斥锁使用完释放后，其它等待的线程再去抢这个锁。</p>
 <p>互斥锁使用步骤:</p>
-<pre><code># 创建锁
+<pre><code class="hljs"># 创建锁
 mutex = threading.Lock()
 # 上锁
 mutex.acquire()
@@ -596,7 +641,7 @@ mutex.acquire()
 mutex.release()
 </code></pre><p>acquire和release方法之间的代码同一时刻只能有一个线程去操作。如果在调用acquire方法的时候，其他线程已经使用了这个互斥锁，那么此时acquire方法会堵塞，直到这个互斥锁释放后才能再次上锁。</p>
 <p>示例代码：</p>
-<pre><code>import threading
+<pre><code class="hljs">import threading
 
 # 定义全局变量
 g_num = 0
@@ -638,7 +683,7 @@ if __name__ == &apos;__main__&apos;:
 <hr>
 <h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><hr>
 <p>死锁: 一直等待对方释放锁的情景就是死锁。死锁的结果会造成应用程序的停止响应，不能再处理其它任务了。</p>
-<pre><code>import threading
+<pre><code class="hljs">import threading
 import time
 
 # 创建互斥锁
@@ -678,18 +723,18 @@ if __name__ == &apos;__main__&apos;:
 <h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2><h3 id="TCP客户端程序开发"><a href="#TCP客户端程序开发" class="headerlink" title="TCP客户端程序开发"></a>TCP客户端程序开发</h3><hr>
 <p>TCP客户端程序开发步骤：创建客户端套接字对象、和服务端套接字建立连接、发送数据、接收数据、关闭客户端套接字。</p>
 <p>socket类：</p>
-<pre><code>#导入socket模块 
+<pre><code class="hljs">#导入socket模块 
 import socket
 
 #创建客户端socket对象 
 socket.socket(AddressFamily, Type)
 </code></pre><p>参数说明:AddressFamily表示IP地址类型, 分为TPv4和IPv6。Type 表示传输协议类型。</p>
 <p>方法说明:</p>
-<pre><code>connect((host, port)) 表示和服务端套接字建立连接, host是服务器ip地址，port是应用程序的端口号
+<pre><code class="hljs">connect((host, port)) 表示和服务端套接字建立连接, host是服务器ip地址，port是应用程序的端口号
 send(data) 表示发送数据，data是二进制数据
 recv(buffersize) 表示接收数据, buffersize是每次接收数据的长度
 </code></pre><p>示例代码：</p>
-<pre><code>import socket
+<pre><code class="hljs">import socket
 
 if __name__ == &apos;__main__&apos;:
     # 创建tcp客户端套接字
@@ -718,19 +763,19 @@ if __name__ == &apos;__main__&apos;:
 <h3 id="TCP服务端程序开发"><a href="#TCP服务端程序开发" class="headerlink" title="TCP服务端程序开发"></a>TCP服务端程序开发</h3><hr>
 <p>TCP服务端程序开发步骤回顾:创建服务端端套接字对象、绑定端口号、设置监听、等待接受客户端的连接请求、接收数据、发送数据、关闭套接字。</p>
 <p>socket类：</p>
-<pre><code>#导入 socket 模块
+<pre><code class="hljs">#导入 socket 模块
 import socket
 #创建服务端 socket 对象
 socket.socket(AddressFamily, Type)
 </code></pre><p>参数说明:AddressFamily表示IP地址类型, 分为TPv4和IPv6。Type表示传输协议类型。</p>
 <p>方法说明:</p>
-<pre><code>bind((host, port)) 表示绑定端口号, host 是 ip 地址，port 是端口号，ip 地址一般不指定，表示本机的任何一个ip地址都可以。
+<pre><code class="hljs">bind((host, port)) 表示绑定端口号, host 是 ip 地址，port 是端口号，ip 地址一般不指定，表示本机的任何一个ip地址都可以。
 listen (backlog) 表示设置监听，backlog参数表示最大等待建立连接的个数。
 accept() 表示等待接受客户端的连接请求
 send(data) 表示发送数据，data 是二进制数据
 recv(buffersize) 表示接收数据, buffersize 是每次接收数据的长度
 </code></pre><p>示例代码：</p>
-<pre><code>import socket
+<pre><code class="hljs">import socket
 
 if __name__ == &apos;__main__&apos;:
     # 创建tcp服务端套接字
@@ -769,7 +814,7 @@ if __name__ == &apos;__main__&apos;:
 </code></pre><p>说明:当客户端和服务端建立连接后，服务端程序退出后端口号不会立即释放，需要等待大概1-2分钟。</p>
 <p>解决办法有两种:更换服务端端口号;设置端口号复用(推荐使用)，也就是说让服务端程序退出后端口号立即释放。</p>
 <p>设置端口号复用的代码如下:</p>
-<pre><code># 参数1: 表示当前套接字
+<pre><code class="hljs"># 参数1: 表示当前套接字
 # 参数2: 设置端口号复用选项
 # 参数3: 设置端口号复用选项对应的值
 tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
@@ -793,7 +838,7 @@ tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
 <li>把创建的子线程设置成为守护主线程，防止主线程无法退出。</li>
 </ol>
 <p>示例代码:</p>
-<pre><code>import socket
+<pre><code class="hljs">import socket
 import threading
 
 # 处理客户端的请求操作
@@ -846,13 +891,13 @@ if __name__ == &apos;__main__&apos;:
 <h2 id="静态Web服务器"><a href="#静态Web服务器" class="headerlink" title="静态Web服务器"></a>静态Web服务器</h2><h3 id="启动python自带静态Web服务"><a href="#启动python自带静态Web服务" class="headerlink" title="启动python自带静态Web服务"></a>启动python自带静态Web服务</h3><hr>
 <p>静态Web服务器：可以为发出请求的浏览器提供静态文档的程序。</p>
 <p>搭建Python自带的静态Web服务器</p>
-<pre><code>python -m http.server 端口号
+<pre><code class="hljs">python -m http.server 端口号
 </code></pre><p>-m表示运行包里面的模块，执行这个命令的时候，需要进入你自己指定静态文件的目录，然后通过浏览器就能访问对应的html文件了，这样一个静态的web服务器就搭建好了。</p>
 <hr>
 <h3 id="开发自己的静态Web服务器"><a href="#开发自己的静态Web服务器" class="headerlink" title="开发自己的静态Web服务器"></a>开发自己的静态Web服务器</h3><hr>
 <p>实现步骤:编写一个TCP服务端程序、获取浏览器发送的http请求报文数据、读取固定页面数据，把页面数据组装成HTTP响应报文数据发送给浏览器。HTTP响应报文数据发送完成以后，关闭服务于客户端的套接字。</p>
 <p>示例代码：</p>
-<pre><code>import socket
+<pre><code class="hljs">import socket
 
 if __name__ == &apos;__main__&apos;:
     # 创建tcp服务端套接字
@@ -889,7 +934,7 @@ if __name__ == &apos;__main__&apos;:
 </code></pre><hr>
 <h3 id="开发自己的静态Web服务器返回指定页面数据"><a href="#开发自己的静态Web服务器返回指定页面数据" class="headerlink" title="开发自己的静态Web服务器返回指定页面数据"></a>开发自己的静态Web服务器返回指定页面数据</h3><hr>
 <p>返回指定页面数据的实现步骤:获取用户请求资源的路径；根据请求资源的路径，读取指定文件的数据；组装指定文件数据的响应报文，发送给浏览器；判断请求的文件在服务端不存在，组装404状态的响应报文，发送给浏览器。</p>
-<pre><code>import socket
+<pre><code class="hljs">import socket
 
 def main():
     # 创建tcp服务端套接字
@@ -959,7 +1004,7 @@ if __name__ == &apos;__main__&apos;:
 </code></pre><hr>
 <h3 id="静态Web服务器-多任务版"><a href="#静态Web服务器-多任务版" class="headerlink" title="静态Web服务器-多任务版"></a>静态Web服务器-多任务版</h3><hr>
 <p>多任务版web服务器程序的实现步骤:当客户端和服务端建立连接成功，创建子线程，使用子线程专门处理客户端的请求，防止主线程阻塞。把创建的子线程设置成为守护主线程，防止主线程无法退出。</p>
-<pre><code>import socket
+<pre><code class="hljs">import socket
 import threading
 
 # 处理客户端的请求
@@ -1041,7 +1086,7 @@ if __name__ == &apos;__main__&apos;:
 </code></pre><hr>
 <h3 id="静态Web服务器-面向对象开发"><a href="#静态Web服务器-面向对象开发" class="headerlink" title="静态Web服务器-面向对象开发"></a>静态Web服务器-面向对象开发</h3><hr>
 <p>实现步骤:把提供服务的Web服务器抽象成一个类(HTTPWebServer)；提供Web服务器的初始化方法，在初始化方法里面创建socket对象；提供一个开启Web服务器的方法，让Web服务器处理客户端请求操作。</p>
-<pre><code>import socket
+<pre><code class="hljs">import socket
 import threading
 
 # 定义web服务器类
@@ -1136,7 +1181,7 @@ if __name__ == &apos;__main__&apos;:
 </code></pre><hr>
 <h3 id="命令行启动动态绑定端口号"><a href="#命令行启动动态绑定端口号" class="headerlink" title="命令行启动动态绑定端口号"></a>命令行启动动态绑定端口号</h3><hr>
 <p>实现步骤:获取执行python程序的终端命令行参数;判断参数的类型，设置端口号必须是整型;给Web服务器类的初始化方法添加一个端口号参数，用于绑定端口号。</p>
-<pre><code>import socket
+<pre><code class="hljs">import socket
 import threading
 import sys
 
@@ -1253,7 +1298,7 @@ if __name__ == &apos;__main__&apos;:
 <p>SQL(Structured Query Language)是结构化查询语言，是一种用来操作RDBMS的数据库的语言。也就是说通过 SQL 可以操作 oracle,sql server,mysql,sqlite 等关系型的数据库。</p>
 <p>SQL的作用是实现数据库客户端和数据库服务端之间的通信，SQL就是通信的桥梁。</p>
 <p>SQL语言主要分为：</p>
-<pre><code>DQL：数据查询语言，用于对数据进行查询，如select
+<pre><code class="hljs">DQL：数据查询语言，用于对数据进行查询，如select
 DML：数据操作语言，对数据进行增加、修改、删除，如insert、update、delete
 TPL：事务处理语言，对事务进行处理，包括begin transaction、commit、rollback
 DCL：数据控制语言，进行授权与权限回收，如grant、revoke
@@ -1264,7 +1309,7 @@ DDL：数据定义语言，进行数据库、表的管理等，如create、drop
 <p>数据库中的数据保存在数据表中，在表中为了更加准确的存储数据，保证数据的正确有效，可以在创建表的时候，为表添加一些强制性的验证，比如:数据类型和约束。</p>
 <p>数据类型是指在创建表的时候为表中字段指定数据类型，只有数据符合类型要求才能存储起来，使用数据类型的原则是:够用就行，尽量使用取值范围小的，而不用大的，这样可以更多的节省存储空间。</p>
 <p>常用数据类型如下:</p>
-<pre><code>整数：int，bit
+<pre><code class="hljs">整数：int，bit
 小数：decimal
 字符串：varchar,char
 日期时间: date, time, datetime
@@ -1278,7 +1323,7 @@ DDL：数据定义语言，进行数据库、表的管理等，如create、drop
 </ol>
 <p>数据约束<br>约束是指数据在数据类型限定的基础上额外增加的要求.</p>
 <p>常见的约束如下:</p>
-<pre><code>主键 primary key: 物理上存储的顺序. MySQL 建议所有表的主键字段都叫 id, 类型为 int unsigned.
+<pre><code class="hljs">主键 primary key: 物理上存储的顺序. MySQL 建议所有表的主键字段都叫 id, 类型为 int unsigned.
 非空 not null: 此字段不允许填写空值.
 惟一 unique: 此字段的值不允许重复.
 默认 default: 当不填写字段对应的值会使用默认值，如果填写时以填写为准.
@@ -1402,33 +1447,33 @@ DDL：数据定义语言，进行数据库、表的管理等，如create、drop
 <hr>
 <h3 id="命令行客户端MySQL的使用"><a href="#命令行客户端MySQL的使用" class="headerlink" title="命令行客户端MySQL的使用"></a>命令行客户端MySQL的使用</h3><hr>
 <p>登录数据库:</p>
-<pre><code>mysql -uroot -p
+<pre><code class="hljs">mysql -uroot -p
 </code></pre><p>显示当前时间：</p>
-<pre><code>select now();
+<pre><code class="hljs">select now();
 </code></pre><p>登出(退出)数据库:</p>
-<pre><code>quit 或 exit 或 ctrl + d
+<pre><code class="hljs">quit 或 exit 或 ctrl + d
 </code></pre><hr>
 <p>数据库操作</p>
 <p>查看所有数据库：</p>
-<pre><code>show databases;
+<pre><code class="hljs">show databases;
 </code></pre><p>创建数据库：</p>
-<pre><code>create database 数据库名 charset=utf8;
+<pre><code class="hljs">create database 数据库名 charset=utf8;
 例：
 create database python charset=utf8;
 </code></pre><p>使用数据库：</p>
-<pre><code>use 数据库名;
+<pre><code class="hljs">use 数据库名;
 </code></pre><p>查看当前使用的数据库：</p>
-<pre><code>select database();
+<pre><code class="hljs">select database();
 </code></pre><p>删除数据库-慎重：</p>
-<pre><code>drop database 数据库名;
+<pre><code class="hljs">drop database 数据库名;
 例：
 drop database python;
 </code></pre><hr>
 <p>表结构操作</p>
 <p>查看当前数据库中所有表：</p>
-<pre><code>show tables;
+<pre><code class="hljs">show tables;
 </code></pre><p>创建表：</p>
-<pre><code>create table students(
+<pre><code class="hljs">create table students(
  id int unsigned primary key auto_increment not null,
  name varchar(20) not null,
  age tinyint unsigned default 0,
@@ -1436,47 +1481,47 @@ drop database python;
  gender enum(&apos;男&apos;,&apos;女&apos;,&apos;人妖&apos;,&apos;保密&apos;)
 );
 </code></pre><p>说明:</p>
-<pre><code>create table 表名(
+<pre><code class="hljs">create table 表名(
 字段名称 数据类型  可选的约束条件,
 column1 datatype contrai,
 ...
 );
 </code></pre><p>修改表-添加字段：</p>
-<pre><code>alter table 表名 add 列名 类型 约束;
+<pre><code class="hljs">alter table 表名 add 列名 类型 约束;
 例：
 alter table students add birthday datetime;
 </code></pre><p>修改表-修改字段类型：</p>
-<pre><code>alter table 表名 modify 列名 类型 约束;
+<pre><code class="hljs">alter table 表名 modify 列名 类型 约束;
 例：
 alter table students modify birthday date not null;
 </code></pre><p>说明:</p>
-<pre><code>modify: 只能修改字段类型或者约束，不能修改字段名
+<pre><code class="hljs">modify: 只能修改字段类型或者约束，不能修改字段名
 </code></pre><p>修改表-修改字段名和字段类型：</p>
-<pre><code>alter table 表名 change 原名 新名 类型及约束;
+<pre><code class="hljs">alter table 表名 change 原名 新名 类型及约束;
 例：
 alter table students change birthday birth datetime not null;
 </code></pre><p>说明:</p>
-<pre><code>change: 既能对字段重命名又能修改字段类型还能修改约束
+<pre><code class="hljs">change: 既能对字段重命名又能修改字段类型还能修改约束
 </code></pre><p>修改表-删除字段：</p>
-<pre><code>alter table 表名 drop 列名;
+<pre><code class="hljs">alter table 表名 drop 列名;
 例：
 alter table students drop birthday;
 </code></pre><p>查看创表SQL语句：</p>
-<pre><code>show create table 表名;
+<pre><code class="hljs">show create table 表名;
 例：
 show create table students;
 </code></pre><p>查看创库SQL语句：</p>
-<pre><code>show create database 数据库名;
+<pre><code class="hljs">show create database 数据库名;
 例：
 show create database mytest;
 </code></pre><p>删除表：</p>
-<pre><code>drop table 表名;
+<pre><code class="hljs">drop table 表名;
 例：
 drop table students;
 </code></pre><hr>
 <p>表数据操作</p>
 <p>查询数据：</p>
-<pre><code>1. 查询所有列
+<pre><code class="hljs">1. 查询所有列
 select * from 表名;
 例：
 select * from students;
@@ -1485,7 +1530,7 @@ select 列1,列2,... from 表名;
 例：
 select id,name from students;
 </code></pre><p>添加数据：</p>
-<pre><code>1. 全列插入：值的顺序与表结构字段的顺序完全一一对应
+<pre><code class="hljs">1. 全列插入：值的顺序与表结构字段的顺序完全一一对应
 insert into 表名 values (...)
 例:
 insert into students values(0, &apos;xx&apos;, default, default, &apos;男&apos;);
@@ -1504,15 +1549,15 @@ insert into students(name, height) values(&apos;刘备&apos;, 1.75),(&apos;曹�
 </code></pre><p>说明:</p>
 <p>主键列是自动增长，但是在全列插入时需要占位，通常使用空值(0或者null或者default)。在全列插入时，如果字段列有默认值可以使用 default 来占位，插入后的数据就是之前设置的默认值</p>
 <p>修改数据：</p>
-<pre><code>update 表名 set 列1=值1,列2=值2... where 条件
+<pre><code class="hljs">update 表名 set 列1=值1,列2=值2... where 条件
 例：
 update students set age = 18, gender = &apos;女&apos; where id = 6;
 </code></pre><p>删除数据：</p>
-<pre><code>delete from 表名 where 条件
+<pre><code class="hljs">delete from 表名 where 条件
 例：
 delete from students where id=5;
 </code></pre><p>问题:上面的操作称之为物理删除，一旦删除就不容易恢复，我们可以使用逻辑删除的方式来解决这个问题。</p>
-<pre><code>添加删除表示字段，0表示未删除 1表示删除
+<pre><code class="hljs">添加删除表示字段，0表示未删除 1表示删除
 alter table students add isdelete bit default 0;
 逻辑删除数据
 update students set isdelete = 1 where id = 8;
@@ -1521,9 +1566,9 @@ update students set isdelete = 1 where id = 8;
 <h3 id="as和distinct关键字"><a href="#as和distinct关键字" class="headerlink" title="as和distinct关键字"></a>as和distinct关键字</h3><hr>
 <p>as关键字：在使用SQL语句显示结果的时候，往往在屏幕显示的字段名并不具备良好的可读性，此时可以使用 as 给字段起一个别名。</p>
 <p>使用 as 给字段起别名：</p>
-<pre><code>select id as 序号, name as 名字, gender as 性别 from students;
+<pre><code class="hljs">select id as 序号, name as 名字, gender as 性别 from students;
 </code></pre><p>可以通过 as 给表起别名</p>
-<pre><code>-- 如果是单表查询 可以省略表名
+<pre><code class="hljs">-- 如果是单表查询 可以省略表名
 select id, name, gender from students;
 
 -- 表名.字段名
@@ -1533,7 +1578,7 @@ select students.id,students.name,students.gender from students;
 select s.id,s.name,s.gender from students as s;
 </code></pre><hr>
 <p>distinct关键字：distinct可以去除重复数据行。</p>
-<pre><code>select distinct 列1,... from 表名;
+<pre><code class="hljs">select distinct 列1,... from 表名;
 
 例： 查询班级中学生的性别
 select name, gender from students;
@@ -1544,11 +1589,11 @@ select distinct name, gender from students;
 <h3 id="where条件查询"><a href="#where条件查询" class="headerlink" title="where条件查询"></a>where条件查询</h3><hr>
 <p>使用where条件查询可以对表中的数据进行筛选，条件成立的记录会出现在结果集中。</p>
 <p>格式如下:</p>
-<pre><code>select * from 表名 where 条件;
+<pre><code class="hljs">select * from 表名 where 条件;
 例：
 select * from students where id = 1;
 </code></pre><p>比较运算符查询（=、&gt;、&gt;=、&lt;、&lt;=、!= 或 &lt;&gt;）：</p>
-<pre><code>例1：查询编号大于3的学生:
+<pre><code class="hljs">例1：查询编号大于3的学生:
 select * from students where id &gt; 3;
 
 例2：查询编号不大于4的学生:
@@ -1560,7 +1605,7 @@ select * from students where name != &apos;黄蓉&apos;;
 例4：查询没被删除的学生:
 select * from students where is_delete=0;
 </code></pre><p>逻辑运算符查询（and、or、not）</p>
-<pre><code>例1：查询编号大于3的女同学:
+<pre><code class="hljs">例1：查询编号大于3的女同学:
 select * from students where id &gt; 3 and gender=0;
 
 例2：查询编号小于4或没被删除的学生:
@@ -1570,7 +1615,7 @@ select * from students where id &lt; 4 or is_delete=0;
 select * from students where not (age &gt;= 10 and age &lt;= 15);
 </code></pre><p>说明:多个条件判断想要作为一个整体，可以结合<code>()</code>。</p>
 <p>模糊查询(like是模糊查询关键字、%表示任意多个任意字符、_表示一个任意字符）：</p>
-<pre><code>例1：查询姓黄的学生:
+<pre><code class="hljs">例1：查询姓黄的学生:
 select * from students where name like &apos;黄%&apos;;
 
 例2：查询姓黄并且“名”是一个字的学生:
@@ -1579,20 +1624,20 @@ select * from students where name like &apos;黄_&apos;;
 例3：查询姓黄或叫靖的学生:
 select * from students where name like &apos;黄%&apos; or name like &apos;%靖&apos;;
 </code></pre><p>范围查询(between .. and .. 表示在一个连续的范围内查询、in 表示在一个非连续的范围内查询）：</p>
-<pre><code>例1：查询编号为3至8的学生:
+<pre><code class="hljs">例1：查询编号为3至8的学生:
 select * from students where id between 3 and 8;
 
 例2：查询编号不是3至8的男生:
 select * from students where (not id between 3 and 8) and gender=&apos;男&apos;;
 </code></pre><p>空判断查询（判断为空使用: is null、判断非空使用: is not null）：</p>
-<pre><code>例1：查询没有填写身高的学生:
+<pre><code class="hljs">例1：查询没有填写身高的学生:
 select * from students where height is null;
 </code></pre><hr>
 <h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><hr>
 <p>排序查询语法：</p>
-<pre><code>select * from 表名 order by 列1 asc|desc [,列2 asc|desc,...]
+<pre><code class="hljs">select * from 表名 order by 列1 asc|desc [,列2 asc|desc,...]
 </code></pre><p>语法说明:先按照列1进行排序，如果列1的值相同时，则按照 列2 排序，以此类推。asc从小到大排列，即升序。desc从大到小排序，即降序。默认按照列值从小到大排列（即asc）。</p>
-<pre><code>例1：查询未删除男生信息，按学号降序:
+<pre><code class="hljs">例1：查询未删除男生信息，按学号降序:
 select * from students where gender=1 and is_delete=0 order by id desc;
 
 例2：显示所有的学生信息，先按照年龄从大--&gt;小排序，当年龄相同时 按照身高从高--&gt;矮排序:
@@ -1600,42 +1645,42 @@ select * from students  order by age desc,height desc;
 </code></pre><hr>
 <h3 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h3><hr>
 <p>分页查询的语法</p>
-<pre><code>select * from 表名 limit start,count
+<pre><code class="hljs">select * from 表名 limit start,count
 </code></pre><p>说明:limit是分页查询关键字；start表示开始行索引，默认是0；count表示查询条数。</p>
-<pre><code>查询前3行男生信息:
+<pre><code class="hljs">查询前3行男生信息:
 select * from students where gender=1 limit 0,3;
 简写：
 select * from students where gender=1 limit 3;
 </code></pre><p>已知每页显示m条数据，求第n页显示的数据</p>
-<pre><code>查询学生表，获取第n页数据的SQL语句:
+<pre><code class="hljs">查询学生表，获取第n页数据的SQL语句:
 select * from students limit (n-1)*m,m
 </code></pre><hr>
 <h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><hr>
 <p>聚合函数又叫组函数，通常是对表中的数据进行统计和计算，一般结合分组(group by)来使用，用于统计和计算分组数据。</p>
 <p>常用的聚合函数:</p>
-<pre><code>count(col): 表示求指定列的总行数
+<pre><code class="hljs">count(col): 表示求指定列的总行数
 max(col): 表示求指定列的最大值
 min(col): 表示求指定列的最小值
 sum(col): 表示求指定列的和
 avg(col): 表示求指定列的平均值
 </code></pre><p>求总行数</p>
-<pre><code>-- 返回非NULL数据的总行数.
+<pre><code class="hljs">-- 返回非NULL数据的总行数.
 select count(height) from students; 
 -- 返回总行数，包含null值记录;
 select count(*) from students;
 </code></pre><p>求最大值</p>
-<pre><code>-- 查询女生的编号最大值
+<pre><code class="hljs">-- 查询女生的编号最大值
 select max(id) from students where gender = 2;
 </code></pre><p>求最小值</p>
-<pre><code>-- 查询未删除的学生最小编号
+<pre><code class="hljs">-- 查询未删除的学生最小编号
 select min(id) from students where is_delete = 0;
 </code></pre><p>求和</p>
-<pre><code>-- 查询男生的总身高
+<pre><code class="hljs">-- 查询男生的总身高
 select sum(height) from students where gender = 1;
 -- 平均身高
 select sum(height) / count(*) from students where gender = 1;
 </code></pre><p>求平均值</p>
-<pre><code>-- 求男生的平均身高, 聚合函数不统计null值，平均身高有误
+<pre><code class="hljs">-- 求男生的平均身高, 聚合函数不统计null值，平均身高有误
 select avg(height) from students where gender = 1;
 -- 求男生的平均身高, 包含身高是null的
 select avg(ifnull(height,0)) from students where gender = 1;
@@ -1645,26 +1690,26 @@ select avg(ifnull(height,0)) from students where gender = 1;
 <h3 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h3><hr>
 <p>分组查询介绍：将查询结果按照指定字段进行分组，字段中数据相等的分为一组。</p>
 <p>语法格式如下：</p>
-<pre><code>GROUP BY 列名 [HAVING 条件表达式] [WITH ROLLUP]
+<pre><code class="hljs">GROUP BY 列名 [HAVING 条件表达式] [WITH ROLLUP]
 </code></pre><p>说明:列名: 是指按照指定字段的值进行分组。HAVING 条件表达式: 用来过滤分组后的数据。WITH ROLLUP：在所有记录的最后加上一条记录，显示select查询时聚合函数的统计和计算结果。</p>
 <p>group by可用于单个字段分组，也可用于多个字段分组：</p>
-<pre><code>-- 根据gender字段来分组
+<pre><code class="hljs">-- 根据gender字段来分组
 select gender from students group by gender;
 -- 根据name和gender字段进行分组
 select name, gender from students group by name, gender;
 </code></pre><p>group_concat(字段名): 统计每个分组指定字段的信息集合，每个信息之间使用逗号进行分割：</p>
-<pre><code>-- 根据gender字段进行分组， 查询gender字段和分组的name字段信息
+<pre><code class="hljs">-- 根据gender字段进行分组， 查询gender字段和分组的name字段信息
 select gender,group_concat(name) from students group by gender;
 </code></pre><p><code>group by + 聚合函数</code>的使用:</p>
-<pre><code>-- 统计不同性别的人的平均年龄
+<pre><code class="hljs">-- 统计不同性别的人的平均年龄
 select gender,avg(age) from students group by gender;
 -- 统计不同性别的人的个数
 select gender,count(*) from students group by gender;
 </code></pre><p><code>group by + having</code>的使用:</p>
-<pre><code>-- 根据gender字段进行分组，统计分组条数大于2的
+<pre><code class="hljs">-- 根据gender字段进行分组，统计分组条数大于2的
 select gender,count(*) from students group by gender having count(*)&gt;2;
 </code></pre><p><code>group by + with rollup</code>的使用:</p>
-<pre><code>-- 根据gender字段进行分组，汇总总人数
+<pre><code class="hljs">-- 根据gender字段进行分组，汇总总人数
 select gender,count(*) from students group by gender with rollup;
 -- 根据gender字段进行分组，汇总所有人的年龄
 select gender,group_concat(age) from students group by gender with rollup;
@@ -1674,36 +1719,36 @@ select gender,group_concat(age) from students group by gender with rollup;
 <p>连接查询可以分为:内连接查询、左连接查询、右连接查询、自连接查询。</p>
 <p>内连接查询：查询<strong>两个表中符合条件的共有记录</strong>。</p>
 <p>语法格式:</p>
-<pre><code>select 字段 from 表1 inner join 表2 on 表1.字段1 = 表2.字段2
+<pre><code class="hljs">select 字段 from 表1 inner join 表2 on 表1.字段1 = 表2.字段2
 </code></pre><p>说明:inner join 就是内连接查询关键字。on 就是连接查询条件</p>
-<pre><code>例1：使用内连接查询学生表与班级表:
+<pre><code class="hljs">例1：使用内连接查询学生表与班级表:
 select * from students as s inner join classes as c on s.cls_id = c.id;
 </code></pre><hr>
 <h3 id="左连接查询"><a href="#左连接查询" class="headerlink" title="左连接查询"></a>左连接查询</h3><hr>
 <p>左连接查询：以左表为主根据条件查询右表数据，如果根据条件查询右表数据不存在使用null值填充。</p>
 <p>语法格式:</p>
-<pre><code>select 字段 from 表1 left join 表2 on 表1.字段1 = 表2.字段2
+<pre><code class="hljs">select 字段 from 表1 left join 表2 on 表1.字段1 = 表2.字段2
 </code></pre><p>说明:left join 就是左连接查询关键字；on 就是连接查询条件；表1是左表；表2是右表。</p>
-<pre><code>例1：使用左连接查询学生表与班级表:
+<pre><code class="hljs">例1：使用左连接查询学生表与班级表:
 select * from students as s left join classes as c on s.cls_id = c.id;
 </code></pre><hr>
 <h3 id="右连接查询"><a href="#右连接查询" class="headerlink" title="右连接查询"></a>右连接查询</h3><hr>
 <p>以右表为主根据条件查询左表数据，如果根据条件查询左表数据不存在使用null值填充。</p>
 <p>右连接查询语法格式:</p>
-<pre><code>select 字段 from 表1 right join 表2 on 表1.字段1 = 表2.字段2
+<pre><code class="hljs">select 字段 from 表1 right join 表2 on 表1.字段1 = 表2.字段2
 </code></pre><p>说明:right join 就是右连接查询关键字；on 就是连接查询条件；表1是左表；表2是右表。</p>
-<pre><code>使用右连接查询学生表与班级表:
+<pre><code class="hljs">使用右连接查询学生表与班级表:
 select * from students as s right join classes as c on s.cls_id = c.id;
 </code></pre><hr>
 <h3 id="自连接查询"><a href="#自连接查询" class="headerlink" title="自连接查询"></a>自连接查询</h3><hr>
 <p>左表和右表是<strong>同一个表</strong>，根据连接查询条件查询两个表中的数据。</p>
 <p>自连接查询的用法:</p>
-<pre><code>select c.id, c.title, c.pid, p.title from areas as c inner join areas as p on c.pid = p.id where p.title = &apos;山西省&apos;;
+<pre><code class="hljs">select c.id, c.title, c.pid, p.title from areas as c inner join areas as p on c.pid = p.id where p.title = &apos;山西省&apos;;
 </code></pre><hr>
 <h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h3><hr>
 <p>在一个 select 语句中,嵌入了另外一个 select 语句, 那么被嵌入的 select 语句称之为子查询语句，外部那个select语句则称为主查询.</p>
 <p>主查询和子查询的关系:子查询是嵌入到主查询中;子查询是辅助主查询的,要么充当条件,要么充当数据源;子查询是可以独立存在的语句,是一条完整的 select 语句。</p>
-<pre><code>例1. 查询大于平均年龄的学生:
+<pre><code class="hljs">例1. 查询大于平均年龄的学生:
 select * from students where age &gt; (select avg(age) from students);
 
 例2. 查询学生在班的所有班级名字:
@@ -1721,14 +1766,14 @@ select * from students where (age, height) =  (select max(age), max(height) from
 <h3 id="外键SQL语句的编写"><a href="#外键SQL语句的编写" class="headerlink" title="外键SQL语句的编写"></a>外键SQL语句的编写</h3><hr>
 <p>外键约束:对外键字段的值进行更新和插入时会和引用表中字段的数据进行验证，数据如果不合法则更新和插入会失败，保证数据的有效性。</p>
 <p>添加外键约束: </p>
-<pre><code>alter table 从表 add foreign key(外键字段) references 主表(主键字段);
+<pre><code class="hljs">alter table 从表 add foreign key(外键字段) references 主表(主键字段);
 </code></pre><p>删除外键约束: </p>
-<pre><code>alter table 表名 drop foreign key 外键名;
+<pre><code class="hljs">alter table 表名 drop foreign key 外键名;
 </code></pre><p>对于已经存在的字段添加外键约束：</p>
-<pre><code>-- 为cls_id字段添加外键约束
+<pre><code class="hljs">-- 为cls_id字段添加外键约束
 alter table students add foreign key(cls_id) references classes(id);
 </code></pre><p>在创建数据表时设置外键约束：</p>
-<pre><code>-- 创建学校表
+<pre><code class="hljs">-- 创建学校表
 create table school(
     id int not null primary key auto_increment, 
     name varchar(10)
@@ -1742,7 +1787,7 @@ create table teacher(
     foreign key(s_id) references school(id)
 );
 </code></pre><p>删除外键约束</p>
-<pre><code>-- 需要先获取外键约束名称,该名称系统会自动生成,可以通过查看表创建语句来获取名称
+<pre><code class="hljs">-- 需要先获取外键约束名称,该名称系统会自动生成,可以通过查看表创建语句来获取名称
 show create table teacher;
 
 -- 获取名称之后就可以根据名称来删除外键约束
@@ -1750,9 +1795,9 @@ alter table teacher drop foreign key 外键名;
 </code></pre><hr>
 <h3 id="将查询结果插入到其它表中"><a href="#将查询结果插入到其它表中" class="headerlink" title="将查询结果插入到其它表中"></a>将查询结果插入到其它表中</h3><hr>
 <p>把查询结果插入到指定表中，也就是表复制:</p>
-<pre><code>insert into .. select .. SQL语句
+<pre><code class="hljs">insert into .. select .. SQL语句
 </code></pre><p>把goods表中的cate_name商品分类添加到good_cates商品分类表:</p>
-<pre><code>-- 查询goods表中商品的分类信息
+<pre><code class="hljs">-- 查询goods表中商品的分类信息
 select cate_name from goods group by cate_name;
 
 -- 将查询结果插入到good_cates表中
@@ -1763,9 +1808,9 @@ insert into good_cates(name) values(&apos;移动设备&apos;);
 </code></pre><hr>
 <h3 id="使用连接更新表中某个字段数据"><a href="#使用连接更新表中某个字段数据" class="headerlink" title="使用连接更新表中某个字段数据"></a>使用连接更新表中某个字段数据</h3><hr>
 <p>连接更新表中数据使用: </p>
-<pre><code>update .. join .. 
+<pre><code class="hljs">update .. join .. 
 </code></pre><p>将goods表中的分类名称更改成商品分类表中对应的分类id</p>
-<pre><code>-- 查看goods表中的商品分类名称对应的商品分类id
+<pre><code class="hljs">-- 查看goods表中的商品分类名称对应的商品分类id
 select * from goods inner join good_cates on goods.cate_name = good_cates.name;
 
 -- 把该语句中from 后的语句理解为一张虚表  
@@ -1773,9 +1818,9 @@ update goods g inner join good_cates gc on g.cate_name=gc.name set g.cate_name=g
 </code></pre><hr>
 <h3 id="创建表并给某个字段添加数据"><a href="#创建表并给某个字段添加数据" class="headerlink" title="创建表并给某个字段添加数据"></a>创建表并给某个字段添加数据</h3><hr>
 <p>创建表并给字段插入数据使用: </p>
-<pre><code>create table .. select 语句
+<pre><code class="hljs">create table .. select 语句
 </code></pre><p>创建品牌表</p>
-<pre><code>-- 查询品牌信息 
+<pre><code class="hljs">-- 查询品牌信息 
 select brand_name from goods group by brand_name;
 
 -- 通过create table ...select来创建数据表并且同时插入数据
@@ -1785,13 +1830,13 @@ id int unsigned primary key auto_increment,
 name varchar(40) not null) select brand_name as name from goods group by brand_name;
 </code></pre><p>说明:<code>create table .. select 列名 ..</code>表示创建表并插入数据</p>
 <p>更新goods表中的品牌信息</p>
-<pre><code>-- 将goods表中的品牌名称更改成品牌表中对应的品牌id
+<pre><code class="hljs">-- 将goods表中的品牌名称更改成品牌表中对应的品牌id
 update goods as g inner join good_brands gb on g.brand_name = gb.name set g.brand_name = gb.id;
 </code></pre><hr>
 <h3 id="修改表结构"><a href="#修改表结构" class="headerlink" title="修改表结构"></a>修改表结构</h3><hr>
-<pre><code>alter table 语句
+<pre><code class="hljs">alter table 语句
 </code></pre><p>把 <code>cate_name</code> 和 <code>brand_name</code> 字段分别改成 <code>cate_id</code>和 <code>brand_id</code> 字段，类型都改成int类型:</p>
-<pre><code>-- 查看表结构
+<pre><code class="hljs">-- 查看表结构
 desc goods;
 -- 通过alter table语句修改表结构
 alter table goods change cate_name cate_id int not null, change brand_name brand_id int not null;
@@ -1799,14 +1844,14 @@ alter table goods change cate_name cate_id int not null, change brand_name brand
 <h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><hr>
 <p>事务就是用户定义的一系列执行SQL语句的操作, 这些操作要么完全地执行，要么完全地都不执行， 它是一个不可分割的工作执行单元。事务能够保证数据的完整性和一致性，让用户的操作更加安全。</p>
 <p>事务的特性:</p>
-<pre><code>原子性: 强调事务中的多个操作时一个整体
+<pre><code class="hljs">原子性: 强调事务中的多个操作时一个整体
 一致性: 强调数据库中不会保存不一致状态
 隔离性: 强调数据库中事务之间相互不可见
 持久性: 强调数据库能永久保存数据，一旦提交就不可撤销
 </code></pre><p>MySQL数据库默认采用自动提交(autocommit)模式, 也就是说修改数据(insert、update、delete)的操作会自动的触发事务,完成事务的提交或者回滚。开启事务使用 begin 或者 start transaction;回滚事务使用 rollback。</p>
 <p>常用的表的存储引擎是 InnoDB 和 MyISAM。InnoDB 是支持事务的；MyISAM 不支持事务，优势是访问速度快，对事务没有要求或者以select、insert为主的都可以使用该存储引擎来创建表。</p>
 <p>事务演练的SQL语句:</p>
-<pre><code>begin;
+<pre><code class="hljs">begin;
 insert into students(name) values(&apos;李白&apos;);
 -- 查询数据，此时有新增的数据, 注意: 如果这里后续没有执行提交事务操作，那么数据是没有真正的更新到物理表中
 select * from students;
@@ -1820,25 +1865,25 @@ select * from students;
 <h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><hr>
 <p>索引在MySQL中也叫做“键”，它是一个特殊的文件，它保存着数据表里所有记录的位置信息，更通俗的来说，数据库索引好比是一本书前面的目录，能加快数据库的查询速度。</p>
 <p>查看表中已有索引:</p>
-<pre><code>show index from 表名;
+<pre><code class="hljs">show index from 表名;
 </code></pre><p>说明:主键列会自动创建索引</p>
 <p>索引的创建:</p>
-<pre><code>-- alter table 表名 add index 索引名[可选](列名, ..)
+<pre><code class="hljs">-- alter table 表名 add index 索引名[可选](列名, ..)
 -- 给name字段添加索引
 alter table classes add index my_name (name);
 </code></pre><p>说明:索引名不指定，默认使用字段名。</p>
 <p>索引的删除:</p>
-<pre><code>-- alter table 表名 drop index 索引名
+<pre><code class="hljs">-- alter table 表名 drop index 索引名
 -- 如果不知道索引名，可以查看创表sql语句
 show create table classes;
 alter table classes drop index my_name;
 </code></pre><p>联合索引又叫复合索引，即一个索引覆盖表中两个或者多个字段，一般用在多个字段一起查询的时候。</p>
-<pre><code>-- 创建联合索引
+<pre><code class="hljs">-- 创建联合索引
 alter table teacher add index (name,age);
 </code></pre><p>联合索引的好处:减少磁盘空间开销，因为每创建一个索引，其实就是创建了一个索引文件，那么会增加磁盘空间的开销。</p>
 <p>联合索引的最左原则：在使用联合索引的时候，我们要遵守一个最左原则,即index(name,age)支持name、name和age组合查询,而不支持单独age 查询，因为没有用到创建的联合索引。</p>
 <p>最左原则示例:</p>
-<pre><code>-- 下面的查询使用到了联合索引
+<pre><code class="hljs">-- 下面的查询使用到了联合索引
 select * from stu where name=&apos;张三&apos; -- 这里使用了联合索引的name部分
 select * from stu where name=&apos;李四&apos; and age=10 -- 这里完整的使用联合索引，包括 name 和 age 部分 
 -- 下面的查询没有使用到联合索引
@@ -1848,9 +1893,9 @@ select * from stu where age=10 -- 因为联合索引里面没有这个组合，�
 <p>使用代码的方式操作数据库就称为数据库编程。</p>
 <p>win电脑cd到python的安装目录Scripts文件夹下</p>
 <p>安装：</p>
-<pre><code>pip install pymysql
+<pre><code class="hljs">pip install pymysql
 </code></pre><p>pymysql的使用:</p>
-<pre><code>#导包
+<pre><code class="hljs">#导包
 import pymysql
 #创建连接对象
 pymysql.connect(参数列表)
@@ -1870,7 +1915,7 @@ cursor.close()
 conn.close()
 </code></pre><hr>
 <p>查询操作:</p>
-<pre><code>import pymysql
+<pre><code class="hljs">import pymysql
 
 # 创建连接对象
 conn = pymysql.connect(host=&apos;localhost&apos;, port=3306, user=&apos;root&apos;, password=&apos;*****&apos;, database=&apos;python&apos;, charset=&apos;utf8&apos;)
@@ -1893,7 +1938,7 @@ cursor.close()
 conn.close()
 </code></pre><hr>
 <p>增删改操作：</p>
-<pre><code>import pymysql
+<pre><code class="hljs">import pymysql
 
 # 创建连接对象
 conn = pymysql.connect(host=&apos;localhost&apos;, port=3306, user=&apos;root&apos;, password=&apos;824699&apos;,database=&apos;python&apos;, charset=&apos;utf8&apos;)
@@ -1923,7 +1968,7 @@ conn.close()
 <p>如何防止SQL注入?SQL语句参数化</p>
 <p>SQL语言中的参数使用%s来占位，此处不是python中的字符串格式化操作。将SQL语句中%s占位所需要的参数存在一个列表中，把参数列表传递给。execute方法中第二个参数。</p>
 <p>防止SQL注入的示例代码:</p>
-<pre><code>from pymysql import connect
+<pre><code class="hljs">from pymysql import connect
 
 def main():
     find_name = input(&quot;请输入物品名称：&quot;)
@@ -1965,7 +2010,7 @@ if __name__ == &apos;__main__&apos;:
 <p>闭包的定义:在函数嵌套的前提下，内部函数使用了外部函数的变量，并且外部函数返回了内部函数，我们把这个使用外部函数变量的内部函数称为闭包。</p>
 <p>闭包的形成条件:在函数嵌套(函数里面再定义函数)的前提下；内部函数使用了外部函数的变量(还包括外部函数的参数)；外部函数返回了内部函数。</p>
 <p>示例代码</p>
-<pre><code># 定义一个外部函数
+<pre><code class="hljs"># 定义一个外部函数
 def func_out(num1):
     # 定义一个内部函数
     def func_inner(num2):
@@ -1982,7 +2027,7 @@ f(3) #结果是: 4
 </code></pre><p>闭包不仅可以保存外部函数的变量还可以提高代码的可重用行。</p>
 <hr>
 <p>修改闭包内使用的外部函数变量使用 nonlocal 关键字来完成。</p>
-<pre><code># 定义一个外部函数
+<pre><code class="hljs"># 定义一个外部函数
 def func_out(num1):
     # 定义一个内部函数
     def func_inner(num2):
@@ -2008,7 +2053,7 @@ f(2) #结果是: 12
 <p>就是给已有函数增加额外功能的函数，它本质上就是一个闭包函数。</p>
 <p>装饰器的功能特点:不修改已有函数的源代码；不修改已有函数的调用方式；给已有函数增加额外的功能。</p>
 <p>装饰器的语法格式:</p>
-<pre><code># 装饰器
+<pre><code class="hljs"># 装饰器
 # def decorator(fn): # fn:被装饰的目标函数.
 #     def inner():
 #         &apos;&apos;&apos;执行函数之前&apos;&apos;&apos;
@@ -2016,7 +2061,7 @@ f(2) #结果是: 12
 #         &apos;&apos;&apos;执行函数之后&apos;&apos;&apos;
 #     return inner
 </code></pre><p>示例代码：</p>
-<pre><code># 添加一个登录验证的功能
+<pre><code class="hljs"># 添加一个登录验证的功能
 def check(fn):
     def inner():
         print(&quot;请先登录....&quot;)
@@ -2032,7 +2077,7 @@ comment()
 </code></pre><p>闭包函数有且只有一个参数，必须是函数类型，这样定义的函数才是装饰器。写代码要遵循开放封闭原则，它规定已经实现的功能代码不允许被修改，但可以被扩展。</p>
 <hr>
 <p>语法糖的书写格式是: <code>@装饰器名字</code>，通过语法糖的方式也可以完成对已有函数的装饰:</p>
-<pre><code># 添加一个登录验证的功能
+<pre><code class="hljs"># 添加一个登录验证的功能
 def check(fn):
     print(&quot;装饰器函数执行了&quot;)
     def inner():
@@ -2046,7 +2091,7 @@ def comment():
 comment()
 </code></pre><hr>
 <p>装饰器实现已有函数执行时间的统计:</p>
-<pre><code>import time
+<pre><code class="hljs">import time
 
 # 装饰器函数
 def get_time(func):
@@ -2065,7 +2110,7 @@ def func1():
 func1()
 </code></pre><hr>
 <p>装饰带有参数的函数:</p>
-<pre><code># 添加输出日志的功能
+<pre><code class="hljs"># 添加输出日志的功能
 def logging(fn):
     def inner(num1, num2):
         print(&quot;--正在努力计算--&quot;)
@@ -2081,7 +2126,7 @@ def sum_num(a, b):
 sum_num(1, 2)
 </code></pre><hr>
 <p>装饰带有返回值的函数:</p>
-<pre><code># 添加输出日志的功能
+<pre><code class="hljs"># 添加输出日志的功能
 def logging(fn):
     def inner(num1, num2):
         print(&quot;--正在努力计算--&quot;)
@@ -2099,7 +2144,7 @@ result = sum_num(1, 2)
 print(result)
 </code></pre><hr>
 <p>装饰带有不定长参数的函数:</p>
-<pre><code># 添加输出日志的功能
+<pre><code class="hljs"># 添加输出日志的功能
 def logging(fn):
     def inner(*args, **kwargs):
         print(&quot;--正在努力计算--&quot;)
@@ -2119,7 +2164,7 @@ def sum_num(*args, **kwargs):
 sum_num(1, 2, a=10)
 </code></pre><hr>
 <p>通用装饰器：</p>
-<pre><code># 添加输出日志的功能
+<pre><code class="hljs"># 添加输出日志的功能
 def logging(fn):
     def inner(*args, **kwargs):
         print(&quot;--正在努力计算--&quot;)
@@ -2147,7 +2192,7 @@ print(result)
 subtraction(4, 2)
 </code></pre><hr>
 <p>多个装饰器的使用示例代码：</p>
-<pre><code>def make_div(func):
+<pre><code class="hljs">def make_div(func):
     &quot;&quot;&quot;对被装饰的函数的返回值 div标签&quot;&quot;&quot;
     def inner(*args, **kwargs):
         return &quot;&lt;div&gt;&quot; + func() + &quot;&lt;/div&gt;&quot;
@@ -2171,7 +2216,7 @@ print(result)
 </code></pre><p>多个装饰器的装饰过程是: 离函数最近的装饰器先装饰，然后外面的装饰器再进行装饰，由内到外的装饰过程</p>
 <hr>
 <p>带有参数的装饰器:在装饰器外面再包裹上一个函数，让最外面的函数接收参数，返回的是装饰器，因为<code>@</code>符号后面必须是装饰器实例。</p>
-<pre><code># 添加输出日志的功能
+<pre><code class="hljs"># 添加输出日志的功能
 def logging(flag):
     def decorator(fn):
         def inner(num1, num2):
@@ -2202,7 +2247,7 @@ result = sub(1, 2)
 print(result)
 </code></pre><hr>
 <p>类装饰器：</p>
-<pre><code>class Check(object):
+<pre><code class="hljs">class Check(object):
     def __init__(self, fn):
         # 初始化操作在此完成
         self.__fn = fn
@@ -2228,7 +2273,7 @@ comment()
 <p>property属性就是负责把一个方法当做属性进行使用，这样做可以简化代码使用。定义property属性有两种方式：装饰器方式和类属性方式。</p>
 <hr>
 <p>装饰器方式：</p>
-<pre><code>class Person(object):
+<pre><code class="hljs">class Person(object):
     def __init__(self):
         self.__age = 0
     # 装饰器方式的property, 把age方法当做属性使用, 表示当获取属性时会执行下面修饰的方法
@@ -2251,7 +2296,7 @@ p.age = 1000
 </code></pre><p><code>@property</code>表示把方法当做属性使用, 表示当获取属性时会执行下面修饰的方法。<code>@方法名.setter</code> 表示把方法当做属性使用,表示当设置属性时会执行下面修饰的方法。装饰器方式的property属性修饰的方法名一定要一样。</p>
 <hr>
 <p>类属性方式:</p>
-<pre><code>class Person(object):
+<pre><code class="hljs">class Person(object):
     def __init__(self):
         self.__age = 0
     def get_age(self):
@@ -2276,7 +2321,7 @@ p.age = 1000
 <hr>
 <h3 id="with语句和上下文管理器"><a href="#with语句和上下文管理器" class="headerlink" title="with语句和上下文管理器"></a>with语句和上下文管理器</h3><hr>
 <p>向文件中写入数据的示例代码:</p>
-<pre><code>try:
+<pre><code class="hljs">try:
     # 1、以读的方式打开文件
     f = open(&quot;1.txt&quot;, &quot;r&quot;)
     # 2、读取文件内容
@@ -2288,14 +2333,14 @@ finally:
     f.close()
 </code></pre><p>这种方法代码过于冗长,Python提供了 with 语句的这种写法，既简单又安全，并且 with 语句执行完成以后自动调用关闭文件操作，即使出现异常也会自动调用关闭文件操作。</p>
 <p>with 语句的示例代码:</p>
-<pre><code># 1、以写的方式打开文件
+<pre><code class="hljs"># 1、以写的方式打开文件
 with open(&quot;1.txt&quot;, &quot;w&quot;) as f:
 # 2、读取文件内容
 f.write(&quot;hello world&quot;)
 </code></pre><hr>
 <p>一个类只要实现了<code>__enter__()</code>和<code>__exit__()</code>这个两个方法，通过该类创建的对象我们就称之为上下文管理器。上下文管理器可以使用 with 语句，with语句之所以这么强大，背后是由上下文管理器做支撑的。</p>
 <p>自定义上下文管理器类,模拟文件操作:</p>
-<pre><code>class File(object):
+<pre><code class="hljs">class File(object):
     # 初始化方法
     def __init__(self, file_name, file_model):
         # 定义变量保存文件名和打开模式
@@ -2322,7 +2367,7 @@ if __name__ == &apos;__main__&apos;:
 </code></pre><p><code>__enter__</code>表示上文方法，需要返回一个操作文件对象。<code>__exit__</code>表示下文方法，with语句执行完成会自动执行，即使出现异常也会执行该方法。</p>
 <hr>
 <p>假如想要让一个函数成为上下文管理器，Python 还提供了一个<code>@contextmanager</code>的装饰器，更进一步简化了上下文管理器的实现方式。通过 <code>yield</code> 将函数分割成两部分，yield 上面的语句在<code>__enter__</code>方法中执行，yield 下面的语句在<code>__exit__</code>方法中执行，紧跟在 yield 后面的参数是函数的返回值。</p>
-<pre><code># 导入装饰器
+<pre><code class="hljs"># 导入装饰器
 from contextlib import contextmanager
 # 装饰器装饰函数，让其称为一个上下文管理器对象
 @contextmanager
@@ -2347,7 +2392,7 @@ with my_open(&apos;out.txt&apos;, &apos;w&apos;) as f:
 <p>根据程序员制定的规则循环生成数据，当条件不成立时则生成数据结束。数据不是一次性全部生成处理，而是使用一个，再生成一个，可以节约大量的内存。创建生成器的方式：生成器推导式和 yield 关键字。</p>
 <hr>
 <p>生成器推导式:</p>
-<pre><code># 创建生成器
+<pre><code class="hljs"># 创建生成器
 my_generator = (i * 2 for i in range(5))
 print(my_generator)
 # next获取生成器下一个值
@@ -2360,7 +2405,7 @@ for value in my_generator:
 <hr>
 <p>yield 关键字:</p>
 <p>只要在def函数里面看到有 yield 关键字那么就是生成器。</p>
-<pre><code>def mygenerater(n):
+<pre><code class="hljs">def mygenerater(n):
     for i in range(n):
         print(&apos;开始生成...&apos;)
         yield i
@@ -2386,40 +2431,88 @@ if __name__ == &apos;__main__&apos;:
 <h2 id="深拷贝和浅拷贝"><a href="#深拷贝和浅拷贝" class="headerlink" title="深拷贝和浅拷贝"></a>深拷贝和浅拷贝</h2><hr>
 <hr>
 
+              
             </div>
-            <hr>
+            <hr/>
             <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/python/">python</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/python/">python</a>
-                    
-                  </div>
-                
-              </div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/python/" class="category-chain-item">python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/python/">#python</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>python高级</div>
+      <div>http://yoursite.com/2020/09/09/43.python高级/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年9月9日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
               
-              
-                <div class="post-prevnext">
+                <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/06/44.JVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/">
+                      <a href="/2020/11/06/44.JVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/" title="JVM虚拟机底层原理">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">JVM虚拟机底层原理</span>
                         <span class="visible-mobile">上一篇</span>
@@ -2429,7 +2522,7 @@ if __name__ == &apos;__main__&apos;:
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/09/09/42.Linux%E5%91%BD%E4%BB%A4/">
+                      <a href="/2020/09/09/42.Linux%E5%91%BD%E4%BB%A4/" title="Linux命令">
                         <span class="hidden-mobile">Linux命令</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -2445,25 +2538,55 @@ if __name__ == &apos;__main__&apos;:
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
 
 
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -2482,32 +2605,34 @@ if __name__ == &apos;__main__&apos;:
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
   
-
   
-</footer>
+  
+  
+</div>
 
+  </footer>
 
-  <!-- SCRIPTS -->
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
@@ -2523,11 +2648,28 @@ if __name__ == &apos;__main__&apos;:
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
 
 
   
@@ -2536,72 +2678,153 @@ if __name__ == &apos;__main__&apos;:
 
 
 
+
   
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
-
-
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
 
 
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
-  </script>
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

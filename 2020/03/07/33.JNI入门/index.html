@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=dark>
 
 
 
@@ -9,40 +9,47 @@
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
+  
+    <meta name="description" content="介绍JNI含义:java native interface JNI好处: 1、JNI可以扩展java虚拟机的能力，让java代码可以调用驱动 2、C&#x2F;C++的效率要高，通过jni把耗时操作方法C&#x2F;C++可以提高java运行效率 3、java代码编译成的.class文件安全性较差, 可以通过jni把重要的业务逻辑放到c&#x2F;c++去实现,c&#x2F;c++反编译比较困难,安全性较高. C基本语法1、C的基本数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JNI入门">
+<meta property="og:url" content="http://yoursite.com/2020/03/07/33.JNI%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="Jiang Space">
+<meta property="og:description" content="介绍JNI含义:java native interface JNI好处: 1、JNI可以扩展java虚拟机的能力，让java代码可以调用驱动 2、C&#x2F;C++的效率要高，通过jni把耗时操作方法C&#x2F;C++可以提高java运行效率 3、java代码编译成的.class文件安全性较差, 可以通过jni把重要的业务逻辑放到c&#x2F;c++去实现,c&#x2F;c++反编译比较困难,安全性较高. C基本语法1、C的基本数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/img/1.png">
+<meta property="article:published_time" content="2020-03-07T03:21:44.564Z">
+<meta property="article:modified_time" content="2021-03-26T14:41:17.451Z">
+<meta property="article:tag" content="JNI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/img/1.png">
+  
+  
   
   <title>JNI入门 - Jiang Space</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
+
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
 
@@ -51,24 +58,44 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
+
+  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Jiang Space</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">
+      <strong>Jiang Space</strong>
+    </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -142,13 +169,15 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -157,60 +186,71 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="JNI入门">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-03-07 11:21" pubdate>
-        2020年3月7日 上午
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      2.9k 字
-    </span>
   
 
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      42
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JNI入门"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-03-07 11:21" pubdate>
+          2020年3月7日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          9.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          79 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
@@ -219,15 +259,20 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">JNI入门</h1>
             
             <div class="markdown-body">
+              
               <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>JNI含义:<code>java native interface</code></p>
 <p>JNI好处:</p>
 <p>1、JNI可以扩展java虚拟机的能力，让java代码可以调用驱动</p>
@@ -238,7 +283,7 @@
 <p>signed:有符号数,可以表示负数;unsigned:无符号数,不可以表示负数。signed和unsigned只能用来修饰整形变量char、short、int、long。</p>
 <p>C没有boolean和byte，C用0和非0表示false和true。</p>
 <h3 id="2、占位符和字符串"><a href="#2、占位符和字符串" class="headerlink" title="2、占位符和字符串"></a>2、占位符和字符串</h3><p>占位符：</p>
-<pre><code>%d  -  int
+<pre><code class="hljs">%d  -  int
 %ld – long int
 %lld - long long
 %hd – short
@@ -253,7 +298,7 @@
 <p>占位符不要乱用,要选择正确的对应类型,否则可能会损失精度。</p>
 </blockquote>
 <p>C没有String类型,C的字符串实际就是字符数组。C字符串两种定义方式：</p>
-<pre><code>//注意&apos;\0&apos;字符串结束符, []只能再变量名之后
+<pre><code class="hljs">//注意&apos;\0&apos;字符串结束符, []只能再变量名之后
 char str[] = &#123;&apos;q&apos;,&apos;w&apos;,&apos;e&apos;,&apos;r&apos;,&apos;t&apos;,&apos;\0&apos;&#125;;
 
 //这种定义方式不用写结束符,可以表示汉字
@@ -262,9 +307,9 @@ char str[] = &quot;你好&quot;;
 <p>C字符串不检查下标越界,使用时要注意。</p>
 </blockquote>
 <p>C的控制台输入</p>
-<pre><code>scanf(&quot;占位符&quot;, &amp;地址);//&amp; 取地址符
+<pre><code class="hljs">scanf(&quot;占位符&quot;, &amp;地址);//&amp; 取地址符
 </code></pre><h3 id="3、内存地址的概念"><a href="#3、内存地址的概念" class="headerlink" title="3、内存地址的概念"></a>3、内存地址的概念</h3><p>声明一个变量,就会立即为这个变量申请内存,一定会有一个对应的内存地址；没有地址的内存是无法使用的；内存的每一个字节都有一个对应的地址；内存地址用一个16进制数来表示；32位操作系统最大可以支持4G内存。</p>
-<h3 id="4、指针"><a href="#4、指针" class="headerlink" title="4、指针"></a>4、指针</h3><pre><code>int i = 123;
+<h3 id="4、指针"><a href="#4、指针" class="headerlink" title="4、指针"></a>4、指针</h3><pre><code class="hljs">int i = 123;
 //一般计算机中用16进制数来表示一个内存地址 
 printf(&quot;%#x\n&quot;,&amp;i); 
 //int* int类型的指针变量  pointer指针  指针变量只能用来保存内存地址
@@ -278,7 +323,7 @@ printf(&quot;i的值是%d\n&quot;,i);
 system(&quot;pause&quot;); 
 </code></pre><p>未赋值的指针称为野指针。</p>
 <h3 id="5、指针交换两个数的值"><a href="#5、指针交换两个数的值" class="headerlink" title="5、指针交换两个数的值"></a>5、指针交换两个数的值</h3><p>所有传递其实本质都是值传递，引用传递本质是把地址传递过去，引用传递其实也是传递一个值，但是这个值是一个内存地址。</p>
-<pre><code>void swap(int* p, int* p2)&#123;
+<pre><code class="hljs">void swap(int* p, int* p2)&#123;
     int temp = *p;
     *p = *p2;
     *p2 = temp;    
@@ -292,7 +337,7 @@ system(&quot;pause&quot;);
 </blockquote>
 <h3 id="7、指针的长度"><a href="#7、指针的长度" class="headerlink" title="7、指针的长度"></a>7、指针的长度</h3><p>不管变量的类型是什么，它的内存地址的长度一定是相同的；类型不同只决定变量占用的内存空间不同；32位环境下，内存地址长度都是4个字节，64位环境下，内存地址长度都是8个字节。</p>
 <h3 id="8、多级指针"><a href="#8、多级指针" class="headerlink" title="8、多级指针"></a>8、多级指针</h3><p>二级指针变量只能保存一级指针变量的地址，有几个<code>*</code>就是几级指针</p>
-<pre><code>int i = 123;
+<pre><code class="hljs">int i = 123;
 //int类型一级指针 
 int* p = &amp;i;
 //int 类型 二级指针 二级指针只能保存一级指针的地址 
@@ -304,7 +349,7 @@ printf(&quot;***p3 = %d\n&quot;, ***p3);
 </code></pre><h3 id="9、堆、栈、静态内存、动态内存"><a href="#9、堆、栈、静态内存、动态内存" class="headerlink" title="9、堆、栈、静态内存、动态内存"></a>9、堆、栈、静态内存、动态内存</h3><p>栈内存:系统自动分配，系统自动销毁，连续的内存区域，向低地址扩展，大小固定，栈上分配的内存称为静态内存。</p>
 <p>静态内存分配：子函数执行完，子函数中的所有局部变量都会被销毁，内存释放，但内存地址不可能被销毁，只是地址上的值没了。</p>
 <p>堆内存：程序员手动分配（java：new，c：malloc），空间不连续，大小取决于系统的虚拟内存，C程序员手动回收free，java自动回收，堆上分配的内存称为动态内存。</p>
-<pre><code>#include&lt;stdio.h&gt;    
+<pre><code class="hljs">#include&lt;stdio.h&gt;    
 #include&lt;stdlib.h&gt;    
 main()&#123; 
    printf(&quot;请输入班级的人数:&quot;);
@@ -342,7 +387,7 @@ main()&#123;
 <blockquote>
 <p>c结构体类似java的class。struct来声明c的结构体。C结构体中不能定义函数，可以定义函数指针 。 </p>
 </blockquote>
-<pre><code>#include&lt;stdio.h&gt;    
+<pre><code class="hljs">#include&lt;stdio.h&gt;    
 #include&lt;stdlib.h&gt;    
 void study()&#123;
            printf(&quot;good good study!\n&quot;);
@@ -371,7 +416,7 @@ main()&#123;
 </code></pre><h3 id="11、联合体"><a href="#11、联合体" class="headerlink" title="11、联合体"></a>11、联合体</h3><p><code>union</code>长度等于联合体中定义的变量当中最长的那个,联合体只能保存一个变量的值,联合体共用同一块内存</p>
 <h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><p>c++开发jni代码时 env不再是结构体Jninativeinterface的二级指针。<code>_JNIEnv</code>是C++的结构体，C++的结构体可以定义函数。<code>env</code>是<code>JNIEnv</code>的一级指针,也就是结构体<code>_JNIEnv</code>的一级指针。<code>env-&gt;</code>来调用结构体里的函数。</p>
 <h2 id="am命令"><a href="#am命令" class="headerlink" title="am命令"></a>am命令</h2><p>am命令:在adb shell里可以通过am命令进行一些操作如启动activity Service 启动浏览器等等。</p>
-<pre><code>#include &lt;jni.h&gt;
+<pre><code class="hljs">#include &lt;jni.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;android/log.h&gt;
@@ -419,7 +464,7 @@ JNIEXPORT void JNICALL Java_com__cfork_demo_MainActivity_cfork
 <p>参数<code>jobject thiz</code>：调用本地函数的java对象，在这个例子中，就是MainActivity的实例。</p>
 <p>参数<code>JNIEnv* env</code>：是结构体JNINativeInterface的二级指针。JNIEnv是结构体JNINativeInterface的一级指针，操作一级指针用<code>(*env)-&gt;</code>。JNINativeInterface结构体中定义了大量的函数指针，这些函数指针在jni开发中很常用。</p>
 <p>C代码</p>
-<pre><code>#include &lt;stdlib.h&gt;
+<pre><code class="hljs">#include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;jni.h&gt;
 
@@ -428,7 +473,7 @@ jstring Java_com_vcredit_cdemo_MainActivity_stringFromJNI(JNIEnv* env,jobject th
     return (*env)-&gt;NewStringUTF(env,cstr);
 &#125;
 </code></pre><p>C++代码</p>
-<pre><code>#include &lt;jni.h&gt;
+<pre><code class="hljs">#include &lt;jni.h&gt;
 #include &lt;string&gt;
 
 extern &quot;C&quot; JNIEXPORT jstring JNICALL
@@ -439,7 +484,7 @@ Java_com_vcredit_cdemo_MainActivity_stringFromJNI(
     return env-&gt;NewStringUTF(hello.c_str());
 &#125;
 </code></pre><h3 id="java传参数给c"><a href="#java传参数给c" class="headerlink" title="java传参数给c"></a>java传参数给c</h3><p>Java给C传递<code>int</code>，<code>String</code>和<code>int[]</code>，并且返回:</p>
-<pre><code>#include &lt;jni.h&gt;
+<pre><code class="hljs">#include &lt;jni.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 
@@ -491,7 +536,7 @@ Java_com_vcredit_cdemo_MainActivity_arrIncrease(JNIEnv *env, jobject thiz, jintA
     (*env)-&gt;SetIntArrayRegion(env, jArray, 0, length, arrayPointer);
     return jArray;
 &#125;
-</code></pre><h3 id="在C中打印log"><a href="#在C中打印log" class="headerlink" title="在C中打印log"></a>在C中打印log</h3><pre><code>#include &lt;android/log.h&gt;
+</code></pre><h3 id="在C中打印log"><a href="#在C中打印log" class="headerlink" title="在C中打印log"></a>在C中打印log</h3><pre><code class="hljs">#include &lt;android/log.h&gt;
 #define LOG_TAG &quot;System.out&quot;
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
@@ -499,7 +544,7 @@ Java_com_vcredit_cdemo_MainActivity_arrIncrease(JNIEnv *env, jobject thiz, jintA
 //使用
 LOGD(&quot;length = %d&quot;,length);
 </code></pre><h3 id="c调用Java"><a href="#c调用Java" class="headerlink" title="c调用Java"></a>c调用Java</h3><p>C调用Java空参方法</p>
-<pre><code>JNIEXPORT void JNICALL
+<pre><code class="hljs">JNIEXPORT void JNICALL
 Java_com_vcredit_cdemo_MainActivity_callbackvoidmethod(JNIEnv* env, jobject thiz) &#123;
     jclass claz = (*env)-&gt;FindClass(env, &quot;com/vcredit/cdemo/MainActivity&quot;);
     jmethodID methodID = (*env)-&gt;GetMethodID(env, claz, &quot;helloFromJava&quot;, &quot;()V&quot;);
@@ -513,7 +558,7 @@ public void helloFromJava() &#123;
 <p>注意FindClass路径用<code>/</code>。</p>
 </blockquote>
 <p>C调用Java有Int参数方法并返回</p>
-<pre><code>JNIEXPORT void JNICALL
+<pre><code class="hljs">JNIEXPORT void JNICALL
 Java_com_vcredit_cdemo_MainActivity_callbackintmethod(JNIEnv *env, jobject thiz) &#123;
     jclass claz = (*env)-&gt;FindClass(env, &quot;com/vcredit/cdemo/MainActivity&quot;);
     jmethodID methodID = (*env)-&gt;GetMethodID(env, claz, &quot;add&quot;, &quot;(II)I&quot;);
@@ -525,7 +570,7 @@ public int add(int x, int y) &#123;
     return x + y;
 &#125;
 </code></pre><p>C调用Java有String参数方法</p>
-<pre><code>JNIEXPORT void JNICALL
+<pre><code class="hljs">JNIEXPORT void JNICALL
 Java_com_vcredit_cdemo_MainActivity_callbackStringmethod(JNIEnv *env, jobject thiz) &#123;
     jclass claz = (*env)-&gt;FindClass(env, &quot;com/vcredit/cdemo/MainActivity&quot;);
     jmethodID methodID = (*env)-&gt;GetMethodID(env, claz, &quot;printString&quot;, &quot;(Ljava/lang/String;)V&quot;);
@@ -537,40 +582,88 @@ public void printString(String s) &#123;
     Log.d(&quot;-----rrrrr&quot;, s);
 &#125;
 </code></pre>
+              
             </div>
-            <hr>
+            <hr/>
             <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Android/">Android</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/JNI/">JNI</a>
-                    
-                  </div>
-                
-              </div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/JNI/">#JNI</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>JNI入门</div>
+      <div>http://yoursite.com/2020/03/07/33.JNI入门/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年3月7日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
               
-              
-                <div class="post-prevnext">
+                <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/03/21/39.C%E5%9F%BA%E7%A1%80/">
+                      <a href="/2020/03/21/39.C%E5%9F%BA%E7%A1%80/" title="C基础">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">C基础</span>
                         <span class="visible-mobile">上一篇</span>
@@ -580,7 +673,7 @@ public void printString(String s) &#123;
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/04/32.Android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E6%88%98/">
+                      <a href="/2020/01/04/32.Android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E6%88%98/" title="Android自定义控件入门与实战-读书笔记">
                         <span class="hidden-mobile">Android自定义控件入门与实战-读书笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -596,25 +689,55 @@ public void printString(String s) &#123;
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
 
 
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -633,32 +756,34 @@ public void printString(String s) &#123;
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
   
-
   
-</footer>
+  
+  
+</div>
 
+  </footer>
 
-  <!-- SCRIPTS -->
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
@@ -674,11 +799,28 @@ public void printString(String s) &#123;
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
 
 
   
@@ -687,72 +829,153 @@ public void printString(String s) &#123;
 
 
 
+
   
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
-
-
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
 
 
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
-  </script>
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

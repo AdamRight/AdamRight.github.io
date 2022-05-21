@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=dark>
 
 
 
@@ -9,14 +9,21 @@
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Jiang Space">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta property="og:site_name" content="Jiang Space">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
   
   <title>Jiang Space</title>
 
@@ -24,9 +31,12 @@
 
 
 
-<!-- 主题依赖的图标库，不要自行修改 -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
 
@@ -35,24 +45,44 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
+
+  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-  <header style="height: 100vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Jiang Space</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">
+      <strong>Jiang Space</strong>
+    </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -126,13 +156,15 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -141,34 +173,40 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/bg_1.jpg') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Whatever is worth doing is worth doing well.">
-              
-            </span>
+  
 
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg_1.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
           
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
+            <span id="subtitle" data-typed-text="Whatever is worth doing is worth doing well."></span>
           
         </div>
+
+        
       </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
     
       <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          style=margin-top:0>
+        <div id="board"
+          style="margin-top: 0">
           
           <div class="container">
             <div class="row">
@@ -188,24 +226,17 @@
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/06/11/24.handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E5%8F%8A%E6%89%8B%E5%86%99handler/">handler源码分析及手写handler</a>
+        <a href="/2019/06/11/24.handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E5%8F%8A%E6%89%8B%E5%86%99handler/" target="_self">
+          handler源码分析及手写handler
+        </a>
       </h1>
 
-      <p class="index-excerpt">
-        <a href="/2019/06/11/24.handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E5%8F%8A%E6%89%8B%E5%86%99handler/">
+      <a class="index-excerpt" href="/2019/06/11/24.handler%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E5%8F%8A%E6%89%8B%E5%86%99handler/" target="_self">
+        <div>
           
-          
-            
-          
-          小实例private Handler mHandler = new Handler()&#123;
-    @Override
-    public void handleMessage(Message msg) &#123;
-        super.handleMessage(msg);
-        System.out.println(msg.what);
-    &#125;
-&#1
-        </a>
-      </p>
+          小实例private Handler mHandler &#x3D; new Handler()&amp;#123;     @Override     public void handleMessage(Message msg) &amp;#123;         super.handleMessage(msg);         System.out.println(msg.what);     &amp;#125; &amp;#1
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -217,18 +248,32 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Android/">Android</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
+              <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">#源码分析</a>
             
           </div>
         
@@ -248,20 +293,17 @@
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/05/15/22.%E8%87%AA%E5%AE%9A%E4%B9%89View/">自定义View</a>
+        <a href="/2019/05/15/22.%E8%87%AA%E5%AE%9A%E4%B9%89View/" target="_self">
+          自定义View
+        </a>
       </h1>
 
-      <p class="index-excerpt">
-        <a href="/2019/05/15/22.%E8%87%AA%E5%AE%9A%E4%B9%89View/">
+      <a class="index-excerpt" href="/2019/05/15/22.%E8%87%AA%E5%AE%9A%E4%B9%89View/" target="_self">
+        <div>
           
-          
-            
-          
-          构造函数一个参数(Context context)的构造函数会在代码里面new的时候调用，
-两个参数(Context context, AttributeSet attrs)的构造函数在布局layout中使用(调用)，
-三个参数(Context context, AttributeSet attrs, int defStyleAttr)的构造函数在布局layout中使用(调用)，但是会有style
-        </a>
-      </p>
+          构造函数一个参数(Context context)的构造函数会在代码里面new的时候调用， 两个参数(Context context, AttributeSet attrs)的构造函数在布局layout中使用(调用)， 三个参数(Context context, AttributeSet attrs, int defStyleAttr)的构造函数在布局layout中使用(调用)，但是会有style
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -273,18 +315,32 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Android/">Android</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/view/">view</a>
+              <a href="/tags/view/">#view</a>
             
           </div>
         
@@ -304,23 +360,17 @@
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/05/13/21.%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/">线程和线程池</a>
+        <a href="/2019/05/13/21.%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" target="_self">
+          线程和线程池
+        </a>
       </h1>
 
-      <p class="index-excerpt">
-        <a href="/2019/05/13/21.%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+      <a class="index-excerpt" href="/2019/05/13/21.%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" target="_self">
+        <div>
           
-          
-            
-          
-          异步任务的方式
-new Thread 、AsyncTask 、HandlerThread 、IntentService 、ThreadPoolExecutor。
-AsyncTask：
-static class MyAsyncTask extends AsyncTask&lt;String,Integer,String&gt;&#123;
-    @Override
-    protected St
-        </a>
-      </p>
+          异步任务的方式 new Thread 、AsyncTask 、HandlerThread 、IntentService 、ThreadPoolExecutor。 AsyncTask： static class MyAsyncTask extends AsyncTask&lt;String,Integer,String&gt;&amp;#123;     @Override     protected St
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -332,18 +382,32 @@ static class MyAsyncTask extends AsyncTask&lt;String,Integer,String&gt;&#123;
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Java/">Java</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/">线程池</a>
+              <a href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/">#线程池</a>
             
           </div>
         
@@ -363,25 +427,17 @@ static class MyAsyncTask extends AsyncTask&lt;String,Integer,String&gt;&#123;
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/04/26/17.%E5%AD%A6%E4%B9%A0node/">学习Node</a>
+        <a href="/2019/04/26/17.%E5%AD%A6%E4%B9%A0node/" target="_self">
+          学习Node
+        </a>
       </h1>
 
-      <p class="index-excerpt">
-        <a href="/2019/04/26/17.%E5%AD%A6%E4%B9%A0node/">
+      <a class="index-excerpt" href="/2019/04/26/17.%E5%AD%A6%E4%B9%A0node/" target="_self">
+        <div>
           
-          
-            
-          
-          起步官网：
-https://nodejs.org/en/
-检查安装版本
-node --version
-Node.js既不是语言，也不是框架，它是一个平台。Node.js 中的 JavaScript没有 BOM、DOM，提供了一些服务器级别的 API：文件操作的能力、http 服务的能力。
-helloworld.js
-var f = &apos;hello nodejs&apos;
-console.
-        </a>
-      </p>
+          起步官网： https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F; 检查安装版本 node --version Node.js既不是语言，也不是框架，它是一个平台。Node.js 中的 JavaScript没有 BOM、DOM，提供了一些服务器级别的 API：文件操作的能力、http 服务的能力。 helloworld.js var f &#x3D; &amp;apos;hello nodejs&amp;apos; console.
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -393,18 +449,32 @@ console.
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Web/">Web</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web/" class="category-chain-item">Web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/node/">node</a>
+              <a href="/tags/node/">#node</a>
             
           </div>
         
@@ -424,29 +494,17 @@ console.
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/04/24/16.%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">Java和Kotlin设计模式</a>
+        <a href="/2019/04/24/16.%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_self">
+          Java和Kotlin设计模式
+        </a>
       </h1>
 
-      <p class="index-excerpt">
-        <a href="/2019/04/24/16.%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+      <a class="index-excerpt" href="/2019/04/24/16.%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_self">
+        <div>
           
-          
-            
-          
-          单例模式
-单例模式：保证整个程序只有一个实例。
-套路：1、构造函数私有，防止在外部new对象；2、内部必须提供一个静态的方法，让外部调用。
-
-饿汉模式
-java实现：
-public class SingletonEHan &#123;
-
-    private SingletonEHan() &#123;
-    &#125;
-
-    private static SingletonEHan s
-        </a>
-      </p>
+          单例模式 单例模式：保证整个程序只有一个实例。 套路：1、构造函数私有，防止在外部new对象；2、内部必须提供一个静态的方法，让外部调用。  饿汉模式 java实现： public class SingletonEHan &amp;#123;      private SingletonEHan() &amp;#123;     &amp;#125;      private static SingletonEHan s
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -458,18 +516,32 @@ public class SingletonEHan &#123;
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Android/">Android</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">#设计模式</a>
             
           </div>
         
@@ -489,21 +561,17 @@ public class SingletonEHan &#123;
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/04/17/15.%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E3%80%81%E6%B3%9B%E5%9E%8B/">反射、注解、泛型</a>
+        <a href="/2019/04/17/15.%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E3%80%81%E6%B3%9B%E5%9E%8B/" target="_self">
+          反射、注解、泛型
+        </a>
       </h1>
 
-      <p class="index-excerpt">
-        <a href="/2019/04/17/15.%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E3%80%81%E6%B3%9B%E5%9E%8B/">
+      <a class="index-excerpt" href="/2019/04/17/15.%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E3%80%81%E6%B3%9B%E5%9E%8B/" target="_self">
+        <div>
           
-          
-            
-          
-          反射.java文件，通过编译，生成.class文件，再通过类加载器，加载到jdk内存中并且生成字节码对象class。
-所有的反射功能都是基于我们字节码（class），一个类的class在内存中只有一份，而且class其实也是一个对象Class。
-获取class对象的三种方式方式一： 通过Object继承来的方法(getClass)获取对象对应的字节码文件对象
-Person p = new Pers
-        </a>
-      </p>
+          反射.java文件，通过编译，生成.class文件，再通过类加载器，加载到jdk内存中并且生成字节码对象class。 所有的反射功能都是基于我们字节码（class），一个类的class在内存中只有一份，而且class其实也是一个对象Class。 获取class对象的三种方式方式一： 通过Object继承来的方法(getClass)获取对象对应的字节码文件对象 Person p &#x3D; new Pers
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -515,18 +583,32 @@ Person p = new Pers
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Java/">Java</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Java/">Java</a>
+              <a href="/tags/Java/">#Java</a>
             
           </div>
         
@@ -546,21 +628,17 @@ Person p = new Pers
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/">win下Fiddler和mac下charles抓包</a>
+        <a href="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/" target="_self">
+          win下Fiddler和mac下charles抓包
+        </a>
       </h1>
 
-      <p class="index-excerpt">
-        <a href="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/">
+      <a class="index-excerpt" href="/2019/04/12/14.win%E4%B8%8BFiddler%E5%92%8Cmac%E4%B8%8Bcharles%E6%8A%93%E5%8C%85/" target="_self">
+        <div>
           
-          
-            
-          
-          前戏准备：win下的Fiddler，mac下的charles，安卓手机。
-手机：打开手机WIFI高级设置，代理服务器类型改为”手动”，代理服务器地址填入PC的IP地址，填入代理服务器端口值，一般默认为8888。
-ip：方式一：win通过ipconfig，mac通过ifconfig，快速查询电脑ip。
-方式二：顶部菜单：Fiddler右上角;charles中Help → Local IP Addre
-        </a>
-      </p>
+          前戏准备：win下的Fiddler，mac下的charles，安卓手机。 手机：打开手机WIFI高级设置，代理服务器类型改为”手动”，代理服务器地址填入PC的IP地址，填入代理服务器端口值，一般默认为8888。 ip：方式一：win通过ipconfig，mac通过ifconfig，快速查询电脑ip。 方式二：顶部菜单：Fiddler右上角;charles中Help → Local IP Addre
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -572,20 +650,34 @@ ip：方式一：win通过ipconfig，mac通过ifconfig，快速查询电脑ip。
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Android/">Android</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Fiddler/">Fiddler</a>
+              <a href="/tags/Fiddler/">#Fiddler</a>
             
-              <a href="/tags/charles/">charles</a>
+              <a href="/tags/charles/">#charles</a>
             
           </div>
         
@@ -611,7 +703,7 @@ ip：方式一：win通过ipconfig，mac通过ifconfig，快速查询电脑ip。
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -630,32 +722,34 @@ ip：方式一：win通过ipconfig，mac通过ifconfig，快速查询电脑ip。
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
   
-
   
-</footer>
+  
+  
+</div>
 
+  </footer>
 
-  <!-- SCRIPTS -->
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
@@ -671,11 +765,28 @@ ip：方式一：win通过ipconfig，mac通过ifconfig，快速查询电脑ip。
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
 
 
   
@@ -684,66 +795,22 @@ ip：方式一：win通过ipconfig，mac通过ifconfig，快速查询电脑ip。
 
 
 
-  
-
-
-
-
-
-
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
-
-
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
 
   <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
-  </script>
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

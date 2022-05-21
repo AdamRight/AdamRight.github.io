@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=dark>
 
 
 
@@ -9,40 +9,48 @@
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
+  
+    <meta name="description" content="sublime http:&#x2F;&#x2F;www.sublimetext.com&#x2F;  https:&#x2F;&#x2F;jingyan.baidu.com&#x2F;article&#x2F;925f8cb8dedc12c0dce05674.html  https:&#x2F;&#x2F;jingyan.baidu.com&#x2F;article&#x2F;ce43664935b90c3772afd377.html  HTML的全称为：HyperText Mark-up Langua">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML和CSS基础">
+<meta property="og:url" content="http://yoursite.com/2018/12/01/2.html%E5%92%8Ccss%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Jiang Space">
+<meta property="og:description" content="sublime http:&#x2F;&#x2F;www.sublimetext.com&#x2F;  https:&#x2F;&#x2F;jingyan.baidu.com&#x2F;article&#x2F;925f8cb8dedc12c0dce05674.html  https:&#x2F;&#x2F;jingyan.baidu.com&#x2F;article&#x2F;ce43664935b90c3772afd377.html  HTML的全称为：HyperText Mark-up Langua">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/img/2.png">
+<meta property="article:published_time" content="2018-12-01T12:15:03.995Z">
+<meta property="article:modified_time" content="2021-03-26T14:39:44.103Z">
+<meta property="article:tag" content="HTML标签">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/img/2.png">
+  
+  
   
   <title>HTML和CSS基础 - Jiang Space</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
+
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
 
@@ -51,24 +59,44 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
+
+  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Jiang Space</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">
+      <strong>Jiang Space</strong>
+    </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -142,13 +170,15 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -157,60 +187,71 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="HTML和CSS基础">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2018-12-01 20:15" pubdate>
-        2018年12月1日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      5.7k 字
-    </span>
   
 
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      79
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HTML和CSS基础"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2018-12-01 20:15" pubdate>
+          2018年12月1日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          15k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          125 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
@@ -219,17 +260,22 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">HTML和CSS基础</h1>
             
             <div class="markdown-body">
+              
               <p>sublime</p>
-<pre><code>http://www.sublimetext.com/
+<pre><code class="hljs">http://www.sublimetext.com/
 
 https://jingyan.baidu.com/article/925f8cb8dedc12c0dce05674.html
 
@@ -239,7 +285,7 @@ https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
 <p>所谓超文本，有两层含义:因为网页中还可以图片、视频、音频等内容(超越文本限制);它还可以在网页中跳转到另一个网页，与世界各地主机的网页链接(超链接文本)。</p>
 <hr>
 <p>html的基本结构</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="hljs">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;            
         &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -251,7 +297,7 @@ https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
 &lt;/html&gt;
 </code></pre><hr>
 <h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><h3 id="常用的html标签"><a href="#常用的html标签" class="headerlink" title="常用的html标签"></a>常用的html标签</h3><hr>
-<pre><code>&lt;!-- 1、成对出现的标签：--&gt;
+<pre><code class="hljs">&lt;!-- 1、成对出现的标签：--&gt;
 &lt;h1&gt;h1标题&lt;/h1&gt;
 &lt;h2&gt;h2标题&lt;/h2&gt;
 &lt;h3&gt;h3标题&lt;/h3&gt;
@@ -282,23 +328,23 @@ https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
 </code></pre><hr>
 <h3 id="其他标签"><a href="#其他标签" class="headerlink" title="其他标签"></a>其他标签</h3><hr>
 <p>加粗</p>
-<pre><code>&lt;strong&gt;&lt;/strong&gt;
+<pre><code class="hljs">&lt;strong&gt;&lt;/strong&gt;
 &lt;b&gt;&lt;/b&gt;
 </code></pre><p>倾斜</p>
-<pre><code>&lt;i&gt;&lt;/i&gt;
+<pre><code class="hljs">&lt;i&gt;&lt;/i&gt;
 &lt;em&gt;&lt;/em&gt;
 </code></pre><p>删除线</p>
-<pre><code>&lt;s&gt;&lt;/s&gt;
+<pre><code class="hljs">&lt;s&gt;&lt;/s&gt;
 &lt;del&gt;&lt;/del&gt;
 </code></pre><p>下划线</p>
-<pre><code>&lt;u&gt;&lt;/u&gt;
+<pre><code class="hljs">&lt;u&gt;&lt;/u&gt;
 &lt;ins&gt;&lt;/ins&gt;
 </code></pre><p>链接</p>
-<pre><code>&lt;a href=&quot;&quot; target=&quot;&quot;&gt;&lt;/a&gt;
+<pre><code class="hljs">&lt;a href=&quot;&quot; target=&quot;&quot;&gt;&lt;/a&gt;
 </code></pre><p>锚点定位（跳转）</p>
-<pre><code>&lt;a href=&quot;#id&quot;&gt;&lt;/a&gt;
+<pre><code class="hljs">&lt;a href=&quot;#id&quot;&gt;&lt;/a&gt;
 </code></pre><p>base设置整体链接状态</p>
-<pre><code>&lt;base target=&quot;_blank&quot; /&gt;
+<pre><code class="hljs">&lt;base target=&quot;_blank&quot; /&gt;
 </code></pre><p>特殊字符</p>
 <table>
 <thead>
@@ -379,25 +425,25 @@ https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
 <hr>
 <h3 id="列表标签"><a href="#列表标签" class="headerlink" title="列表标签"></a>列表标签</h3><hr>
 <p>无序列表</p>
-<pre><code>&lt;ul&gt;
+<pre><code class="hljs">&lt;ul&gt;
     &lt;li&gt;&lt;/li&gt;
     &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </code></pre><p>有序列表</p>
-<pre><code>&lt;ol&gt;
+<pre><code class="hljs">&lt;ol&gt;
     &lt;li&gt;&lt;/li&gt;
     &lt;li&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </code></pre><p>注意：<code>ul</code>和<code>ol</code>里面之能放<code>li</code>,<code>li</code>里面可以放其他标签。</p>
 <p>自定义列表</p>
-<pre><code>&lt;dl&gt;
+<pre><code class="hljs">&lt;dl&gt;
     &lt;dt&gt;&lt;/dt&gt;
     &lt;dd&gt;&lt;/dd&gt;
     &lt;dd&gt;&lt;/dd&gt;
 &lt;/dl&gt;
 </code></pre><hr>
 <h3 id="表格标签"><a href="#表格标签" class="headerlink" title="表格标签"></a>表格标签</h3><hr>
-<pre><code>&lt;table width=&quot;&quot; border=&quot;&quot; align=&quot;&quot; cellpadding=&quot;&quot; cellspacing=&quot;&quot;&gt;
+<pre><code class="hljs">&lt;table width=&quot;&quot; border=&quot;&quot; align=&quot;&quot; cellpadding=&quot;&quot; cellspacing=&quot;&quot;&gt;
     &lt;caption&gt;表格标题&lt;/caption&gt;
     &lt;thead&gt;
         &lt;tr&gt;
@@ -458,7 +504,7 @@ https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
 <blockquote>
 <p>合并单元格（<code>rowspan</code>合并行，<code>colspan</code>合并列）</p>
 </blockquote>
-<pre><code>&lt;table width=&quot;500&quot; border=&quot;1&quot;&gt;
+<pre><code class="hljs">&lt;table width=&quot;500&quot; border=&quot;1&quot;&gt;
     &lt;tr&gt;
         &lt;td&gt;11&lt;/td&gt;
         &lt;td&gt;12&lt;/td&gt;
@@ -567,7 +613,7 @@ https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
 <blockquote>
 <p>label标签</p>
 </blockquote>
-<pre><code>&lt;label&gt; 用户名&lt;input type=&quot;text&quot;&gt; &lt;/label&gt;
+<pre><code class="hljs">&lt;label&gt; 用户名&lt;input type=&quot;text&quot;&gt; &lt;/label&gt;
 &lt;br /&gt;
 &lt;label for=&quot;pwd&quot;&gt;
     用户名&lt;input type=&quot;text&quot; /&gt;
@@ -576,12 +622,12 @@ https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
 </code></pre><blockquote>
 <p>textarea标签</p>
 </blockquote>
-<pre><code>&lt;textarea cols=&quot;每行中字符数&quot; rows=&quot;显示的行数&quot;&gt;        
+<pre><code class="hljs">&lt;textarea cols=&quot;每行中字符数&quot; rows=&quot;显示的行数&quot;&gt;        
 &lt;/textarea&gt;
 </code></pre><blockquote>
 <p>select标签</p>
 </blockquote>
-<pre><code>&lt;select name=&quot;&quot; id=&quot;&quot;&gt;
+<pre><code class="hljs">&lt;select name=&quot;&quot; id=&quot;&quot;&gt;
     &lt;option value=&quot;&quot;&gt;请选择&lt;/option&gt;
     &lt;option value=&quot;&quot;&gt;1&lt;/option&gt;
     &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;2&lt;/option&gt;
@@ -589,7 +635,7 @@ https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
 &lt;/select&gt;
 </code></pre><hr>
 <h3 id="表单提交"><a href="#表单提交" class="headerlink" title="表单提交"></a>表单提交</h3><hr>
-<pre><code>&lt;form action=&quot;提交地址url&quot; method=&quot;提交方式get/post&quot;&gt;
+<pre><code class="hljs">&lt;form action=&quot;提交地址url&quot; method=&quot;提交方式get/post&quot;&gt;
     用户名&lt;input type=&quot;text&quot; name=&quot;user&quot; /&gt; 
     &lt;input type=&quot;submit&quot; value=&quot;提交&quot; name=&quot;submit&quot; /&gt;
 &lt;/form&gt;
@@ -598,16 +644,16 @@ https://jingyan.baidu.com/article/ce43664935b90c3772afd377.html
 <blockquote>
 <p>拓展</p>
 </blockquote>
-<pre><code>http://www.w3school.com.cn/
+<pre><code class="hljs">http://www.w3school.com.cn/
 
 https://developer.mozilla.org/zh-CN/
 </code></pre><hr>
 <h2 id="引入CSS样式表"><a href="#引入CSS样式表" class="headerlink" title="引入CSS样式表"></a>引入CSS样式表</h2><hr>
 <p>css(Cascading Style Sheet)层叠样式表，它是用来美化页面的一种语言。</p>
 <p>第一种：行内式（内联样式）</p>
-<pre><code>&lt;h3 style=&quot;color: pink; font-size: 25px;&quot;&gt;英文版新闻报&lt;/h3&gt;
+<pre><code class="hljs">&lt;h3 style=&quot;color: pink; font-size: 25px;&quot;&gt;英文版新闻报&lt;/h3&gt;
 </code></pre><p>第二种：内部样式表</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="hljs">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -625,7 +671,7 @@ https://developer.mozilla.org/zh-CN/
 &lt;/html&gt;
 </code></pre><p>第三种：外部样式表(外联式)</p>
 <p>html文件</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="hljs">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -637,7 +683,7 @@ https://developer.mozilla.org/zh-CN/
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><p>css文件</p>
-<pre><code>h3 &#123;
+<pre><code class="hljs">h3 &#123;
     color: pink;
     font-size: 60px; 
 &#125;
@@ -646,14 +692,14 @@ https://developer.mozilla.org/zh-CN/
 <p>把某类标签全部选出来。</p>
 <hr>
 <h3 id="类选择器"><a href="#类选择器" class="headerlink" title="类选择器"></a>类选择器</h3><hr>
-<pre><code>.类名 &#123;
+<pre><code class="hljs">.类名 &#123;
     属性:属性值;
 &#125;
 </code></pre><p>注意：可以使用中横线命名，不建议使用下划线<code>_</code>,不能数字开头。</p>
 <blockquote>
 <p>多类名选择器</p>
 </blockquote>
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="hljs">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -678,7 +724,7 @@ https://developer.mozilla.org/zh-CN/
 </blockquote>
 <hr>
 <h3 id="id选择器"><a href="#id选择器" class="headerlink" title="id选择器"></a>id选择器</h3><hr>
-<pre><code>#id &#123;
+<pre><code class="hljs">#id &#123;
     属性:属性值;
 &#125;
 </code></pre><blockquote>
@@ -686,12 +732,12 @@ https://developer.mozilla.org/zh-CN/
 </blockquote>
 <p>第四种：通配符选择器</p>
 <p><code>*</code>代表所有，<code>?</code>代表单个字符。</p>
-<pre><code>* &#123;
+<pre><code class="hljs">* &#123;
     属性：属性值;
 &#125;
 </code></pre><hr>
 <h2 id="CSS选择器之复合选择器"><a href="#CSS选择器之复合选择器" class="headerlink" title="CSS选择器之复合选择器"></a>CSS选择器之复合选择器</h2><h3 id="后代选择器"><a href="#后代选择器" class="headerlink" title="后代选择器"></a>后代选择器</h3><hr>
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="hljs">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -717,7 +763,7 @@ https://developer.mozilla.org/zh-CN/
 &lt;/html&gt;
 </code></pre><hr>
 <h3 id="子代选择器-选择亲儿子"><a href="#子代选择器-选择亲儿子" class="headerlink" title="子代选择器-选择亲儿子"></a>子代选择器-选择亲儿子</h3><hr>
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="hljs">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -741,7 +787,7 @@ https://developer.mozilla.org/zh-CN/
 &lt;/html&gt;
 </code></pre><hr>
 <h3 id="并集选择器"><a href="#并集选择器" class="headerlink" title="并集选择器 **"></a>并集选择器 **</h3><hr>
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="hljs">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -762,7 +808,7 @@ https://developer.mozilla.org/zh-CN/
 &lt;/html&gt;
 </code></pre><hr>
 <h3 id="交集选择器-即-又"><a href="#交集选择器-即-又" class="headerlink" title="交集选择器(即..又..)"></a>交集选择器(即..又..)</h3><hr>
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="hljs">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -781,12 +827,12 @@ https://developer.mozilla.org/zh-CN/
 </code></pre><hr>
 <h3 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h3><hr>
 <p>链接伪类选择器</p>
-<pre><code>link  /*未访问的链接*/
+<pre><code class="hljs">link  /*未访问的链接*/
 visited /*已访问的链接*/
 hover /*鼠标移动到链接上*/
 active /*选定的链接*/
 </code></pre><p>代码示例</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="hljs">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -812,7 +858,7 @@ active /*选定的链接*/
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><p>常见写法</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="hljs">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -835,7 +881,7 @@ active /*选定的链接*/
 &lt;/html&gt;
 </code></pre><hr>
 <h2 id="CSS属性"><a href="#CSS属性" class="headerlink" title="CSS属性"></a>CSS属性</h2><h3 id="布局常用样式属性"><a href="#布局常用样式属性" class="headerlink" title="布局常用样式属性"></a>布局常用样式属性</h3><hr>
-<pre><code>width 设置元素(标签)的宽度，如：width:100px;
+<pre><code class="hljs">width 设置元素(标签)的宽度，如：width:100px;
 height 设置元素(标签)的高度，如：height:200px;
 background 设置元素背景色或者背景图片，如：background:gold; 设置元素的背景色, background: url(images/logo.png); 设置元素的背景图片。
 border 设置元素四周的边框，如：border:1px solid black; 设置元素四周边框是1像素宽的黑色实线
@@ -849,7 +895,7 @@ margin 设置元素和外界的距离，也叫外边距，如margin:20px;margin�
 float 设置元素浮动，浮动可以让块元素排列在一行，浮动分为左浮动：float:left; 右浮动：float:right;
 </code></pre><hr>
 <h3 id="文本常用样式属性"><a href="#文本常用样式属性" class="headerlink" title="文本常用样式属性"></a>文本常用样式属性</h3><hr>
-<pre><code>color 设置文字的颜色，如： color:red;
+<pre><code class="hljs">color 设置文字的颜色，如： color:red;
 font-size 设置文字的大小，如：font-size:12px;
 font-family 设置文字的字体，如：font-family:&apos;微软雅黑&apos;;为了避免中文字不兼容，一般写成：font-family:&apos;Microsoft Yahei&apos;;
 font-weight 设置文字是否加粗，如：font-weight:bold; 设置加粗 font-weight:normal 设置不加粗
@@ -860,7 +906,7 @@ text-indent 设置文字首行缩进，如：text-indent:24px; 设置文字首�
 </code></pre><hr>
 <h2 id="CSS字体属性"><a href="#CSS字体属性" class="headerlink" title="CSS字体属性"></a>CSS字体属性</h2><hr>
 <p>font-size字号大小（px、em）、font-family字体 、font-weight字体粗细 、font-style字体风格（倾斜） </p>
-<pre><code>font-size: 18px;
+<pre><code class="hljs">font-size: 18px;
 /*font-family: &quot;宋体&quot;;*/            
 font-family: &quot;\5B8B\4F53&quot;;
 font-weight: bold;
@@ -869,10 +915,10 @@ font-weight: bold;
 font-style: italic;    
 </code></pre><p>bold相当于700，normal为400。</p>
 <p>font综合设置</p>
-<pre><code>选择器&#123;font: font-style font-weight font-size font-family ;&#125;
+<pre><code class="hljs">选择器&#123;font: font-style font-weight font-size font-family ;&#125;
 </code></pre><p>注意：不能更换顺序。<code>font-size</code>和<code>font-family</code>不能省略。</p>
 <h2 id="CSS外观属性"><a href="#CSS外观属性" class="headerlink" title="CSS外观属性"></a>CSS外观属性</h2><p>color颜色、line-height行间距、text-align文字水平对齐方式(left ,right,center)、text-indent首行缩进、text-decoration文本的装饰。</p>
-<pre><code>color: #FF0000;
+<pre><code class="hljs">color: #FF0000;
 line-height: 24px;
 text-align: left;
 text-indent: 2em;
@@ -883,35 +929,35 @@ text-decoration: line-through;
 </blockquote>
 <p>一般居中写法</p>
 <p><code>line-height: (=height);text-align: center;</code></p>
-<h2 id="background"><a href="#background" class="headerlink" title="background"></a>background</h2><pre><code>background-color: #fff;
+<h2 id="background"><a href="#background" class="headerlink" title="background"></a>background</h2><pre><code class="hljs">background-color: #fff;
 background-image: url();
 </code></pre><p><code>background-repeat</code></p>
-<pre><code>/* 平铺方式：repeat、no-repeat、repeat-x、repeat-y*/
+<pre><code class="hljs">/* 平铺方式：repeat、no-repeat、repeat-x、repeat-y*/
 background-repeat: repeat-x;
 </code></pre><p><code>background-position</code></p>
-<pre><code>/* x轴和y轴位置 ，top、bottom、left、right*/
+<pre><code class="hljs">/* x轴和y轴位置 ，top、bottom、left、right*/
 /* background-position: 12px 12px; */
 /* 如果只写一个方位，另一个默认居中 */
 /* background-position: bottom; */
 background-position: center bottom;
 </code></pre><p><code>background-attachment</code>滚动还是固定，默认滚动</p>
-<pre><code>/* fixed */
+<pre><code class="hljs">/* fixed */
 background-attachment: scroll;
 </code></pre><p><code>background</code>简写,没有强制顺序</p>
-<pre><code>background: background-color background-image background-repeat background-attachment background-position
+<pre><code class="hljs">background: background-color background-image background-repeat background-attachment background-position
 
 background: transparent url(image.jpg) repeat scroll 50% 0;
 </code></pre><p>设置透明，最后一位为alpha</p>
-<pre><code>background: rgba(0, 0, 0, 0.5);
+<pre><code class="hljs">background: rgba(0, 0, 0, 0.5);
 </code></pre><h2 id="标签显示模式"><a href="#标签显示模式" class="headerlink" title="标签显示模式"></a>标签显示模式</h2><p>块级元素和行内元素相互转换：</p>
-<pre><code>div &#123;
+<pre><code class="hljs">div &#123;
     display: inline;
 &#125;
 span &#123;
     display: block;
 &#125;
 </code></pre><p>把行内元素转换为行内快元素：</p>
-<pre><code>a &#123;
+<pre><code class="hljs">a &#123;
     display: inline-block;
 &#125;
 </code></pre><h2 id="CSS三大特性"><a href="#CSS三大特性" class="headerlink" title="CSS三大特性"></a>CSS三大特性</h2><p>1、层叠性</p>
@@ -926,7 +972,7 @@ span &#123;
 <p>权重相同，就近原则；权重会叠加；</p>
 <h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><hr>
 <p>盒子模型的5个主要样式属性</p>
-<pre><code>width：内容的宽度(不是盒子的宽度)
+<pre><code class="hljs">width：内容的宽度(不是盒子的宽度)
 height：内容的高度(不是盒子的高度)
 padding：内边距。
 border：边框。
@@ -935,26 +981,26 @@ margin：外边距
 <hr>
 <h3 id="盒子边框-border"><a href="#盒子边框-border" class="headerlink" title="盒子边框(border)"></a>盒子边框(border)</h3><hr>
 <p><code>border-width、border-style、border-color</code></p>
-<pre><code>border-width: 1px;
+<pre><code class="hljs">border-width: 1px;
 border-color: red;
 /* none无边框、solid实线边框、dashed虚线边框、dotted点线边框 */
 border-style: dashed;
 </code></pre><p>连写，没有顺序</p>
-<pre><code>border: 1px solid red;
+<pre><code class="hljs">border: 1px solid red;
 </code></pre><p>边框可以拆开</p>
-<pre><code>border-top: 1px solid red;
+<pre><code class="hljs">border-top: 1px solid red;
 border-bottom: 1px solid green;
 </code></pre><p>去掉所有边框</p>
-<pre><code>border: 0;
+<pre><code class="hljs">border: 0;
 </code></pre><p>表格细线边框</p>
-<pre><code>table,
+<pre><code class="hljs">table,
 td &#123;
     border-collapse: collapse;
 &#125;
 </code></pre><hr>
 <h3 id="内边框-padding"><a href="#内边框-padding" class="headerlink" title="内边框(padding)"></a>内边框(padding)</h3><hr>
 <p>padding会撑开带width和height盒子。</p>
-<pre><code>padding: 10px;
+<pre><code class="hljs">padding: 10px;
 padding-left: 10dp;
 padding: 10px 20px; /* 上下分别10和左右分别20 */
 padding: 10px 20px 30px; /* 上10,左右分别20,下30 */
@@ -965,39 +1011,39 @@ padding: 10px 20px 30px 40px; /* 顺时针，上右下左 */
 <hr>
 <h3 id="外边距-margin"><a href="#外边距-margin" class="headerlink" title="外边距(margin)"></a>外边距(margin)</h3><hr>
 <p>清除元素内外边距</p>
-<pre><code>* &#123;
+<pre><code class="hljs">* &#123;
     margin: 0;
     padding: 0;
 &#125;
 </code></pre><p>清除li中圆点</p>
-<pre><code>li &#123;
+<pre><code class="hljs">li &#123;
     list-style: none;
 &#125;
 </code></pre><p>让盒子水平居中,注意，必须给块级盒子设置宽度。</p>
-<pre><code>margin: 0 auto;
+<pre><code class="hljs">margin: 0 auto;
 或者
 margin-left: auto;
 margin-right: auto;
 text-align: center;/* 内容水平居中 */
 </code></pre><p>相邻块元素垂直外边距合并问题</p>
-<pre><code>/* 一个元素是 */
+<pre><code class="hljs">/* 一个元素是 */
 margin-bottom: 100px;
 /* 另一个元素是 */
 margin-top: 50px;
 /*合并后的距离为100px，即以大的为准 */
 </code></pre><p>嵌套块元素垂直外边距合并问题</p>
 <p>三种解决办法：</p>
-<pre><code>border-top: 1px solid red;
+<pre><code class="hljs">border-top: 1px solid red;
 padding-top: 1px;
 overflow: hidden;
 </code></pre><hr>
 <h2 id="圆角边框和盒子阴影"><a href="#圆角边框和盒子阴影" class="headerlink" title="圆角边框和盒子阴影"></a>圆角边框和盒子阴影</h2><p>圆角边框</p>
-<pre><code>border-radius: 10px;/* 圆角 */
+<pre><code class="hljs">border-radius: 10px;/* 圆角 */
 border-radius: 50%;/* 正方形变成圆 */
 border-radius: 10px 20px 30px 40px;/* 左上开始顺时针 */
 border-radius: 10px 0;/* 左上右下和右上左下 */ 
 </code></pre><p>阴影</p>
-<pre><code>box-shadow: 0px 15px 30px 2px rgba(0,0,0,0.4);
+<pre><code class="hljs">box-shadow: 0px 15px 30px 2px rgba(0,0,0,0.4);
 </code></pre><p>box-shadow:<code>水平阴影 垂直阴影 模糊距离 阴影尺寸 阴影颜色 内/外阴影</code>;</p>
 <table>
 <thead>
@@ -1043,13 +1089,13 @@ border-radius: 10px 0;/* 左上右下和右上左下 */
 <p>父元素自动检测子级元素的高度，以最高为准。常用四种解决办法。</p>
 <p>1、额外标签法</p>
 <p>在最后一个浮动标签后面新添加一个标签，清除浮动。</p>
-<pre><code>clear: both;
+<pre><code class="hljs">clear: both;
 </code></pre><p>2、父级添加overflow</p>
 <p>给父级元素添加</p>
-<pre><code>overflow: hidden;
+<pre><code class="hljs">overflow: hidden;
 </code></pre><p>3、使用after伪元素清除浮动</p>
 <p>给父级元素添加类名<code>clearfix</code></p>
-<pre><code>.clearfix:after &#123;
+<pre><code class="hljs">.clearfix:after &#123;
     content: &quot;&quot;;
     display: block;
     height: 0;
@@ -1061,7 +1107,7 @@ border-radius: 10px 0;/* 左上右下和右上左下 */
 &#125;
 </code></pre><p>4、使用before和after双伪元素清除浮动</p>
 <p>给父级元素添加类名<code>clearfix</code></p>
-<pre><code>.clearfix:before,
+<pre><code class="hljs">.clearfix:before,
 .clearfix:after &#123;
     content: &quot;&quot;;
     display: table;
@@ -1100,14 +1146,14 @@ border-radius: 10px 0;/* 左上右下和右上左下 */
 </tbody>
 </table>
 <p>1、相对定位</p>
-<pre><code>position: relative;
+<pre><code class="hljs">position: relative;
 top: 100px;
 left: 100px;
 </code></pre><blockquote>
 <p>注意：相对定位可以通过边偏移移动位置，但是原来的所占的位置，继续占有。以自己的左上角为基准点定位。</p>
 </blockquote>
 <p>2、绝对定位</p>
-<pre><code>position: absolute;
+<pre><code class="hljs">position: absolute;
 top: 100px;
 left: 100px;
 </code></pre><blockquote>
@@ -1120,13 +1166,13 @@ left: 100px;
 <p>子绝父相。正常情况，子级是绝对定位的话，父级要用相对定位。</p>
 </blockquote>
 <p>定位的盒子居中</p>
-<pre><code>position: absolute;
+<pre><code class="hljs">position: absolute;
 left: 50%;
 margin-left: -(宽度/2);
 top: 50%;
 margin-top:  -(高度/2);
 </code></pre><p>3、固定定位</p>
-<pre><code>position: fixed;
+<pre><code class="hljs">position: fixed;
 left: 0;
 top: 0;
 </code></pre><blockquote>
@@ -1137,7 +1183,7 @@ top: 0;
 <p>绝对定位和固定定位，元素模式发生转换，都转换为行内快模式。</p>
 </blockquote>
 <p>叠放次序(z-index)</p>
-<pre><code>z-index: 1;
+<pre><code class="hljs">z-index: 1;
 </code></pre><table>
 <thead>
 <tr>
@@ -1178,36 +1224,36 @@ top: 0;
 <p>只有定位的盒子才有z-index。</p>
 <p>没有单位。</p>
 <h2 id="鼠标样式、轮廓线、防止拖拽文本域"><a href="#鼠标样式、轮廓线、防止拖拽文本域" class="headerlink" title="鼠标样式、轮廓线、防止拖拽文本域"></a>鼠标样式、轮廓线、防止拖拽文本域</h2><p>鼠标样式</p>
-<pre><code>cursor: default;/*default: 默认、 pointer： 小手、 text： 选择、move： 移动*/
+<pre><code class="hljs">cursor: default;/*default: 默认、 pointer： 小手、 text： 选择、move： 移动*/
 </code></pre><p>轮廓线</p>
-<pre><code>input &#123;
+<pre><code class="hljs">input &#123;
     outline: none;/* 取消轮廓线 */
     border: 1px solid red;
 &#125;
 </code></pre><p>防止拖拽文本域</p>
-<pre><code>textarea &#123;
+<pre><code class="hljs">textarea &#123;
     resize: none;/* 不要重新规定尺寸 */
     outline: none;/* 取消轮廓线 */
 &#125;
 </code></pre><h2 id="vertical-align"><a href="#vertical-align" class="headerlink" title="vertical-align"></a>vertical-align</h2><p>针对行内元素和行内块元素。控制图片和文字位置</p>
-<pre><code>img &#123;
+<pre><code class="hljs">img &#123;
     vertical-align: middle;/* top、bottom */
 &#125;
 </code></pre><hr>
 <h2 id="显示与隐藏"><a href="#显示与隐藏" class="headerlink" title="显示与隐藏"></a>显示与隐藏</h2><hr>
-<pre><code>display: none;/* 隐藏 */
+<pre><code class="hljs">display: none;/* 隐藏 */
 display: block;/* 显示 */
 </code></pre><p>display隐藏后不保留位置。</p>
-<pre><code>visibility: visible;/* 显示 */
+<pre><code class="hljs">visibility: visible;/* 显示 */
 visibility: hidden;/* 隐藏 */
 </code></pre><p>visibility隐藏后保留位置。</p>
-<pre><code>overflow: hidden;
+<pre><code class="hljs">overflow: hidden;
 </code></pre><p>overflow四个属性<code>auto; scroll; hidden; visible;</code></p>
 <hr>
 <h2 id="溢出文字隐藏"><a href="#溢出文字隐藏" class="headerlink" title="溢出文字隐藏"></a>溢出文字隐藏</h2><hr>
 <p>当子元素(标签)的尺寸超过父元素(标签)的尺寸时，此时需要设置父元素显示溢出的子元素的方式，设置的方法是通过overflow属性来完成。</p>
 <p>overflow的设置项：visible 默认值, 显示子标签溢出部分。hidden 隐藏子标签溢出部分。auto 如果子标签溢出，则可以滚动查看其余的内容。</p>
-<pre><code>white-space: nowrap;/* 强制在同一行内显示所有文本，直到文本结束或者br */
+<pre><code class="hljs">white-space: nowrap;/* 强制在同一行内显示所有文本，直到文本结束或者br */
 overflow: hidden;/* 超出部分隐藏 */
 text-overflow: ellipsis;/* 超出部分显示省略号 */
 </code></pre><blockquote>
@@ -1217,52 +1263,100 @@ text-overflow: ellipsis;/* 超出部分显示省略号 */
 <h2 id="Sprites"><a href="#Sprites" class="headerlink" title="Sprites"></a>Sprites</h2><p>为了有效地减少服务器接收和发送请求次数，提高页面加载速度。</p>
 <p>CSS精灵是一种处理网页背景图像的方式。</p>
 <h2 id="滑动门"><a href="#滑动门" class="headerlink" title="滑动门"></a>滑动门</h2><h2 id="字体图标"><a href="#字体图标" class="headerlink" title="字体图标"></a>字体图标</h2><p>icomoon字库</p>
-<pre><code>https://icomoon.io/
+<pre><code class="hljs">https://icomoon.io/
 </code></pre><p>阿里icon font字库</p>
-<pre><code>http://www.iconfont.cn/
+<pre><code class="hljs">http://www.iconfont.cn/
 </code></pre><h2 id="sublime快捷键"><a href="#sublime快捷键" class="headerlink" title="sublime快捷键"></a>sublime快捷键</h2><p>sublime可以快速提高我们代码的书写方式</p>
-<pre><code>1.生成标签直接输入标签名按tab键即可 比如div 然后tab键，就可以生成&lt;div&gt;&lt;/div&gt;
+<pre><code class="hljs">1.生成标签直接输入标签名按tab键即可 比如div 然后tab键，就可以生成&lt;div&gt;&lt;/div&gt;
 2.如果想要生成多个相同标签加上*就可以了比如div*3 就可以快速生成3个div
 3.如果有父子级关系的标签，可以用&gt;比如ul&gt; li就可以了
 4.如果有兄弟关系的标签，用+就可以了比如div+p
 5.如果生成带有类名或者id名字的，直接写 .demo 或者#two tab 键就可以了
 </code></pre>
+              
             </div>
-            <hr>
+            <hr/>
             <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Web/">Web</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/HTML%E6%A0%87%E7%AD%BE/">HTML标签</a>
-                    
-                      <a class="hover-with-bg" href="/tags/CSS/">CSS</a>
-                    
-                  </div>
-                
-              </div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web/" class="category-chain-item">Web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/HTML%E6%A0%87%E7%AD%BE/">#HTML标签</a>
+      
+        <a href="/tags/CSS/">#CSS</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HTML和CSS基础</div>
+      <div>http://yoursite.com/2018/12/01/2.html和css基础/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2018年12月1日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
               
-              
-                <div class="post-prevnext">
+                <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2018/12/02/3.OkHttp%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E5%8F%8A%E7%BD%91%E7%BB%9C%E5%B0%81%E8%A3%85/">
+                      <a href="/2018/12/02/3.OkHttp%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E5%8F%8A%E7%BD%91%E7%BB%9C%E5%B0%81%E8%A3%85/" title="OkHttp基本使用及网络封装">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">OkHttp基本使用及网络封装</span>
                         <span class="visible-mobile">上一篇</span>
@@ -1272,7 +1366,7 @@ text-overflow: ellipsis;/* 超出部分显示省略号 */
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2018/11/25/1.JavaScript%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%92%8CDOM%E5%92%8CBOM/">
+                      <a href="/2018/11/25/1.JavaScript%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%92%8CDOM%E5%92%8CBOM/" title="JavaScript基本语法和DOM和BOM">
                         <span class="hidden-mobile">JavaScript基本语法和DOM和BOM</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -1288,25 +1382,55 @@ text-overflow: ellipsis;/* 超出部分显示省略号 */
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
 
 
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -1325,32 +1449,34 @@ text-overflow: ellipsis;/* 超出部分显示省略号 */
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
   
-
   
-</footer>
+  
+  
+</div>
 
+  </footer>
 
-  <!-- SCRIPTS -->
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
@@ -1366,11 +1492,28 @@ text-overflow: ellipsis;/* 超出部分显示省略号 */
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
 
 
   
@@ -1379,72 +1522,153 @@ text-overflow: ellipsis;/* 超出部分显示省略号 */
 
 
 
+
   
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
-
-
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
 
 
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
-  </script>
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

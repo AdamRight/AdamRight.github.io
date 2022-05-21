@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=dark>
 
 
 
@@ -9,40 +9,47 @@
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
+  
+    <meta name="description" content="起步官网： https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F; 检查安装版本 node --version Node.js既不是语言，也不是框架，它是一个平台。Node.js 中的 JavaScript没有 BOM、DOM，提供了一些服务器级别的 API：文件操作的能力、http 服务的能力。 helloworld.js var f &#x3D; &amp;apos;hello nodejs&amp;apos; console.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习Node">
+<meta property="og:url" content="http://yoursite.com/2019/04/26/17.%E5%AD%A6%E4%B9%A0node/index.html">
+<meta property="og:site_name" content="Jiang Space">
+<meta property="og:description" content="起步官网： https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F; 检查安装版本 node --version Node.js既不是语言，也不是框架，它是一个平台。Node.js 中的 JavaScript没有 BOM、DOM，提供了一些服务器级别的 API：文件操作的能力、http 服务的能力。 helloworld.js var f &#x3D; &amp;apos;hello nodejs&amp;apos; console.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/img/3.png">
+<meta property="article:published_time" content="2019-04-26T12:25:02.383Z">
+<meta property="article:modified_time" content="2021-03-26T14:40:34.351Z">
+<meta property="article:tag" content="node">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/img/3.png">
+  
+  
   
   <title>学习Node - Jiang Space</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
+
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
 
@@ -51,24 +58,44 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
+
+  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Jiang Space</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">
+      <strong>Jiang Space</strong>
+    </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -142,13 +169,15 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -157,60 +186,71 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="学习Node">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2019-04-26 20:25" pubdate>
-        2019年4月26日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      1.9k 字
-    </span>
   
 
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      27
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="学习Node"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-04-26 20:25" pubdate>
+          2019年4月26日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          51 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
@@ -219,29 +259,34 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">学习Node</h1>
             
             <div class="markdown-body">
+              
               <h2 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h2><p>官网：</p>
-<pre><code>https://nodejs.org/en/
+<pre><code class="hljs">https://nodejs.org/en/
 </code></pre><p>检查安装版本</p>
-<pre><code>node --version
+<pre><code class="hljs">node --version
 </code></pre><p>Node.js既不是语言，也不是框架，它是一个平台。Node.js 中的 JavaScript没有 BOM、DOM，提供了一些服务器级别的 API：文件操作的能力、http 服务的能力。</p>
 <p>helloworld.js</p>
-<pre><code>var f = &apos;hello nodejs&apos;
+<pre><code class="hljs">var f = &apos;hello nodejs&apos;
 console.log(f)
 </code></pre><p>然后执行</p>
-<pre><code>node .../helloworld.js
+<pre><code class="hljs">node .../helloworld.js
 </code></pre><p><code>require</code> 是一个方法,它的作用就是用来加载模块的。在 Node 中，模块有三种：具名的核心模块，例如 fs、http；用户自己编写的文件模块；第三方模块。</p>
 <h2 id="读和写文件"><a href="#读和写文件" class="headerlink" title="读和写文件"></a>读和写文件</h2><p>浏览器中的 JavaScript 是没有文件操作的能力的，但是 Node 中的JavaScript 具有文件操作的能力。fs 是 file-system 的简写，就是文件系统的意思，<code>fs.readFile</code> 就是用来读取文件的。</p>
 <p>node执行下面的js文件：</p>
-<pre><code>var fs = require(&apos;fs&apos;)
+<pre><code class="hljs">var fs = require(&apos;fs&apos;)
 //    第一个参数就是要读取的文件路径,第二个参数是一个回调函数
 fs.readFile(&apos;./data/hello.txt&apos;, function (error, data) &#123;
   if (error) &#123;
@@ -251,7 +296,7 @@ fs.readFile(&apos;./data/hello.txt&apos;, function (error, data) &#123;
   &#125;
 &#125;)
 </code></pre><p>写文件：</p>
-<pre><code>var fs = require(&apos;fs&apos;)
+<pre><code class="hljs">var fs = require(&apos;fs&apos;)
 fs.writeFile(&apos;./data/你好.md&apos;, &apos;我是Node.js&apos;, function (error) &#123;
   if (error) &#123;
     console.log(&apos;写入失败&apos;)
@@ -260,7 +305,7 @@ fs.writeFile(&apos;./data/你好.md&apos;, &apos;我是Node.js&apos;, function (
   &#125;
 &#125;)
 </code></pre><h2 id="http服务"><a href="#http服务" class="headerlink" title="http服务"></a>http服务</h2><p>简单的http服务</p>
-<pre><code>var http = require(&apos;http&apos;)
+<pre><code class="hljs">var http = require(&apos;http&apos;)
 //使用 http.createServer() 方法创建一个 Web 服务器
 var server = http.createServer()
 //当客户端请求过来，就会自动触发服务器的 request 请求事件，然后执行第二个参数：回调处理函数
@@ -272,7 +317,7 @@ server.listen(3000, function () &#123;
   console.log(&apos;服务器启动成功了，可以通过 http://你的ip/ 来进行访问&apos;)
 &#125;)
 </code></pre><p>处理请求,request请求事件处理函数，需要接收两个参数：Request 请求对象,请求对象可以用来获取客户端的一些请求信息，例如请求路径;Response 响应对象,响应对象可以用来给客户端发送响应消息。</p>
-<pre><code>var http = require(&apos;http&apos;)
+<pre><code class="hljs">var http = require(&apos;http&apos;)
 var server = http.createServer()
 
 server.on(&apos;request&apos;, function (request, response) &#123;
@@ -287,7 +332,7 @@ server.listen(3000, function () &#123;
   console.log(&apos;服务器启动成功了，可以通过 http://你的ip:3000/ 来进行访问&apos;)
 &#125;)
 </code></pre><p>根据不同请求路径返回不同数据：</p>
-<pre><code>var http = require(&apos;http&apos;)
+<pre><code class="hljs">var http = require(&apos;http&apos;)
 var server = http.createServer()
 
 server.on(&apos;request&apos;, function (req, res) &#123;
@@ -323,14 +368,14 @@ server.listen(3000, function () &#123;
   console.log(&apos;服务器启动成功，可以访问了。。。&apos;)
 &#125;)
 </code></pre><p>在服务端默认发送的数据，其实是 utf8 编码的内容，中文操作系统默认是 gbk。在 http 协议中，Content-Type 就是用来告知对方我给你发送的数据内容是什么类型</p>
-<pre><code>// text/plain 就是普通文本
+<pre><code class="hljs">// text/plain 就是普通文本
 res.setHeader(&apos;Content-Type&apos;, &apos;text/plain; charset=utf-8&apos;)
 // 如果你发送的是 html 格式的字符串，则也要告诉浏览器我给你发送是 text/html 格式的内容
 res.setHeader(&apos;Content-Type&apos;, &apos;text/html; charset=utf-8&apos;)
 // 图片就不需要指定编码了，因为我们常说的编码一般指的是：字符编码
 res.setHeader(&apos;Content-Type&apos;, &apos;image/jpeg&apos;)
 </code></pre><h2 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h2><p>读取文件目录</p>
-<pre><code>var fs = require(&apos;fs&apos;)
+<pre><code class="hljs">var fs = require(&apos;fs&apos;)
 fs.readdir(&apos;D:/Movie/www&apos;, function (err, files) &#123;
   if (err) &#123;
     return console.log(&apos;目录不存在&apos;)
@@ -338,13 +383,13 @@ fs.readdir(&apos;D:/Movie/www&apos;, function (err, files) &#123;
   console.log(files)
 &#125;)
 </code></pre><p><code>art-template</code>不仅可以在浏览器使用，也可以在 node 中使用。</p>
-<pre><code>https://github.com/aui/art-template
+<pre><code class="hljs">https://github.com/aui/art-template
 https://aui.github.io/art-template/
 </code></pre><p>安装：该命令在哪执行就会把包下载到哪里,下载到 node_modules 目录中。</p>
-<pre><code>npm install art-template
+<pre><code class="hljs">npm install art-template
 </code></pre><p>注意：在浏览器中需要引用 lib/template-web.js 文件</p>
 <p>浏览器中使用art-template:</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="hljs">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -384,7 +429,7 @@ https://aui.github.io/art-template/
 &lt;/html&gt;
 </code></pre><p> 在 Node 中使用 art-template 模板引擎。在需要使用的文件模块中加载 art-template，只需要使用 require 方法加载就可以了：<code>require(&#39;art-template&#39;)</code></p>
 <p>node执行js</p>
-<pre><code>var template = require(&apos;art-template&apos;)
+<pre><code class="hljs">var template = require(&apos;art-template&apos;)
 var fs = require(&apos;fs&apos;)
 fs.readFile(&apos;./tpl.html&apos;, function (err, data) &#123;
   if (err) &#123;
@@ -404,7 +449,7 @@ fs.readFile(&apos;./tpl.html&apos;, function (err, data) &#123;
   console.log(ret)
 &#125;)
 </code></pre><p>tpl.html</p>
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="hljs">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -422,9 +467,9 @@ fs.readFile(&apos;./tpl.html&apos;, function (err, data) &#123;
 &lt;/html&gt;
 </code></pre><p>留言板小案例</p>
 <h2 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h2><p>官网</p>
-<pre><code>https://www.npmjs.com/
+<pre><code class="hljs">https://www.npmjs.com/
 </code></pre><p>常用命令行工具</p>
-<pre><code>//查看版本
+<pre><code class="hljs">//查看版本
 npm --version
 
 //升级npm
@@ -449,49 +494,97 @@ npm uninstall --save 包名
 npm help
 </code></pre><p>解决翻墙：</p>
 <p>首先安装淘宝cnpm（可以再任意目录执行，–global表示安装到全局）</p>
-<pre><code>npm install --global cnpm
+<pre><code class="hljs">npm install --global cnpm
 </code></pre><p>接下来用cnpm替换npm。</p>
 <p>如果不想安装npm又想使用淘宝镜像：</p>
-<pre><code>npm install jquery --registry=https://registry.npm.taobao.org
+<pre><code class="hljs">npm install jquery --registry=https://registry.npm.taobao.org
 </code></pre><p>加入配置文件中：</p>
-<pre><code>npm config set registry https://registry.npm.taobao.org
+<pre><code class="hljs">npm config set registry https://registry.npm.taobao.org
 //查看配置成功
 npm config list
 </code></pre>
+              
             </div>
-            <hr>
+            <hr/>
             <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Web/">Web</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/node/">node</a>
-                    
-                  </div>
-                
-              </div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web/" class="category-chain-item">Web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/node/">#node</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>学习Node</div>
+      <div>http://yoursite.com/2019/04/26/17.学习node/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2019年4月26日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
               
-              
-                <div class="post-prevnext">
+                <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2019/05/13/21.%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+                      <a href="/2019/05/13/21.%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="线程和线程池">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">线程和线程池</span>
                         <span class="visible-mobile">上一篇</span>
@@ -501,7 +594,7 @@ npm config list
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2019/04/24/16.%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                      <a href="/2019/04/24/16.%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="Java和Kotlin设计模式">
                         <span class="hidden-mobile">Java和Kotlin设计模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -517,25 +610,55 @@ npm config list
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
 
 
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -554,32 +677,34 @@ npm config list
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
   
-
   
-</footer>
+  
+  
+</div>
 
+  </footer>
 
-  <!-- SCRIPTS -->
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
@@ -595,11 +720,28 @@ npm config list
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
 
 
   
@@ -608,72 +750,153 @@ npm config list
 
 
 
+
   
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
-
-
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
 
 
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
-  </script>
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=dark>
 
 
 
@@ -9,40 +9,47 @@
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
+  
+    <meta name="description" content="第1章、绘图基础1.1、基本图形绘制1.1.1、概述在 Android中，Paint类就是画笔，而Canvas类就是纸，在这里叫作画布。 1.1.2、画笔的基本设置Paint paint.setAntiAlias(true); &#x2F;&#x2F;打开抗锯齿功能  paint.setColor(Color.RED); &#x2F;&#x2F;设置画笔颜色  paint.setStyle(Paint.Style.FILL); &#x2F;&#x2F;设置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android自定义控件入门与实战-读书笔记">
+<meta property="og:url" content="http://yoursite.com/2020/01/04/32.Android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">
+<meta property="og:site_name" content="Jiang Space">
+<meta property="og:description" content="第1章、绘图基础1.1、基本图形绘制1.1.1、概述在 Android中，Paint类就是画笔，而Canvas类就是纸，在这里叫作画布。 1.1.2、画笔的基本设置Paint paint.setAntiAlias(true); &#x2F;&#x2F;打开抗锯齿功能  paint.setColor(Color.RED); &#x2F;&#x2F;设置画笔颜色  paint.setStyle(Paint.Style.FILL); &#x2F;&#x2F;设置">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/img/32.png">
+<meta property="article:published_time" content="2020-01-04T11:48:26.998Z">
+<meta property="article:modified_time" content="2021-03-26T14:41:13.947Z">
+<meta property="article:tag" content="自定义控件">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/img/32.png">
+  
+  
   
   <title>Android自定义控件入门与实战-读书笔记 - Jiang Space</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
+
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
 
@@ -51,24 +58,44 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
+
+  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Jiang Space</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">
+      <strong>Jiang Space</strong>
+    </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -142,13 +169,15 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -157,60 +186,71 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Android自定义控件入门与实战-读书笔记">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-01-04 19:48" pubdate>
-        2020年1月4日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      13.3k 字
-    </span>
   
 
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      177
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Android自定义控件入门与实战-读书笔记"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-01-04 19:48" pubdate>
+          2020年1月4日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          41k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          342 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
@@ -219,18 +259,23 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">Android自定义控件入门与实战-读书笔记</h1>
             
             <div class="markdown-body">
+              
               <h2 id="第1章、绘图基础"><a href="#第1章、绘图基础" class="headerlink" title="第1章、绘图基础"></a>第1章、绘图基础</h2><h3 id="1-1、基本图形绘制"><a href="#1-1、基本图形绘制" class="headerlink" title="1.1、基本图形绘制"></a>1.1、基本图形绘制</h3><h4 id="1-1-1、概述"><a href="#1-1-1、概述" class="headerlink" title="1.1.1、概述"></a>1.1.1、概述</h4><p>在 Android中，Paint类就是画笔，而Canvas类就是纸，在这里叫作画布。</p>
 <h4 id="1-1-2、画笔的基本设置"><a href="#1-1-2、画笔的基本设置" class="headerlink" title="1.1.2、画笔的基本设置"></a>1.1.2、画笔的基本设置</h4><p>Paint</p>
-<pre><code>paint.setAntiAlias(true); //打开抗锯齿功能
+<pre><code class="hljs">paint.setAntiAlias(true); //打开抗锯齿功能
 
 paint.setColor(Color.RED); //设置画笔颜色
 
@@ -238,39 +283,39 @@ paint.setStyle(Paint.Style.FILL); //设置填充样式
 
 paint.setStrokeWidth(50); //设置画笔宽度
 </code></pre><p>ARGB</p>
-<pre><code>A 代表透明度（Alpha）
+<pre><code class="hljs">A 代表透明度（Alpha）
 R 代表红色值（Red）
 G 代表绿色值（Green）
 B 代表蓝色值（Blue）
 </code></pre><p>设置填充样式，对于文字和几何图形都有效:</p>
-<pre><code>Paint.Style.FILL//仅填充内部。
+<pre><code class="hljs">Paint.Style.FILL//仅填充内部。
 Paint.Style.FILL_AND_STROKE//填充内部和描边。
 Paint.Style.STROKE//仅描边。
 </code></pre><blockquote>
 <p>FILL_AND_STROKE比FILL多了一个描边的宽度。    </p>
 </blockquote>
 <h4 id="1-1-3、Canvas使用基础"><a href="#1-1-3、Canvas使用基础" class="headerlink" title="1.1.3、Canvas使用基础"></a>1.1.3、Canvas使用基础</h4><p>demo地址</p>
-<pre><code>com.vcredit.doview.chapter1.DrawShapeView
-</code></pre><h5 id="1、画布背景设置"><a href="#1、画布背景设置" class="headerlink" title="1、画布背景设置"></a>1、画布背景设置</h5><pre><code>canvas.drawColor(int color)
+<pre><code class="hljs">com.vcredit.doview.chapter1.DrawShapeView
+</code></pre><h5 id="1、画布背景设置"><a href="#1、画布背景设置" class="headerlink" title="1、画布背景设置"></a>1、画布背景设置</h5><pre><code class="hljs">canvas.drawColor(int color)
 canvas.drawARGB(int a, int r, int g, int b)
 canvas.drawRGB(int r, int g, int b) //透明度Alpha的值取255
-</code></pre><h5 id="2、画直线"><a href="#2、画直线" class="headerlink" title="2、画直线"></a>2、画直线</h5><pre><code>void drawLine(float startX, float startY, float stopX, float stopY, Paint paint)
+</code></pre><h5 id="2、画直线"><a href="#2、画直线" class="headerlink" title="2、画直线"></a>2、画直线</h5><pre><code class="hljs">void drawLine(float startX, float startY, float stopX, float stopY, Paint paint)
 </code></pre><p>直线的粗细是与setStrokeWidth有直接关系的。所以，paint.setStrokeWidth在Style起作用时，用于设置描边宽度；在Style不起作用时，用于设置画笔宽度。</p>
-<h5 id="3、多条直线"><a href="#3、多条直线" class="headerlink" title="3、多条直线"></a>3、多条直线</h5><pre><code>void drawLines(float[] pts, Paint paint)
+<h5 id="3、多条直线"><a href="#3、多条直线" class="headerlink" title="3、多条直线"></a>3、多条直线</h5><pre><code class="hljs">void drawLines(float[] pts, Paint paint)
 void drawLines(float[] pts, int offset, int count, Paint paint)
 </code></pre><p>pts：点的集合。两个元素形成一个点，每两个点形成一条直线。</p>
 <p>offset：pts集合中跳过的元素个数。</p>
 <p>count：pts集合中参与绘制的元素个数。</p>
-<pre><code>float[] pts = &#123;10,10,100,100,200,200,400,400&#125;;
+<pre><code class="hljs">float[] pts = &#123;10,10,100,100,200,200,400,400&#125;;
 canvas.drawLines(pts,2,4,paint);
 </code></pre><p>表示点(100,100)和(200,200)这两个点的连线。</p>
-<h5 id="4、点"><a href="#4、点" class="headerlink" title="4、点"></a>4、点</h5><pre><code>void drawPoint(float x, float y, Paint paint)
+<h5 id="4、点"><a href="#4、点" class="headerlink" title="4、点"></a>4、点</h5><pre><code class="hljs">void drawPoint(float x, float y, Paint paint)
 </code></pre><p>点的大小只与setStrokeWidth(width)有关，而与setStyle无关。</p>
-<h5 id="5、多个点"><a href="#5、多个点" class="headerlink" title="5、多个点"></a>5、多个点</h5><pre><code>void drawPoints(float[] pts, Paint paint)
+<h5 id="5、多个点"><a href="#5、多个点" class="headerlink" title="5、多个点"></a>5、多个点</h5><pre><code class="hljs">void drawPoints(float[] pts, Paint paint)
 void drawPoints(float[] pts, int offset, int count, Paint paint)
 </code></pre><p>这几个参数的含义与多条直线中的参数含义相同。</p>
 <h5 id="6、矩形工具类RectF和Rect"><a href="#6、矩形工具类RectF和Rect" class="headerlink" title="6、矩形工具类RectF和Rect"></a>6、矩形工具类RectF和Rect</h5><p>RectF与Rect中的方法、成员变量完全一样，都是根据4个点构造出一个矩形结构，唯一不同的是：RectF是用来保存float类型数值的矩形结构的；而Rect是用来保存int类型数值的矩形结构的。</p>
-<pre><code>//RectF 的构造函数有如下4个，但最常用的还是第二个，即根据 4 个点构造出一个矩形。
+<pre><code class="hljs">//RectF 的构造函数有如下4个，但最常用的还是第二个，即根据 4 个点构造出一个矩形。
 RectF()
 RectF(float left, float top, float right, float bottom)
 RectF(RectF r)
@@ -280,27 +325,27 @@ Rect()
 Rect(int left, int top, int right, int bottom)
 Rect(Rect r)
 </code></pre><p>一般而言，要构造一个矩形结构，可以通过以下两种方法来实现。</p>
-<pre><code>//方法一：直接构造
+<pre><code class="hljs">//方法一：直接构造
 Rect rect = new Rect(10,10,100,100);
 //方法二：间接构造
 Rect rect = new Rect();
 rect.set(10,10,100,100);
 </code></pre><h5 id="7、矩形"><a href="#7、矩形" class="headerlink" title="7、矩形"></a>7、矩形</h5><p>矩形的绘制方法</p>
-<pre><code>void drawRect(float left, float top, float right, float bottom, Paint paint)
+<pre><code class="hljs">void drawRect(float left, float top, float right, float bottom, Paint paint)
 void drawRect(RectF rect, Paint paint)
 void drawRect(Rect r, Paint paint)
-</code></pre><h5 id="8、圆角矩形"><a href="#8、圆角矩形" class="headerlink" title="8、圆角矩形"></a>8、圆角矩形</h5><pre><code>void drawRoundRect(RectF rect, float rx, float ry, Paint paint)
+</code></pre><h5 id="8、圆角矩形"><a href="#8、圆角矩形" class="headerlink" title="8、圆角矩形"></a>8、圆角矩形</h5><pre><code class="hljs">void drawRoundRect(RectF rect, float rx, float ry, Paint paint)
 </code></pre><p>rect：要绘制的矩形；rx：生成圆角的椭圆的X轴半径；ry：生成圆角的椭圆的Y轴半径。</p>
 <p>drawRoundRect()函数不能针对每个角设置对应的椭圆，而只能统一设置4个角对应的椭圆。</p>
-<h5 id="9、圆形"><a href="#9、圆形" class="headerlink" title="9、圆形"></a>9、圆形</h5><pre><code>void drawCircle(float cx, float cy, float radius, Paint paint)
+<h5 id="9、圆形"><a href="#9、圆形" class="headerlink" title="9、圆形"></a>9、圆形</h5><pre><code class="hljs">void drawCircle(float cx, float cy, float radius, Paint paint)
 </code></pre><p>参数是圆心和半径</p>
-<h5 id="10、椭圆"><a href="#10、椭圆" class="headerlink" title="10、椭圆"></a>10、椭圆</h5><pre><code>void drawOval(RectF oval, Paint paint)
+<h5 id="10、椭圆"><a href="#10、椭圆" class="headerlink" title="10、椭圆"></a>10、椭圆</h5><pre><code class="hljs">void drawOval(RectF oval, Paint paint)
 </code></pre><p>椭圆是根据矩形生成的，以矩形的长为椭圆的X轴，以矩形的宽为椭圆的Y轴。</p>
-<h5 id="11、弧"><a href="#11、弧" class="headerlink" title="11、弧"></a>11、弧</h5><pre><code>void drawArc(RectF oval, float startAngle, float sweepAngle, boolean useCenter,Paint paint)
+<h5 id="11、弧"><a href="#11、弧" class="headerlink" title="11、弧"></a>11、弧</h5><pre><code class="hljs">void drawArc(RectF oval, float startAngle, float sweepAngle, boolean useCenter,Paint paint)
 </code></pre><p>弧是椭圆的一部分，而椭圆是根据矩形来生成的，所以弧也是根据矩形来生成的。</p>
 <p>oval：生成椭圆的矩形。startAngle：弧开始的角度，以 X 轴正方向为 0°。sweepAngle：弧持续的角度,顺时针方向为正值。</p>
 <p>useCenter：是否有弧的两边。为true时，表示带有两边；为false时，只有一条弧。</p>
-<h4 id="1-1-4、Rect与RectF"><a href="#1-1-4、Rect与RectF" class="headerlink" title="1.1.4、Rect与RectF"></a>1.1.4、Rect与RectF</h4><h5 id="1、是否包含点、矩形"><a href="#1、是否包含点、矩形" class="headerlink" title="1、是否包含点、矩形"></a>1、是否包含点、矩形</h5><pre><code>//判断是否包含某个点，如果在，则返回true；如果不在，则返回false。
+<h4 id="1-1-4、Rect与RectF"><a href="#1-1-4、Rect与RectF" class="headerlink" title="1.1.4、Rect与RectF"></a>1.1.4、Rect与RectF</h4><h5 id="1、是否包含点、矩形"><a href="#1、是否包含点、矩形" class="headerlink" title="1、是否包含点、矩形"></a>1、是否包含点、矩形</h5><pre><code class="hljs">//判断是否包含某个点，如果在，则返回true；如果不在，则返回false。
 boolean contains(int x, int y)
 //rect.contains(mX, mY)
 
@@ -310,7 +355,7 @@ boolean contains(Rect r)
 </code></pre><blockquote>
 <p>postInvalidate()和 nvalidate()函数都是用来重绘控件的，区别是invalidate()函数一定要在主线程中执行，否则就会报错；而postInvalidate()可以在任何线程中执行。因为在 postInvalidate()函数中就是利用handler给主线程发送刷新界面的消息来实现的，所以它可以在任何线程中执行而不会出错。postInvalidate()界面刷新速度可能没有直接调用invalidate()函数那么快。</p>
 </blockquote>
-<h5 id="2、判断两个矩形是否相交"><a href="#2、判断两个矩形是否相交" class="headerlink" title="2、判断两个矩形是否相交"></a>2、判断两个矩形是否相交</h5><pre><code>//这是Rect类的一个静态方法，如果相交则返回true，否则返回false。
+<h5 id="2、判断两个矩形是否相交"><a href="#2、判断两个矩形是否相交" class="headerlink" title="2、判断两个矩形是否相交"></a>2、判断两个矩形是否相交</h5><pre><code class="hljs">//这是Rect类的一个静态方法，如果相交则返回true，否则返回false。
 static boolean intersects(Rect a, Rect b)
 //还可以使用 Rect 类中自带的方法来判断当前 Rect 对象与其他矩形是否相交。
 boolean intersects(int left, int top, int right, int bottom)
@@ -320,16 +365,16 @@ boolean intersects(int left, int top, int right, int bottom)
 boolean intersect(int left, int top, int right, int bottom)
 boolean intersect(Rect r)
 </code></pre><h5 id="3、合并"><a href="#3、合并" class="headerlink" title="3、合并"></a>3、合并</h5><p>合并两个矩形的意思就是将两个矩形合并成一个矩形，即无论这两个矩形是否相交，取两个矩形最小左上角点作为结果矩形的左上角点，取两个矩形最大右下角点作为结果矩形的右下角点。如果要合并的两个矩形有一方为空，则将有值的一方作为最终结果。</p>
-<pre><code>public void union(int left, int top, int right, int bottom)
+<pre><code class="hljs">public void union(int left, int top, int right, int bottom)
 public void union(Rect r)
 </code></pre><p>合并矩形与某个点：先判断当前矩形与目标合并点的关系，如果不相交，则根据目标点(x,y)的位置，将目标点设置为当前矩形的左上角点或者右下角点。如果当前矩形是一个空矩形，则最后的结果矩形为([0,0],[x,y])，即结果矩形的左上角点为[0,0]，右下角点为[x,y]。</p>
-<pre><code>public void union(int x, int y)
+<pre><code class="hljs">public void union(int x, int y)
 </code></pre><h4 id="1-1-5、Color"><a href="#1-1-5、Color" class="headerlink" title="1.1.5、Color"></a>1.1.5、Color</h4><blockquote>
 <p>当需要重绘时就会调用onDraw()函数，所以在 onDraw()函数中创建的变量会一直被重复创建，这样会引起频繁的程序GC（回收内存），进而引起程序卡顿。所以一定要记住，在onDraw()函数中不能创建变量！一般在自定义控件的构造函数中创建变量，即在初始化时一次性创建。</p>
 </blockquote>
 <h3 id="1-2、路径"><a href="#1-2、路径" class="headerlink" title="1.2、路径"></a>1.2、路径</h3><h4 id="1-2-1、概述"><a href="#1-2-1、概述" class="headerlink" title="1.2.1、概述"></a>1.2.1、概述</h4><p>Path类就代表路径。在Canvas中绘制路径的方法</p>
-<pre><code>void drawPath(Path path, Paint paint)
-</code></pre><h4 id="1-2-2、直线路径"><a href="#1-2-2、直线路径" class="headerlink" title="1.2.2、直线路径"></a>1.2.2、直线路径</h4><pre><code>//(x1,y1)是直线的起始点
+<pre><code class="hljs">void drawPath(Path path, Paint paint)
+</code></pre><h4 id="1-2-2、直线路径"><a href="#1-2-2、直线路径" class="headerlink" title="1.2.2、直线路径"></a>1.2.2、直线路径</h4><pre><code class="hljs">//(x1,y1)是直线的起始点
 void moveTo(float x1, float y1)
 
 //(x2,y2)是直线的终点，又是下一次绘制直线路径的起始点； lineTo()函数可以一直使用。
@@ -337,38 +382,38 @@ void lineTo(float x2, float y2)
 
 //首尾点连接起来，形成闭环
 void close()
-</code></pre><h4 id="1-2-3、弧线路径"><a href="#1-2-3、弧线路径" class="headerlink" title="1.2.3、弧线路径"></a>1.2.3、弧线路径</h4><pre><code>//弧线是从椭圆上截取的一部分
+</code></pre><h4 id="1-2-3、弧线路径"><a href="#1-2-3、弧线路径" class="headerlink" title="1.2.3、弧线路径"></a>1.2.3、弧线路径</h4><pre><code class="hljs">//弧线是从椭圆上截取的一部分
 void arcTo(RectF oval, float startAngle, float sweepAngle, boolean forceMoveTo)
 //oval：生成椭圆的矩形。
 //startAngle：弧开始的角度，以 X 轴正方向为 0°。sweepAngle：弧持续的角度。
 //forceMoveTo 的含义是是否强制将弧的起始点作为绘制起始位置。
 </code></pre><h4 id="1-2-4、addXXX系列函数"><a href="#1-2-4、addXXX系列函数" class="headerlink" title="1.2.4、addXXX系列函数"></a>1.2.4、addXXX系列函数</h4><p>addXXX系列函数可以让我们直接往Path中添加一些曲线，而不必考虑连贯性。</p>
-<h5 id="添加矩形路径"><a href="#添加矩形路径" class="headerlink" title="添加矩形路径"></a>添加矩形路径</h5><pre><code>void addRect(float left, float top, float right, float bottom,Path.Direction dir)
+<h5 id="添加矩形路径"><a href="#添加矩形路径" class="headerlink" title="添加矩形路径"></a>添加矩形路径</h5><pre><code class="hljs">void addRect(float left, float top, float right, float bottom,Path.Direction dir)
 void addRect(RectF rect, Path.Direction dir)
 </code></pre><p>Path.Direction 参数有两个值。Path.Direction.CCW：是指创建逆时针方向的矩形路径。Path.Direction.CW：指创建顺时针方向的矩形路径。</p>
-<h5 id="添加圆角矩形路径"><a href="#添加圆角矩形路径" class="headerlink" title="添加圆角矩形路径"></a>添加圆角矩形路径</h5><pre><code>void addRoundRect(RectF rect, float[] radii, Path.Direction dir)
+<h5 id="添加圆角矩形路径"><a href="#添加圆角矩形路径" class="headerlink" title="添加圆角矩形路径"></a>添加圆角矩形路径</h5><pre><code class="hljs">void addRoundRect(RectF rect, float[] radii, Path.Direction dir)
 void addRoundRect(RectF rect, float rx, float ry, Path.Direction dir)
 </code></pre><p><code>float[] radii</code>：必须传入8个数值，分4组，第一组对应第一个角（左上角）的用来生成圆角的椭圆的横轴半径和纵轴半径。在第二个构造函数中，只能构建统一的圆角大小，rx：生成圆角的椭圆的横轴半径，ry：生成圆角的椭圆的纵轴半径。</p>
-<h5 id="添加圆形路径"><a href="#添加圆形路径" class="headerlink" title="添加圆形路径"></a>添加圆形路径</h5><pre><code>void addCircle(float x, float y, float radius, Path.Direction dir)
+<h5 id="添加圆形路径"><a href="#添加圆形路径" class="headerlink" title="添加圆形路径"></a>添加圆形路径</h5><pre><code class="hljs">void addCircle(float x, float y, float radius, Path.Direction dir)
 </code></pre><p>x和y：圆心坐标；radius：圆半径。</p>
-<h5 id="添加椭圆路径"><a href="#添加椭圆路径" class="headerlink" title="添加椭圆路径"></a>添加椭圆路径</h5><pre><code>void addOval(RectF oval, Path.Direction dir)
-</code></pre><h5 id="添加弧形路径"><a href="#添加弧形路径" class="headerlink" title="添加弧形路径"></a>添加弧形路径</h5><pre><code>void addArc(float left, float top, float right, float bottom, float startAngle, float sweepAngle)
+<h5 id="添加椭圆路径"><a href="#添加椭圆路径" class="headerlink" title="添加椭圆路径"></a>添加椭圆路径</h5><pre><code class="hljs">void addOval(RectF oval, Path.Direction dir)
+</code></pre><h5 id="添加弧形路径"><a href="#添加弧形路径" class="headerlink" title="添加弧形路径"></a>添加弧形路径</h5><pre><code class="hljs">void addArc(float left, float top, float right, float bottom, float startAngle, float sweepAngle)
 void addArc(RectF oval, float startAngle, float sweepAngle)
 </code></pre><p>oval：生成椭圆的矩形;startAngle：弧开始的角度;sweepAngel：弧持续的角度。</p>
 <h4 id="1-2-5、填充模式"><a href="#1-2-5、填充模式" class="headerlink" title="1.2.5、填充模式"></a>1.2.5、填充模式</h4><p>Path的填充模式是指填充Path的哪部分。</p>
-<pre><code>//Path.FillType 表示 Path 的填充模式，它有 4 个枚举值。
+<pre><code class="hljs">//Path.FillType 表示 Path 的填充模式，它有 4 个枚举值。
 FillType.WINDING：默认值，当两个图形相交时，取相交部分显示。
 FillType.EVEN_ODD：取 path 所在并不相交的区域。
 FillType.INVERSE_WINDING：取 path 的外部区域。
 FillType.INVERSE_EVEN_ODD：取 path 的外部和相交区域。
 </code></pre><p>在利用画笔填充图形时，填充的肯定是图形内部，而 path.setFillType()函数就是用来界定哪里算Path内部的算法，进而让Paint填充这部分图像。</p>
 <h4 id="1-2-6、重置路径"><a href="#1-2-6、重置路径" class="headerlink" title="1.2.6、重置路径"></a>1.2.6、重置路径</h4><p>系统提供了两个重置路径的方法:</p>
-<pre><code>void reset()
+<pre><code class="hljs">void reset()
 void rewind()
 </code></pre><p>共同点是都会清空内部所保存的所有路径。</p>
 <p>区别:<code>rewind()</code>函数不会清除内存，但会清除FillType；而<code>reset()</code>函数则会清除内存，但不会清除FillType。</p>
 <h4 id="1-2-7、蜘蛛网状图示例"><a href="#1-2-7、蜘蛛网状图示例" class="headerlink" title="1.2.7、蜘蛛网状图示例"></a>1.2.7、蜘蛛网状图示例</h4><h3 id="1-3、文字"><a href="#1-3、文字" class="headerlink" title="1.3、文字"></a>1.3、文字</h3><h4 id="1-3-1、Paint设置"><a href="#1-3-1、Paint设置" class="headerlink" title="1.3.1、Paint设置"></a>1.3.1、Paint设置</h4><p>Paint与文字相关的设置:</p>
-<pre><code>//普通设置
+<pre><code class="hljs">//普通设置
 paint.setStrokeWidth(5); //设置画笔宽度
 paint.setAntiAlias(true); //指定是否使用抗锯齿功能
 paint.setStyle(Paint.Style.FILL); //绘图样式，对于文字和几何图形都有效
@@ -381,9 +426,9 @@ paint.setTextSkewX((float) -0.25); //字体水平倾斜度，默认为0，普通
 paint.setStrikeThruText(true); //设置带有删除线效果
 //其他设置
 paint.setTextScaleX(2); //水平方向拉伸，高度不变，表示拉伸倍数，默认为1表示不拉伸
-</code></pre><h4 id="1-3-2、Canvas绘制文本"><a href="#1-3-2、Canvas绘制文本" class="headerlink" title="1.3.2、Canvas绘制文本"></a>1.3.2、Canvas绘制文本</h4><pre><code>//setTextAlign的显示与x、y的设置有关系
+</code></pre><h4 id="1-3-2、Canvas绘制文本"><a href="#1-3-2、Canvas绘制文本" class="headerlink" title="1.3.2、Canvas绘制文本"></a>1.3.2、Canvas绘制文本</h4><pre><code class="hljs">//setTextAlign的显示与x、y的设置有关系
 canvas.drawText(String text,Float x,Float y,Paint paint);
-</code></pre><h5 id="1、普通绘制"><a href="#1、普通绘制" class="headerlink" title="1、普通绘制"></a>1、普通绘制</h5><pre><code>//参数(x,y)就是起始点坐标
+</code></pre><h5 id="1、普通绘制"><a href="#1、普通绘制" class="headerlink" title="1、普通绘制"></a>1、普通绘制</h5><pre><code class="hljs">//参数(x,y)就是起始点坐标
 void drawText(String text, float x, float y, Paint paint)
 
 //start：表示起始绘制字符所在字符串中的索引。
@@ -395,18 +440,18 @@ void drawText(String text, int start, int end, float x, float y, Paint paint)
 //count：指定从起始绘制字符开始绘制几个字符。x,y：起始点坐标。
 void drawText(char[] text, int index, int count, float x, float y, Paint paint)
 </code></pre><p>举例</p>
-<pre><code>canvas.drawText(&quot;床前明月光&quot;,2,4, 10,100, paint);//明月
+<pre><code class="hljs">canvas.drawText(&quot;床前明月光&quot;,2,4, 10,100, paint);//明月
 </code></pre><h5 id="2、逐个指定文字位置"><a href="#2、逐个指定文字位置" class="headerlink" title="2、逐个指定文字位置"></a>2、逐个指定文字位置</h5><p>指定每个要绘制的文字的具体位置</p>
-<pre><code>void drawPosText(String text, float[] pos, Paint paint)
+<pre><code class="hljs">void drawPosText(String text, float[] pos, Paint paint)
 void drawPosText(char[] text, int index, int count, float[] pos, Paint paint)
 </code></pre><p>index：第一个要绘制的文字的索引。count：要绘制的文字的个数。pos：要绘制的每个文字的具体位置，两个点确定一个文字的位置。</p>
-<h5 id="3、沿路径绘制"><a href="#3、沿路径绘制" class="headerlink" title="3、沿路径绘制"></a>3、沿路径绘制</h5><pre><code>void drawTextOnPath (String text, Path path, float hOffset, float vOffset, Paint paint)
+<h5 id="3、沿路径绘制"><a href="#3、沿路径绘制" class="headerlink" title="3、沿路径绘制"></a>3、沿路径绘制</h5><pre><code class="hljs">void drawTextOnPath (String text, Path path, float hOffset, float vOffset, Paint paint)
 void drawTextOnPath (char[] text, int index, int count, Path path, float hOffset,float vOffset, Paint paint)
 </code></pre><p>hOffset：与路径起始点的水平偏移量。vOffset：与路径中心的垂直偏移量。</p>
 <h4 id="1-3-3、设置字体样式"><a href="#1-3-3、设置字体样式" class="headerlink" title="1.3.3、设置字体样式"></a>1.3.3、设置字体样式</h4><p>在Paint中有一个函数是专门用来设置字体样式的。使用这个函数的前提是必须构造Typeface类的一个参数。</p>
-<pre><code>Typeface setTypeface(Typeface typeface)
+<pre><code class="hljs">Typeface setTypeface(Typeface typeface)
 </code></pre><p>设置字体样式</p>
-<pre><code>Typeface defaultFromStyle(int style)
+<pre><code class="hljs">Typeface defaultFromStyle(int style)
 
 //参数int style的取值如下。
 Typeface.NORMAL：正常字体。
@@ -414,14 +459,14 @@ Typeface.BOLD：粗体。
 Typeface.ITALIC：斜体。
 Typeface.BOLD_ITALIC：粗斜体。
 </code></pre><p>举例，设置粗斜体样式:</p>
-<pre><code>Typeface typeface = Typeface.defaultFromStyle(Typeface.BOLD_ITALIC);
+<pre><code class="hljs">Typeface typeface = Typeface.defaultFromStyle(Typeface.BOLD_ITALIC);
 paint.setTypeface(typeface);
 </code></pre><h3 id="1-4、Region"><a href="#1-4、Region" class="headerlink" title="1.4、Region"></a>1.4、Region</h3><p>Region译为“区域”，区域是一块任意形状的封闭图形。</p>
-<h4 id="1-4-1、构造Region"><a href="#1-4-1、构造Region" class="headerlink" title="1.4.1、构造Region"></a>1.4.1、构造Region</h4><h5 id="直接构造"><a href="#直接构造" class="headerlink" title="直接构造"></a>直接构造</h5><pre><code>public Region(Region region) //复制一个 Region 的范围
+<h4 id="1-4-1、构造Region"><a href="#1-4-1、构造Region" class="headerlink" title="1.4.1、构造Region"></a>1.4.1、构造Region</h4><h5 id="直接构造"><a href="#直接构造" class="headerlink" title="直接构造"></a>直接构造</h5><pre><code class="hljs">public Region(Region region) //复制一个 Region 的范围
 public Region(Rect r) //创建一个矩形区域
 public Region(int left, int top, int right, int bottom) //创建一个矩形区域
 </code></pre><h5 id="间接构造"><a href="#间接构造" class="headerlink" title="间接构造"></a>间接构造</h5><p>间接构造主要是通过空构造函数与set系列函数相结合来实现的。</p>
-<pre><code>//Region的空构造函数：
+<pre><code class="hljs">//Region的空构造函数：
 public Region()
 //set 系列函数：
 public void setEmpty() //置空
@@ -435,12 +480,12 @@ public boolean setPath(Path path, Region clip)//根据路径的区域与某区�
 <blockquote>
 <p>利用setPath可以设置不规则区域</p>
 </blockquote>
-<h4 id="1-4-2、枚举区域——RegionIterator类"><a href="#1-4-2、枚举区域——RegionIterator类" class="headerlink" title="1.4.2、枚举区域——RegionIterator类"></a>1.4.2、枚举区域——RegionIterator类</h4><pre><code>//构造函数：根据区域构建对应的矩形集。
+<h4 id="1-4-2、枚举区域——RegionIterator类"><a href="#1-4-2、枚举区域——RegionIterator类" class="headerlink" title="1.4.2、枚举区域——RegionIterator类"></a>1.4.2、枚举区域——RegionIterator类</h4><pre><code class="hljs">//构造函数：根据区域构建对应的矩形集。
 RegionIterator(Region region)
 //获取下一个矩形，将结果保存在参数 Rect r 中。
 boolean next(Rect r)
 </code></pre><p>Canvas中没有直接绘制Region的函数，想要绘制一个区域，就只能通过RegionIterator类构造矩形集来逼近显示区域。</p>
-<pre><code>private void drawRegion(Canvas canvas,Region rgn,Paint paint)&#123;
+<pre><code class="hljs">private void drawRegion(Canvas canvas,Region rgn,Paint paint)&#123;
     RegionIterator iter = new RegionIterator(rgn);
     Rect r = new Rect();
     while (iter.next(r)) &#123;
@@ -448,17 +493,17 @@ boolean next(Rect r)
     &#125;
 &#125;
 </code></pre><h4 id="1-4-3、区域相交"><a href="#1-4-3、区域相交" class="headerlink" title="1.4.3、区域相交"></a>1.4.3、区域相交</h4><p>Region不是用来绘图的，Region最重要的功能在区域的相交操作中。</p>
-<h5 id="union-函数"><a href="#union-函数" class="headerlink" title="union()函数"></a>union()函数</h5><pre><code>boolean union(Rect r)
+<h5 id="union-函数"><a href="#union-函数" class="headerlink" title="union()函数"></a>union()函数</h5><pre><code class="hljs">boolean union(Rect r)
 </code></pre><p>该函数用于与指定矩形取并集，即将Rect所指定的矩形加入当前区域中。举例：</p>
-<pre><code>Region region = new Region(10,10,200,100);
+<pre><code class="hljs">Region region = new Region(10,10,200,100);
 region.union(new Rect(10,10,50,300));
 </code></pre><h5 id="区域操作"><a href="#区域操作" class="headerlink" title="区域操作"></a>区域操作</h5><p>方法一：</p>
 <p>相交操作，并将结果赋给当前的Region对象。如果计算成功，则返回true；否则返回false。</p>
-<pre><code>boolean op(Rect r, Op op)
+<pre><code class="hljs">boolean op(Rect r, Op op)
 boolean op(int left, int top, int right, int bottom, Op op)
 boolean op(Region region, Op op)
 </code></pre><p>Op参数值有如下6个：</p>
-<pre><code>public enum Op &#123;
+<pre><code class="hljs">public enum Op &#123;
     DIFFERENCE(0), //最终区域为region1区域，但是不包括与region2相交的区域
     INTERSECT(1), // 最终区域为region1与region2 相交的区域
     UNION(2), //最终区域为region1与region2组合在一起的区域
@@ -467,10 +512,10 @@ boolean op(Region region, Op op)
     REPLACE(5); //最终区域为region2的区域
 &#125;
 </code></pre><p>方法二：传入两个 Region 对象进行区域操作</p>
-<pre><code>boolean op(Rect rect, Region region, Op op)
+<pre><code class="hljs">boolean op(Rect rect, Region region, Op op)
 boolean op(Region region1, Region region2, Region.Op op)
 </code></pre><h4 id="1-4-4、其他函数"><a href="#1-4-4、其他函数" class="headerlink" title="1.4.4、其他函数"></a>1.4.4、其他函数</h4><p>几个判断</p>
-<pre><code>//该函数用于判断该区域是否为空
+<pre><code class="hljs">//该函数用于判断该区域是否为空
 public boolean isEmpty();
 
 //该函数用于判断该区域是否是一个矩阵。
@@ -479,7 +524,7 @@ public boolean isRect();
 //该函数用于判断该区域是否是多个矩阵的组合。
 public boolean isComplex();
 </code></pre><p>getBound系列函数</p>
-<pre><code>//这两个函数用于返回能够包裹当前路径的最小矩形。
+<pre><code class="hljs">//这两个函数用于返回能够包裹当前路径的最小矩形。
 public Rect getBounds()
 public boolean getBounds(Rect r)
 
@@ -487,49 +532,49 @@ public boolean getBounds(Rect r)
 public Path getBoundaryPath()
 public boolean getBoundaryPath(Path path)
 </code></pre><p>是否包含</p>
-<pre><code>//该函数用于判断该区域是否包含某个点。
+<pre><code class="hljs">//该函数用于判断该区域是否包含某个点。
 public boolean contains(int x, int y)
 
 //这两个函数用于判断该区域是否包含某个矩形。
 public boolean quickContains(Rect r)
 public boolean quickContains(int left, int top, int right,int bottom)
 </code></pre><p>是否相交</p>
-<pre><code>//这两个函数用于判断该区域是否没有和指定矩形相交。
+<pre><code class="hljs">//这两个函数用于判断该区域是否没有和指定矩形相交。
 public boolean quickReject(Rect r)
 public boolean quickReject(int left, int top, int right, int bottom);
 
 //该函数用于判断该区域是否没有和指定区域相交。
 public boolean quickReject(Region rgn);
 </code></pre><p>平移变换</p>
-<pre><code>//该函数用于将Region对象向X轴平移dx距离，向Y轴平移dy距离，并将结果赋给当前的Region对象。X轴向右是正方向，Y轴向下是正方向。
+<pre><code class="hljs">//该函数用于将Region对象向X轴平移dx距离，向Y轴平移dy距离，并将结果赋给当前的Region对象。X轴向右是正方向，Y轴向下是正方向。
 public void translate(int dx, int dy)
 
 //与上一个函数不同的是，该函数将结果赋给dst对象，而当前Region对象的值保持不变。
 public void translate(int dx, int dy, Region dst)
 </code></pre><h3 id="1-5、Canvas（画布）"><a href="#1-5、Canvas（画布）" class="headerlink" title="1.5、Canvas（画布）"></a>1.5、Canvas（画布）</h3><p>除了在Canvas上绘图以外，还可以对画布进行变换及裁剪等操作。</p>
 <h4 id="1-5-1、Canvas变换"><a href="#1-5-1、Canvas变换" class="headerlink" title="1.5.1、Canvas变换"></a>1.5.1、Canvas变换</h4><h5 id="平移（Translate）"><a href="#平移（Translate）" class="headerlink" title="平移（Translate）"></a>平移（Translate）</h5><p>右是X轴正方向，向下是Y轴正方向。</p>
-<pre><code>void translate(float dx, float dy)
+<pre><code class="hljs">void translate(float dx, float dy)
 </code></pre><p>举例</p>
-<pre><code>canvas.translate(100, 100);
+<pre><code class="hljs">canvas.translate(100, 100);
 Rect rect = new Rect(0,0,400,220);
 canvas.drawRect(rect, paint);
 </code></pre><h4 id="屏幕显示与Canvas的关系"><a href="#屏幕显示与Canvas的关系" class="headerlink" title="屏幕显示与Canvas的关系"></a>屏幕显示与Canvas的关系</h4><p>每次调用drawXXX系列函数来绘图时，都会产生一个全新的Canvas透明图层。调用平移、旋转等函数对Canvas进行了操作，不会对之前已经draw的产生影响。</p>
-<h5 id="旋转（Rotate）"><a href="#旋转（Rotate）" class="headerlink" title="旋转（Rotate）"></a>旋转（Rotate）</h5><pre><code>//旋转的中心点是原点(0,0)
+<h5 id="旋转（Rotate）"><a href="#旋转（Rotate）" class="headerlink" title="旋转（Rotate）"></a>旋转（Rotate）</h5><pre><code class="hljs">//旋转的中心点是原点(0,0)
 void rotate(float degrees)
 //指定旋转的中心点坐标(px,py)
 void rotate(float degrees, float px, float py)
-</code></pre><h5 id="缩放（Scale）"><a href="#缩放（Scale）" class="headerlink" title="缩放（Scale）"></a>缩放（Scale）</h5><pre><code>//sx是小数表示缩小，sx是整数表示放大
+</code></pre><h5 id="缩放（Scale）"><a href="#缩放（Scale）" class="headerlink" title="缩放（Scale）"></a>缩放（Scale）</h5><pre><code class="hljs">//sx是小数表示缩小，sx是整数表示放大
 public void scale(float sx, float sy)
 
 //px,py表示缩放中心位置
 public void scale(float sx, float sy, float px, float py)
-</code></pre><h5 id="扭曲（Skew）"><a href="#扭曲（Skew）" class="headerlink" title="扭曲（Skew）"></a>扭曲（Skew）</h5><pre><code>//sx为X轴方向倾斜角度的正切值，比如在X轴方向上倾斜60°，tan60=1.732
+</code></pre><h5 id="扭曲（Skew）"><a href="#扭曲（Skew）" class="headerlink" title="扭曲（Skew）"></a>扭曲（Skew）</h5><pre><code class="hljs">//sx为X轴方向倾斜角度的正切值，比如在X轴方向上倾斜60°，tan60=1.732
 void skew(float sx, float sy)
 </code></pre><p>举例</p>
-<pre><code>canvas.skew(1.732f,0);//X 轴倾斜 60°， Y 轴不变
+<pre><code class="hljs">canvas.skew(1.732f,0);//X 轴倾斜 60°， Y 轴不变
 </code></pre><h5 id="裁剪画布（clip系列函数）"><a href="#裁剪画布（clip系列函数）" class="headerlink" title="裁剪画布（clip系列函数）"></a>裁剪画布（clip系列函数）</h5><p>一旦Canvas被裁剪，就不能恢复。在使用clip系列函数时，需要禁用硬件加速功能，<code>setLayerType(LAYER_TYPE_SOFTWARE,null)</code>。</p>
 <p>clip 系列函数如下：</p>
-<pre><code>boolean clipPath(Path path)
+<pre><code class="hljs">boolean clipPath(Path path)
 boolean clipPath(Path path, Region.Op op)
 boolean clipRect(Rect rect, Region.Op op)
 boolean clipRect(RectF rect, Region.Op op)
@@ -542,18 +587,18 @@ boolean clipRegion(Region region)
 boolean clipRegion(Region region, Region.Op op)
 </code></pre><h4 id="1-5-2、画布的保存与恢复"><a href="#1-5-2、画布的保存与恢复" class="headerlink" title="1.5.2、画布的保存与恢复"></a>1.5.2、画布的保存与恢复</h4><h5 id="save-和restore-函数"><a href="#save-和restore-函数" class="headerlink" title="save()和restore()函数"></a>save()和restore()函数</h5><p>每次调用save()函数，都会先保存当前画布的状态，然后将其放入特定的栈中。每次调用restore()函数，都会把栈中顶层的画布状态取出来，并按照这个状态恢复当前的画布，然后在这个画布上作画。</p>
 <h4 id="restoreToCount-int-saveCount-函数"><a href="#restoreToCount-int-saveCount-函数" class="headerlink" title="restoreToCount(int saveCount)函数"></a>restoreToCount(int saveCount)函数</h4><p>在利用save()函数保存画布时，会有一个int类型的返回值。该返回值是当前所保存的画布所在栈的索引。restoreToCount()函数就是一直出栈，直到指定索引的画布出栈为止，即将指定索引的画布作为当前画布。</p>
-<pre><code>public void restoreToCount(int saveCount);
+<pre><code class="hljs">public void restoreToCount(int saveCount);
 </code></pre><h4 id="1-5-3、圆形头像示例"><a href="#1-5-3、圆形头像示例" class="headerlink" title="1.5.3、圆形头像示例"></a>1.5.3、圆形头像示例</h4><h4 id="1-5-4、裁剪动画示例"><a href="#1-5-4、裁剪动画示例" class="headerlink" title="1.5.4、裁剪动画示例"></a>1.5.4、裁剪动画示例</h4><h3 id="1-6、控件的使用方法"><a href="#1-6、控件的使用方法" class="headerlink" title="1.6、控件的使用方法"></a>1.6、控件的使用方法</h3><h4 id="1-6-1、控件概述"><a href="#1-6-1、控件概述" class="headerlink" title="1.6.1、控件概述"></a>1.6.1、控件概述</h4><h4 id="1-6-2、通过XML引入控件"><a href="#1-6-2、通过XML引入控件" class="headerlink" title="1.6.2、通过XML引入控件"></a>1.6.2、通过XML引入控件</h4><p>通过XML引入控件，所调用的构造函数：</p>
-<pre><code>public MyView(Context context, AttributeSet attrs) &#123;
+<pre><code class="hljs">public MyView(Context context, AttributeSet attrs) &#123;
     super(context, attrs);
 &#125;
-</code></pre><h4 id="1-6-3、动态添加控件"><a href="#1-6-3、动态添加控件" class="headerlink" title="1.6.3、动态添加控件"></a>1.6.3、动态添加控件</h4><pre><code>LinearLayout rootView = (LinearLayout)findViewById(R.id.root);
+</code></pre><h4 id="1-6-3、动态添加控件"><a href="#1-6-3、动态添加控件" class="headerlink" title="1.6.3、动态添加控件"></a>1.6.3、动态添加控件</h4><pre><code class="hljs">LinearLayout rootView = (LinearLayout)findViewById(R.id.root);
 CustomView customView = new CustomView(this);
 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 rootView.addView(customView,layoutParams);
 </code></pre><p>LayoutParams的作用就是设置控件的宽和高，对应的是XML中的<code>layout_width</code>和<code>layout_height</code>属性。</p>
 <p>LayoutParams有三个构造函数:</p>
-<pre><code>//指定具体的宽和高:LayoutParams.MATCH_PARENT或者具体值
+<pre><code class="hljs">//指定具体的宽和高:LayoutParams.MATCH_PARENT或者具体值
 public LayoutParams(int width, int height)
 //从AttributeSet中提取出宽高等属性值
 public LayoutParams(Context c, AttributeSet attrs)
@@ -561,45 +606,45 @@ public LayoutParams(Context c, AttributeSet attrs)
 public LayoutParams(LayoutParams source)
 </code></pre><p>LinearLayout、FrameLayout、RelativeLayout都有各自的LayoutParams。</p>
 <h5 id="addRule"><a href="#addRule" class="headerlink" title="addRule"></a>addRule</h5><p>RelativeLayout.LayoutParams的addRule()函数：第一个参数是指RelativeLayout的布局属性，第二个参数是指相对于哪个控件ID来布局。</p>
-<pre><code>RelativeLayout rootView = (RelativeLayout) findViewById(R.id.root);
+<pre><code class="hljs">RelativeLayout rootView = (RelativeLayout) findViewById(R.id.root);
 CustomView customView = new CustomView(this);
 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 layoutParams.addRule(RelativeLayout.RIGHT_OF,R.id.text);
 rootView.addView(customView, layoutParams);
-</code></pre><h5 id="设置margin"><a href="#设置margin" class="headerlink" title="设置margin"></a>设置margin</h5><pre><code>LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+</code></pre><h5 id="设置margin"><a href="#设置margin" class="headerlink" title="设置margin"></a>设置margin</h5><pre><code class="hljs">LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
 lp.setMargins(10, 20, 30, 40);
 imageView.setLayoutParams(lp);
 </code></pre><h5 id="设置layout-weight（方法一）"><a href="#设置layout-weight（方法一）" class="headerlink" title="设置layout_weight（方法一）"></a>设置layout_weight（方法一）</h5><p>构造函数    </p>
-<pre><code>public LayoutParams(int width, int height, float weight)
+<pre><code class="hljs">public LayoutParams(int width, int height, float weight)
 </code></pre><p>示例：</p>
-<pre><code>TextView tv_like = new TextView(this);
+<pre><code class="hljs">TextView tv_like = new TextView(this);
 LinearLayout.LayoutParams LP_LIKE_MW = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
 tv_like.setText(&quot;赞(8)&quot;);
 tv_like.setTextSize(16);
 layout_sub_Lin.addView(tv_like, LP_LIKE_MW);
-</code></pre><h5 id="设置layout-weight（方法二）"><a href="#设置layout-weight（方法二）" class="headerlink" title="设置layout_weight（方法二）"></a>设置layout_weight（方法二）</h5><pre><code>LinearLayout rootView = (LinearLayout) findViewById(R.id.root);
+</code></pre><h5 id="设置layout-weight（方法二）"><a href="#设置layout-weight（方法二）" class="headerlink" title="设置layout_weight（方法二）"></a>设置layout_weight（方法二）</h5><pre><code class="hljs">LinearLayout rootView = (LinearLayout) findViewById(R.id.root);
 CustomView customView = new CustomView(this);
 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 layoutParams.weight = 1.0f;
 rootView.addView(customView, layoutParams);
-</code></pre><h5 id="设置layout-gravity"><a href="#设置layout-gravity" class="headerlink" title="设置layout_gravity"></a>设置layout_gravity</h5><pre><code>LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.FILL_PARENT);
+</code></pre><h5 id="设置layout-gravity"><a href="#设置layout-gravity" class="headerlink" title="设置layout_gravity"></a>设置layout_gravity</h5><pre><code class="hljs">LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.FILL_PARENT);
 params.gravity = Gravity.TOP;
 </code></pre><p>params.gravity的取值有<code>Gravity.TOP</code>、<code>Gravity.BOTTOM</code>、<code>Gravity.LEFT</code>、<code>Gravity.RIGHT</code>、<code>Gravity.CENTER_VERTICAL</code>、<code>Gravity.CENTER_HORIZONTAL</code>等这些属性值可<code>|</code>（或）运算符合并。</p>
 <h5 id="设置android-gravity"><a href="#设置android-gravity" class="headerlink" title="设置android:gravity"></a>设置android:gravity</h5><p>分别给Button和rootView设置</p>
-<pre><code>Button button = new Button(this);
+<pre><code class="hljs">Button button = new Button(this);
 button.setGravity(Gravity.TOP);
 button.setText(&quot;btn&quot;);
 rootView.addView(button, layoutParams);
 rootView.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
-</code></pre><h5 id="addView"><a href="#addView" class="headerlink" title="addView"></a>addView</h5><pre><code>public void addView(View child, int index)
+</code></pre><h5 id="addView"><a href="#addView" class="headerlink" title="addView"></a>addView</h5><pre><code class="hljs">public void addView(View child, int index)
 </code></pre><p>在指定位置添加一个View控件，index的取值有-1、0和正数。当取值为-1时，表示在末尾添加一个View控件，此时的效果就与addView(View child)相同；当取值为0时，表示在容器顶端添加一个View控件；当取值为正数时，表示在对应的索引位置插入一个View控件。</p>
 <h2 id="第2章、视图动画"><a href="#第2章、视图动画" class="headerlink" title="第2章、视图动画"></a>第2章、视图动画</h2><p>两种类型的动画：<code>View Animation</code>（视图动画）和<code>Property Animation</code>（属性动画）。其中，<code>View Animation</code>包括<code>Tween Animation</code>（补间动画）和<code>Frame Animation</code>（逐帧动画）;<code>Property Animation</code>包括<code>ValueAnimator</code>和<code>ObjectAnimator</code>。</p>
 <h3 id="2-1、视图动画标签"><a href="#2-1、视图动画标签" class="headerlink" title="2.1、视图动画标签"></a>2.1、视图动画标签</h3><h4 id="2-1-1、概述"><a href="#2-1-1、概述" class="headerlink" title="2.1.1、概述"></a>2.1.1、概述</h4><p>alpha(渐变透)、scale(缩放)、translate(位置移动)、rotate(旋转)set(动画集)。</p>
-<h5 id="配置XML动画文件"><a href="#配置XML动画文件" class="headerlink" title="配置XML动画文件"></a>配置XML动画文件</h5><pre><code>//首先加载动画
+<h5 id="配置XML动画文件"><a href="#配置XML动画文件" class="headerlink" title="配置XML动画文件"></a>配置XML动画文件</h5><pre><code class="hljs">//首先加载动画
 Animation animation = AnimationUtils.loadAnimation(Activity.this,R.a aim.scaleanim);
 //然后利用View的startAnimation()函数开始动画
 tv.startAnimation(animation);
-</code></pre><h4 id="2-1-2、scale标签"><a href="#2-1-2、scale标签" class="headerlink" title="2.1.2、scale标签"></a>2.1.2、scale标签</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+</code></pre><h4 id="2-1-2、scale标签"><a href="#2-1-2、scale标签" class="headerlink" title="2.1.2、scale标签"></a>2.1.2、scale标签</h4><pre><code class="hljs">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;scale xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     android:duration=&quot;700&quot;
     android:fillBefore=&quot;true&quot;
@@ -624,7 +669,7 @@ tv.startAnimation(animation);
 <p>android:repeatMode：用于设定重复的类型，有reverse和restart两个值。其中，reverse表示倒序回放：restart表示重放，并且必须与repeatCount一起使用才能看到效果。</p>
 <p>android:interpolator：用于设定插值器，其实就是指定的动画效果，比如弹跳效果等。</p>
 <h4 id="2-1-3、alpha标签"><a href="#2-1-3、alpha标签" class="headerlink" title="2.1.3、alpha标签"></a>2.1.3、alpha标签</h4><p>透明度动画效果。</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre><code class="hljs">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;alpha xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     android:duration=&quot;3000&quot;
     android:fillBefore=&quot;true&quot;
@@ -633,7 +678,7 @@ tv.startAnimation(animation);
 &lt;/alpha&gt;
 </code></pre><p>android:fromAlpha:开始时的透明度,android:toAlpha:结束时的透明度。0.0表示全透明，1.0表示完全不透明。</p>
 <h4 id="2-1-4、rotate标签"><a href="#2-1-4、rotate标签" class="headerlink" title="2.1.4、rotate标签"></a>2.1.4、rotate标签</h4><p>旋转动画效果。</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre><code class="hljs">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;rotate xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     android:duration=&quot;3000&quot;
     android:fillAfter=&quot;true&quot;
@@ -645,7 +690,7 @@ tv.startAnimation(animation);
 </code></pre><p>android:fromDegrees：动画开始旋转时的角度位置；android:toDegrees：动画结束时旋转到的角度位置。正值代表顺时针方向的度数，负值代表逆时针方向的度数。</p>
 <p>android:pivotX：旋转中心点X轴坐标；android:pivotY：旋转中心点Y轴坐标。没有指定android:pivotX与android:pivotY属性，旋转中心点是默认的控件坐标原点，即控件左上角位置。</p>
 <h4 id="2-1-5、translate标签"><a href="#2-1-5、translate标签" class="headerlink" title="2.1.5、translate标签"></a>2.1.5、translate标签</h4><p>位置移动动画效果。 </p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre><code class="hljs">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;translate xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     android:duration=&quot;2000&quot;
     android:fromXDelta=&quot;0&quot;
@@ -655,7 +700,7 @@ tv.startAnimation(animation);
 &lt;/translate&gt;
 </code></pre><p>android:fromXDelta：起始点X轴坐标，android:fromYDelta：起始点Y轴坐标，android:toXDelta：终点X轴坐标，android:toYDelta：终点Y轴坐标。可以是数值、百分数、百分数p三种样式。</p>
 <h4 id="2-1-6、set标签"><a href="#2-1-6、set标签" class="headerlink" title="2.1.6、set标签"></a>2.1.6、set标签</h4><p>定义动画集。</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre><code class="hljs">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     android:duration=&quot;3000&quot;
     android:fillAfter=&quot;true&quot;&gt;
@@ -676,7 +721,7 @@ tv.startAnimation(animation);
         android:toDegrees=&quot;720&quot; /&gt;
 &lt;/set&gt;
 </code></pre><p>在set标签中设直repeateCount属性是无效的，必须对每个动画单独设直才有作用。</p>
-<h3 id="2-2、视图动画的代码实现"><a href="#2-2、视图动画的代码实现" class="headerlink" title="2.2、视图动画的代码实现"></a>2.2、视图动画的代码实现</h3><h4 id="2-2-1、概述"><a href="#2-2-1、概述" class="headerlink" title="2.2.1、概述"></a>2.2.1、概述</h4><pre><code>setDuration(long)
+<h3 id="2-2、视图动画的代码实现"><a href="#2-2、视图动画的代码实现" class="headerlink" title="2.2、视图动画的代码实现"></a>2.2、视图动画的代码实现</h3><h4 id="2-2-1、概述"><a href="#2-2-1、概述" class="headerlink" title="2.2.1、概述"></a>2.2.1、概述</h4><pre><code class="hljs">setDuration(long)
 setFillAfter(boolean)
 setFillBefore(boolean)
 setFillEnabled(boolean)
@@ -684,45 +729,45 @@ setRepeatCount(int)
 setRepeatMode(int)
 setlnterpolator(lnterpolator)
 </code></pre><p>setRepeatMode(int）取值为Animation.RESTART或者Animation.REVERSE;setRepeatCount(int）用于设置循环次数，当设置为Animation.INFINITE时，表示无限循环。</p>
-<h4 id="2-2-2、ScaleAnimation"><a href="#2-2-2、ScaleAnimation" class="headerlink" title="2.2.2、ScaleAnimation"></a>2.2.2、ScaleAnimation</h4><pre><code>ScaleAnimation(float fromX , float toX, float fromY , float toY)
+<h4 id="2-2-2、ScaleAnimation"><a href="#2-2-2、ScaleAnimation" class="headerlink" title="2.2.2、ScaleAnimation"></a>2.2.2、ScaleAnimation</h4><pre><code class="hljs">ScaleAnimation(float fromX , float toX, float fromY , float toY)
 ScaleAnimation(float fromX , float toX , float fromY , float toY , float pivotX, float pivotY)
 ScaleAnimation(float fromX , float toX , float fromY , float toY, intpivotXType,float pivotXVal ue , int pivotYType , float pivotYValue)
 </code></pre><p>pivotXType的取值有三个：<code>Animation.ABSOLUTE</code>、<code>Animation.RELATIVE_TO_SELF</code>和<code>Animation.RELATIVE_TO_PARENT</code>。对应的是<code>android:pivotX</code>中的三种取值样式:数值、百分数、百分数p。</p>
-<pre><code>ScaleAnimation scaleAnim = new ScaleAnimation(O.Of , 1.4f, O.Of, 1.4f, Animation.RELATIVE_TO_SELF , 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+<pre><code class="hljs">ScaleAnimation scaleAnim = new ScaleAnimation(O.Of , 1.4f, O.Of, 1.4f, Animation.RELATIVE_TO_SELF , 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 scaleAnim.setDuration(700);
 tv.startAnimation(scaleAnim);
-</code></pre><h4 id="2-2-3、AlphaAnimation"><a href="#2-2-3、AlphaAnimation" class="headerlink" title="2.2.3、AlphaAnimation"></a>2.2.3、AlphaAnimation</h4><pre><code>AlphaAnimation(Context context , AttributeSet attrs)
+</code></pre><h4 id="2-2-3、AlphaAnimation"><a href="#2-2-3、AlphaAnimation" class="headerlink" title="2.2.3、AlphaAnimation"></a>2.2.3、AlphaAnimation</h4><pre><code class="hljs">AlphaAnimation(Context context , AttributeSet attrs)
 AlphaAnimation(float fromAlpha , float toAlpha)
 </code></pre><p>示例</p>
-<pre><code>AlphaAnimation alphaAnim = new AlphaAnimation(1.Of, 0.1f);
+<pre><code class="hljs">AlphaAnimation alphaAnim = new AlphaAnimation(1.Of, 0.1f);
 alphaAnim.setDuration(3000);
 alphaAnim.setFillBefore(true);
 tv.startAnimation(alphaAnim);
-</code></pre><h4 id="2-2-4、RotateAnimation"><a href="#2-2-4、RotateAnimation" class="headerlink" title="2.2.4、RotateAnimation"></a>2.2.4、RotateAnimation</h4><pre><code>RotateAnimation(Context context , AttributeSet attrs)
+</code></pre><h4 id="2-2-4、RotateAnimation"><a href="#2-2-4、RotateAnimation" class="headerlink" title="2.2.4、RotateAnimation"></a>2.2.4、RotateAnimation</h4><pre><code class="hljs">RotateAnimation(Context context , AttributeSet attrs)
 RotateAnimation(float fromDegrees , float toDegrees)
 RotateAnimation(float fromDegrees , float toDegrees , float pivotX,float pivotY)
 RotateAnimation (float fromDegrees , float toDegrees , int pivotXType , float pivotXValue , int pivotYType , float pivotYValue)
 </code></pre><p>示例</p>
-<pre><code>RotateAnimation rotateAnim = new RotateAnimation(0 , -650, Animation.RELATIVE_TO_SELF, O.5f , Animation.RELATIVE_TO_SELF , 0.5f);
+<pre><code class="hljs">RotateAnimation rotateAnim = new RotateAnimation(0 , -650, Animation.RELATIVE_TO_SELF, O.5f , Animation.RELATIVE_TO_SELF , 0.5f);
 rotateAnim.setDuration(3000);
 rotateAnim.setFillAfter(true);
 tv.startAnimation(rotateAnim);
-</code></pre><h4 id="2-2-5、TranslateAnimation"><a href="#2-2-5、TranslateAnimation" class="headerlink" title="2.2.5、TranslateAnimation"></a>2.2.5、TranslateAnimation</h4><pre><code>TranslateAnimation(Context context , AttributeSet attrs)
+</code></pre><h4 id="2-2-5、TranslateAnimation"><a href="#2-2-5、TranslateAnimation" class="headerlink" title="2.2.5、TranslateAnimation"></a>2.2.5、TranslateAnimation</h4><pre><code class="hljs">TranslateAnimation(Context context , AttributeSet attrs)
 TranslateAnimation(float fromXDelta ,float toXDelta, float fromYDelta, float toYDelta)
 TranslateAnimation(int fromXType, float fromXValue, int toXType, float toXValue , int fromYType , float fromYValue , int toYType , float toYValue)
 </code></pre><p>示例</p>
-<pre><code>TranslateAnimation translateAnim = new TranslateAnimation(Animation.ABSOLUTE, 0, Animation.ABSOLUTE, -80, Animation.ABSOLUTE, 0, Animation.ABSOLUTE, -80);
+<pre><code class="hljs">TranslateAnimation translateAnim = new TranslateAnimation(Animation.ABSOLUTE, 0, Animation.ABSOLUTE, -80, Animation.ABSOLUTE, 0, Animation.ABSOLUTE, -80);
 translateAnim.setDuration(2000);
 translateAnim.setFillBefore(true);
 tv.startAnimation(translateAnim);
 </code></pre><h4 id="2-2-6、AnimationSet"><a href="#2-2-6、AnimationSet" class="headerlink" title="2.2.6、AnimationSet"></a>2.2.6、AnimationSet</h4><p>构造函数</p>
-<pre><code>AnimationSet(Context context, AttributeSet attrs)
+<pre><code class="hljs">AnimationSet(Context context, AttributeSet attrs)
 AnimationSet(boolean shareinterpolator)
 </code></pre><p>shareinterpolator当取值为true，在AnimationSet类中定义一个插值器（Interpolator）其下面的所有动画共用该插值器；当取值为false，则表示其下面的动画定义各自的插值器。</p>
 <p>增加动画的函数为：</p>
-<pre><code>public void addAnimation(Animation a)
+<pre><code class="hljs">public void addAnimation(Animation a)
 </code></pre><p>示例</p>
-<pre><code>Animation alpha_Anim = new AlphaAnimation(1.0f, 0.1f);
+<pre><code class="hljs">Animation alpha_Anim = new AlphaAnimation(1.0f, 0.1f);
 Animation scale_Anim = new ScaleAnimation(0.0f, 1.4f, 0.0f, 1.4f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 Animation rotate_Anim = new RotateAnimation(0, 720, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 AnimationSet setAnim = new AnimationSet(true);
@@ -732,14 +777,14 @@ setAnim.addAnimation(rotate_Anim);
 setAnim.setDuration(3000);
 setAnim.setFillAfter(true);
 tv.startAnimation(setAnim);
-</code></pre><h4 id="2-2-7、Animation"><a href="#2-2-7、Animation" class="headerlink" title="2.2.7、Animation"></a>2.2.7、Animation</h4><pre><code>//取消动画
+</code></pre><h4 id="2-2-7、Animation"><a href="#2-2-7、Animation" class="headerlink" title="2.2.7、Animation"></a>2.2.7、Animation</h4><pre><code class="hljs">//取消动画
 void cancel()
 //将控件重置到动画开始前状态
 void reset()
 //设置动画监昕
 void setAnimationListener(Animation.AnimationListener listener)
 </code></pre><p>监听：</p>
-<pre><code>scaleAnim.setAnimationListener(new Animation.AnimationListener() &#123;
+<pre><code class="hljs">scaleAnim.setAnimationListener(new Animation.AnimationListener() &#123;
     @Override
     public void onAnimationStart(Animation animation) &#123;
     &#125;
@@ -752,7 +797,7 @@ void setAnimationListener(Animation.AnimationListener listener)
 &#125;);
 </code></pre><h3 id="2-3、插值器初探"><a href="#2-3、插值器初探" class="headerlink" title="2.3、插值器初探"></a>2.3、插值器初探</h3><p>Interpolator只是一个接口，通过实现这个接口就可以自定义动画的变化速率。</p>
 <p>使用：</p>
-<pre><code>//xml中
+<pre><code class="hljs">//xml中
 android:interpolator=”@android:anim/accelerate_interpolator”
 //代码
 alphaAnim.setinterpolator(new LinearInterpolator());
@@ -763,25 +808,25 @@ alphaAnim.setinterpolator(new LinearInterpolator());
 <h4 id="2-3-5、Bouncelnterpolator"><a href="#2-3-5、Bouncelnterpolator" class="headerlink" title="2.3.5、Bouncelnterpolator"></a>2.3.5、Bouncelnterpolator</h4><p>弹跳插值器，模拟了控件自由落地后回弹的效果。</p>
 <h4 id="2-3-6、Anticipatelnterpolator"><a href="#2-3-6、Anticipatelnterpolator" class="headerlink" title="2.3.6、Anticipatelnterpolator"></a>2.3.6、Anticipatelnterpolator</h4><p>动画开始后，会先往动画反方向移动一段距离，再应用动画。</p>
 <p>Anticipatelnterpolator还有一个构造函数：</p>
-<pre><code>public Anticipateinterpolator(float tension)
+<pre><code class="hljs">public Anticipateinterpolator(float tension)
 </code></pre><p>参数<code>tension</code>对应的XML属性为<code>android:tension</code>，表示张力值，默认值为2，值越大，初始的偏移量越大，而且速度越快。</p>
 <h4 id="2-3-7、Overshootlnterpolator"><a href="#2-3-7、Overshootlnterpolator" class="headerlink" title="2.3.7、Overshootlnterpolator"></a>2.3.7、Overshootlnterpolator</h4><p>结束偏移插值器，表示在动画结束时，沿动画方向继续运动一段距离后再结束动画。</p>
 <p>Overshootlnterpolator也有另一个构造函数：</p>
-<pre><code>public Overshootinterpolator(float tension）
+<pre><code class="hljs">public Overshootinterpolator(float tension）
 </code></pre><p>参数<code>tension</code>对应的XML属性为<code>android:tension</code>，表示张力值，默认值为2，值越大，结束时的偏移量越大，而且速度越快。</p>
 <h4 id="2-3-8、AnticipateOvershootlnterpolator"><a href="#2-3-8、AnticipateOvershootlnterpolator" class="headerlink" title="2.3.8、AnticipateOvershootlnterpolator"></a>2.3.8、AnticipateOvershootlnterpolator</h4><p>AnticipateOvershootlnterpolator是Anticipatelnterpolator与Overshootlnterpolator的合体，即在动画开始时向前偏移一段距离，在动画结束时向后偏移一段距离。</p>
 <p>AnticipateOvershootlnterpolator也有其他的构造函数</p>
-<pre><code>public AnticipateOvershootlnterpolator(float tension)
+<pre><code class="hljs">public AnticipateOvershootlnterpolator(float tension)
 public AnticipateOvershootlnterpolator(float tension, float extraTension)
 </code></pre><p>tension默认值为2，extraTension默认值为1.5。 </p>
 <h4 id="2-3-9、Cyclelnterpolator"><a href="#2-3-9、Cyclelnterpolator" class="headerlink" title="2.3.9、Cyclelnterpolator"></a>2.3.9、Cyclelnterpolator</h4><p>循环插值器，表示动画循环播放特定的次数，速率沿正弦曲线改变。</p>
 <p>Cyclelnterpolator的构造函数如下：</p>
-<pre><code>public Cycleinterpolator(float cycles)
+<pre><code class="hljs">public Cycleinterpolator(float cycles)
 </code></pre><p>参数cycles表示循环次数。</p>
 <h3 id="2-4、动画示例"><a href="#2-4、动画示例" class="headerlink" title="2.4、动画示例"></a>2.4、动画示例</h3><h4 id="2-4-1、镜头由远及近效果"><a href="#2-4-1、镜头由远及近效果" class="headerlink" title="2.4.1、镜头由远及近效果"></a>2.4.1、镜头由远及近效果</h4><h4 id="2-4-2、加载框效果"><a href="#2-4-2、加载框效果" class="headerlink" title="2.4.2、加载框效果"></a>2.4.2、加载框效果</h4><h4 id="2-4-3、扫描动画效果"><a href="#2-4-3、扫描动画效果" class="headerlink" title="2.4.3、扫描动画效果"></a>2.4.3、扫描动画效果</h4><p>用<code>Animation.setStartOffset(int time）</code>来延迟各个动画的开始时间。</p>
 <h3 id="2-5、逐帧动画"><a href="#2-5、逐帧动画" class="headerlink" title="2.5、逐帧动画"></a>2.5、逐帧动画</h3><p>Frame Animation</p>
 <h4 id="2-5-1、XML实现"><a href="#2-5-1、XML实现" class="headerlink" title="2.5.1、XML实现"></a>2.5.1、XML实现</h4><h5 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h5><p>XML文件放置在<code>／res</code>下的drawable目录中：</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code class="hljs">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;animation-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     android:oneshot=&quot;false&quot;&gt;
     &lt;item
@@ -802,15 +847,15 @@ public AnticipateOvershootlnterpolator(float tension, float extraTension)
 &lt;/animation-list&gt;
 </code></pre><p><code>android:oneshot</code>如果定义为true，那么此动画只会执行1次;如果定义为false，则一直循环。</p>
 <p>然后给ImageView设置动画资源。可以通过<code>android:src</code>实现，也可以通过<code>android:background</code>实现。</p>
-<pre><code>android:background=&quot;@drawable/playing_ani&quot;
+<pre><code class="hljs">android:background=&quot;@drawable/playing_ani&quot;
 //或者
 android:src=&quot;@drawable/playing_ani&quot;
 </code></pre><p>最后代码中开始动画</p>
-<pre><code>AnimationDrawable anim = (AnimationDrawable) image.getDrawable();
+<pre><code class="hljs">AnimationDrawable anim = (AnimationDrawable) image.getDrawable();
 anim.start();
 </code></pre><p>当我们通过<code>android:src＝””</code>设置动画资源时，对应的取出方式是<code>image.getDrawable()</code>如果我们通过<code>android:background=””</code>设置动画资源，那么对应的取出方式就是<code>image.getBackground()</code>。</p>
 <h5 id="2、音乐播放示例"><a href="#2、音乐播放示例" class="headerlink" title="2、音乐播放示例"></a>2、音乐播放示例</h5><h5 id="3、AnimationDrawable类"><a href="#3、AnimationDrawable类" class="headerlink" title="3、AnimationDrawable类"></a>3、AnimationDrawable类</h5><p>AnimationDrawable有下面几个常用函数</p>
-<pre><code>void start()//开始播放逐帧动画
+<pre><code class="hljs">void start()//开始播放逐帧动画
 void stop()//停止播放逐帧动画
 int getDuration(int index）//得到指定index的帧的持续时间
 Drawable getFrame(int index）//得到指定index的帧所对应的Drawable对象
@@ -819,12 +864,12 @@ boolean isRunning() //判断当前AnimationDrawable是否正在播放
 void setOneShot(boolean oneShot）//设置AnimationDrawable是否执行一次，true表示执行一次，false表示循环播放
 boolean isOneShot() //判断当前AnimationDrawable是否执行一次，true表示执行一次，返回false表示循环播放。
 void addFrame(Drawable frame,int duration）//为AnimationDrawable添加1帧，并设置持续时间。
-</code></pre><h4 id="2-5-2、代码实现"><a href="#2-5-2、代码实现" class="headerlink" title="2.5.2、代码实现"></a>2.5.2、代码实现</h4><pre><code>&lt;ImageView
+</code></pre><h4 id="2-5-2、代码实现"><a href="#2-5-2、代码实现" class="headerlink" title="2.5.2、代码实现"></a>2.5.2、代码实现</h4><pre><code class="hljs">&lt;ImageView
     android:id=&quot;@+id/frame_iv&quot;
     android:layout_width=&quot;wrap_content&quot;
     android:layout_height=&quot;wrap_content&quot;/&gt;
 </code></pre><p>代码</p>
-<pre><code>AnimationDrawable anim = new AnimationDrawable();
+<pre><code class="hljs">AnimationDrawable anim = new AnimationDrawable();
 for (int i = 1; i &lt;= 14; i++) &#123;
     int id = getResources().getIdentifier(&quot;list_icon_gif_playing&quot; + i,&quot;drawable&quot;, getPackageName());
     Drawable drawable = getResources().getDrawable(id);
@@ -834,7 +879,7 @@ anim.setOneShot(false);
 image.setBackgroundDrawable(anim);
 anim.start();
 </code></pre><p>getldentifier()函数的完整声明如下：</p>
-<pre><code>int getldentifier(String name, String defType, String defPackage)
+<pre><code class="hljs">int getldentifier(String name, String defType, String defPackage)
 
 //获得string
 getResources().getldentifier(”name”,”string”, packdgeName);
@@ -843,7 +888,7 @@ getResources().getidentifier(”name”,”array”, packdgeName);
 </code></pre><h2 id="第3章、属性动画"><a href="#第3章、属性动画" class="headerlink" title="第3章、属性动画"></a>第3章、属性动画</h2><h3 id="3-1、ValueAnimator的基本使用"><a href="#3-1、ValueAnimator的基本使用" class="headerlink" title="3.1、ValueAnimator的基本使用"></a>3.1、ValueAnimator的基本使用</h3><h4 id="3-1-1、概述"><a href="#3-1-1、概述" class="headerlink" title="3.1.1、概述"></a>3.1.1、概述</h4><p>View Animation中的动画类命名都是XXXXAnimation，而Property Animation中的动画类命名都是XXXXAnimator。</p>
 <p>视图动画仅能对指定的控件做动画，而属性动画是通过改变控件的某一属性值来做动画的。</p>
 <h4 id="3-1-2、ValueAnimator的简单使用"><a href="#3-1-2、ValueAnimator的简单使用" class="headerlink" title="3.1.2、ValueAnimator的简单使用"></a>3.1.2、ValueAnimator的简单使用</h4><p>ValueAnimator不会对控件执行任何操作，我们可以给它设定从哪个值运动到哪个值，通过监听这些值的渐变过程来自己操作控件。</p>
-<pre><code>//创建实例
+<pre><code class="hljs">//创建实例
 ValueAnimator animator = ValueAnimator.ofInt(0, 400);
 animator.setDuration(1000);
 //添加监昕事件
@@ -857,8 +902,8 @@ animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;
 //开启动画
 animator.start();
 </code></pre><p>改变控件位置</p>
-<pre><code>view.layout();
-</code></pre><h4 id="3-1-3、常用函数"><a href="#3-1-3、常用函数" class="headerlink" title="3.1.3、常用函数"></a>3.1.3、常用函数</h4><pre><code>public static ValueAnimator ofint (int... values)
+<pre><code class="hljs">view.layout();
+</code></pre><h4 id="3-1-3、常用函数"><a href="#3-1-3、常用函数" class="headerlink" title="3.1.3、常用函数"></a>3.1.3、常用函数</h4><pre><code class="hljs">public static ValueAnimator ofint (int... values)
 public static ValueAnimator ofFloat(float... values)
 
 //设置动画时长，单位是毫秒
@@ -876,7 +921,7 @@ void cancel()
 </code></pre><blockquote>
 <p>重复次数为INFINITE的动画，当Activity结束的时候，必须调用cancel()函数取消动画，否则动画将无限循环，从而导致View无法释放，进一步导致整个Activity无法释放，最终引起内存泄漏。</p>
 </blockquote>
-<pre><code>//监听动画过程中值的实时变化,添加方法为:public void addUpdateListener(AnimatorUpdateListener listener)
+<pre><code class="hljs">//监听动画过程中值的实时变化,添加方法为:public void addUpdateListener(AnimatorUpdateListener listener)
 public static interface AnimatorUpdateListener &#123;
     void onAnimationUpdate(ValueAnimator animation);
 &#125;
@@ -889,20 +934,20 @@ public static interface AnimatorListener &#123;
     void onAnimationRepeat(Animator animation);
 &#125;
 </code></pre><p>移除监听</p>
-<pre><code>void removeUpdateListener(AnimatorUpdateListener listener);
+<pre><code class="hljs">void removeUpdateListener(AnimatorUpdateListener listener);
 void removeAllUpdateListeners();
 
 void removeListener(AnimatorListener listener);
 void removeAllListeners();
 </code></pre><p>其他不常用函数</p>
-<pre><code>//延时多久开始，单位是毫秒
+<pre><code class="hljs">//延时多久开始，单位是毫秒
 public void setStartDelay(long startDelay)
 //完全克隆一个ValueAnimator实例，包括它所有的设置以及所有对监听器代码的处理
 public void Animatorclone()
 </code></pre><h4 id="3-1-4、弹跳加载申效果示例"><a href="#3-1-4、弹跳加载申效果示例" class="headerlink" title="3.1.4、弹跳加载申效果示例"></a>3.1.4、弹跳加载申效果示例</h4><p>通过<code>setTop(int top）</code>函数将控件移动到当前位置。这里需要说明的是，<code>getTop</code>和<code>setTop</code>函数所得到的和设置的坐标都是相对父控件的坐标位置。</p>
 <h3 id="3-2、自定义插值器与Evaluator"><a href="#3-2、自定义插值器与Evaluator" class="headerlink" title="3.2、自定义插值器与Evaluator"></a>3.2、自定义插值器与Evaluator</h3><p>对于Animator而言，不仅可以设置插值器，还可以设置Evaluator。</p>
 <h4 id="3-2-1、自定义插值器"><a href="#3-2-1、自定义插值器" class="headerlink" title="3.2.1、自定义插值器"></a>3.2.1、自定义插值器</h4><p>系统插值器实现的接口：</p>
-<pre><code>public interface TimeInterpolator &#123;
+<pre><code class="hljs">public interface TimeInterpolator &#123;
     float getInterpolation(float input);
 &#125;
 </code></pre><p>参数input:取值范围是0～1，表示当前动画的进度，只与时间有关，取0时表示动画刚开始，取1时表示动画结束。</p>
@@ -910,7 +955,7 @@ public void Animatorclone()
 <p>自定义插值器，只需实现<code>Timelnterpolator</code>接口就可以了。</p>
 <h4 id="3-2-2、Evaluator"><a href="#3-2-2、Evaluator" class="headerlink" title="3.2.2、Evaluator"></a>3.2.2、Evaluator</h4><p>流程：oflnt(0,400）定义动画数值区间 -&gt; 插值器(返面当前数值进度，如0.2) -&gt; Evaluator(根据数值进度计算当前值) -&gt; 监听器退回(在AnimatorUpdatelistener中返回)。</p>
 <p>Evaluator用于将从插值器返回的数值进度转换成对应的数值。</p>
-<pre><code>public class IntEvaluator Implements TypeEvaluator&lt;Integer&gt; &#123;
+<pre><code class="hljs">public class IntEvaluator Implements TypeEvaluator&lt;Integer&gt; &#123;
     public Integer evaluate(float fraction , Integer startValue , Integer endValue) &#123;
         int startint = startValue;
         return (int) (startint + fraction * (endValue - startint));
@@ -918,10 +963,10 @@ public void Animatorclone()
 &#125;
 </code></pre><p><code>fraction</code>参数就是插值器中的返回值，表示当前动画的数值进度，以小数表示。<code>startValue</code>和<code>endValue</code>分别对应<code>oflnt(int start,int end）</code>函数中<code>start</code>和<code>end</code>的数值。返回值就是在<code>AnimatorUpdateListener</code>监听器中通过<code>animation.getAnimatedValue()</code>函数得到的数值。</p>
 <p>使用</p>
-<pre><code>animator.setEvaluator(new IntEvaluator());
+<pre><code class="hljs">animator.setEvaluator(new IntEvaluator());
 </code></pre><p>所以既可以通过重写插值器改变数值进度来改变数值位置，也可以通过改变Evaluator中数值进度所对应的具体数值来改变数值位置。</p>
 <h5 id="ArgbEvaluator"><a href="#ArgbEvaluator" class="headerlink" title="ArgbEvaluator"></a>ArgbEvaluator</h5><p>除 <code>IntEvaluator</code> 和 <code>FloatEvaluator</code> 外，还有一个名为 <code>ArgbEvaluator</code>，它是用来实现颜色值过渡转换的。</p>
-<pre><code>ValueAnimator animator = ValueAnimator.ofInt(0xffffff00,0xff0000ff);
+<pre><code class="hljs">ValueAnimator animator = ValueAnimator.ofInt(0xffffff00,0xff0000ff);
 animator.setEvaluator(new ArgbEvaluator());
 animator.setDuration(3000);
 animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;
@@ -931,11 +976,11 @@ animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;
     &#125;
 &#125;);
 animator.start();
-</code></pre><h3 id="3-3、ValueAnimator进阶ofObject"><a href="#3-3、ValueAnimator进阶ofObject" class="headerlink" title="3.3、ValueAnimator进阶ofObject"></a>3.3、ValueAnimator进阶ofObject</h3><pre><code>public static ValueAnimator ofObject(TypeEvaluator evaluator, Object ...values)
+</code></pre><h3 id="3-3、ValueAnimator进阶ofObject"><a href="#3-3、ValueAnimator进阶ofObject" class="headerlink" title="3.3、ValueAnimator进阶ofObject"></a>3.3、ValueAnimator进阶ofObject</h3><pre><code class="hljs">public static ValueAnimator ofObject(TypeEvaluator evaluator, Object ...values)
 </code></pre><h4 id="TextView中的字母从A变化到Z实例"><a href="#TextView中的字母从A变化到Z实例" class="headerlink" title="TextView中的字母从A变化到Z实例"></a>TextView中的字母从A变化到Z实例</h4><h4 id="3-3-2、示例：抛物动画"><a href="#3-3-2、示例：抛物动画" class="headerlink" title="3.3.2、示例：抛物动画"></a>3.3.2、示例：抛物动画</h4><h3 id="3-4、ObjectAnimator"><a href="#3-4、ObjectAnimator" class="headerlink" title="3.4、ObjectAnimator"></a>3.4、ObjectAnimator</h3><h4 id="3-4-1、概述"><a href="#3-4-1、概述" class="headerlink" title="3.4.1、概述"></a>3.4.1、概述</h4><p><code>ObjectAnimator</code>是派生自<code>ValueAnimator</code>的，所以<code>ValueAnimator</code>中所能使用的函数在<code>ObjectAnimator</code>中都可以正常使用。</p>
-<pre><code>public static ObjectAnimator ofFloat(Object target,String propertyName,float ...values)
+<pre><code class="hljs">public static ObjectAnimator ofFloat(Object target,String propertyName,float ...values)
 </code></pre><p>在View中，有关动画共有下面几组set函数。</p>
-<pre><code>// 1. 透明 度： alpha
+<pre><code class="hljs">// 1. 透明 度： alpha
 public void setAlpha(float alpha)
 // 2. 旋转度数 ： rotation 、 rotationX 、 rotationY
 public void setRotation(float rotation)
@@ -951,7 +996,7 @@ public void setScaleY(float scaleY)
 <p>ObjectAnimator 只负责把动画过程中的数值传到对应属性的set函数中就结束了。</p>
 <h4 id="3-4-3、自定义ObjectAnimator属性"><a href="#3-4-3、自定义ObjectAnimator属性" class="headerlink" title="3.4.3、自定义ObjectAnimator属性"></a>3.4.3、自定义ObjectAnimator属性</h4><p>抛物动画例子</p>
 <h4 id="3-4-4、何时需要实现对应属性的get函数"><a href="#3-4-4、何时需要实现对应属性的get函数" class="headerlink" title="3.4.4、何时需要实现对应属性的get函数"></a>3.4.4、何时需要实现对应属性的get函数</h4><p>当动画只有一个过渡值时，系统才会调用对应属性的get函数来得到动画的初始值。当不存在get函数时，则会取动画参数类型的默认值作为初始值；当无法取得动画参数类型的默认值时，则会直接崩渍。</p>
-<h4 id="3-4-5、常用函数"><a href="#3-4-5、常用函数" class="headerlink" title="3.4.5、常用函数"></a>3.4.5、常用函数</h4><pre><code>//设置动画时长，单位是毫秒
+<h4 id="3-4-5、常用函数"><a href="#3-4-5、常用函数" class="headerlink" title="3.4.5、常用函数"></a>3.4.5、常用函数</h4><pre><code class="hljs">//设置动画时长，单位是毫秒
 ValueAnimator setDuration(long duration)
 
 //获取 ValueAnimator 在运动时，当前运动点的值
@@ -991,7 +1036,7 @@ public void setEvaluator(TypeEvaluator value)
 </code></pre><h3 id="3-5、组合动画AnimatorSet"><a href="#3-5、组合动画AnimatorSet" class="headerlink" title="3.5、组合动画AnimatorSet"></a>3.5、组合动画AnimatorSet</h3><h4 id="3-5-1、playSequentially与playTogether"><a href="#3-5-1、playSequentially与playTogether" class="headerlink" title="3.5.1、playSequentially与playTogether"></a>3.5.1、playSequentially与playTogether</h4><p>playSequentially：动画依次播放，playTogether：所有动画一起开始。</p>
 <p>playTogether和playSequentially函数在开始动画时，只是把每个控件的动画激活，至于每个控件自身的动画是否延时、是否无限循环，只与控件自身的动画设定有关，与playTogether和 playSequentially函数无关，它们只负责到时间后激活动画。</p>
 <p>playSequentially函数只有在上一个控件做完动画以后，才会激活下一个控件的动画。如果上一个控件的动画是无限循环的，那么下一个控件就别再指望能做动画了。</p>
-<h4 id="3-5-2、AnimatorSet-Builde"><a href="#3-5-2、AnimatorSet-Builde" class="headerlink" title="3.5.2、AnimatorSet.Builde"></a>3.5.2、AnimatorSet.Builde</h4><pre><code>//表示要播放哪个动画
+<h4 id="3-5-2、AnimatorSet-Builde"><a href="#3-5-2、AnimatorSet-Builde" class="headerlink" title="3.5.2、AnimatorSet.Builde"></a>3.5.2、AnimatorSet.Builde</h4><pre><code class="hljs">//表示要播放哪个动画
 public Builder play (Animator anim)
 //和前面的动画一起执行
 public Builder with(Animator anim)
@@ -1001,21 +1046,21 @@ public Builder before (Animator aηim)
 public Builder after(Animator anim)
 //延迟 n 毫秒之后执行动画
 public Builder after(long delay)
-</code></pre><h4 id="3-5-3、AnimatorSet监昕器"><a href="#3-5-3、AnimatorSet监昕器" class="headerlink" title="3.5.3、AnimatorSet监昕器"></a>3.5.3、AnimatorSet监昕器</h4><pre><code>public void addListener(AnimatorListener listener);
-</code></pre><h4 id="3-5-4、常用函数"><a href="#3-5-4、常用函数" class="headerlink" title="3.5.4、常用函数"></a>3.5.4、常用函数</h4><pre><code>//设置单次动画时长
+</code></pre><h4 id="3-5-3、AnimatorSet监昕器"><a href="#3-5-3、AnimatorSet监昕器" class="headerlink" title="3.5.3、AnimatorSet监昕器"></a>3.5.3、AnimatorSet监昕器</h4><pre><code class="hljs">public void addListener(AnimatorListener listener);
+</code></pre><h4 id="3-5-4、常用函数"><a href="#3-5-4、常用函数" class="headerlink" title="3.5.4、常用函数"></a>3.5.4、常用函数</h4><pre><code class="hljs">//设置单次动画时长
 public AnimatorSet setDuration(long duration);
 //设置插值器
 public void setinterpolator(Timeinterpolator interpolator)
 //设置 ObjectAnimator 动画目标控件
 public void setTarget(Object target)
 </code></pre><p>在AnimatorSet中设置以后，会覆盖单个ObjectAnimator中的设置。</p>
-<pre><code>//设置延时开始动画时长
+<pre><code class="hljs">//设置延时开始动画时长
 public void setStartDelay(long startDelay)
 </code></pre><p>不会覆盖单个动画的延时，而且仅针对性地延长AnimatorSet的激活时间。</p>
 <h4 id="3-5-5、示例：路径动画"><a href="#3-5-5、示例：路径动画" class="headerlink" title="3.5.5、示例：路径动画"></a>3.5.5、示例：路径动画</h4><p>代码</p>
-<pre><code>https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/pathMenu/PathMenuActivity.java
+<pre><code class="hljs">https://github.com/AdamRight/TeaTool/blob/master/app/src/main/java/com/tea/teatool/pathMenu/PathMenuActivity.java
 </code></pre><h3 id="3-6、Animator动画的XML实现"><a href="#3-6、Animator动画的XML实现" class="headerlink" title="3.6、Animator动画的XML实现"></a>3.6、Animator动画的XML实现</h3><p>在 XML 中与 Animator 对应的有三个标签:</p>
-<pre><code>&lt;animator/＞:对应ValueAnimator
+<pre><code class="hljs">&lt;animator/＞:对应ValueAnimator
 &lt;objectAnimator/＞ 对应ObjectAnimator
 &lt;set/＞对应 AnimatorSet 
 
@@ -1027,23 +1072,23 @@ animator.setTarget(mTvl);
 animator.start();
 </code></pre><h2 id="第4章属性动画进阶"><a href="#第4章属性动画进阶" class="headerlink" title="第4章属性动画进阶"></a>第4章属性动画进阶</h2><h3 id="4-1、PropertyValuesHolder与Keyframe"><a href="#4-1、PropertyValuesHolder与Keyframe" class="headerlink" title="4.1、PropertyValuesHolder与Keyframe"></a>4.1、PropertyValuesHolder与Keyframe</h3><p>通过<code>ofPropertyValu巳sHolder</code>函数来创建实例。</p>
 <h4 id="4-1-1、PropertyValuesHolder"><a href="#4-1-1、PropertyValuesHolder" class="headerlink" title="4.1.1、PropertyValuesHolder"></a>4.1.1、PropertyValuesHolder</h4><p>ofFloat</p>
-<pre><code>PropertyValuesHolder rotationHolder = PropertyValuesHolder.ofFloat(&quot;Rotation&quot;, 60f, -60f, 40f, -40f, -20f, 20f, 10f, -10f, 0f);
+<pre><code class="hljs">PropertyValuesHolder rotationHolder = PropertyValuesHolder.ofFloat(&quot;Rotation&quot;, 60f, -60f, 40f, -40f, -20f, 20f, 10f, -10f, 0f);
 PropertyValuesHolder alphaHolder = PropertyValuesHolder.ofFloat(&quot;alpha&quot;, 0.1f, 1f, 0.1f, 1f);
 ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(mTextView, rotationHolder, alphaHolder);
 animator.setDuration(3000);
 animator.start();
 </code></pre><p>ofObject</p>
-<pre><code>public static PropertyValuesHolder ofObject (String propertyName ,TypeEvaluator evaluator, Object . .. values )
+<pre><code class="hljs">public static PropertyValuesHolder ofObject (String propertyName ,TypeEvaluator evaluator, Object . .. values )
 </code></pre><h4 id="4-1-2、Keyframe"><a href="#4-1-2、Keyframe" class="headerlink" title="4.1.2、Keyframe"></a>4.1.2、Keyframe</h4><p>关键帧：解决控制动画速率的问题。</p>
-<pre><code>public static Keyframe ofFloat(float fraction , float value)
+<pre><code class="hljs">public static Keyframe ofFloat(float fraction , float value)
 
 fraction：表示当前的显示进度，即在插值器中getlnterpolation函数的返回值。
 value：表示动画当前所在的数值位置。
 </code></pre><p>设置插值器：</p>
-<pre><code>public void setinterpolator(Timeinterpolator interpolator)
+<pre><code class="hljs">public void setinterpolator(Timeinterpolator interpolator)
 </code></pre><p>使用ofObject函数来制作动画的时候，必须设置Evaluator，因为系统根本无法知道动画的中间值Object真正是什么类型的。</p>
 <h4 id="4-1-3-PropertyValuesHolde其他函数"><a href="#4-1-3-PropertyValuesHolde其他函数" class="headerlink" title="4.1.3 PropertyValuesHolde其他函数"></a>4.1.3 PropertyValuesHolde其他函数</h4><h4 id="4-1-4、电话晌铃效果示例"><a href="#4-1-4、电话晌铃效果示例" class="headerlink" title="4.1.4、电话晌铃效果示例"></a>4.1.4、电话晌铃效果示例</h4><p>借助Keyframe，不需要使用AnimatorSet，也能实现多个动画同时播放。</p>
-<h3 id="4-2、ViewPropertyAnimator"><a href="#4-2、ViewPropertyAnimator" class="headerlink" title="4.2、ViewPropertyAnimator"></a>4.2、ViewPropertyAnimator</h3><h4 id="4-2-1、概述"><a href="#4-2-1、概述" class="headerlink" title="4.2.1、概述"></a>4.2.1、概述</h4><h4 id="4-2-2、常用函数"><a href="#4-2-2、常用函数" class="headerlink" title="4.2.2、常用函数"></a>4.2.2、常用函数</h4><pre><code>tv.animate().scaleX(2).scaleY(2).setListener(new Animator.AnimatorListener() &#123;
+<h3 id="4-2、ViewPropertyAnimator"><a href="#4-2、ViewPropertyAnimator" class="headerlink" title="4.2、ViewPropertyAnimator"></a>4.2、ViewPropertyAnimator</h3><h4 id="4-2-1、概述"><a href="#4-2-1、概述" class="headerlink" title="4.2.1、概述"></a>4.2.1、概述</h4><h4 id="4-2-2、常用函数"><a href="#4-2-2、常用函数" class="headerlink" title="4.2.2、常用函数"></a>4.2.2、常用函数</h4><pre><code class="hljs">tv.animate().scaleX(2).scaleY(2).setListener(new Animator.AnimatorListener() &#123;
     public void onAnimationStart(Animator animation ) &#123;&#125;
     public void onAnimationEnd (Animator animation ) &#123;&#125;
     public void onAnimationCancel(Animator animation) &#123;&#125;
@@ -1051,24 +1096,24 @@ value：表示动画当前所在的数值位置。
 &#125;);
 </code></pre><h3 id="4-3、为ViewGroup内的组件添加动画"><a href="#4-3、为ViewGroup内的组件添加动画" class="headerlink" title="4.3、为ViewGroup内的组件添加动画"></a>4.3、为ViewGroup内的组件添加动画</h3><h4 id="4-3-1、animatelayoutChanges属性"><a href="#4-3-1、animatelayoutChanges属性" class="headerlink" title="4.3.1、animatelayoutChanges属性"></a>4.3.1、animatelayoutChanges属性</h4><p><code>android:animateLayoutChanges＝”true/false”</code>，所有派生自ViewGroup类的控件都具有此属性。动画不能自定义。</p>
 <h4 id="4-3-2、LayoutTransition"><a href="#4-3-2、LayoutTransition" class="headerlink" title="4.3.2、LayoutTransition"></a>4.3.2、LayoutTransition</h4><p>第一步，创建实例。</p>
-<pre><code>LayoutTransition transitioner = new LayoutTransition();
+<pre><code class="hljs">LayoutTransition transitioner = new LayoutTransition();
 </code></pre><p>第二步创建动画并进行设置。</p>
-<pre><code>ObjectAnimator animOut = ObjectAnimator.ofFloat(null,”rotation”, Of,90f, Of);
+<pre><code class="hljs">ObjectAnimator animOut = ObjectAnimator.ofFloat(null,”rotation”, Of,90f, Of);
 transitioner.setAnimator(LayoutTransition.DISAPPEARING , animOut);
 </code></pre><p>第三步将LayoutTransition设置到ViewGroup中。</p>
-<pre><code>linearLayout.setLayoutTransition(transitioner);
+<pre><code class="hljs">linearLayout.setLayoutTransition(transitioner);
 </code></pre><p>其中,transitionType表示当前应用动画的对象范围，取值如下:</p>
-<pre><code>APPEARING：元素在容器中出现时所定义的动画。
+<pre><code class="hljs">APPEARING：元素在容器中出现时所定义的动画。
 DISAPPEARING：元素在容器中消失时所定义的动画。
 CHANGE_APPEARING:由于容器中要显现一个新的元素，其他需要变化的元素所应用的动画。
 CHANGE_DISAPPEARING：当容器中某个元素消失时，其他需要变化的元素所应用的动画。
 </code></pre><h4 id="4-3-3、其他函数"><a href="#4-3-3、其他函数" class="headerlink" title="4.3.3、其他函数"></a>4.3.3、其他函数</h4><h3 id="4-4、开源动画库NineOldAndroids"><a href="#4-4、开源动画库NineOldAndroids" class="headerlink" title="4.4、开源动画库NineOldAndroids"></a>4.4、开源动画库NineOldAndroids</h3><h2 id="第5章动画进阶"><a href="#第5章动画进阶" class="headerlink" title="第5章动画进阶"></a>第5章动画进阶</h2><h3 id="5-1、利用PathMeasure实现路径动画"><a href="#5-1、利用PathMeasure实现路径动画" class="headerlink" title="5.1、利用PathMeasure实现路径动画"></a>5.1、利用PathMeasure实现路径动画</h3><h4 id="5-1-1、初始化"><a href="#5-1-1、初始化" class="headerlink" title="5.1.1、初始化"></a>5.1.1、初始化</h4><p>方式一：</p>
-<pre><code>PathMeasure pathMeasure = new PathMeasure() ;
+<pre><code class="hljs">PathMeasure pathMeasure = new PathMeasure() ;
 setPath (Path path , boolean forceClosed);
 </code></pre><p>方式二：</p>
-<pre><code>PathMeasure(Path path , boolean forceClosed);
+<pre><code class="hljs">PathMeasure(Path path , boolean forceClosed);
 </code></pre><p><code>boolean forceClosed</code>表示Path最终是否需要闭合，如果为true，则不管关联的Path是否是闭合的，都会被闭合。对绑定的Path不会产生任何影响，PathMeasure的计算就会包含最后一段闭合的路径，与原来的Path不同。</p>
-<h4 id="5-1-2、简单函数使用"><a href="#5-1-2、简单函数使用" class="headerlink" title="5.1.2、简单函数使用"></a>5.1.2、简单函数使用</h4><pre><code>//获取计算的路径长度
+<h4 id="5-1-2、简单函数使用"><a href="#5-1-2、简单函数使用" class="headerlink" title="5.1.2、简单函数使用"></a>5.1.2、简单函数使用</h4><pre><code class="hljs">//获取计算的路径长度
 PathMeasure.getLength()
 
 //判断测量Path时是否计算闭合
@@ -1076,17 +1121,17 @@ public boolean isClosed()
 
 //函数得到的曲线的顺序与Path中添加的顺序相同。getLength等函数针对的都是当前的曲线，而不是整个Path。
 PathMeasure.nextContour()
-</code></pre><h4 id="5-1-3、getSegment函数"><a href="#5-1-3、getSegment函数" class="headerlink" title="5.1.3、getSegment函数"></a>5.1.3、getSegment函数</h4><pre><code>//截取整个Path中的某个片段，将截取后的 Path 保存到参数 dst 中。
+</code></pre><h4 id="5-1-3、getSegment函数"><a href="#5-1-3、getSegment函数" class="headerlink" title="5.1.3、getSegment函数"></a>5.1.3、getSegment函数</h4><pre><code class="hljs">//截取整个Path中的某个片段，将截取后的 Path 保存到参数 dst 中。
 boolean getSegrneηt(float startD ,float stopD, Path dst, boolean startWithMoveTo)
 
 startD、stopD：开始截取位置距离 Path 起始点的长度；结束截取位置距离 Path 起始点的长度。
 Path dst：截取的Path将会被添加到dst中。注意是添加，而不是替换。
 boolean startWithMoveTo：起始点是否使用 moveTo。
-</code></pre><h4 id="5-1-4、getPosTan函数"><a href="#5-1-4、getPosTan函数" class="headerlink" title="5.1.4、getPosTan函数"></a>5.1.4、getPosTan函数</h4><pre><code>//用于得到路径上某一长度的位置以及该位置的正切值 
+</code></pre><h4 id="5-1-4、getPosTan函数"><a href="#5-1-4、getPosTan函数" class="headerlink" title="5.1.4、getPosTan函数"></a>5.1.4、getPosTan函数</h4><pre><code class="hljs">//用于得到路径上某一长度的位置以及该位置的正切值 
 boolean getPosTan(float distance , float[] pos , float[] tan)
 </code></pre><p><code>float distance</code>：距离Path起始点的长度。<code>float[] pos</code>：该点的坐标值。<code>pos[O]</code>表示x坐标，<code>pos[1］</code>表示y坐标。<code>float[] tan</code>：该点的正切值。</p>
 <p>箭头加载动画示例</p>
-<h4 id="5-1-5、getMatrix函数"><a href="#5-1-5、getMatrix函数" class="headerlink" title="5.1.5、getMatrix函数"></a>5.1.5、getMatrix函数</h4><pre><code>//用于得到路径上某一长度的位置以及该位置的正切值的矩阵
+<h4 id="5-1-5、getMatrix函数"><a href="#5-1-5、getMatrix函数" class="headerlink" title="5.1.5、getMatrix函数"></a>5.1.5、getMatrix函数</h4><pre><code class="hljs">//用于得到路径上某一长度的位置以及该位置的正切值的矩阵
 boolean getMatrix(float distance , Matrix matrix , int flags)
 </code></pre><h4 id="5-1-6、支付宝支付成功动画示例"><a href="#5-1-6、支付宝支付成功动画示例" class="headerlink" title="5.1.6、支付宝支付成功动画示例"></a>5.1.6、支付宝支付成功动画示例</h4><h3 id="5-2、SVG动画"><a href="#5-2、SVG动画" class="headerlink" title="5.2、SVG动画"></a>5.2、SVG动画</h3><h4 id="5-2-1、概述"><a href="#5-2-1、概述" class="headerlink" title="5.2.1、概述"></a>5.2.1、概述</h4><p>SVG 的全称是<code>Scalable Vector Graphics</code>（可缩放矢量图形〉。矢量图相对应的是位图，Bitmap就是位图。</p>
 <p>对于5.0以下的机型，可以通过引入 <code>com.android.support:appcompat-v7:23.4.0</code>及以上版本进行支持。</p>
@@ -1095,56 +1140,56 @@ boolean getMatrix(float distance , Matrix matrix , int flags)
 <h4 id="5-2-3、动态Vector"><a href="#5-2-3、动态Vector" class="headerlink" title="5.2.3、动态Vector"></a>5.2.3、动态Vector</h4><h4 id="5-2-4、输入搜索动画示例"><a href="#5-2-4、输入搜索动画示例" class="headerlink" title="5.2.4、输入搜索动画示例"></a>5.2.4、输入搜索动画示例</h4><h2 id="第6章Paint基本使用"><a href="#第6章Paint基本使用" class="headerlink" title="第6章Paint基本使用"></a>第6章Paint基本使用</h2><h3 id="6-1、硬件加速"><a href="#6-1、硬件加速" class="headerlink" title="6.1、硬件加速"></a>6.1、硬件加速</h3><p>GPU的英文全称为<code>Graphic Processing Unit</code>，中文翻译为“图形处理器”。GPU是专门为处理图形任务而产生的芯片。在GPU加速时，实际上是使用OpenGL的相关函数来完成绘制的。</p>
 <p>Android提供了不同的禁用方法，分Application、Activity、Window、View4个层级。</p>
 <p>在<code>AndroidManifest.xml</code>文件中为application标签添加如下属性，即可为整个应用程序开启/关闭硬件加速。</p>
-<pre><code>&lt;application android:hardwareAccelerated=”true”...&gt;
+<pre><code class="hljs">&lt;application android:hardwareAccelerated=”true”...&gt;
 </code></pre><p>在activity标签下开启或关闭硬件加速:</p>
-<pre><code>&lt;activity android:hardwareAccelerated=”false” /&gt;
+<pre><code class="hljs">&lt;activity android:hardwareAccelerated=”false” /&gt;
 </code></pre><p>在Window层级上使用如下代码开启硬件加速(在Window层级上不支持关闭硬件加速:</p>
-<pre><code>getWiηdow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+<pre><code class="hljs">getWiηdow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
 </code></pre><p>在View层级上使用如下代码关闭硬件加速（在View层级上不支持开启硬件加速）</p>
-<pre><code>setLayerType(View.LAYER_TYPE_SOFTWARE,null&#125;;
+<pre><code class="hljs">setLayerType(View.LAYER_TYPE_SOFTWARE,null&#125;;
 </code></pre><p>或者使用<code>android:layerType＝&quot;software&quot;</code>来关闭硬件加速。</p>
 <h3 id="6-2、文字"><a href="#6-2、文字" class="headerlink" title="6.2、文字"></a>6.2、文字</h3><h4 id="6-2-1、概述"><a href="#6-2-1、概述" class="headerlink" title="6.2.1、概述"></a>6.2.1、概述</h4><p>基线就是四线格中的第三条线。</p>
-<pre><code>public void drawText (String text , float x , float y , Paint paint)
+<pre><code class="hljs">public void drawText (String text , float x , float y , Paint paint)
 </code></pre><p>y代表的是基线的位置,而不是左上角。x代表所要绘制的文字所在矩形的相对位置。</p>
-<pre><code>Align的取值为 Paint.Align.LEFT、Paint.Align.CENTER、Paint.Align.RIGHT
+<pre><code class="hljs">Align的取值为 Paint.Align.LEFT、Paint.Align.CENTER、Paint.Align.RIGHT
 Paint :: setTextAlign(Align align);
-</code></pre><h4 id="6-2-2、绘图四线搭与FontMetrics"><a href="#6-2-2、绘图四线搭与FontMetrics" class="headerlink" title="6.2.2、绘图四线搭与FontMetrics"></a>6.2.2、绘图四线搭与FontMetrics</h4><pre><code>ascent：系统推荐的，在绘制单个字符时，字符应当的最高高度所在线。
+</code></pre><h4 id="6-2-2、绘图四线搭与FontMetrics"><a href="#6-2-2、绘图四线搭与FontMetrics" class="headerlink" title="6.2.2、绘图四线搭与FontMetrics"></a>6.2.2、绘图四线搭与FontMetrics</h4><pre><code class="hljs">ascent：系统推荐的，在绘制单个字符时，字符应当的最高高度所在线。
 descent：系统推荐的，在绘制单个字符肘，宇符应当的最低高度所在线。
 top：可绘制的最高高度所在线。
 bottom：可绘制的最低高度所在线。
 </code></pre><p>ascent变量的值是负数。descent变量的值必然是正数。</p>
-<pre><code>ascent线的y坐标 ＝ baseline线的y坐标 ＋ fontMetric.ascent
+<pre><code class="hljs">ascent线的y坐标 ＝ baseline线的y坐标 ＋ fontMetric.ascent
 descent线的y坐标 ＝ baseline线的y坐标 ＋ fontMetric.descent
 top线的y坐标 ＝ baseline线的y坐标 ＋ fontMetric.top
 bottom线的y坐标 ＝ baseline线的y坐标 ＋ fontMetric.bottom
 </code></pre><p>获取 FontMetrics 对象</p>
-<pre><code>Paint paint = new Paint();
+<pre><code class="hljs">Paint paint = new Paint();
 Paint.FontMetrics fm = paint.getFontMetrics();//Float类型
 Paint.FontMetricsint fmint = paint.getFontMetricsint();//Int类型
 </code></pre><h4 id="6-2-3、常用函数"><a href="#6-2-3、常用函数" class="headerlink" title="6.2.3、常用函数"></a>6.2.3、常用函数</h4><p>字符串所占区域的高度、宽度和最小矩形。</p>
 <p>高度：bottom线所在位置的y坐标减去top线所在位置的y坐标</p>
-<pre><code>Paint.FontMetricsint fm = paint.getFontMetricsint();
+<pre><code class="hljs">Paint.FontMetricsint fm = paint.getFontMetricsint();
 int top = baseLineY + fm.top;
 int bottom = baseLineY + fm.bottom;
 //所占区域的高度
 int height = bottom - top;
 </code></pre><p>宽度:</p>
-<pre><code>int width = paint.measureText(String text);
+<pre><code class="hljs">int width = paint.measureText(String text);
 </code></pre><p>最小矩形</p>
-<pre><code>//以（0, 0）点所在位置为基线,text要测量最小矩形的字符串,start 要测量起始字符在字符串中的索引,
+<pre><code class="hljs">//以（0, 0）点所在位置为基线,text要测量最小矩形的字符串,start 要测量起始字符在字符串中的索引,
 //end 所要测量的字符的长度,bounds接收测量结果
 public void getTextBounds(String text, int start, int end, Rect bounds);
 </code></pre><p>矩形实际位置的坐标如下</p>
-<pre><code>Rect minRect = new Rect();
+<pre><code class="hljs">Rect minRect = new Rect();
 paint.getTextBounds(text , 0 , text. length(), minRect);
 //最小矩形，实际top线的位置
 int minTop =bounds.top + baselineY;
 //最小矩形，实际 bottom 线的位置
 int minBottom = bounds.bottom + baselineY;
 </code></pre><h4 id="6-2-4、定点写字示例"><a href="#6-2-4、定点写字示例" class="headerlink" title="6.2.4、定点写字示例"></a>6.2.4、定点写字示例</h4><p>当给定中间线位置以后，baseline线的位置为：</p>
-<pre><code>baseline = center + (FontMetrics.bottom - FontMetrics.top)/2 - FontMetrics.bottom
-</code></pre><h3 id="6-3、Paint常用函数"><a href="#6-3、Paint常用函数" class="headerlink" title="6.3、Paint常用函数"></a>6.3、Paint常用函数</h3><h4 id="6-3-1、基本设置函数"><a href="#6-3-1、基本设置函数" class="headerlink" title="6.3.1、基本设置函数"></a>6.3.1、基本设置函数</h4><pre><code>reset()
+<pre><code class="hljs">baseline = center + (FontMetrics.bottom - FontMetrics.top)/2 - FontMetrics.bottom
+</code></pre><h3 id="6-3、Paint常用函数"><a href="#6-3、Paint常用函数" class="headerlink" title="6.3、Paint常用函数"></a>6.3、Paint常用函数</h3><h4 id="6-3-1、基本设置函数"><a href="#6-3-1、基本设置函数" class="headerlink" title="6.3.1、基本设置函数"></a>6.3.1、基本设置函数</h4><pre><code class="hljs">reset()
 setColor(int color)
 setARGB(int a, int r, int g, int b)
 setAlpha(int a)
@@ -1162,7 +1207,7 @@ setStrokeCap(Paint.Cap cap)
 setStrokeJoin (Paiηt.Join join)
 
 setDither(boolean dither)
-</code></pre><h4 id="6-3-2、字体相关函数"><a href="#6-3-2、字体相关函数" class="headerlink" title="6.3.2、字体相关函数"></a>6.3.2、字体相关函数</h4><pre><code>setTextSize(float textSize)
+</code></pre><h4 id="6-3-2、字体相关函数"><a href="#6-3-2、字体相关函数" class="headerlink" title="6.3.2、字体相关函数"></a>6.3.2、字体相关函数</h4><pre><code class="hljs">setTextSize(float textSize)
 setFakeBoldText(boolean fakeBoldText)
 setUnderlineText(boolean underlineText)
 setTextAlign（Paint.Align align)
@@ -1173,7 +1218,7 @@ setSubpixelText(boolean subpixelText)
 </code></pre><h2 id="第7章绘图进阶"><a href="#第7章绘图进阶" class="headerlink" title="第7章绘图进阶"></a>第7章绘图进阶</h2><h3 id="7-1、贝济埃曲线"><a href="#7-1、贝济埃曲线" class="headerlink" title="7.1、贝济埃曲线"></a>7.1、贝济埃曲线</h3><h4 id="7-1-1、概述"><a href="#7-1-1、概述" class="headerlink" title="7.1.1、概述"></a>7.1.1、概述</h4><p>一阶贝济埃曲线，可以理解为在由起始点和终点形成的这条直线上匀速移动的点。</p>
 <p>二阶贝济埃曲线的移动轨迹是建立在两条一阶贝济埃曲线的中间点的基础上的。</p>
 <p>所谓几阶贝济埃曲线，全部是由一条条一阶贝济埃曲线搭起来的。</p>
-<h3 id="7-1-2、贝济埃曲线之quadTo"><a href="#7-1-2、贝济埃曲线之quadTo" class="headerlink" title="7.1.2、贝济埃曲线之quadTo"></a>7.1.2、贝济埃曲线之quadTo</h3><pre><code>//二阶贝济埃曲线
+<h3 id="7-1-2、贝济埃曲线之quadTo"><a href="#7-1-2、贝济埃曲线之quadTo" class="headerlink" title="7.1.2、贝济埃曲线之quadTo"></a>7.1.2、贝济埃曲线之quadTo</h3><pre><code class="hljs">//二阶贝济埃曲线
 public void quadTo(float xl , float yl, fl oat x2 , float y2)
 public void rQuadTo(float dxl, float dyl , float dx2, float dy2)
 //三阶贝济埃曲线
@@ -1182,41 +1227,41 @@ public void rCubicTo(float xl , float yl, float x2 , float y2 , float x3 , float
 </code></pre><p>起始点是通过<code>Path.moveTo(x,y）</code>函数来指定的，而如果我们连续调用<code>quadTo（）</code>函数， 那么前一个<code>quadTo（）</code>函数的终点就是下一个<code>quadTo（）</code>函数的起始。</p>
 <p>传统捕捉手势轨迹示例</p>
 <h4 id="7-1-3、贝济埃曲线之rQuadTo"><a href="#7-1-3、贝济埃曲线之rQuadTo" class="headerlink" title="7.1.3、贝济埃曲线之rQuadTo"></a>7.1.3、贝济埃曲线之rQuadTo</h4><p>quadTo()函数定义一个绝对坐标：</p>
-<pre><code>path.moveTo(300,400)
+<pre><code class="hljs">path.moveTo(300,400)
 path.quadTo(500,300,500,500)
 </code></pre><p>与利用rQuadTo()函数定义相对坐标是等价的：</p>
-<pre><code>path.moveTo(300,400)
+<pre><code class="hljs">path.moveTo(300,400)
 path.rQuadTo(200,-100,200,100)
-</code></pre><h4 id="7-1-4、波浪效果示例"><a href="#7-1-4、波浪效果示例" class="headerlink" title="7.1.4、波浪效果示例"></a>7.1.4、波浪效果示例</h4><h3 id="7-2、setShadowLayer与阴影效果"><a href="#7-2、setShadowLayer与阴影效果" class="headerlink" title="7.2、setShadowLayer与阴影效果"></a>7.2、setShadowLayer与阴影效果</h3><h4 id="7-2-1、setShadowlayer-构造函数"><a href="#7-2-1、setShadowlayer-构造函数" class="headerlink" title="7.2.1、setShadowlayer()构造函数"></a>7.2.1、setShadowlayer()构造函数</h4><pre><code>public void setShadowLayer(float radius, float dx , float dy , int color)
+</code></pre><h4 id="7-1-4、波浪效果示例"><a href="#7-1-4、波浪效果示例" class="headerlink" title="7.1.4、波浪效果示例"></a>7.1.4、波浪效果示例</h4><h3 id="7-2、setShadowLayer与阴影效果"><a href="#7-2、setShadowLayer与阴影效果" class="headerlink" title="7.2、setShadowLayer与阴影效果"></a>7.2、setShadowLayer与阴影效果</h3><h4 id="7-2-1、setShadowlayer-构造函数"><a href="#7-2-1、setShadowlayer-构造函数" class="headerlink" title="7.2.1、setShadowlayer()构造函数"></a>7.2.1、setShadowlayer()构造函数</h4><pre><code class="hljs">public void setShadowLayer(float radius, float dx , float dy , int color)
 </code></pre><p><code>float radius</code>：模糊半径，<code>radius</code>越大越模糊、越小越清晰。如果<code>radius</code>设置为0则阴影消失不见。<code>float dx</code>：阴影的横向偏移距离，正值向右偏移，负值向左偏移。<code>float dy</code>：阴影的纵向偏移距离，正值向下偏移，负值向上偏移。<code>int color</code>：绘制阴影的画笔颜色，阴影的颜色（对图片阴影无效）。</p>
 <p><code>setShadowLayer()</code>函数使用的是高斯模糊算法。高斯模糊的具体算法是：对于正在处理的每一个像素，取周围若干个像素的RGB值并且平均，这个平均值就是模糊处理过的像素。如果对图片中的所有像素都这么处理，那么处理完成的图片就会变得模糊。其中，所取周围像素的半径就是模糊半径。所以，模糊半径越大，所得平均像素与原始像素相差就越大，也就越模糊。</p>
 <h4 id="7-2-2、清除阴影"><a href="#7-2-2、清除阴影" class="headerlink" title="7.2.2、清除阴影"></a>7.2.2、清除阴影</h4><p>setShadowLayer函数的radius参数值设为0， 或者用专门的清除阴影的函数：</p>
-<pre><code>public void clearShadowLayer()
-</code></pre><h4 id="7-2-3、给文字添加阴影示例"><a href="#7-2-3、给文字添加阴影示例" class="headerlink" title="7.2.3、给文字添加阴影示例"></a>7.2.3、给文字添加阴影示例</h4><h3 id="7-3、BlurMaskFilter发光效果与图片阴影"><a href="#7-3、BlurMaskFilter发光效果与图片阴影" class="headerlink" title="7.3、BlurMaskFilter发光效果与图片阴影"></a>7.3、BlurMaskFilter发光效果与图片阴影</h3><pre><code>public MaskFilter setMaskFilter(MaskFilter maskfilter)
+<pre><code class="hljs">public void clearShadowLayer()
+</code></pre><h4 id="7-2-3、给文字添加阴影示例"><a href="#7-2-3、给文字添加阴影示例" class="headerlink" title="7.2.3、给文字添加阴影示例"></a>7.2.3、给文字添加阴影示例</h4><h3 id="7-3、BlurMaskFilter发光效果与图片阴影"><a href="#7-3、BlurMaskFilter发光效果与图片阴影" class="headerlink" title="7.3、BlurMaskFilter发光效果与图片阴影"></a>7.3、BlurMaskFilter发光效果与图片阴影</h3><pre><code class="hljs">public MaskFilter setMaskFilter(MaskFilter maskfilter)
 
 public BlurMaskFilter&#123;float radius ,Blur style)
-</code></pre><h4 id="7-3-2、给图片添加纯色阴影"><a href="#7-3-2、给图片添加纯色阴影" class="headerlink" title="7.3.2、给图片添加纯色阴影"></a>7.3.2、给图片添加纯色阴影</h4><pre><code>public Bitmap extractAlpha();
+</code></pre><h4 id="7-3-2、给图片添加纯色阴影"><a href="#7-3-2、给图片添加纯色阴影" class="headerlink" title="7.3.2、给图片添加纯色阴影"></a>7.3.2、给图片添加纯色阴影</h4><pre><code class="hljs">public Bitmap extractAlpha();
 </code></pre><p>extractAlpha会新建一幅仅具有Alpha值的空白图像，而且这幅图像的颜色是在使用<code>canvas.drawBitmap</code>函数绘制时由传入的画笔颜色指定的。</p>
 <h3 id="7-4、Shader与BitmapShader"><a href="#7-4、Shader与BitmapShader" class="headerlink" title="7.4、Shader与BitmapShader"></a>7.4、Shader与BitmapShader</h3><h4 id="7-4-1、Shader概述"><a href="#7-4-1、Shader概述" class="headerlink" title="7.4.1、Shader概述"></a>7.4.1、Shader概述</h4><p>通过给Shader指定对应的图像、渐变色等来填充图形的。</p>
-<pre><code>public Shader setShader (Shader shader)
-</code></pre><h4 id="7-4-2、BitmapShader的基本用法"><a href="#7-4-2、BitmapShader的基本用法" class="headerlink" title="7.4.2、BitmapShader的基本用法"></a>7.4.2、BitmapShader的基本用法</h4><pre><code>public BitmapShader(Bitmap bitmap, TileMode tileX , TileMode tileY)
+<pre><code class="hljs">public Shader setShader (Shader shader)
+</code></pre><h4 id="7-4-2、BitmapShader的基本用法"><a href="#7-4-2、BitmapShader的基本用法" class="headerlink" title="7.4.2、BitmapShader的基本用法"></a>7.4.2、BitmapShader的基本用法</h4><pre><code class="hljs">public BitmapShader(Bitmap bitmap, TileMode tileX , TileMode tileY)
 </code></pre><p>bitmap用来指定图案，tileX用来指定当X轴超出单张图片大小时所使用的重复策略，tileY用来指定当Y轴超出单张图片大小时所使用的重复策略。</p>
 <p>TileMode的取值：</p>
-<pre><code>TileMode.CLAMP：用边缘色彩来填充多余空间。
+<pre><code class="hljs">TileMode.CLAMP：用边缘色彩来填充多余空间。
 TileMode.REPEAT：重复原图像来填充多余空间。
 TileMode.MIRROR：重复使用镜像模式的 图像来填充多余空间。
 </code></pre><p>先填充Y轴，然后填充X轴。</p>
-<h4 id="7-4-3、望远镜效果示例"><a href="#7-4-3、望远镜效果示例" class="headerlink" title="7.4.3、望远镜效果示例"></a>7.4.3、望远镜效果示例</h4><h4 id="7-4-4、生成不规则头像示例"><a href="#7-4-4、生成不规则头像示例" class="headerlink" title="7.4.4、生成不规则头像示例"></a>7.4.4、生成不规则头像示例</h4><h3 id="7-5、Shader之LinearGradient"><a href="#7-5、Shader之LinearGradient" class="headerlink" title="7.5、Shader之LinearGradient"></a>7.5、Shader之LinearGradient</h3><h4 id="7-5-1、概述"><a href="#7-5-1、概述" class="headerlink" title="7.5.1、概述"></a>7.5.1、概述</h4><pre><code>public LinearGradient(float xO , float yO , float xl , float yl , int colorO , int colorl , TileMode tile)
+<h4 id="7-4-3、望远镜效果示例"><a href="#7-4-3、望远镜效果示例" class="headerlink" title="7.4.3、望远镜效果示例"></a>7.4.3、望远镜效果示例</h4><h4 id="7-4-4、生成不规则头像示例"><a href="#7-4-4、生成不规则头像示例" class="headerlink" title="7.4.4、生成不规则头像示例"></a>7.4.4、生成不规则头像示例</h4><h3 id="7-5、Shader之LinearGradient"><a href="#7-5、Shader之LinearGradient" class="headerlink" title="7.5、Shader之LinearGradient"></a>7.5、Shader之LinearGradient</h3><h4 id="7-5-1、概述"><a href="#7-5-1、概述" class="headerlink" title="7.5.1、概述"></a>7.5.1、概述</h4><pre><code class="hljs">public LinearGradient(float xO , float yO , float xl , float yl , int colorO , int colorl , TileMode tile)
 
 public LinearGradient (float xO , fl 。atyO, floatxl ,floatyl,intcolors[], float positions[] , TileMode tile)
-</code></pre><h4 id="7-5-2、闪光文字效果示例"><a href="#7-5-2、闪光文字效果示例" class="headerlink" title="7.5.2、闪光文字效果示例"></a>7.5.2、闪光文字效果示例</h4><h3 id="7-6、Shader之RadialGradient"><a href="#7-6、Shader之RadialGradient" class="headerlink" title="7.6、Shader之RadialGradient"></a>7.6、Shader之RadialGradient</h3><h4 id="7-6-1、双色渐变"><a href="#7-6-1、双色渐变" class="headerlink" title="7.6.1、双色渐变"></a>7.6.1、双色渐变</h4><pre><code>RadialGradient(float centerX , float centerY , float radius , int centerColor ,int edgeColor, Shader.TileMode tileMode)
-</code></pre><h4 id="7-6-2、多色渐变"><a href="#7-6-2、多色渐变" class="headerlink" title="7.6.2、多色渐变"></a>7.6.2、多色渐变</h4><pre><code>RadialGradient(float centerX , float centerY , float radius, int[] colors , float[] stops, Shader.TileMode tileMode)
+</code></pre><h4 id="7-5-2、闪光文字效果示例"><a href="#7-5-2、闪光文字效果示例" class="headerlink" title="7.5.2、闪光文字效果示例"></a>7.5.2、闪光文字效果示例</h4><h3 id="7-6、Shader之RadialGradient"><a href="#7-6、Shader之RadialGradient" class="headerlink" title="7.6、Shader之RadialGradient"></a>7.6、Shader之RadialGradient</h3><h4 id="7-6-1、双色渐变"><a href="#7-6-1、双色渐变" class="headerlink" title="7.6.1、双色渐变"></a>7.6.1、双色渐变</h4><pre><code class="hljs">RadialGradient(float centerX , float centerY , float radius , int centerColor ,int edgeColor, Shader.TileMode tileMode)
+</code></pre><h4 id="7-6-2、多色渐变"><a href="#7-6-2、多色渐变" class="headerlink" title="7.6.2、多色渐变"></a>7.6.2、多色渐变</h4><pre><code class="hljs">RadialGradient(float centerX , float centerY , float radius, int[] colors , float[] stops, Shader.TileMode tileMode)
 </code></pre><h2 id="第8章混合模式"><a href="#第8章混合模式" class="headerlink" title="第8章混合模式"></a>第8章混合模式</h2><h3 id="8-1、混合模式之AvoidXfermode"><a href="#8-1、混合模式之AvoidXfermode" class="headerlink" title="8.1、混合模式之AvoidXfermode"></a>8.1、混合模式之AvoidXfermode</h3><h4 id="8-1-1、混合模式概述"><a href="#8-1-1、混合模式概述" class="headerlink" title="8.1.1、混合模式概述"></a>8.1.1、混合模式概述</h4><p>Xfermode的子类有AvoidXfermode、PixelXorXfermode和PorterDuffXfermode。</p>
 <p>在使用Xfermode时，为了保险起见，需要做两件事：</p>
 <p>禁用硬件加速：</p>
-<pre><code>setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+<pre><code class="hljs">setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 </code></pre><p>使用离屏绘制:</p>
-<pre><code>需要把绘制的核心代码放在canvas.save和canvas.restore函数之间
+<pre><code class="hljs">需要把绘制的核心代码放在canvas.save和canvas.restore函数之间
 
 //新建图层
 int layerId = canvas.saveLayer(0, 0, getWidth(), getHeight(),null ,Canvas.ALL_SAVE_FLAG);
@@ -1224,46 +1269,94 @@ int layerId = canvas.saveLayer(0, 0, getWidth(), getHeight(),null ,Canvas.ALL_SA
 //....
 //还原图层
 canvas.restoreToCount(layerid);
-</code></pre><h4 id="8-1-2、AvoidXfermode"><a href="#8-1-2、AvoidXfermode" class="headerlink" title="8.1.2、AvoidXfermode"></a>8.1.2、AvoidXfermode</h4><pre><code>public AvoidXfermode (int opColor, int tolerance ,Mode mode)
-</code></pre><h4 id="8-1-3、AvoidXfermode绘制原理"><a href="#8-1-3、AvoidXfermode绘制原理" class="headerlink" title="8.1.3、AvoidXfermode绘制原理"></a>8.1.3、AvoidXfermode绘制原理</h4><h4 id="8-1-4、AvoidXfermode之Mode-AVOID"><a href="#8-1-4、AvoidXfermode之Mode-AVOID" class="headerlink" title="8.1.4、AvoidXfermode之Mode.AVOID"></a>8.1.4、AvoidXfermode之Mode.AVOID</h4><h3 id="8-2、混合模式之PorterDuffXfermode"><a href="#8-2、混合模式之PorterDuffXfermode" class="headerlink" title="8.2、混合模式之PorterDuffXfermode"></a>8.2、混合模式之PorterDuffXfermode</h3><h4 id="8-2-1、PorterDuffXfermode概述"><a href="#8-2-1、PorterDuffXfermode概述" class="headerlink" title="8.2.1、PorterDuffXfermode概述"></a>8.2.1、PorterDuffXfermode概述</h4><pre><code>public PorterDuffXfermode(PorterDuff .Mode mode)
+</code></pre><h4 id="8-1-2、AvoidXfermode"><a href="#8-1-2、AvoidXfermode" class="headerlink" title="8.1.2、AvoidXfermode"></a>8.1.2、AvoidXfermode</h4><pre><code class="hljs">public AvoidXfermode (int opColor, int tolerance ,Mode mode)
+</code></pre><h4 id="8-1-3、AvoidXfermode绘制原理"><a href="#8-1-3、AvoidXfermode绘制原理" class="headerlink" title="8.1.3、AvoidXfermode绘制原理"></a>8.1.3、AvoidXfermode绘制原理</h4><h4 id="8-1-4、AvoidXfermode之Mode-AVOID"><a href="#8-1-4、AvoidXfermode之Mode-AVOID" class="headerlink" title="8.1.4、AvoidXfermode之Mode.AVOID"></a>8.1.4、AvoidXfermode之Mode.AVOID</h4><h3 id="8-2、混合模式之PorterDuffXfermode"><a href="#8-2、混合模式之PorterDuffXfermode" class="headerlink" title="8.2、混合模式之PorterDuffXfermode"></a>8.2、混合模式之PorterDuffXfermode</h3><h4 id="8-2-1、PorterDuffXfermode概述"><a href="#8-2-1、PorterDuffXfermode概述" class="headerlink" title="8.2.1、PorterDuffXfermode概述"></a>8.2.1、PorterDuffXfermode概述</h4><pre><code class="hljs">public PorterDuffXfermode(PorterDuff .Mode mode)
 </code></pre><p>在Xfermode设置前画出的图像叫作目标图像，即给谁应用Xfermode；在Xfermode设置后画出 的图像叫作源图像，即拿什么应用Xfermode。</p>
 <h4 id="8-2-2、颜色叠加相关模式"><a href="#8-2-2、颜色叠加相关模式" class="headerlink" title="8.2.2、颜色叠加相关模式"></a>8.2.2、颜色叠加相关模式</h4><h3 id="8-3、PorterDuffXfermode之源图像模式"><a href="#8-3、PorterDuffXfermode之源图像模式" class="headerlink" title="8.3、PorterDuffXfermode之源图像模式"></a>8.3、PorterDuffXfermode之源图像模式</h3><p>刮刮卡效果示例</p>
 <h3 id="8-4、目标图像模式与真他模式"><a href="#8-4、目标图像模式与真他模式" class="headerlink" title="8.4、目标图像模式与真他模式"></a>8.4、目标图像模式与真他模式</h3><p>区域波纹示例</p>
 
+              
             </div>
-            <hr>
+            <hr/>
             <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Android/">Android</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6/">自定义控件</a>
-                    
-                  </div>
-                
-              </div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6/">#自定义控件</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Android自定义控件入门与实战-读书笔记</div>
+      <div>http://yoursite.com/2020/01/04/32.Android自定义控件入门与实战/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年1月4日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
               
-              
-                <div class="post-prevnext">
+                <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/03/07/33.JNI%E5%85%A5%E9%97%A8/">
+                      <a href="/2020/03/07/33.JNI%E5%85%A5%E9%97%A8/" title="JNI入门">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">JNI入门</span>
                         <span class="visible-mobile">上一篇</span>
@@ -1273,7 +1366,7 @@ canvas.restoreToCount(layerid);
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2019/12/23/31.ConstraintLayout%E5%B8%83%E5%B1%80/">
+                      <a href="/2019/12/23/31.ConstraintLayout%E5%B8%83%E5%B1%80/" title="ConstraintLayout布局详解">
                         <span class="hidden-mobile">ConstraintLayout布局详解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -1289,25 +1382,55 @@ canvas.restoreToCount(layerid);
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
 
 
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -1326,32 +1449,34 @@ canvas.restoreToCount(layerid);
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
   
-
   
-</footer>
+  
+  
+</div>
 
+  </footer>
 
-  <!-- SCRIPTS -->
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
@@ -1367,11 +1492,28 @@ canvas.restoreToCount(layerid);
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
 
 
   
@@ -1380,72 +1522,153 @@ canvas.restoreToCount(layerid);
 
 
 
+
   
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
-
-
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
 
 
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
-  </script>
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

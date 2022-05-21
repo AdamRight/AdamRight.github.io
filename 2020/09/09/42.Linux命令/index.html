@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=dark>
 
 
 
@@ -9,40 +9,47 @@
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
+  
+    <meta name="description" content="LinuxLinux主要目录速查表 &#x2F;：根目录，一般根目录下只存放目录，在 linux 下有且只有一个根目录，所有的东西都是从这里开始。当在终端里输入 &#x2F;home，其实是在告诉电脑，先从 &#x2F;（根目录）开始，再进入到 home 目录  &#x2F;bin、&#x2F;usr&#x2F;bin：可执行二进制文件的目录，如常用的命令 ls、tar、mv、cat 等  &#x2F;boot：放置 linux 系统启动时用到的一些文件，如 lin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux命令">
+<meta property="og:url" content="http://yoursite.com/2020/09/09/42.Linux%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Jiang Space">
+<meta property="og:description" content="LinuxLinux主要目录速查表 &#x2F;：根目录，一般根目录下只存放目录，在 linux 下有且只有一个根目录，所有的东西都是从这里开始。当在终端里输入 &#x2F;home，其实是在告诉电脑，先从 &#x2F;（根目录）开始，再进入到 home 目录  &#x2F;bin、&#x2F;usr&#x2F;bin：可执行二进制文件的目录，如常用的命令 ls、tar、mv、cat 等  &#x2F;boot：放置 linux 系统启动时用到的一些文件，如 lin">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/img/10.png">
+<meta property="article:published_time" content="2020-09-09T13:06:10.253Z">
+<meta property="article:modified_time" content="2021-03-26T14:41:50.562Z">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yoursite.com/img/10.png">
+  
+  
   
   <title>Linux命令 - Jiang Space</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
+
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
 
@@ -51,24 +58,44 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
+
+  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Jiang Space</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">
+      <strong>Jiang Space</strong>
+    </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -142,13 +169,15 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -157,60 +186,71 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Linux命令">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-09-09 21:06" pubdate>
-        2020年9月9日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      3.8k 字
-    </span>
   
 
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      43
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux命令"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-09-09 21:06" pubdate>
+          2020年9月9日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          5.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          50 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
@@ -219,17 +259,22 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">Linux命令</h1>
             
             <div class="markdown-body">
+              
               <h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="Linux主要目录速查表"><a href="#Linux主要目录速查表" class="headerlink" title="Linux主要目录速查表"></a>Linux主要目录速查表</h3><hr>
-<pre><code>/：根目录，一般根目录下只存放目录，在 linux 下有且只有一个根目录，所有的东西都是从这里开始。当在终端里输入 /home，其实是在告诉电脑，先从 /（根目录）开始，再进入到 home 目录
+<pre><code class="hljs">/：根目录，一般根目录下只存放目录，在 linux 下有且只有一个根目录，所有的东西都是从这里开始。当在终端里输入 /home，其实是在告诉电脑，先从 /（根目录）开始，再进入到 home 目录
 
 /bin、/usr/bin：可执行二进制文件的目录，如常用的命令 ls、tar、mv、cat 等
 
@@ -291,7 +336,7 @@
 <p>后9个字母分别代表三组权限：文件所有者、用户者、其他用户拥有的权限。每一个用户都有它自身的读、写和执行权限。</p>
 <hr>
 <h3 id="常用Linux命令"><a href="#常用Linux命令" class="headerlink" title="常用Linux命令"></a>常用Linux命令</h3><hr>
-<pre><code>ctrl + shift + =     //放大终端窗口的字体显示
+<pre><code class="hljs">ctrl + shift + =     //放大终端窗口的字体显示
 ctrl + -     //缩小终端窗口的字体显示
 
 ls    //查看当前文件夹下的内容
@@ -305,38 +350,38 @@ clear    //清屏
 tree    //以树状方式显示目录信息
 </code></pre><hr>
 <p>Linux文件或者目录名称最长可以有256个字符，<code>.</code>代表当前目录，<code>..</code>代表上一级目录，以<code>.</code>开头的文件为隐藏文件，需要用<code>-a</code>参数才能显示。</p>
-<pre><code>ls -a     //查看所有文件包含隐藏文件
+<pre><code class="hljs">ls -a     //查看所有文件包含隐藏文件
 ls -l     //以列表形式查看文件，不包含隐藏文件
 ls -lh     //以列表形式查看文件，不包含隐藏文件 ，按照1024倍数显示&#123;KB MB GB&#125;
 ls -all    //以列表形式查看文件，包含隐藏文件 快捷方式【ll】
 </code></pre><p>通配符：</p>
-<pre><code>【*】 匹配任意多个字符【0-256】  a*  一个以上字符 256以下 
+<pre><code class="hljs">【*】 匹配任意多个字符【0-256】  a*  一个以上字符 256以下 
 【?】 匹配任意一个字符  a？ 两个字符
 【[a-z]】 区间法 匹配a到z的所有字符 只能确定一个字符
 【[abcde]】 穷举法 权值法 匹配abcde的所有字符 只能确定一个字符
 </code></pre><p>重定向命令 </p>
-<pre><code>//Linux允许将命令执行结果重定向到一个文件，本应显示在终端上的内容保存到指定文件中。
+<pre><code class="hljs">//Linux允许将命令执行结果重定向到一个文件，本应显示在终端上的内容保存到指定文件中。
 ls &gt; test.txt     //test.txt 如果不存在，则创建，存在则覆盖其内容。
 &gt;输出重定向会覆盖原来的内容，&gt;&gt;输出重定向则会追加到文件的尾部。
 </code></pre><hr>
 <p>切换工作目录：</p>
-<pre><code>cd ~ 切换到当前用户的主目录
+<pre><code class="hljs">cd ~ 切换到当前用户的主目录
 cd .. 切换到上级目录 
 cd -  切换到上一次目录
 </code></pre><hr>
 <p>查看或者合并文件内容：</p>
-<pre><code>cat 文件名
+<pre><code class="hljs">cat 文件名
 cat a.txt b.txt &gt; c.txt
 </code></pre><hr>
 <p>建立链接文件：ln</p>
-<pre><code>//如果没有-s选项代表建立一个硬链接文件，两个文件占用相同大小的硬盘空间，即使删除了源文件，链接文件还是存在。
+<pre><code class="hljs">//如果没有-s选项代表建立一个硬链接文件，两个文件占用相同大小的硬盘空间，即使删除了源文件，链接文件还是存在。
 //硬链接和拷贝（复制）区别:无论修改了哪一个链接之后的文件,两个文件都会改变,保持一致,但是拷贝不会。
 ln 源文件 链接文件
 //软链接文件不占磁盘空间 但是删除源文件会影响软链接文件
 ln -s 源文件 链接文件
 </code></pre><hr>
 <p>搜索文件里的文本内容：</p>
-<pre><code>//行首,搜寻以a开头的行
+<pre><code class="hljs">//行首,搜寻以a开头的行
 grep -n &apos;^a&apos; 1.txt
 
 //行尾,搜寻以 ke 结束的行
@@ -349,13 +394,13 @@ grep -n &apos;[Ss]igna[Ll]&apos; 1.txt
 grep -n &apos;e.e&apos; 1.txt
 </code></pre><hr>
 <p>计算文件行数或字数：</p>
-<pre><code>wc 文件名
+<pre><code class="hljs">wc 文件名
 -l    统计行数
 -w    统计字数。一个字被定义为由空白、跳格或换行字符分隔的字符串。
 -c    统计字节数
 -m    统计字符数。这个标志不能与 -c 标志一起使用。
 </code></pre><p>查找文件：</p>
-<pre><code>find ./ -name test.sh    //查找当前目录下所有名为test.sh的文件
+<pre><code class="hljs">find ./ -name test.sh    //查找当前目录下所有名为test.sh的文件
 find ./ -name &apos;*.sh&apos;    //查找当前目录下所有后缀为.sh的文件
 find ./ -name &quot;[A-Z]*&quot;    //查找当前目录下所有以大写字母开头的文件
 find  /tmp  -size   2M    //查找在/tmp 目录下等于2M的文件
@@ -365,13 +410,13 @@ find ./ -size +4k -size -5M    //查找当前目录下大于4k，小于5M的文�
 find ./ -perm 0777    //查找当前目录下权限为 777 的文件或目录
 </code></pre><hr>
 <p>拷贝文件：cp</p>
-<pre><code>cp vim_configure/ code/ -ivr //把文件夹 vim_configure 拷贝到 code 目录里：
+<pre><code class="hljs">cp vim_configure/ code/ -ivr //把文件夹 vim_configure 拷贝到 code 目录里：
 </code></pre><p>移动文件：mv</p>
 <hr>
 <p>获取文件类型：</p>
-<pre><code>file 文件名
+<pre><code class="hljs">file 文件名
 </code></pre><p>归档管理：tar</p>
-<pre><code>//tar  [参数]  打包文件名  文件
+<pre><code class="hljs">//tar  [参数]  打包文件名  文件
 tar -cvf text.tar 1.text 2.text 3.text
 //解归档
 tar -xvf test.tar
@@ -382,17 +427,17 @@ tar zcvf test.tar.gz 1.c 2.c 3.c 4.c
 tar zxvf 文件名.tar.gz
 </code></pre><hr>
 <p>文件压缩解压：gzip</p>
-<pre><code>//tar与gzip命令结合使用实现文件打包、压缩。tar只负责打包文件，但不压缩，用gzip压缩tar打包后的文件，其扩展名一般用xxxx.tar.gz。
+<pre><code class="hljs">//tar与gzip命令结合使用实现文件打包、压缩。tar只负责打包文件，但不压缩，用gzip压缩tar打包后的文件，其扩展名一般用xxxx.tar.gz。
 gzip  text.tar
 //解压缩：生成了一个文件 归档文件名.tar
 gzip -d 归档文件名.tar.gz 
 </code></pre><p>文件压缩解压：bzip2</p>
-<pre><code>//bzip2压缩：
+<pre><code class="hljs">//bzip2压缩：
 tar -cjvf 文件名.tar.bz2 文件1 文件2
 //bzip2解压缩：
 tar -xjvf 文件名.tar.bz2 -C 路径
 </code></pre><p>文件压缩解压：zip、unzip</p>
-<pre><code>//压缩
+<pre><code class="hljs">//压缩
 zip 文件名 文件1 文件2 生成一个文件为：文件名.zip
 //unzip解压缩：
 unzip 文件名.zip -C 路径
@@ -403,22 +448,22 @@ unzip 文件名.zip -C 路径
 <p>查看当前用户：<code>whoami</code></p>
 <p>查看登录用户：<code>who -m</code></p>
 <p>切换用户</p>
-<pre><code>su    //切换到root用户
+<pre><code class="hljs">su    //切换到root用户
 su root    //切换到root用户
 
 su 普通用户    //切换到普通用户
 su - 普通用户    //切换到普通用户，同时切换普通用户所在的目录
 </code></pre><p>添加、删除组账号：</p>
-<pre><code>groupadd 新建组账号
+<pre><code class="hljs">groupadd 新建组账号
 groupdel 组账号
 </code></pre><p>修改用户所在组：</p>
-<pre><code>usermod -g 用户组 用户名
+<pre><code class="hljs">usermod -g 用户组 用户名
 </code></pre><p>添加组：</p>
-<pre><code>groupadd 组名     //  添加组  需要用户权限
+<pre><code class="hljs">groupadd 组名     //  添加组  需要用户权限
 groupdel 组名    //删除组  需要用户权限和清空组成员
 usermod -g 组名 用户名1 用户名2】//修改用户所在组：需要用户权限
 </code></pre><p>修改文件权限：chmod 修改文件权限有两种使用格式：字母法与数字法。</p>
-<pre><code>//字母法：
+<pre><code class="hljs">//字母法：
 chmod u/g/o/a  +/-/=  rwx  文件
 
 [ u/g/o/a ]     含义
@@ -460,16 +505,16 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 <hr>
 <h3 id="VI"><a href="#VI" class="headerlink" title="VI"></a>VI</h3><hr>
 <p>VI编辑器有两个模式：文本编辑模式 命令行处理模式：</p>
-<pre><code>1、vi 文件名  2、vim 
+<pre><code class="hljs">1、vi 文件名  2、vim 
 </code></pre><p>操作编辑器：</p>
-<pre><code>【i】在光标当前位置插入
+<pre><code class="hljs">【i】在光标当前位置插入
 【a】在光标右侧位置插入
 【o】在光标下一行位置开启新的一行插入
 【O】在光标上一行位置开启新的一行插入
 【I】在光标当前行行首插入
 【A】在光标当前行行尾插入
 </code></pre><p>退出编辑器：</p>
-<pre><code>【ZZ】保存退出
+<pre><code class="hljs">【ZZ】保存退出
 【:wq】保存退出
 【:x】保存退出
 【:w 文件名】保存到指定文件中
@@ -477,7 +522,7 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 【:q!】 强制退出  退出 不保存
 【:! 命令】暂时离开vi 执行其他命令
 </code></pre><p>编辑器操作：</p>
-<pre><code>【[n]x】删除光标位置后面n个字符
+<pre><code class="hljs">【[n]x】删除光标位置后面n个字符
 【[n]X】删除光标位置前面n个字符
 【D】删除光标所在位置后面到行尾的所有字符
 【[n]dd】删除光标所在行及下面n行   剪切
@@ -488,7 +533,7 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 【.】执行上一次命令行操作
 【u】撤销
 </code></pre><p>编辑器定位：</p>
-<pre><code>【ctrl+b】回滚 行号减小
+<pre><code class="hljs">【ctrl+b】回滚 行号减小
 【ctrl+f】前滚 行号增加
 【gg】定位在文件第一行行首
 【G】定位在文件最后一行行首
@@ -504,13 +549,13 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 【/.】查找任意一个字符
 【/*】查找任意多个字符
 </code></pre><p>编辑器替换：</p>
-<pre><code>【r】替换光标所在位置的字符
+<pre><code class="hljs">【r】替换光标所在位置的字符
 【:r 文件名】在光标当前行的下一行插入一个文件 每次添加只能添加一个文件
 【:s/a/b/g】将光标所在行的a替换为b
 【:g/a/s//b/g】将文件中所有a替换为b
 【:n1,n2s/a/b/g】将行区间n1到n2的行中所有的a替换为b
 </code></pre><p>编辑器设置：</p>
-<pre><code>【:set ic】搜索时不区分大小写
+<pre><code class="hljs">【:set ic】搜索时不区分大小写
 【:set noic】搜索时区分大小写
 :set nu    //显示行号
 :set nonu    //不显示行号
@@ -524,40 +569,88 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 <p>终端内容保存到文件使用重定向有两种方式: <code>&gt;</code> 和 <code>&gt;&gt;</code>。<code>&gt;</code> 表示每次只写入最新的数据，原有数据不保留。<code>&gt;&gt;</code> 表示每次在原有数据的基础上进行追加，原有数据会保留。</p>
 <hr>
 
+              
             </div>
-            <hr>
+            <hr/>
             <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/C/">C</a>
-                    
-                  </div>
-                
-              </div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/C/">#C</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux命令</div>
+      <div>http://yoursite.com/2020/09/09/42.Linux命令/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年9月9日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
               
-              
-                <div class="post-prevnext">
+                <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/09/09/43.python%E9%AB%98%E7%BA%A7/">
+                      <a href="/2020/09/09/43.python%E9%AB%98%E7%BA%A7/" title="python高级">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">python高级</span>
                         <span class="visible-mobile">上一篇</span>
@@ -567,7 +660,7 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/09/05/41.python%E5%9F%BA%E7%A1%80/">
+                      <a href="/2020/09/05/41.python%E5%9F%BA%E7%A1%80/" title="python基础">
                         <span class="hidden-mobile">python基础</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -583,25 +676,55 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
 
 
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -620,32 +743,34 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
   
-
   
-</footer>
+  
+  
+</div>
 
+  </footer>
 
-  <!-- SCRIPTS -->
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
@@ -661,11 +786,28 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
 
 
   
@@ -674,72 +816,153 @@ chmod 751 file    //文件所有者：读、写、执行权限、同组用户：
 
 
 
+
   
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
-
-
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
 
 
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
-  </script>
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>
