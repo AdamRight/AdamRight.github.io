@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=dark>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
 
 
 
@@ -9,47 +9,40 @@
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
-  
-    <meta name="description" content="C语言概述   #include &lt;stdio.h&gt; int main(int argc, const char * argv[])  &amp;#123;     printf(&quot;Hello, World!\n&quot;);     return 0; &amp;#125; return return代表函数执行完毕，返回return代表函数的终止 如果main定义的时候前面是int，那">
-<meta property="og:type" content="article">
-<meta property="og:title" content="C基础">
-<meta property="og:url" content="http://yoursite.com/2020/03/21/39.C%E5%9F%BA%E7%A1%80/index.html">
-<meta property="og:site_name" content="Jiang Space">
-<meta property="og:description" content="C语言概述   #include &lt;stdio.h&gt; int main(int argc, const char * argv[])  &amp;#123;     printf(&quot;Hello, World!\n&quot;);     return 0; &amp;#125; return return代表函数执行完毕，返回return代表函数的终止 如果main定义的时候前面是int，那">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/img/7.png">
-<meta property="article:published_time" content="2020-03-21T06:18:40.244Z">
-<meta property="article:modified_time" content="2021-03-26T14:41:37.134Z">
-<meta property="article:tag" content="C">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://yoursite.com/img/7.png">
-  
-  
   
   <title>C基础 - Jiang Space</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
@@ -58,44 +51,24 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
+<!-- 自定义样式保持在最底部 -->
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-
-  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>Jiang Space</strong>
-    </a>
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Jiang Space</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -169,15 +142,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
-            </a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
           </li>
-          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+            <a class="nav-link" href="javascript:">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -186,71 +157,60 @@
   </div>
 </nav>
 
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="C基础">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-21 14:18" pubdate>
+        2020年3月21日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12.2k 字
+    </span>
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="C基础"></span>
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      180
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
           
         </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-03-21 14:18" pubdate>
-          2020年3月21日 下午
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          <!-- compatible with older versions-->
-          33k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          <!-- compatible with older versions-->
-          273 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
       </div>
-
-      
     </div>
-  </div>
-</div>
-
-</div>
-
   </header>
 
   <main>
@@ -259,36 +219,31 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
+    <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
+        <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">C基础</h1>
             
             <div class="markdown-body">
-              
               <h2 id="C语言"><a href="#C语言" class="headerlink" title="C语言"></a>C语言</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><hr>
 <p><img src="/2020/03/21/39.C%E5%9F%BA%E7%A1%80/39.C基础/1.png" srcset="/img/loading.gif" lazyload alt></p>
 <p><img src="/2020/03/21/39.C%E5%9F%BA%E7%A1%80/39.C基础/3.png" srcset="/img/loading.gif" lazyload alt></p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main(int argc, const char * argv[]) 
 &#123;
     printf(&quot;Hello, World!\n&quot;);
     return 0;
 &#125;
 </code></pre><p>return</p>
-<pre><code class="hljs">return代表函数执行完毕，返回return代表函数的终止
+<pre><code>return代表函数执行完毕，返回return代表函数的终止
 如果main定义的时候前面是int，那么return后面就需要写一个整数；如果main定义的时候前面是void，那么return后面什么也不需要写
 在main函数中return 0代表程序执行成功，return -1代表程序执行失败
 int main()和void main()在C语言中是一样的，但C++只接受int main这种定义方式
 </code></pre><p>include</p>
-<pre><code class="hljs">#include的意思是头文件包含，#include &lt;stdio.h&gt;代表包含stdio.h这个头文件
+<pre><code>#include的意思是头文件包含，#include &lt;stdio.h&gt;代表包含stdio.h这个头文件
 使用C语言库函数需要提前包含库函数对应的头文件，如这里使用了printf()函数，需要包含stdio.h头文件
 #include&lt; &gt; 与 #include &quot;&quot;的区别：
 &lt; &gt; 表示系统直接按系统指定的目录检索
@@ -299,7 +254,7 @@ int main()和void main()在C语言中是一样的，但C++只接受int main这�
 <p>汇编：将汇编文件生成目标文件(二进制文件)(<code>.o</code>)</p>
 <p>链接：C语言写的程序是需要依赖各种库的，所以编译之后还需要把库链接到最终的可执行程序中去()</p>
 <p>32个关键字</p>
-<pre><code class="hljs">数据类型关键字（12个）
+<pre><code>数据类型关键字（12个）
 char、short、int、long、float、double、unsigned、signed、struct、union、enum、void
 
 控制语句关键字（12个）
@@ -313,7 +268,7 @@ sizeof、typedef、volatile
 </code></pre><hr>
 <h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><hr>
 <p><strong>声明变量</strong>不需要建立存储空间，如：<code>extern int a;</code>。<strong>定义变量</strong>需要建立存储空间，如：<code>int b;</code>。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main(int argc, const char* argv[])
 &#123;
     &#123;
@@ -326,7 +281,7 @@ int main(int argc, const char* argv[])
     &#125;
 &#125;
 </code></pre><p>define、const</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #define MAX 10 //声明了一个常量，名字叫MAX，值是10，常量的值一旦初始化不可改
 int main()
 &#123;
@@ -342,7 +297,7 @@ int main()
 </code></pre><p><strong>通过 <code>#define</code> 定义的常量,是根据值来匹配数据类型的。const修饰的常量是不安全，可以通过指针来修改。</strong></p>
 <hr>
 <h3 id="进制"><a href="#进制" class="headerlink" title="进制"></a>进制</h3><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     int a = 123;        //十进制方式赋值
@@ -357,7 +312,7 @@ int main()
 </code></pre><hr>
 <h3 id="sizeof"><a href="#sizeof" class="headerlink" title="sizeof"></a>sizeof</h3><hr>
 <p>sizeof不是函数，所以不需要包含任何头文件，它的功能是计算一个数据类型的大小，单位为字节。sizeof的返回值为size_t。size_t类型在32位操作系统下是unsigned int，是一个无符号的整数。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     int a;
@@ -370,7 +325,7 @@ int main()
 </code></pre><hr>
 <h3 id="int"><a href="#int" class="headerlink" title="int"></a>int</h3><hr>
 <p>打印格式</p>
-<pre><code class="hljs">%hd    输出short类型
+<pre><code>%hd    输出short类型
 %d    输出int类型
 %l    输出long类型
 %ll    输出long long类型
@@ -379,7 +334,7 @@ int main()
 %lu    输出unsigned long类型
 %llu    输出unsigned long long类型
 </code></pre><p>代码</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     short a = 10;
@@ -408,7 +363,7 @@ int main()
     return 0;
 &#125;
 </code></pre><p><strong>有符号数</strong>是最高位为符号位，0代表正数，1代表负数。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     signed int a = -1089474374; //定义有符号整型变量a
@@ -418,7 +373,7 @@ int main()
     return 0;
 &#125;
 </code></pre><p><strong>无符号数</strong>最高位不是符号位，而就是数的一部分，无符号数不可能是负数。无符号数，可以增大数的表达最大值。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     unsigned int a = 3236958022; //定义无符号整型变量a
@@ -428,7 +383,7 @@ int main()
 </code></pre><hr>
 <h3 id="char"><a href="#char" class="headerlink" title="char"></a>char</h3><hr>
 <p>字符变量实际上并不是把该字符本身放到变量的内存单元中去，而是将该字符对应的ASCII编码放到变量的存储单元中。<strong>char的本质就是一个1字节大小的整型</strong>。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     char ch = &apos;a&apos;;
@@ -451,7 +406,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h3 id="float、double"><a href="#float、double" class="headerlink" title="float、double"></a>float、double</h3><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     //传统方式赋值
@@ -470,7 +425,7 @@ int main()
     return 0;
 &#125;
 </code></pre><p>类型限定符</p>
-<pre><code class="hljs">//extern:声明一个变量，extern声明的变量没有建立存储空间
+<pre><code>//extern:声明一个变量，extern声明的变量没有建立存储空间
 extern int a;
 //const:定义一个常量，常量的值不能修改。
 const int a = 10;
@@ -483,11 +438,11 @@ const int a = 10;
 <hr>
 <h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><hr>
 <p>C语言的比较运算中，“真”用数字“1”来表示，“假”用数字“0”来表示。</p>
-<pre><code class="hljs">-&gt;    对象指针-&gt;成员名    //成员选择（指针）
+<pre><code>-&gt;    对象指针-&gt;成员名    //成员选择（指针）
 &amp;    &amp;变量名    //取地址运算符
 </code></pre><hr>
 <h3 id="三目运算符"><a href="#三目运算符" class="headerlink" title="三目运算符"></a>三目运算符</h3><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     int a = 10;
@@ -499,7 +454,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><hr>
-<pre><code class="hljs">#define _CRT_SECURE_NO_WARNINGS
+<pre><code>#define _CRT_SECURE_NO_WARNINGS
 #include&lt;stdio.h&gt;
 #include&lt;string.h&gt;
 #include&lt;stdlib.h&gt;
@@ -530,7 +485,7 @@ int main()
 </code></pre><hr>
 <h3 id="goto语句"><a href="#goto语句" class="headerlink" title="goto语句"></a>goto语句</h3><hr>
 <p>无条件跳转，尽量少用。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     goto End; //无条件跳转到End的标识
@@ -542,7 +497,7 @@ End:
 </code></pre><hr>
 <h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><hr>
 <p><strong>数组就是在内存中连续的相同类型的变量空间</strong>。同一个数组所有的成员都是相同的数据类型，同时所有的成员在内存中的地址是连续的。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     int a[10];//定义了一个数组，名字叫a，有10个成员，每个成员都是int类型
@@ -564,7 +519,7 @@ int main()
 </code></pre><hr>
 <h4 id="一维数组的初始化"><a href="#一维数组的初始化" class="headerlink" title="一维数组的初始化"></a>一维数组的初始化</h4><hr>
 <p>在定义数组的同时进行赋值，称为初始化。全局数组若不初始化，编译器将其初始化为零。局部数组若不初始化，内容为随机值。</p>
-<pre><code class="hljs">int a[10] = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 &#125;;//定义一个数组，同时初始化所有成员变量
+<pre><code>int a[10] = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 &#125;;//定义一个数组，同时初始化所有成员变量
 int a[10] = &#123; 1, 2, 3 &#125;;//初始化前三个成员，后面所有元素都设置为0
 int a[10] = &#123; 0 &#125;;//所有的成员都设置为0
 
@@ -573,7 +528,7 @@ int a[] = &#123; 1, 2, 3, 4, 5 &#125;;//定义了一个数组，有5个成员
 </code></pre><hr>
 <h4 id="数组名"><a href="#数组名" class="headerlink" title="数组名"></a>数组名</h4><hr>
 <p><strong>数组名是一个地址的常量，代表数组中首元素的地址</strong>。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     int a[10] = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 &#125;;//定义一个数组，同时初始化所有成员变量
@@ -593,14 +548,14 @@ int main()
     return 0;
 &#125;
 </code></pre><p><strong>数组元素个数</strong>：</p>
-<pre><code class="hljs">int （size_t） unsigned int 个数  = sizeof(数组名)/sizeof(数组元素 | 数组数据类型) 
+<pre><code>int （size_t） unsigned int 个数  = sizeof(数组名)/sizeof(数组元素 | 数组数据类型) 
 </code></pre><p><strong>数组地址</strong></p>
-<pre><code class="hljs">int a[10] = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 &#125;;//定义一个数组，同时初始化所有成员变量
+<pre><code>int a[10] = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 &#125;;//定义一个数组，同时初始化所有成员变量
 printf(&quot;a = %p\n&quot;, a);
 printf(&quot;&amp;a[0] = %p\n&quot;, &amp;a[0]);
 </code></pre><hr>
 <h4 id="一维数组的最值"><a href="#一维数组的最值" class="headerlink" title="一维数组的最值"></a>一维数组的最值</h4><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     int a[] = &#123; 1, -2, 3,-4, 5, -6, 7, -8, -9, 10 &#125;;//定义一个数组，同时初始化所有成员变量
@@ -618,7 +573,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="一维数组的逆置"><a href="#一维数组的逆置" class="headerlink" title="一维数组的逆置"></a>一维数组的逆置</h4><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     int a[] = &#123; 1, -2, 3,-4, 5, -6, 7, -8, -9, 10 &#125;;//定义一个数组，同时初始化所有成员变量
@@ -642,7 +597,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="冒泡法排序"><a href="#冒泡法排序" class="headerlink" title="冒泡法排序"></a>冒泡法排序</h4><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     int a[] = &#123; 1, -2, 3,-4, 5, -6, 7, -8, -9, 10 &#125;;//定义一个数组，同时初始化所有成员变量
@@ -672,11 +627,11 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h4><hr>
-<pre><code class="hljs">//常量表达式1表示第一维下标的长度，常量表达式2表示第二维下标的长度。
+<pre><code>//常量表达式1表示第一维下标的长度，常量表达式2表示第二维下标的长度。
 类型说明符 数组名[常量表达式1][常量表达式2]
 </code></pre><p>在内存中并不存在二维数组，二维数组实际的硬件存储器是连续编址的，也就是说内存中只有一维数组，即放完一行之后顺次放入第二行，和一维数组存放方式是一样的。</p>
 <p>实现</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     //定义了一个二维数组，名字叫a
@@ -708,7 +663,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="二维数组的初始化"><a href="#二维数组的初始化" class="headerlink" title="二维数组的初始化"></a>二维数组的初始化</h4><hr>
-<pre><code class="hljs">//分段赋值     
+<pre><code>//分段赋值     
 int a[3][4] = &#123;&#123; 1, 2, 3, 4 &#125;,&#123; 5, 6, 7, 8, &#125;,&#123; 9, 10, 11, 12 &#125;&#125;;
 
 //连续赋值
@@ -725,7 +680,7 @@ int a[][4] = &#123; 1, 2, 3, 4, 5, 6, 7, 8&#125;;
 </code></pre><hr>
 <h4 id="数组名-1"><a href="#数组名-1" class="headerlink" title="数组名"></a>数组名</h4><hr>
 <p>数组名是一个地址的常量，代表数组中首元素的地址。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 
 int main()
 &#123;
@@ -757,7 +712,7 @@ int main()
 </code></pre><hr>
 <h3 id="字符数组与字符串"><a href="#字符数组与字符串" class="headerlink" title="字符数组与字符串"></a>字符数组与字符串</h3><hr>
 <p><strong>C语言中没有字符串这种数据类型</strong>，可以通过char的数组来替代；字符串一定是一个char的数组，但char的数组未必是字符串；<strong>数字0(和字符‘\0’等价)结尾的char数组就是一个字符串</strong>，但如果char数组没有以数字0结尾，那么就不是一个字符串，只是普通字符数组，所以字符串是一种特殊的char的数组。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 
 int main()
 &#123;
@@ -775,7 +730,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="字符串初始化"><a href="#字符串初始化" class="headerlink" title="字符串初始化"></a>字符串初始化</h4><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 
 // C语言没有字符串类型，通过字符数组模拟
 // C语言字符串，以字符‘\0’, 数字0
@@ -816,7 +771,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="字符串追加拼接"><a href="#字符串追加拼接" class="headerlink" title="字符串追加拼接"></a>字符串追加拼接</h4><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 
 int main()
 &#123;
@@ -843,7 +798,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h4><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;time.h&gt;
 #include &lt;stdlib.h&gt;
 
@@ -858,7 +813,7 @@ int main()
 </code></pre><hr>
 <h4 id="strlen"><a href="#strlen" class="headerlink" title="strlen()"></a>strlen()</h4><hr>
 <p><code>#include &lt;string.h&gt;</code>计算指定指定字符串的长度，不包含字符串结束符<code>‘\0’</code>。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 int main()
 &#123;
@@ -872,7 +827,7 @@ int main()
 <p><code>include &lt;string.h&gt;    char *strcpy_s(char *dest, const char *src);</code></p>
 <p>功能：把src所指向的字符串复制到dest所指向的空间中，’\0’也会拷贝过去。返回值：成功：返回dest字符串的首地址；失败：NULL。</p>
 <p>注意：如果参数dest所指的内存空间不够大，可能会造成缓冲溢出的错误情况。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 int main()
 &#123;
@@ -885,7 +840,7 @@ int main()
 </code></pre><hr>
 <h4 id="strncpy-s"><a href="#strncpy-s" class="headerlink" title="strncpy_s"></a>strncpy_s</h4><hr>
 <p><code>#include &lt;string.h&gt;    char *strncpy_s(char *dest, const char *src, size_t n);</code>把src指向字符串的前n个字符复制到dest所指向的空间中，是否拷贝结束符看指定的长度是否包含’\0’。返回值：成功：返回dest字符串的首地址;失败：NULL。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 int main()
 &#123;
@@ -902,7 +857,7 @@ int main()
 </code></pre><hr>
 <h4 id="strcat-s"><a href="#strcat-s" class="headerlink" title="strcat_s"></a>strcat_s</h4><hr>
 <p><code>#include &lt;string.h&gt;  char *strcat_s(char *dest, const char *src);</code>将src字符串连接到dest的尾部，<code>‘\0’</code>也会追加过去。返回值：成功：返回dest字符串的首地址；失败：NULL。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 int main()
 &#123;
@@ -915,7 +870,7 @@ int main()
 </code></pre><hr>
 <h4 id="strncat-s"><a href="#strncat-s" class="headerlink" title="strncat_s"></a>strncat_s</h4><hr>
 <p><code>#include &lt;string.h&gt;  char *strncat(char *dest, const char *src, size_t n);</code>将src字符串前n个字符连接到dest的尾部，‘\0’也会追加过去。返回值：成功：返回dest字符串的首地址；失败：NULL。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 int main()
 &#123;
@@ -928,7 +883,7 @@ int main()
 </code></pre><hr>
 <h4 id="strcmp和strncmp"><a href="#strcmp和strncmp" class="headerlink" title="strcmp和strncmp"></a>strcmp和strncmp</h4><hr>
 <p>比较 s1 和 s2 的大小，比较的是字符ASCII码大小。返回值：相等：0; 大于：&gt;0; 小于：&lt;0。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 int main()
 &#123;
@@ -974,7 +929,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="sprintf-s"><a href="#sprintf-s" class="headerlink" title="sprintf_s"></a>sprintf_s</h4><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     char dst[100] = &#123; 0 &#125;;
@@ -991,7 +946,7 @@ int main()
 </code></pre><hr>
 <h4 id="strchr"><a href="#strchr" class="headerlink" title="strchr"></a>strchr</h4><hr>
 <p><code>#include &lt;string.h&gt;  char *strchr(const char *s, int c);</code>在字符串s中查找字母c出现的位置。返回值：成功：返回第一次出现的c地址；失败：NULL。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 int main()
 &#123;
@@ -1003,7 +958,7 @@ int main()
 </code></pre><hr>
 <h4 id="strstr"><a href="#strstr" class="headerlink" title="strstr"></a>strstr</h4><hr>
 <p><code>#include &lt;string.h&gt;  char *strstr(const char *haystack, const char *needle);</code>在字符串haystack中查找字符串needle出现的位置。返回值：成功：返回第一次出现的needle地址；失败：NULL。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 int main()
 &#123;
@@ -1016,7 +971,7 @@ int main()
 <h4 id="strstr-1"><a href="#strstr-1" class="headerlink" title="strstr"></a>strstr</h4><hr>
 <p><code>#include &lt;stdlib.h&gt; int atoi(const char *nptr);</code>atoi()会扫描nptr字符串，跳过前面的空格字符，直到遇到数字或正负号才开始做转换，而遇到非数字或字符串结束符(‘\0’)才结束转换，并将结果返回返回值。返回值：成功转换后整数</p>
 <p>类似的函数有：atof()：把一个小数形式的字符串转化为一个浮点数。atol()：将一个字符串转化为long类型。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 int main()
 &#123;
@@ -1032,7 +987,7 @@ int main()
 </code></pre><hr>
 <h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h4><hr>
 <p>函数定义的一般形式：</p>
-<pre><code class="hljs">返回类型 函数名(形式参数列表)
+<pre><code>返回类型 函数名(形式参数列表)
 &#123;
     数据定义部分;
     执行语句部分;
@@ -1046,7 +1001,7 @@ int main()
 <h4 id="函数的声明"><a href="#函数的声明" class="headerlink" title="函数的声明"></a>函数的声明</h4><hr>
 <p>函数定义的位置在主调函数之后，则必须在调用此函数之前对被调用的函数作声明。</p>
 <p>所谓函数声明，就是在函数尚在未定义的情况下，事先将该函数的有关信息通知编译系统，相当于告诉编译器，函数在后面定义，以便使编译能正常进行。注意：一个函数只能被定义一次，但可以声明多次。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int max(int x, int y); // 函数的声明，分号不能省略
 // int max(int, int); // 另一种方式
 
@@ -1069,14 +1024,14 @@ int max(int x, int y)
 <hr>
 <h4 id="分文件编程"><a href="#分文件编程" class="headerlink" title="分文件编程"></a>分文件编程</h4><hr>
 <p>max.h文件</p>
-<pre><code class="hljs">extern int max(int a, int b);
+<pre><code>extern int max(int a, int b);
 </code></pre><p>max.c文件</p>
-<pre><code class="hljs">int max(int x, int y)
+<pre><code>int max(int x, int y)
 &#123;
     return x &gt; y ? x : y;
 &#125;
 </code></pre><p>main.c文件</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &quot;max.h&quot;
 int main()
 &#123;
@@ -1088,15 +1043,15 @@ int main()
 </code></pre><hr>
 <h4 id="防止头文件重复包含"><a href="#防止头文件重复包含" class="headerlink" title="防止头文件重复包含"></a>防止头文件重复包含</h4><hr>
 <p>方法一：</p>
-<pre><code class="hljs">#ifndef __SOMEFILE_H__
+<pre><code>#ifndef __SOMEFILE_H__
 #define __SOMEFILE_H__
 // 声明语句
 #endif
 </code></pre><p>方法二：</p>
-<pre><code class="hljs">#pragma once
+<pre><code>#pragma once
 // 声明语句
 </code></pre><hr>
-<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><pre><code class="hljs">int  i    定义整形变量
+<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><pre><code>int  i    定义整形变量
 int *p    定义一个指向int的指针变量
 int a[10]    定义一个有10个元素的数组，每个元素类型为int
 int *p[10]    定义一个有10个元素的数组，每个元素类型为int*
@@ -1110,7 +1065,7 @@ int **p    定义一个指向int的指针的指针，二级指针
 <p>如果在程序中定义了一个变量，在对程序进行编译或运行时，系统就会给这个变量分配内存单元，并确定它的内存地址(编号)</p>
 <p><strong>指针的实质就是内存“地址”。指针就是地址，地址就是指针。指针是内存单元的编号，指针变量是存放地址的变量。</strong></p>
 <p>指针也是一种数据类型，指针变量也是一种变量。指针变量指向谁，就把谁的地址赋值给指针变量。<code>“*”</code>操作符操作的是指针变量指向的内存空间。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     int a = 0;
@@ -1129,7 +1084,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="通过指针间接修改变量的值"><a href="#通过指针间接修改变量的值" class="headerlink" title="通过指针间接修改变量的值"></a>通过指针间接修改变量的值</h4><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     int a = 0;
@@ -1151,17 +1106,17 @@ int main()
 <hr>
 <h4 id="野指针和空指针"><a href="#野指针和空指针" class="headerlink" title="野指针和空指针"></a>野指针和空指针</h4><hr>
 <p>指针变量也是变量，是变量就可以任意赋值，不要越界即可（32位为4字节，64位为8字节），但是，任意数值赋值给指针变量没有意义，因为这样的指针就成了野指针，此指针指向的区域是未知(操作系统不允许操作此指针指向的内存区域)。所以，野指针不会直接引发错误，操作野指针指向的内存区域才会出问题。</p>
-<pre><code class="hljs">int a = 100;
+<pre><code>int a = 100;
 int* p;
 p = a; //把a的值赋值给指针变量p，p为野指针， ok，不会有问题，但没有意义
 p = 0x12345678; //给指针变量p赋值，p为野指针， ok，不会有问题，但没有意义
 *p = 1000;  //操作野指针指向未知区域，内存出问题，err
 </code></pre><p>但是，野指针和有效指针变量保存的都是数值，为了标志此指针变量没有指向任何变量(空闲可用)，C语言中，可以把NULL赋值给此指针，这样就标志此指针为空指针，没有任何指针。NULL是一个值为0的宏常量：</p>
-<pre><code class="hljs">int *p = NULL;
+<pre><code>int *p = NULL;
 </code></pre><hr>
 <h4 id="万能指针"><a href="#万能指针" class="headerlink" title="万能指针"></a>万能指针</h4><hr>
 <p><code>void *</code>指针可以指向任意变量的内存空间：</p>
-<pre><code class="hljs">void* p = NULL;
+<pre><code>void* p = NULL;
 int a = 10;
 p = (void*)&amp;a; //指向变量时，最好转换为void *
 //使用指针变量指向的内存时，转换为int *
@@ -1170,7 +1125,7 @@ printf(&quot;a = %d\n&quot;, a);//11
 </code></pre><hr>
 <h4 id="const修饰的指针变量"><a href="#const修饰的指针变量" class="headerlink" title="const修饰的指针变量"></a>const修饰的指针变量</h4><hr>
 <p>指针常量和常量的指针</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     int a = 100;
@@ -1192,13 +1147,13 @@ int main()
 </code></pre><hr>
 <h3 id="指针和数组"><a href="#指针和数组" class="headerlink" title="指针和数组"></a>指针和数组</h3><hr>
 <p>数组名字是数组的首元素地址，但它是一个常量：</p>
-<pre><code class="hljs">int a[] = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9 &#125;;
+<pre><code>int a[] = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9 &#125;;
 printf(&quot;a = %p\n&quot;, a);//a = 0000002A5F6FFB48
 printf(&quot;&amp;a[0] = %p\n&quot;, &amp;a[0]);//&amp;a[0] = 0000002A5F6FFB48
 //a = 10; //err, 数组名只是常量，不能修改
 </code></pre><hr>
 <p>指针操作数组元素</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     int a[] = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9 &#125;;
@@ -1224,7 +1179,7 @@ int main()
 &#125;
 </code></pre><hr>
 <p>指针加法运算:指针计算不是简单的整数相加，如果是一个<code>int *</code>，+1的结果是增加一个int的大小;如果是一个<code>char *</code>，+1的结果是增加一个char大小。</p>
-<pre><code class="hljs">int a;
+<pre><code>int a;
 int* p = &amp;a;
 printf(&quot;%d\n&quot;, p);//896988804
 p += 2;//移动了2个int
@@ -1238,7 +1193,7 @@ printf(&quot;%d\n&quot;, p1);//896988812
 return 0;
 </code></pre><hr>
 <p>通过改变指针指向操作数组元素：</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 int main()
 &#123;
     int a[] = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9 &#125;;
@@ -1255,7 +1210,7 @@ int main()
 &#125;
 </code></pre><hr>
 <p>指针减法运算</p>
-<pre><code class="hljs">int a[] = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9 &#125;;
+<pre><code>int a[] = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9 &#125;;
 int* p2 = &amp;a[2]; //第2个元素地址
 int* p1 = &amp;a[1]; //第1个元素地址
 printf(&quot;p1 = %p, p2 = %p\n&quot;, p1, p2);
@@ -1265,7 +1220,7 @@ int n2 = (int)p2 - (int)p1; //n2 = 4
 printf(&quot;n1 = %d, n2 = %d\n&quot;, n1, n2);
 </code></pre><hr>
 <p>指针数组，它是数组，数组的每个元素都是指针类型。</p>
-<pre><code class="hljs">//指针数组
+<pre><code>//指针数组
 int* p[3];
 int a = 1;
 int b = 2;
@@ -1284,7 +1239,7 @@ printf(&quot;\n&quot;);
 </code></pre><hr>
 <h3 id="多级指针"><a href="#多级指针" class="headerlink" title="多级指针"></a>多级指针</h3><hr>
 <p>C语言允许有多级指针存在，在实际的程序中一级指针最常用，其次是二级指针。二级指针就是指向一个一级指针变量地址的指针。</p>
-<pre><code class="hljs">int a = 10;
+<pre><code>int a = 10;
 int* p = &amp;a; //一级指针
 *p = 100; //*p就是a
 
@@ -1298,7 +1253,7 @@ int*** t = &amp;q;
 //***t就是a
 </code></pre><hr>
 <h3 id="指针和函数"><a href="#指针和函数" class="headerlink" title="指针和函数"></a>指针和函数</h3><h4 id="函数形参改变实参的值"><a href="#函数形参改变实参的值" class="headerlink" title="函数形参改变实参的值"></a>函数形参改变实参的值</h4><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 void swap1(int x, int y)
 &#123;
     int tmp;
@@ -1332,7 +1287,7 @@ int main()
 </code></pre><hr>
 <h4 id="数组名做函数参数"><a href="#数组名做函数参数" class="headerlink" title="数组名做函数参数"></a>数组名做函数参数</h4><hr>
 <p>数组名做函数参数，函数的形参会退化为指针。</p>
-<pre><code class="hljs">//void printArrary(int a[10], int n)
+<pre><code>//void printArrary(int a[10], int n)
 //void printArrary(int a[], int n)
 void printArrary(int* a, int n)
 &#123;
@@ -1355,7 +1310,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="指针做为函数的返回值"><a href="#指针做为函数的返回值" class="headerlink" title="指针做为函数的返回值"></a>指针做为函数的返回值</h4><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 
 int a = 10;
 int* getA()
@@ -1370,7 +1325,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h3 id="指针和字符串"><a href="#指针和字符串" class="headerlink" title="指针和字符串"></a>指针和字符串</h3><hr>
-<pre><code class="hljs">char str[] = &quot;hello world&quot;;
+<pre><code>char str[] = &quot;hello world&quot;;
 char* p = str;
 *p = &apos;m&apos;;
 p++;
@@ -1384,7 +1339,7 @@ char* q = &quot;test&quot;;
 printf(&quot;%s\n&quot;, q);//test
 </code></pre><hr>
 <p>字符指针做函数参数</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 
 void mystrcat(char* dest, const char* src)
 &#123;
@@ -1416,7 +1371,7 @@ int main()
 &#125;
 </code></pre><hr>
 <p><strong>const修饰的指针，变量从左往右看，跳过类型，看修饰哪个字符，如果是<code>*</code>， 说明指针指向的内存不能改变，如果是指针变量，说明指针的指向不能改变，指针的值不能修改。</strong></p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 
@@ -1447,7 +1402,7 @@ int main(void)
 &#125;
 </code></pre><hr>
 <p>查找”abcd”个数-while</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 
@@ -1472,7 +1427,7 @@ int main(void)
 &#125;
 </code></pre><hr>
 <p>查找”abcd”个数-do-while</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 
@@ -1500,7 +1455,7 @@ int main(void)
 &#125;
 </code></pre><hr>
 <p>求非空字符串元素的个数：</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include &lt;ctype.h&gt;
@@ -1554,7 +1509,7 @@ int main(void)
 &#125;
 </code></pre><hr>
 <p>字符串反转模型(逆置):</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 
@@ -1598,7 +1553,7 @@ int main(void)
 &#125;
 </code></pre><hr>
 <h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><hr>
-<pre><code class="hljs">类型    作用域    生命周期    存储位置
+<pre><code>类型    作用域    生命周期    存储位置
 auto变量    一对&#123;&#125;内    当前函数    栈区
 static局部变量    一对&#123;&#125;内    整个程序运行期    初始化在data段，未初始化在BSS段
 extern变量    整个程序    整个程序运行期    初始化在data段，未初始化在BSS段
@@ -1611,12 +1566,12 @@ register变量    一对&#123;&#125;内    当前函数    运行时存储在CPU
 <p><strong>只有c语言将数组放在栈区</strong>。</p>
 <hr>
 <h4 id="malloc"><a href="#malloc" class="headerlink" title="malloc()"></a>malloc()</h4><hr>
-<pre><code class="hljs">#include &lt;stdlib.h&gt;
+<pre><code>#include &lt;stdlib.h&gt;
 void *malloc(size_t size);
 </code></pre><p>功能：在内存的动态存储区(堆区)中分配一块长度为size字节的连续区域，用来存放类型说明符指定的类型。分配的内存空间内容不确定，一般使用memset初始化。参数：size：需要分配内存大小(单位：字节)。返回值：成功：分配空间的起始地址，失败：NULL。</p>
 <hr>
 <h4 id="free"><a href="#free" class="headerlink" title="free"></a>free</h4><hr>
-<pre><code class="hljs">#include &lt;stdlib.h&gt;
+<pre><code>#include &lt;stdlib.h&gt;
 void free(void *ptr);
 </code></pre><p>功能：释放ptr所指向的一块内存空间，ptr是一个任意类型的指针变量，指向被释放区域的首地址。对同一内存空间多次释放会出错。<br>参数：ptr：需要释放空间的首地址，被释放区应是由malloc函数所分配的区域。返回值：无。</p>
 <hr>
@@ -1624,7 +1579,7 @@ void free(void *ptr);
 <p>定义结构体变量的方式：先声明结构体类型再定义变量名；在声明类型的同时定义变量；直接定义结构体类型变量（无类型名）。</p>
 <p>结构体类型：指定了一个结构体类型，它相当于一个模型，但其中并无具体数据，系统对之也不分配实际内存单元。</p>
 <p>结构体变量：系统根据结构体类型（内部成员状况）为之分配空间。</p>
-<pre><code class="hljs">//结构体类型的定义
+<pre><code>//结构体类型的定义
 struct stu
 &#123;
     char name[50];
@@ -1649,7 +1604,7 @@ struct
 &#125;s3 = &#123; &quot;yuri&quot;, 25 &#125;;
 </code></pre><hr>
 <h4 id="结构体成员的使用"><a href="#结构体成员的使用" class="headerlink" title="结构体成员的使用"></a>结构体成员的使用</h4><hr>
-<pre><code class="hljs">#include&lt;stdio.h&gt;
+<pre><code>#include&lt;stdio.h&gt;
 #include&lt;string.h&gt;
 
 //结构体类型的定义
@@ -1677,7 +1632,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="结构体数组"><a href="#结构体数组" class="headerlink" title="结构体数组"></a>结构体数组</h4><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 
 //统计学生成绩
 struct stu
@@ -1725,7 +1680,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="结构体套结构体"><a href="#结构体套结构体" class="headerlink" title="结构体套结构体"></a>结构体套结构体</h4><hr>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 
 struct person
 &#123;
@@ -1753,7 +1708,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="结构体赋值"><a href="#结构体赋值" class="headerlink" title="结构体赋值"></a>结构体赋值</h4><hr>
-<pre><code class="hljs">#include&lt;stdio.h&gt;
+<pre><code>#include&lt;stdio.h&gt;
 #include&lt;string.h&gt;
 
 //结构体类型的定义
@@ -1783,7 +1738,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="指向普通结构体变量的指针"><a href="#指向普通结构体变量的指针" class="headerlink" title="指向普通结构体变量的指针"></a>指向普通结构体变量的指针</h4><hr>
-<pre><code class="hljs">#include&lt;stdio.h&gt;
+<pre><code>#include&lt;stdio.h&gt;
 
 //结构体类型的定义
 struct stu
@@ -1805,7 +1760,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="堆区结构体变量"><a href="#堆区结构体变量" class="headerlink" title="堆区结构体变量"></a>堆区结构体变量</h4><hr>
-<pre><code class="hljs">#include&lt;stdio.h&gt;
+<pre><code>#include&lt;stdio.h&gt;
 #include &lt;string.h&gt;
 #include &lt;stdlib.h&gt;
 
@@ -1836,7 +1791,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="结构体套一级指针"><a href="#结构体套一级指针" class="headerlink" title="结构体套一级指针"></a>结构体套一级指针</h4><hr>
-<pre><code class="hljs">#include&lt;stdio.h&gt;
+<pre><code>#include&lt;stdio.h&gt;
 #include &lt;string.h&gt;
 #include &lt;stdlib.h&gt;
 
@@ -1876,7 +1831,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="结构体普通变量做函数参数"><a href="#结构体普通变量做函数参数" class="headerlink" title="结构体普通变量做函数参数"></a>结构体普通变量做函数参数</h4><hr>
-<pre><code class="hljs">#include&lt;stdio.h&gt;
+<pre><code>#include&lt;stdio.h&gt;
 #include &lt;string.h&gt;
 
 //结构体类型的定义
@@ -1904,7 +1859,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="结构体指针变量做函数参数"><a href="#结构体指针变量做函数参数" class="headerlink" title="结构体指针变量做函数参数"></a>结构体指针变量做函数参数</h4><hr>
-<pre><code class="hljs">#include&lt;stdio.h&gt;
+<pre><code>#include&lt;stdio.h&gt;
 #include &lt;string.h&gt;
 
 //结构体类型的定义
@@ -1931,7 +1886,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="结构体数组名做函数参数"><a href="#结构体数组名做函数参数" class="headerlink" title="结构体数组名做函数参数"></a>结构体数组名做函数参数</h4><hr>
-<pre><code class="hljs">#include&lt;stdio.h&gt;
+<pre><code>#include&lt;stdio.h&gt;
 
 //结构体类型的定义
 struct stu
@@ -1969,7 +1924,7 @@ int main()
 &#125;
 </code></pre><hr>
 <h4 id="const修饰结构体指针形参变量"><a href="#const修饰结构体指针形参变量" class="headerlink" title="const修饰结构体指针形参变量"></a>const修饰结构体指针形参变量</h4><hr>
-<pre><code class="hljs">//结构体类型的定义
+<pre><code>//结构体类型的定义
 struct stu
 &#123;
     char name[50];
@@ -2000,7 +1955,7 @@ void fun3(const struct stu* const p)
 <p>同一内存段可以用来存放几种不同类型的成员，但每一瞬时只有一种起作用；</p>
 <p>共用体变量中起作用的成员是最后一次存放的成员，在存入一个新的成员后原有的成员的值会被覆盖；</p>
 <p>共用体变量的地址和它的各成员的地址都是同一地址。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 
 //共用体也叫联合体 
 union Test
@@ -2038,12 +1993,12 @@ int main()
 </code></pre><hr>
 <h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><hr>
 <p>枚举：将变量的值一一列举出来，变量的值只限于列举出来的值的范围内。</p>
-<pre><code class="hljs">enum  枚举名
+<pre><code>enum  枚举名
 &#123;
     枚举值表
 &#125;;
 </code></pre><p>在枚举值表中应列出所有可用值，也称为枚举元素。枚举值是常量，不能在程序中用赋值语句再对它赋值。枚举元素本身由系统定义了一个表示序号的数值从0开始顺序定义为0，1，2 …。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 
 enum weekday
 &#123;
@@ -2075,7 +2030,7 @@ int main()
 </code></pre><hr>
 <h3 id="typedef"><a href="#typedef" class="headerlink" title="typedef"></a>typedef</h3><hr>
 <p>为一种数据类型(基本类型或自定义数据类型)定义一个新名字，不能创建新类型。与<code>#define</code>不同，typedef仅限于数据类型，而不是能是表达式或具体的值。<code>#define</code>发生在预处理，typedef发生在编译阶段。</p>
-<pre><code class="hljs">#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 
 typedef int INT;
 typedef char BYTE;
@@ -2103,88 +2058,40 @@ int main()
 &#125;
 </code></pre><hr>
 
-              
             </div>
-            <hr/>
+            <hr>
             <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/C/" class="category-chain-item">C</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/C/">#C</a>
-      
-    </div>
-  
-</div>
-
-
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/C/">C</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/C/">C</a>
+                    
+                  </div>
+                
+              </div>
               
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>C基础</div>
-      <div>http://yoursite.com/2020/03/21/39.C基础/</div>
-    </div>
-    <div class="license-meta">
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2020年3月21日</div>
-        </div>
-      
-      
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
-                <div class="post-prevnext my-3">
+              
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/06/13/34.HTTP%E5%92%8C%E5%8A%A0%E5%AF%86%E5%92%8CHTTPS/" title="HTTP和加密和HTTPS">
+                      <a href="/2020/06/13/34.HTTP%E5%92%8C%E5%8A%A0%E5%AF%86%E5%92%8CHTTPS/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">HTTP和加密和HTTPS</span>
                         <span class="visible-mobile">上一篇</span>
@@ -2194,7 +2101,7 @@ int main()
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/03/07/33.JNI%E5%85%A5%E9%97%A8/" title="JNI入门">
+                      <a href="/2020/03/07/33.JNI%E5%85%A5%E9%97%A8/">
                         <span class="hidden-mobile">JNI入门</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -2210,55 +2117,25 @@ int main()
         </div>
       </div>
     </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-
-
-  </aside>
-
-
-    </div>
+      </div>
+    
   </div>
 </div>
 
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
+<!-- Custom -->
 
 
     
 
     
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+      <a id="scroll-top-button" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -2277,34 +2154,32 @@ int main()
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
-
     
 
     
   </main>
 
-  <footer>
-    <div class="footer-inner">
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
   
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
 
-  </footer>
+  
 
-  <!-- Scripts -->
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
@@ -2320,28 +2195,11 @@ int main()
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
+<!-- Plugins -->
 
 
   
@@ -2350,153 +2208,72 @@ int main()
 
 
 
-
   
-<script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      collapseDepth   : CONFIG.toc.collapseDepth || 0,
-      scrollSmooth    : true,
-      headingsOffset  : -boardTop
-    });
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-  });
-</script>
 
 
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-  (function() {
-    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
-    var enableCopy = CONFIG.copy_btn;
-    if (!enableLang && !enableCopy) {
-      return;
-    }
-
-    function getBgClass(ele) {
-      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
-    }
-
-    var copyTmpl = '';
-    copyTmpl += '<div class="code-widget">';
-    copyTmpl += 'LANG';
-    copyTmpl += '</div>';
-    jQuery('.markdown-body pre').each(function() {
-      var $pre = jQuery(this);
-      if ($pre.find('code.mermaid').length > 0) {
-        return;
-      }
-      if ($pre.find('span.line').length > 0) {
-        return;
-      }
-
-      var lang = '';
-
-      if (enableLang) {
-        lang = CONFIG.code_language.default;
-        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
-          lang = $pre[0].children[0].classList[1];
-        } else if ($pre[0].getAttribute('data-language')) {
-          lang = $pre[0].getAttribute('data-language');
-        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
-          lang = $pre[0].children[0].classList[1];
-          $pre.parent().addClass('code-wrapper');
-        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
-          $pre.wrap('<div class="code-wrapper"></div>');
-        }
-        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
-      }
-      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
-        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
-
-      if (enableCopy) {
-        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js', function() {
-          var clipboard = new window.ClipboardJS('.copy-btn', {
-            target: function(trigger) {
-              var nodes = trigger.parentNode.childNodes;
-              for (var i = 0; i < nodes.length; i++) {
-                if (nodes[i].tagName === 'CODE') {
-                  return nodes[i];
-                }
-              }
-            }
-          });
-          clipboard.on('success', function(e) {
-            e.clearSelection();
-            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
-            setTimeout(function() {
-              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
-            }, 2000);
-          });
-        });
-      }
-    });
-  })();
-</script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
-  
-<script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
 
 
 
 
 
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
 
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
 </body>
 </html>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=dark>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
 
 
 
@@ -9,47 +9,40 @@
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
-  
-    <meta name="description" content="1、介绍和环境搭建DSL(domain specific language)：领域特定语言，解决特定问题，包括Groovy，xml等等。 Groovy是一种基于JVM的敏捷开发语言，可以使用java所用的库。 Groovy官网 http:&#x2F;&#x2F;groovy-lang.org&#x2F; 下载最新稳定版本(the latest stable version of Groovy)-2.5.8版本。 检查环境变量配">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Gradle构建详解">
-<meta property="og:url" content="http://yoursite.com/2019/07/13/29.Gradle%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/index.html">
-<meta property="og:site_name" content="Jiang Space">
-<meta property="og:description" content="1、介绍和环境搭建DSL(domain specific language)：领域特定语言，解决特定问题，包括Groovy，xml等等。 Groovy是一种基于JVM的敏捷开发语言，可以使用java所用的库。 Groovy官网 http:&#x2F;&#x2F;groovy-lang.org&#x2F; 下载最新稳定版本(the latest stable version of Groovy)-2.5.8版本。 检查环境变量配">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/img/29.png">
-<meta property="article:published_time" content="2019-07-13T08:08:14.650Z">
-<meta property="article:modified_time" content="2021-03-26T14:41:01.350Z">
-<meta property="article:tag" content="gradle">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://yoursite.com/img/29.png">
-  
-  
   
   <title>Gradle构建详解 - Jiang Space</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
@@ -58,44 +51,24 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
+<!-- 自定义样式保持在最底部 -->
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-
-  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>Jiang Space</strong>
-    </a>
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Jiang Space</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -169,15 +142,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
-            </a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
           </li>
-          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+            <a class="nav-link" href="javascript:">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -186,71 +157,60 @@
   </div>
 </nav>
 
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Gradle构建详解">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-07-13 16:08" pubdate>
+        2019年7月13日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.1k 字
+    </span>
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="Gradle构建详解"></span>
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      85
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
           
         </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2019-07-13 16:08" pubdate>
-          2019年7月13日 下午
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          <!-- compatible with older versions-->
-          23k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          <!-- compatible with older versions-->
-          195 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
       </div>
-
-      
     </div>
-  </div>
-</div>
-
-</div>
-
   </header>
 
   <main>
@@ -259,35 +219,30 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
+    <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
+        <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">Gradle构建详解</h1>
             
             <div class="markdown-body">
-              
               <h2 id="1、介绍和环境搭建"><a href="#1、介绍和环境搭建" class="headerlink" title="1、介绍和环境搭建"></a>1、介绍和环境搭建</h2><p>DSL(domain specific language)：领域特定语言，解决特定问题，包括Groovy，xml等等。</p>
 <p>Groovy是一种基于JVM的敏捷开发语言，可以使用java所用的库。</p>
 <p>Groovy官网</p>
-<pre><code class="hljs">http://groovy-lang.org/
+<pre><code>http://groovy-lang.org/
 </code></pre><p>下载最新稳定版本(the latest stable version of Groovy)-2.5.8版本。</p>
 <p>检查环境变量配置</p>
-<pre><code class="hljs">groovy -version
+<pre><code>groovy -version
 </code></pre><p>在Android studio中Tools - Groovy Console直接编写Groovy语言。</p>
-<pre><code class="hljs">println &quot;hello groovy&quot;
+<pre><code>println &quot;hello groovy&quot;
 </code></pre><h2 id="2、语法"><a href="#2、语法" class="headerlink" title="2、语法"></a>2、语法</h2><h3 id="2-1、基础语法"><a href="#2-1、基础语法" class="headerlink" title="2.1、基础语法"></a>2.1、基础语法</h3><p>groovy变量的类型都是对象类型，没有基本类型，因为基本类型都会装箱成对象类型。</p>
 <p>变量的定义包括强类型定义和弱类型def定义。</p>
-<pre><code class="hljs">def x = 10
+<pre><code>def x = 10
 println x.class  //class java.lang.Integer
 </code></pre><p>字符串除了String还有GString，GString的常用三种定义方式</p>
-<pre><code class="hljs">def s1 = &apos;a single \&apos;a\&apos; String&apos;
+<pre><code>def s1 = &apos;a single \&apos;a\&apos; String&apos;
 println s1  //a single &apos;a&apos; String
 
 def s2 = &apos;&apos;&apos;\
@@ -304,7 +259,7 @@ def say = &quot;this is $&#123;s3&#125;&quot;   //花括号可扩展任意的表
 println say  //this is a common String
 println say.class  //class org.codehaus.groovy.runtime.GStringImpl
 </code></pre><p>新增常用操作符</p>
-<pre><code class="hljs">def str = &quot;groovy&quot;
+<pre><code>def str = &quot;groovy&quot;
 //println str.center(9,&apos;a&apos;)   //agroovyaa
 //println str.padLeft(9,&apos;a&apos;)  //aaagroovy
 //println str.padRight(9,&apos;a&apos;)  //groovyaaa
@@ -324,7 +279,7 @@ println str.capitalize()   //Groovy
 println str.isNumber()   //false
 </code></pre><p>逻辑控制:</p>
 <p>switch</p>
-<pre><code class="hljs">def x = 1.23
+<pre><code>def x = 1.23
 def result
 switch (x)&#123;
     case &quot;str&quot;:
@@ -346,39 +301,39 @@ switch (x)&#123;
 &#125;
 println result  //BigDecimal
 </code></pre><p>for范围</p>
-<pre><code class="hljs">def sum = 0
+<pre><code>def sum = 0
 for (i in 0..9)&#123;
     sum += i
 &#125;
 println sum //45
 </code></pre><p>list循环</p>
-<pre><code class="hljs">def sum = 0
+<pre><code>def sum = 0
 for (i in [1,2,3,4,5,6,7,8,9])&#123;
     sum += i
 &#125;
 println sum //45
 </code></pre><p>map循环</p>
-<pre><code class="hljs">def sum = 0
+<pre><code>def sum = 0
 for (i in [&apos;wang&apos;:1,&apos;zhang&apos;:2,&apos;li&apos;:3])&#123;
     sum += i.value
 &#125;
 println sum //6
 </code></pre><h3 id="2-2、闭包"><a href="#2-2、闭包" class="headerlink" title="2.2、闭包"></a>2.2、闭包</h3><p>类似于方法</p>
-<pre><code class="hljs">def clouser = &#123; println &quot;Hello groovy&quot;&#125;
+<pre><code>def clouser = &#123; println &quot;Hello groovy&quot;&#125;
 clouser.call()  //调用方式一，Hello groovy
 clouser()  //调用方式二，Hello groovy
 </code></pre><p>有参数的闭包<code>-&gt;</code>前的是参数,也可以有多个参数</p>
-<pre><code class="hljs">def clouser = &#123;String name -&gt; println &quot;$&#123;name&#125; Hello groovy&quot;&#125;
+<pre><code>def clouser = &#123;String name -&gt; println &quot;$&#123;name&#125; Hello groovy&quot;&#125;
 clouser.call(&quot;this is&quot;)  //调用方式一，this is Hello groovy
 clouser(&quot;this is&quot;)  //调用方式二，this is Hello groovy
 </code></pre><p>隐式的it参数,不需要定义参数</p>
-<pre><code class="hljs">def clouser = &#123;println &quot;Hello $&#123;it&#125;&quot;&#125;
+<pre><code>def clouser = &#123;println &quot;Hello $&#123;it&#125;&quot;&#125;
 clouser(&quot;groovy&quot;)  //Hello groovy
 </code></pre><p>返回值</p>
-<pre><code class="hljs">def clouser = &#123;String name -&gt; return  &quot;Hello $&#123;name&#125;&quot;&#125;
+<pre><code>def clouser = &#123;String name -&gt; return  &quot;Hello $&#123;name&#125;&quot;&#125;
 println clouser(&quot;groovy&quot;)  //Hello groovy
 </code></pre><p>基本类型和闭包结合使用</p>
-<pre><code class="hljs">int x = cal(5)
+<pre><code>int x = cal(5)
 println x   
 //num的阶乘
 int fab(int number) &#123;
@@ -404,7 +359,7 @@ int cal(int number) &#123;
     return result
 &#125;
 </code></pre><p>字符串和闭包结合使用</p>
-<pre><code class="hljs">String str = &apos;2 and 3 is 5&apos;
+<pre><code>String str = &apos;2 and 3 is 5&apos;
 
 //each遍历
 str.each &#123;
@@ -437,7 +392,7 @@ def list2 = str.collect&#123;
 println list2.toListString()    //[2,  , A, N, D,  , 3,  , I, S,  , 5]
 </code></pre><p>闭包进阶</p>
 <p>变量：this、owner、delegate</p>
-<pre><code class="hljs">def scriptClouser = &#123;
+<pre><code>def scriptClouser = &#123;
     println &quot;this:&quot; + this  //代表闭包定义处的类
     println &quot;owner:&quot; + owner    //代表闭包定义处的类或者对象
     println &quot;delegate:&quot; + delegate  //代表任意对象，默认与owner一致
@@ -475,7 +430,7 @@ def nextClouser = &#123;
 &#125;
 nextClouser.call()
 </code></pre><p>闭包委托策略</p>
-<pre><code class="hljs">class Student &#123;
+<pre><code>class Student &#123;
     String name
     def pretty = &#123;
         &quot;My name is $&#123;name&#125;&quot;
@@ -494,11 +449,11 @@ stu.pretty.delegate = tea
 stu.pretty.resolveStrategy = Closure.DELEGATE_FIRST//delegate优先
 println stu.toSting()   //My name is Qndroid
 </code></pre><h3 id="2-3、列表list"><a href="#2-3、列表list" class="headerlink" title="2.3、列表list"></a>2.3、列表list</h3><p>数组和列表定义方式</p>
-<pre><code class="hljs">def array = [1, 2, 3, 4, 5, 6] as int[]
+<pre><code>def array = [1, 2, 3, 4, 5, 6] as int[]
 int[] array2 = [1, 2, 3, 4, 5, 6]
 def list = [1, 2, 3, 4, 5, 6]
 </code></pre><p>主要介绍特有的</p>
-<pre><code class="hljs">//排序
+<pre><code>//排序
 def sortList = [1, -4, 5, -6, 2, 3]
 //Collections.sort(sortList)
 //println sortList    //[-6, -4, 1, 2, 3, 5]
@@ -539,7 +494,7 @@ println findList.max()  //12
 def num = findList.count &#123; return it % 2 == 0 &#125; //符合条件的个数
 println num //4
 </code></pre><h3 id="2-4、映射map"><a href="#2-4、映射map" class="headerlink" title="2.4、映射map"></a>2.4、映射map</h3><p>定义和基本操作</p>
-<pre><code class="hljs">def colors = [red: &apos;ff0000&apos;, green: &apos;00ff00&apos;, blue: &apos;0000ff&apos;]
+<pre><code>def colors = [red: &apos;ff0000&apos;, green: &apos;00ff00&apos;, blue: &apos;0000ff&apos;]
 println colors.getClass()   //class java.util.LinkedHashMap
 //索引
 println colors[&apos;red&apos;]   //ff0000
@@ -548,7 +503,7 @@ println colors.red  //ff0000
 colors.yellow = &apos;ffff00&apos;
 println colors.toMapString()    //[red:ff0000, green:00ff00, blue:0000ff, yellow:ffff00]
 </code></pre><p>其他操作</p>
-<pre><code class="hljs">def students = [
+<pre><code>def students = [
         1: [number: &apos;0001&apos;, name: &apos;zhang&apos;, score: 55, sex: &apos;male&apos;],
         2: [number: &apos;0002&apos;, name: &apos;li&apos;, score: 62, sex: &apos;female&apos;],
         3: [number: &apos;0003&apos;, name: &apos;wang&apos;, score: 63, sex: &apos;female&apos;],
@@ -605,7 +560,7 @@ def sort = students.sort&#123;
 &#125;
 println sort.toMapString()
 </code></pre><h3 id="2-5、范围range"><a href="#2-5、范围range" class="headerlink" title="2.5、范围range"></a>2.5、范围range</h3><p>定义和使用</p>
-<pre><code class="hljs">def range = 1..10
+<pre><code>def range = 1..10
 println range[0]    //1
 println range.contains(10)    //true
 println range.from    //1
@@ -637,7 +592,7 @@ def getGrade(Number number)&#123;
     return result
 &#125;
 </code></pre><h3 id="2-6、面向对象"><a href="#2-6、面向对象" class="headerlink" title="2.6、面向对象"></a>2.6、面向对象</h3><p>类、方法、接口</p>
-<pre><code class="hljs">//groovy中默认都是public类型
+<pre><code>//groovy中默认都是public类型
 class Person implements Action&#123;
     String name
     Integer age
@@ -672,7 +627,7 @@ trait DefaultAction&#123;
     &#125;
 &#125;
 </code></pre><p>元编程</p>
-<pre><code class="hljs">class Person &#123;
+<pre><code>class Person &#123;
     String name
     Integer age
 
@@ -708,9 +663,9 @@ Person.metaClass.static.createPerson = &#123;
 def personn3 = Person.createPerson(&apos;li&apos;, 18)
 println personn3.name + personn3.age  //li18
 </code></pre><p>一次注入，应用程序其他方法都可以使用</p>
-<pre><code class="hljs">ExpandoMetaClass.enableGlobally()
+<pre><code>ExpandoMetaClass.enableGlobally()
 </code></pre><h2 id="3、高级用法"><a href="#3、高级用法" class="headerlink" title="3、高级用法"></a>3、高级用法</h2><h3 id="3-1、json文件处理"><a href="#3-1、json文件处理" class="headerlink" title="3.1、json文件处理"></a>3.1、json文件处理</h3><p>转换成json</p>
-<pre><code class="hljs">import groovy.json.JsonOutput
+<pre><code>import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
 class Person &#123;
@@ -726,7 +681,7 @@ println JsonOutput.prettyPrint(json)
 def jsonSlpuer = new JsonSlurper()
 jsonSlpuer.parseText()
 </code></pre><p>get请求</p>
-<pre><code class="hljs">import groovy.json.JsonSlurper
+<pre><code>import groovy.json.JsonSlurper
 
 def response = getNetworkData(&quot;http://httpbin.org/get?id=123&quot;)
 println response.args.id
@@ -740,7 +695,7 @@ def getNetworkData(String url)&#123;
 &#125;
 </code></pre><h3 id="3-2、xml读取和生成"><a href="#3-2、xml读取和生成" class="headerlink" title="3.2、xml读取和生成"></a>3.2、xml读取和生成</h3><p>解析xml格式数据，创建xml格式数据，都不再详解</p>
 <h3 id="3-3、文件操作"><a href="#3-3、文件操作" class="headerlink" title="3.3、文件操作"></a>3.3、文件操作</h3><p>读取文件</p>
-<pre><code class="hljs">def file = new File(&quot;目标文件&quot;)
+<pre><code>def file = new File(&quot;目标文件&quot;)
 //方式一
 file.eachLine &#123;
     line -&gt; println line
@@ -759,7 +714,7 @@ def reader = file.withReader &#123;
 &#125;
 println reader
 </code></pre><p>拷贝文件</p>
-<pre><code class="hljs">def copy(String sourcePath, String destationPath) &#123;
+<pre><code>def copy(String sourcePath, String destationPath) &#123;
     try &#123;
         def desFile = new File(destationPath)
         if (!desFile.exists()) &#123;
@@ -781,7 +736,7 @@ println reader
     &#125;
 &#125;
 </code></pre><p>对象的读写</p>
-<pre><code class="hljs">def saveObject(Object object, String path) &#123;
+<pre><code>def saveObject(Object object, String path) &#123;
     try &#123;
         def desFile = new File(path)
         if (!desFile.exists()) &#123;
@@ -812,17 +767,17 @@ def readObject(String path) &#123;
 &#125;
 </code></pre><h2 id="4、Gradle介绍"><a href="#4、Gradle介绍" class="headerlink" title="4、Gradle介绍"></a>4、Gradle介绍</h2><p>Gradle用于构建应用程序，使用Groovy核心语法。</p>
 <p>在Terminal中执行</p>
-<pre><code class="hljs">gradlew clean    //win
+<pre><code>gradlew clean    //win
 gradlew build    //win
 
 ./gradlew clean    //mac
 ./gradlew build    //mac
 </code></pre><p>gradle的生命周期</p>
-<pre><code class="hljs">initialization初始化阶段：根据settings.gradle解析整个工程中所有的Project，构建所有的Project对应的project对象。
+<pre><code>initialization初始化阶段：根据settings.gradle解析整个工程中所有的Project，构建所有的Project对应的project对象。
 Configuration配置阶段：解析所有的projects对象中的task，构建好所有的task的拓扑图
 Excution执行阶段：执行具体的task及其依赖task
 </code></pre><p>生命周期监听</p>
-<pre><code class="hljs">//配置阶段开始前的监听回调
+<pre><code>//配置阶段开始前的监听回调
 this.beforeEvaluate &#123;
     println &apos;------配置阶段开始------&apos;
 &#125;
@@ -839,10 +794,10 @@ this.gradle.beforeProject &#123;&#125;
 //等同afterEvaluate
 this.gradle.afterProject &#123;&#125;
 </code></pre><h2 id="5、Project"><a href="#5、Project" class="headerlink" title="5、Project"></a>5、Project</h2><p>查看Project的个数</p>
-<pre><code class="hljs">gradlew projects
+<pre><code>gradlew projects
 ./gradlew projects    //mac
 </code></pre><h3 id="5-1、Project相关API"><a href="#5-1、Project相关API" class="headerlink" title="5.1、Project相关API"></a>5.1、Project相关API</h3><p>在最外层的根的build.gradle中</p>
-<pre><code class="hljs">this.getProjects()
+<pre><code>this.getProjects()
 def getProjects()&#123;
     //只输全部projects
     this.getAllprojects().eachWithIndex &#123;
@@ -862,10 +817,10 @@ def getProjects()&#123;
     println &quot;this is Root project:&quot; + this.getRootProject().name
 &#125;
 </code></pre><p>在module的build.gradle中</p>
-<pre><code class="hljs">//只输出父projects
+<pre><code>//只输出父projects
 println &quot;this is parent project:&quot; + this.getParent().name
 </code></pre><p>根project中可以配置module的配置</p>
-<pre><code class="hljs">//根project配置module为app的配置
+<pre><code>//根project配置module为app的配置
 project(&apos;app&apos;) &#123;
     Project project -&gt;
         println project.name    //app
@@ -876,14 +831,14 @@ project(&apos;app&apos;) &#123;
         android &#123;&#125;
 &#125;
 </code></pre><p>配置当前节点工程和subproject的所有project</p>
-<pre><code class="hljs">//配置当前节点工程和subproject的所有project
+<pre><code>//配置当前节点工程和subproject的所有project
 allprojects &#123;
     group &apos;com.tea&apos;
     version &apos;1.0.0-release&apos;
 &#125;
 println project(&apos;app&apos;).group
 </code></pre><p>不包括当前节点工程，只包括他的subproject</p>
-<pre><code class="hljs">//不包括当前节点工程，只包括他的subproject
+<pre><code>//不包括当前节点工程，只包括他的subproject
 subprojects &#123;
     Project project -&gt;
         if (project.plugins.hasPlugin(&apos;com.android.library&apos;)) &#123;
@@ -891,20 +846,20 @@ subprojects &#123;
         &#125;
 &#125;
 </code></pre><h3 id="5-2、属性相关API"><a href="#5-2、属性相关API" class="headerlink" title="5.2、属性相关API"></a>5.2、属性相关API</h3><p>定义扩展属性</p>
-<pre><code class="hljs">ext&#123;&#125;
+<pre><code>ext&#123;&#125;
 </code></pre><p>所以提供扩展属性定义方式:</p>
 <p>方式一：</p>
 <p>可以在根build中定义</p>
-<pre><code class="hljs">ext &#123;
+<pre><code>ext &#123;
     compileSdkVersion = 28
     cardview = &apos;com.android.support:cardview-v7:28.0.0&apos;
 &#125;
 </code></pre><p>然后在需要用的build中引用</p>
-<pre><code class="hljs">compileSdkVersion this.rootProject.compileSdkVersion
+<pre><code>compileSdkVersion this.rootProject.compileSdkVersion
 implementation this.cardview
 </code></pre><p>方式二：</p>
 <p>和根build同级定义common.gradle</p>
-<pre><code class="hljs">ext &#123;
+<pre><code>ext &#123;
 
     android = [compileSdkVersion: 28,
                buildToolsVersion: &apos;26.0.0&apos;,
@@ -926,21 +881,21 @@ implementation this.cardview
                   &apos;libAppcompat&apos;: &apos;com.android.support:appcompat-v7:28.0.0&apos;]
 &#125;
 </code></pre><p>在根build中引入</p>
-<pre><code class="hljs">apply from: this.file(&apos;common.gradle&apos;)
+<pre><code>apply from: this.file(&apos;common.gradle&apos;)
 </code></pre><p>在需要的build中使用</p>
-<pre><code class="hljs">compileSdkVersion rootProject.ext.android.compileSdkVersion
+<pre><code>compileSdkVersion rootProject.ext.android.compileSdkVersion
 implementation rootProject.ext.dependence.libCardview
 </code></pre><p>方式三：</p>
 <p>在gradle.properties中定义<code>key:value</code>形式</p>
-<pre><code class="hljs">mCompileSdkVersion = 28
+<pre><code>mCompileSdkVersion = 28
 </code></pre><p>build中使用，默认都是字符串，需要转换</p>
-<pre><code class="hljs">compileSdkVersion mCompileSdkVersion.toInteger()
+<pre><code>compileSdkVersion mCompileSdkVersion.toInteger()
 </code></pre><h3 id="5-3、file相关API"><a href="#5-3、file相关API" class="headerlink" title="5.3、file相关API"></a>5.3、file相关API</h3><p>文件路径获取</p>
-<pre><code class="hljs">println getRootDir().absolutePath
+<pre><code>println getRootDir().absolutePath
 println getBuildDir().absolutePath
 println getProjectDir().absolutePath
 </code></pre><p>文件定位</p>
-<pre><code class="hljs">apply from: this.file(&apos;common.gradle&apos;)
+<pre><code>apply from: this.file(&apos;common.gradle&apos;)
 
 println getContent(&apos;common.gradle&apos;)
 def getContent(String path)&#123;
@@ -954,14 +909,14 @@ def getContent(String path)&#123;
     return null
 &#125;
 </code></pre><p>文件拷贝,在app的build中拷贝文件或者文件夹</p>
-<pre><code class="hljs">copy &#123;
+<pre><code>copy &#123;
     from file(&apos;build/outputs/apk/&apos;)
     into getRootProject().getBuildDir().path + &apos;/apk/&apos;
     exclude &#123;&#125;//补拷贝的文件
     rename &#123;&#125;//重命名
 &#125;
 </code></pre><p>文件树</p>
-<pre><code class="hljs">fileTree(&apos;src/main/assets/&apos;)&#123;FileTree fileTree -&gt;
+<pre><code>fileTree(&apos;src/main/assets/&apos;)&#123;FileTree fileTree -&gt;
     fileTree.visit &#123;FileTreeElement element -&gt;
         println element.file.name
         copy &#123;
@@ -971,21 +926,21 @@ def getContent(String path)&#123;
     &#125;
 &#125;
 </code></pre><h3 id="5-4、依赖相关API"><a href="#5-4、依赖相关API" class="headerlink" title="5.4、依赖相关API"></a>5.4、依赖相关API</h3><p>依赖</p>
-<pre><code class="hljs">buildscript &#123;    
+<pre><code>buildscript &#123;    
     //配置工程的仓库地址
     repositories &#123;    &#125;
     //配置工程的gradle插件依赖地址，app中的是项目的第三库依赖
     dependencies &#123;    &#125;
 &#125;
 </code></pre><p>依赖冲突常用解决办法</p>
-<pre><code class="hljs">compile (&apos;rootProject.ext.dependence.libAutoScrollViewPager&apos;) &#123;
+<pre><code>compile (&apos;rootProject.ext.dependence.libAutoScrollViewPager&apos;) &#123;
     exclude module: &apos;support-v4&apos;//排除依赖
     exclude group: &apos;com.android.support&apos;
     transitive false//禁止传递依赖
 &#125;
 </code></pre><p>provided只在编译起作用，占位编译。</p>
 <h3 id="5-5、外部命令API"><a href="#5-5、外部命令API" class="headerlink" title="5.5、外部命令API"></a>5.5、外部命令API</h3><p>调用系统指令，执行<code>./gradlew apkcopy</code></p>
-<pre><code class="hljs">task(name: &apos;apkcopy&apos;) &#123;
+<pre><code>task(name: &apos;apkcopy&apos;) &#123;
     doLast &#123;
         def srcPath = this.buildDir.path + &apos;/outputs/apk&apos;
         def destPath = &apos;./target/apk&apos;
@@ -1002,7 +957,7 @@ def getContent(String path)&#123;
     &#125;
 &#125;
 </code></pre><p>调用脚本</p>
-<pre><code class="hljs">task stopTomcat(type:Exec) &#123;
+<pre><code>task stopTomcat(type:Exec) &#123;
     //dir
     workingDir &apos;../tomcat/bin&apos;
     //windows
@@ -1010,7 +965,7 @@ def getContent(String path)&#123;
     //linux
     commandLine &apos;./stop.sh&apos;
 &#125;
-</code></pre><h2 id="6、task"><a href="#6、task" class="headerlink" title="6、task"></a>6、task</h2><h3 id="两种定义方式"><a href="#两种定义方式" class="headerlink" title="两种定义方式"></a>两种定义方式</h3><pre><code class="hljs">task helloTask (group: &apos;com.tea&apos;,description: &apos;study&apos;)&#123;
+</code></pre><h2 id="6、task"><a href="#6、task" class="headerlink" title="6、task"></a>6、task</h2><h3 id="两种定义方式"><a href="#两种定义方式" class="headerlink" title="两种定义方式"></a>两种定义方式</h3><pre><code>task helloTask (group: &apos;com.tea&apos;,description: &apos;study&apos;)&#123;
     println &apos;---------helloTask&apos;
 &#125;
 
@@ -1019,7 +974,7 @@ this.tasks.create(name : &apos;helloTask2&apos;)&#123;
     setDescription(&apos;study&apos;)
     println &apos;---------helloTask2&apos;
 &#125;
-</code></pre><h3 id="doFirst和doLast"><a href="#doFirst和doLast" class="headerlink" title="doFirst和doLast"></a>doFirst和doLast</h3><pre><code class="hljs">task helloTask (group: &apos;com.tea&apos;,description: &apos;study&apos;)&#123;
+</code></pre><h3 id="doFirst和doLast"><a href="#doFirst和doLast" class="headerlink" title="doFirst和doLast"></a>doFirst和doLast</h3><pre><code>task helloTask (group: &apos;com.tea&apos;,description: &apos;study&apos;)&#123;
     println &apos;---------helloTask&apos;
     doFirst &#123;
         println &apos;---------helloTask---doFirst&apos;
@@ -1028,7 +983,7 @@ this.tasks.create(name : &apos;helloTask2&apos;)&#123;
 helloTask.doFirst&#123;
     println &apos;---------helloTask---doFirst2&apos;//比闭包的先执行
 &#125;
-</code></pre><h3 id="统计Build时长"><a href="#统计Build时长" class="headerlink" title="统计Build时长"></a>统计Build时长</h3><pre><code class="hljs">def startTime,endTime
+</code></pre><h3 id="统计Build时长"><a href="#统计Build时长" class="headerlink" title="统计Build时长"></a>统计Build时长</h3><pre><code>def startTime,endTime
 this.afterEvaluate &#123;Project project -&gt;
     def  preBuildTask = project.tasks.getByName(&apos;preBuild&apos;)
     preBuildTask.doFirst &#123;
@@ -1042,7 +997,7 @@ this.afterEvaluate &#123;Project project -&gt;
         println &quot;==============:&quot; + (endTime - startTime)
     &#125;
 &#125;
-</code></pre><h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><pre><code class="hljs">task taskX &#123;
+</code></pre><h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><pre><code>task taskX &#123;
     doLast &#123;
         println &quot;taskX&quot;
     &#125;
@@ -1074,7 +1029,7 @@ task taskZ(dependsOn: [taskX, taskY]) &#123;
 &#125;
 //或者
 taskZ.dependsOn(taskX, taskY)
-</code></pre><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><pre><code class="hljs">task writeTask&#123;
+</code></pre><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><pre><code>task writeTask&#123;
     //输入
     inputs.property(&quot;key&quot;,&quot;value&quot;)
     def data = inputs.getProperties()
@@ -1082,15 +1037,15 @@ taskZ.dependsOn(taskX, taskY)
     outputs.file 文件
     File file = outputs.getFiles().getSingleFile()
 &#125;
-</code></pre><h3 id="执行顺序指定"><a href="#执行顺序指定" class="headerlink" title="执行顺序指定"></a>执行顺序指定</h3><pre><code class="hljs">mustRunAfter
+</code></pre><h3 id="执行顺序指定"><a href="#执行顺序指定" class="headerlink" title="执行顺序指定"></a>执行顺序指定</h3><pre><code>mustRunAfter
 </code></pre><h2 id="7、其他模块"><a href="#7、其他模块" class="headerlink" title="7、其他模块"></a>7、其他模块</h2><h3 id="7-1、SourceSet"><a href="#7-1、SourceSet" class="headerlink" title="7.1、SourceSet"></a>7.1、SourceSet</h3><p>修改资源路径</p>
-<pre><code class="hljs">sourceSets &#123;
+<pre><code>sourceSets &#123;
     main&#123;
         jniLibs.srcDirs = [&apos;libs&apos;]//修改so库文件位置
     &#125;
 &#125;
 </code></pre><p>给res分模块分包</p>
-<pre><code class="hljs">sourceSets &#123;
+<pre><code>sourceSets &#123;
     main&#123;
         res.srcDirs = [&apos;src/main/res&apos;,
                        &apos;src/main/res-ad&apos;,
@@ -1099,7 +1054,7 @@ taskZ.dependsOn(taskX, taskY)
 &#125;
 </code></pre><h3 id="7-2、自定义plugin"><a href="#7-2、自定义plugin" class="headerlink" title="7.2、自定义plugin"></a>7.2、自定义plugin</h3><hr>
 <p>main下的java替换成groovy，新建.groovy类：</p>
-<pre><code class="hljs">class GradleStudyPlugin implements Plugin&lt;Project&gt;&#123;
+<pre><code>class GradleStudyPlugin implements Plugin&lt;Project&gt;&#123;
     @Override
     void apply (Project project)&#123;
         project.extensions.create(&apos;comTea&apos;,xxx（groovy类）)    
@@ -1107,16 +1062,16 @@ taskZ.dependsOn(taskX, taskY)
 
 &#125;
 </code></pre><p>自定义task的类</p>
-<pre><code class="hljs">class xxxxx extend DefaultTask&#123;
+<pre><code>class xxxxx extend DefaultTask&#123;
     @TaskAction
     void doAction()&#123;
         //执行于gradle执行阶段的代码
     &#125;
 &#125;
 </code></pre><p>main/resources/META-INF.gradle/包名.properties:</p>
-<pre><code class="hljs">implementation-class=包名.类名
+<pre><code>implementation-class=包名.类名
 </code></pre><p>build.gradle为：</p>
-<pre><code class="hljs">apply plugin: &apos;groovy&apos;
+<pre><code>apply plugin: &apos;groovy&apos;
 sourceSets &#123;
     main&#123;
         groovy &#123;
@@ -1128,14 +1083,14 @@ sourceSets &#123;
     &#125;
 &#125;
 </code></pre><p>引用和传参</p>
-<pre><code class="hljs">apply plugin: &apos;包名&apos;
+<pre><code>apply plugin: &apos;包名&apos;
 
 comTea&#123;
     //传参
 &#125;
 </code></pre><hr>
 <h3 id="7-3、修改apk名字"><a href="#7-3、修改apk名字" class="headerlink" title="7.3、修改apk名字"></a>7.3、修改apk名字</h3><p>app的build中</p>
-<pre><code class="hljs">this.afterEvaluate &#123;
+<pre><code>this.afterEvaluate &#123;
     this.android.applicationVariants.all &#123; variant -&gt;
         def output = variant.outputs.first()
         def apkName = &quot;app-$&#123;variant.baseName&#125;&quot; + &quot;-$&#123;variant.versionName&#125;.apk&quot;
@@ -1143,7 +1098,7 @@ comTea&#123;
         println &quot;------------------&quot;
     &#125;
 &#125; 
-</code></pre><h2 id="8、Jenkins"><a href="#8、Jenkins" class="headerlink" title="8、Jenkins"></a>8、Jenkins</h2><pre><code class="hljs">java -jar jenkins.war 
+</code></pre><h2 id="8、Jenkins"><a href="#8、Jenkins" class="headerlink" title="8、Jenkins"></a>8、Jenkins</h2><pre><code>java -jar jenkins.war 
 </code></pre><h2 id="Android实战应用"><a href="#Android实战应用" class="headerlink" title="Android实战应用"></a>Android实战应用</h2><h3 id="buildTypes和productFlavors"><a href="#buildTypes和productFlavors" class="headerlink" title="buildTypes和productFlavors"></a>buildTypes和productFlavors</h3><hr>
 <p>和main同级别，同包名，创建文件，区别使用debug还是release。可以用来实现类似gradle调用java类。</p>
 <hr>
@@ -1155,9 +1110,9 @@ comTea&#123;
 <p>参考上述<code>7.2、自定义plugin</code>。</p>
 <p>新建Module-<code>Java Library</code>-buildSrc模块</p>
 <p>创建目录<code>\buildSrc\src\main\resources\META-INF\gradle-plugins</code>，创建文件xxx.properties</p>
-<pre><code class="hljs">implementation-class=com.plugin.demo.PluginDemo
+<pre><code>implementation-class=com.plugin.demo.PluginDemo
 </code></pre><p>目录<code>buildSrc\src\main\groovy\com\plugin\demo</code>创建文件PluginDemo.groovy</p>
-<pre><code class="hljs">import com.android.build.gradle.BaseExtension
+<pre><code>import com.android.build.gradle.BaseExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 public class PluginDemo implements Plugin&lt;Project&gt; &#123;
@@ -1173,11 +1128,11 @@ public class PluginDemo implements Plugin&lt;Project&gt; &#123;
     &#125;
 &#125;
 </code></pre><p>创建文件ExtensionDemo.groovy</p>
-<pre><code class="hljs">public class ExtensionDemo &#123;
+<pre><code>public class ExtensionDemo &#123;
     def name = &quot;Author&quot;;
 &#125;
 </code></pre><p>在app的build中使用plugin</p>
-<pre><code class="hljs">apply plugin: &apos;xxx&apos;
+<pre><code>apply plugin: &apos;xxx&apos;
 
 yyyy &#123;
     name &apos;zzzzz&apos;
@@ -1188,7 +1143,7 @@ yyyy &#123;
 <h3 id="Transform"><a href="#Transform" class="headerlink" title="Transform"></a>Transform</h3><hr>
 <p>Transform是由 Android 提供的，在项目构建过程中把编译后的文件（jar文件和 class文件）添加自定义的中间处理过程的工具。下面代码只是把编译完的内容原封不动搬运到目标位置，没有实际用处。要修改字节码，需要引入其他工具，例如 javassist。</p>
 <p>新建TransformDemo.groovy</p>
-<pre><code class="hljs">import com.android.build.api.transform.Format
+<pre><code>import com.android.build.api.transform.Format
 import com.android.build.api.transform.QualifiedContent
 import com.android.build.api.transform.Transform
 import com.android.build.api.transform.TransformException
@@ -1237,7 +1192,7 @@ public class TransformDemo extends Transform &#123;
     &#125;
 &#125;
 </code></pre><p>buildSrc-build中改为：</p>
-<pre><code class="hljs">repositories &#123;
+<pre><code>repositories &#123;
     google()
     jcenter()
 &#125;
@@ -1246,95 +1201,47 @@ dependencies &#123;
     implementation &apos;com.android.tools.build:gradle:3.2.1&apos;
 &#125;
 </code></pre><p>PluginDemo.groovy中添加代码</p>
-<pre><code class="hljs">def transform = new TransformDemo()
+<pre><code>def transform = new TransformDemo()
 def baseExtension = project.extensions.getByType(BaseExtension)
 baseExtension.registerTransform(transform)
 </code></pre><p>修改app-build中的plugin放在android{}之后。</p>
 <p>示例：<a target="_blank" rel="noopener" href="https://github.com/liangzhitao/consuming-collector">https://github.com/liangzhitao/consuming-collector</a></p>
 <hr>
 
-              
             </div>
-            <hr/>
+            <hr>
             <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/gradle/">#gradle</a>
-      
-    </div>
-  
-</div>
-
-
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Android/">Android</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/gradle/">gradle</a>
+                    
+                  </div>
+                
+              </div>
               
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>Gradle构建详解</div>
-      <div>http://yoursite.com/2019/07/13/29.Gradle构建详解/</div>
-    </div>
-    <div class="license-meta">
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2019年7月13日</div>
-        </div>
-      
-      
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
-                <div class="post-prevnext my-3">
+              
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2019/12/23/31.ConstraintLayout%E5%B8%83%E5%B1%80/" title="ConstraintLayout布局详解">
+                      <a href="/2019/12/23/31.ConstraintLayout%E5%B8%83%E5%B1%80/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">ConstraintLayout布局详解</span>
                         <span class="visible-mobile">上一篇</span>
@@ -1344,7 +1251,7 @@ baseExtension.registerTransform(transform)
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2019/07/07/28.%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0EventBus/" title="手写实现EventBus">
+                      <a href="/2019/07/07/28.%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0EventBus/">
                         <span class="hidden-mobile">手写实现EventBus</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -1360,55 +1267,25 @@ baseExtension.registerTransform(transform)
         </div>
       </div>
     </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-
-
-  </aside>
-
-
-    </div>
+      </div>
+    
   </div>
 </div>
 
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
+<!-- Custom -->
 
 
     
 
     
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+      <a id="scroll-top-button" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -1427,34 +1304,32 @@ baseExtension.registerTransform(transform)
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
-
     
 
     
   </main>
 
-  <footer>
-    <div class="footer-inner">
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
   
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
 
-  </footer>
+  
 
-  <!-- Scripts -->
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
@@ -1470,28 +1345,11 @@ baseExtension.registerTransform(transform)
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
+<!-- Plugins -->
 
 
   
@@ -1500,153 +1358,72 @@ baseExtension.registerTransform(transform)
 
 
 
-
   
-<script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      collapseDepth   : CONFIG.toc.collapseDepth || 0,
-      scrollSmooth    : true,
-      headingsOffset  : -boardTop
-    });
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-  });
-</script>
 
 
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-  (function() {
-    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
-    var enableCopy = CONFIG.copy_btn;
-    if (!enableLang && !enableCopy) {
-      return;
-    }
-
-    function getBgClass(ele) {
-      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
-    }
-
-    var copyTmpl = '';
-    copyTmpl += '<div class="code-widget">';
-    copyTmpl += 'LANG';
-    copyTmpl += '</div>';
-    jQuery('.markdown-body pre').each(function() {
-      var $pre = jQuery(this);
-      if ($pre.find('code.mermaid').length > 0) {
-        return;
-      }
-      if ($pre.find('span.line').length > 0) {
-        return;
-      }
-
-      var lang = '';
-
-      if (enableLang) {
-        lang = CONFIG.code_language.default;
-        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
-          lang = $pre[0].children[0].classList[1];
-        } else if ($pre[0].getAttribute('data-language')) {
-          lang = $pre[0].getAttribute('data-language');
-        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
-          lang = $pre[0].children[0].classList[1];
-          $pre.parent().addClass('code-wrapper');
-        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
-          $pre.wrap('<div class="code-wrapper"></div>');
-        }
-        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
-      }
-      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
-        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
-
-      if (enableCopy) {
-        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js', function() {
-          var clipboard = new window.ClipboardJS('.copy-btn', {
-            target: function(trigger) {
-              var nodes = trigger.parentNode.childNodes;
-              for (var i = 0; i < nodes.length; i++) {
-                if (nodes[i].tagName === 'CODE') {
-                  return nodes[i];
-                }
-              }
-            }
-          });
-          clipboard.on('success', function(e) {
-            e.clearSelection();
-            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
-            setTimeout(function() {
-              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
-            }, 2000);
-          });
-        });
-      }
-    });
-  })();
-</script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
-  
-<script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
 
 
 
 
 
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
 
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
 </body>
 </html>

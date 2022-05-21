@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=dark>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
 
 
 
@@ -9,47 +9,40 @@
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
-  
-    <meta name="description" content="Objective-C介绍 OC程序的源文件后缀名为.m。 m代表message，代表OC的消息机制。OC语言完全兼容C语言，所以在.m文件中可以写C语言的任何代码，甚至C++的代 码也可以写在.m文件下。  #import 指令:同一个文件，无论被#import多少次，在预编译的时候只会包含1次。包括#import &quot;&quot;和#import &lt;&gt;。 .m是Object">
-<meta property="og:type" content="article">
-<meta property="og:title" content="从oc到swift">
-<meta property="og:url" content="http://yoursite.com/2020/08/29/40.%E4%BB%8Eoc%E5%88%B0swift/index.html">
-<meta property="og:site_name" content="Jiang Space">
-<meta property="og:description" content="Objective-C介绍 OC程序的源文件后缀名为.m。 m代表message，代表OC的消息机制。OC语言完全兼容C语言，所以在.m文件中可以写C语言的任何代码，甚至C++的代 码也可以写在.m文件下。  #import 指令:同一个文件，无论被#import多少次，在预编译的时候只会包含1次。包括#import &quot;&quot;和#import &lt;&gt;。 .m是Object">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/img/8.png">
-<meta property="article:published_time" content="2020-08-29T08:31:43.733Z">
-<meta property="article:modified_time" content="2021-03-26T14:41:41.248Z">
-<meta property="article:tag" content="iOS">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://yoursite.com/img/8.png">
-  
-  
   
   <title>从oc到swift - Jiang Space</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
@@ -58,44 +51,24 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
+<!-- 自定义样式保持在最底部 -->
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-
-  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>Jiang Space</strong>
-    </a>
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Jiang Space</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -169,15 +142,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
-            </a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
           </li>
-          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+            <a class="nav-link" href="javascript:">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -186,71 +157,60 @@
   </div>
 </nav>
 
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="从oc到swift">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-08-29 16:31" pubdate>
+        2020年8月29日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.4k 字
+    </span>
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="从oc到swift"></span>
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      68
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
           
         </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-08-29 16:31" pubdate>
-          2020年8月29日 下午
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          <!-- compatible with older versions-->
-          13k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          <!-- compatible with older versions-->
-          107 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
       </div>
-
-      
     </div>
-  </div>
-</div>
-
-</div>
-
   </header>
 
   <main>
@@ -259,27 +219,22 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
+    <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
+        <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">从oc到swift</h1>
             
             <div class="markdown-body">
-              
               <h2 id="Objective-C"><a href="#Objective-C" class="headerlink" title="Objective-C"></a>Objective-C</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>OC程序的源文件后缀名为<code>.m</code>。 m代表message，代表OC的消息机制。OC语言完全兼容C语言，所以在<code>.m</code>文件中可以写C语言的任何代码，甚至C++的代 码也可以写在<code>.m</code>文件下。 </p>
 <p><code>#import</code> 指令:同一个文件，无论被<code>#import</code>多少次，在预编译的时候只会包含1次。包括<code>#import &quot;&quot;</code>和<code>#import &lt;&gt;</code>。</p>
 <p><code>.m</code>是Objective-C的源文件。<code>.mm</code>是Objective-C++的源文件。</p>
 <p><code>.h</code>是头文件，包含方法，属性的声明。<code>.m</code>是类的实现文件，参与编译的文件，用来实现类中声明的方法。</p>
 <p>Boolean类型数据允许取值true或false,也可以是0或非0的整数替代true和false。</p>
-<pre><code class="hljs">@try &#123; 
+<pre><code>@try &#123; 
     //可能出错的代码块 
 &#125; 
 @catch (NSException *exception) &#123; 
@@ -292,7 +247,7 @@
 <hr>
 <h3 id="NSLog"><a href="#NSLog" class="headerlink" title="NSLog"></a>NSLog</h3><hr>
 <p>NSLog 是printf函数的增强版 </p>
-<pre><code class="hljs">NSLog(@&quot;Hello World!&quot;); 
+<pre><code>NSLog(@&quot;Hello World!&quot;); 
 </code></pre><p><code>@&quot;&quot;</code>这个符号表示将一个C的字符串转化为OC中的字符串对象NSString。</p>
 <p>OC字符串必须使用@符号开头。<code>@</code>符号放置的位置在双引号外面。在打印OC字符串的时候使用格式控制符<code>%@</code> 。NSString类型的指针变量只能存储OC字符串常量的地址。</p>
 <p>OC中大部分的关键字都是以<code>@</code>开头的,比如<code>@interface</code>,<code>@implementation</code>,<code>@end</code>。</p>
@@ -303,16 +258,16 @@
 <p>方法的声明和实现，都必须以<code>+</code> 或者 <code>-</code> 开头。 <code>+</code>表示类方法（静态方法）, <code>-</code>表示对象方法（动态方法）。</p>
 <p>在<code>.h</code>中声明的所有方法作用域都是public类型，不能更改。</p>
 <p>成员变量的常用作用域有3种:</p>
-<pre><code class="hljs">@public 全局都可以访问 
+<pre><code>@public 全局都可以访问 
 @protected    只能在类内部和子类中访问 
 @private 只能在类内部访问
 </code></pre><hr>
 <h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><hr>
 <p>创建对象的写法 </p>
-<pre><code class="hljs">类名 * 对象名 = [类名 new]; 
+<pre><code>类名 * 对象名 = [类名 new]; 
 </code></pre><p>只要是用new操作符定义的实体就会在堆内存中开辟一个新的空间。1）在堆中开辟一段存储空间 2）初始化成员变量（写在类声明大括号中的属性就叫做成员变量，也叫做实例变量） 3）返回开辟空间的首地址。</p>
 <p>访问对象的属性可以用： </p>
-<pre><code class="hljs">对象-&gt;对象成员；
+<pre><code>对象-&gt;对象成员；
 </code></pre><hr>
 <h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><hr>
 <p>oc没有严格的方法重载. 在oc中方法名不允许相同。 </p>
@@ -320,13 +275,13 @@
 <p>对象方法：对象方法以<code>-</code>开头如<code>-（void）xx</code> ;对象方法只能由对象来调用;对象方法中可以访问当前对象的成员变量;调用格式<code>[对象名    对象方法名]</code> 。凡事类型都用()括起来。</p>
 <p>类方法：以<code>+</code>开头如<code>+（void）xxx</code>;类方法只能由类来调用;类方法中不能访问实例变量(成员变量)，因为类方法由类来调用，并没有创建存储空间来存储类中的成员变量;调用格式：<code>[类名  类方法名]</code>。</p>
 <p>有参方法，冒号也是方法名的一部分</p>
-<pre><code class="hljs">//返回值类型 void ; 方法名run: : :，参数有3个，都是int型的，参数的参数名 steps  km times
+<pre><code>//返回值类型 void ; 方法名run: : :，参数有3个，都是int型的，参数的参数名 steps  km times
  - (void)run:(int)steps :(int)km :(int)times;
 
 // 声明三个带参数的方法，方法名是 runWith: andWith: andWith:
  - (void)runWith:(int)steps andWith:(int)km andWith:(int)times;
 </code></pre><p>有参方法的调用：</p>
-<pre><code class="hljs">//[对象名 方法名 参数]
+<pre><code>//[对象名 方法名 参数]
 [zhansgan eat:@&quot;辣条&quot;];
 
 // [对象名 方法名:参数:参数];
@@ -339,7 +294,7 @@
 <p>每一个对象都包含一个isa指针，这个指针指向当前对象所属的类。 当调用方法的时候如<code>[p eat]</code> 表示给p所指向的对象发送一条eat消息，表示要调用对象的eat方法，此时对象会顺着内部的isa指针找到存储于类中的方法，开始执行，此时方法所修改的所有的信息，都是对应的对象的。</p>
 <hr>
 <h3 id="pragma-mark"><a href="#pragma-mark" class="headerlink" title="pragma mark"></a>pragma mark</h3><hr>
-<pre><code class="hljs">#pragma mark -//“-”后面不能随手敲个空格 
+<pre><code>#pragma mark -//“-”后面不能随手敲个空格 
 #pragma mark 分组（标识）名称
 </code></pre><hr>
 <h3 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h3><hr>
@@ -349,21 +304,21 @@
 <h3 id="NSString"><a href="#NSString" class="headerlink" title="NSString"></a>NSString</h3><hr>
 <p>NSString是Objective-C中核心处理字符串的类之一。</p>
 <p>创建常量字符串，注意使用“@”符号：</p>
-<pre><code class="hljs">NSString * str = @&quot;hahahaha&quot;; 
+<pre><code>NSString * str = @&quot;hahahaha&quot;; 
 
 NSString * str2 = [[NSString alloc] initWithString:str];
 </code></pre><p>创建空字符串，给予赋值：</p>
-<pre><code class="hljs">NSString * str1 = [NSString new ];
+<pre><code>NSString * str1 = [NSString new ];
 str1 = @&quot;啊哈哈哈&quot;;
 </code></pre><p>创建格式化字符串：占位符（由一个%加一个字符组成）：</p>
-<pre><code class="hljs">NSString * str3 = [NSString stringWithFormat:@&quot;图片 xxxx %02d- %02d.jpg&quot;,9,1];
+<pre><code>NSString * str3 = [NSString stringWithFormat:@&quot;图片 xxxx %02d- %02d.jpg&quot;,9,1];
 NSLog(@&quot;Hello, World! %@ &quot;,str3);//图片 xxxx %09- %01.jpg
 </code></pre><p>计算字符串长度</p>
-<pre><code class="hljs">NSLog(@&quot;字符串的长度  %ld&quot;, [str2 length]);
+<pre><code>NSLog(@&quot;字符串的长度  %ld&quot;, [str2 length]);
 </code></pre><hr>
 <h3 id="对象与对象之间的关系"><a href="#对象与对象之间的关系" class="headerlink" title="对象与对象之间的关系"></a>对象与对象之间的关系</h3><hr>
 <p>一个对象作为另外1个对象的成员变量</p>
-<pre><code class="hljs">//女孩有一部手机
+<pre><code>//女孩有一部手机
 @interface Girl :NSObject
 &#123;
 Phone *_phone;
@@ -384,12 +339,12 @@ Phone *_phone;
 <h4 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h4><hr>
 <p>以“-”减号开头的方法就是对象方法。对象方法的调用，必须创建对象，然后通过对象名去调用。 </p>
 <p>声明 </p>
-<pre><code class="hljs">-（返回值类型）方法名：（参数类型）参数名称； 
+<pre><code>-（返回值类型）方法名：（参数类型）参数名称； 
 - (void)square : (int)num;
 </code></pre><hr>
 <h4 id="类方法-1"><a href="#类方法-1" class="headerlink" title="类方法"></a>类方法</h4><hr>
 <p>以<code>+</code>加号开头的方法叫做类方法。这个方法不依赖于对象，不需要创建对象来调用，而是直接使用类名调用。</p>
-<pre><code class="hljs">+（返回值类型）方法名：（参数类型）参数名称； 
+<pre><code>+（返回值类型）方法名：（参数类型）参数名称； 
 + (void)square : (int)num;
 </code></pre><p><strong>类方法使用注意事项： 1. 类方法中不能访问成员变量。 2. 类方法和对象方法可以同名。 3. 类方法中不能通过self调用同名方法，会死循环。 4. 对象方法当中可以通过类名直接调用类方法。 5. 在没有属性时，建议使用类方法。</strong></p>
 <hr>
@@ -398,7 +353,7 @@ Phone *_phone;
 <p>self是一个指针变量，用于在方法中指向调用该方法的对象。 </p>
 <p>self的应用场景 1）用在类方法中，代表当前类。 2）用在对象方法中，代表当前对象。 3）访问成员变量：<code>self-&gt;成员变量</code>。 </p>
 <p>self使用注意</p>
-<pre><code class="hljs">在对象方法中
+<pre><code>在对象方法中
 【self 对象方法】；  // 死循环 
 
 在类方法中
@@ -407,16 +362,16 @@ Phone *_phone;
 <h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>封装:把复杂的数据或者操作进行隐藏,只操作数据或者方法的接口。封装的好处:隐藏成员变量，不让外部直接访问，提高安全性。控制外界访问成员权限。</p>
 <h4 id="set方法"><a href="#set方法" class="headerlink" title="set方法"></a>set方法</h4><hr>
 <p>命名规范：方法名必须以set开头。set后面跟成员变量名称，成员变量的首字母必须大写。返回值一定是void。一定要接收一个参数，而且参数类型跟成员变量类型一致。形参的名称不能跟成员变量名一样。</p>
-<pre><code class="hljs">- (void)set成员变量名 (首字母大写，去掉下划线) : (成员变量类型)成员变量名称 （去掉下划线）；
+<pre><code>- (void)set成员变量名 (首字母大写，去掉下划线) : (成员变量类型)成员变量名称 （去掉下划线）；
 - (void)setAge:(int)age;
 </code></pre><hr>
 <h4 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h4><hr>
 <p>命名规范：肯定有返回值，返回值类型肯定与成员变量类型一致。方法名跟成员变量名一样。不需要接收任何参数</p>
 <p>格式： </p>
-<pre><code class="hljs">- （成员变量类型）成员变量名称（去掉下划线）; 
+<pre><code>- （成员变量类型）成员变量名称（去掉下划线）; 
 - (int) age;
 </code></pre><p>使用</p>
-<pre><code class="hljs">// Student类的声明
+<pre><code>// Student类的声明
 @interface Student : NSObject
 &#123;
    int _age;
@@ -457,7 +412,7 @@ NSLog(@&quot;age is %d&quot;, age);
 <p>基类的私有属性<code>@private</code>能被继承,不能被使用。<code>@public</code>公有成员能被继承,也能被外部方法访问。<code>@protected</code>保护成员能够被继承、在子类中使用,但不能够被外部函数访问。在<code>@interface @end</code>之间声明的成员变量如果不做特别的说明,那么其默认是 protected的。</p>
 <p>在类的实现即<code>.m</code>文件，<code>@implementation</code>中也可以声明成员变量,是<code>@private</code>的。</p>
 <p>方法的重写：从父类继承的方法,可能这个方法并不适合子类,可以在子类中重写父类的方法。</p>
-<pre><code class="hljs">@interface Animal : NSObject
+<pre><code>@interface Animal : NSObject
 &#123;
   int _tuiNum; //腿的个数
   int _eyeNum; //眼睛个数
@@ -481,7 +436,7 @@ NSLog(@&quot;age is %d&quot;, age);
 @end
 </code></pre><p>重写之后,父类的对象调用父类的方法;子类的对象,调用子类的方法,不会引起冲突。从父类继承的方法,不适用于子类时,可以直接声明父类的同名方法,并定义。不用考虑父类中,方法已存在的问题。</p>
 <p>重写后,子类可以通过super调用父类的方法。</p>
-<pre><code class="hljs">- （void）eat
+<pre><code>- （void）eat
 &#123;
  [super eat];
 &#125;
@@ -489,7 +444,7 @@ NSLog(@&quot;age is %d&quot;, age);
 <h3 id="私有方法"><a href="#私有方法" class="headerlink" title="私有方法"></a>私有方法</h3><hr>
 <p>OC中并没有像Java中提供的私有方法,OC中的私有,可以理解为相对私有。</p>
 <p>方法在<code>.m</code>中实现,不在<code>.h</code>中声明,此时该方法被称为私有方法:私有方法不可以被子类继承</p>
-<pre><code class="hljs">@interface MyClass
+<pre><code>@interface MyClass
 &#123;
 // 添加变量
 &#125;
@@ -510,7 +465,7 @@ NSLog(@&quot;age is %d&quot;, age);
 <hr>
 <h3 id="类对象的用法"><a href="#类对象的用法" class="headerlink" title="类对象的用法"></a>类对象的用法</h3><hr>
 <p>可以用来调用方法</p>
-<pre><code class="hljs">Dog *d = [Dog new];
+<pre><code>Dog *d = [Dog new];
 Dog *d1 = [Dog new];
 Class c = [d1 class];
 
@@ -518,7 +473,7 @@ Class c = [d1 class];
 [Dog test];
 [c test];
 </code></pre><p>可以用来初始化对象</p>
-<pre><code class="hljs">Class c = [Dog class];
+<pre><code>Class c = [Dog class];
 [c test];
 
 // 用类对象创建对象
@@ -535,7 +490,7 @@ Dog *d = [c new];
 <p>使用static修饰实例变量是不被允许的。</p>
 <p>使用static修饰方法也是不被允许的。</p>
 <p>使用static<code>@interface和@end</code>之间是不被允许的（写局部变量本来就不被允许）。</p>
-<pre><code class="hljs">//狗类的声明
+<pre><code>//狗类的声明
 static int m=10; //此句话也可以放到.m中
 @interface Dog:NSObject
 &#123;
@@ -560,7 +515,7 @@ m++;
 <hr>
 <h3 id="点语法"><a href="#点语法" class="headerlink" title="点语法"></a>点语法</h3><hr>
 <p>点语法是编译器特性，当编译器看到对象使用点语法，会自动把点语法转换为调用set或get方法的形式。</p>
-<pre><code class="hljs">Student *stu = [Student new];
+<pre><code>Student *stu = [Student new];
 
 // 设置age的值
 stu.age = 10; // 等价于[stu setAge:10];
@@ -571,7 +526,7 @@ int age = stu.age; // 等价于int age = [stu age];
 // 输出
 NSLog(@&quot;age is %i&quot;, age);
 </code></pre><p>self在set方法中使用</p>
-<pre><code class="hljs">- (void)setAge:(int)age
+<pre><code>- (void)setAge:(int)age
 &#123;
 self.age = age;
 &#125;
@@ -582,7 +537,7 @@ self.age = age;
 [self setAge:age];
 &#125;
 </code></pre><p>self在get方法中使用</p>
-<pre><code class="hljs">- (int)age
+<pre><code>- (int)age
 &#123;
 return self.age;
 &#125;
@@ -597,7 +552,7 @@ return [self age];
 <h3 id="property关键字"><a href="#property关键字" class="headerlink" title="property关键字"></a>property关键字</h3><hr>
 <p><code>@property</code>是编译器的指令。它告诉编译器,声明属性的set、get方法。好处是:免去我们手工书写get和set方法繁琐的代码。</p>
 <p>格式：</p>
-<pre><code class="hljs">@property 类型 方法名
+<pre><code>@property 类型 方法名
 @property int age;
 
 //相当于进行了age的set和get方法的声明
@@ -606,7 +561,7 @@ return [self age];
 </code></pre><hr>
 <h3 id="synthesize关键字"><a href="#synthesize关键字" class="headerlink" title="synthesize关键字"></a>synthesize关键字</h3><hr>
 <p>如果<code>@synthesize</code>变量名要先在<code>.h</code>文件中声明</p>
-<pre><code class="hljs">@property int age;
+<pre><code>@property int age;
 .h
 -(void)setAge:(int)age;
 -(int)age;
@@ -625,7 +580,7 @@ return age;
 <hr>
 <h3 id="id类型"><a href="#id类型" class="headerlink" title="id类型"></a>id类型</h3><hr>
 <p>id类型应用场景</p>
-<pre><code class="hljs">//狗的类,狗继承自动物
+<pre><code>//狗的类,狗继承自动物
 Dog *dog = [Dog new];
 [dog run];
 
@@ -637,7 +592,7 @@ NSObjcet *dog1 = [Dog new];
 id dog2 = [Dog new];
 [obj run];
 </code></pre><p>id作为成员变量</p>
-<pre><code class="hljs">// 类的声明
+<pre><code>// 类的声明
 @interface Person : NSObject
 @property int age;
 @property id obj; // 可以接收任何对象
@@ -659,18 +614,18 @@ int main()
 <h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><hr>
 <p>构造方法:用来初始化对象实例变量值的方法,是个对象方法,<code>-</code>开头。</p>
 <p>完整的创建一个可用的对象:</p>
-<pre><code class="hljs">Person *p=[Person new];
+<pre><code>Person *p=[Person new];
 </code></pre><p>new方法的内部会分别调用两个方法来完成3件事情:使用alloc方法来分配存储空间(返回分配的对象);使用init方法来对对象进行初始化；返回对象的首地址。</p>
 <p>可以把new方法拆开如下:调用类方法+alloc分配存储空间,返回未经初始化的对象 </p>
-<pre><code class="hljs">Person *p1=[Person alloc];
+<pre><code>Person *p1=[Person alloc];
 </code></pre><p>调用对象方法-init进行初始化,返回对象本身</p>
-<pre><code class="hljs">Person *p2=[p1 init];
+<pre><code>Person *p2=[p1 init];
 </code></pre><p>以上两个过程整合为一句:</p>
-<pre><code class="hljs">Person *p=[[Person alloc] init];
+<pre><code>Person *p=[[Person alloc] init];
 </code></pre><p>init方法就是构造方法,是用来初始化对象的方法,注意这是一个对象方法,以减号开头。默认初始化完毕后,所有成员变量的值都为0。</p>
 <p><strong>自定义构造方法的代码实现</strong></p>
 <p>问题1：给Hero类定义一个构造方法,自定义名字信息。</p>
-<pre><code class="hljs">// 声明
+<pre><code>// 声明
 @property NSString *name;
 
 - (instancetype)initWithName:(NSString *)name；
@@ -686,7 +641,7 @@ int main()
 &#125;
 @end
 </code></pre><p>问题2：给Hero类定义一个构造方法,自定义名字信息和年龄。</p>
-<pre><code class="hljs">// 声明
+<pre><code>// 声明
 @property NSString *name;
 @property int age;
 
@@ -707,11 +662,11 @@ int main()
 <h3 id="NSMutableArray"><a href="#NSMutableArray" class="headerlink" title="NSMutableArray"></a>NSMutableArray</h3><hr>
 <p>数组长度不固定，可以随便往里面添加或者删除元素。</p>
 <p>创建可变数组</p>
-<pre><code class="hljs">NSMutableArray *arrayM = [NSMutableArray array];
+<pre><code>NSMutableArray *arrayM = [NSMutableArray array];
 </code></pre><p>数组添加成员</p>
-<pre><code class="hljs">- (void)addObject:(ObjectType)object;
+<pre><code>- (void)addObject:(ObjectType)object;
 </code></pre><p>删除数组成员</p>
-<pre><code class="hljs">// 用成员名进行删除
+<pre><code>// 用成员名进行删除
 - (void)removeObject:(ObjectType)object;
 
 // 删除指定位置的元素
@@ -719,7 +674,7 @@ int main()
 </code></pre><hr>
 <h2 id="swift"><a href="#swift" class="headerlink" title="swift"></a>swift</h2><h3 id="处理值缺失的情况"><a href="#处理值缺失的情况" class="headerlink" title="处理值缺失的情况"></a>处理值缺失的情况</h3><hr>
 <p><code>?</code>代表可能值确实，可以使用<code>if let</code>或者<code>??</code>来处理。</p>
-<pre><code class="hljs">var optionalName: String? = &quot;John Appleseed&quot;
+<pre><code>var optionalName: String? = &quot;John Appleseed&quot;
 var greeting = &quot;Hello!&quot;
 //如果不是 nil，会将值解包并赋给 let 后面的常量
 if let name = optionalName &#123;
@@ -727,7 +682,7 @@ if let name = optionalName &#123;
 &#125;
 print(greeting)//Hello, John Appleseed
 </code></pre><p><code>??</code>前面的变量为<code>nil</code>，则用<code>??</code>后面的变量；<code>??</code>前面的不为<code>nil</code>，则用<code>??</code>前面的变量。</p>
-<pre><code class="hljs">let nickName: String? = nil
+<pre><code>let nickName: String? = nil
 let fullName: String = &quot;John Appleseed&quot;
 let informalGreeting = &quot;Hi \(nickName ?? fullName)&quot;
 print(informalGreeting)//Hi John Appleseed
@@ -735,19 +690,19 @@ print(informalGreeting)//Hi John Appleseed
 <h3 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h3><hr>
 <p>使用<code>let</code>来声明常量，使用<code>var</code>来声明变量。</p>
 <p>int转String</p>
-<pre><code class="hljs">let label = &quot;The width is&quot;
+<pre><code>let label = &quot;The width is&quot;
 let width = 94
 let widthLabel = label + String(width)
 </code></pre><p>或者</p>
-<pre><code class="hljs">let apples = 3
+<pre><code>let apples = 3
 let appleSummary = &quot;I have \(apples) apples.&quot;
 </code></pre><p>使用方括号<code>[]</code>来创建数组和字典。数组添加元素用<code>append</code>。</p>
 <p>初始化一个空数组或者空字典：</p>
-<pre><code class="hljs">let emptyArray = [String]()
+<pre><code>let emptyArray = [String]()
 let emptyDictionary = [String: Float]()
 </code></pre><p>使用 <code>for-in</code>、<code>while</code> 和 <code>repeat-while</code> 来进行循环。</p>
 <p>switch：不需要在每个子句结尾写 break。</p>
-<pre><code class="hljs">let vegetable = &quot;red pepper&quot;
+<pre><code>let vegetable = &quot;red pepper&quot;
 switch vegetable &#123;
 case &quot;celery&quot;:
     print(&quot;Add some raisins and make ants on a log.&quot;)
@@ -759,7 +714,7 @@ default:
     print(&quot;Everything tastes good in soup.&quot;)
 &#125;
 </code></pre><p>字典是一个无序的集合，所以他们的键和值以任意顺序迭代结束。</p>
-<pre><code class="hljs">let interestingNumbers = [
+<pre><code>let interestingNumbers = [
     &quot;Prime&quot;: [2, 3, 5, 7, 11, 13],
     &quot;Fibonacci&quot;: [1, 1, 2, 3, 5, 8],
     &quot;Square&quot;: [1, 4, 9, 16, 25],
@@ -774,7 +729,7 @@ for (kind, numbers) in interestingNumbers &#123;
 &#125;
 print(largest)
 </code></pre><p>while</p>
-<pre><code class="hljs">var n = 2
+<pre><code>var n = 2
 while n &lt; 100 &#123;
     n *= 2
 &#125;
@@ -786,30 +741,30 @@ repeat &#123;
 &#125; while m &lt; 100
 print(m)//128
 </code></pre><p><code>..&lt;</code>来表示下标范围,不包含上界。如果想包含的话需要使用 <code>...</code>：</p>
-<pre><code class="hljs">var total = 0
+<pre><code>var total = 0
 for i in 0..&lt;4 &#123;
     total += i
 &#125;
 print(total)//6
 </code></pre><p>条件循环：</p>
-<pre><code class="hljs">for i in 1...10 where i % 2 == 0&#123;
+<pre><code>for i in 1...10 where i % 2 == 0&#123;
     print(i)
 &#125;
 </code></pre><p>倒叙遍历：</p>
-<pre><code class="hljs">for i in (1...10).reversed()&#123;
+<pre><code>for i in (1...10).reversed()&#123;
     print(i)
 &#125;
 </code></pre><p>生成随机数：</p>
-<pre><code class="hljs">Int.random(in: 1...6)//1-6之间随机数
+<pre><code>Int.random(in: 1...6)//1-6之间随机数
 </code></pre><p>四舍五入double，返回double：</p>
-<pre><code class="hljs">round(4.44) //4.0
+<pre><code>round(4.44) //4.0
 </code></pre><p>使用<code>func</code>来声明一个函数，使用<code>-&gt;</code>来指定函数返回值的类型。</p>
-<pre><code class="hljs">func greet(person: String, day: String) -&gt; String &#123;
+<pre><code>func greet(person: String, day: String) -&gt; String &#123;
     return &quot;Hello \(person), today is \(day).&quot;
 &#125;
 print(greet(person:&quot;Bob&quot;, day: &quot;Tuesday&quot;))//Hello Bob, today is Tuesday.
 </code></pre><p>使用元组来生成复合值，比如让一个函数返回多个值。该元组的元素可以用名称或数字来获取:</p>
-<pre><code class="hljs">func calculateStatistics(scores: [Int]) -&gt; (min: Int, max: Int, sum: Int) &#123;
+<pre><code>func calculateStatistics(scores: [Int]) -&gt; (min: Int, max: Int, sum: Int) &#123;
     var min = scores[0]
     var max = scores[0]
     var sum = 0
@@ -829,7 +784,7 @@ let statistics = calculateStatistics(scores:[5, 3, 100, 3, 9])
 print(statistics.sum)//120
 print(statistics.2)//120
 </code></pre><p>两个参数名时候的外部参数和内部参数：</p>
-<pre><code class="hljs">func numSun(wai nei : Int) &#123;
+<pre><code>func numSun(wai nei : Int) &#123;
     print(nei)
 &#125;
 numSun(wai: 3)
@@ -840,7 +795,7 @@ func numSun(_ nei : Int) &#123;
 numSun(3)
 </code></pre><p>函数可以嵌套。</p>
 <p>函数可以作为另一个函数的返回值:</p>
-<pre><code class="hljs">func makeIncrementer() -&gt; ((Int) -&gt; Int) &#123;
+<pre><code>func makeIncrementer() -&gt; ((Int) -&gt; Int) &#123;
     func addOne(number: Int) -&gt; Int &#123;
         return 1 + number
     &#125;
@@ -849,7 +804,7 @@ numSun(3)
 var increment = makeIncrementer()
 increment(7)//8
 </code></pre><p>函数也可以当做参数传入另一个函数:</p>
-<pre><code class="hljs">func hasAnyMatches(list: [Int], condition: (Int) -&gt; Bool) -&gt; Bool &#123;
+<pre><code>func hasAnyMatches(list: [Int], condition: (Int) -&gt; Bool) -&gt; Bool &#123;
     for item in list &#123;
         if condition(item) &#123;
             return true
@@ -864,7 +819,7 @@ var numbers = [20, 19, 7, 12]
 var bol = hasAnyMatches(list: numbers, condition: lessThanTen)
 print(&quot;\(bol)&quot;)
 </code></pre><p>闭包:</p>
-<pre><code class="hljs">numbers.map(&#123;
+<pre><code>numbers.map(&#123;
     (number: Int) -&gt; Int in
     let result = 3 * number
     return result
@@ -876,7 +831,7 @@ print(mappedNumbers)//[60, 57, 21, 36]
 </code></pre><p>使用 class 和类名来创建一个类。</p>
 <p>要创建一个类的实例，在类名后面加上括号。使用点语法来访问实例的属性和方法。</p>
 <p>使用 init 来创建一个构造器。</p>
-<pre><code class="hljs">class NamedShape &#123;
+<pre><code>class NamedShape &#123;
     var numberOfSides: Int = 0
     var name: String
 
@@ -895,20 +850,20 @@ print(mappedNumbers)//[60, 57, 21, 36]
 <hr>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><hr>
 <p>给<code>Image View</code>重新设置Assets资源图片：</p>
-<pre><code class="hljs">@IBOutlet weak var leftImage: UIImageView!
+<pre><code>@IBOutlet weak var leftImage: UIImageView!
 leftImage.image = UIImage(named: &quot;show2&quot;)
 </code></pre><hr>
 <p>摇晃手机结束：</p>
-<pre><code class="hljs">override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) &#123;  
+<pre><code>override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) &#123;  
 &#125;
 </code></pre><hr>
 <p>设置view的tag，然后同一个方法中区分：</p>
-<pre><code class="hljs">@IBAction func tagBtn(_ sender: UIButton) &#123;
+<pre><code>@IBAction func tagBtn(_ sender: UIButton) &#123;
     print(sender.tag)
 &#125;
 </code></pre><hr>
 <p>播放音频：</p>
-<pre><code class="hljs">import AVFoundation
+<pre><code>import AVFoundation
 var player: AVAudioPlayer!
 func palyAV() &#123;
     let url = Bundle.main.url(forResource: &quot;文件名&quot;, withExtension: &quot;格式名&quot;)
@@ -921,14 +876,14 @@ func palyAV() &#123;
 &#125;
 </code></pre><hr>
 <p>弹出框：</p>
-<pre><code class="hljs">let alter = UIAlertController(title: &quot;title&quot;, message: &quot;message&quot;, preferredStyle: .alert)
+<pre><code>let alter = UIAlertController(title: &quot;title&quot;, message: &quot;message&quot;, preferredStyle: .alert)
 alter.addAction(UIAlertAction(title: &quot;ok&quot;, style: .default, handler: &#123;(_) in
     print(&quot;点击了ok&quot;)
 &#125;))
 present(alter,animated: true,completion: nil)
 </code></pre><hr>
 <p>动态设置宽度：</p>
-<pre><code class="hljs">rightImage.frame.size.width = view.frame.width / 10
+<pre><code>rightImage.frame.size.width = view.frame.width / 10
 </code></pre><hr>
 <h2 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h2><hr>
 <p>control拖拽控件，可以选择Outlet和Action。</p>
@@ -938,103 +893,55 @@ present(alter,animated: true,completion: nil)
 <hr>
 <h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><hr>
 <p>图标制作网站：</p>
-<pre><code class="hljs">https://appicon.co/
+<pre><code>https://appicon.co/
 </code></pre><p>快捷键</p>
-<pre><code class="hljs">command + R        编译运行
+<pre><code>command + R        编译运行
 command + m        最小化
 command + z        撤销
 
 command + d        复制粘贴出来一个选中的ui控件
 command + 删除键    光标在一行的最后位置，删除整行/删除光标前的内容
 </code></pre><p>局域网真机调试：</p>
-<pre><code class="hljs">Window-Devices and Simulators
+<pre><code>Window-Devices and Simulators
 </code></pre><hr>
 <p>iOS</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/dequan1331/HybridPageKit">https://github.com/dequan1331/HybridPageKit</a></p>
 <hr>
 
-              
             </div>
-            <hr/>
+            <hr>
             <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/iOS/" class="category-chain-item">iOS</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/iOS/">#iOS</a>
-      
-    </div>
-  
-</div>
-
-
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/iOS/">iOS</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/iOS/">iOS</a>
+                    
+                  </div>
+                
+              </div>
               
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>从oc到swift</div>
-      <div>http://yoursite.com/2020/08/29/40.从oc到swift/</div>
-    </div>
-    <div class="license-meta">
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2020年8月29日</div>
-        </div>
-      
-      
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
-                <div class="post-prevnext my-3">
+              
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/09/05/41.python%E5%9F%BA%E7%A1%80/" title="python基础">
+                      <a href="/2020/09/05/41.python%E5%9F%BA%E7%A1%80/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">python基础</span>
                         <span class="visible-mobile">上一篇</span>
@@ -1044,7 +951,7 @@ command + 删除键    光标在一行的最后位置，删除整行/删除光�
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/07/06/37.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/" title="数据结构和算法">
+                      <a href="/2020/07/06/37.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">
                         <span class="hidden-mobile">数据结构和算法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -1060,55 +967,25 @@ command + 删除键    光标在一行的最后位置，删除整行/删除光�
         </div>
       </div>
     </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-
-
-  </aside>
-
-
-    </div>
+      </div>
+    
   </div>
 </div>
 
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
+<!-- Custom -->
 
 
     
 
     
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+      <a id="scroll-top-button" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -1127,34 +1004,32 @@ command + 删除键    光标在一行的最后位置，删除整行/删除光�
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
-
     
 
     
   </main>
 
-  <footer>
-    <div class="footer-inner">
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
   
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
 
-  </footer>
+  
 
-  <!-- Scripts -->
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
@@ -1170,28 +1045,11 @@ command + 删除键    光标在一行的最后位置，删除整行/删除光�
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
+<!-- Plugins -->
 
 
   
@@ -1200,153 +1058,72 @@ command + 删除键    光标在一行的最后位置，删除整行/删除光�
 
 
 
-
   
-<script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      collapseDepth   : CONFIG.toc.collapseDepth || 0,
-      scrollSmooth    : true,
-      headingsOffset  : -boardTop
-    });
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-  });
-</script>
 
 
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-  (function() {
-    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
-    var enableCopy = CONFIG.copy_btn;
-    if (!enableLang && !enableCopy) {
-      return;
-    }
-
-    function getBgClass(ele) {
-      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
-    }
-
-    var copyTmpl = '';
-    copyTmpl += '<div class="code-widget">';
-    copyTmpl += 'LANG';
-    copyTmpl += '</div>';
-    jQuery('.markdown-body pre').each(function() {
-      var $pre = jQuery(this);
-      if ($pre.find('code.mermaid').length > 0) {
-        return;
-      }
-      if ($pre.find('span.line').length > 0) {
-        return;
-      }
-
-      var lang = '';
-
-      if (enableLang) {
-        lang = CONFIG.code_language.default;
-        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
-          lang = $pre[0].children[0].classList[1];
-        } else if ($pre[0].getAttribute('data-language')) {
-          lang = $pre[0].getAttribute('data-language');
-        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
-          lang = $pre[0].children[0].classList[1];
-          $pre.parent().addClass('code-wrapper');
-        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
-          $pre.wrap('<div class="code-wrapper"></div>');
-        }
-        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
-      }
-      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
-        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
-
-      if (enableCopy) {
-        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js', function() {
-          var clipboard = new window.ClipboardJS('.copy-btn', {
-            target: function(trigger) {
-              var nodes = trigger.parentNode.childNodes;
-              for (var i = 0; i < nodes.length; i++) {
-                if (nodes[i].tagName === 'CODE') {
-                  return nodes[i];
-                }
-              }
-            }
-          });
-          clipboard.on('success', function(e) {
-            e.clearSelection();
-            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
-            setTimeout(function() {
-              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
-            }, 2000);
-          });
-        });
-      }
-    });
-  })();
-</script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
-  
-<script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
 
 
 
 
 
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
 
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
 </body>
 </html>

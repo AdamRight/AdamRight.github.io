@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=dark>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
 
 
 
@@ -9,48 +9,40 @@
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
-  
-    <meta name="description" content="1、网络基础1.2、Cookie 、Session和TokenCookie 、Session、Token：都是用来做持久化处理的，目的就是让客户端和服务端相互认识。Http请求默认是不持久的没有状态的，谁也不认识谁。 Cookie: 是存放在客户端的信息，这个信息是来自于服务器返回的信息，下次请求带过去，如果用户离开网站后，如果Cookie已过期一般是会被清除的。如果Cookie没过期下次访问网站">
-<meta property="og:type" content="article">
-<meta property="og:title" content="OkHttp基本使用及网络封装">
-<meta property="og:url" content="http://yoursite.com/2018/12/02/3.OkHttp%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E5%8F%8A%E7%BD%91%E7%BB%9C%E5%B0%81%E8%A3%85/index.html">
-<meta property="og:site_name" content="Jiang Space">
-<meta property="og:description" content="1、网络基础1.2、Cookie 、Session和TokenCookie 、Session、Token：都是用来做持久化处理的，目的就是让客户端和服务端相互认识。Http请求默认是不持久的没有状态的，谁也不认识谁。 Cookie: 是存放在客户端的信息，这个信息是来自于服务器返回的信息，下次请求带过去，如果用户离开网站后，如果Cookie已过期一般是会被清除的。如果Cookie没过期下次访问网站">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/img/4.png">
-<meta property="article:published_time" content="2018-12-02T13:32:32.973Z">
-<meta property="article:modified_time" content="2021-03-26T14:39:48.613Z">
-<meta property="article:tag" content="OkHttp">
-<meta property="article:tag" content="网络">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://yoursite.com/img/4.png">
-  
-  
   
   <title>OkHttp基本使用及网络封装 - Jiang Space</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
@@ -59,44 +51,24 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
+<!-- 自定义样式保持在最底部 -->
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-
-  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>Jiang Space</strong>
-    </a>
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Jiang Space</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -170,15 +142,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
-            </a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
           </li>
-          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+            <a class="nav-link" href="javascript:">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -187,71 +157,60 @@
   </div>
 </nav>
 
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="OkHttp基本使用及网络封装">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-12-02 21:32" pubdate>
+        2018年12月2日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.8k 字
+    </span>
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="OkHttp基本使用及网络封装"></span>
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      51
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
           
         </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2018-12-02 21:32" pubdate>
-          2018年12月2日 晚上
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          <!-- compatible with older versions-->
-          13k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          <!-- compatible with older versions-->
-          109 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
       </div>
-
-      
     </div>
-  </div>
-</div>
-
-</div>
-
   </header>
 
   <main>
@@ -260,20 +219,15 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
+    <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
+        <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">OkHttp基本使用及网络封装</h1>
             
             <div class="markdown-body">
-              
               <h2 id="1、网络基础"><a href="#1、网络基础" class="headerlink" title="1、网络基础"></a>1、网络基础</h2><h3 id="1-2、Cookie-、Session和Token"><a href="#1-2、Cookie-、Session和Token" class="headerlink" title="1.2、Cookie 、Session和Token"></a>1.2、Cookie 、Session和Token</h3><p>Cookie 、Session、Token：都是用来做持久化处理的，目的就是让客户端和服务端相互认识。Http请求默认是不持久的没有状态的，谁也不认识谁。</p>
 <p>Cookie: 是存放在客户端的信息，这个信息是来自于服务器返回的信息，下次请求带过去，如果用户离开网站后，如果Cookie已过期一般是会被清除的。如果Cookie没过期下次访问网站还是会带过去。（相对危险）</p>
 <p>Session: 是存放在服务器上面的客户端临时信息，用户离开网站是会被清除的。（相对安全，耗资源）</p>
@@ -282,7 +236,7 @@
 <p>Expires（缓存的过期策略）：指名了缓存数据有效的绝对时间，告诉客户端到了这个时间点（比照客户端时间点）后本地缓存就作废了，在这个时间点内客户端可以认为缓存数据有效，可直接从缓存中加载展示。</p>
 <p>如果有缓存并且过期了那么发起请求，服务端会给我们数据？（不一定会给）服务器的数据没有变动就不会给，状态码会变为304，自己拿之前过期的缓存。</p>
 <h3 id="1-5、Https"><a href="#1-5、Https" class="headerlink" title="1.5、Https"></a>1.5、Https</h3><p>Http和Https的区别：</p>
-<pre><code class="hljs">Https = Http + 加密 + 验证身份 + 完整
+<pre><code>Https = Http + 加密 + 验证身份 + 完整
 端口：Http (80)  Https (443)
 </code></pre><p>Http的缺点：数据是没有加密传输，可能遭遇窃听；不验证通信方的身份，可能会遭遇伪装；无法验证报文的完整性，可能会遭遇篡改。</p>
 <p>TLS/SSL协议：加密：对称加密（AES，DES）+ 非对称加密 (RSA，DSA)；证书：要钱（便宜），建立连接的速度会拖慢，TCP由3次握手变为8次握手。</p>
@@ -296,7 +250,7 @@
 <p>2、RealCall里面有enqueue，通过<code>call.enqueue()</code>,转换成了AsyncCall。</p>
 <p>3、AsyncCall是RealCall的内部类，AsyncCall继承了Runnable。AsyncCall给了OKhttp的Dispatcher（线程池），executorService().execute(call); </p>
 <p>4、最终去执行了AsyncCall.execute()方法，执行getResponseWithInterceptorChain返回 Response。</p>
-<pre><code class="hljs">synchronized void enqueue(AsyncCall call) &#123;  
+<pre><code>synchronized void enqueue(AsyncCall call) &#123;  
     //判断当前正在执行的任务数量，最大是64，正在执行的任务中的host,最大是5   
     if (runningAsyncCalls.size() &lt; maxRequests &amp;&amp; runningCallsForHost(call) &lt; maxRequestsPerHost) &#123;
         //加入到正在执行      
@@ -309,14 +263,14 @@
     &#125;  
 &#125;
 </code></pre><h3 id="2-1、官网和导入"><a href="#2-1、官网和导入" class="headerlink" title="2.1、官网和导入"></a>2.1、官网和导入</h3><p>官网</p>
-<pre><code class="hljs">http://square.github.io/okhttp/
+<pre><code>http://square.github.io/okhttp/
 </code></pre><p>引入</p>
-<pre><code class="hljs">compile &apos;com.squareup.okhttp3:okhttp:3.11.0&apos;
-</code></pre><h3 id="2-2、测试地址"><a href="#2-2、测试地址" class="headerlink" title="2.2、测试地址"></a>2.2、测试地址</h3><pre><code class="hljs">http://httpbin.org/
+<pre><code>compile &apos;com.squareup.okhttp3:okhttp:3.11.0&apos;
+</code></pre><h3 id="2-2、测试地址"><a href="#2-2、测试地址" class="headerlink" title="2.2、测试地址"></a>2.2、测试地址</h3><pre><code>http://httpbin.org/
 http://httpbin.org/get?id=123
 http://httpbin.org/post
 </code></pre><h3 id="2-3、get请求"><a href="#2-3、get请求" class="headerlink" title="2.3、get请求"></a>2.3、get请求</h3><p>同步请求</p>
-<pre><code class="hljs">OkHttpClient client = new OkHttpClient();
+<pre><code>OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder().url(&quot;http://httpbin.org/get?id=123&quot;).build();
 try &#123;
     Response response = client.newCall(request).execute();
@@ -327,7 +281,7 @@ try &#123;
     e.printStackTrace();
 &#125;
 </code></pre><p>异步请求</p>
-<pre><code class="hljs">System.out.println(Thread.currentThread().getId());
+<pre><code>System.out.println(Thread.currentThread().getId());
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder().url(&quot;http://httpbin.org/get?id=123&quot;).build();
 client.newCall(request).enqueue(new Callback() &#123;
@@ -342,7 +296,7 @@ client.newCall(request).enqueue(new Callback() &#123;
     &#125;
 &#125;);
 </code></pre><h3 id="2-4、post请求"><a href="#2-4、post请求" class="headerlink" title="2.4、post请求"></a>2.4、post请求</h3><p>同步请求，提交表单</p>
-<pre><code class="hljs">OkHttpClient client = new OkHttpClient();
+<pre><code>OkHttpClient client = new OkHttpClient();
 FormBody body = new FormBody
         .Builder()
         .add(&quot;name&quot;, &quot;shuaige&quot;)
@@ -358,7 +312,7 @@ try &#123;
     e.printStackTrace();
 &#125;
 </code></pre><p>异步提交，提交json</p>
-<pre><code class="hljs">OkHttpClient okHttpClient  = new OkHttpClient.Builder()
+<pre><code>OkHttpClient okHttpClient  = new OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10,TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
@@ -389,7 +343,7 @@ call.enqueue(new Callback() &#123;
     public void onResponse(Call call, Response response) throws IOException &#123;
         System.out.println(response.body().string());
     &#125;
-</code></pre><h3 id="2-5、设置url参数-HttpUrl"><a href="#2-5、设置url参数-HttpUrl" class="headerlink" title="2.5、设置url参数-HttpUrl"></a>2.5、设置url参数-HttpUrl</h3><pre><code class="hljs">OkHttpClient client = new OkHttpClient();
+</code></pre><h3 id="2-5、设置url参数-HttpUrl"><a href="#2-5、设置url参数-HttpUrl" class="headerlink" title="2.5、设置url参数-HttpUrl"></a>2.5、设置url参数-HttpUrl</h3><pre><code>OkHttpClient client = new OkHttpClient();
 HttpUrl httpUrl = HttpUrl.parse(&quot;http://httpbin.org/get&quot;).
         newBuilder().
         addQueryParameter(&quot;city&quot;, &quot;beijing&quot;).
@@ -406,7 +360,7 @@ try &#123;
 &#125; catch (IOException e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><h3 id="2-6、请求头的设置-addHeader"><a href="#2-6、请求头的设置-addHeader" class="headerlink" title="2.6、请求头的设置-addHeader"></a>2.6、请求头的设置-addHeader</h3><pre><code class="hljs">OkHttpClient client = new OkHttpClient();
+</code></pre><h3 id="2-6、请求头的设置-addHeader"><a href="#2-6、请求头的设置-addHeader" class="headerlink" title="2.6、请求头的设置-addHeader"></a>2.6、请求头的设置-addHeader</h3><pre><code>OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder().
         url(&quot;http://httpbin.org/get?id=123&quot;).
         addHeader(&quot;User-Agent&quot;, &quot;this my head&quot;).
@@ -420,7 +374,7 @@ try &#123;
 &#125; catch (IOException e) &#123;
     e.printStackTrace();
 &#125;
-</code></pre><h3 id="2-7、上传文件"><a href="#2-7、上传文件" class="headerlink" title="2.7、上传文件"></a>2.7、上传文件</h3><pre><code class="hljs">RequestBody imageBody = RequestBody.create(MediaType.parse(&quot;image/jpeg&quot;), new File(&quot;文件路径+文件名&quot;));
+</code></pre><h3 id="2-7、上传文件"><a href="#2-7、上传文件" class="headerlink" title="2.7、上传文件"></a>2.7、上传文件</h3><pre><code>RequestBody imageBody = RequestBody.create(MediaType.parse(&quot;image/jpeg&quot;), new File(&quot;文件路径+文件名&quot;));
 MultipartBody body = new MultipartBody.Builder()
         .setType(MultipartBody.FORM)
         .addFormDataPart(&quot;name&quot;, &quot;name&quot;)
@@ -436,7 +390,7 @@ try &#123;
     e.printStackTrace();
 &#125;
 </code></pre><p><strong>boundary</strong></p>
-<h3 id="2-8、定义拦截器"><a href="#2-8、定义拦截器" class="headerlink" title="2.8、定义拦截器"></a>2.8、定义拦截器</h3><pre><code class="hljs">//定义拦截器
+<h3 id="2-8、定义拦截器"><a href="#2-8、定义拦截器" class="headerlink" title="2.8、定义拦截器"></a>2.8、定义拦截器</h3><pre><code>//定义拦截器
 Interceptor interceptor = new Interceptor() &#123;
     @Override
     public Response intercept(Chain chain) throws IOException &#123;
@@ -453,7 +407,7 @@ OkHttpClient client = new OkHttpClient.Builder()
         .addInterceptor(interceptor)
         .build();
 </code></pre><h3 id="2-9、缓存"><a href="#2-9、缓存" class="headerlink" title="2.9、缓存"></a>2.9、缓存</h3><p>使用缓存的前提是服务器支持缓存</p>
-<pre><code class="hljs">// 创建缓存对象，缓存文件和缓存大小
+<pre><code>// 创建缓存对象，缓存文件和缓存大小
 Cache cache = new Cache(new File(&quot;cache.cache&quot;), 1024 * 1024);
 // 创建 OkHttpClient 对象
 OkHttpClient client = new OkHttpClient.Builder()
@@ -485,7 +439,7 @@ try &#123;
     e.printStackTrace();
 &#125;
 </code></pre><p><strong>Okhttp实现缓存方式：在<code>CacheInterceptor</code>缓存拦截器中，根据缓存策略<code>CacheStrategy</code>分配。<code>Cache</code>和<code>DiskLruCache</code>。</strong></p>
-<h3 id="2-10、文件下载"><a href="#2-10、文件下载" class="headerlink" title="2.10、文件下载"></a>2.10、文件下载</h3><pre><code class="hljs">OkHttpClient client = new OkHttpClient();
+<h3 id="2-10、文件下载"><a href="#2-10、文件下载" class="headerlink" title="2.10、文件下载"></a>2.10、文件下载</h3><pre><code>OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder().url(&quot;文件地址&quot;).
         addHeader(&quot;Accept-Encoding&quot;,&quot;identity&quot;).
         addHeader(&quot;Range&quot;, &quot;bytes=0-&quot;).
@@ -506,7 +460,7 @@ try &#123;
 <h2 id="3、源码分析"><a href="#3、源码分析" class="headerlink" title="3、源码分析"></a>3、源码分析</h2><p>Volley是基于HttpUrlConnection；OkHttp基于Okio(原生的JavaIO + 自定义封装) + Socket连接。</p>
 <h3 id="3-1、OkHttpClient"><a href="#3-1、OkHttpClient" class="headerlink" title="3.1、OkHttpClient"></a>3.1、OkHttpClient</h3><hr>
 <p>OkHttpClient相当于配置中心，所有的请求都会共享这些配置，比如出错是否重试、共享的连接池。主要配置有：</p>
-<pre><code class="hljs">//调度器，主要管理线程，用于调度后台发起的网络请求，有后台总请求数和单主机总请求数的控制。
+<pre><code>//调度器，主要管理线程，用于调度后台发起的网络请求，有后台总请求数和单主机总请求数的控制。
 //private int maxRequests = 64;private int maxRequestsPerHost = 5;
 final Dispatcher dispatcher;
 
@@ -555,7 +509,7 @@ final int readTimeout;
 //发起请求并被目标服务器接受的超时时间
 final int writeTimeout;
 </code></pre><p>CertificatePinner的配置公钥示例：</p>
-<pre><code class="hljs">String hostname = &quot;publicobject.com&quot;;
+<pre><code>String hostname = &quot;publicobject.com&quot;;
 CertificatePinner certificatePinner = new CertificatePinner.Builder()
 .add(hostname, &quot;sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=&quot;)
 .build();
@@ -569,13 +523,13 @@ client.newCall(request).execute();
 </code></pre><hr>
 <h3 id="3-2、RealCall"><a href="#3-2、RealCall" class="headerlink" title="3.2、RealCall"></a>3.2、RealCall</h3><hr>
 <p>newCall(Request)方法会返回一个RealCall对象，它是Call接口的实现。</p>
-<pre><code class="hljs">final class RealCall implements Call &#123;
+<pre><code>final class RealCall implements Call &#123;
 </code></pre><p>当调用RealCall.execute()的时候，getResponseWithInterceptorChain()会被调用，它会发起网络请求并拿到返回的响应，装进一个Response对象并作为返回值返回。</p>
-<pre><code class="hljs">Response result = getResponseWithInterceptorChain();
+<pre><code>Response result = getResponseWithInterceptorChain();
 </code></pre><p>RealCall.enqueue()被调用的时候大同小异，区别在于enqueue会使用Dispatcher的线程池来把请求放在后台线程进行，但实质上使用的同样也是getResponseWithInterceptorChain()方法。</p>
 <p>getResponseWithInterceptorChain()方法里做的事：把所有配置好的Interceptor放在一个List里，然后作为参数，创建一个RealInterceptorChain对象，并调用chain.proceed(request)发起请求和获取响应。</p>
 <p>RealCall类中的<code>getResponseWithInterceptorChain()</code>方法作用：<strong>将请求Request转变成响应Response</strong>。</p>
-<pre><code class="hljs">Response getResponseWithInterceptorChain() throws IOException &#123;
+<pre><code>Response getResponseWithInterceptorChain() throws IOException &#123;
     // 拦截器的一个集合
     List&lt;Interceptor&gt; interceptors = new ArrayList&lt;&gt;();
     // 客户端的所有自定义拦截器，可以添加自己定义的
@@ -618,7 +572,7 @@ client.newCall(request).execute();
 <h2 id="4、Okio"><a href="#4、Okio" class="headerlink" title="4、Okio"></a>4、Okio</h2><p>程序内部（内存）和外部（本地文件和网络）进行数据交互的过程，就叫输入输出。</p>
 <p>从文件里或者从网络上读数据到内存里，就叫输入；从内存里写到文件里或者发送到网络上，就叫输出。Java I/O 作用只有一个：和外界做数据交互。使用流，例如 <code>FileInputStream / FileOutputStream</code>。</p>
 <p>Okio特点：基于插管的，而且是单向的，输入源叫 Source，输出目标叫 Sink，支持 Buffer，可以对 Buffer 进行操作，但不强制使用Buffer。</p>
-<pre><code class="hljs">try (Source source = Okio.buffer(Okio.source(new File(&quot;./io/text.txt&quot;)))) &#123;
+<pre><code>try (Source source = Okio.buffer(Okio.source(new File(&quot;./io/text.txt&quot;)))) &#123;
     Buffer buffer = new Buffer();
     source.read(buffer, 1024);
     System.out.println(buffer.readUtf8Line());
@@ -627,90 +581,42 @@ client.newCall(request).execute();
     e.printStackTrace();
 &#125;
 </code></pre>
-              
             </div>
-            <hr/>
+            <hr>
             <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/OkHttp/">#OkHttp</a>
-      
-        <a href="/tags/%E7%BD%91%E7%BB%9C/">#网络</a>
-      
-    </div>
-  
-</div>
-
-
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Android/">Android</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/OkHttp/">OkHttp</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+                    
+                  </div>
+                
+              </div>
               
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>OkHttp基本使用及网络封装</div>
-      <div>http://yoursite.com/2018/12/02/3.OkHttp基本使用及网络封装/</div>
-    </div>
-    <div class="license-meta">
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2018年12月2日</div>
-        </div>
-      
-      
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
-                <div class="post-prevnext my-3">
+              
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2019/01/05/4.%E5%AE%89%E5%8D%93%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%89%E5%85%A8%E9%94%AE%E7%9B%98/" title="安卓自定义安全键盘">
+                      <a href="/2019/01/05/4.%E5%AE%89%E5%8D%93%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%89%E5%85%A8%E9%94%AE%E7%9B%98/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">安卓自定义安全键盘</span>
                         <span class="visible-mobile">上一篇</span>
@@ -720,7 +626,7 @@ client.newCall(request).execute();
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2018/12/01/2.html%E5%92%8Ccss%E5%9F%BA%E7%A1%80/" title="HTML和CSS基础">
+                      <a href="/2018/12/01/2.html%E5%92%8Ccss%E5%9F%BA%E7%A1%80/">
                         <span class="hidden-mobile">HTML和CSS基础</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -736,55 +642,25 @@ client.newCall(request).execute();
         </div>
       </div>
     </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-
-
-  </aside>
-
-
-    </div>
+      </div>
+    
   </div>
 </div>
 
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
+<!-- Custom -->
 
 
     
 
     
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+      <a id="scroll-top-button" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -803,34 +679,32 @@ client.newCall(request).execute();
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
-
     
 
     
   </main>
 
-  <footer>
-    <div class="footer-inner">
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
   
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
 
-  </footer>
+  
 
-  <!-- Scripts -->
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
@@ -846,28 +720,11 @@ client.newCall(request).execute();
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
+<!-- Plugins -->
 
 
   
@@ -876,153 +733,72 @@ client.newCall(request).execute();
 
 
 
-
   
-<script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      collapseDepth   : CONFIG.toc.collapseDepth || 0,
-      scrollSmooth    : true,
-      headingsOffset  : -boardTop
-    });
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-  });
-</script>
 
 
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-  (function() {
-    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
-    var enableCopy = CONFIG.copy_btn;
-    if (!enableLang && !enableCopy) {
-      return;
-    }
-
-    function getBgClass(ele) {
-      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
-    }
-
-    var copyTmpl = '';
-    copyTmpl += '<div class="code-widget">';
-    copyTmpl += 'LANG';
-    copyTmpl += '</div>';
-    jQuery('.markdown-body pre').each(function() {
-      var $pre = jQuery(this);
-      if ($pre.find('code.mermaid').length > 0) {
-        return;
-      }
-      if ($pre.find('span.line').length > 0) {
-        return;
-      }
-
-      var lang = '';
-
-      if (enableLang) {
-        lang = CONFIG.code_language.default;
-        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
-          lang = $pre[0].children[0].classList[1];
-        } else if ($pre[0].getAttribute('data-language')) {
-          lang = $pre[0].getAttribute('data-language');
-        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
-          lang = $pre[0].children[0].classList[1];
-          $pre.parent().addClass('code-wrapper');
-        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
-          $pre.wrap('<div class="code-wrapper"></div>');
-        }
-        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
-      }
-      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
-        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
-
-      if (enableCopy) {
-        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js', function() {
-          var clipboard = new window.ClipboardJS('.copy-btn', {
-            target: function(trigger) {
-              var nodes = trigger.parentNode.childNodes;
-              for (var i = 0; i < nodes.length; i++) {
-                if (nodes[i].tagName === 'CODE') {
-                  return nodes[i];
-                }
-              }
-            }
-          });
-          clipboard.on('success', function(e) {
-            e.clearSelection();
-            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
-            setTimeout(function() {
-              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
-            }, 2000);
-          });
-        });
-      }
-    });
-  })();
-</script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
-  
-<script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
 
 
 
 
 
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
 
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
 </body>
 </html>
