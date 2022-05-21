@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>flutter笔记</title>
+    <link href="/2022/05/08/49.flutter%E7%AC%94%E8%AE%B0/"/>
+    <url>/2022/05/08/49.flutter%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>flutter，根据官网更新，（<a href="https://docs.flutter.dev/community/china）镜像配置。mac中的`.bash_profile`配置：">https://docs.flutter.dev/community/china）镜像配置。mac中的`.bash_profile`配置：</a></p><pre><code class="hljs">export PUB_HOSTED_URL=https://pub.flutter-io.cnexport FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn</code></pre><p>下载sdk，并且配置环境变量</p><pre><code class="hljs">export PATH=$PATH:/Users/kakadai/Documents/flutter/bin</code></pre><p>as中在plugins中安装flutter和dart</p><p>检查：</p><pre><code class="hljs">flutter doctor</code></pre><h3 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h3><p>谷歌安卓开发者网页镜像访问：</p><pre><code class="hljs">https://developer.android.google.cn/</code></pre><p>资料：</p><pre><code class="hljs">book.flutterchina.clubhttps://juejin.cn/post/6844903850076291086https://juejin.cn/post/6938687202184396836</code></pre><p>dart在线练习    </p><pre><code class="hljs">https://dartpad.cn/?</code></pre><p>学习demo</p><pre><code class="hljs">https://github.com/iampawan/FlutterExampleApps</code></pre><p>JSON to Dart 工具：</p><pre><code class="hljs">https://javiercbk.github.io/json_to_dart/</code></pre><h3 id="pub库相关"><a href="#pub库相关" class="headerlink" title="pub库相关"></a>pub库相关</h3><p>输入一下代码，升级插件:</p><pre><code class="hljs">flutter pub upgrade --major-versions</code></pre><p>package repository for Dart and Flutter apps:</p><pre><code class="hljs">https://pub.dev/</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>flutter</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>flutter</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>逆向</title>
     <link href="/2022/02/12/48.%E9%80%86%E5%90%91/"/>
     <url>/2022/02/12/48.%E9%80%86%E5%90%91/</url>
