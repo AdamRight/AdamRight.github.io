@@ -1,0 +1,2265 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="快速入门和详解kotlin, Jiang Space">
+    <meta name="description" content="快速入门1、资料As查看反编译代码：
+Tools -&amp;gt; Kotlin -&amp;gt; show kotlin bytecode -&amp;gt; Decompile
+
+官方文档
+https://kotlinlang.org/docs/refer">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+
+    <title>快速入门和详解kotlin | Jiang Space</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Jiang Space</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Jiang Space</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">快速入门和详解kotlin</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/kotlin/">
+                                <span class="chip bg-color">kotlin</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Android/" class="post-category">
+                                Android
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-01-23
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><h3 id="1、资料"><a href="#1、资料" class="headerlink" title="1、资料"></a>1、资料</h3><p>As查看反编译代码：</p>
+<pre><code>Tools -&gt; Kotlin -&gt; show kotlin bytecode -&gt; Decompile
+</code></pre>
+<p>官方文档</p>
+<pre><code>https://kotlinlang.org/docs/reference/
+</code></pre>
+<p>Kotlin源码</p>
+<pre><code>https://github.com/JetBrains/kotlin
+</code></pre>
+<p>Kotlin官博</p>
+<pre><code>https://blog.jetbrains.com/kotlin/
+</code></pre>
+<p>Kotlin微信公众号</p>
+<pre><code>Kotlin
+</code></pre>
+<h3 id="2、HelloWorld"><a href="#2、HelloWorld" class="headerlink" title="2、HelloWorld"></a>2、HelloWorld</h3><p>第一种写法</p>
+<pre><code>fun main(args: Array&lt;String&gt;) &#123;
+    println(&quot;Hello World&quot;)
+&#125;
+</code></pre>
+<p>第二种写法</p>
+<pre><code>object HelloWorld &#123;
+    @JvmStatic
+    fun main(args: Array&lt;String&gt;) &#123;
+        println(&quot;Hello&quot;)
+    &#125;
+&#125;
+</code></pre>
+<p>第三种写法</p>
+<pre><code>class HelloWorld &#123;
+    companion object &#123;
+        @JvmStatic
+        fun main(args: Array&lt;String&gt;) &#123;
+            println(&quot;Hello&quot;)
+        &#125;
+    &#125;
+&#125;	
+</code></pre>
+<h3 id="3、基本类型定义"><a href="#3、基本类型定义" class="headerlink" title="3、基本类型定义"></a>3、基本类型定义</h3><pre><code>var s : String = &quot;Hello&quot;
+var stringA = &quot;Hello&quot;
+var int = 5
+</code></pre>
+<p>基本数据类型的定义可以加类型，也可以不加。</p>
+<p><strong><code>lateinit</code>延迟初始化成员变量，先不赋值</strong></p>
+<pre><code>private lateinit var string : String
+</code></pre>
+<p><strong>val延迟初始化用lazy，使用的时候再赋值,值只在第一次访问的时候计算</strong></p>
+<pre><code>val ss : String by lazy &#123; 
+    &quot;赋值&quot;
+&#125;
+</code></pre>
+<p>数据类型转换</p>
+<pre><code>.toInt()
+.toFloat()
+</code></pre>
+<p>字符串比较</p>
+<pre><code>==
+.equals()
+</code></pre>
+<h3 id="4、定义final"><a href="#4、定义final" class="headerlink" title="4、定义final"></a>4、定义<code>final</code></h3><pre><code>const val stringB = &quot;Hello&quot;
+val stringC = &quot;Hello&quot;
+</code></pre>
+<p><code>var</code>是一个可变变量,<code>val</code>是一个只读变量，可以省略类型。</p>
+<p><code>const</code>只能用在顶级属性，以及object对象的属性中（伴随对象也是obejct）。</p>
+<p><code>const val</code>就相当于Java中的<code>final</code>，<strong>编译期常量</strong>。</p>
+<h3 id="5、占位符-quot-quot"><a href="#5、占位符-quot-quot" class="headerlink" title="5、占位符&quot;${}&quot;"></a>5、占位符<code>&quot;$&#123;&#125;&quot;</code></h3><pre><code>var stringG = &quot;IamG&quot;
+var stringF = &quot;$&#123;stringG&#125;&quot; + &quot;dd&quot;
+println(stringF)//IamGdd
+</code></pre>
+<h3 id="6、数组和遍历"><a href="#6、数组和遍历" class="headerlink" title="6、数组和遍历"></a>6、数组和遍历</h3><pre><code>val names: Array&lt;String&gt; = arrayOf(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)
+val emptyStrings: Array&lt;String?&gt; = arrayOfNulls(10)
+
+
+val array = arrayOf(1, 2, 3)
+val arrayOfNulls = arrayOfNulls&lt;Int&gt;(3)
+val array1 = Array(5) &#123; i: Int -&gt; (i * i).toString() &#125;//i为索引0-4
+val intArrayOf = intArrayOf(1, 2, 3)//[1,2,3]
+val intArray = IntArray(3)//[0,0,0]
+val intArray1 = IntArray(2) &#123; 99 &#125;//[99,99]
+val intArray2 = IntArray(3) &#123; it * 1 &#125;//it为索引0-4
+</code></pre>
+<p><strong><code>String?</code>表示可以为null的String类型</strong></p>
+<p>基本数据类型定制版</p>
+<pre><code>val ints = intArrayOf(1, 3, 5)
+</code></pre>
+<p>基本操作</p>
+<pre><code>names.isNotEmpty() //判断空
+names.length //数组的长度
+names[i] = &quot;Hello&quot; //给第i个成员赋值
+print array[i] //输出第i个成员
+</code></pre>
+<p>for遍历(注意<code>..</code>和<code>until</code>)</p>
+<pre><code>val ints = intArrayOf(1, 3, 5, 7, 9)
+
+for (int in ints) &#123;
+    println(int)
+&#125;
+
+for (i in ints.indices)&#123;//i是角标
+    print(ints[i])
+&#125;
+
+for ((index,value) in ints.withIndex())&#123;
+    println(&quot;$index -&gt; $value&quot;)
+&#125;
+
+for (indexedValue in strArrays.withIndex())&#123;
+    println(&quot;$&#123;indexedValue.index&#125; -&gt; $&#123;indexedValue.value&#125;&quot;)
+&#125;
+
+for (i in IntRange(0, ints.size - 1)) &#123;
+    print(ints[i])
+&#125;
+
+for (i in 0..ints.size - 1) &#123;
+    print(ints[i])
+&#125;
+
+for (i in 0 until ints.size) &#123;
+    print(ints[i])
+&#125;
+
+//Lambda方式遍历
+ints.forEach&#123;
+    println(it)
+&#125;
+ints.forEach(::println)
+
+ints.forEachIndexed &#123; index: Int, i: Int -&gt; println(&quot;$index:$i&quot;) &#125;
+ints.forEachIndexed &#123; index, i -&gt; println(&quot;$index:$i&quot;) &#125;
+</code></pre>
+<h3 id="7、list"><a href="#7、list" class="headerlink" title="7、list"></a>7、list</h3><hr>
+<p>List：</p>
+<pre><code>var lists = listOf &lt;String&gt;(&quot;张三&quot;, &quot;李四&quot;, &quot;王五&quot;)
+for (list in lists) &#123;
+    println(list)
+&#125;
+for ((index, valu) in lists.withIndex()) &#123;//角标从零开始，角标和值
+    println(index.toString() + &quot;-----&quot; + valu)
+&#125;
+
+val list = listOf(&quot;one&quot;, &quot;two&quot;, &quot;one&quot;)
+println(list)
+val set = setOf(&quot;one&quot;, &quot;two&quot;, &quot;one&quot;)//不可重复
+println(set)
+
+//可变集合List
+val mutableListOf1 = mutableListOf(1, 2, 3, 4)
+val mutableListOf2 = mutableListOf&lt;String&gt;()
+
+//可变集合Set
+val hello = mutableSetOf(&quot;H&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot;)//Set自动过滤重复元素
+hello.remove(&quot;o&quot;)
+println(hello)
+hello += setOf(&quot;w&quot;, &quot;o&quot;, &quot;r&quot;, &quot;l&quot;, &quot;d&quot;)//集合相加合并，前面的必须为可变集合
+println(hello)
+</code></pre>
+<p>排序：</p>
+<pre><code>val number3 = mutableListOf(1, 2, 3, 4)
+number3.shuffle()//洗牌，随机排序
+println(number3)
+number3.sort()//从小到大
+println(number3)
+number3.sortDescending()//从大到小
+println(number3)
+</code></pre>
+<p>自定义排序：</p>
+<pre><code>data class Language(var name: String, var score: Int)
+
+val languageList = mutableListOf&lt;Language&gt;()
+languageList.add(Language(&quot;Java&quot;, 80))
+languageList.add(Language(&quot;Kotlin&quot;, 90))
+languageList.add(Language(&quot;Dart&quot;, 99))
+languageList.add(Language(&quot;C&quot;, 80))
+//使用sortBy进行排序，适合单条件排序
+languageList.sortBy &#123; it.score &#125;
+println(languageList)
+languageList.sortWith(compareBy(&#123; it.score &#125;, &#123; it.name &#125;))
+println(languageList)
+</code></pre>
+<hr>
+<h3 id="7、map"><a href="#7、map" class="headerlink" title="7、map"></a>7、map</h3><hr>
+<p>Map：</p>
+<pre><code>var map = TreeMap&lt;String, String&gt;()
+map[&quot;姓名&quot;] = &quot;张三&quot;
+map[&quot;性别&quot;] = &quot;男&quot;
+map[&quot;年龄&quot;] = &quot;18&quot;
+map[&quot;爱好&quot;] = &quot;游泳&quot;
+</code></pre>
+<p>map不是Collection接口的继承者，但是他也是kotlin的一种集合类型：</p>
+<pre><code>val map = mapOf(&quot;key1&quot; to 1, &quot;key2&quot; to 2, &quot;key3&quot; to 3, &quot;key4&quot; to 4, &quot;key5&quot; to 5)
+println(map.keys)
+println(map.values)
+if (&quot;key2&quot; in map) println(&quot;Value by key key2:$&#123;map[&quot;key2&quot;]&#125;&quot;)
+if (1 in map.values) println(&quot;1 is in the map&quot;)
+if (map.containsKey(&quot;key1&quot;)) &#123;
+    println()
+&#125;
+if (map.containsValue(1)) &#123;
+    println()
+&#125;
+</code></pre>
+<p>两个具有相同键值对，但顺序不同的map相等吗？为什么？</p>
+<pre><code>/**
+ * Q1：两个具有相同键值对，但顺序不同的map相等吗？为什么？
+ * 无论键值对的顺序如何，包含相同键值对的两个 Map 是相等的
+ */
+val anotherMap = mapOf(&quot;key2&quot; to 2, &quot;key1&quot; to 1, &quot;key3&quot; to 3, &quot;key4&quot; to 4, &quot;key5&quot; to 5)
+println(&quot;anotherMap == numberMap:$&#123;anotherMap == map&#125;&quot;)
+anotherMap.equals(map)
+</code></pre>
+<hr>
+<h3 id="8、静态变量、方法"><a href="#8、静态变量、方法" class="headerlink" title="8、静态变量、方法"></a>8、静态变量、方法</h3><pre><code>companion object &#123; 
+&#125;
+</code></pre>
+<h3 id="9、方法函数"><a href="#9、方法函数" class="headerlink" title="9、方法函数"></a>9、方法函数</h3><p>定义方法带参及返回类型</p>
+<pre><code>fun stringD(string : String):Boolean&#123;
+    //...
+    return true
+&#125;
+</code></pre>
+<p><strong>参数个数不固定</strong>，vararg：</p>
+<pre><code>fun stringE(vararg names: String)&#123;
+&#125;
+
+stringE(*Ints)
+</code></pre>
+<p>简化写法</p>
+<pre><code>fun add(num1 : Int ,num2 : Int) : Int&#123;
+    return num1 + num2
+&#125;
+
+fun add(num1 : Int ,num2 : Int) = num1 + num2
+</code></pre>
+<p>函数作为变量使用</p>
+<pre><code>var d = add(1,2)
+val add = fun(num1: Int, num2: Int): Int &#123;
+    return num1 + num2
+&#125;
+</code></pre>
+<h3 id="10、when表达式"><a href="#10、when表达式" class="headerlink" title="10、when表达式"></a>10、when表达式</h3><p>when用来代替switch</p>
+<pre><code>fun checkScore(score: Int) : String &#123;
+    var str = when (score) &#123;
+        100 -&gt;&quot;满分&quot;
+        99 -&gt; &quot;继续加油&quot;
+        else -&gt;&quot;看好你哦&quot;
+    &#125;
+    return str
+&#125;
+    
+</code></pre>
+<h3 id="11、实例化类和class实例"><a href="#11、实例化类和class实例" class="headerlink" title="11、实例化类和class实例"></a>11、实例化类和<code>class</code>实例</h3><pre><code>var data = Date()
+</code></pre>
+<p>不需要<code>new</code></p>
+<p>获得<code>class</code>的实例的两种方式</p>
+<pre><code>val clazz1 = DD::class.java
+
+val dd = DD()
+val clazz2 = dd.javaClass
+</code></pre>
+<h3 id="12、继承"><a href="#12、继承" class="headerlink" title="12、继承"></a>12、继承</h3><pre><code>class Son : Father()&#123;
+    override fun action()&#123;
+        //...
+    &#125;
+&#125;
+</code></pre>
+<h3 id="13、AS转化"><a href="#13、AS转化" class="headerlink" title="13、AS转化"></a>13、AS转化</h3><p>as中直接转换：两次<code>shift</code>后输入<code>Convert Java File to Kotlin File</code>。</p>
+<h3 id="14、Lambda"><a href="#14、Lambda" class="headerlink" title="14、Lambda"></a>14、Lambda</h3><p>无参数：</p>
+<pre><code>fun test() &#123;
+    println(&quot;no param&quot;)
+&#125;
+//转换成Lambda
+val test = &#123; println(&quot;no param&quot;) &#125;
+</code></pre>
+<p>有参数：</p>
+<pre><code>函数入参 -&gt; 返回值
+
+val add = fun(num1: Int, num2: Int): Int &#123;
+    return num1 + num2
+&#125;
+
+//Lambda可以写成
+val add: (Int, Int) -&gt; Int = &#123; a, b -&gt; a + b &#125;
+//或者
+val add = &#123; num1: Int, num2: Int -&gt; num1 + num2 &#125;
+</code></pre>
+<p>过滤空后的输出结果</p>
+<pre><code>var strArrays = arrayOf(&quot;1&quot;, &quot;2&quot;, &quot;&quot;, &quot;&quot;, &quot;3&quot;, &quot;4&quot;)
+strArrays.filter &#123; it.isNotEmpty() &#125;.forEach&#123; println(it)&#125;
+</code></pre>
+<p>下划线，用不到的参数可以用下划线代替：</p>
+<pre><code>val map = mapOf(&quot;key1&quot; to &quot;value1&quot;, &quot;key2&quot; to &quot;value2&quot;, &quot;key3&quot; to &quot;value3&quot;, &quot;key4&quot; to &quot;value4&quot;, &quot;key5&quot; to &quot;value5&quot;)
+map.forEach &#123; (k, _) -&gt; println(k) &#125;
+map.forEach &#123; (_, v) -&gt; println(v) &#125;
+</code></pre>
+<h3 id="15、空安全"><a href="#15、空安全" class="headerlink" title="15、空安全"></a>15、空安全</h3><p><strong><code>String?</code>表示可以为null的String类型</strong>。<code>!!</code>表示自己判断不会出现<code>null</code>，但如果出现了<code>null</code>会崩溃。<code>？</code>表示可能会返回<code>null</code>，不会崩溃。</p>
+<pre><code>var string: String? = null
+var len1 = string?.length
+var len2 = string!!.length//最终会崩溃
+</code></pre>
+<h3 id="16、类"><a href="#16、类" class="headerlink" title="16、类"></a>16、类</h3><hr>
+<p>类的创建</p>
+<pre><code>class Person(val name:String,val age:Int)
+</code></pre>
+<p>构造方法</p>
+<pre><code>class Person(var name: String?, var age:Int) &#123;
+    constructor(name: String):this(name,0)    
+    constructor():this(null,0)
+&#125;
+</code></pre>
+<p>get和set</p>
+<pre><code>var name: String? = null        
+    private set// 私有掉set方法    
+var age: Int = 0        
+    get() &#123; return if (field &lt; 0) 0 else field &#125;//field就是age
+</code></pre>
+<p>类的继承</p>
+<pre><code>class QQStepView : View &#123;    
+    constructor(context:Context):this(context,null)    
+    constructor(context:Context,attrs: AttributeSet?):this(context,attrs,0)    
+    constructor(context:Context,attrs: AttributeSet?,defStyleAttr:Int):super(context,attrs,defStyleAttr&#123;        
+        // 写内容 获取自定义属性的内容    
+    &#125;
+&#125;
+</code></pre>
+<p>或者</p>
+<pre><code>class QQStepView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
+</code></pre>
+<p>匿名内部类</p>
+<pre><code> //匿名内部类 object:xxx        
+httpUtils.get(object: HttpCallback()&#123;
+        override fun onError(e: IOException) &#123;  &#125;            
+        override fun onSuccess() &#123; Log.e(&quot;TAG&quot;,&quot;onSuccess&quot;)&#125; 
+&#125;)
+</code></pre>
+<p>类内声名变量三种方式：</p>
+<pre><code>//1声明为空 
+val simple:Int?=null
+//2设置getter
+val simple: Int?
+    get() &#123;
+        return 0
+    &#125;
+//3在构造方法内初始化
+</code></pre>
+<p>类内成员变量：</p>
+<pre><code>class Shop &#123;
+    val name: String = &quot;Android&quot;
+    var address: String? = null
+    val isClose: Boolean
+        get() = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) &gt; 11
+    var score: Float = 0.0f
+        //val不允许set var才可以
+        get() = if (field &lt; 0.2f) 0.2f else field * 1.5f
+        set(value) = println(value)
+    var counter = 0
+        set(value) &#123;
+            if (value &gt; 0) field = value
+        &#125;
+
+&#125;
+
+/**
+ * lateinit 对属性的延迟初始化 常用于注入
+ */
+class Test &#123;
+    lateinit var shop: Shop
+    fun setup() &#123;
+        shop = Shop()
+        shop.address = &quot;Beijing&quot;
+    &#125;
+
+    fun test() &#123;
+        //::表示创建成员或者类的引用
+        if (::shop.isInitialized) println(shop.address)
+    &#125;
+&#125;
+</code></pre>
+<hr>
+<h3 id="17、运算符重载"><a href="#17、运算符重载" class="headerlink" title="17、运算符重载"></a>17、运算符重载</h3><hr>
+<pre><code>class Counter(val dayIndex: Int)&#123;    
+    // 操作符重载 +    
+    operator fun plus(counter: Counter):Counter&#123;        
+        return Counter(dayIndex+counter.dayIndex)    
+    &#125;    
+    // 操作符重载 -    
+    operator fun minus(counter: Counter):Counter&#123;        
+        return Counter(dayIndex-counter.dayIndex)    
+    &#125;
+&#125;
+</code></pre>
+<hr>
+<h3 id="18、方法扩展"><a href="#18、方法扩展" class="headerlink" title="18、方法扩展"></a>18、方法扩展</h3><hr>
+<pre><code> // 对类方法进行扩展        
+val str = &quot;abc&quot;       
+var strMulit = str.mulit(3)
+Log.e(&quot;TAG&quot;,&quot;strMulit = $strMulit&quot;)
+// 对一个类的方法进行扩展    
+operator fun  String.mulit(number: Int): String &#123;         
+    val stringBuilder = StringBuilder()         
+    for (num in 1..number)&#123;             
+    stringBuilder.append(this)         
+    &#125;        
+    return stringBuilder.toString()    
+&#125;
+</code></pre>
+<hr>
+<h2 id="详解kotlin"><a href="#详解kotlin" class="headerlink" title="详解kotlin"></a>详解kotlin</h2><h3 id="1、数据类型和函数"><a href="#1、数据类型和函数" class="headerlink" title="1、数据类型和函数"></a>1、数据类型和函数</h3><h4 id="和"><a href="#和" class="headerlink" title="==和==="></a><code>==</code>和<code>===</code></h4><p><code>==</code>表示比较内容，类似于java的equals；<code>===</code>表示比较对象是否相同。</p>
+<h4 id="open继承"><a href="#open继承" class="headerlink" title="open继承"></a>open继承</h4><p>如果一个类允许被继承，那么需要使用open声明。方法想被重写也是要加open。</p>
+<pre><code>open class People(name: String, sex: String) &#123;
+&#125;
+
+class Man(name: String, sex: String) : People(name, sex) &#123;
+&#125;
+</code></pre>
+<h4 id="init"><a href="#init" class="headerlink" title="init"></a>init</h4><p>init代码比构造函数先执行。</p>
+<pre><code>open class People(name: String, sex: String) &#123;
+    init &#123;
+
+    &#125;
+&#125;
+</code></pre>
+<h4 id="is"><a href="#is" class="headerlink" title="is"></a>is</h4><p><code>is</code>类似于java中的<code>instance of</code>。</p>
+<h4 id="as父类向下转为子类"><a href="#as父类向下转为子类" class="headerlink" title="as父类向下转为子类"></a>as父类向下转为子类</h4><p><code>as</code>类型转换，失败则抛异常，<code>as?</code>如果转换失败，则返回<code>null</code>,不抛异常。</p>
+<pre><code>val child : Child? = parent as? Child
+</code></pre>
+<p>只能类型转化：父类对象直接引用子类的成员。</p>
+<h4 id="Any父类和Unit返回值"><a href="#Any父类和Unit返回值" class="headerlink" title="Any父类和Unit返回值"></a>Any父类和Unit返回值</h4><p>Any是Kotlin中的父类，类似于java中的Object。</p>
+<p>没有返回值时候，其实返回的是Unit，相当于java中的void。</p>
+<h4 id="引用包名"><a href="#引用包名" class="headerlink" title="引用包名"></a>引用包名</h4><p>导包时候替换其他名字</p>
+<pre><code>import 包名...类名1 as xxx
+val name : xxx = xxx() 
+</code></pre>
+<h4 id="range"><a href="#range" class="headerlink" title="range"></a>range</h4><p>range表示范围，ClosedRange的子类</p>
+<pre><code>0..100 表示 [0,100]
+0 until 100 表示 [0,100)
+i in 0..100 判断i是否在[0,100]中
+</code></pre>
+<h4 id="类中的toString"><a href="#类中的toString" class="headerlink" title="类中的toString"></a>类中的toString</h4><pre><code>open class People(var name: String, var sex: String) &#123;
+    override fun toString(): String &#123;
+        return name + sex
+    &#125;
+&#125;
+</code></pre>
+<h4 id="get和set方法"><a href="#get和set方法" class="headerlink" title="get和set方法"></a>get和set方法</h4><p>默认已经实现了get&#x2F;set方法，如果要做处理</p>
+<pre><code>class Woman&#123;
+    var nameA : String = &quot;翠花&quot;
+        get() &#123;
+            print(&quot;get方法&quot;)
+            return field
+        &#125;
+        set(value) &#123;
+            print(&quot;set方法&quot;)
+            field = value
+        &#125;
+&#125;
+</code></pre>
+<h4 id="if可以作为表达式"><a href="#if可以作为表达式" class="headerlink" title="if可以作为表达式"></a>if可以作为表达式</h4><p>if可以直接作为表达式</p>
+<pre><code>val nameB = if (true)&#123;
+    &quot;NameB&quot;
+&#125; else &#123;
+    &quot;NameBB&quot;
+&#125;
+</code></pre>
+<p><code>try...catch</code>、<code>when</code>等也可以作为表达式。</p>
+<h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><pre><code>Outter@for ((index,value) in strArrays.withIndex())&#123;
+    println(&quot;$index -&gt; $value&quot;)
+    Inner@for (indexedValue in strArrays.withIndex())&#123;
+        if (...)&#123;
+            break@Outter
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h4 id="接口代理"><a href="#接口代理" class="headerlink" title="接口代理"></a>接口代理</h4><pre><code>interface Child &#123;
+    fun play()
+&#125;
+
+interface Parent &#123;
+    fun eat()
+&#125;
+
+class People : Child, Parent &#123;
+    override fun play() &#123;
+    &#125;
+    override fun eat() &#123;
+    &#125;
+&#125;
+
+class People1(child: Child,parent: Parent) : Child by child, Parent by parent
+</code></pre>
+<h4 id="object类"><a href="#object类" class="headerlink" title="object类"></a>object类</h4><p>只有一个实例的类；不能自定义构造方法；可以实现接口，继承父类；本质上就是单例模式的最基本实现。object类里面的方法都是静态方法。</p>
+<pre><code>object FF &#123;
+    val ffv : String = &quot;ff&quot;
+&#125;
+</code></pre>
+<h4 id="静态方法和成员"><a href="#静态方法和成员" class="headerlink" title="静态方法和成员"></a>静态方法和成员</h4><p><code>companion object</code>包裹起来静态方法；<code>@JvmStatic</code>和<code>@JvmField</code>加上后，java去调用更方便。</p>
+<pre><code>class HelloWorld &#123;
+
+    @JvmField
+    val TAG : String = &quot;TAG&quot;
+
+    companion object &#123;
+        @JvmStatic
+        fun main(args: Array&lt;String&gt;) &#123;
+            println(&quot;Hello&quot;)
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h4 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h4><hr>
+<p>方法重载可以用方法上的默认参数代替，想给java用可以加上<code>@JvmOverloads</code>。</p>
+<pre><code>@JvmOverloads
+fun sum(a: Int = 2, b: Int): Int &#123;
+    return a + b
+&#125;
+</code></pre>
+<hr>
+<h4 id="data-class类"><a href="#data-class类" class="headerlink" title="data class类"></a><code>data class</code>类</h4><hr>
+<p>可以定义javabean，自动有了 <code>toString()</code>、<code>hashCode()</code>、<code>equals()</code>、<code>copy()</code>、<code>componentN()</code>这些方法。</p>
+<hr>
+<p>填坑：</p>
+<pre><code>apply plugin: &#39;kotlin-noarg&#39;
+apply plugin: &#39;kotlin-allopen&#39;
+
+classpath &quot;org.jetbrains.kotlin:kotlin-gradle-noarg:$kotlin_version&quot;
+classpath &quot;org.jetbrains.kotlin:kotlin-gradle-allopen:$kotlin_version&quot;
+
+noArg&#123;
+    annotation(&quot;xxxx&quot;)
+&#125;
+</code></pre>
+<h4 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h4><p>java定义内部类，默认持有外部类的引用，除非定义为静态的内部类。</p>
+<p><strong>Kotlin中内部类默认是静态内部类，inner定义的是非静态内部类</strong></p>
+<pre><code>inner class Inner&#123;
+&#125;
+</code></pre>
+<h4 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h4><p>可以继承父类或者实现多个接口</p>
+<pre><code>interface OnClickListener &#123;
+    fun onClick()
+&#125;
+
+class View &#123;
+    var onclick: OnClickListener? = null
+&#125;
+
+val view = View()
+view.onclick = object : OnClickListener&#123;
+    override fun onClick() &#123;
+    &#125;
+&#125;
+</code></pre>
+<h4 id="对象表达式"><a href="#对象表达式" class="headerlink" title="对象表达式"></a>对象表达式</h4><hr>
+<pre><code>open class Address2(name: String) &#123;
+    open fun print() &#123;
+
+    &#125;
+&#125;
+
+class Shop2 &#123;
+    var address: Address2? = null
+    fun addAddress(address2: Address2) &#123;
+        this.address = address2
+    &#125;
+&#125;
+
+/**
+ * 对象表达式
+ */
+fun test3() &#123;
+    //如果超类型有一个构造方法，则必须传递适当的构造方法参数给它
+    Shop2().addAddress(object : Address2(&quot;Android&quot;) &#123;
+        //对象表达式
+        override fun print() &#123;
+            super.print()
+        &#125;
+    &#125;)
+    //只需要一个对象 不需要一个新的类
+    val adHoc = object &#123;
+        var x: Int = 0
+        var y: Int = 0
+    &#125;
+    println(adHoc.x + adHoc.y)
+&#125;
+</code></pre>
+<hr>
+<h3 id="2、高阶函数"><a href="#2、高阶函数" class="headerlink" title="2、高阶函数"></a>2、高阶函数</h3><hr>
+<p>对每个元素操作返回新的list</p>
+<pre><code>val list = listOf(1, 3, 5, 7, 9, 11)
+val newList = list.map &#123;
+    it * 2 + 3
+&#125;
+</code></pre>
+<p>还有</p>
+<pre><code>forEach、map、flatMap、reduce、fold、filter、takeWhile、
+let、apply、with、use、
+joinToString
+</code></pre>
+<p>尾递归</p>
+<pre><code>tailrec
+</code></pre>
+<p>高阶函数：如果一个函数接收另一个函数作为参数，或者返回值的类型是另一个函数的话，那么该函数就称为高阶函数。</p>
+<p>扩展函数-&gt;参考上文，18、方法扩展。</p>
+<p>定义函数变量,<code> -&gt;</code>左边是参数类型，右边是返回值，Unit相当于void，无返回值：</p>
+<pre><code>val a: (String, Int) -&gt; Unit
+</code></pre>
+<p>定义函数</p>
+<pre><code>fun num1Andnum2(num1: Int, num2: Int, operation: (Int, Int) -&gt; Int): Int &#123;
+    return operation(num1, num2)
+&#125;
+</code></pre>
+<hr>
+<h4 id="函数作为参数"><a href="#函数作为参数" class="headerlink" title="函数作为参数"></a>函数作为参数</h4><hr>
+<pre><code>/**
+ * .sum扩展
+ */
+fun List&lt;Int&gt;.sum(callback: (Int) -&gt; Unit): Int &#123;
+    var result = 0
+    for (v in this) &#123;
+        result += v
+        callback(v)
+    &#125;
+    return result
+&#125;
+
+//使用
+val list = listOf(1, 2, 3, 4, 5)
+var result = list.sum &#123; println(it) &#125;//当lambda作为参数，且只有一个参数时，可用it代替此参数
+print(result)
+</code></pre>
+<hr>
+<h4 id="函数作为返回值"><a href="#函数作为返回值" class="headerlink" title="函数作为返回值"></a>函数作为返回值</h4><hr>
+<p>实现一个能够对集合进行求和的高阶函数，并且返回一个<code>(scale: Int) -&gt; Float</code>的函数：</p>
+<pre><code>/**
+ * 函数作为返回值
+ */
+fun List&lt;String&gt;.toIntSum(): (scale: Int) -&gt; Float &#123;
+    println(&quot;第一层函数&quot;)
+    return fun(scale): Float &#123;
+        var result = 0f
+        for (v in this) &#123;
+            result += v.toInt() * scale
+        &#125;
+        return result
+    &#125;
+&#125;
+
+//使用
+val listString = listOf(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;)
+val toIntSum = listString.toIntSum()(2)
+</code></pre>
+<hr>
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><hr>
+<p>实现一个接收一个testClosure方法，该方法要接收一个Int类型的v1参数，同时能够返回一个声名为<code>v2: Int, (Int) -&gt; Unit</code>的函数，并且这个函数能够计算v1和v2的和。</p>
+<pre><code>fun testClosure(v1: Int): (v2: Int, (Int) -&gt; Unit) -&gt; Unit &#123;
+    return fun(v2, printer: (Int) -&gt; Unit) &#123;
+        printer(v1 + v2)
+    &#125;
+&#125;
+
+//使用
+testClosure(1)(2)&#123;
+    println(it)
+&#125;
+</code></pre>
+<hr>
+<h4 id="解构声明"><a href="#解构声明" class="headerlink" title="解构声明"></a>解构声明</h4><hr>
+<pre><code>data class Result(val msg: String, val code: Int)
+
+fun test11() &#123;
+    val result = Result(&quot;success&quot;, 200)
+    val (msg, code) = result
+    println(msg + code)
+&#125;
+</code></pre>
+<hr>
+<h4 id="方法字面值"><a href="#方法字面值" class="headerlink" title="方法字面值"></a>方法字面值</h4><hr>
+<pre><code>var temp: ((Int) -&gt; Boolean)? = null //变量temp为(Int)-&gt;Boolean类型
+//&#123;num-&gt;(num&gt;10)&#125;方法字面值
+temp = &#123; num -&gt; (num &gt; 10) &#125;
+println(temp(11))
+</code></pre>
+<hr>
+<h3 id="3、协程"><a href="#3、协程" class="headerlink" title="3、协程"></a>3、协程</h3><p>协作程序，解决异步问题。</p>
+<h3 id="4、泛型"><a href="#4、泛型" class="headerlink" title="4、泛型"></a>4、泛型</h3><hr>
+<pre><code>fun main() &#123;
+    Coke().taste()
+    Coke().price(Sweet())
+    BlueColor(Blue()).printColor()
+    test12()
+&#125;
+
+//范型接口
+interface Drinks&lt;T&gt; &#123;
+    fun taste(): T
+    fun price(t: T)
+&#125;
+
+class Sweet &#123;
+    val price = 5
+&#125;
+
+class Coke : Drinks&lt;Sweet&gt; &#123;
+    override fun taste(): Sweet &#123;
+        println(&quot;sweet&quot;)
+        return Sweet()
+    &#125;
+
+    override fun price(t: Sweet) &#123;
+        println(&quot;coke price=$&#123;t.price&#125;&quot;)
+    &#125;
+&#125;
+
+//范型类
+abstract class Color&lt;T&gt;(var t: T/*范型字段*/) &#123;
+    abstract fun printColor()
+&#125;
+
+class Blue &#123;
+    val color = &quot;blue&quot;
+&#125;
+
+class BlueColor(b: Blue) : Color&lt;Blue&gt;(b) &#123;
+    override fun printColor() &#123;
+        println(&quot;color:$&#123;t.color&#125;&quot;)
+    &#125;
+&#125;
+
+//范型方法
+fun &lt;T&gt; fromJson(json: String, tClass: Class&lt;T&gt;): T? &#123;
+    val t: T? = tClass.newInstance()
+    return t
+&#125;
+
+//范型约束
+//extends
+fun &lt;T : Comparable&lt;T&gt;?&gt; sort(list: List&lt;T&gt;?): Unit &#123;&#125;
+
+fun test12() &#123;
+    sort(listOf(1, 2, 3))
+    val listString = listOf(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)
+    val list = test(listString, &quot;B&quot;)
+    println(list)
+&#125;
+
+//多个上界
+fun &lt;T&gt; test(list: List&lt;T&gt;, threshold: T): List&lt;T&gt;
+        where T : CharSequence, T : Comparable&lt;T&gt; &#123;
+    return list.filter &#123; it &gt; threshold &#125;.map &#123; it &#125;
+&#125;
+
+//范型out(?extends) in(?super)
+fun sumOfList(list: List&lt;out Number&gt;): Number &#123;
+    var result = 0f;
+    for (number in list) &#123;
+        result += number.toFloat()
+    &#125;
+    return result
+&#125;
+</code></pre>
+<hr>
+<h3 id="5、注解"><a href="#5、注解" class="headerlink" title="5、注解"></a>5、注解</h3><hr>
+<pre><code>fun main() &#123;
+    fire(ApiGetArticles())
+&#125;
+
+//kotlin注解
+annotation class ApiDoc(val value: String)
+
+@ApiDoc(&quot;modifier class&quot;)
+class Box &#123;
+    @ApiDoc(&quot;modifier field&quot;)
+    var size = 6
+
+    @ApiDoc(&quot;modifier func&quot;)
+    fun test() &#123;
+    &#125;
+&#125;
+
+public enum class Method &#123;
+    GET, POST
+&#125;
+
+//元注解
+@Target(AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class HttpMethod(val method: Method)
+
+interface Api &#123;
+    val name: String
+    val version: String
+        get() = &quot;1.0&quot;
+&#125;
+
+@HttpMethod(Method.GET)
+class ApiGetArticles : Api &#123;
+    override val name: String
+        get() = &quot;/api.articles&quot;
+&#125;
+
+fun fire(api: Api) &#123;
+    val annotations = api.javaClass.annotations
+    val httpMethod = annotations.find &#123; it is HttpMethod &#125; as? HttpMethod
+    println(httpMethod?.method)
+&#125;
+</code></pre>
+<hr>
+<h3 id="6、扩展"><a href="#6、扩展" class="headerlink" title="6、扩展"></a>6、扩展</h3><hr>
+<pre><code>fun main() &#123;
+    val mutableListOf = mutableListOf(1, 2, 3)
+    mutableListOf.swap(0, 2)
+    println(mutableListOf)
+
+    val mutableListOf1 = mutableListOf(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)
+    mutableListOf1.swap1(0, 2)
+    println(mutableListOf1)
+
+    println(&quot;hello&quot;.lastChar)
+    Jump.print(&quot;dfaj&quot;)
+    testApply()
+&#125;
+
+//扩展方法
+fun MutableList&lt;Int&gt;.swap(index1: Int, index2: Int) &#123;
+    var temp = this[index1]
+    this[index1] = this[index2]
+    this[index2] = temp
+&#125;
+
+//范型
+fun &lt;T&gt; MutableList&lt;T&gt;.swap1(index1: Int, index2: Int) &#123;
+    var temp = this[index1]
+    this[index1] = this[index2]
+    this[index2] = temp
+&#125;
+
+//扩展属性
+val String.lastChar: Char get() = this.get(this.length - 1)
+
+//伴生对象扩展
+class Jump &#123;
+    companion object &#123;&#125;
+&#125;
+
+fun Jump.Companion.print(string: String) &#123;
+    println(&quot;Jump.Companion.print:$string&quot;)
+&#125;
+
+/*    常见扩展  */
+/**
+ * let
+ */
+fun testLet(string: String?) &#123;
+    string?.let &#123;//避免null
+        println(it.length)
+    &#125;
+    string?.let &#123;//限制作用域
+        val str2 = &quot;let&quot;
+        println(it + str2)
+    &#125;
+&#125;
+
+/**
+ * run
+ */
+data class Room(val address: String, val price: Float, val size: Float)
+
+fun testRun(room: Room) &#123;
+    room.run &#123; //不再需要room.
+        println(&quot;Room:$address,$price,$size&quot;)
+    &#125;
+&#125;
+
+/**
+ * apply
+ * 类似与Android的builder
+ */
+fun testApply() &#123;
+    ArrayList&lt;String&gt;().apply &#123;//返回的仍为该类型的实例
+        add(&quot;1&quot;)
+        add(&quot;2&quot;)
+        add(&quot;3&quot;)
+        println(&quot;$this&quot;)
+    &#125;.let &#123; println(it) &#125;
+&#125;
+
+/**---------案例:使用Kotlin扩展为控件绑定监听器减少模板代码---------**/
+//为Activity添加find扩展方法，用于通过资源id获取控件
+fun &lt;T : View&gt; Activity.find(@IdRes id: Int): T &#123;
+    return findViewById(id)
+&#125;
+
+//为Int添加onClick扩展方法，用于为资源id对应的控件添加onClick监听
+fun Int.onClick(activity: Activity, click: () -&gt; Unit) &#123;
+    activity.find&lt;View&gt;(this).apply &#123;
+        setOnClickListener &#123;
+            click()
+        &#125;
+    &#125;
+&#125;
+
+//Activity中使用 
+val v = find&lt;TextView&gt;(R.id.test)
+R.id.test.onClick(this)&#123;
+    test.text=&quot;Kotlin extension&quot;
+&#125;
+</code></pre>
+<hr>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>代码：<a target="_blank" rel="noopener" href="https://github.com/AdamRight/Android2021Code/tree/master/app/src/main/java/com/android/code/kotlin">https://github.com/AdamRight/Android2021Code/tree/master/app/src/main/java/com/android/code/kotlin</a></p>
+<h3 id="1、静态函数和属性"><a href="#1、静态函数和属性" class="headerlink" title="1、静态函数和属性"></a>1、静态函数和属性</h3><h4 id="1-1-顶层函数"><a href="#1-1-顶层函数" class="headerlink" title="1.1 顶层函数"></a>1.1 顶层函数</h4><hr>
+<p>顶层函数直接在kotlin文件中定义函数和属性，会直接生成静态的。</p>
+<p>在其他kotlin类中可以直接使用函数名，在Java中通过 <code>文件名Kt</code>来使用。</p>
+<p>如果在kotlin文件中注解 <code>@file:JvmName(&quot;类名&quot;)</code>，那么在Java中可以通过 <code>类名.函数名</code> 来使用。</p>
+<hr>
+<h4 id="1-2-object类"><a href="#1-2-object类" class="headerlink" title="1.2 object类"></a>1.2 object类</h4><hr>
+<p>object类直接生成单例例对象，然后通过单例对象访问函数和属性。</p>
+<p>在其他kotlin类中可以通过 <code>类名.函数名</code> 使用；在Java中通过 <code>类名.INSTANCE.函数名</code>来使用。</p>
+<hr>
+<h4 id="1-3-companion-object"><a href="#1-3-companion-object" class="headerlink" title="1.3 companion object"></a>1.3 companion object</h4><hr>
+<p>kotlin类中使用 <code>companion object</code> 生成单例例对象，然后通过单例对象访问函数和属性。</p>
+<p>在其他kotlin类中可以通过 <code>类名.函数名</code> 使用；在Java中通过 <code>类名.Companion.函数名</code>来使用。</p>
+<p>如果在 <code>companion object</code> 中的函数和属性通过 <code>@JvmStatic</code> 修饰，那么Java中可以用 <code>类名.函数名</code> 直接使用。</p>
+<hr>
+<h3 id="2、internal"><a href="#2、internal" class="headerlink" title="2、internal"></a>2、internal</h3><hr>
+<p>有多个module模块情况下，可⻅性修饰符internal的作用是，只能被当前module模块访问的到。</p>
+<hr>
+<h3 id="3、主构造器"><a href="#3、主构造器" class="headerlink" title="3、主构造器"></a>3、主构造器</h3><hr>
+<p>改造前</p>
+<pre><code>class User1 &#123;
+    var userName: String? = null
+    var userPassWord: String? = null
+    constructor()&#123;
+
+    &#125;
+    constructor(name: String, password: String)&#123;
+        this.userName = name
+        this.userPassWord = password
+    &#125;
+&#125;
+</code></pre>
+<p>改成主构造器：</p>
+<pre><code>class User1 constructor(name: String?, password: String?) &#123;
+    var userName: String? = null
+    var userPassWord: String? = null
+    constructor() : this(null, null)&#123;
+
+    &#125;
+    init &#123;
+        this.userName = name
+        this.userPassWord = password
+    &#125;
+&#125;
+</code></pre>
+<p>进一步修改：</p>
+<pre><code>class User1 constructor(name: String?, password: String?) &#123;
+    var userName: String? = name
+    var userPassWord: String? = password
+     constructor(): this(null, null)
+&#125;
+</code></pre>
+<p>再进一步修改：</p>
+<pre><code>class User1 constructor(var name: String?, var password: String?) &#123;
+    constructor(): this(null, null)
+&#125;
+</code></pre>
+<p>在主构造参数前面加上 <code>var/val</code> 使构造参数同时成为成员变量。</p>
+<p>再进一步修改：</p>
+<pre><code>class User1 constructor(var name: String? = null, var password: String? = null) &#123;
+&#125;
+</code></pre>
+<hr>
+<h3 id="4、查看kotlin类的字节码"><a href="#4、查看kotlin类的字节码" class="headerlink" title="4、查看kotlin类的字节码"></a>4、查看kotlin类的字节码</h3><hr>
+<p>Tools –&gt; Kotlin –&gt; Show Kotlin Bytecode</p>
+<hr>
+<h3 id="5、Elvis操作符"><a href="#5、Elvis操作符" class="headerlink" title="5、Elvis操作符"></a>5、Elvis操作符</h3><hr>
+<p>通过 <code>?:</code> 的操作来简化 <code>if null</code> 的操作。</p>
+<pre><code>var myName = user.name
+if (myName == null)&#123;
+    myName = &quot;kotlin&quot;
+&#125;
+</code></pre>
+<p>修改后：</p>
+<pre><code>var myName = user.name ?: &quot;kotlin&quot;
+</code></pre>
+<p>修改前：</p>
+<pre><code>if (user.name == null || user.name!!.length &lt; 4)&#123;
+
+&#125;
+</code></pre>
+<p>修改后：</p>
+<pre><code>if (user.name?.length ?: 0 &lt; 4)&#123;
+
+&#125;
+</code></pre>
+<hr>
+<h3 id="6、forEach和filter"><a href="#6、forEach和filter" class="headerlink" title="6、forEach和filter"></a>6、forEach和filter</h3><hr>
+<p>forEach：</p>
+<pre><code>var arrayListUser1 = ArrayList&lt;User1&gt;()
+var arrayListUser2 = ArrayList&lt;User1&gt;()
+
+arrayListUser1.forEach &#123;
+    if (it.name == &quot;kotlin&quot;)&#123;
+        arrayListUser2.add(it)
+    &#125;
+&#125;
+</code></pre>
+<p>filter：</p>
+<pre><code>var arrayListUser1 = ArrayList&lt;User1&gt;()
+var arrayListUser2: List&lt;User1&gt; = arrayListUser1.filter &#123; it.name == &quot;kotlin&quot; &#125;
+</code></pre>
+<hr>
+<h3 id="7、let、apply、run、also"><a href="#7、let、apply、run、also" class="headerlink" title="7、let、apply、run、also"></a>7、let、apply、run、also</h3><hr>
+<p>返回自身 –&gt; 从 apply 和 also 中选</p>
+<pre><code>作用域中使用 this 作为参数 ----&gt; 选择 apply
+
+作用域中使用 it 作为参数 ----&gt; 选择 also
+</code></pre>
+<p>不需要返回自身 -&gt; 从 run 和 let 中选择</p>
+<pre><code>作用域中使用 this 作为参数 ----&gt; 选择 run
+
+作用域中使用 it 作为参数 ----&gt; 选择 let
+</code></pre>
+<hr>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer"></a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://adamright.github.io/2019/01/23/7.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8kotlin/">https://adamright.github.io/2019/01/23/7.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8kotlin/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank"></a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/kotlin/">
+                                    <span class="chip bg-color">kotlin</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/01/25/8.IconFont%E5%9C%A8Android%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="IconFont在Android中的使用介绍">
+                        
+                        <span class="card-title">IconFont在Android中的使用介绍</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-01-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Android/" class="post-category">
+                                    Android
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/IconFont/">
+                        <span class="chip bg-color">IconFont</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/01/17/6.%E5%BC%BA%E5%BC%95%E7%94%A8%E3%80%81%E8%BD%AF%E5%BC%95%E7%94%A8%E3%80%81%E5%BC%B1%E5%BC%95%E7%94%A8%E3%80%81%E5%B9%BB%E8%B1%A1%E5%BC%95%E7%94%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="强引用、软引用、弱引用、幻象引用">
+                        
+                        <span class="card-title">强引用、软引用、弱引用、幻象引用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-01-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2022</span>
+            
+            <a href="/about" target="_blank"></a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
