@@ -373,6 +373,58 @@ MariaDB：开源免费中小型的数据库
 </code></pre>
 <p>SQL：英文：Structured Query Language，简称 SQL，结构化查询语言。操作关系型数据库的编程语言。定义操作所有关系型数据库的统一标准，可以使用SQL操作所有的关系型数据库管理系统，以后工作中如果使用到了其他的数据库管理系统，也同样的使用SQL来操作。</p>
 <hr>
+<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><hr>
+<p>下载：<a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
+<p>配置环境变量</p>
+<p>配置文件：</p>
+<pre><code>[mysql]
+# 设置mysql客户端默认字符集
+default-character-set=utf8 
+[mysqld]
+# 设置mysql的安装目录
+basedir = E:\mysql-5.7.27-winx64\mysql-5.7.27-winx64
+# 设置mysql数据库的数据的存放目录
+datadir = E:\mysql-5.7.27-winx64\mysql-5.7.27-winx64\data
+# 允许最大连接数
+max_connections=200
+# 服务端使用的字符集默认为8比特编码的latin1字符集
+character-set-server=utf8
+# 创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB
+# 如果需要的存储引擎被禁用或未编译，可以防止自动替换存储引擎
+# 为事务存储引擎启用严格模式，也可能为非事务存储引擎启用严格模式
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+# 开启查询缓存
+explicit_defaults_for_timestamp=true
+</code></pre>
+<p>以管理员方式运行,初始化MySQL:</p>
+<pre><code>mysqld --initialize-insecure
+</code></pre>
+<p>注册MySQL服务:</p>
+<pre><code>mysqld -install
+</code></pre>
+<p>启动MySQL服务:</p>
+<pre><code>net start mysql
+</code></pre>
+<p>修改默认账户密码:</p>
+<pre><code>mysqladmin -u root password ****
+</code></pre>
+<p>登陆:</p>
+<pre><code>mysql -uroot -p****
+</code></pre>
+<p>登陆其他机器参数：</p>
+<pre><code>mysql -u用户名 -p密码 -h要连接的mysql服务器的ip地址(默认127.0.0.1) -P端口号(默认3306)
+</code></pre>
+<p>退出mysql：</p>
+<pre><code>exit
+quit
+</code></pre>
+<hr>
+<h3 id="MySQL数据模型"><a href="#MySQL数据模型" class="headerlink" title="MySQL数据模型"></a>MySQL数据模型</h3><hr>
+<p>关系型数据库：关系型数据库是建立在关系模型基础上的数据库，简单说，关系型数据库是由多张能互相连接的二维表组成的数据库。</p>
+<p>在MySQL中一个数据库对应到磁盘上的一个文件夹。<code>db.frm</code> 是表文件，<code>db.MYD</code> 是数据文件，通过这两个文件就可以查询到数据展示成二维表的效果。</p>
+<p>MySQL中可以创建多个数据库，每个数据库对应到磁盘上的一个文件夹；在每个数据库中可以创建多个表，每张都对应到磁盘上一个 frm 文件；每张表可以存储多条数据，数据会被存储到磁盘中  MYD 文件中。</p>
+<hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
 <p>我们可以使用Spring Boot创建java应用，并使用<code>java –jar</code> 启动它，就能得到一个生产级别的web工程。</p>
