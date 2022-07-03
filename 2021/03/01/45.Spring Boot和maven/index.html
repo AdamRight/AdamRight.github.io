@@ -425,6 +425,45 @@ quit
 <p>在MySQL中一个数据库对应到磁盘上的一个文件夹。<code>db.frm</code> 是表文件，<code>db.MYD</code> 是数据文件，通过这两个文件就可以查询到数据展示成二维表的效果。</p>
 <p>MySQL中可以创建多个数据库，每个数据库对应到磁盘上的一个文件夹；在每个数据库中可以创建多个表，每张都对应到磁盘上一个 frm 文件；每张表可以存储多条数据，数据会被存储到磁盘中  MYD 文件中。</p>
 <hr>
+<h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><hr>
+<p>通过SQL语句对数据库、表、数据进行增删改查操作。 英文：Structured Query Language，简称 SQL。结构化查询语言，一门操作关系型数据库的编程语言。</p>
+<p>SQL语句可以单行或多行书写，以分号结尾。</p>
+<p>MySQL 数据库的 SQL 语句不区分大小写，关键字建议使用大写。</p>
+<p>注释</p>
+<pre><code>单行注释: -- 注释内容 或 #注释内容(MySQL 特有) 
+
+多行注释: /* 注释 */
+</code></pre>
+<p>SQL分类</p>
+<pre><code>DDL(Data Definition Language) ： 数据定义语言，用来定义数据库对象：数据库，表，列等
+DML(Data Manipulation Language) 数据操作语言，用来对数据库中表的数据进行增删改
+DQL(Data Query Language) 数据查询语言，用来查询数据库中表的记录(数据)
+DCL(Data Control Language) 数据控制语言，用来定义数据库的访问权限和安全级别，及创建用户
+</code></pre>
+<hr>
+<h3 id="DDL操作数据库"><a href="#DDL操作数据库" class="headerlink" title="DDL操作数据库"></a>DDL操作数据库</h3><hr>
+<p>查询所有的数据库:</p>
+<pre><code>SHOW DATABASES;
+</code></pre>
+<p>创建数据库:</p>
+<pre><code>CREATE DATABASE 数据库名称;
+</code></pre>
+<p>创建数据库(判断，如果不存在则创建):</p>
+<pre><code>CREATE DATABASE IF NOT EXISTS 数据库名称;
+</code></pre>
+<p>删除数据库:</p>
+<pre><code>DROP DATABASE 数据库名称;
+</code></pre>
+<p>删除数据库(判断，如果存在则删除):</p>
+<pre><code>DROP DATABASE IF EXISTS 数据库名称;
+</code></pre>
+<p>使用数据库:</p>
+<pre><code>USE 数据库名称;
+</code></pre>
+<p>查看当前使用的数据库:</p>
+<pre><code>SELECT DATABASE();
+</code></pre>
+<hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
 <p>我们可以使用Spring Boot创建java应用，并使用<code>java –jar</code> 启动它，就能得到一个生产级别的web工程。</p>
