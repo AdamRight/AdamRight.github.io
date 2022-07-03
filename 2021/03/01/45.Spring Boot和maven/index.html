@@ -5,9 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Spring Boot和maven, Jiang Space">
-    <meta name="description" content="Spring Boot介绍
-Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。
-我">
+    <meta name="description" content="mysql介绍
+数据库：存储和管理数据的仓库，数据是有组织的进行存储。数据库英文名是 DataBase，简称DB。
+数据库就是将数据存储在硬盘上，可以达到持久化存储的效果。那又是如何解决上述问题的？使用数据库管理系统。
+数据库管理系统：管理">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -356,7 +357,23 @@ Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><hr>
+                <h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><hr>
+<p>数据库：存储和管理数据的仓库，数据是有组织的进行存储。数据库英文名是 DataBase，简称DB。</p>
+<p>数据库就是将数据存储在硬盘上，可以达到持久化存储的效果。那又是如何解决上述问题的？使用数据库管理系统。</p>
+<p>数据库管理系统：管理数据库的大型软件。DataBase Management System，简称 DBMS</p>
+<p>我们平时说的MySQL数据库其实是MySQL数据库管理系统。</p>
+<p>常见的数据库管理系统：</p>
+<pre><code>Oracle：收费的大型数据库，Oracle 公司的产品
+==MySQL==： 开源免费的中小型数据库。后来 Sun公司收购了 MySQL，而 Sun 公司又被 Oracle 收购
+SQL Server：MicroSoft 公司收费的中型的数据库。C#、.net 等语言常使用
+PostgreSQL：开源免费中小型的数据库
+DB2：IBM 公司的大型收费数据库产品
+SQLite：嵌入式的微型数据库。如：作为 Android 内置数据库
+MariaDB：开源免费中小型的数据库
+</code></pre>
+<p>SQL：英文：Structured Query Language，简称 SQL，结构化查询语言。操作关系型数据库的编程语言。定义操作所有关系型数据库的统一标准，可以使用SQL操作所有的关系型数据库管理系统，以后工作中如果使用到了其他的数据库管理系统，也同样的使用SQL来操作。</p>
+<hr>
+<h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
 <p>我们可以使用Spring Boot创建java应用，并使用<code>java –jar</code> 启动它，就能得到一个生产级别的web工程。</p>
 <hr>
@@ -940,7 +957,7 @@ public class RedisTest &#123;
 <p>可以点击右边栏maven的Lifecycle中的<code>package</code>进行打包。</p>
 <p>部署：<code>java -jar 打好的jar包名字</code>。</p>
 <hr>
-<h2 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
+<h2 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h2><h3 id="介绍-2"><a href="#介绍-2" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>maven 是一个项目管理工具，主要作用是在项目开发阶段对Java项目进行依赖管理和项目构建。</p>
 <p>依赖管理：就是对jar包的管理。通过导入maven坐标，就相当于将仓库中的jar包导入了当前项目中。</p>
 <p>项目构建：通过maven的一个命令就可以完成项目从清理、编译、测试、报告、打包，部署整个过程。</p>
