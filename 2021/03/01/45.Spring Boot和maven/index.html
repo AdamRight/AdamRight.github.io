@@ -464,6 +464,57 @@ DCL(Data Control Language) 数据控制语言，用来定义数据库的访问�
 <pre><code>SELECT DATABASE();
 </code></pre>
 <hr>
+<h3 id="DDL操作数据表"><a href="#DDL操作数据表" class="headerlink" title="DDL操作数据表"></a>DDL操作数据表</h3><hr>
+<p>操作表也就是对表进行增（Create）删（Retrieve）改（Update）查（Delete）。</p>
+<p>查询当前数据库下所有表名称:</p>
+<pre><code>SHOW TABLES;
+</code></pre>
+<p>查询表结构：</p>
+<pre><code>DESC 表名称;
+</code></pre>
+<p>创建表：</p>
+<pre><code>CREATE TABLE 表名 (
+    字段名1  数据类型1,
+    字段名2  数据类型2,
+    …
+    字段名n  数据类型n
+);
+</code></pre>
+<blockquote>
+<p>注意：最后一行末尾，不能加逗号。</p>
+</blockquote>
+<p>数据类型-MySQL支持多种类型，可以分为三类：</p>
+<pre><code>数值:
+TINYINT	1 byte	小整数值
+SMALLINT	2 bytes	大整数值
+MEDIUMINT	3 bytes	大整数值
+INT或INTEGER	4 bytes	大整数值
+BIGINT	8 bytes	极大整数值
+FLOAT	4 bytes	单精度浮点数值
+DOUBLE	8 bytes	双精度浮点数值
+DECIMAL		小数值
+
+日期:
+DATE	3	日期值
+TIME	3	时间值或持续时间
+YEAR	1	年份值
+DATETIME	8	混合日期和时间值
+TIMESTAMP	4	混合日期和时间值，时间戳
+
+字符串:
+CHAR	0-255 bytes	定长字符串
+VARCHAR	0-65535 bytes	变长字符串
+TINYBLOB	0-255 bytes	不超过 255 个字符的二进制字符串
+TINYTEXT	0-255 bytes	短文本字符串
+BLOB	0-65 535 bytes	二进制形式的长文本数据
+TEXT	0-65 535 bytes	长文本数据
+MEDIUMBLOB	0-16 777 215 bytes	二进制形式的中等长度文本数据
+MEDIUMTEXT	0-16 777 215 bytes	中等长度文本数据
+LONGBLOB	0-4 294 967 295 bytes	二进制形式的极大文本数据
+LONGTEXT	0-4 294 967 295 bytes	极大文本数据
+</code></pre>
+<p>char ： 定长字符串。varchar ： 变长字符串。</p>
+<hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
 <p>我们可以使用Spring Boot创建java应用，并使用<code>java –jar</code> 启动它，就能得到一个生产级别的web工程。</p>
