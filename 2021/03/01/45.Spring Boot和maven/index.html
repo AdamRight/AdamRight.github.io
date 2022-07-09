@@ -513,7 +513,12 @@ MEDIUMTEXT	0-16 777 215 bytes	中等长度文本数据
 LONGBLOB	0-4 294 967 295 bytes	二进制形式的极大文本数据
 LONGTEXT	0-4 294 967 295 bytes	极大文本数据
 </code></pre>
-<p>char ： 定长字符串。varchar ： 变长字符串。</p>
+<p>char： 定长字符串。优点：存储性能高；缺点：浪费空间；name char(10)  如果存储的数据字符个数不足10个，也会占10个的空间。</p>
+<p>varchar： 变长字符串。优点：节约空间；缺点：存储性能底；name varchar(10) 如果存储的数据字符个数不足10个，那就数据字符个数是几就占几个的空间。</p>
+<p>double的使用举例，设置分数，0-100，保留两位小数：</p>
+<pre><code>score double(总长度, 小数点后保留的位数)
+score double(5, 2)
+</code></pre>
 <hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
