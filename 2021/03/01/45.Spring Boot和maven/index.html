@@ -519,6 +519,42 @@ LONGTEXT	0-4 294 967 295 bytes	极大文本数据
 <pre><code>score double(总长度, 小数点后保留的位数)
 score double(5, 2)
 </code></pre>
+<p>删除表：</p>
+<pre><code>DROP TABLE 表名;
+</code></pre>
+<p>删除表时判断表是否存在：</p>
+<pre><code>DROP TABLE IF EXISTS 表名;
+</code></pre>
+<p>修改表名：</p>
+<pre><code>ALTER TABLE 表名 RENAME TO 新的表名;
+
+# 将表名student修改为stu
+alter table student rename to stu;
+</code></pre>
+<p>添加一列：</p>
+<pre><code>ALTER TABLE 表名 ADD 列名 数据类型;
+
+# 给stu表添加一列address，该字段类型是varchar(50)
+alter table stu add address varchar(50);
+</code></pre>
+<p>修改数据类型：</p>
+<pre><code>ALTER TABLE 表名 MODIFY 列名 新数据类型;
+
+# 将stu表中的address字段的类型改为 char(50)
+alter table stu modify address char(50);
+</code></pre>
+<p>修改列名和数据类型：</p>
+<pre><code>ALTER TABLE 表名 CHANGE 列名 新列名 新数据类型;
+
+# 将stu表中的address字段名改为 addr，类型改为varchar(50)
+alter table stu change address addr varchar(50);
+</code></pre>
+<p>删除列：</p>
+<pre><code>ALTER TABLE 表名 DROP 列名;
+
+# 将stu表中的addr字段 删除
+alter table stu drop addr;
+</code></pre>
 <hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
