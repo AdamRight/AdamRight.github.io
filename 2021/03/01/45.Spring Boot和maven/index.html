@@ -607,6 +607,55 @@ delete from stu where name = &#39;张三&#39;;
 delete from stu;
 </code></pre>
 <hr>
+<h3 id="DQL"><a href="#DQL" class="headerlink" title="DQL"></a>DQL</h3><hr>
+<p>查询的完整语法：</p>
+<pre><code>SELECT 
+    字段列表
+FROM 
+    表名列表 
+WHERE 
+    条件列表
+GROUP BY
+    分组字段
+HAVING
+    分组后条件
+ORDER BY
+    排序字段
+LIMIT
+    分页限定
+</code></pre>
+<p>查询多个字段：</p>
+<pre><code>SELECT 字段列表 FROM 表名;
+SELECT * FROM 表名; -- 查询所有数据
+</code></pre>
+<p>去除重复记录：</p>
+<pre><code>SELECT DISTINCT 字段列表 FROM 表名;
+</code></pre>
+<p>起别名：</p>
+<pre><code>AS: AS 也可以省略
+
+select name,math 数学成绩,english 英文成绩 from stu;
+</code></pre>
+<p>条件查询:</p>
+<pre><code># 查询年龄大于等于20岁 并且 年龄 小于等于 30岁 的学生信息
+select * from stu where age &gt;= 20 &amp;&amp;  age &lt;= 30;
+select * from stu where age &gt;= 20 and  age &lt;= 30;
+select * from stu where age BETWEEN 20 and 30;
+
+# 查询年龄不等于18岁的学生信息
+select * from stu where age != 18;
+select * from stu where age &lt;&gt; 18;
+
+# 查询年龄等于18岁 或者 年龄等于20岁 或者 年龄等于22岁的学生信息
+select * from stu where age = 18 or age = 20 or age = 22;
+select * from stu where age in (18,20 ,22);
+
+# 查询英语成绩为 null的学员信息
+# null值的比较不能使用 =  或者 != 。需要使用 is  或者 is not
+select * from stu where english is null;
+select * from stu where english is not null;
+</code></pre>
+<hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
 <p>我们可以使用Spring Boot创建java应用，并使用<code>java –jar</code> 启动它，就能得到一个生产级别的web工程。</p>
