@@ -556,6 +556,57 @@ alter table stu change address addr varchar(50);
 alter table stu drop addr;
 </code></pre>
 <hr>
+<h3 id="DML"><a href="#DML" class="headerlink" title="DML"></a>DML</h3><hr>
+<p>DML主要是对数据进行增（insert）删（delete）改（update）操作。</p>
+<p>给指定列添加数据：</p>
+<pre><code>INSERT INTO 表名(列名1,列名2,…) VALUES(值1,值2,…);
+</code></pre>
+<p>给全部列添加数据：</p>
+<pre><code>INSERT INTO 表名 VALUES(值1,值2,…);
+</code></pre>
+<p>批量添加数据：</p>
+<pre><code>INSERT INTO 表名(列名1,列名2,…) VALUES(值1,值2,…),(值1,值2,…),(值1,值2,…)…;
+INSERT INTO 表名 VALUES(值1,值2,…),(值1,值2,…),(值1,值2,…)…;
+</code></pre>
+<p>练习：</p>
+<pre><code>-- 给指定列添加数据
+INSERT INTO stu (id, NAME) VALUES (1, &#39;张三&#39;);
+-- 给所有列添加数据，列名的列表可以省略的
+INSERT INTO stu (id,NAME,sex,birthday,score,email,tel,STATUS) VALUES (2,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1);
+
+INSERT INTO stu VALUES (2,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1);
+
+-- 批量添加数据
+INSERT INTO stu VALUES 
+    (2,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1),
+    (2,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1),
+    (2,&#39;李四&#39;,&#39;男&#39;,&#39;1999-11-11&#39;,88.88,&#39;lisi@itcast.cn&#39;,&#39;13888888888&#39;,1);
+</code></pre>
+<p>修改表数据：</p>
+<pre><code>UPDATE 表名 SET 列名1=值1,列名2=值2,… [WHERE 条件] ;
+# 将张三的性别改为女
+update stu set sex = &#39;女&#39; where name = &#39;张三&#39;;
+
+# 将张三的生日改为 1999-12-12 分数改为99.99
+update stu set birthday = &#39;1999-12-12&#39;, score = 99.99 where name = &#39;张三&#39;;
+</code></pre>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li>修改语句中如果不加条件，则将所有数据都修改！</li>
+<li>像上面的语句中的中括号，表示在写sql语句中可以省略这部分</li>
+</ol>
+</blockquote>
+<p>删除数据:</p>
+<pre><code>DELETE FROM 表名 [WHERE 条件] ;
+
+# 删除张三记录
+delete from stu where name = &#39;张三&#39;;
+
+# 删除stu表中所有的数据
+delete from stu;
+</code></pre>
+<hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
 <p>我们可以使用Spring Boot创建java应用，并使用<code>java –jar</code> 启动它，就能得到一个生产级别的web工程。</p>
