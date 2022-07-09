@@ -655,6 +655,101 @@ select * from stu where age in (18,20 ,22);
 select * from stu where english is null;
 select * from stu where english is not null;
 </code></pre>
+<p>模糊查询：</p>
+<p>模糊查询使用like关键字，可以使用通配符进行占位:<code>_</code>: 代表单个任意字符; <code>%</code>: 代表任意个数字符。</p>
+<pre><code># 查询姓&#39;马&#39;的学生信息
+select * from stu where name like &#39;马%&#39;;
+
+# 查询第二个字是&#39;花&#39;的学生信息  
+select * from stu where name like &#39;_花%&#39;;
+
+# 查询名字中包含 &#39;德&#39; 的学生信息
+select * from stu where name like &#39;%德%&#39;;
+</code></pre>
+<p>排序查询：</p>
+<pre><code>SELECT 字段列表 FROM 表名 ORDER BY 排序字段名1 [排序方式1],排序字段名2 [排序方式2] …;
+
+排序方式有两种，分别是：ASC ： 升序排列 **（默认值）**，DESC ： 降序排列
+注意：如果有多个排序条件，当前边的条件值一样时，才会根据第二条件进行排序
+
+select * from stu order by age ;
+select * from stu order by math desc ;
+select * from stu order by math desc , english asc ;
+</code></pre>
+<p>聚合函数:将一列数据作为一个整体，进行纵向计算。</p>
+<p>聚合函数分类:</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>count(列名)</td>
+<td>统计数量（一般选用不为null的列）</td>
+</tr>
+<tr>
+<td>max(列名)</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>min(列名)</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>sum(列名)</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>avg(列名)</td>
+<td>平均值</td>
+</tr>
+</tbody></table>
+<p>聚合函数语法:</p>
+<pre><code>SELECT 聚合函数名(列名) FROM 表;
+# 注意：null 值不参与所有聚合函数运算
+
+# 统计班级一共有多少个学生
+select count(id) from stu;
+select count(*) from stu;
+
+# 查询数学成绩的最高分
+select max(math) from stu;
+</code></pre>
+<p>分组查询:</p>
+<pre><code>SELECT 字段列表 FROM 表名 [WHERE 分组前条件限定] GROUP BY 分组字段名 [HAVING 分组后条件过滤];
+# 分组之后，查询的字段为聚合函数和分组字段，查询其他字段无任何意义
+
+# 查询男同学和女同学各自的数学平均分
+select sex, avg(math) from stu group by sex;
+
+# 查询男同学和女同学各自的数学平均分，以及各自人数
+select sex, avg(math),count(*) from stu group by sex;
+
+# 查询男同学和女同学各自的数学平均分，以及各自人数，要求：分数低于70分的不参与分组
+select sex, avg(math),count(*) from stu where math &gt; 70 group by sex;
+
+# 查询男同学和女同学各自的数学平均分，以及各自人数，要求：分数低于70分的不参与分组，分组之后人数大于2个的
+select sex, avg(math),count(*) from stu where math &gt; 70 group by sex having count(*)  &gt; 2;
+</code></pre>
+<p><strong>where 和 having 区别：</strong>执行时机不一样：where 是分组之前进行限定，不满足where条件，则不参与分组，而having是分组之后对结果进行过滤。可判断的条件不一样：where 不能对聚合函数进行判断，having 可以。</p>
+<p>分页查询:</p>
+<pre><code>SELECT 字段列表 FROM 表名 LIMIT  起始索引 , 查询条目数;
+# 上述语句中的起始索引是从0开始
+
+# 从0开始查询，查询3条数据
+select * from stu limit 0 , 3;
+
+# 每页显示3条数据，查询第1页数据
+select * from stu limit 0 , 3;
+
+# 每页显示3条数据，查询第2页数据
+select * from stu limit 3 , 3;
+
+# 公式：
+起始索引 = (当前页码 - 1) * 每页显示的条数
+</code></pre>
 <hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
