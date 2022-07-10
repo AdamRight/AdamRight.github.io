@@ -766,6 +766,117 @@ select * from stu limit 3 , 3;
 
 外键约束： 关键字是  FOREIGN KEY。外键用来让两个表的数据之间建立链接，保证数据的一致性和完整性。
 </code></pre>
+<p>非空约束:</p>
+<pre><code>-- 创建表时添加非空约束
+CREATE TABLE 表名(
+   列名 数据类型 NOT NULL,
+   …
+); 
+
+-- 建完表后添加非空约束
+ALTER TABLE 表名 MODIFY 字段名 数据类型 NOT NULL;
+
+-- 删除约束
+ALTER TABLE 表名 MODIFY 字段名 数据类型;
+</code></pre>
+<p>唯一约束:</p>
+<pre><code>-- 创建表时添加唯一约束
+CREATE TABLE 表名(
+   列名 数据类型 UNIQUE [AUTO_INCREMENT],
+   -- AUTO_INCREMENT: 当不指定值时自动增长
+   …
+); 
+CREATE TABLE 表名(
+   列名 数据类型,
+   …
+   [CONSTRAINT] [约束名称] UNIQUE(列名)
+); 
+
+-- 建完表后添加唯一约束
+ALTER TABLE 表名 MODIFY 字段名 数据类型 UNIQUE;
+
+--删除约束
+ALTER TABLE 表名 DROP INDEX 字段名;
+</code></pre>
+<p>主键约束:</p>
+<pre><code>-- 创建表时添加主键约束
+CREATE TABLE 表名(
+   列名 数据类型 PRIMARY KEY [AUTO_INCREMENT],
+   …
+); 
+CREATE TABLE 表名(
+   列名 数据类型,
+   [CONSTRAINT] [约束名称] PRIMARY KEY(列名)
+); 
+
+-- 建完表后添加主键约束
+ALTER TABLE 表名 ADD PRIMARY KEY(字段名);
+
+-- 删除约束
+ALTER TABLE 表名 DROP PRIMARY KEY;
+</code></pre>
+<p>默认约束:</p>
+<pre><code>-- 创建表时添加默认约束
+CREATE TABLE 表名(
+   列名 数据类型 DEFAULT 默认值,
+   …
+); 
+
+-- 建完表后添加默认约束
+ALTER TABLE 表名 ALTER 列名 SET DEFAULT 默认值;
+
+-- 删除约束
+ALTER TABLE 表名 ALTER 列名 DROP DEFAULT;
+</code></pre>
+<p>约束练习:</p>
+<pre><code>CREATE TABLE emp (
+  id INT PRIMARY KEY auto_increment, -- 员工id，主键且自增长
+  ename VARCHAR(50) NOT NULL UNIQUE, -- 员工姓名，非空并且唯一
+  joindate DATE NOT NULL , -- 入职日期，非空
+  salary DOUBLE(7,2) NOT NULL , -- 工资，非空
+  bonus DOUBLE(7,2) DEFAULT 0 -- 奖金，如果没有奖金默认为0
+);
+</code></pre>
+<p><strong>默认约束只有在不给值时才会采用默认值。如果给了null，那值就是null值。</strong></p>
+<p><strong>验证自动增长： auto_increment  当列是数字类型 并且唯一约束</strong></p>
+<p>外键约束：</p>
+<pre><code>-- 创建表时添加外键约束
+CREATE TABLE 表名(
+   列名 数据类型,
+   …
+   [CONSTRAINT] [外键名称] FOREIGN KEY(外键列名) REFERENCES 主表(主表列名) 
+); 
+
+-- 建完表后添加外键约束
+ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键字段名称) REFERENCES 主表名称(主表列名称);
+
+-- 删除外键约束
+ALTER TABLE 表名 DROP FOREIGN KEY 外键名称;
+</code></pre>
+<p>员工表和部门表，并添加上外键约束：</p>
+<pre><code>-- 部门表
+CREATE TABLE dept(
+    id int primary key auto_increment,
+    dep_name varchar(20),
+    addr varchar(20)
+);
+-- 员工表 
+CREATE TABLE emp(
+    id int primary key auto_increment,
+    name varchar(20),
+    age int,
+    dep_id int,
+
+    -- 添加外键 dep_id,关联 dept 表的id主键
+    CONSTRAINT fk_emp_dept FOREIGN KEY(dep_id) REFERENCES dept(id)	
+);
+
+-- 删除外键
+alter table emp drop FOREIGN key fk_emp_dept;
+
+-- 重新添加外键
+alter table emp add CONSTRAINT fk_emp_dept FOREIGN key(dep_id) REFERENCES dept(id);
+</code></pre>
 <hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
