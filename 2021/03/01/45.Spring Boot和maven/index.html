@@ -878,6 +878,13 @@ alter table emp drop FOREIGN key fk_emp_dept;
 alter table emp add CONSTRAINT fk_emp_dept FOREIGN key(dep_id) REFERENCES dept(id);
 </code></pre>
 <hr>
+<h3 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h3><hr>
+<p>数据库设计：建立数据库中的表结构以及表与表之间的关联关系的过程。有哪些表？表里有哪些字段？表和表之间有什么关系？</p>
+<p>表关系:一对一、一对多、多对多。</p>
+<p>一对多的实现方式：在多的一方建立外键，指向一的一方的主键。</p>
+<p>多对多的实现方式：建立第三张中间表，中间表至少包含两个外键，分别关联两方主键。</p>
+<p>一对一的实现方式：在任意一方加入外键，关联另一方主键，并且设置外键为唯一(UNIQUE)。</p>
+<hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
 <p>我们可以使用Spring Boot创建java应用，并使用<code>java –jar</code> 启动它，就能得到一个生产级别的web工程。</p>
