@@ -751,6 +751,22 @@ select * from stu limit 3 , 3;
 起始索引 = (当前页码 - 1) * 每页显示的条数
 </code></pre>
 <hr>
+<h3 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h3><hr>
+<p>约束是作用于表中列上的规则，用于限制加入表的数据。约束的存在保证了数据库中数据的正确性、有效性和完整性。</p>
+<p>分类：</p>
+<pre><code>非空约束： 关键字是 NOT NULL。保证列中所有的数据不能有null值。
+
+唯一约束：关键字是  UNIQUE。保证列中所有数据各不相同。
+
+主键约束： 关键字是  PRIMARY KEY。主键是一行数据的唯一标识，要求非空且唯一。一般我们都会给每张表添加一个主键列用来唯一标识数据。
+
+检查约束： 关键字是  CHECK。 保证列中的值满足某一条件。MySQL不支持检查约束。
+
+默认约束： 关键字是   DEFAULT。保存数据时，未指定值则采用默认值。
+
+外键约束： 关键字是  FOREIGN KEY。外键用来让两个表的数据之间建立链接，保证数据的一致性和完整性。
+</code></pre>
+<hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
 <p>我们可以使用Spring Boot创建java应用，并使用<code>java –jar</code> 启动它，就能得到一个生产级别的web工程。</p>
