@@ -1008,6 +1008,13 @@ rollback;
 
 持久性（Durability） :事务一旦提交或回滚，它对数据库中的数据的改变就是永久的
 </code></pre>
+<p>mysql中事务是自动提交的。也就是说我们不添加事务执行sql语句，语句执行完毕会自动的提交事务。</p>
+<p>可以通过下面语句查询默认提交方式：</p>
+<pre><code>SELECT @@autocommit;
+</code></pre>
+<p>查询到的结果是1 则表示自动提交，结果是0表示手动提交。当然也可以通过下面语句修改提交方式</p>
+<pre><code>set @@autocommit = 0;
+</code></pre>
 <hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
