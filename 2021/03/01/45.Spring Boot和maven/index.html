@@ -985,6 +985,30 @@ select * from emp where join_date &gt; &#39;2011-11-11&#39; ;
 select * from (select * from emp where join_date &gt; &#39;2011-11-11&#39; ) t1, dept where t1.dep_id = dept.did;
 </code></pre>
 <hr>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><hr>
+<p>事务把所有的命令作为一个整体一起向系统提交或撤销操作请求，即这一组数据库命令要么同时成功，要么同时失败。事务是一个不可分割的工作逻辑单元。</p>
+<p>语法:</p>
+<pre><code># 开启事务
+START TRANSACTION;
+或者  
+BEGIN;
+
+# 提交事务
+commit;
+
+# 回滚事务
+rollback;
+</code></pre>
+<p>事务的四大特征：</p>
+<pre><code>原子性（Atomicity）: 事务是不可分割的最小操作单位，要么同时成功，要么同时失败
+
+一致性（Consistency） :事务完成时，必须使所有的数据都保持一致状态
+
+隔离性（Isolation） :多个事务之间，操作的可见性
+
+持久性（Durability） :事务一旦提交或回滚，它对数据库中的数据的改变就是永久的
+</code></pre>
+<hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
 <p>我们可以使用Spring Boot创建java应用，并使用<code>java –jar</code> 启动它，就能得到一个生产级别的web工程。</p>
