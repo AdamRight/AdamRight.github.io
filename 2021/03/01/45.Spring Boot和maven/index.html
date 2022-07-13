@@ -1016,6 +1016,31 @@ rollback;
 <pre><code>set @@autocommit = 0;
 </code></pre>
 <hr>
+<h2 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h2><h3 id="JDBC概念"><a href="#JDBC概念" class="headerlink" title="JDBC概念"></a>JDBC概念</h3><hr>
+<p>JDBC就是使用Java语言操作关系型数据库的一套API。全称：( Java DataBase Connectivity ) Java 数据库连接。</p>
+<p>JDBC好处：各数据库厂商使用相同的接口，Java代码不需要针对不同数据库分别开发；可随时替换底层数据库，访问数据库的Java代码基本不变。</p>
+<hr>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><hr>
+<pre><code>//1. 注册驱动
+Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+//2. 获取连接
+String url = &quot;jdbc:mysql://127.0.0.1:3306/db1&quot;;
+String username = &quot;root&quot;;
+String password = &quot;1234&quot;;
+Connection conn = DriverManager.getConnection(url, username, password);
+//3. 定义sql
+String sql = &quot;update account set money = 2000 where id = 1&quot;;
+//4. 获取执行sql的对象 Statement
+Statement stmt = conn.createStatement();
+//5. 执行sql
+int count = stmt.executeUpdate(sql);//受影响的行数
+//6. 处理结果
+System.out.println(count);
+//7. 释放资源
+stmt.close();
+conn.close();
+</code></pre>
+<hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
 <p>我们可以使用Spring Boot创建java应用，并使用<code>java –jar</code> 启动它，就能得到一个生产级别的web工程。</p>
