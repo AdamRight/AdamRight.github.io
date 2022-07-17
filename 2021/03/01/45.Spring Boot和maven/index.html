@@ -1214,6 +1214,100 @@ public void testResultSet() throws  Exception &#123;
 </code></pre>
 <hr>
 <h3 id="PreparedStatement"><a href="#PreparedStatement" class="headerlink" title="PreparedStatement"></a>PreparedStatement</h3><hr>
+<p>代码模拟SQL注入问题:</p>
+<pre><code>@Test
+public void testLogin() throws  Exception &#123;
+    //2. 获取连接：如果连接的是本机mysql并且端口是默认的 3306 可以简化书写
+    String url = &quot;jdbc:mysql:///db1?useSSL=false&quot;;
+    String username = &quot;root&quot;;
+    String password = &quot;1234&quot;;
+    Connection conn = DriverManager.getConnection(url, username, password);
+
+    // 接收用户输入 用户名和密码
+    String name = &quot;sjdljfld&quot;;
+    String pwd = &quot;&#39; or &#39;1&#39; = &#39;1&quot;;
+    String sql = &quot;select * from tb_user where username = &#39;&quot;+name+&quot;&#39; and password = &#39;&quot;+pwd+&quot;&#39;&quot;;
+    // 获取stmt对象
+    Statement stmt = conn.createStatement();
+    // 执行sql
+    ResultSet rs = stmt.executeQuery(sql);
+    // 判断登录是否成功
+    if(rs.next())&#123;
+        System.out.println(&quot;登录成功~&quot;);
+    &#125;else&#123;
+        System.out.println(&quot;登录失败~&quot;);
+    &#125;
+
+    //7. 释放资源
+    rs.close();
+    stmt.close();
+    conn.close();
+&#125;
+</code></pre>
+<p>上面代码是将用户名和密码拼接到sql语句中，拼接后的sql语句如下</p>
+<pre><code>select * from tb_user where username = &#39;sjdljfld&#39; and password = &#39;&#39;or &#39;1&#39; = &#39;1&#39;
+</code></pre>
+<p>从上面语句可以看出条件 <code>username = &#39;sjdljfld&#39; and password = &#39;&#39;</code> 不管是否满足，而 <code>or</code> 后面的 <code>&#39;1&#39; = &#39;1&#39;</code> 是始终满足的，最终条件是成立的，就可以正常的进行登陆了。</p>
+<p>接下来我们来学习PreparedStatement对象.</p>
+<p>PreparedStatement作用：预编译SQL语句并执行：预防SQL注入问题</p>
+<p>获取 PreparedStatement 对象:</p>
+<pre><code>// SQL语句中的参数值，使用？占位符替代
+String sql = &quot;select * from user where username = ? and password = ?&quot;;
+// 通过Connection对象获取，并传入对应的sql语句
+PreparedStatement pstmt = conn.prepareStatement(sql);
+</code></pre>
+<p>上面的sql语句中参数使用 ? 进行占位，在之前之前肯定要设置这些 ?  的值。</p>
+<pre><code>PreparedStatement对象：setXxx(参数1，参数2)：给 ? 赋值
+Xxx：数据类型 ； 如 setInt (参数1，参数2)
+参数：
+参数1： ？的位置编号，从1 开始
+参数2： ？的值
+</code></pre>
+<p>执行SQL语句:</p>
+<pre><code>executeUpdate();  执行DDL语句和DML语句
+executeQuery();  执行DQL语句
+注意：调用这两个方法时不需要传递SQL语句，因为获取SQL语句执行对象时已经对SQL语句进行预编译了。
+</code></pre>
+<p>使用PreparedStatement改进:</p>
+<pre><code>@Test
+public void testPreparedStatement() throws  Exception &#123;
+    //2. 获取连接：如果连接的是本机mysql并且端口是默认的 3306 可以简化书写
+    String url = &quot;jdbc:mysql:///db1?useSSL=false&quot;;
+    String username = &quot;root&quot;;
+    String password = &quot;1234&quot;;
+    Connection conn = DriverManager.getConnection(url, username, password);
+
+    // 接收用户输入 用户名和密码
+    String name = &quot;zhangsan&quot;;
+    String pwd = &quot;&#39; or &#39;1&#39; = &#39;1&quot;;
+
+    // 定义sql
+    String sql = &quot;select * from tb_user where username = ? and password = ?&quot;;
+    // 获取pstmt对象
+    PreparedStatement pstmt = conn.prepareStatement(sql);
+    // 设置？的值
+    pstmt.setString(1,name);
+    pstmt.setString(2,pwd);
+    // 执行sql
+    ResultSet rs = pstmt.executeQuery();
+    // 判断登录是否成功
+    if(rs.next())&#123;
+        System.out.println(&quot;登录成功~&quot;);
+    &#125;else&#123;
+        System.out.println(&quot;登录失败~&quot;);
+    &#125;
+    //7. 释放资源
+    rs.close();
+    pstmt.close();
+    conn.close();
+&#125;
+</code></pre>
+<p>执行上面语句就可以发现不会出现SQL注入漏洞问题了。那么PreparedStatement又是如何解决的呢？它是将特殊字符进行了转义，转义的SQL如下：</p>
+<pre><code>select * from tb_user where username = &#39;sjdljfld&#39; and password = &#39;\&#39;or \&#39;1\&#39; = \&#39;1&#39;
+</code></pre>
+<p>PreparedStatement 好处：预编译SQL，性能更高;防止SQL注入：&#x3D;&#x3D;将敏感字符进行转义&#x3D;&#x3D;.</p>
+<p>Java代码操作数据库流程：将sql语句发送到MySQL服务器端;MySQL服务端会对sql语句进行如下操作:检查SQL语句的语法是否正确,将SQL语句编译成可执行的函数,执行SQL语句.</p>
+<p>PreparedStatement原理:在获取PreparedStatement对象时，将sql语句发送给mysql服务器进行检查，编译（这些步骤很耗时）;执行时就不用再进行这些步骤了，速度更快;如果sql模板一样，则只需要进行一次检查、编译。</p>
 <hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
