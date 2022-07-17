@@ -1041,6 +1041,180 @@ stmt.close();
 conn.close();
 </code></pre>
 <hr>
+<h3 id="API详解"><a href="#API详解" class="headerlink" title="API详解"></a>API详解</h3><hr>
+<p>DriverManager（驱动管理类）作用：注册驱动 <code>registerDriver</code> ；获取数据库连接 <code>getConnection</code> 。</p>
+<p>Connection（数据库连接对象）作用：获取执行 SQL 的对象；管理事务。</p>
+<p>Connection管理事务：</p>
+<pre><code>/**
+ * JDBC API 详解：Connection
+ */
+public class JDBCDemo3_Connection &#123;
+
+    public static void main(String[] args) throws Exception &#123;
+        //1. 注册驱动
+        //Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+        //2. 获取连接：如果连接的是本机mysql并且端口是默认的 3306 可以简化书写
+        String url = &quot;jdbc:mysql:///db1?useSSL=false&quot;;
+        String username = &quot;root&quot;;
+        String password = &quot;1234&quot;;
+        Connection conn = DriverManager.getConnection(url, username, password);
+        //3. 定义sql
+        String sql1 = &quot;update account set money = 3000 where id = 1&quot;;
+        String sql2 = &quot;update account set money = 3000 where id = 2&quot;;
+        //4. 获取执行sql的对象 Statement
+        Statement stmt = conn.createStatement();
+        try &#123;
+            // ============开启事务==========
+            // autoCommit 表示是否自动提交事务，true表示自动提交事务，false表示手动提交事务。
+            conn.setAutoCommit(false);
+            //5. 执行sql
+            int count1 = stmt.executeUpdate(sql1);//受影响的行数
+            //6. 处理结果
+            System.out.println(count1);
+            int i = 3/0;
+            //5. 执行sql
+            int count2 = stmt.executeUpdate(sql2);//受影响的行数
+            //6. 处理结果
+            System.out.println(count2);
+            // ============提交事务==========
+            //程序运行到此处，说明没有出现任何问题，则需求提交事务
+            conn.commit();
+        &#125; catch (Exception e) &#123;
+            // ============回滚事务==========
+            //程序在出现异常时会执行到这个地方，此时就需要回滚事务
+            conn.rollback();
+            e.printStackTrace();
+        &#125;
+        //7. 释放资源
+        stmt.close();
+        conn.close();
+    &#125;
+&#125;
+</code></pre>
+<p>Statement对象的作用就是用来执行SQL语句。</p>
+<p>执行DML语句:</p>
+<pre><code>/**
+* 执行DML语句
+* @throws Exception
+*/
+@Test
+public void testDML() throws  Exception &#123;
+  //1. 注册驱动
+  //Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+  //2. 获取连接：如果连接的是本机mysql并且端口是默认的 3306 可以简化书写
+  String url = &quot;jdbc:mysql:///db1?useSSL=false&quot;;
+  String username = &quot;root&quot;;
+  String password = &quot;1234&quot;;
+  Connection conn = DriverManager.getConnection(url, username, password);
+  //3. 定义sql
+  String sql = &quot;update account set money = 3000 where id = 1&quot;;
+  //4. 获取执行sql的对象 Statement
+  Statement stmt = conn.createStatement();
+  //5. 执行sql
+  int count = stmt.executeUpdate(sql);//执行完DML语句，受影响的行数
+  //6. 处理结果
+  //System.out.println(count);
+  if(count &gt; 0)&#123;
+      System.out.println(&quot;修改成功~&quot;);
+  &#125;else&#123;
+      System.out.println(&quot;修改失败~&quot;);
+  &#125;
+  //7. 释放资源
+  stmt.close();
+  conn.close();
+&#125;
+</code></pre>
+<p>执行DDL语句(<strong>执行完DDL语句，可能是0</strong>):</p>
+<pre><code>/**
+* 执行DDL语句
+* @throws Exception
+*/
+@Test
+public void testDDL() throws  Exception &#123;
+  //1. 注册驱动
+  //Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+  //2. 获取连接：如果连接的是本机mysql并且端口是默认的 3306 可以简化书写
+  String url = &quot;jdbc:mysql:///db1?useSSL=false&quot;;
+  String username = &quot;root&quot;;
+  String password = &quot;1234&quot;;
+  Connection conn = DriverManager.getConnection(url, username, password);
+  //3. 定义sql
+  String sql = &quot;drop database db2&quot;;
+  //4. 获取执行sql的对象 Statement
+  Statement stmt = conn.createStatement();
+  //5. 执行sql
+  int count = stmt.executeUpdate(sql);//执行完DDL语句，可能是0
+  //6. 处理结果
+  System.out.println(count);
+
+  //7. 释放资源
+  stmt.close();
+  conn.close();
+&#125;
+</code></pre>
+<p>ResultSet（结果集对象）作用：封装了SQL查询语句的结果。我们就需要从 <code>ResultSet</code> 对象中获取我们想要的数据。<code>ResultSet</code> 对象提供了操作查询结果数据的方法，如下：</p>
+<pre><code>boolean  next():将光标从当前位置向前移动一行;判断当前行是否为有效行
+
+xxx  getXxx(参数)：获取数据
+xxx : 数据类型；如： int getInt(参数) ；String getString(参数)
+参数:int类型的参数：列的编号，从1开始; String类型的参数： 列的名称 
+</code></pre>
+<p>执行DQL:</p>
+<pre><code>/**
+  * 执行DQL
+  * @throws Exception
+  */
+@Test
+public void testResultSet() throws  Exception &#123;
+    //1. 注册驱动
+    //Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+    //2. 获取连接：如果连接的是本机mysql并且端口是默认的 3306 可以简化书写
+    String url = &quot;jdbc:mysql:///db1?useSSL=false&quot;;
+    String username = &quot;root&quot;;
+    String password = &quot;1234&quot;;
+    Connection conn = DriverManager.getConnection(url, username, password);
+    //3. 定义sql
+    String sql = &quot;select * from account&quot;;
+    //4. 获取statement对象
+    Statement stmt = conn.createStatement();
+    //5. 执行sql
+    ResultSet rs = stmt.executeQuery(sql);
+    //6. 处理结果， 遍历rs中的所有数据
+    /* // 6.1 光标向下移动一行，并且判断当前行是否有数据
+        while (rs.next())&#123;
+            //6.2 获取数据  getXxx()
+            int id = rs.getInt(1);
+            String name = rs.getString(2);
+            double money = rs.getDouble(3);
+
+            System.out.println(id);
+            System.out.println(name);
+            System.out.println(money);
+            System.out.println(&quot;--------------&quot;);
+
+        &#125;*/
+    // 6.1 光标向下移动一行，并且判断当前行是否有数据
+    while (rs.next())&#123;
+        //6.2 获取数据  getXxx()
+        int id = rs.getInt(&quot;id&quot;);
+        String name = rs.getString(&quot;name&quot;);
+        double money = rs.getDouble(&quot;money&quot;);
+
+        System.out.println(id);
+        System.out.println(name);
+        System.out.println(money);
+        System.out.println(&quot;--------------&quot;);
+    &#125;
+
+    //7. 释放资源
+    rs.close();
+    stmt.close();
+    conn.close();
+&#125;
+</code></pre>
+<hr>
+<h3 id="PreparedStatement"><a href="#PreparedStatement" class="headerlink" title="PreparedStatement"></a>PreparedStatement</h3><hr>
+<hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
 <p>我们可以使用Spring Boot创建java应用，并使用<code>java –jar</code> 启动它，就能得到一个生产级别的web工程。</p>
