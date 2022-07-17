@@ -1309,6 +1309,272 @@ public void testPreparedStatement() throws  Exception &#123;
 <p>Java代码操作数据库流程：将sql语句发送到MySQL服务器端;MySQL服务端会对sql语句进行如下操作:检查SQL语句的语法是否正确,将SQL语句编译成可执行的函数,执行SQL语句.</p>
 <p>PreparedStatement原理:在获取PreparedStatement对象时，将sql语句发送给mysql服务器进行检查，编译（这些步骤很耗时）;执行时就不用再进行这些步骤了，速度更快;如果sql模板一样，则只需要进行一次检查、编译。</p>
 <hr>
+<h3 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h3><hr>
+<p>数据库连接池是个容器，负责分配、管理数据库连接(Connection)。它允许应用程序重复使用一个现有的数据库连接，而不是再重新建立一个；释放空闲时间超过最大空闲时间的数据库连接来避免因为没有释放数据库连接而引起的数据库连接遗漏。</p>
+<p>好处：资源重用，提升系统响应速度，避免数据库连接遗漏。</p>
+<p>之前我们代码中使用连接是没有使用都创建一个Connection对象，使用完毕就会将其销毁。这样重复创建销毁的过程是特别耗费计算机的性能的及消耗时间的。而数据库使用了数据库连接池后，就能达到Connection对象的复用。</p>
+<p>连接池是在一开始就创建好了一些连接（Connection）对象存储起来。用户需要连接数据库时，不需要自己创建连接，而只需要从连接池中获取一个连接进行使用，使用完毕后再将连接对象归还给连接池；这样就可以起到资源重用，也节省了频繁创建连接销毁连接所花费的时间，从而提升了系统响应的速度。</p>
+<p>数据库连接池实现：以后就不需要通过 <code>DriverManager</code> 对象获取 <code>Connection</code> 对象，而是通过连接池（DataSource）获取 <code>Connection</code> 对象。</p>
+<p>常见的数据库连接池：DBCP、C3P0、Druid。</p>
+<p>Druid（德鲁伊）：Druid连接池是阿里巴巴开源的数据库连接池项目。功能强大，性能优秀，是Java语言最好的数据库连接池之一。</p>
+<p>Driud使用</p>
+<pre><code>导入jar包 druid-1.1.12.jar
+
+定义配置文件
+    driverClassName=com.mysql.jdbc.Driver
+    url=jdbc:mysql:///db1?useSSL=false&amp;useServerPrepStmts=true
+    username=root
+    password=1234
+    # 初始化连接数量
+    initialSize=5
+    # 最大连接数
+    maxActive=10
+    # 最大等待时间
+    maxWait=3000
+
+加载配置文件
+获取数据库连接池对象
+获取连接
+</code></pre>
+<p>使用druid的代码如下：</p>
+<pre><code>/**
+ * Druid数据库连接池演示
+ */
+public class DruidDemo &#123;
+
+    public static void main(String[] args) throws Exception &#123;
+        //1.导入jar包
+        //2.定义配置文件
+        //3. 加载配置文件
+        Properties prop = new Properties();
+        prop.load(new FileInputStream(&quot;jdbc-demo/src/druid.properties&quot;));
+        //4. 获取连接池对象
+        DataSource dataSource = DruidDataSourceFactory.createDataSource(prop);
+
+        //5. 获取数据库连接 Connection
+        Connection connection = dataSource.getConnection();
+        System.out.println(connection); //获取到了连接后就可以继续做其他操作了
+
+        //System.out.println(System.getProperty(&quot;user.dir&quot;));
+    &#125;
+&#125;
+</code></pre>
+<p>druid配置详解:</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">说明</th>
+<th align="center">建议值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">url</td>
+<td align="center">数据库的jdbc连接地址。一般为连接oracle&#x2F;mysql。示例如下：</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">mysql : jdbc:mysql:&#x2F;&#x2F;ip:port&#x2F;dbname?option1&amp;option2&amp;…</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">oracle : jdbc:oracle:thin:@ip:port:oracle_sid</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">username</td>
+<td align="center">登录数据库的用户名</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">password</td>
+<td align="center">登录数据库的用户密码</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">initialSize</td>
+<td align="center">启动程序时，在连接池中初始化多少个连接</td>
+<td align="center">10-50已足够</td>
+</tr>
+<tr>
+<td align="center">maxActive</td>
+<td align="center">连接池中最多支持多少个活动会话</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">maxWait</td>
+<td align="center">程序向连接池中请求连接时,超过maxWait的值后，认为本次请求失败，即连接池</td>
+<td align="center">100</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">没有可用连接，单位毫秒，设置-1时表示无限等待</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">minEvictableIdleTimeMillis</td>
+<td align="center">池中某个连接的空闲时长达到 N 毫秒后, 连接池在下次检查空闲连接时，将</td>
+<td align="center">见说明部分</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">回收该连接,要小于防火墙超时设置</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">net.netfilter.nf_conntrack_tcp_timeout_established的设置</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">timeBetweenEvictionRunsMillis</td>
+<td align="center">检查空闲连接的频率，单位毫秒, 非正整数时表示不进行检查</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">keepAlive</td>
+<td align="center">程序没有close连接且空闲时长超过 minEvictableIdleTimeMillis,则会执</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">行validationQuery指定的SQL,以保证该程序连接不会池kill掉,其范围不超</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">过minIdle指定的连接个数。</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">minIdle</td>
+<td align="center">回收空闲连接时，将保证至少有minIdle个连接.</td>
+<td align="center">与initialSize相同</td>
+</tr>
+<tr>
+<td align="center">removeAbandoned</td>
+<td align="center">要求程序从池中get到连接后, N 秒后必须close,否则druid 会强制回收该</td>
+<td align="center">false,当发现程序有未</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">连接,不管该连接中是活动还是空闲, 以防止进程不会进行close而霸占连接。</td>
+<td align="center">正常close连接时设置为true</td>
+</tr>
+<tr>
+<td align="center">removeAbandonedTimeout</td>
+<td align="center">设置druid 强制回收连接的时限，当程序从池中get到连接开始算起，超过此</td>
+<td align="center">应大于业务运行最长时间</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">值后，druid将强制回收该连接，单位秒。</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">logAbandoned</td>
+<td align="center">当druid强制回收连接后，是否将stack trace 记录到日志中</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">testWhileIdle</td>
+<td align="center">当程序请求连接，池在分配连接时，是否先检查该连接是否有效。(高效)</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">validationQuery</td>
+<td align="center">检查池中的连接是否仍可用的 SQL 语句,drui会连接到数据库执行该SQL, 如果</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">正常返回，则表示连接可用，否则表示连接不可用</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">testOnBorrow</td>
+<td align="center">程序 <strong>申请</strong> 连接时,进行连接有效性检查（低效，影响性能）</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">testOnReturn</td>
+<td align="center">程序 <strong>返还</strong> 连接时,进行连接有效性检查（低效，影响性能）</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">poolPreparedStatements</td>
+<td align="center">缓存通过以下两个方法发起的SQL:</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">public PreparedStatement prepareStatement(String sql)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">public PreparedStatement prepareStatement(String sql,</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">int resultSetType, int resultSetConcurrency)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">maxPoolPrepareStatementPerConnectionSize</td>
+<td align="center">每个连接最多缓存多少个SQL</td>
+<td align="center">20</td>
+</tr>
+<tr>
+<td align="center">filters</td>
+<td align="center">这里配置的是插件,常用的插件有:</td>
+<td align="center">stat,wall,slf4j</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">监控统计: filter:stat</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">日志监控: filter:log4j 或者 slf4j</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">防御SQL注入: filter:wall</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">connectProperties</td>
+<td align="center">连接属性。比如设置一些连接池统计方面的配置。</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">druid.stat.mergeSql&#x3D;true;druid.stat.slowSqlMillis&#x3D;5000</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">比如设置一些数据库连接属性:</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<hr>
 <h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p>Spring Boot是便捷搭建基于Spring的工程脚手架。其最主要作用就是帮助开发人员快速的构建庞大的spring项目，并且尽可能的减少一切xml配置，做到开箱即用，迅速上手，让开发人员关注业务而非配置。</p>
 <p>我们可以使用Spring Boot创建java应用，并使用<code>java –jar</code> 启动它，就能得到一个生产级别的web工程。</p>
