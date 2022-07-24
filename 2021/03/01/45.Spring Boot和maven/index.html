@@ -2181,6 +2181,66 @@ public class RedisTest &#123;
 <p>如果不改本地仓库，默认下载到本地目录：</p>
 <pre><code>C:\Users\Admin\.m2\repository
 </code></pre>
+<p>检查配置版本：</p>
+<pre><code>mvn -version
+</code></pre>
+<hr>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><hr>
+<p>Maven 常用命令：</p>
+<pre><code>mvn compile ：编译
+mvn clean：清理
+mvn test：测试
+mvn package：打包
+mvn install：安装
+</code></pre>
+<hr>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><hr>
+<p>Maven 构建项目生命周期描述的是一次构建过程经历经历了多少个事件。</p>
+<p>Maven 对项目构建的生命周期划分为3套：</p>
+<pre><code>clean：清理工作
+default：核心工作，例如编译，测试，打包，安装等
+site：产生报告，发布站点等
+</code></pre>
+<p><strong>同一生命周期内，执行后边的命令，前边的所有命令会自动执行</strong></p>
+<hr>
+<h3 id="IDEA-配置-Maven"><a href="#IDEA-配置-Maven" class="headerlink" title="IDEA 配置 Maven"></a>IDEA 配置 Maven</h3><hr>
+<p>配置 Maven：</p>
+<pre><code>选择 IDEA中 File --&gt; Settings
+搜索 maven 
+设置 IDEA 使用本地安装的 Maven，并修改配置文件路径。即maven home path 和 User settings file
+</code></pre>
+<p>IDEA 导入 Maven 项目：</p>
+<pre><code>选择右侧Maven面板，点击 + 号
+选中对应项目的pom.xml文件，双击即可
+如果没有Maven面板，选择 View -&gt; Appearance -&gt; Tool Window Bars
+</code></pre>
+<p>Maven Helper插件：</p>
+<pre><code>Plugins里面搜索 Maven，选择第一个 Maven Helper，点击Install安装，弹出面板中点击Accept
+</code></pre>
+<hr>
+<h3 id="maven坐标"><a href="#maven坐标" class="headerlink" title="maven坐标"></a>maven坐标</h3><hr>
+<p>Maven 中的坐标是资源的唯一标识。使用坐标来定义项目或引入项目中需要的依赖</p>
+<p>Maven 坐标主要组成：</p>
+<pre><code>groupId：定义当前Maven项目隶属组织名称（通常是域名反写，例如：com.itheima）
+artifactId：定义当前Maven项目名称（通常是模块名称，例如 order-service、goods-service）
+version：定义当前项目版本号
+</code></pre>
+<p>使用坐标导入 jar 包：</p>
+<pre><code>在 pom.xml 中编写 &lt;dependencies&gt; 标签
+在 &lt;dependencies&gt; 标签中 使用 &lt;dependency&gt; 引入坐标
+定义坐标的 groupId，artifactId，version
+点击刷新按钮，使坐标生效
+</code></pre>
+<p>使用坐标导入 jar 包 – 快捷方式：</p>
+<pre><code>在 pom.xml 中 按 alt + insert，选择 Dependency
+在弹出的面板中搜索对应坐标，然后双击选中对应坐标
+点击刷新按钮，使坐标生效
+</code></pre>
+<p>使用坐标导入 jar 包 – 自动导入：</p>
+<pre><code>选择 IDEA中 File --&gt; Settings
+在弹出的面板中找到 Build Tools
+选择 Any changes，点击 ok 即可生效
+</code></pre>
 <hr>
 <h3 id="maven的依赖范围"><a href="#maven的依赖范围" class="headerlink" title="maven的依赖范围"></a>maven的依赖范围</h3><hr>
 <p>maven的依赖范围：</p>
