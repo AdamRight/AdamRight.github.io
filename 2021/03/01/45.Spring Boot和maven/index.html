@@ -2221,7 +2221,7 @@ site：产生报告，发布站点等
 <h3 id="maven坐标"><a href="#maven坐标" class="headerlink" title="maven坐标"></a>maven坐标</h3><hr>
 <p>Maven 中的坐标是资源的唯一标识。使用坐标来定义项目或引入项目中需要的依赖</p>
 <p>Maven 坐标主要组成：</p>
-<pre><code>groupId：定义当前Maven项目隶属组织名称（通常是域名反写，例如：com.itheima）
+<pre><code>groupId：定义当前Maven项目隶属组织名称（通常是域名反写，例如：com.tea）
 artifactId：定义当前Maven项目名称（通常是模块名称，例如 order-service、goods-service）
 version：定义当前项目版本号
 </code></pre>
@@ -2368,6 +2368,107 @@ version：定义当前项目版本号
 &lt;/dependencies&gt;
 </code></pre>
 <p>maven工程的聚合：在maven工程的<code>pom.xml</code>文件中可以使用<code>&lt;modules&gt;</code>标签将其他maven工程聚合到一起，聚合的目的是为了进行统一操作。例如拆分后的maven工程有多个，如果要进行打包，就需要针对每个工程分别执行打包命令，操作起来非常繁琐。这时就可以使用<code>&lt;modules&gt;</code>标签将这些工程统一聚合到maven工程中，需要打包的时候，只需要在此工程中执行一次打包命令，其下被聚合的工程就都会被打包了。</p>
+<hr>
+<h2 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h2><h3 id="介绍-3"><a href="#介绍-3" class="headerlink" title="介绍"></a>介绍</h3><hr>
+<p>官网：<a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/index.html">https://mybatis.org/mybatis-3/zh/index.html</a> </p>
+<p>MyBatis 是一款优秀的持久层框架，用于简化 JDBC 开发。</p>
+<p>JavaEE三层架构：表现层、业务层、持久层。持久层：负责将数据到保存到数据库的那一层代码。</p>
+<p>MyBatis 免除了几乎所有的 JDBC 代码以及设置参数和获取结果集的工作。</p>
+<hr>
+<h3 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h3><hr>
+<p>创建模块，导入坐标：</p>
+<pre><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+        &lt;version&gt;3.4.5&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;5.1.46&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.12&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;!-- 添加slf4j日志api --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+        &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+        &lt;version&gt;1.7.25&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- 添加logback-classic依赖 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+        &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+        &lt;version&gt;1.2.3&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- 添加logback-core依赖 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+        &lt;artifactId&gt;logback-core&lt;/artifactId&gt;
+        &lt;version&gt;1.2.3&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<p>编写 MyBatis 核心配置文件：resources&#x2F;mybatis-config.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE configuration
+        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+&lt;configuration&gt;
+
+    &lt;environments default=&quot;development&quot;&gt;
+        &lt;environment id=&quot;development&quot;&gt;
+            &lt;transactionManager type=&quot;JDBC&quot;/&gt;
+            &lt;dataSource type=&quot;POOLED&quot;&gt;
+                &lt;!--数据库连接信息--&gt;
+                &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+                &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql:///mybatis?useSSL=false&quot;/&gt;
+                &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+                &lt;property name=&quot;password&quot; value=&quot;824699&quot;/&gt;
+            &lt;/dataSource&gt;
+        &lt;/environment&gt;
+    &lt;/environments&gt;
+    &lt;mappers&gt;
+        &lt;mapper resource=&quot;UserMapper.xml&quot;/&gt;
+    &lt;/mappers&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>编写 SQL 映射文件:resources&#x2F;UserMapper.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+
+&lt;!-- namespace:名称空间--&gt;
+&lt;mapper namespace=&quot;test&quot;&gt;
+    &lt;!--statement--&gt;
+    &lt;select id=&quot;selectAll&quot; resultType=&quot;com.tea.pojo.User&quot;&gt;
+        select *
+        from tb_user;
+    &lt;/select&gt;
+&lt;/mapper&gt;
+</code></pre>
+<p>编码：</p>
+<pre><code>public static void main(String[] args) throws IOException &#123;
+    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+    //2. 获取SqlSession对象，用它来执行sql
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    //3. 执行sql
+    List&lt;User&gt; users = sqlSession.selectList(&quot;test.selectAll&quot;);
+    System.out.println(users);
+    //4. 释放资源
+    sqlSession.close();
+&#125;
+</code></pre>
 <hr>
 
                 
