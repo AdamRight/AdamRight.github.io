@@ -2470,6 +2470,69 @@ version：定义当前项目版本号
 &#125;
 </code></pre>
 <hr>
+<h3 id="Idea连接数据库"><a href="#Idea连接数据库" class="headerlink" title="Idea连接数据库"></a>Idea连接数据库</h3><hr>
+<p>Idea右边栏点击Database，点击加号+，输入用户名，密码，数据库，建立连接。</p>
+<hr>
+<h3 id="Mapper代理开发"><a href="#Mapper代理开发" class="headerlink" title="Mapper代理开发"></a>Mapper代理开发</h3><hr>
+<p>定义与SQL映射文件同名的Mapper接口，并且将Mapper接口和SQL映射文件放置在同一目录下：</p>
+<pre><code>在java目录下，新建com.tea.mapper.UserMapper接口
+在resources目录下，新建com/tea/mapper目录，UserMapper.xml文件。注意用斜杠。
+</code></pre>
+<p>设置SQL映射文件的namespace属性为Mapper接口全限定名：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+
+&lt;!-- namespace:名称空间--&gt;
+&lt;mapper namespace=&quot;com.tea.mapper.UserMapper&quot;&gt;
+    &lt;!--statement--&gt;
+    &lt;select id=&quot;selectAll&quot; resultType=&quot;com.tea.pojo.User&quot;&gt;
+        select *
+        from tb_user;
+    &lt;/select&gt;
+&lt;/mapper&gt;
+</code></pre>
+<p>在 Mapper 接口中定义方法，方法名就是SQL映射文件中sql语句的id，并保持参数类型和返回值类型一致:</p>
+<pre><code>public interface UserMapper &#123;
+    List&lt;User&gt; selectAll();
+&#125;
+</code></pre>
+<p>配置mybatis-config.xml：</p>
+<pre><code>&lt;mappers&gt;
+    &lt;mapper resource=&quot;com/tea/mapper/UserMapper.xml&quot;/&gt;
+&lt;/mappers&gt;
+</code></pre>
+<p>编码：</p>
+<pre><code>public class MyBatisDemo2 &#123;
+    public static void main(String[] args) throws IOException &#123;
+        //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+        String resource = &quot;mybatis-config.xml&quot;;
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //2. 获取SqlSession对象，用它来执行sql
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        //3. 执行sql
+        //List&lt;User&gt; users = sqlSession.selectList(&quot;test.selectAll&quot;);
+        //3.1 获取UserMapper接口的代理对象
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        List&lt;User&gt; users = userMapper.selectAll();
+
+        System.out.println(users);
+        //4. 释放资源
+        sqlSession.close();
+    &#125;
+&#125;
+</code></pre>
+<p>细节：如果Mapper接口名称和SQL映射文件名称相同，并在同一目录下，则可以使用包扫描的方式简化SQL映射文件的加载:</p>
+<pre><code>&lt;mappers&gt;
+    &lt;!--&lt;mapper resource=&quot;com/tea/mapper/UserMapper.xml&quot;/&gt;--&gt;
+    &lt;!--mapper代理--&gt;
+    &lt;package name=&quot;com.tea.mapper&quot;/&gt;
+&lt;/mappers&gt;
+</code></pre>
+<hr>
 
                 
             </div>
