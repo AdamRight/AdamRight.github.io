@@ -2533,6 +2533,20 @@ version：定义当前项目版本号
 &lt;/mappers&gt;
 </code></pre>
 <hr>
+<h3 id="核心配置文件"><a href="#核心配置文件" class="headerlink" title="核心配置文件"></a>核心配置文件</h3><hr>
+<p>environments：配置数据库连接环境信息。可以配置多个environment，通过default属性切换不同的environment。</p>
+<p>typeAliases-别名：</p>
+<pre><code>mybatis-config.xml内：
+&lt;typeAliases&gt;
+    &lt;package name=&quot;com.tea.pojo&quot;/&gt;
+&lt;/typeAliases&gt;
+
+UserMapper.xml内：
+可以不用	resultType=&quot;com.tea.pojo.User&quot;
+可以直接使用	resultType=&quot;User&quot;
+</code></pre>
+<p><strong>mybatis-config.xml中配置各个标签时，需要遵守标签前后顺序。</strong></p>
+<hr>
 
                 
             </div>
