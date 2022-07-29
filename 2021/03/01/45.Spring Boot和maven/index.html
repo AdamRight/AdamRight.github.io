@@ -2551,6 +2551,70 @@ UserMapper.xml内：
 <p>MybatisX 是一款基于 IDEA 的快速开发插件，为效率而生。</p>
 <p>主要功能：XML 和 接口方法 相互跳转;根据接口方法生成 statement。</p>
 <hr>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><hr>
+<p>查询所有：</p>
+<pre><code>//编写接口方法： Mapper接口：（参数：无，结果：List&lt;Brand&gt;）
+public interface BrandMapper &#123;
+    public List&lt;Brand&gt; selectAll();
+&#125;
+
+//编写 SQL语句： SQL映射文件：
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+
+&lt;!-- namespace:名称空间--&gt;
+&lt;mapper namespace=&quot;com.tea.mapper.BrandMapper&quot;&gt;
+    &lt;select id=&quot;selectAll&quot; resultType=&quot;brand&quot;&gt;
+        select *
+        from tb_brand;
+    &lt;/select&gt;
+&lt;/mapper&gt;
+
+//执行方法，测试
+String resource = &quot;mybatis-config.xml&quot;;
+InputStream inputStream = Resources.getResourceAsStream(resource);
+SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+SqlSession sqlSession = sqlSessionFactory.openSession();
+
+BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+List&lt;Brand&gt; brands = brandMapper.selectAll();
+System.out.println(brands);
+sqlSession.close();
+</code></pre>
+<p>数据库表的字段名称和实体类的属性名称不一样时，解决办法：</p>
+<pre><code>//方法1、xml中用别名
+&lt;select id=&quot;selectAll&quot; resultType=&quot;brand&quot;&gt;
+    select id, brand_name as brandName, company_name as companyName, ordered, description, status
+    from tb_brand;
+&lt;/select&gt;
+
+//方法2、sql片段抽取
+&lt;sql id=&quot;brand_column&quot;&gt;
+    id, brand_name as brandName, company_name as companyName, ordered, description, status
+&lt;/sql&gt;
+&lt;select id=&quot;selectAll&quot; resultType=&quot;brand&quot;&gt;
+    select
+    &lt;include refid=&quot;brand_column&quot; /&gt;
+    from tb_brand;
+&lt;/select&gt;
+
+//方法3、resultMap
+&lt;!--id：唯一标识、type：映射的类型，支持别名--&gt;
+&lt;resultMap id=&quot;brandResultMap&quot; type=&quot;brand&quot;&gt;
+    &lt;!--id：完成主键字段的映射、column：表的列名、property：实体类的属性名
+        result：完成一般字段的映射、column：表的列名、property：实体类的属性名--&gt;
+    &lt;result column=&quot;brand_name&quot; property=&quot;brandName&quot;/&gt;
+    &lt;result column=&quot;company_name&quot; property=&quot;companyName&quot;/&gt;
+&lt;/resultMap&gt;
+&lt;select id=&quot;selectAll&quot; resultMap=&quot;brandResultMap&quot;&gt;
+    select *
+    from tb_brand;
+&lt;/select&gt;
+</code></pre>
+<hr>
 
                 
             </div>
