@@ -2584,6 +2584,7 @@ List&lt;Brand&gt; brands = brandMapper.selectAll();
 System.out.println(brands);
 sqlSession.close();
 </code></pre>
+<hr>
 <p>数据库表的字段名称和实体类的属性名称不一样时，解决办法：</p>
 <pre><code>//方法1、xml中用别名
 &lt;select id=&quot;selectAll&quot; resultType=&quot;brand&quot;&gt;
@@ -2614,6 +2615,7 @@ sqlSession.close();
     from tb_brand;
 &lt;/select&gt;
 </code></pre>
+<hr>
 <p>根据Id查询：</p>
 <pre><code>//编写接口方法： Mapper接口（参数：id、结果：Brand）
 public interface BrandMapper &#123;
@@ -2633,6 +2635,7 @@ Brand brand = brandMapper.selectById(id);
 System.out.println(brand);
 sqlSession.close();
 </code></pre>
+<hr>
 <p>参数占位符：</p>
 <pre><code>#&#123;&#125;:会将其替换为 ?，为了防止SQL注入
 $&#123;&#125;：拼sql。会存在SQL注入问题
@@ -2642,6 +2645,7 @@ $&#123;&#125;：拼sql。会存在SQL注入问题
 参数类型：parameterType：可以省略。
 特殊字符处理： 转义字符；CDATA区。比如&lt;小于号，可以用 &amp;lt; 或者 &lt;![CDATA[&lt;]]&gt; 。
 </code></pre>
+<hr>
 <p>多条件查询：三种方式</p>
 <pre><code>散装参数：需要使用@Param(&quot;SQL中的参数名称&quot;)
 实体类封装参数:只需要保证SQL中的参数名 和 实体类属性名对应上，即可设置成功
@@ -2700,6 +2704,65 @@ map.put(&quot;brandName&quot;, brandName);
 List&lt;Brand&gt; brands = brandMapper.selectByCondition(map);
 System.out.println(brands);
 sqlSession.close();
+</code></pre>
+<hr>
+<p><strong>多条件动态条件查询</strong>-动态SQL：</p>
+<pre><code>&lt;select id=&quot;selectByCondition&quot; resultMap=&quot;brandResultMap&quot;&gt;
+    select *
+    from tb_brand
+    &lt;where&gt;
+        &lt;if test=&quot;status != null&quot;&gt;
+            and status = #&#123;status&#125;
+        &lt;/if&gt;
+        &lt;if test=&quot;companyName != null and companyName != &#39;&#39; &quot;&gt;
+            and company_name like #&#123;companyName&#125;
+        &lt;/if&gt;
+        &lt;if test=&quot;brandName != null and brandName != &#39;&#39; &quot;&gt;
+            and brand_name like #&#123;brandName&#125;
+        &lt;/if&gt;
+    &lt;/where&gt;
+
+&lt;/select&gt;
+</code></pre>
+<hr>
+<p>单条件动态条件查询:</p>
+<pre><code>&lt;select id=&quot;selectByConditionSingle&quot; resultMap=&quot;brandResultMap&quot;&gt;
+    select * from tb_brand
+    where    
+    &lt;choose&gt;  &lt;!--类似于switch--&gt;
+        &lt;when test=&quot;status != null&quot;&gt;  &lt;!--类似于case--&gt;
+            status = #&#123;status&#125;
+        &lt;/when&gt;
+        &lt;when test=&quot;companyName != null and companyName !=&#39;&#39;&quot;&gt;
+            company_name like #&#123;companyName&#125;
+        &lt;/when&gt;
+        &lt;when test=&quot;brandName != null and brandName !=&#39;&#39; &quot;&gt;
+            brand_name like #&#123;brandName&#125;
+        &lt;/when&gt;
+        &lt;otherwise&gt;  &lt;!--类似于default--&gt;
+            1 = 1
+        &lt;/otherwise&gt;
+    &lt;/choose&gt;
+&lt;/select&gt;
+
+或者
+&lt;select id=&quot;selectByConditionSingle&quot; resultMap=&quot;brandResultMap&quot;&gt;
+    select *
+    from tb_brand
+    &lt;where&gt;
+        &lt;choose&gt;&lt;!--相当于switch--&gt;
+            &lt;when test=&quot;status != null&quot;&gt;&lt;!--相当于case--&gt;
+                status = #&#123;status&#125;
+            &lt;/when&gt;
+            &lt;when test=&quot;companyName != null and companyName != &#39;&#39; &quot;&gt;&lt;!--相当于case--&gt;
+                company_name like #&#123;companyName&#125;
+            &lt;/when&gt;
+            &lt;when test=&quot;brandName != null and brandName != &#39;&#39;&quot;&gt;&lt;!--相当于case--&gt;
+                brand_name like #&#123;brandName&#125;
+            &lt;/when&gt;
+        &lt;/choose&gt;
+    &lt;/where&gt;
+&lt;/select&gt;
 </code></pre>
 <hr>
 
