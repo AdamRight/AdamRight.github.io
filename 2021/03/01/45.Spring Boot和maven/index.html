@@ -2809,6 +2809,65 @@ sqlSession.close();
 &lt;/insert&gt;
 </code></pre>
 <hr>
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><hr>
+<p>修改全部字段：</p>
+<pre><code>&lt;update id=&quot;update&quot;&gt;
+    update tb_brand
+    set
+        brand_name = #&#123;brandName&#125;,
+        company_name = #&#123;companyName&#125;,
+        ordered = #&#123;ordered&#125;,
+        description = #&#123;description&#125;,
+        status = #&#123;status&#125;
+    where id = #&#123;id&#125;;
+&lt;/update&gt;
+</code></pre>
+<p>修改动态字段：</p>
+<pre><code>&lt;update id=&quot;update&quot;&gt;
+    update tb_brand
+    &lt;set&gt;
+        &lt;if test=&quot;brandName != null and brandName != &#39;&#39;&quot;&gt;
+            brand_name = #&#123;brandName&#125;,
+        &lt;/if&gt;
+        &lt;if test=&quot;companyName != null and companyName != &#39;&#39;&quot;&gt;
+            company_name = #&#123;companyName&#125;,
+        &lt;/if&gt;
+        &lt;if test=&quot;ordered != null&quot;&gt;
+            ordered = #&#123;ordered&#125;,
+        &lt;/if&gt;
+        &lt;if test=&quot;description != null and description != &#39;&#39;&quot;&gt;
+            description = #&#123;description&#125;,
+        &lt;/if&gt;
+        &lt;if test=&quot;status != null&quot;&gt;
+            status = #&#123;status&#125;
+        &lt;/if&gt;
+    &lt;/set&gt;
+    where id = #&#123;id&#125;;
+&lt;/update&gt;
+</code></pre>
+<p>注意逗号。</p>
+<hr>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><hr>
+<p>删除一个：</p>
+<pre><code>&lt;delete id=&quot;deleteById&quot;&gt;
+    delete from tb_brand where id = #&#123;id&#125;;
+&lt;/delete&gt;
+</code></pre>
+<p>批量删除：</p>
+<p>mybatis会将数组参数，封装为一个Map集合。默认：array &#x3D; 数组。使用@Param注解改变map集合的默认key的名称。</p>
+<pre><code>//void deleteByIds(@Param(&quot;ids&quot;) int[] ids);	collection=&quot;ids&quot;
+void deleteByIds(int[] ids);
+
+&lt;delete id=&quot;deleteByIds&quot;&gt;
+    delete from tb_brand where id
+    in
+        &lt;foreach collection=&quot;array&quot; item=&quot;id&quot; separator=&quot;,&quot; open=&quot;(&quot;   close=&quot;)&quot;&gt;
+            #&#123;id&#125;
+        &lt;/foreach&gt;
+         ;
+&lt;/delete&gt;
+</code></pre>
+<hr>
 
                 
             </div>
