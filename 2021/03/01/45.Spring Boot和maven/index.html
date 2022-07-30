@@ -2868,6 +2868,19 @@ void deleteByIds(int[] ids);
 &lt;/delete&gt;
 </code></pre>
 <hr>
+<h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><hr>
+<p>Mybatis 接口方法中可以接收各种各样的参数，如下：</p>
+<pre><code>多个参数
+单个参数：单个参数又可以是如下类型
+  * POJO 类型
+  * Map 集合类型
+  * Collection 集合类型
+  * List 集合类型
+  * Array 类型
+  * 其他类型
+</code></pre>
+<p>Mybatis提供了ParamNameResolver类来进行参数封装。</p>
+<hr>
 
                 
             </div>
