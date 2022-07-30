@@ -2765,6 +2765,50 @@ sqlSession.close();
 &lt;/select&gt;
 </code></pre>
 <hr>
+<h3 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h3><hr>
+<p>MyBatis事务：</p>
+<pre><code>openSession()：默认开启事务，进行增删改操作后需要使用 sqlSession.commit(); 手动提交事务
+openSession(true)：可以设置为自动提交事务（关闭事务）
+</code></pre>
+<p>添加:</p>
+<pre><code>//编写接口方法： Mapper接口（参数：除了id之外的所有数据,结果：void）
+public interface BrandMapper &#123;
+    void add(Brand brand);
+&#125;	
+
+//编写 SQL语句： SQL映射文件
+&lt;insert id=&quot;add&quot;&gt;
+    insert into tb_brand (brand_name, company_name, ordered, description, status)
+    values (#&#123;brandName&#125;, #&#123;companyName&#125;, #&#123;ordered&#125;, #&#123;description&#125;, #&#123;status&#125;);
+&lt;/insert&gt;
+
+//执行方法，测试
+int status = 1;
+String companyName = &quot;三星&quot;;
+String brandName = &quot;三星&quot;;
+String des = &quot;三星三星三星三星三星三星三星三星&quot;;
+int ordered = 100;
+Brand brand = new Brand();
+brand.setStatus(status);
+brand.setCompanyName(companyName);
+brand.setBrandName(brandName);
+brand.setDescription(des);
+brand.setOrdered(ordered);
+
+SqlSession sqlSession = sqlSessionFactory.openSession(false);
+
+BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+brandMapper.add(brand);
+sqlSession.commit();
+sqlSession.close();
+</code></pre>
+<p>添加-主键返回：useGeneratedKeys和keyProperty</p>
+<pre><code>&lt;insert id=&quot;add&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt;
+    insert into tb_brand (brand_name, company_name, ordered, description, status)
+    values (#&#123;brandName&#125;, #&#123;companyName&#125;, #&#123;ordered&#125;, #&#123;description&#125;, #&#123;status&#125;);
+&lt;/insert&gt;
+</code></pre>
+<hr>
 
                 
             </div>
