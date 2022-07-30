@@ -2870,16 +2870,53 @@ void deleteByIds(int[] ids);
 <hr>
 <h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><hr>
 <p>Mybatis 接口方法中可以接收各种各样的参数，如下：</p>
-<pre><code>多个参数
-单个参数：单个参数又可以是如下类型
-  * POJO 类型
-  * Map 集合类型
-  * Collection 集合类型
-  * List 集合类型
-  * Array 类型
-  * 其他类型
+<pre><code>单个参数：
+    POJO类型：直接使用，属性名 和 参数占位符名称 一致
+    Map集合：直接使用，键名 和 参数占位符名称 一致
+    Collection：封装为Map集合，可以使用@Param注解，替换Map集合中默认的arg键名
+        map.put(&quot;arg0&quot;,collection集合);
+        map.put(&quot;collection&quot;,collection集合);
+    List：封装为Map集合，可以使用@Param注解，替换Map集合中默认的arg键名
+        map.put(&quot;arg0&quot;,list集合);
+        map.put(&quot;collection&quot;,list集合);
+        map.put(&quot;list&quot;,list集合);
+    Array：封装为Map集合，可以使用@Param注解，替换Map集合中默认的arg键名
+        map.put(&quot;arg0&quot;,数组);
+        map.put(&quot;array&quot;,数组);
+    其他类型：直接使用
+多个参数：封装为Map集合,可以使用@Param注解，替换Map集合中默认的arg键名
+    map.put(&quot;arg0&quot;,参数值1)
+    map.put(&quot;param1&quot;,参数值1)
+    map.put(&quot;param2&quot;,参数值2)
+    map.put(&quot;agr1&quot;,参数值2)
+    ---------------@Param(&quot;username&quot;)
+    map.put(&quot;username&quot;,参数值1)
+    map.put(&quot;param1&quot;,参数值1)
+    map.put(&quot;param2&quot;,参数值2)
+    map.put(&quot;agr1&quot;,参数值2)
 </code></pre>
 <p>Mybatis提供了ParamNameResolver类来进行参数封装。</p>
+<hr>
+<h3 id="注解开发"><a href="#注解开发" class="headerlink" title="注解开发"></a>注解开发</h3><hr>
+<p>使用注解开发会比配置文件开发更加方便。</p>
+<pre><code>@Select(value = &quot;select * from tb_user where id = #&#123;id&#125;&quot;)
+public User select(int id);
+</code></pre>
+<p>注解完成简单功能;配置文件完成复杂功能。</p>
+<pre><code>查询：@Select
+添加：@Insert
+修改：@Update
+删除：@Delete
+</code></pre>
+<p>参数设置：</p>
+<pre><code>@Select(value = &quot;select * from tb_user where id = #&#123;id&#125; and username = #&#123;username&#125;&quot;)
+public User select(@Param(&quot;id&quot;) int id, @Param(&quot;username&quot;) String username);
+</code></pre>
+<p>结果集映射：</p>
+<pre><code>@Select(value = &quot;select * from tb_user where id = #&#123;id&#125; and username = #&#123;username&#125;&quot;)
+@ResultMap(&quot;userResultMap&quot;)
+public User select(@Param(&quot;id&quot;) int id, @Param(&quot;username&quot;) String username);
+</code></pre>
 <hr>
 
                 
