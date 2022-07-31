@@ -3003,6 +3003,39 @@ Deployment -&gt; 加号 -&gt; Artifat 配置war
 &lt;/build&gt;
 </code></pre>
 <hr>
+<h2 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h2><h3 id="介绍-4"><a href="#介绍-4" class="headerlink" title="介绍"></a>介绍</h3><hr>
+<p>Servlet 是 Java提供的一门动态web资源开发技术。</p>
+<p>Servlet 是JavaEE 规范之一，其实就是一个接口，将来我们需要定义Servlet类实现Servlet接口，并由web服务器运行Servlet。</p>
+<hr>
+<h3 id="Servlet快速入门"><a href="#Servlet快速入门" class="headerlink" title="Servlet快速入门"></a>Servlet快速入门</h3><hr>
+<p>创建 web项目，导入 Servlet依赖坐标：</p>
+<pre><code>&lt;dependencies&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+  &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+  &lt;version&gt;3.1.0&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<p>创建：定义一个类，实现 Servlet接口，并重写接口中所有方法，并在 service方法中输入一句话:</p>
+<pre><code>public class ServletDemo1 implements Servlet &#123;
+    @Override
+    public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException &#123;
+        System.out.println(&quot;servlet hello vorld&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>配置：在类上使用@WebServlet 注解，配置该 Servlet的访问路径:</p>
+<pre><code>@WebServlet(&quot;/demo1&quot;)
+public class ServletDemo1 implements Servlet &#123;
+</code></pre>
+<p>访问：启动 Tomcat，浏览器输入URL 访问该Servlet</p>
+<pre><code>http://localhost:8080/web-demo/demo1
+</code></pre>
+<hr>
+<h3 id="Servlet-执行流程"><a href="#Servlet-执行流程" class="headerlink" title="Servlet 执行流程"></a>Servlet 执行流程</h3><hr>
+<hr>
 
                 
             </div>
