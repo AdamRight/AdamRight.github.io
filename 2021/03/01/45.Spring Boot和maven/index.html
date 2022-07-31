@@ -2918,6 +2918,91 @@ public User select(@Param(&quot;id&quot;) int id, @Param(&quot;username&quot;) S
 public User select(@Param(&quot;id&quot;) int id, @Param(&quot;username&quot;) String username);
 </code></pre>
 <hr>
+<h2 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h2><h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><hr>
+<p>官网：<a target="_blank" rel="noopener" href="https://tomcat.apache.org/">https://tomcat.apache.org/</a> </p>
+<p>解决中文乱码，修改配置 <code>conf/logging.properties</code> :</p>
+<pre><code>java.util.logging.ConsoleHandler.encoding = GBK
+</code></pre>
+<p>修改启动端口号：conf&#x2F;server.xml ：</p>
+<pre><code>&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot;
+           connectionTimeout=&quot;20000&quot;
+           redirectPort=&quot;8443&quot; /&gt;
+</code></pre>
+<p>注：HTTP协议默认端口号为80，如果将Tomcat端口号改为80，则将来访问Tomcat时，将不用输入端口号。</p>
+<hr>
+<h3 id="Web项目"><a href="#Web项目" class="headerlink" title="Web项目"></a>Web项目</h3><hr>
+<p>Maven Web项目结构</p>
+<pre><code>和java同级下有webapp目录，包含html文件夹和WEB-INF文件夹
+</code></pre>
+<p>编译后的Java字节码文件和resources的资源文件，放到WEB-INF下的classes目录下。pom.xml中依赖坐标对应的jar包，放入WEB-INF下的lib目录下.</p>
+<p><strong>使用骨架</strong></p>
+<p>创建Maven项目:</p>
+<pre><code>勾选Create from archetype
+选择maven-archetype-webapp
+</code></pre>
+<p>删除pom.xml中多余内容:</p>
+<pre><code>&lt;build&gt;
+    &lt;finalName&gt;tomcatdemo&lt;/finalName&gt;
+    &lt;pluginManagement&gt;&lt;!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) --&gt;
+      &lt;plugins&gt;
+        &lt;plugin&gt;
+</code></pre>
+<p>补齐Maven Web项目缺失的目录结构:</p>
+<pre><code>java
+resource
+</code></pre>
+<hr>
+<h3 id="IDEA使用Tomcat"><a href="#IDEA使用Tomcat" class="headerlink" title="IDEA使用Tomcat"></a>IDEA使用Tomcat</h3><hr>
+<p>Maven Web项目创建成功后，通过Maven的package命令可以将项目打包成war包，将war文件拷贝到Tomcat的webapps目录下，启动Tomcat就可以将项目部署成功，然后通过浏览器进行访问即可。</p>
+<p>然而我们在开发的过程中，项目中的内容会经常发生变化，如果按照上面这种方式来部署测试，是非常不方便的,如何在IDEA中能快速使用Tomcat呢?</p>
+<p>在IDEA中集成使用Tomcat有两种方式，分别是集成本地Tomcat和Tomcat Maven插件。</p>
+<p>集成本地Tomcat：</p>
+<pre><code>Edit Configurations -&gt; 加号 -&gt; Tomcat Server -&gt; Local -&gt; Configure 
+
+配置TomEE Home:apache-tomcat-8.5.68
+
+Deployment -&gt; 加号 -&gt; Artifat 配置war
+</code></pre>
+<p>Tomcat Maven 插件：只需要两步，分别是:</p>
+<pre><code>在pom.xml中添加Tomcat插件
+&lt;build&gt;
+   &lt;plugins&gt;
+   	&lt;!--Tomcat插件 --&gt;
+       &lt;plugin&gt;
+           &lt;groupId&gt;org.apache.tomcat.maven&lt;/groupId&gt;
+           &lt;artifactId&gt;tomcat7-maven-plugin&lt;/artifactId&gt;
+           &lt;version&gt;2.2&lt;/version&gt;
+       &lt;/plugin&gt;
+   &lt;/plugins&gt;
+&lt;/build&gt;
+
+使用Maven Helper插件快速启动项目，选中项目，右键--&gt;Run Maven --&gt; tomcat7:run
+</code></pre>
+<p>在IDEA中下载Maven Helper插件，具体的操作方式为: File –&gt; Settings –&gt; Plugins –&gt; Maven Helper —&gt; Install,安装完后按照提示重启IDEA，就可以看到了。</p>
+<p><strong>Maven Tomcat插件目前只有Tomcat7版本，没有更高的版本可以使用。</strong></p>
+<p>使用Maven Tomcat插件，要想修改Tomcat的端口和访问路径，可以直接修改pom.xml:</p>
+<pre><code>&lt;build&gt;
+    &lt;plugins&gt;
+    	&lt;!--Tomcat插件 --&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.tomcat.maven&lt;/groupId&gt;
+            &lt;artifactId&gt;tomcat7-maven-plugin&lt;/artifactId&gt;
+            &lt;version&gt;2.2&lt;/version&gt;
+            &lt;configuration&gt;
+            	&lt;port&gt;80&lt;/port&gt;&lt;!--访问端口号 --&gt;
+                &lt;!--项目访问路径
+                    未配置访问路径: http://localhost:80/tomcat-demo2/a.html
+                    配置/后访问路径: http://localhost:80/a.html
+                    如果配置成 /hello,访问路径会变成什么?
+                        答案: http://localhost:80/hello/a.html
+                --&gt;
+                &lt;path&gt;/&lt;/path&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
+<hr>
 
                 
             </div>
