@@ -3034,7 +3034,42 @@ public class ServletDemo1 implements Servlet &#123;
 <pre><code>http://localhost:8080/web-demo/demo1
 </code></pre>
 <hr>
-<h3 id="Servlet-执行流程"><a href="#Servlet-执行流程" class="headerlink" title="Servlet 执行流程"></a>Servlet 执行流程</h3><hr>
+<h3 id="Servlet执行流程和生命周期"><a href="#Servlet执行流程和生命周期" class="headerlink" title="Servlet执行流程和生命周期"></a>Servlet执行流程和生命周期</h3><hr>
+<p>Servlet 由谁创建？Servlet方法由谁调用？</p>
+<p>Servlet由web服务器创建，Servlet方法由web服务器调用。</p>
+<p>服务器怎么知道Servlet中一定有service方法？</p>
+<p>因为我们自定义的Servlet，必须实现Servlet接口并复写其方法，而Servlet接口中有service方法。</p>
+<p>Servlet运行在Servlet容器(web服务器)中，其生命周期由容器来管理，分为4个阶段：</p>
+<pre><code>加载和实例化：默认情况下，当Servlet第一次被访问时，由容器创建Servlet对象
+初始化：在Servlet实例化之后，容器将调用Servlet的init()方法初始化这个对象，完成一些如加载配置文件、创建连接等初始化的工作。该方法**只调用一次**
+请求处理：**每次请求**Servlet时，Servlet容器都会调用Servlet的service()方法对请求进行处理。
+服务终止：当需要释放内存或者容器关闭时，容器就会调用Servlet实例的destroy()方法完成资源的释放。在destroy()方法调用之后，容器会释放这个Servlet实例，该实例随后会被Java的垃圾收集器所回收
+</code></pre>
+<p>loadOnstartup：</p>
+<pre><code>@WebServlet(urlPatterns = &quot;/demo1&quot;,loadOnStartup = 1)
+loadOnstartup的取值有两类情况
+    （1）负整数:第一次访问时创建Servlet对象
+    （2）0或正整数:服务器启动时创建Servlet对象，数字越小优先级越高
+</code></pre>
+<p>Servlet 方法介绍：</p>
+<pre><code>//初始化方法，在Servlet被创建时执行，只执行一次
+void init(ServletConfig config)
+
+//提供服务方法， 每次Servlet被访问，都会调用该方法
+void service(ServletRequest req, ServletResponse res) 
+
+//销毁方法，当Servlet被销毁时，调用该方法。在内存释放或服务器关闭时销毁
+void destroy()
+
+//获取ServletConfig对象
+ServletConfig getServletConfig()
+
+//获取Servlet信息
+String getServletInfo() 
+</code></pre>
+<hr>
+<h3 id="HttpServlet"><a href="#HttpServlet" class="headerlink" title="HttpServlet"></a>HttpServlet</h3><hr>
+<p>HttpServlet：对HTTP协议封装的Servlet实现类。</p>
 <hr>
 
                 
