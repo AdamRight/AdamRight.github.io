@@ -3070,6 +3070,77 @@ String getServletInfo()
 <hr>
 <h3 id="HttpServlet"><a href="#HttpServlet" class="headerlink" title="HttpServlet"></a>HttpServlet</h3><hr>
 <p>HttpServlet：对HTTP协议封装的Servlet实现类。</p>
+<pre><code>@WebServlet(&quot;/demo4&quot;)
+public class ServletDemo4 extends HttpServlet &#123;
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        System.out.println(&quot;get...&quot;);
+    &#125;
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        System.out.println(&quot;post...&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>自己封装请求方式：</p>
+<pre><code>public class MyHttpServlet implements Servlet &#123;
+    @Override
+    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException &#123;
+        // 根据请求方式的不同，进行分别的处理
+        HttpServletRequest request = (HttpServletRequest) req;
+        //1. 获取请求方式
+        String method = request.getMethod();
+        //2. 判断
+        if(&quot;GET&quot;.equals(method))&#123;
+            // get方式的处理逻辑
+            doGet(req,res);
+        &#125;else if(&quot;POST&quot;.equals(method))&#123;
+            // post方式的处理逻辑
+            doPost(req,res);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<hr>
+<h3 id="urlPattern配置"><a href="#urlPattern配置" class="headerlink" title="urlPattern配置"></a>urlPattern配置</h3><hr>
+<p>一个Servlet，可以配置多个 urlPattern:</p>
+<pre><code>@WebServlet(urlPatterns = &#123;&quot;/demo7&quot;,&quot;/demo8&quot;&#125;)
+</code></pre>
+<p>urlPattern 配置规则:</p>
+<pre><code>//精确匹配
+@WebServlet(urlPatterns = &#123;&quot;/demo7&quot;&#125;)
+
+//目录匹配-通配符
+@WebServlet(urlPatterns = &quot;/user/*&quot;)
+
+//扩展名匹配-注意没有斜杠
+@WebServlet(urlPatterns = &quot;*.do&quot;)
+
+//任意匹配
+@WebServlet(urlPatterns = &quot;/&quot;)
+@WebServlet(urlPatterns = &quot;/*&quot;)
+</code></pre>
+<p><code>/</code> 和 <code>/*</code> 区别：当我们的项目中的Servlet配置了“&#x2F;”，会覆盖掉tomcat中的DefaultServlet，当其他的 url-pattern都匹配不上时都会走这个Servlet。当我们的项目中配置了“&#x2F;*”，意味着匹配任意访问路径</p>
+<p>优先级：</p>
+<pre><code>   精确路径 &gt; 目录路径 &gt; 扩展名路径 &gt; /* &gt; /
+</code></pre>
+<hr>
+<h3 id="XML配置方式编写Servlet"><a href="#XML配置方式编写Servlet" class="headerlink" title="XML配置方式编写Servlet"></a>XML配置方式编写Servlet</h3><hr>
+<p>Servlet 从3.0版本后开始支持使用注解配置，3.0版本前只支持 XML 配置文件的配置方式。</p>
+<p>在 main&#x2F;webapp&#x2F;WEB-INF&#x2F;web.xml中配置该Servlet：</p>
+<pre><code>&lt;!--Servlet 全类名 --&gt;
+&lt;servlet&gt;
+    &lt;servlet-name&gt;demo13&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;com.tea.web.ServletDemo13&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+
+&lt;!--Servlet 访问路径--&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;demo13&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/demo13&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
 <hr>
 
                 
