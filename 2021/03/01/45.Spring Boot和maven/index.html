@@ -3198,6 +3198,54 @@ public class RequestDemo1 extends HttpServlet &#123;
 &#125;
 </code></pre>
 <p>Request 通用方式获取请求参数:</p>
+<pre><code>//三种方式：
+Map&lt;String, String[]&gt; getParameterMap()：获取所有参数Map集合
+String[] getParameterValues(String name) ：根据名称获取参数值（数组）
+String getParameter(String name)：根据名称获取参数值（单个值）
+</code></pre>
+<hr>
+<h3 id="请求参数中文乱码"><a href="#请求参数中文乱码" class="headerlink" title="请求参数中文乱码"></a>请求参数中文乱码</h3><hr>
+<p>POST请求参数解决中文乱码:</p>
+<pre><code>request.setCharacterEncoding(&quot;UTF-8&quot;);//设置字符输入流的编码
+</code></pre>
+<p>GET请求参数解决中文乱码，原因:</p>
+<pre><code>// 乱码原因：tomcat进行URL解码，默认的字符集ISO-8859-1
+//1. URL编码
+String encode = URLEncoder.encode(username, &quot;utf-8&quot;);
+System.out.println(encode);
+//2. URL解码
+String decode = URLDecoder.decode(encode, &quot;ISO-8859-1&quot;);
+System.out.println(decode);
+</code></pre>
+<p>GET请求参数解决中文乱码，解决办法：</p>
+<pre><code>//获取username
+String username = request.getParameter(&quot;username&quot;);
+System.out.println(&quot;解决乱码前：&quot;+username);
+//先对乱码数据进行编码：转为字节数组。ISO_8859_1和UTF_8字节数组是一样的。
+byte[] bytes = username.getBytes(StandardCharsets.ISO_8859_1);
+//字节数组解码
+username = new String(bytes, StandardCharsets.UTF_8);*/
+</code></pre>
+<p>Tomcat 8.0 之后，已将GET请求乱码问题解决，设置默认的解码方式为UTF-8。</p>
+<hr>
+<h3 id="Request请求转发"><a href="#Request请求转发" class="headerlink" title="Request请求转发"></a>Request请求转发</h3><hr>
+<p>请求转发(forward)：一种在服务器内部的资源跳转方式。</p>
+<p>demo5转发到demo6：</p>
+<pre><code>//存储数据
+request.setAttribute(&quot;msg&quot;,&quot;hello&quot;);
+//请求转发
+request.getRequestDispatcher(&quot;/req6&quot;).forward(request,response);
+</code></pre>
+<p>请求转发资源间共享数据：使用Request对象：</p>
+<pre><code>void setAttribute(String name, Object o)：存储数据到 request域中
+Object getAttribute(String name)：根据 key，获取值
+void removeAttribute(String name)：根据 key，删除该键值对
+</code></pre>
+<p>请求转发特点：</p>
+<pre><code>浏览器地址栏路径不发生变化
+只能转发到当前服务器的内部资源
+一次请求，可以在转发的资源间使用request共享数据
+</code></pre>
 <hr>
 
                 
