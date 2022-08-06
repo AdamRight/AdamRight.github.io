@@ -3247,6 +3247,104 @@ void removeAttribute(String name)：根据 key，删除该键值对
 一次请求，可以在转发的资源间使用request共享数据
 </code></pre>
 <hr>
+<h2 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h2><h3 id="继承体系-1"><a href="#继承体系-1" class="headerlink" title="继承体系"></a>继承体系</h3><hr>
+<p>ServletResponse(Java提供的请求对象根接口) -&gt; HttpServletResponse(Java提供的对Http协议封装的请求对象接口<br>) -&gt; ResponseFacade(Tomcat 定义的实现类)</p>
+<hr>
+<h3 id="设置响应数据"><a href="#设置响应数据" class="headerlink" title="设置响应数据"></a>设置响应数据</h3><hr>
+<p>响应行：</p>
+<pre><code>void setStatus(int sc) ：设置响应状态
+</code></pre>
+<p>响应头：</p>
+<pre><code>void setHeader(String name, String value) ：设置响应头键值对
+</code></pre>
+<p>响应体：</p>
+<pre><code>PrintWriter getWriter()：获取字符输出流
+ServletOutputStream getOutputStream()：获取字节输出流
+</code></pre>
+<hr>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><hr>
+<p>实现方式：</p>
+<pre><code>//方式一：
+resp.setStatus(302);
+resp.setHeader(“location”,“资源B的路径&quot;);
+
+//方式二：
+resp.sendRedirect(&quot;资源B的路径&quot;);
+</code></pre>
+<p>重定向特点：</p>
+<pre><code>浏览器地址栏路径发生变化
+可以重定向到任意位置的资源（服务器内部、外部均可）
+两次请求，不能在多个资源使用request共享数据
+</code></pre>
+<p>可以和请求转发对比。</p>
+<p>代码：</p>
+<pre><code>//重定向
+//1.设置响应状态码 302
+response.setStatus(302);
+//2. 设置响应头 Location
+response.setHeader(&quot;Location&quot;,&quot;/request-demo/resp2&quot;);
+
+//简化方式完成重定向
+//动态获取虚拟目录
+String contextPath = request.getContextPath();
+response.sendRedirect(contextPath+&quot;/resp2&quot;);
+
+response.sendRedirect(&quot;https://www.baidu.com&quot;);
+</code></pre>
+<hr>
+<h3 id="资源路径"><a href="#资源路径" class="headerlink" title="资源路径"></a>资源路径</h3><hr>
+<p>明确路径谁使用：</p>
+<pre><code>浏览器使用：需要加虚拟目录(项目访问路径)
+服务端使用：不需要加虚拟目录，比如请求转发
+</code></pre>
+<p>动态获取虚拟目录：</p>
+<pre><code>String contextPath = request.getContextPath();
+</code></pre>
+<hr>
+<h3 id="响应字符数据"><a href="#响应字符数据" class="headerlink" title="响应字符数据"></a>响应字符数据</h3><hr>
+<pre><code>//中文数据乱码：原因通过Response获取的字符输出流默认编码：ISO-8859-1
+response.setContentType(&quot;text/html;charset=utf-8&quot;);
+//1. 获取字符输出流
+PrintWriter writer = response.getWriter();
+//content-type	设置支持html的标签
+//response.setHeader(&quot;content-type&quot;,&quot;text/html&quot;);
+
+writer.write(&quot;你好&quot;);
+writer.write(&quot;&lt;h1&gt;aaa&lt;/h1&gt;&quot;);
+//细节：流不需要关闭
+</code></pre>
+<hr>
+<h3 id="响应字节数据"><a href="#响应字节数据" class="headerlink" title="响应字节数据"></a>响应字节数据</h3><hr>
+<p>IOUtils工具类：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;commons-io&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-io&lt;/artifactId&gt;
+    &lt;version&gt;2.6&lt;/version&gt;
+&lt;/dependency&gt;
+
+IOUtils.copy(输入流,输出流);
+</code></pre>
+<p>响应字节数据:</p>
+<pre><code>//通过Response对象获取字节输出流
+ServletOutputStream outputStream = resp.getOutputStream();
+//写数据
+outputStream.write(字节数据);
+</code></pre>
+<p>代码：</p>
+<pre><code>//1. 读取文件
+FileInputStream fis = new FileInputStream(&quot;d://a.jpg&quot;);
+//2. 获取response字节输出流
+ServletOutputStream os = response.getOutputStream();
+//3. 完成流的copy
+/* byte[] buff = new byte[1024];
+int len = 0;
+while ((len = fis.read(buff))!= -1)&#123;
+    os.write(buff,0,len);
+&#125;*/
+IOUtils.copy(fis,os);
+fis.close();
+</code></pre>
+<hr>
 
                 
             </div>
