@@ -2918,6 +2918,28 @@ public User select(@Param(&quot;id&quot;) int id, @Param(&quot;username&quot;) S
 public User select(@Param(&quot;id&quot;) int id, @Param(&quot;username&quot;) String username);
 </code></pre>
 <hr>
+<h3 id="SqlSessionFactory工具类"><a href="#SqlSessionFactory工具类" class="headerlink" title="SqlSessionFactory工具类"></a>SqlSessionFactory工具类</h3><hr>
+<pre><code>public class SqlSessionFactoryUtils &#123;
+
+    private static SqlSessionFactory sqlSessionFactory;
+
+    static &#123;
+        //静态代码块会随着类的加载而自动执行，且只执行一次
+        try &#123;
+            String resource = &quot;mybatis-config.xml&quot;;
+            InputStream inputStream = Resources.getResourceAsStream(resource);
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        &#125; catch (IOException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+
+    public static SqlSessionFactory getSqlSessionFactory()&#123;
+        return sqlSessionFactory;
+    &#125;
+&#125;
+</code></pre>
+<hr>
 <h2 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h2><h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><hr>
 <p>官网：<a target="_blank" rel="noopener" href="https://tomcat.apache.org/">https://tomcat.apache.org/</a> </p>
 <p>解决中文乱码，修改配置 <code>conf/logging.properties</code> :</p>
