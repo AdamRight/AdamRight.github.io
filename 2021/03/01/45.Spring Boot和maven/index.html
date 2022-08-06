@@ -3513,7 +3513,7 @@ request.getRequestDispatcher(&quot;/el-demo.jsp&quot;).forward(request,response)
 <p>在JSP页面上引入JSTL标签库：</p>
 <pre><code>&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
 </code></pre>
-<p>c:if：</p>
+<p>c:if代码：</p>
 <pre><code>&lt;%--c:if：来完成逻辑判断，替换java  if else--%&gt;
 &lt;c:if test=&quot;$&#123;status ==1&#125;&quot;&gt;
     启用
@@ -3521,6 +3521,26 @@ request.getRequestDispatcher(&quot;/el-demo.jsp&quot;).forward(request,response)
 &lt;c:if test=&quot;$&#123;status ==0&#125;&quot;&gt;
     禁用
 &lt;/c:if&gt;
+</code></pre>
+<p>c:forEach代码：</p>
+<pre><code>&lt;%--&lt;c:forEach&gt;：相当于 for 循环--%&gt;
+&lt;c:forEach items=&quot;$&#123;brands&#125;&quot; var=&quot;brand&quot; varStatus=&quot;status&quot;&gt;
+    &lt;tr align=&quot;center&quot;&gt;
+        &lt;%--&lt;td&gt;$&#123;brand.id&#125;&lt;/td&gt;--%&gt;
+        &lt;td&gt;$&#123;status.count&#125;&lt;/td&gt;
+        &lt;td&gt;$&#123;brand.brandName&#125;&lt;/td&gt;
+        &lt;td&gt;$&#123;brand.companyName&#125;&lt;/td&gt;
+        &lt;td&gt;$&#123;brand.ordered&#125;&lt;/td&gt;
+        &lt;td&gt;$&#123;brand.description&#125;&lt;/td&gt;
+        &lt;c:if test=&quot;$&#123;brand.status == 1&#125;&quot;&gt;
+            &lt;td&gt;启用&lt;/td&gt;
+        &lt;/c:if&gt;
+        &lt;c:if test=&quot;$&#123;brand.status != 1&#125;&quot;&gt;
+            &lt;td&gt;禁用&lt;/td&gt;
+        &lt;/c:if&gt;
+        &lt;td&gt;&lt;a href=&quot;#&quot;&gt;修改&lt;/a&gt; &lt;a href=&quot;#&quot;&gt;删除&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/c:forEach&gt;
 </code></pre>
 <hr>
 
