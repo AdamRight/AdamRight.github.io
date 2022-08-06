@@ -3367,6 +3367,162 @@ IOUtils.copy(fis,os);
 fis.close();
 </code></pre>
 <hr>
+<h2 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><hr>
+<p>JSP：Java Server Pages，Java服务端页面。一种动态的网页技术，其中既可以定义 HTML、JS、CSS等静态内容，还可以定义 Java代码的动态内容。</p>
+<p>JSP &#x3D; HTML + Java</p>
+<p>JSP的作用：简化开发，避免了在Servlet中直接输出HTML标签。</p>
+<p>缺点：</p>
+<pre><code>书写麻烦：特别是复杂的页面
+阅读麻烦
+复杂度高：运行需要依赖于各种环境，JRE，JSP容器，JavaEE…
+占内存和磁盘：JSP会自动生成.java和.class文件占磁盘，运行的是.class文件占内存
+调试困难：出错后，需要找到自动生成的.java文件进行调试
+不利于团队协作：前端人员不会 Java，后端人员不精 HTML
+</code></pre>
+<hr>
+<h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><hr>
+<p>导入JSP坐标：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;
+    &lt;artifactId&gt;jsp-api&lt;/artifactId&gt;
+    &lt;version&gt;2.2&lt;/version&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>创建JSP文件：</p>
+<pre><code>new -&gt; jsp/jspx
+</code></pre>
+<p>编写 HTML标签 和 Java代码:</p>
+<pre><code>&lt;body&gt;
+    &lt;h1&gt;hello jsp&lt;/h1&gt;
+    &lt;%
+        System.out.println(&quot;hello,jsp~&quot;);
+    %&gt;
+&lt;/body&gt;
+</code></pre>
+<hr>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><hr>
+<p>JSP 本质上就是一个 Servlet.</p>
+<p>JSP 在被访问时，由JSP容器(Tomcat)将其转换为 Java文件(Servlet)，在由JSP容器(Tomcat)将其编译，最终对外提供服务的其实就是这个字节码文件.</p>
+<hr>
+<h3 id="JSP脚本"><a href="#JSP脚本" class="headerlink" title="JSP脚本"></a>JSP脚本</h3><hr>
+<p>JSP 脚本分类：</p>
+<pre><code>&lt;%...%&gt;：内容会直接放到_jspService()方法之中
+&lt;%=…%&gt;：内容会放到out.print()中，作为out.print()的参数
+&lt;%!…%&gt;：内容会放到_jspService()方法之外，被类直接包含
+</code></pre>
+<p>代码：</p>
+<pre><code>&lt;%
+    System.out.println(&quot;hello,jsp~&quot;);
+    int i = 3;
+%&gt;
+
+&lt;%=&quot;hello&quot;%&gt;
+&lt;%=i%&gt;
+
+&lt;%!
+    void  show()&#123;&#125;
+    String name = &quot;zhangsan&quot;;
+%&gt;
+</code></pre>
+<hr>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><hr>
+<p>jsp代码是可以截断的：</p>
+<pre><code>&lt;%
+    for (int i = 0; i &lt; brands.size(); i++) &#123;
+        Brand brand = brands.get(i);
+%&gt;
+
+&lt;tr align=&quot;center&quot;&gt;
+    &lt;td&gt;&lt;%=brand.getId()%&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;%=brand.getBrandName()%&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;%=brand.getCompanyName()%&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;%=brand.getOrdered()%&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;%=brand.getDescription()%&gt;&lt;/td&gt;
+
+    &lt;%
+        if(brand.getStatus() == 1)&#123;
+            //显示启用
+    %&gt;
+        &lt;td&gt;&lt;%=&quot;启用&quot;%&gt;&lt;/td&gt;
+    &lt;%
+        &#125;else &#123;
+            // 显示禁用
+    %&gt;
+        &lt;td&gt;&lt;%=&quot;禁用&quot;%&gt;&lt;/td&gt;
+    &lt;%
+        &#125;
+    %&gt;
+
+    &lt;td&gt;&lt;a href=&quot;#&quot;&gt;修改&lt;/a&gt; &lt;a href=&quot;#&quot;&gt;删除&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;%
+    &#125;
+%&gt;
+</code></pre>
+<hr>
+<h3 id="EL表达式"><a href="#EL表达式" class="headerlink" title="EL表达式"></a>EL表达式</h3><hr>
+<p>Expression Language 表达式语言，用于简化 JSP页面内的Java代码。</p>
+<p>主要功能：获取数据。</p>
+<p>语法：</p>
+<pre><code>$&#123;expression&#125;
+
+$&#123;brands&#125;	获取域中存储的key为brands的数据
+</code></pre>
+<p>JavaWeb中的四大域对象：</p>
+<pre><code>page：当前页面有效
+request：当前请求有效
+session：当前会话有效
+application：当前应用有效
+</code></pre>
+<p>el表达式获取数据，会依次从这4个域中寻找，直到找到为止。</p>
+<p>示例代码：</p>
+<pre><code>//1. 准备数据
+List&lt;Brand&gt; brands = new ArrayList&lt;Brand&gt;();
+brands.add(new Brand(1,&quot;三只松鼠&quot;,&quot;三只松鼠&quot;,100,&quot;三只松鼠，好吃不上火&quot;,1));
+brands.add(new Brand(2,&quot;优衣库&quot;,&quot;优衣库&quot;,200,&quot;优衣库，服适人生&quot;,0));
+brands.add(new Brand(3,&quot;小米&quot;,&quot;小米科技有限公司&quot;,1000,&quot;为发烧而生&quot;,1));
+//2. 存储到request域中
+request.setAttribute(&quot;brands&quot;,brands);
+request.setAttribute(&quot;status&quot;,1);
+//3. 转发到 el-demo.jsp
+request.getRequestDispatcher(&quot;/el-demo.jsp&quot;).forward(request,response);
+
+//jsp代码：
+&lt;body&gt;
+    $&#123;brands&#125;
+&lt;/body&gt;
+</code></pre>
+<hr>
+<h3 id="JSTL标签"><a href="#JSTL标签" class="headerlink" title="JSTL标签"></a>JSTL标签</h3><hr>
+<p>JSP标准标签库(Jsp Standarded Tag Library) ，使用标签取代JSP页面上的Java代码。</p>
+<p>导入坐标：</p>
+<pre><code>&lt;!--jstl--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;jstl&lt;/groupId&gt;
+    &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+    &lt;version&gt;1.2&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;taglibs&lt;/groupId&gt;
+    &lt;artifactId&gt;standard&lt;/artifactId&gt;
+    &lt;version&gt;1.1.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>在JSP页面上引入JSTL标签库：</p>
+<pre><code>&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+</code></pre>
+<p>c:if：</p>
+<pre><code>&lt;%--c:if：来完成逻辑判断，替换java  if else--%&gt;
+&lt;c:if test=&quot;$&#123;status ==1&#125;&quot;&gt;
+    启用
+&lt;/c:if&gt;
+&lt;c:if test=&quot;$&#123;status ==0&#125;&quot;&gt;
+    禁用
+&lt;/c:if&gt;
+</code></pre>
+<hr>
 
                 
             </div>
