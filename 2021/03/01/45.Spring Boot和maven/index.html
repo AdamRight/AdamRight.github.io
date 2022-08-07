@@ -4041,6 +4041,24 @@ public void doFilter(ServletRequest request, ServletResponse response, FilterCha
 </code></pre>
 <hr>
 <h3 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a>Listener</h3><hr>
+<p>概念：Listener 表示监听器，是 JavaWeb 三大组件(Servlet、Filter、Listener)之一。</p>
+<p>监听器可以监听就是在application,session,request三个对象创建、销毁或者往其中添加修改删除属性时自动执行代码的功能组件。</p>
+<p>Listener分类：JavaWeb中提供了8个监听器</p>
+<p>ServletContextListener 使用：</p>
+<pre><code>@WebListener
+public class ContextLoaderListener implements ServletContextListener &#123;
+    @Override
+    public void contextInitialized(ServletContextEvent sce) &#123;
+        //加载资源
+        System.out.println(&quot;ContextLoaderListener...&quot;);
+    &#125;
+
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) &#123;
+        //释放资源
+    &#125;
+&#125;
+</code></pre>
 <hr>
 <h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><hr>
 <hr>
