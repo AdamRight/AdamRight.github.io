@@ -3999,6 +3999,48 @@ public class FilterDemo implements Filter &#123;
 </code></pre>
 <hr>
 <h3 id="Filter使用细节"><a href="#Filter使用细节" class="headerlink" title="Filter使用细节"></a>Filter使用细节</h3><hr>
+<p>Filter 可以根据需求，配置不同的拦截资源路径：</p>
+<pre><code>拦截具体的资源：/index.jsp：只有访问index.jsp时才会被拦截。
+目录拦截：/user/*：访问/user下的所有资源，都会被拦截。
+后缀名拦截：*.jsp：访问后缀名为jsp的资源，都会被拦截。
+拦截所有：/*：访问所有资源，都会被拦截
+</code></pre>
+<p>过滤器链：一个Web应用，可以配置多个过滤器，这多个过滤器称为过滤器链。</p>
+<p>注解配置的Filter，优先级按照过滤器**类名(字符串)**的自然排序。</p>
+<p>登录验证案例代码：</p>
+<pre><code>@Override
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException &#123;
+    HttpServletRequest req = (HttpServletRequest) request;
+    //判断访问资源路径是否和登录注册相关
+    String[] urls = &#123;&quot;/login.jsp&quot;,&quot;/imgs/&quot;,&quot;/css/&quot;,&quot;/loginServlet&quot;,&quot;/register.jsp&quot;,&quot;/registerServlet&quot;,&quot;/checkCodeServlet&quot;&#125;;
+    // 获取当前访问的资源路径
+    String url = req.getRequestURL().toString();
+    //循环判断
+    for (String u : urls) &#123;
+        if(url.contains(u))&#123;
+            //找到了-放行
+            chain.doFilter(request, response);
+            //break;
+            return;
+        &#125;
+    &#125;
+    //1. 判断session中是否有user
+    HttpSession session = req.getSession();
+    Object user = session.getAttribute(&quot;user&quot;);
+
+    //2. 判断user是否为null
+    if(user != null)&#123;
+        // 登录过了-放行
+        chain.doFilter(request, response);
+    &#125;else &#123;
+        // 没有登陆，存储提示信息，跳转到登录页面
+        req.setAttribute(&quot;login_msg&quot;,&quot;您尚未登陆！&quot;);
+        req.getRequestDispatcher(&quot;/login.jsp&quot;).forward(req,response);
+    &#125;
+&#125;
+</code></pre>
+<hr>
+<h3 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a>Listener</h3><hr>
 <hr>
 <h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><hr>
 <hr>
