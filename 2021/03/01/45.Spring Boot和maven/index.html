@@ -3963,7 +3963,42 @@ public class CheckCodeUtil &#123;
 &#125;
 </code></pre>
 <hr>
-<h2 id="过滤器和监听器"><a href="#过滤器和监听器" class="headerlink" title="过滤器和监听器"></a>过滤器和监听器</h2><hr>
+<h2 id="Filter和Listener"><a href="#Filter和Listener" class="headerlink" title="Filter和Listener"></a>Filter和Listener</h2><h3 id="Filter介绍"><a href="#Filter介绍" class="headerlink" title="Filter介绍"></a>Filter介绍</h3><hr>
+<p>概念：Filter 表示过滤器，是 JavaWeb 三大组件(Servlet、Filter、Listener)之一。</p>
+<p>过滤器可以把对资源的请求拦截下来，从而实现一些特殊的功能。</p>
+<p>过滤器一般完成一些通用的操作，比如：权限控制、统一编码处理、敏感字符处理等等…</p>
+<hr>
+<h3 id="Filter快速入门"><a href="#Filter快速入门" class="headerlink" title="Filter快速入门"></a>Filter快速入门</h3><hr>
+<p>定义类，实现 Filter接口，并重写其所有方法。配置Filter拦截资源的路径：在类上定义 <code>@WebFilter</code> 注解。在doFilter方法中输出一句话，并放行。</p>
+<pre><code>import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import java.io.IOException;
+@WebFilter(&quot;/*&quot;)
+public class FilterDemo implements Filter &#123;
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException &#123;
+        //1. 放行前，对 request数据进行处理
+        System.out.println(&quot;1.FilterDemo...&quot;);
+        //放行
+        chain.doFilter(request,response);
+        //2. 放行后，对Response 数据进行处理
+        System.out.println(&quot;5.FilterDemo...&quot;);
+    &#125;
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException &#123;
+    &#125;
+    @Override
+    public void destroy() &#123;
+    &#125;
+&#125;
+</code></pre>
+<p>放行后访问对应资源，资源访问完成后，还会回到Filter中吗？<strong>会</strong></p>
+<p>如果回到Filter中，是重头执行还是执行放行后的逻辑呢？<strong>执行放行后的</strong></p>
+<pre><code>执行放行前逻辑 -&gt; 放行 -&gt; 访问资源 -&gt; 执行放行后逻辑
+</code></pre>
+<hr>
+<h3 id="Filter使用细节"><a href="#Filter使用细节" class="headerlink" title="Filter使用细节"></a>Filter使用细节</h3><hr>
 <hr>
 <h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><hr>
 <hr>
