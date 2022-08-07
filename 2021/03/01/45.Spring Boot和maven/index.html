@@ -4133,6 +4133,22 @@ public class ContextLoaderListener implements ServletContextListener &#123;
 </code></pre>
 <p>Axios中，JSON字符串和JS对象自动进行转换。</p>
 <hr>
+<h3 id="Fastjson"><a href="#Fastjson" class="headerlink" title="Fastjson"></a>Fastjson</h3><hr>
+<p>Fastjson是阿里巴巴提供的一个Java语言编写的高性能功能完善的JSON库，是目前Java语言中最快的JSON库，可以实现Java对象和JSON字符串的相互转换。</p>
+<p>导入坐标：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+    &lt;version&gt;1.2.62&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>Java对象转JSON:</p>
+<pre><code>String jsonStr = JSON.toJSONString(obj);
+</code></pre>
+<p>JSON字符串转Java对象:</p>
+<pre><code>User user = JSON.parseObject(jsonStr, User.class);
+</code></pre>
+<hr>
 
                 
             </div>
