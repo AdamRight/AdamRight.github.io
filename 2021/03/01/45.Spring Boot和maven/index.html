@@ -4060,7 +4060,78 @@ public class ContextLoaderListener implements ServletContextListener &#123;
 &#125;
 </code></pre>
 <hr>
-<h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><hr>
+<h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><h3 id="介绍-5"><a href="#介绍-5" class="headerlink" title="介绍"></a>介绍</h3><hr>
+<p>概念：AJAX(Asynchronous JavaScript And XML)：异步的 JavaScript 和 XML。</p>
+<p>AJAX作用：</p>
+<pre><code>与服务器进行数据交换：通过AJAX可以给服务器发送请求，并获取服务器响应的数据。使用了AJAX和服务器进行通信，就可以使用 HTML+AJAX来替换JSP页面了。
+
+异步交互：可以在不重新加载整个页面的情况下，与服务器交换数据并更新部分网页的技术，如：搜索联想、用户名是否可用校验，等等…
+</code></pre>
+<p>同步发送请求过程：浏览器页面在发送请求给服务器，在服务器处理请求的过程中，浏览器页面不能做其他的操作。只能等到服务器响应结束后才能，浏览器页面才能继续做其他的操作。</p>
+<p>异步发送请求：浏览器页面发送请求给服务器，在服务器处理请求的过程中，浏览器页面还可以做其他的操作。</p>
+<hr>
+<h3 id="快速入门-1"><a href="#快速入门-1" class="headerlink" title="快速入门"></a>快速入门</h3><hr>
+<pre><code>&lt;script&gt;
+    //1. 创建核心对象
+    var xhttp;
+    if (window.XMLHttpRequest) &#123;
+        xhttp = new XMLHttpRequest();
+    &#125; else &#123;
+        // code for IE6, IE5
+        xhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+    &#125;
+    //2. 发送请求
+    xhttp.open(&quot;GET&quot;, &quot;http://localhost:8080/ajax-demo/ajaxServlet&quot;);
+    xhttp.send();
+
+    //3. 获取响应
+    xhttp.onreadystatechange = function() &#123;
+        if (this.readyState == 4 &amp;&amp; this.status == 200) &#123;
+               alert(this.responseText);
+        &#125;
+    &#125;;
+&lt;/script&gt;
+</code></pre>
+<hr>
+<h3 id="Axios"><a href="#Axios" class="headerlink" title="Axios"></a>Axios</h3><hr>
+<p>Axios 异步框架。Axios 对原生的AJAX进行封装，简化书写。官网：<a target="_blank" rel="noopener" href="https://www.axios-http.cn/">https://www.axios-http.cn</a></p>
+<p>使用：</p>
+<pre><code>引入 axios 的 js 文件
+&lt;script src=&quot;js/axios-0.18.0.js&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+    //1. get
+    axios(&#123;
+        method:&quot;get&quot;,
+        url:&quot;http://localhost:8080/ajax-demo/axiosServlet?username=zhangsan&quot;
+    &#125;).then(function (resp) &#123;
+        alert(resp.data);
+    &#125;)
+
+    //2. post
+    axios(&#123;
+        method:&quot;post&quot;,
+        url:&quot;http://localhost:8080/ajax-demo/axiosServlet&quot;,
+        data:&quot;username=zhangsan&quot;
+    &#125;).then(function (resp) &#123;
+        alert(resp.data);
+    &#125;)
+&lt;/script&gt;
+</code></pre>
+<p>别名方式：</p>
+<pre><code>&lt;script&gt;
+    //1. get
+    axios.get(&quot;http://localhost:8080/ajax-demo/axiosServlet?username=zhangsan&quot;).then(function (resp) &#123;
+        alert(resp.data);
+    &#125;)
+
+    //2. post
+   axios.post(&quot;http://localhost:8080/ajax-demo/axiosServlet&quot;,&quot;username=zhangsan&quot;).then(function (resp) &#123;
+        alert(resp.data);
+    &#125;)
+&lt;/script&gt;
+</code></pre>
+<p>Axios中，JSON字符串和JS对象自动进行转换。</p>
 <hr>
 
                 
