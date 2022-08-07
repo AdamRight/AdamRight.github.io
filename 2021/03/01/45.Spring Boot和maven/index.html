@@ -3543,6 +3543,83 @@ request.getRequestDispatcher(&quot;/el-demo.jsp&quot;).forward(request,response)
 &lt;/c:forEach&gt;
 </code></pre>
 <hr>
+<h2 id="会话跟踪技术"><a href="#会话跟踪技术" class="headerlink" title="会话跟踪技术"></a>会话跟踪技术</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><hr>
+<p>会话跟踪技术：</p>
+<p>会话：用户打开浏览器，访问web服务器的资源，会话建立，直到有一方断开连接，会话结束。在一次会话中可以包含多次请求和响应。</p>
+<p>会话跟踪：一种维护浏览器状态的方法，服务器需要识别多次请求是否来自于同一浏览器，以便在同一次会话的多次请求间共享数据。</p>
+<p>HTTP协议是无状态的，每次浏览器向服务器请求时，服务器都会将该请求视为新的请求，因此我们需要会话跟踪技术来实现会话内数据共享。</p>
+<p>实现方式：</p>
+<pre><code>客户端会话跟踪技术：Cookie
+服务端会话跟踪技术：Session
+</code></pre>
+<hr>
+<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><hr>
+<p>基本使用：</p>
+<pre><code>//创建Cookie对象，设置数据
+Cookie cookie = new Cookie(&quot;key&quot;,&quot;value&quot;);
+//发送Cookie到客户端：使用response对象
+response.addCookie(cookie);
+
+//获取客户端携带的所有Cookie，使用request对象
+Cookie[] cookies = request.getCookies();
+//遍历数组，获取每一个Cookie对象：for
+//使用Cookie对象方法获取数据
+cookie.getName();
+cookie.getValue();
+</code></pre>
+<p>原理：</p>
+<pre><code>Cookie的实现是基于HTTP协议的
+响应头：set-cookie
+请求头：cookie
+</code></pre>
+<p>使用细节：</p>
+<pre><code>Cookie 存活时间：默认情况下，Cookie 存储在浏览器内存中，当浏览器关闭，内存释放，则Cookie被销毁
+
+setMaxAge(int seconds)：设置Cookie存活时间
+正数：将 Cookie写入浏览器所在电脑的硬盘，持久化存储。到时间自动删除
+负数：默认值，Cookie在当前浏览器内存中，当浏览器关闭，则 Cookie被销毁
+零：删除对应 Cookie
+
+Cookie 不能直接存储中文。如需要存储，则需要进行转码：URL编码
+</code></pre>
+<p>代码示例：</p>
+<pre><code>@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;
+    //发送Cookie
+    //1. 创建Cookie对象
+    //Cookie cookie = new Cookie(&quot;username&quot;,&quot;zs&quot;);
+    String value = &quot;张三&quot;;
+    //URL编码
+    value = URLEncoder.encode(value, &quot;UTF-8&quot;);
+    System.out.println(&quot;存储数据：&quot;+value);
+    Cookie cookie = new Cookie(&quot;username&quot;,value);
+    //设置存活时间   ，1周 7天
+    cookie.setMaxAge(60*60*24*7);
+    //2. 发送Cookie，response
+    response.addCookie(cookie);
+&#125;
+
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;
+    //获取Cookie
+    //1. 获取Cookie数组
+    Cookie[] cookies = request.getCookies();
+    //2. 遍历数组
+    for (Cookie cookie : cookies) &#123;
+        //3. 获取数据
+        String name = cookie.getName();
+        if(&quot;username&quot;.equals(name))&#123;
+            String value = cookie.getValue();
+            //URL解码
+            value = URLDecoder.decode(value,&quot;UTF-8&quot;);
+            System.out.println(name+&quot;:&quot;+value);
+            break;
+        &#125;
+    &#125;
+</code></pre>
+<hr>
+<h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><hr>
+<hr>
 
                 
             </div>
