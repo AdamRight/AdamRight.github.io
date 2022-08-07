@@ -3619,6 +3619,64 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 </code></pre>
 <hr>
 <h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><hr>
+<p>服务端会话跟踪技术：将数据保存到服务端。JavaEE 提供 HttpSession接口，来实现一次会话的多次请求间数据共享功能。</p>
+<p>基本使用：</p>
+<pre><code>//获取Session对象
+HttpSession session = request.getSession();
+//Session对象功能：
+void setAttribute(String name, Object o)：存储数据到 session 域中
+Object getAttribute(String name)：根据 key，获取值
+void removeAttribute(String name)：根据 key，删除该键值对
+</code></pre>
+<p>原理：</p>
+<pre><code>Session是基于Cookie实现的
+</code></pre>
+<p>使用细节:</p>
+<pre><code>服务器重启后，Session中的数据是否还在？
+钝化：在服务器正常关闭后， Tomcat会自动将 Session数据写入硬盘的文件中
+活化：再次启动服务器后，从文件中加载数据到Session中
+
+Seesion 销毁：默认情况下，无操作，30分钟自动销毁。
+web.xml手动配置时间：
+&lt;session-config&gt;
+    &lt;session-timeout&gt;100&lt;/session-timeout&gt;
+&lt;/session-config&gt;
+手动销毁：调用 Session对象的 invalidate()方法
+</code></pre>
+<p>代码示例：</p>
+<pre><code>@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;
+    //存储到Session中
+    //1. 获取Session对象
+    HttpSession session = request.getSession();
+    System.out.println(session);
+    //2. 存储数据
+    session.setAttribute(&quot;username&quot;,&quot;zs&quot;);
+&#125;
+
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;
+    //获取数据，从session中
+    //1. 获取Session对象
+    HttpSession session = request.getSession();
+    System.out.println(session);
+    // 销毁
+    //session.invalidate();
+    //2. 获取数据
+    Object username = session.getAttribute(&quot;username&quot;);
+    System.out.println(username);
+&#125;
+</code></pre>
+<hr>
+<h3 id="小节"><a href="#小节" class="headerlink" title="小节"></a>小节</h3><hr>
+<p>Cookie 和 Session 都是来完成一次会话内多次请求间数据共享的。</p>
+<p>区别：</p>
+<pre><code>存储位置：Cookie 是将数据存储在客户端，Session 将数据存储在服务端
+安全性：Cookie 不安全，Session 安全
+数据大小：Cookie 最大3KB，Session 无大小限制
+存储时间：Cookie 可以长期存储，Session 默认30分钟
+服务器性能：Cookie 不占服务器资源，Session 占用服务器资源
+</code></pre>
 <hr>
 
                 
