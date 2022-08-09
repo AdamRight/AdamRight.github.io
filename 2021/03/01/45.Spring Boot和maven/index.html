@@ -4149,6 +4149,99 @@ public class ContextLoaderListener implements ServletContextListener &#123;
 <pre><code>User user = JSON.parseObject(jsonStr, User.class);
 </code></pre>
 <hr>
+<h2 id="spring"><a href="#spring" class="headerlink" title="spring"></a>spring</h2><h3 id="初识Spring"><a href="#初识Spring" class="headerlink" title="初识Spring"></a>初识Spring</h3><hr>
+<p>Spring技术是JavaEE开发必备技能，企业开发技术选型命中率&gt;90%。简化开发（IoC、AOP、事务处理），降低企业级开发的复杂性。框架整合，高效整合其他技术，提高企业级应用开发与运行效率。</p>
+<p>官网：spring.io</p>
+<p>Spring发展到今天已经形成了一种开发的生态圈，Spring提供了若干个项目，每个项目用于完成特定的功能。</p>
+<pre><code>Spring Framework
+Spring Boot
+Spring Cloud
+等等。。。
+</code></pre>
+<p>Spring Framework是Spring生态圈中最基础的项目，是其他项目的根基。</p>
+<pre><code>Core Container：核心容器
+
+AOP：面向切面编程
+Aspects：AOP思想实现
+
+Data Access：数据访问
+Data Integration：数据集成
+
+Web：Web开发
+
+Test：单元测试与集成测试
+</code></pre>
+<p>使用对象时，在程序中不要主动使用new产生对象，转换为由外部提供对象。<strong>IoC（Inversion of Control）控制反转</strong>：对象的创建控制权由程序转移到外部，这种思想称为控制反转。</p>
+<p>Spring提供了一个容器，称为IoC容器，用来充当IoC思想中的“外部”。IoC容器负责对象的创建、初始化等一系列工作，被创建或被管理的对象在IoC容器中统称为Bean。</p>
+<p><strong>DI（Dependency Injection）依赖注入</strong>：在容器中建立bean与bean之间的依赖关系的整个过程，称为依赖注入。</p>
+<p>最终效果：使用对象时不仅可以直接从IoC容器中获取，并且获取到的bean已经绑定了所有的依赖关系</p>
+<p>原始代码：</p>
+<pre><code>public interface BookDao &#123;
+    public void save();
+&#125;
+
+public class BookDaoImpl implements BookDao &#123;
+    public void save() &#123;
+        System.out.println(&quot;book dao save ...&quot;);
+    &#125;
+&#125;
+
+public interface BookService &#123;
+    public void save();
+&#125;
+
+public class BookServiceImpl implements BookService &#123;
+    private BookDao bookDao = new BookDaoImpl();
+    public void save() &#123;
+        System.out.println(&quot;book service save ...&quot;);
+        bookDao.save();
+    &#125;
+&#125;
+
+public class App &#123;
+    public static void main(String[] args) &#123;
+        BookService bookService = new BookServiceImpl();
+        bookService.save();
+    &#125;
+&#125;
+//输出
+//book service save ...
+//book dao save ...
+</code></pre>
+<p>Ioc入门：</p>
+<pre><code>&lt;!--导入spring的坐标--&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+  &lt;version&gt;5.2.10.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;!--新建xml：resources -&gt; new -&gt; xml configuration File -&gt; Spring Config--&gt;
+&lt;!--配置bean--&gt;
+    &lt;!--bean标签标示配置bean
+    id属性标示给bean起名字
+    class属性表示给bean定义类型--&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+    &lt;bean id=&quot;bookDao&quot; class=&quot;com.tea.web.dao.impl.BookDaoImpl&quot;/&gt;
+    &lt;bean id=&quot;bookService&quot; class=&quot;com.tea.web.service.impl.BookServiceImpl&quot; /&gt;
+&lt;/beans&gt;
+
+public class App2 &#123;
+    public static void main(String[] args) &#123;
+        //获取IoC容器
+        ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+        BookService bookService = (BookService) ctx.getBean(&quot;bookService&quot;);
+        bookService.save();
+    &#125;
+&#125;
+//输出
+//book service save ...
+//book dao save ...
+</code></pre>
+<hr>
 
                 
             </div>
