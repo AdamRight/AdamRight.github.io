@@ -4241,6 +4241,29 @@ public class App2 &#123;
 //book service save ...
 //book dao save ...
 </code></pre>
+<p>DI入门:</p>
+<pre><code>//改造BookServiceImpl
+public class BookServiceImpl implements BookService &#123;
+    //5.删除业务层中使用new的方式创建的dao对象
+    private BookDao bookDao;
+    public void save() &#123;
+        System.out.println(&quot;book service save ...&quot;);
+        bookDao.save();
+    &#125;
+    //6.提供对应的set方法
+    public void setBookDao(BookDao bookDao) &#123;
+        this.bookDao = bookDao;
+    &#125;
+&#125;
+
+&lt;!--设置xml--&gt;
+&lt;bean id=&quot;bookDao&quot; class=&quot;com.tea.web.dao.impl.BookDaoImpl&quot;/&gt;
+&lt;bean id=&quot;bookService&quot; class=&quot;com.tea.web.service.impl.BookServiceImpl&quot;&gt;
+    &lt;!--7.配置server与dao的关系--&gt;
+    &lt;!--name：BookServiceImpl类中的成员变量bookDao。ref：上面的id-bookDao--&gt;
+    &lt;property name=&quot;bookDao&quot; ref=&quot;bookDao&quot;/&gt;
+&lt;/bean&gt;
+</code></pre>
 <hr>
 
                 
