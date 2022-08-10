@@ -4265,6 +4265,70 @@ public class BookServiceImpl implements BookService &#123;
 &lt;/bean&gt;
 </code></pre>
 <hr>
+<h3 id="bean实例化"><a href="#bean实例化" class="headerlink" title="bean实例化"></a>bean实例化</h3><hr>
+<p>xml中bean基础配置：</p>
+<pre><code>id：bean的id，使用容器可以通过id值获取对应的bean，在一个容器中id值唯一
+class：bean的类型，即配置的bean的全路径类名
+</code></pre>
+<p>bean别名配置：</p>
+<pre><code>定义bean的别名，可定义多个，使用逗号(,)分号(;)空格( )分隔
+
+&lt;bean id=&quot;bookDao&quot; name=&quot;dao bookDaoImpl&quot; class=&quot;com.dao.impl.BookDaoImpl&quot;/&gt;
+&lt;bean name=&quot;service,bookServiceImpl&quot; class=&quot;com.service.impl.BookServiceImpl&quot;/&gt;
+</code></pre>
+<p>获取bean无论是通过id还是name获取，如果无法获取到，将抛出异常 <code>NoSuchBeanDefinitionException</code> 。</p>
+<p>bean作用范围配置：</p>
+<pre><code>scope:定义bean的作用范围，可选范围如下
+singleton：单例（默认）
+prototype：非单例
+
+&lt;bean id=&quot;bookDao&quot; class=&quot;com.dao.impl.BookDaoImpl&quot; scope=&quot;prototype&quot; /&gt;
+</code></pre>
+<p>bean是如何创建的:</p>
+<pre><code>bean实例化:bean本质上就是对象，创建bean使用构造方法完成
+</code></pre>
+<p>实例化bean的三种方式:</p>
+<p>实例化bean的三种方式————构造方法（常用）:</p>
+<pre><code>public class BookDaoImpl implements BookDao &#123;
+
+    //public BookDaoImpl() &#123;
+    //    System.out.println(&quot;book dao constructor is running ....&quot;);
+    //&#125;
+
+    public void save() &#123;
+        System.out.println(&quot;book dao save ...&quot;);
+    &#125;
+&#125;
+
+&lt;bean id=&quot;bookDao&quot;  class=&quot;com.dao.impl.BookDaoImpl&quot;/&gt;
+
+无参构造方法如果不存在，将抛出异常BeanCreationException
+</code></pre>
+<p>实例化bean的三种方式————静态工厂（了解）:</p>
+<pre><code>//静态工厂创建对象
+public class OrderDaoFactory &#123;
+    public static OrderDao getOrderDao()&#123;
+        System.out.println(&quot;factory setup....&quot;);
+        return new OrderDaoImpl();
+    &#125;
+&#125;
+
+&lt;!--方式二：使用静态工厂实例化bean--&gt;
+&lt;bean id=&quot;orderDao&quot; class=&quot;com.factory.OrderDaoFactory&quot; factory-method=&quot;getOrderDao&quot;/&gt;
+</code></pre>
+<p>实例化bean的三种方式————实例工厂（了解）:</p>
+<pre><code>//实例工厂创建对象
+public class UserDaoFactory &#123;
+    public UserDao getUserDao()&#123;
+        return new UserDaoImpl();
+    &#125;
+&#125;
+&lt;!--方式三：使用实例工厂实例化bean--&gt;
+&lt;bean id=&quot;userFactory&quot; class=&quot;com.factory.UserDaoFactory&quot;/&gt;
+&lt;bean id=&quot;userDao&quot; factory-method=&quot;getUserDao&quot; factory-bean=&quot;userFactory&quot;/&gt;
+</code></pre>
+<p>实例化bean的第四种方式FactoryBean:</p>
+<hr>
 
                 
             </div>
