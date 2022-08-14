@@ -4388,6 +4388,343 @@ public class BookServiceImpl implements BookService, InitializingBean, Disposabl
 &#125;
 </code></pre>
 <hr>
+<h3 id="注入"><a href="#注入" class="headerlink" title="注入"></a>注入</h3><hr>
+<p>向一个类中传递数据的方式：普通方法（set方法）和 构造方法。</p>
+<p>传递数据的类型：引用类型和简单类型（基本数据类型与String）。</p>
+<p>依赖注入方式：</p>
+<pre><code>setter注入
+    简单类型
+    引用类型
+构造器注入
+    简单类型
+    引用类型
+</code></pre>
+<p>setter注入-引用类型：</p>
+<pre><code>public class BookServiceImpl implements BookService&#123;
+    private BookDao bookDao;
+    private UserDao userDao;
+    //setter注入需要提供要注入对象的set方法
+    public void setUserDao(UserDao userDao) &#123;
+        this.userDao = userDao;
+    &#125;
+    //setter注入需要提供要注入对象的set方法
+    public void setBookDao(BookDao bookDao) &#123;
+        this.bookDao = bookDao;
+    &#125;
+    public void save() &#123;
+        System.out.println(&quot;book service save ...&quot;);
+        bookDao.save();
+        userDao.save();
+    &#125;
+&#125;
+
+&lt;bean id=&quot;userDao&quot; class=&quot;com.dao.impl.UserDaoImpl&quot;/&gt;
+&lt;bean id=&quot;bookDao&quot; class=&quot;com..dao.impl.BookDaoImpl&quot;/&gt;
+&lt;!--注入引用类型--&gt;
+&lt;bean id=&quot;bookService&quot; class=&quot;com.service.impl.BookServiceImpl&quot;&gt;
+    &lt;!--property标签：设置注入属性--&gt;
+    &lt;!--name属性：设置注入的属性名，实际是set方法对应的名称--&gt;
+    &lt;!--ref属性：设置注入引用类型bean的id或name--&gt;
+    &lt;property name=&quot;bookDao&quot; ref=&quot;bookDao&quot;/&gt;
+    &lt;property name=&quot;userDao&quot; ref=&quot;userDao&quot;/&gt;
+&lt;/bean&gt;
+</code></pre>
+<p>setter注入-简单类型：</p>
+<pre><code>public class BookDaoImpl implements BookDao &#123;
+    private String databaseName;
+    private int connectionNum;
+    //setter注入需要提供要注入对象的set方法
+    public void setConnectionNum(int connectionNum) &#123;
+        this.connectionNum = connectionNum;
+    &#125;
+    //setter注入需要提供要注入对象的set方法
+    public void setDatabaseName(String databaseName) &#123;
+        this.databaseName = databaseName;
+    &#125;
+    public void save() &#123;
+        System.out.println(&quot;book dao save ...&quot;+databaseName+&quot;,&quot;+connectionNum);
+    &#125;
+&#125;
+
+&lt;!--注入简单类型--&gt;
+&lt;bean id=&quot;bookDao&quot; class=&quot;com.dao.impl.BookDaoImpl&quot;&gt;
+    &lt;!--property标签：设置注入属性--&gt;
+    &lt;!--name属性：设置注入的属性名，实际是set方法对应的名称--&gt;
+    &lt;!--value属性：设置注入简单类型数据值--&gt;
+    &lt;property name=&quot;connectionNum&quot; value=&quot;100&quot;/&gt;
+    &lt;property name=&quot;databaseName&quot; value=&quot;mysql&quot;/&gt;
+&lt;/bean&gt;
+</code></pre>
+<p>构造器注入-简单类型和引用类型：</p>
+<pre><code>public class BookDaoImpl implements BookDao &#123;
+    private String databaseName;
+    private int connectionNum;
+
+    public BookDaoImpl(String databaseName, int connectionNum) &#123;
+        this.databaseName = databaseName;
+        this.connectionNum = connectionNum;
+    &#125;
+
+    public void save() &#123;
+        System.out.println(&quot;book dao save ...&quot;+databaseName+&quot;,&quot;+connectionNum);
+    &#125;
+&#125;
+
+public class BookServiceImpl implements BookService&#123;
+    private BookDao bookDao;
+    private UserDao userDao;
+
+    public BookServiceImpl(BookDao bookDao, UserDao userDao) &#123;
+        this.bookDao = bookDao;
+        this.userDao = userDao;
+    &#125;
+
+    public void save() &#123;
+        System.out.println(&quot;book service save ...&quot;);
+        bookDao.save();
+        userDao.save();
+    &#125;
+&#125;
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+&lt;!--
+    标准书写
+    &lt;bean id=&quot;bookDao&quot; class=&quot;com.dao.impl.BookDaoImpl&quot;&gt;
+        根据构造方法参数名称注入
+        &lt;constructor-arg name=&quot;connectionNum&quot; value=&quot;10&quot;/&gt;
+        &lt;constructor-arg name=&quot;databaseName&quot; value=&quot;mysql&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;bean id=&quot;userDao&quot; class=&quot;com.dao.impl.UserDaoImpl&quot;/&gt;
+
+    &lt;bean id=&quot;bookService&quot; class=&quot;com.service.impl.BookServiceImpl&quot;&gt;
+        &lt;constructor-arg name=&quot;userDao&quot; ref=&quot;userDao&quot;/&gt;
+        &lt;constructor-arg name=&quot;bookDao&quot; ref=&quot;bookDao&quot;/&gt;
+    &lt;/bean&gt;
+--&gt;
+&lt;!--
+    解决形参名称的问题，与形参名不耦合
+    &lt;bean id=&quot;bookDao&quot; class=&quot;com.dao.impl.BookDaoImpl&quot;&gt;
+        根据构造方法参数类型注入
+        &lt;constructor-arg type=&quot;int&quot; value=&quot;10&quot;/&gt;
+        &lt;constructor-arg type=&quot;java.lang.String&quot; value=&quot;mysql&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;bean id=&quot;userDao&quot; class=&quot;com.dao.impl.UserDaoImpl&quot;/&gt;
+
+    &lt;bean id=&quot;bookService&quot; class=&quot;com.service.impl.BookServiceImpl&quot;&gt;
+        &lt;constructor-arg name=&quot;userDao&quot; ref=&quot;userDao&quot;/&gt;
+        &lt;constructor-arg name=&quot;bookDao&quot; ref=&quot;bookDao&quot;/&gt;
+    &lt;/bean&gt;--&gt;
+
+    &lt;!--解决参数类型重复问题，使用位置解决参数匹配--&gt;
+    &lt;bean id=&quot;bookDao&quot; class=&quot;com.dao.impl.BookDaoImpl&quot;&gt;
+        &lt;!--根据构造方法参数位置注入--&gt;
+        &lt;constructor-arg index=&quot;0&quot; value=&quot;mysql&quot;/&gt;
+        &lt;constructor-arg index=&quot;1&quot; value=&quot;100&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;bean id=&quot;userDao&quot; class=&quot;com.dao.impl.UserDaoImpl&quot;/&gt;
+
+    &lt;bean id=&quot;bookService&quot; class=&quot;com.service.impl.BookServiceImpl&quot;&gt;
+        &lt;constructor-arg name=&quot;userDao&quot; ref=&quot;userDao&quot;/&gt;
+        &lt;constructor-arg name=&quot;bookDao&quot; ref=&quot;bookDao&quot;/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<p>强制依赖使用构造器进行。使用setter注入有概率不进行注入导致null对象出现。可选依赖使用setter注入进行，灵活性强。Spring框架倡导使用构造器，第三方框架内部大多数采用构造器注入的形式进行数据初始化，相对严谨。自己开发的模块推荐使用setter注入。</p>
+<hr>
+<p>IoC容器根据bean所依赖的资源在容器中自动查找并注入到bean中的过程称为<strong>自动装配</strong>。自动装配方式：按类型（常用）、按名称、按构造方法、不启用自动装配。</p>
+<p>依赖自动装配：配置中使用bean标签autowire属性设置自动装配的类型</p>
+<pre><code>&lt;bean id=&quot;bookDao&quot; class=&quot;com.dao.impl.BookDaoImpl&quot;/&gt;
+&lt;bean id=&quot;bookService&quot; class=&quot;com.service.impl.BookServiceImpl&quot; autowire=&quot;byType&quot;/&gt;
+</code></pre>
+<p>自动装配用于引用类型依赖注入，不能对简单类型进行操作。使用按类型装配时（byType）必须保障容器中相同类型的bean唯一，推荐使用。<br>使用按名称装配时（byName）必须保障容器中具有指定名称的bean，因变量名与配置耦合，不推荐使用。</p>
+<p>自动装配优先级低于setter注入与构造器注入，同时出现时自动装配配置失效。</p>
+<hr>
+<p>集合注入：</p>
+<pre><code>public class BookDaoImpl implements BookDao &#123;
+
+    private int[] array;
+    private List&lt;String&gt; list;
+    private Set&lt;String&gt; set;
+    private Map&lt;String,String&gt; map;
+    private Properties properties;
+    public void setArray(int[] array) &#123;
+        this.array = array;
+    &#125;
+    public void setList(List&lt;String&gt; list) &#123;
+        this.list = list;
+    &#125;
+    public void setSet(Set&lt;String&gt; set) &#123;
+        this.set = set;
+    &#125;
+    public void setMap(Map&lt;String, String&gt; map) &#123;
+        this.map = map;
+    &#125;
+    public void setProperties(Properties properties) &#123;
+        this.properties = properties;
+    &#125;
+
+    public void save() &#123;
+        System.out.println(&quot;book dao save ...&quot;);
+        System.out.println(&quot;遍历数组:&quot; + Arrays.toString(array));
+        System.out.println(&quot;遍历List&quot; + list);
+        System.out.println(&quot;遍历Set&quot; + set);
+        System.out.println(&quot;遍历Map&quot; + map);
+        System.out.println(&quot;遍历Properties&quot; + properties);
+    &#125;
+&#125;
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+    &lt;bean id=&quot;bookDao&quot; class=&quot;com.dao.impl.BookDaoImpl&quot;&gt;
+        &lt;!--数组注入--&gt;
+        &lt;property name=&quot;array&quot;&gt;
+            &lt;array&gt;
+                &lt;value&gt;100&lt;/value&gt;
+                &lt;value&gt;200&lt;/value&gt;
+                &lt;value&gt;300&lt;/value&gt;
+            &lt;/array&gt;
+        &lt;/property&gt;
+        &lt;!--list集合注入--&gt;
+        &lt;property name=&quot;list&quot;&gt;
+            &lt;list&gt;
+                &lt;value&gt;it&lt;/value&gt;
+                &lt;value&gt;fghf&lt;/value&gt;
+                &lt;value&gt;ghf&lt;/value&gt;
+                &lt;value&gt;hgfd&lt;/value&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+        &lt;!--set集合注入--&gt;
+        &lt;property name=&quot;set&quot;&gt;
+            &lt;set&gt;
+                &lt;value&gt;jgf&lt;/value&gt;
+                &lt;value&gt;jh&lt;/value&gt;
+                &lt;value&gt;jhfg&lt;/value&gt;
+                &lt;value&gt;nv&lt;/value&gt;
+            &lt;/set&gt;
+        &lt;/property&gt;
+        &lt;!--map集合注入--&gt;
+        &lt;property name=&quot;map&quot;&gt;
+            &lt;map&gt;
+                &lt;entry key=&quot;country&quot; value=&quot;china&quot;/&gt;
+                &lt;entry key=&quot;province&quot; value=&quot;henan&quot;/&gt;
+                &lt;entry key=&quot;city&quot; value=&quot;kaifeng&quot;/&gt;
+            &lt;/map&gt;
+        &lt;/property&gt;
+        &lt;!--Properties注入--&gt;
+        &lt;property name=&quot;properties&quot;&gt;
+            &lt;props&gt;
+                &lt;prop key=&quot;country&quot;&gt;china&lt;/prop&gt;
+                &lt;prop key=&quot;province&quot;&gt;henan&lt;/prop&gt;
+                &lt;prop key=&quot;city&quot;&gt;kaifeng&lt;/prop&gt;
+            &lt;/props&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<hr>
+<h3 id="druid和ComboPooledDataSource配置"><a href="#druid和ComboPooledDataSource配置" class="headerlink" title="druid和ComboPooledDataSource配置"></a>druid和ComboPooledDataSource配置</h3><hr>
+<p>加载properties配置文件信息：</p>
+<pre><code>不加载系统属性
+&lt;context:property-placeholder location=&quot;jdbc.properties&quot; system-properties-mode=&quot;NEVER&quot;/&gt;
+
+加载多个properties文件
+&lt;context:property-placeholder location=&quot;jdbc.properties,msg.properties&quot;/&gt;
+
+加载所有properties文件
+&lt;context:property-placeholder location=&quot;*.properties&quot;/&gt;
+
+加载properties文件标准格式
+&lt;context:property-placeholder location=&quot;classpath:*.properties&quot;/&gt;
+
+从类路径或jar包中搜索并加载properties文件
+&lt;context:property-placeholder location=&quot;classpath*:*.properties&quot;/&gt;
+</code></pre>
+<p>Spring管理第三方资源：DruidDataSource和ComboPooledDataSource。</p>
+<p>坐标：</p>
+<pre><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+        &lt;version&gt;5.2.10.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+        &lt;artifactId&gt;druid&lt;/artifactId&gt;
+        &lt;version&gt;1.1.16&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;c3p0&lt;/groupId&gt;
+        &lt;artifactId&gt;c3p0&lt;/artifactId&gt;
+        &lt;version&gt;0.9.1.2&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;5.1.47&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<p>applicationContext.xml：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xsi:schemaLocation=&quot;
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            &quot;&gt;
+&lt;!--    管理DruidDataSource对象--&gt;
+&lt;!--    &lt;bean class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;
+        &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+        &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/spring_db&quot;/&gt;
+        &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+        &lt;property name=&quot;password&quot; value=&quot;root&quot;/&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+        &lt;property name=&quot;driverClass&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+        &lt;property name=&quot;jdbcUrl&quot; value=&quot;jdbc:mysql://localhost:3306/spring_db&quot;/&gt;
+        &lt;property name=&quot;user&quot; value=&quot;root&quot;/&gt;
+        &lt;property name=&quot;password&quot; value=&quot;root&quot;/&gt;
+        &lt;property name=&quot;maxPoolSize&quot; value=&quot;1000&quot;/&gt;
+    &lt;/bean&gt;--&gt;
+
+&lt;!--    1.开启context命名空间--&gt;
+&lt;!--    2.使用context空间加载properties文件--&gt;
+&lt;context:property-placeholder location=&quot;jdbc.properties&quot; system-properties-mode=&quot;NEVER&quot;/&gt;
+&lt;!--    3.使用属性占位符$&#123;&#125;读取properties文件中的属性--&gt;
+&lt;!--    说明：idea自动识别$&#123;&#125;加载的属性值，需要手工点击才可以查阅原始书写格式--&gt;
+    &lt;bean class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;
+        &lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;jdbc.driver&#125;&quot;/&gt;
+        &lt;property name=&quot;url&quot; value=&quot;$&#123;jdbc.url&#125;&quot;/&gt;
+        &lt;property name=&quot;username&quot; value=&quot;$&#123;jdbc.username&#125;&quot;/&gt;
+        &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<p>jdbc.properties:</p>
+<pre><code>jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:3306/spring_db
+jdbc.username=root
+jdbc.password=root
+</code></pre>
+<p>执行代码：</p>
+<pre><code>public class App &#123;
+    public static void main(String[] args) &#123;
+        ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+        DataSource dataSource = (DataSource) ctx.getBean(&quot;dataSource&quot;);
+        System.out.println(dataSource);
+    &#125;
+&#125;
+</code></pre>
+<hr>
 
                 
             </div>
