@@ -4725,6 +4725,106 @@ jdbc.password=root
 &#125;
 </code></pre>
 <hr>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><hr>
+<p>创建容器的两种方式：</p>
+<pre><code>方式一：类路径加载配置文件
+ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+
+方式二：文件路径加载配置文件
+ApplicationContext ctx = new FileSystemXmlApplicationContext(&quot;D:\\applicationContext.xml&quot;);
+
+加载多个配置文件
+ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;bean1.xml&quot;, &quot;bean2.xml&quot;);
+</code></pre>
+<p>获取bean的三种方式:</p>
+<pre><code>方式一：使用bean名称获取
+BookDao bookDao = (BookDao) ctx.getBean(&quot;bookDao&quot;);
+
+方式二：使用bean名称获取并指定类型
+BookDao bookDao = ctx.getBean(&quot;bookDao&quot;, BookDao.class);
+
+方式三：使用bean类型获取
+BookDao bookDao = ctx.getBean(BookDao.class);
+</code></pre>
+<p>BeanFactory初始化:</p>
+<pre><code>Resource resources = new ClassPathResource(&quot;applicationContext.xml&quot;);
+BeanFactory bf = new XmlBeanFactory(resources);
+BookDao bookDao = bf.getBean(&quot;bookDao&quot;, BookDao.class);
+bookDao.save();
+</code></pre>
+<p>BeanFactory是顶层接口。BeanFactory创建完毕后，所有的bean均为延迟加载（即new XmlBeanFactory之后，bean的构造方法不加载）。</p>
+<p>BeanFactory是IoC容器的顶层接口，初始化BeanFactory对象时，加载的bean延迟加载。ApplicationContext接口是Spring容器的核心接口，初始化时bean立即加载。</p>
+<p>bean相关：</p>
+<pre><code>&lt;bean
+    id=&quot;bookDao&quot;	&lt;!--bean的Id	--&gt;
+    name=&quot;dao bookDaoImpl daoImpl&quot;	&lt;!--bean别名	--&gt;
+    class=&quot;com.dao.impl.BookDaoImpl&quot;	&lt;!--bean类型，静态工厂类，FactoryBean类	--&gt;
+    scope=&quot;singleton&quot;	&lt;!--控制bean的实例数量	--&gt;
+    init-method=&quot;init&quot;	&lt;!--生命周期初始化方法	--&gt;
+    destroy-method=&quot;destory&quot;	&lt;!--生命周期销毁方法	--&gt;
+    autowire=&quot;byType&quot;	&lt;!--自动装配类型	--&gt;
+    factory-method=&quot;getInstance&quot;	&lt;!--bean工厂方法，应用于静态工厂或实例工厂	--&gt;
+    factory-bean=&quot;com.factory.BookDaoFactory&quot;	&lt;!--实例工厂bean	--&gt;
+    lazy-init=&quot;true&quot; /&gt;	&lt;!--控制bean延迟加载	--&gt;
+</code></pre>
+<p>依赖注入相关:</p>
+<pre><code>&lt;bean id=&quot;bookService&quot; class=&quot;com.service.impl.BookServiceImpl&quot;&gt;
+    &lt;constructor-arg name=&quot;bookDao&quot; ref=&quot;bookDao&quot;/&gt;		&lt;!--构造器注入引用类型	--&gt;
+    &lt;constructor-arg name=&quot;userDao&quot; ref=&quot;userDao&quot;/&gt;
+    &lt;constructor-arg name=&quot;msg&quot; value=&quot;WARN&quot;/&gt;
+    &lt;constructor-arg type=&quot;java.lang.String&quot; index=&quot;3&quot; value=&quot;WARN&quot;/&gt;		&lt;!--构造器注入简单类型,类型匹配与索引匹配	--&gt;
+    &lt;property name=&quot;bookDao&quot; ref=&quot;bookDao&quot;/&gt;		&lt;!--setter注入引用类型	--&gt;
+    &lt;property name=&quot;userDao&quot; ref=&quot;userDao&quot;/&gt;
+    &lt;property name=&quot;msg&quot; value=&quot;WARN&quot;/&gt;		&lt;!--setter注入简单类型	--&gt;
+    &lt;property name=&quot;names&quot;&gt;		&lt;!--setter注入集合类型	--&gt;
+        &lt;list&gt;
+            &lt;value&gt;dsafas&lt;/value&gt;
+            &lt;ref bean=&quot;dataSource&quot;/&gt;		&lt;!--集合注入引用类型	--&gt;
+        &lt;/list&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre>
+<hr>
+<h3 id="注解开发-1"><a href="#注解开发-1" class="headerlink" title="注解开发"></a>注解开发</h3><hr>
+<p>注解开发定义bean：</p>
+<pre><code>&lt;bean id=&quot;bookService&quot; class=&quot;com.tea.service.impl.BookServiceImpl&quot;/&gt;
+
+//使用注解实现
+@Component(&quot;bookService&quot;)
+public class BookServiceImpl implements BookService &#123;&#125;
+//xml:核心配置文件中通过组件扫描加载bean
+&lt;context:component-scan base-package=&quot;com.tea&quot;/&gt;
+</code></pre>
+<p>Spring提供 <code>@Component</code> 注解的三个衍生注解:</p>
+<pre><code>@Controller：用于表现层bean定义
+@Service：用于业务层bean定义
+@Repository：用于数据层bean定义
+</code></pre>
+<p>Spring3.0升级了纯注解开发模式，使用Java类替代xml配置文件，开启了Spring快速开发赛道:</p>
+<pre><code>//配置类
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+//声明当前类为Spring配置类
+@Configuration
+//设置bean扫描路径，多个路径书写为字符串数组格式
+@ComponentScan(&#123;&quot;com.tea.service&quot;,&quot;com.tea.dao&quot;&#125;)
+public class SpringConfig &#123;
+&#125;
+
+//使用配置
+public class AppForAnnotation &#123;
+    public static void main(String[] args) &#123;
+        //AnnotationConfigApplicationContext加载Spring配置类初始化Spring容器
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
+        //按类型获取bean
+        BookService bookService = ctx.getBean(BookService.class);
+        System.out.println(bookService);
+    &#125;
+&#125;
+</code></pre>
+<p><code>@Configuration</code> 注解用于设定当前类为配置类。</p>
+<p><code>@ComponentScan</code> 注解用于设定扫描路径，此注解只能添加一次，多个数据请用数组格式。</p>
+<hr>
 
                 
             </div>
