@@ -4824,6 +4824,173 @@ public class AppForAnnotation &#123;
 </code></pre>
 <p><code>@Configuration</code> 注解用于设定当前类为配置类。</p>
 <p><code>@ComponentScan</code> 注解用于设定扫描路径，此注解只能添加一次，多个数据请用数组格式。</p>
+<p>bean作用范围（Scope）和生命周期的注解（PostConstruct、PreDestroy）：</p>
+<pre><code>@Repository
+//@Scope设置bean的作用范围
+@Scope(&quot;singleton&quot;)
+public class BookDaoImpl implements BookDao &#123;
+    public void save() &#123;
+        System.out.println(&quot;book dao save ...&quot;);
+    &#125;
+    //@PostConstruct设置bean的初始化方法
+    @PostConstruct
+    public void init() &#123;
+        System.out.println(&quot;init ...&quot;);
+    &#125;
+    //@PreDestroy设置bean的销毁方法
+    @PreDestroy
+    public void destroy() &#123;
+        System.out.println(&quot;destroy ...&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>依赖注入（Autowired）：</p>
+<pre><code>@Service
+public class BookServiceImpl implements BookService &#123;
+    //@Autowired：注入引用类型，自动装配模式，默认按类型装配
+    @Autowired
+    //@Qualifier：自动装配bean时按bean名称装配
+    @Qualifier(&quot;bookDao&quot;)
+    private BookDao bookDao;
+    public void save() &#123;
+        System.out.println(&quot;book service save ...&quot;);
+        bookDao.save();
+    &#125;
+&#125;
+</code></pre>
+<p>注意：自动装配基于反射设计创建对象并暴力反射对应属性为私有属性初始化数据，因此无需提供setter方法。</p>
+<p>注意：自动装配建议使用无参构造方法创建对象（默认），如果不提供对应构造方法，请提供唯一的构造方法。</p>
+<p>使用 <code>@Qualifier</code> 注解开启指定名称装配bean。注意：<code>@Qualifier</code> 注解无法单独使用，必须配合 <code>@Autowired</code> 注解使用。</p>
+<p>简单类型注入(Value):</p>
+<pre><code>@Repository(&quot;bookDao&quot;)
+public class BookDaoImpl implements BookDao &#123;
+    @Value(&quot;100&quot;)
+    private String connectionNum;
+&#125;
+</code></pre>
+<p>加载properties文件(PropertySource):</p>
+<pre><code>@Configuration
+@ComponentScan(&quot;com.tea&quot;)
+//@PropertySource加载properties配置文件
+@PropertySource(&#123;&quot;jdbc.properties&quot;&#125;)
+public class SpringConfig &#123;
+&#125;
+
+@Repository(&quot;bookDao&quot;)
+public class BookDaoImpl implements BookDao &#123;
+    //@Value：注入简单类型（无需提供set方法）
+    @Value(&quot;$&#123;name&#125;&quot;)
+    private String name;
+    public void save() &#123;
+        System.out.println(&quot;book dao save ...&quot; + name);
+    &#125;
+&#125;
+
+//resources下jdbc.properties文件
+name=tea
+</code></pre>
+<hr>
+<h3 id="第三方bean管理、"><a href="#第三方bean管理、" class="headerlink" title="第三方bean管理、"></a>第三方bean管理、</h3><hr>
+<p>坐标：</p>
+<pre><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+      &lt;version&gt;5.2.10.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+      &lt;artifactId&gt;druid&lt;/artifactId&gt;
+      &lt;version&gt;1.1.16&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<p>定义单独配置类：</p>
+<pre><code>public class JdbcConfig &#123;
+    //1.定义一个方法获得要管理的对象
+    @Value(&quot;com.mysql.jdbc.Driver&quot;)
+    private String driver;
+    @Value(&quot;jdbc:mysql://localhost:3306/spring_db&quot;)
+    private String url;
+    @Value(&quot;root&quot;)
+    private String userName;
+    @Value(&quot;root&quot;)
+    private String password;
+    //2.添加@Bean，表示当前方法的返回值是一个bean
+    //@Bean修饰的方法，形参根据类型自动装配
+    @Bean
+    public DataSource dataSource(BookDao bookDao)&#123;
+        System.out.println(bookDao);
+        DruidDataSource ds = new DruidDataSource();
+        ds.setDriverClassName(driver);
+        ds.setUrl(url);
+        ds.setUsername(userName);
+        ds.setPassword(password);
+        return ds;
+    &#125;
+&#125;
+</code></pre>
+<p>上面的<code>BookDao</code> 参数，引用类型注入只需要为bean定义方法设置形参即可，容器会根据类型自动装配对象。</p>
+<pre><code>@Repository
+public class BookDaoImpl implements BookDao &#123;
+    public void save() &#123;
+        System.out.println(&quot;book dao save ...&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>配置类导入单独配置：</p>
+<pre><code>@Configuration
+@ComponentScan(&quot;com.tea&quot;)
+//@Import:导入配置信息
+@Import(&#123;JdbcConfig.class&#125;)
+public class SpringConfig &#123;
+&#125;
+</code></pre>
+<p>使用：</p>
+<pre><code>public class App &#123;
+    public static void main(String[] args) &#123;
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
+        DataSource dataSource = ctx.getBean(DataSource.class);
+        System.out.println(dataSource);
+    &#125;
+&#125;
+</code></pre>
+<hr>
+<h3 id="XML配置比对注解配置"><a href="#XML配置比对注解配置" class="headerlink" title="XML配置比对注解配置"></a>XML配置比对注解配置</h3><hr>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>XML配置</th>
+<th>注解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定义bean</td>
+<td>bean标签:id属性、class属性</td>
+<td>@Component（@Controller、@Service、@Repository）、@ComponentScan</td>
+</tr>
+<tr>
+<td>设置依赖注入</td>
+<td>setter注入(set方法)、构造器注入(构造方法)、自动装配</td>
+<td>@Autowired@Qualifier@Value</td>
+</tr>
+<tr>
+<td>配置第三方bean</td>
+<td>bean标签：静态工厂、实例工厂、FactoryBean</td>
+<td>@Bean</td>
+</tr>
+<tr>
+<td>作用范围</td>
+<td>scope属性</td>
+<td>@Scope</td>
+</tr>
+<tr>
+<td>生命周期</td>
+<td>标准接口：init-method、destroy-method</td>
+<td>@PostConstructor、@PreDestroy</td>
+</tr>
+</tbody></table>
 <hr>
 
                 
