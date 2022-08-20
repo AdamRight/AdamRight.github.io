@@ -4992,6 +4992,216 @@ public class SpringConfig &#123;
 </tr>
 </tbody></table>
 <hr>
+<h3 id="Spring整合mybatis"><a href="#Spring整合mybatis" class="headerlink" title="Spring整合mybatis"></a>Spring整合mybatis</h3><hr>
+<p>在pom.xml中添加基础依赖:</p>
+<pre><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+      &lt;version&gt;5.2.10.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+      &lt;artifactId&gt;druid&lt;/artifactId&gt;
+      &lt;version&gt;1.1.16&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+      &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+      &lt;version&gt;3.5.6&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;mysql&lt;/groupId&gt;
+      &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+      &lt;version&gt;5.1.47&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+      &lt;version&gt;5.2.10.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+      &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+      &lt;version&gt;1.3.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>service层代码:</p>
+<pre><code>public interface AccountService &#123;
+    void save(Account account);
+    void delete(Integer id);
+    void update(Account account);
+    List&lt;Account&gt; findAll();
+    Account findById(Integer id);
+&#125;
+@Service
+public class AccountServiceImpl implements AccountService &#123;
+    @Autowired
+    private AccountDao accountDao;
+    public void save(Account account) &#123;
+        accountDao.save(account);
+    &#125;
+    public void update(Account account)&#123;
+        accountDao.update(account);
+    &#125;
+    public void delete(Integer id) &#123;
+        accountDao.delete(id);
+    &#125;
+    public Account findById(Integer id) &#123;
+        return accountDao.findById(id);
+    &#125;
+    public List&lt;Account&gt; findAll() &#123;
+        return accountDao.findAll();
+    &#125;
+&#125;
+</code></pre>
+<p>dao层基础代码:</p>
+<pre><code>public interface AccountDao &#123;
+    @Insert(&quot;insert into tbl_account(name,money)values(#&#123;name&#125;,#&#123;money&#125;)&quot;)
+    void save(Account account);
+    @Delete(&quot;delete from tbl_account where id = #&#123;id&#125; &quot;)
+    void delete(Integer id);
+    @Update(&quot;update tbl_account set name = #&#123;name&#125; , money = #&#123;money&#125; where id = #&#123;id&#125; &quot;)
+    void update(Account account);
+    @Select(&quot;select * from tbl_account&quot;)
+    List&lt;Account&gt; findAll();
+    @Select(&quot;select * from tbl_account where id = #&#123;id&#125; &quot;)
+    Account findById(Integer id);
+&#125;
+</code></pre>
+<p>domain包下：</p>
+<pre><code>public class Account implements Serializable &#123;
+    private Integer id;
+    private String name;
+    private Double money;
+    public Integer getId() &#123;
+        return id;
+    &#125;
+    public void setId(Integer id) &#123;
+        this.id = id;
+    &#125;
+    public String getName() &#123;
+        return name;
+    &#125;
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+    public Double getMoney() &#123;
+        return money;
+    &#125;
+    public void setMoney(Double money) &#123;
+        this.money = money;
+    &#125;
+    @Override
+    public String toString() &#123;
+        return &quot;Account&#123;&quot; +&quot;id=&quot; + id +&quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +&quot;, money=&quot; + money +&#39;&#125;&#39;;
+    &#125;
+&#125;
+</code></pre>
+<p>创建JdbcConfig配置DataSource数据源:</p>
+<pre><code>//resources文件下jdbc.properties文件
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/spring_db?useSSL=false
+jdbc.username=root
+jdbc.password=root
+
+public class JdbcConfig &#123;
+    @Value(&quot;$&#123;jdbc.driver&#125;&quot;)
+    private String driver;
+    @Value(&quot;$&#123;jdbc.url&#125;&quot;)
+    private String url;
+    @Value(&quot;$&#123;jdbc.username&#125;&quot;)
+    private String userName;
+    @Value(&quot;$&#123;jdbc.password&#125;&quot;)
+    private String password;
+    @Bean
+    public DataSource dataSource()&#123;
+        DruidDataSource ds = new DruidDataSource();
+        ds.setDriverClassName(driver);
+        ds.setUrl(url);
+        ds.setUsername(userName);
+        ds.setPassword(password);
+        return ds;
+    &#125;
+&#125;
+</code></pre>
+<p>创建MybatisConfig整合mybatis:</p>
+<pre><code>public class MybatisConfig &#123;
+    //定义bean，SqlSessionFactoryBean，用于产生SqlSessionFactory对象
+    @Bean
+    public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource)&#123;
+        SqlSessionFactoryBean ssfb = new SqlSessionFactoryBean();
+        ssfb.setTypeAliasesPackage(&quot;com.tea.domain&quot;);
+        ssfb.setDataSource(dataSource);
+        return ssfb;
+    &#125;
+    //定义bean，返回MapperScannerConfigurer对象
+    @Bean
+    public MapperScannerConfigurer mapperScannerConfigurer()&#123;
+        MapperScannerConfigurer msc = new MapperScannerConfigurer();
+        msc.setBasePackage(&quot;com.tea.dao&quot;);
+        return msc;
+    &#125;
+&#125;
+</code></pre>
+<p>创建SpringConfig主配置类进行包扫描和加载其他配置类:</p>
+<pre><code>@Configuration
+@ComponentScan(&quot;com.tea&quot;)
+//@PropertySource：加载类路径jdbc.properties文件
+@PropertySource(&quot;classpath:jdbc.properties&quot;)
+@Import(&#123;JdbcConfig.class, MybatisConfig.class&#125;)
+public class SpringConfig &#123;
+&#125;
+</code></pre>
+<p>定义测试类进行测试:</p>
+<pre><code>public class App &#123;
+    public static void main(String[] args) &#123;
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
+        AccountService accountService = ctx.getBean(AccountService.class);
+        Account ac = accountService.findById(1);
+        System.out.println(ac);
+    &#125;
+&#125;
+</code></pre>
+<hr>
+<h3 id="Spring整合Junit单元测试"><a href="#Spring整合Junit单元测试" class="headerlink" title="Spring整合Junit单元测试"></a>Spring整合Junit单元测试</h3><hr>
+<p>导入整合的依赖坐标:</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;junit&lt;/groupId&gt;
+  &lt;artifactId&gt;junit&lt;/artifactId&gt;
+  &lt;version&gt;4.12&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!--spring整合junit--&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+  &lt;version&gt;5.1.9.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>使用Spring整合Junit专用的类加载器，加载配置文件或者配置类：</p>
+<pre><code>//使用Spring整合Junit专用的类加载器
+@RunWith(SpringJUnit4ClassRunner.class)
+//加载配置文件或者配置类
+@ContextConfiguration(classes = &#123;SpringConfiguration.class&#125;) //加载配置类
+//@ContextConfiguration(locations=&#123;&quot;classpath:applicationContext.xml&quot;&#125;)//加载配置文件
+public class AccountServiceTest &#123;
+    //支持自动装配注入bean
+    @Autowired
+    private AccountService accountService;
+
+    @Test
+    public void testFindById()&#123;
+        System.out.println(accountService.findById(1));
+    &#125;
+
+    @Test
+    public void testFindAll()&#123;
+        System.out.println(accountService.findAll());
+    &#125;
+&#125;
+</code></pre>
+<p>注意：junit的依赖至少要是4.12版本,可以是4.13等版本,否则出现异常。</p>
+<hr>
 
                 
             </div>
