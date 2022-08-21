@@ -5410,6 +5410,72 @@ public Object around(ProceedingJoinPoint pjp)  &#123;
 &#125;
 </code></pre>
 <hr>
+<h3 id="Spring事务"><a href="#Spring事务" class="headerlink" title="Spring事务"></a>Spring事务</h3><hr>
+<p>实现步骤一-在业务层接口上添加Spring事务管理</p>
+<pre><code>public interface AccountService &#123;
+    //配置当前接口方法具有事务
+    @Transactional
+    public void transfer(String out,String in ,Double money) ;
+&#125;
+</code></pre>
+<p>注意事项:Spring注解式事务通常添加在业务层接口中而不会添加到业务层实现类中，降低耦合。注解式事务可以添加到业务方法上表示当前方法开启事务，也可以添加到接口上表示当前接口所有方法开启事务。</p>
+<p>实现步骤二-设置事务管理器(将事务管理器添加到IOC容器中)：</p>
+<pre><code>//可以在JdbcConfig中配置事务管理器
+//配置事务管理器，mybatis使用的是jdbc事务
+@Bean
+public PlatformTransactionManager transactionManager(DataSource dataSource)&#123;
+    DataSourceTransactionManager dtm = new DataSourceTransactionManager();
+    transactionManager.setDataSource(dataSource);
+    return transactionManager;
+&#125;
+</code></pre>
+<p>注意事项:事务管理器要根据实现技术进行选择;MyBatis框架使用的是JDBC事务。</p>
+<p>实现步骤三-开启注解式事务驱动:</p>
+<pre><code>@Configuration
+@ComponentScan(&quot;com.itheima&quot;)
+@PropertySource(&quot;classpath:jdbc.properties&quot;)
+@Import(&#123;JdbcConfig.class,MybatisConfig.class&#125;)
+//开启注解式事务驱动
+@EnableTransactionManagement
+public class SpringConfig &#123;
+&#125;
+</code></pre>
+<p>Spring事务角色：</p>
+<pre><code>事务管理员：发起事务方，在Spring中通常指代业务层开启事务的方法
+事务协调员：加入事务方，在Spring中通常指代数据层方法，也可以是业务层方法
+</code></pre>
+<p>Spring事务相关配置：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>readOnly</td>
+<td>设置是否为只读事务</td>
+<td>readOnly&#x3D;true 只读事务</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>设置事务超时时间</td>
+<td>timeout &#x3D; -1（永不超时）</td>
+</tr>
+<tr>
+<td>rollbackFor</td>
+<td>设置事务回滚异常（class）</td>
+<td>rollbackFor &#x3D; {NullPointException.class}</td>
+</tr>
+<tr>
+<td>propagation</td>
+<td>设置事务传播行为</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>propagation传播属性：REQUIRED（默认）、REQUIRES_NEW、SUPPORTS、NOT_SUPPORTED、MANDATORY、NEVER、NESTED。</p>
+<hr>
 
                 
             </div>
