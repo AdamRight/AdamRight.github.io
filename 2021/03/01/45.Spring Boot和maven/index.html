@@ -5346,6 +5346,68 @@ public Object around(ProceedingJoinPoint pjp) throws Throwable &#123;
 <pre><code>环绕通知方法形参必须是ProceedingJoinPoint，表示正在执行的连接点，使用该对象的proceed()方法表示对原始对象方法进行调用，返回值为原始对象方法的返回值。
 
 环绕通知方法的返回值建议写成Object类型，用于将原始对象方法的返回值进行返回，哪里使用代理对象就返回到哪里。
+
+//获取执行的签名对象
+Signature signature = pjp.getSignature();
+//获取接口/类全限定名
+String className = signature.getDeclaringTypeName();
+//获取方法名
+String methodName = signature.getName();
+</code></pre>
+<p>AOP切入点数据获取-获取参数:</p>
+<pre><code>JoinPoint：适用于前置、后置、返回后、抛出异常后通知
+ProceedJointPoint：适用于环绕通知
+
+@Before(&quot;pt()&quot;)
+public void before(JoinPoint jp) &#123;
+    Object[] args = jp.getArgs(); //获取连接点方法的参数们
+    System.out.println(Arrays.toString(args));
+&#125;
+
+@Around(&quot;pt()&quot;)
+public Object around(ProceedingJoinPoint pjp) throws Throwable &#123;
+    Object[] args = pjp.getArgs(); //获取连接点方法的参数们
+    System.out.println(Arrays.toString(args));
+    Object ret = pjp.proceed();
+    return ret;
+&#125;
+</code></pre>
+<p>AOP切入点数据获取-获取切入点方法返回值:</p>
+<pre><code>返回后通知
+环绕通知
+
+@AfterReturning(value = &quot;pt()&quot;,returning = &quot;ret&quot;)
+public void afterReturning(Object ret) &#123; //变量名要和returning=&quot;ret&quot;的属性值一致
+    System.out.println(&quot;afterReturning advice ...&quot;+ret);
+&#125;
+
+@Around(&quot;pt()&quot;)
+public Object around(ProceedingJoinPoint pjp) throws Throwable &#123;
+    // 手动调用连接点方法，返回值就是连接点方法的返回值
+    Object ret = pjp.proceed();
+    return ret;
+&#125;
+</code></pre>
+<p>AOP切入点数据获取-获取切入点方法运行异常信息:</p>
+<pre><code>抛出异常后通知
+环绕通知
+
+@AfterThrowing(value = &quot;pt()&quot;,throwing = &quot;t&quot;)
+public void afterThrowing(Throwable t) &#123;//变量名要和throwing = &quot;t&quot;的属性值一致
+    System.out.println(&quot;afterThrowing advice ...&quot;+ t);
+&#125;
+
+@Around(&quot;pt()&quot;)
+public Object around(ProceedingJoinPoint pjp)  &#123;
+    Object ret = null;
+    //此处需要try...catch处理，catch中捕获到的异常就是连接点方法中抛出的异常
+    try &#123;
+        ret = pjp.proceed();
+    &#125; catch (Throwable t) &#123;
+        t.printStackTrace();
+    &#125;
+    return ret;
+&#125;
 </code></pre>
 <hr>
 
