@@ -5559,6 +5559,10 @@ public class ServletContainersInitConfig extends AbstractDispatcherServletInitia
     &#125;
 &#125;
 </code></pre>
+<p>运行：</p>
+<pre><code>访问：http://localhost/save
+返回：&#123;&#39;info&#39;:&#39;springmvc&#39;&#125;
+</code></pre>
 <p><code>@RequestMapping</code> ：方法注解，设置当前控制器方法请求访问路径。</p>
 <p><code>@ResponseBody</code> : 方法注解，设置当前控制器方法响应内容为当前返回值，无需解析。</p>
 <p>AbstractDispatcherServletInitializer类是SpringMVC提供的快速初始化Web3.0容器的抽象类。AbstractDispatcherServletInitializer提供三个接口方法供用户实现。</p>
