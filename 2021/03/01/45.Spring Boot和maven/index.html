@@ -5432,7 +5432,7 @@ public PlatformTransactionManager transactionManager(DataSource dataSource)&#123
 <p>注意事项:事务管理器要根据实现技术进行选择;MyBatis框架使用的是JDBC事务。</p>
 <p>实现步骤三-开启注解式事务驱动:</p>
 <pre><code>@Configuration
-@ComponentScan(&quot;com.itheima&quot;)
+@ComponentScan(&quot;com.tea&quot;)
 @PropertySource(&quot;classpath:jdbc.properties&quot;)
 @Import(&#123;JdbcConfig.class,MybatisConfig.class&#125;)
 //开启注解式事务驱动
@@ -5563,12 +5563,79 @@ public class ServletContainersInitConfig extends AbstractDispatcherServletInitia
 <pre><code>访问：http://localhost/save
 返回：&#123;&#39;info&#39;:&#39;springmvc&#39;&#125;
 </code></pre>
-<p><code>@RequestMapping</code> ：方法注解，设置当前控制器方法请求访问路径。</p>
+<p><code>@RequestMapping</code> ：方法注解，类注解。设置当前控制器方法请求访问路径。如果设置在类上统一设置当前控制器方法请求访问路径前缀。</p>
 <p><code>@ResponseBody</code> : 方法注解，设置当前控制器方法响应内容为当前返回值，无需解析。</p>
 <p>AbstractDispatcherServletInitializer类是SpringMVC提供的快速初始化Web3.0容器的抽象类。AbstractDispatcherServletInitializer提供三个接口方法供用户实现。</p>
 <p><code>createServletApplicationContext()</code>方法，创建Servlet容器时，加载SpringMVC对应的bean并放入WebApplicationContext对象范围中，而WebApplicationContext的作用范围为ServletContext范围，即整个web容器范围。</p>
 <p><code>getServletMappings()</code>方法，设定SpringMVC对应的请求映射路径，设置为<code>/</code>表示拦截所有请求，任意请求都将转入到SpringMVC进行处理。</p>
 <p><code>createRootApplicationContext()</code>方法，如果创建Servlet容器时需要加载非SpringMVC对应的bean，使用当前方法进行，使用方式同createServletApplicationContext()。</p>
+<p>启动服务器初始化过程：</p>
+<pre><code>服务器启动，执行ServletContainersInitConfig类，初始化web容器
+执行createServletApplicationContext方法，创建了WebApplicationContext对象
+加载SpringMvcConfig
+执行@ComponentScan加载对应的bean
+加载UserController，每个@RequestMapping的名称对应一个具体的方法
+执行getServletMappings方法，定义所有的请求都通过SpringMVC
+</code></pre>
+<p>单次请求过程：</p>
+<pre><code>发送请求localhost/save
+web容器发现所有请求都经过SpringMVC，将请求交给SpringMVC处理
+解析请求路径/save
+由/save匹配执行对应的方法save(）
+执行save()
+检测到有@ResponseBody直接将save()方法的返回值作为响应求体返回给请求方
+</code></pre>
+<hr>
+<h3 id="bean加载控制"><a href="#bean加载控制" class="headerlink" title="bean加载控制"></a>bean加载控制</h3><hr>
+<p>SpringMVC控制自己相关bean（表现层bean）。SpringMVC加载的bean对应的包均在com.tea.controller包内。</p>
+<p>Spring控制自己相关的bean：业务bean（Service）和功能bean（DataSource等）。</p>
+<p>Spring相关bean加载控制：</p>
+<pre><code>方式一：Spring加载的bean设定扫描范围为com.tea，排除掉controller包内的bean
+@ComponentScan(&#123;&quot;com.tea.service&quot;,&quot;com.tea.dao&quot;&#125;)
+
+方式二：Spring加载的bean设定扫描范围为精准范围，例如service包、dao包等
+//excludeFilters属性：设置扫描加载bean时，排除的过滤规则
+//type属性：设置排除规则，当前使用按照bean定义时的注解类型进行排除
+//classes属性：设置排除的具体注解类，当前设置排除@Controller定义的bean
+@ComponentScan(value=&quot;com.tea&quot;,
+    excludeFilters = @ComponentScan.Filter(
+        type = FilterType.ANNOTATION,
+        classes = Controller.class
+    )
+)
+
+方式三：不区分Spring与SpringMVC的环境，加载到同一个环境中
+</code></pre>
+<p>配置SpringMVC和Spring：</p>
+<pre><code>public class ServletContainersInitConfig extends AbstractDispatcherServletInitializer &#123;
+    protected WebApplicationContext createServletApplicationContext() &#123;
+        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+        ctx.register(SpringMvcConfig.class);
+        return ctx;
+    &#125;
+    protected WebApplicationContext createRootApplicationContext() &#123;
+        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+        ctx.register(SpringConfig.class);
+        return ctx;
+    &#125;
+    protected String[] getServletMappings() &#123;
+        return new String[]&#123;&quot;/&quot;&#125;;
+    &#125;
+&#125;
+</code></pre>
+<p>简化配置SpringMVC和Spring：</p>
+<pre><code>public class ServletContainersInitConfig extends AbstractAnnotationConfigDispatcherServletInitializer &#123;
+    protected Class&lt;?&gt;[] getRootConfigClasses() &#123;
+        return new Class[]&#123;SpringConfig.class&#125;;
+    &#125;
+    protected Class&lt;?&gt;[] getServletConfigClasses() &#123;
+        return new Class[]&#123;SpringMvcConfig.class&#125;;
+    &#125;
+    protected String[] getServletMappings() &#123;
+        return new String[]&#123;&quot;/&quot;&#125;;
+    &#125;
+&#125;
+</code></pre>
 <hr>
 
                 
