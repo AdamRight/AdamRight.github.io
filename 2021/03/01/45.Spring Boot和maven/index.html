@@ -5637,6 +5637,162 @@ web容器发现所有请求都经过SpringMVC，将请求交给SpringMVC处理
 &#125;
 </code></pre>
 <hr>
+<h3 id="中文处理"><a href="#中文处理" class="headerlink" title="中文处理"></a>中文处理</h3><hr>
+<p>post请求，中文参数处理：</p>
+<pre><code>public class ServletContainersInitConfig extends AbstractAnnotationConfigDispatcherServletInitializer &#123;
+    protected Class&lt;?&gt;[] getRootConfigClasses() &#123;
+        return new Class[0];
+    &#125;
+
+    protected Class&lt;?&gt;[] getServletConfigClasses() &#123;
+        return new Class[]&#123;SpringMvcConfig.class&#125;;
+    &#125;
+
+    protected String[] getServletMappings() &#123;
+        return new String[]&#123;&quot;/&quot;&#125;;
+    &#125;
+
+    //乱码处理
+    @Override
+    protected Filter[] getServletFilters() &#123;
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding(&quot;UTF-8&quot;);
+        return new Filter[]&#123;filter&#125;;
+    &#125;
+&#125;
+</code></pre>
+<hr>
+<h3 id="参数传递-1"><a href="#参数传递-1" class="headerlink" title="参数传递"></a>参数传递</h3><hr>
+<p>请求参数传递：</p>
+<pre><code>//请求参数
+@Controller
+public class UserController &#123;
+
+    //普通参数：请求参数与形参名称对应即可完成参数传递
+    @RequestMapping(&quot;/commonParam&quot;)
+    @ResponseBody
+    public String commonParam(String name ,int age)&#123;
+        System.out.println(&quot;普通参数传递 name ==&gt; &quot;+name);
+        System.out.println(&quot;普通参数传递 age ==&gt; &quot;+age);
+        return &quot;&#123;&#39;module&#39;:&#39;common param&#39;&#125;&quot;;
+    &#125;
+
+    //普通参数：请求参数名与形参名不同时，使用@RequestParam注解关联请求参数名称与形参名称之间的关系
+    @RequestMapping(&quot;/commonParamDifferentName&quot;)
+    @ResponseBody
+    public String commonParamDifferentName(@RequestParam(&quot;name&quot;) String userName , int age)&#123;
+        System.out.println(&quot;普通参数传递 userName ==&gt; &quot;+userName);
+        System.out.println(&quot;普通参数传递 age ==&gt; &quot;+age);
+        return &quot;&#123;&#39;module&#39;:&#39;common param different name&#39;&#125;&quot;;
+    &#125;
+
+    //POJO参数：请求参数与形参对象中的属性对应即可完成参数传递
+    @RequestMapping(&quot;/pojoParam&quot;)
+    @ResponseBody
+    public String pojoParam(User user)&#123;
+        System.out.println(&quot;pojo参数传递 user ==&gt; &quot;+user);
+        return &quot;&#123;&#39;module&#39;:&#39;pojo param&#39;&#125;&quot;;
+    &#125;
+
+    //嵌套POJO参数：嵌套属性按照层次结构设定名称即可完成参数传递
+    @RequestMapping(&quot;/pojoContainPojoParam&quot;)
+    @ResponseBody
+    public String pojoContainPojoParam(User user)&#123;
+        System.out.println(&quot;pojo嵌套pojo参数传递 user ==&gt; &quot;+user);
+        return &quot;&#123;&#39;module&#39;:&#39;pojo contain pojo param&#39;&#125;&quot;;
+    &#125;
+
+    //数组参数：同名请求参数可以直接映射到对应名称的形参数组对象中
+    @RequestMapping(&quot;/arrayParam&quot;)
+    @ResponseBody
+    public String arrayParam(String[] likes)&#123;
+        System.out.println(&quot;数组参数传递 likes ==&gt; &quot;+ Arrays.toString(likes));
+        return &quot;&#123;&#39;module&#39;:&#39;array param&#39;&#125;&quot;;
+    &#125;
+
+    //集合参数：同名请求参数可以使用@RequestParam注解映射到对应名称的集合对象中作为数据
+    @RequestMapping(&quot;/listParam&quot;)
+    @ResponseBody
+    public String listParam(@RequestParam List&lt;String&gt; likes)&#123;
+        System.out.println(&quot;集合参数传递 likes ==&gt; &quot;+ likes);
+        return &quot;&#123;&#39;module&#39;:&#39;list param&#39;&#125;&quot;;
+    &#125;
+
+    //集合参数：json格式
+    //1.开启json数据格式的自动转换，在配置类中开启@EnableWebMvc
+    //2.使用@RequestBody注解将外部传递的json数组数据映射到形参的集合对象中作为数据
+    @RequestMapping(&quot;/listParamForJson&quot;)
+    @ResponseBody
+    public String listParamForJson(@RequestBody List&lt;String&gt; likes)&#123;
+        System.out.println(&quot;list common(json)参数传递 list ==&gt; &quot;+likes);
+        return &quot;&#123;&#39;module&#39;:&#39;list common for json param&#39;&#125;&quot;;
+    &#125;
+
+    //POJO参数：json格式
+    //1.开启json数据格式的自动转换，在配置类中开启@EnableWebMvc
+    //2.使用@RequestBody注解将外部传递的json数据映射到形参的实体类对象中，要求属性名称一一对应
+    @RequestMapping(&quot;/pojoParamForJson&quot;)
+    @ResponseBody
+    public String pojoParamForJson(@RequestBody User user)&#123;
+        System.out.println(&quot;pojo(json)参数传递 user ==&gt; &quot;+user);
+        return &quot;&#123;&#39;module&#39;:&#39;pojo for json param&#39;&#125;&quot;;
+    &#125;
+
+    //集合参数：json格式
+    //1.开启json数据格式的自动转换，在配置类中开启@EnableWebMvc
+    //2.使用@RequestBody注解将外部传递的json数组数据映射到形参的保存实体类对象的集合对象中，要求属性名称一一对应
+    @RequestMapping(&quot;/listPojoParamForJson&quot;)
+    @ResponseBody
+    public String listPojoParamForJson(@RequestBody List&lt;User&gt; list)&#123;
+        System.out.println(&quot;list pojo(json)参数传递 list ==&gt; &quot;+list);
+        return &quot;&#123;&#39;module&#39;:&#39;list pojo for json param&#39;&#125;&quot;;
+    &#125;
+
+    //日期参数
+    //使用@DateTimeFormat注解设置日期类型数据格式，默认格式yyyy/MM/dd
+    @RequestMapping(&quot;/dataParam&quot;)
+    @ResponseBody
+    public String dataParam(Date date,
+                            @DateTimeFormat(pattern=&quot;yyyy-MM-dd&quot;) Date date1,
+                            @DateTimeFormat(pattern=&quot;yyyy/MM/dd HH:mm:ss&quot;) Date date2)&#123;
+        System.out.println(&quot;参数传递 date ==&gt; &quot;+date);
+        System.out.println(&quot;参数传递 date1(yyyy-MM-dd) ==&gt; &quot;+date1);
+        System.out.println(&quot;参数传递 date2(yyyy/MM/dd HH:mm:ss) ==&gt; &quot;+date2);
+        return &quot;&#123;&#39;module&#39;:&#39;data param&#39;&#125;&quot;;
+    &#125;
+
+&#125;
+</code></pre>
+<p><code>@RequestParam</code> 形参注解:required：是否为必传参数、defaultValue：参数默认值。</p>
+<p>请求参数key的名称要和POJO中属性的名称一致，否则无法封装。</p>
+<p>添加json数据转换相关坐标：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+    &lt;version&gt;2.9.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>开启自动转换json数据的支持：</p>
+<pre><code>@Configuration
+@ComponentScan(&quot;com.tea.controller&quot;)
+//开启json数据类型自动转换
+@EnableWebMvc
+public class SpringMvcConfig &#123;
+&#125;
+</code></pre>
+<p><code>@EnableWebMvc</code>注解功能强大，该注解整合了多个功能，此处仅使用其中一部分功能，即json数据进行自动类型转换。</p>
+<p><code>@DateTimeFormat</code>：设定日期时间型数据格式。属性：pattern：指定日期时间格式字符串。工作原理：其内部依赖Converter接口：</p>
+<pre><code>public interface Converter&lt;S, T&gt; &#123;
+    @Nullable
+    T convert(S var1);
+&#125;
+
+请求参数年龄数据（String→Integer）
+json数据转对象（json → POJO）
+日期格式转换（String → Date）
+</code></pre>
+<p>传递日期类型参数必须在配置类上使用@EnableWebMvc注解。其功能之一：根据类型匹配对应的类型转换器。</p>
+<hr>
 
                 
             </div>
