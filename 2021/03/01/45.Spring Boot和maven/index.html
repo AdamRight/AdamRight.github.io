@@ -6186,18 +6186,15 @@ public class BookServiceImpl implements BookService &#123;
     private BookDao bookDao;
 
     public boolean save(Book book) &#123;
-        bookDao.save(book);
-        return true;
+        return bookDao.save(book) &gt; 0;
     &#125;
 
     public boolean update(Book book) &#123;
-        bookDao.update(book);
-        return true;
+        return bookDao.update(book) &gt; 0;
     &#125;
 
     public boolean delete(Integer id) &#123;
-        bookDao.delete(id);
-        return true;
+        return bookDao.delete(id) &gt; 0;
     &#125;
 
     public Book getById(Integer id) &#123;
@@ -6214,13 +6211,13 @@ public class BookServiceImpl implements BookService &#123;
 
 //    @Insert(&quot;insert into tbl_book values(null,#&#123;type&#125;,#&#123;name&#125;,#&#123;description&#125;)&quot;)
     @Insert(&quot;insert into tbl_book (type,name,description) values(#&#123;type&#125;,#&#123;name&#125;,#&#123;description&#125;)&quot;)
-    public void save(Book book);
+    public int save(Book book);
 
     @Update(&quot;update tbl_book set type = #&#123;type&#125;, name = #&#123;name&#125;, description = #&#123;description&#125; where id = #&#123;id&#125;&quot;)
-    public void update(Book book);
+    public int update(Book book);
 
     @Delete(&quot;delete from tbl_book where id = #&#123;id&#125;&quot;)
-    public void delete(Integer id);
+    public int delete(Integer id);
 
     @Select(&quot;select * from tbl_book where id = #&#123;id&#125;&quot;)
     public Book getById(Integer id);
