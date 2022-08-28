@@ -6134,13 +6134,29 @@ public class ServletConfig extends AbstractAnnotationConfigDispatcherServletInit
 public class SpringConfig &#123;
 &#125;
 </code></pre>
+<p>config&#x2F;WebMvcConfigurationSupport:</p>
+<pre><code>import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+
+@Configuration
+public class SpringMvcSupport extends WebMvcConfigurationSupport &#123;
+    @Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) &#123;
+        registry.addResourceHandler(&quot;/pages/**&quot;).addResourceLocations(&quot;/pages/&quot;);
+        registry.addResourceHandler(&quot;/css/**&quot;).addResourceLocations(&quot;/css/&quot;);
+        registry.addResourceHandler(&quot;/js/**&quot;).addResourceLocations(&quot;/js/&quot;);
+        registry.addResourceHandler(&quot;/plugins/**&quot;).addResourceLocations(&quot;/plugins/&quot;);
+    &#125;
+&#125;
+</code></pre>
 <p>config&#x2F;SpringMvcConfig:</p>
 <pre><code>import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(&quot;com.tea.controller&quot;)
+@ComponentScan(&#123;&quot;com.tea.controller&quot;,&quot;com.tea.config&quot;&#125;)
 @EnableWebMvc
 public class SpringMvcConfig &#123;
 &#125;
@@ -6247,6 +6263,102 @@ public class BookController &#123;
     &#125;
 &#125;
 </code></pre>
+<hr>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><hr>
+<p>模拟异常：</p>
+<pre><code>//模拟业务异常，包装成自定义异常
+if(id == 1)&#123;
+    throw new BusinessException(Code.BUSINESS_ERR,&quot;请不要使用你的技术挑战我的耐性!&quot;);
+&#125;
+//模拟系统异常，将可能出现的异常进行包装，转换成自定义异常
+try&#123;
+    int i = 1/0;
+&#125;catch (Exception e)&#123;
+    throw new SystemException(Code.SYSTEM_TIMEOUT_ERR,&quot;服务器访问超时，请重试!&quot;,e);
+&#125;
+</code></pre>
+<p>自定义异常exception&#x2F;SystemException：</p>
+<pre><code>//自定义异常处理器，用于封装异常信息，对异常进行分类
+public class SystemException extends RuntimeException&#123;
+    private Integer code;
+
+    public Integer getCode() &#123;
+        return code;
+    &#125;
+
+    public void setCode(Integer code) &#123;
+        this.code = code;
+    &#125;
+
+    public SystemException(Integer code, String message) &#123;
+        super(message);
+        this.code = code;
+    &#125;
+
+    public SystemException(Integer code, String message, Throwable cause) &#123;
+        super(message, cause);
+        this.code = code;
+    &#125;
+
+&#125;
+</code></pre>
+<p>自定义异常exception&#x2F;BusinessException：</p>
+<pre><code>//自定义异常处理器，用于封装异常信息，对异常进行分类
+public class BusinessException extends RuntimeException&#123;
+    private Integer code;
+
+    public Integer getCode() &#123;
+        return code;
+    &#125;
+
+    public void setCode(Integer code) &#123;
+        this.code = code;
+    &#125;
+
+    public BusinessException(Integer code, String message) &#123;
+        super(message);
+        this.code = code;
+    &#125;
+
+    public BusinessException(Integer code, String message, Throwable cause) &#123;
+        super(message, cause);
+        this.code = code;
+    &#125;
+&#125;
+</code></pre>
+<p>controller&#x2F;ProjectExceptionAdvice：</p>
+<pre><code>import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+//@RestControllerAdvice用于标识当前类为REST风格对应的异常处理器
+@RestControllerAdvice
+public class ProjectExceptionAdvice &#123;
+    //@ExceptionHandler用于设置当前处理器类对应的异常类型
+    @ExceptionHandler(SystemException.class)
+    public Result doSystemException(SystemException ex)&#123;
+        //记录日志
+        //发送消息给运维
+        //发送邮件给开发人员,ex对象发送给开发人员
+        return new Result(ex.getCode(),null,ex.getMessage());
+    &#125;
+
+    @ExceptionHandler(BusinessException.class)
+    public Result doBusinessException(BusinessException ex)&#123;
+        return new Result(ex.getCode(),null,ex.getMessage());
+    &#125;
+
+    //除了自定义的异常处理器，保留对Exception类型的异常处理，用于处理非预期的异常
+    @ExceptionHandler(Exception.class)
+    public Result doOtherException(Exception ex)&#123;
+        //记录日志
+        //发送消息给运维
+        //发送邮件给开发人员,ex对象发送给开发人员
+        return new Result(Code.SYSTEM_UNKNOW_ERR,null,&quot;系统繁忙，请稍后再试！&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p><code>@RestControllerAdvice</code> 类注解,自带@ResponseBody注解与@Component注解，具备对应的功能。</p>
+<p><code>@ExceptionHandler</code> 方法注解，专用于异常处理的控制器方法上方。设置指定异常的处理方案，功能等同于控制器方法，出现异常后终止原始控制器执行，并转入当前方法执行。</p>
 <hr>
 
                 
