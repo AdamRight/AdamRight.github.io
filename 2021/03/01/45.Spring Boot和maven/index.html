@@ -6440,6 +6440,65 @@ public class RedisTest &#123;
 <p>可以点击右边栏maven的Lifecycle中的<code>package</code>进行打包。</p>
 <p>部署：<code>java -jar 打好的jar包名字</code>。</p>
 <hr>
+<h2 id="Spring-Boot-新"><a href="#Spring-Boot-新" class="headerlink" title="Spring Boot (新)"></a>Spring Boot (新)</h2><h3 id="入门-1"><a href="#入门-1" class="headerlink" title="入门"></a>入门</h3><hr>
+<p>SpringBoot是由Pivotal团队提供的全新框架，其设计目的是用来简化Spring应用的初始搭建以及开发过程。</p>
+<p>创建新模块，选择<code>Spring Initializr</code>，选择当前模块需要使用的技术集 <code>Web</code> -&gt; <code>Spring Web</code>。</p>
+<p>基础文件-pom:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.5.0&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+    &lt;groupId&gt;com.tea&lt;/groupId&gt;
+    &lt;artifactId&gt;SpringBootDemo&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;SpringBootDemo&lt;/name&gt;
+    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+    &lt;properties&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+<p>基础文件-Application:</p>
+<pre><code>@SpringBootApplication
+public class SpringBootDemoApplication &#123;
+    public static void main(String[] args) &#123;
+        SpringApplication.run(SpringBootDemoApplication.class, args);
+    &#125;
+&#125;
+</code></pre>
+<p>打包并运行：</p>
+<pre><code>右边栏Maven -&gt; 项目下Lifecycle -&gt; package -&gt; 生成jar包在target文件夹下
+
+执行启动指令
+java –jar 项目.jar
+</code></pre>
+<hr>
 
                 
             </div>
