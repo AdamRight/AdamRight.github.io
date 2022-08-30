@@ -6499,6 +6499,49 @@ public class SpringBootDemoApplication &#123;
 java –jar 项目.jar
 </code></pre>
 <hr>
+<h3 id="起步依赖"><a href="#起步依赖" class="headerlink" title="起步依赖"></a>起步依赖</h3><hr>
+<p>SpringBoot中已经有了各种依赖的的版本号，及依赖。</p>
+<p>默认的Tomcat服务改成Jetty:</p>
+<pre><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;!--web起步依赖环境中，排除Tomcat起步依赖--&gt;
+        &lt;exclusions&gt;
+            &lt;exclusion&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;
+            &lt;/exclusion&gt;
+        &lt;/exclusions&gt;
+    &lt;/dependency&gt;
+    &lt;!--添加Jetty起步依赖，版本由SpringBoot的starter控制--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-jetty&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<hr>
+<h3 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h3><hr>
+<p>SpringBoot提供了多种属性配置方式：</p>
+<p>application.properties文件：</p>
+<pre><code>server.port=80
+</code></pre>
+<p>application.yml文件：</p>
+<pre><code>server:
+  port: 81
+</code></pre>
+<p>application.yaml文件：</p>
+<pre><code>server:
+  port: 82
+</code></pre>
+<p>pringBoot配置文件加载顺序：	</p>
+<pre><code>application.properties  &gt;  application.yml  &gt;  application.yaml
+</code></pre>
+<p>自动提示功能消失解决方案：</p>
+<pre><code>File -&gt; Project Structure -&gt; Facets -&gt; Customize Spring Boot -&gt; 添加配置文件
+</code></pre>
+<hr>
 
                 
             </div>
