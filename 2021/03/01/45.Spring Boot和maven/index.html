@@ -6542,6 +6542,76 @@ java –jar 项目.jar
 <pre><code>File -&gt; Project Structure -&gt; Facets -&gt; Customize Spring Boot -&gt; 添加配置文件
 </code></pre>
 <hr>
+<h3 id="yaml"><a href="#yaml" class="headerlink" title="yaml"></a>yaml</h3><hr>
+<p>yaml语法规则：</p>
+<pre><code>大小写敏感
+属性层级关系使用多行描述，每行结尾使用冒号结束
+使用缩进表示层级关系，同层级左侧对齐，只允许使用空格（不允许使用Tab键）
+属性值前面添加空格（属性名与属性值之间使用冒号+空格作为分隔）
+# 表示注释
+
+核心规则：数据前面要加空格与冒号隔开
+</code></pre>
+<p>数组数据：</p>
+<pre><code>subject:
+ - Java
+ - 前端    
+ - 大数据
+</code></pre>
+<p>application.yaml：</p>
+<pre><code>lesson: SpringBoot
+
+server:
+  port: 80
+
+enterprise:
+  name: itcast
+  age: 16
+  tel: 4006184000
+  subject:
+    - Java
+    - 前端
+    - 大数据
+</code></pre>
+<p>读取数据三种格式- <code>@Value</code>（直接读取）:</p>
+<pre><code>//使用@Value读取单一属性数据
+@Value(&quot;$&#123;lesson&#125;&quot;)
+private String lesson;
+@Value(&quot;$&#123;server.port&#125;&quot;)
+private Integer port;
+@Value(&quot;$&#123;enterprise.subject[0]&#125;&quot;)
+private String subject_00;
+</code></pre>
+<p>读取数据三种格式-Environment（封装后读取）:</p>
+<pre><code>//使用Environment封装全配置数据
+@Autowired
+private Environment environment;
+
+System.out.println(environment.getProperty(&quot;lesson&quot;));
+System.out.println(environment.getProperty(&quot;server.port&quot;));
+System.out.println(environment.getProperty(&quot;enterprise.age&quot;));
+System.out.println(environment.getProperty(&quot;enterprise.subject[1]&quot;));
+</code></pre>
+<p>读取数据三种格式-实体类封装属性（封装后读取）:</p>
+<pre><code>import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+import java.util.Arrays;
+//封装yaml对象格式数据必须先声明当前实体类受Spring管控
+@Component
+//使用@ConfigurationProperties注解定义当前实体类读取配置属性信息，通过prefix属性设置读取哪个数据
+@ConfigurationProperties(prefix = &quot;enterprise&quot;)
+public class Enterprise &#123;
+    private String name;
+    private Integer age;
+    private String tel;
+    private String[] subject;
+&#125;
+
+
+@Autowired
+private Enterprise enterprise;
+</code></pre>
+<hr>
 
                 
             </div>
