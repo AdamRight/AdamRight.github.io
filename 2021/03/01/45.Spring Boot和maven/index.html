@@ -6660,6 +6660,70 @@ server.port=82
 java –jar springboot.jar –-server.port=88
 java –jar springboot.jar –-server.port=88 –-spring.profiles.active=test
 </code></pre>
+<p>Maven与SpringBoot多环境兼容-Maven的设置大于yml的设置。</p>
+<p>在yml中读取Maven的设置：</p>
+<p>maven：</p>
+<pre><code>&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+        &lt;/plugin&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;
+            &lt;version&gt;3.2.0&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;encoding&gt;UTF-8&lt;/encoding&gt;
+                &lt;useDefaultDelimiters&gt;true&lt;/useDefaultDelimiters&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+
+&lt;profiles&gt;
+    &lt;!--开发环境--&gt;
+    &lt;profile&gt;
+        &lt;id&gt;dev&lt;/id&gt;
+        &lt;properties&gt;
+            &lt;profile.active&gt;dev&lt;/profile.active&gt;
+        &lt;/properties&gt;
+    &lt;/profile&gt;
+    &lt;!--生产环境--&gt;
+    &lt;profile&gt;
+        &lt;id&gt;pro&lt;/id&gt;
+        &lt;properties&gt;
+            &lt;profile.active&gt;pro&lt;/profile.active&gt;
+        &lt;/properties&gt;
+        &lt;activation&gt;
+            &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
+        &lt;/activation&gt;
+    &lt;/profile&gt;
+    &lt;!--测试环境--&gt;
+    &lt;profile&gt;
+        &lt;id&gt;test&lt;/id&gt;
+        &lt;properties&gt;
+            &lt;profile.active&gt;test&lt;/profile.active&gt;
+        &lt;/properties&gt;
+    &lt;/profile&gt;
+&lt;/profiles&gt;
+</code></pre>
+<p>application.yml读取maven中activeByDefault的那个环境：</p>
+<pre><code>#设置启用的环境
+spring:
+  profiles:
+    active: $&#123;profile.active&#125;
+</code></pre>
+<p>SpringBoot中4级配置文件：</p>
+<pre><code>1级： file ：config/application.yml	【最高】
+2级： file ：application.yml
+3级：classpath：config/application.yml【项目中】
+4级：classpath：application.yml	 【最低，项目中】
+
+作用：
+1级与2级留做系统打包后设置通用属性
+3级与4级用于系统开发阶段设置通用属性
+</code></pre>
 <hr>
 
                 
