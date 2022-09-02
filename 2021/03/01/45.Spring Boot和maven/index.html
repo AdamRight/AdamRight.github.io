@@ -6725,6 +6725,127 @@ spring:
 3级与4级用于系统开发阶段设置通用属性
 </code></pre>
 <hr>
+<h3 id="整合JUnit"><a href="#整合JUnit" class="headerlink" title="整合JUnit"></a>整合JUnit</h3><hr>
+<pre><code>@SpringBootTest
+class SpringbootTestApplicationTests &#123;
+
+    @Autowired
+    private BookService bookService;
+
+    @Test
+    public void save() &#123;
+        bookService.save();
+    &#125;
+&#125;
+</code></pre>
+<p>如果测试类在SpringBoot启动类的包或子包中，可以省略启动类的设置，也就是省略classes的设定</p>
+<pre><code>@SpringBootTest(classes = Springboot07JunitApplication.class)
+</code></pre>
+<hr>
+<h3 id="整合ssm"><a href="#整合ssm" class="headerlink" title="整合ssm"></a>整合ssm</h3><hr>
+<pre><code>SpringBoot整合Spring-不存在
+SpringBoot整合SpringMVC-不存在
+SpringBoot整合MyBatis-主要
+</code></pre>
+<p>SpringBoot整合MyBatis及SSM：</p>
+<p>创建项目-需要使用的技术集：</p>
+<pre><code>We -&gt; Spring Web
+SQL -&gt; MyBatis Framework
+SQL -&gt; MySQL Driver
+</code></pre>
+<p>pom.xml文件-导入druid：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.5.0&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+    &lt;groupId&gt;com.tea&lt;/groupId&gt;
+    &lt;artifactId&gt;springboot_ssm&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;springboot_ssm&lt;/name&gt;
+    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+    &lt;properties&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;2.2.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;scope&gt;runtime&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;druid&lt;/artifactId&gt;
+            &lt;version&gt;1.1.16&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+&lt;/project&gt;
+</code></pre>
+<p>application.yml配置数据源、端口等：</p>
+<pre><code>server:
+  port: 80
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ssm_db?servierTimezone=UTC #SpringBoot版本低于2.4.3(不含)，Mysql驱动版本大于8.0时，需要在url连接串中配置时区
+    username: root
+    password: *********
+</code></pre>
+<p>dao设置 <code>@Mapper</code>:</p>
+<pre><code>@Mapper
+public interface BookDao &#123;
+    @Insert(&quot;insert into tbl_book (type,name,description) values(#&#123;type&#125;,#&#123;name&#125;,#&#123;description&#125;)&quot;)
+    public int save(Book book);
+
+    @Update(&quot;update tbl_book set type = #&#123;type&#125;, name = #&#123;name&#125;, description = #&#123;description&#125; where id = #&#123;id&#125;&quot;)
+    public int update(Book book);
+
+    @Delete(&quot;delete from tbl_book where id = #&#123;id&#125;&quot;)
+    public int delete(Integer id);
+
+    @Select(&quot;select * from tbl_book where id = #&#123;id&#125;&quot;)
+    public Book getById(Integer id);
+
+    @Select(&quot;select * from tbl_book&quot;)
+    public List&lt;Book&gt; getAll();
+&#125;
+</code></pre>
+<p>页面放置在resources目录下的static目录中。</p>
+<hr>
+<h2 id="Maven高级"><a href="#Maven高级" class="headerlink" title="Maven高级"></a>Maven高级</h2><hr>
+<hr>
 
                 
             </div>
