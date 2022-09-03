@@ -6844,7 +6844,70 @@ public interface BookDao &#123;
 </code></pre>
 <p>页面放置在resources目录下的static目录中。</p>
 <hr>
-<h2 id="Maven高级"><a href="#Maven高级" class="headerlink" title="Maven高级"></a>Maven高级</h2><hr>
+<h2 id="Maven高级"><a href="#Maven高级" class="headerlink" title="Maven高级"></a>Maven高级</h2><h3 id="分模块开发"><a href="#分模块开发" class="headerlink" title="分模块开发"></a>分模块开发</h3><hr>
+<p>创建Maven模块，gav导入主模块：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.tea&lt;/groupId&gt;
+    &lt;artifactId&gt;SpringBootDemo&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>子模块实行：右边栏Maven -&gt; Lifecycle -&gt; install。通过maven指令安装模块到本地仓库（install指令）</p>
+<hr>
+<h3 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h3><hr>
+<p>依赖具有传递性：</p>
+<pre><code>直接依赖：在当前项目中通过依赖配置建立的依赖关系
+间接依赖：被资源的资源如果依赖其他资源，当前项目间接依赖其他资源
+</code></pre>
+<p>依赖传递冲突问题：</p>
+<pre><code>路径优先：当依赖中出现相同的资源时，层级越深，优先级越低，层级越浅，优先级越高
+声明优先：当资源在相同层级被依赖时，配置顺序靠前的覆盖配置顺序靠后的
+特殊优先：当同级配置了相同资源的不同版本，后配置的覆盖先配置的
+</code></pre>
+<p>可选依赖：可选依赖指对外隐藏当前所依赖的资源————不透明</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.tea&lt;/groupId&gt;
+    &lt;artifactId&gt;maven_03_pojo&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;!--可选依赖是隐藏当前工程所依赖的资源，隐藏后对应资源将不具有依赖传递性--&gt;
+    &lt;optional&gt;true&lt;/optional&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>排除依赖：排除依赖指主动断开依赖的资源，被排除的资源无需指定版本————不需要</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;com.tea&lt;/groupId&gt;
+  &lt;artifactId&gt;maven_04_dao&lt;/artifactId&gt;
+  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+  &lt;!--排除依赖是隐藏当前资源对应的依赖关系--&gt;
+  &lt;exclusions&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;log4j&lt;/groupId&gt;
+      &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+      &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+  &lt;/exclusions&gt;
+&lt;/dependency&gt;
+</code></pre>
+<hr>
+<h3 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h3><hr>
+<p>聚合：将多个模块组织成一个整体，同时进行项目构建的过程称为聚合。</p>
+<p>聚合工程：通常是一个不具有业务功能的“空”工程（有且仅有一个pom文件）。</p>
+<p>作用：使用聚合工程可以将多个工程编组，通过对聚合工程进行构建，实现对所包含的模块进行同步构建。当工程中某个模块发生更新（变更）时，必须保障工程中与已更新模块关联的模块同步更新，此时可以使用聚合工程来解决批量模块同步构建的问题。</p>
+<p>聚合工程：创建Maven模块，设置打包类型为pom</p>
+<pre><code>&lt;packaging&gt;pom&lt;/packaging&gt;
+
+&lt;modules&gt;
+    &lt;module&gt;../maven_ssm&lt;/module&gt;
+    &lt;module&gt;../maven_pojo&lt;/module&gt;
+    &lt;module&gt;../maven_dao&lt;/module&gt;
+&lt;/modules&gt;
+</code></pre>
+<p>聚合工程中所包含的模块在进行构建时会根据模块间的依赖关系设置构建顺序，与聚合工程中模块的配置书写位置无关。参与聚合的工程无法向上感知是否参与聚合，只能向下配置哪些模块参与本工程的聚合。</p>
+<hr>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><hr>
 <hr>
 
                 
