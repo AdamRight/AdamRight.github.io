@@ -3125,7 +3125,9 @@ public class CheckCodeUtil &#123;
      * 输出随机验证码图片流,并返回验证码值（一般传入输出流，响应response页面端，Web项目用的较多）
      *
      * @param width 图片宽度
-     * @param height 图片高度
+     * @param 
+     * 
+     * ght 图片高度
      * @param os  输出流
      * @param verifySize 数据长度
      * @return 验证码数据
@@ -7051,6 +7053,115 @@ RELEASE（发布版本）
 <pre><code>alpha版
 beta版
 纯数字版
+</code></pre>
+<hr>
+<h3 id="多环境开发"><a href="#多环境开发" class="headerlink" title="多环境开发"></a>多环境开发</h3><hr>
+<p>pom里配置多环境：</p>
+<pre><code>&lt;!--配置多环境--&gt;
+&lt;profiles&gt;
+    &lt;!--开发环境--&gt;
+    &lt;profile&gt;
+        &lt;id&gt;env_dep&lt;/id&gt;
+        &lt;properties&gt;
+            &lt;jdbc.url&gt;jdbc:mysql://127.1.1.1:3306/ssm_db&lt;/jdbc.url&gt;
+        &lt;/properties&gt;
+        &lt;!--设定是否为默认启动环境--&gt;
+        &lt;activation&gt;
+            &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
+        &lt;/activation&gt;
+    &lt;/profile&gt;
+    &lt;!--生产环境--&gt;
+    &lt;profile&gt;
+        &lt;id&gt;env_pro&lt;/id&gt;
+        &lt;properties&gt;
+            &lt;jdbc.url&gt;jdbc:mysql://127.2.2.2:3306/ssm_db&lt;/jdbc.url&gt;
+        &lt;/properties&gt;
+    &lt;/profile&gt;
+    &lt;!--测试环境--&gt;
+    &lt;profile&gt;
+        &lt;id&gt;env_test&lt;/id&gt;
+        &lt;properties&gt;
+            &lt;jdbc.url&gt;jdbc:mysql://127.3.3.3:3306/ssm_db&lt;/jdbc.url&gt;
+        &lt;/properties&gt;
+    &lt;/profile&gt;
+&lt;/profiles&gt;
+</code></pre>
+<p>设置activation标签指定多环境。或者 <code>mvn 指令 –P 环境定义id</code> 例如 <code>mvn install –P pro_env</code>。</p>
+<p>跳过测试：</p>
+<pre><code>mvn 指令 –D skipTests
+mvn install –D skipTests
+</code></pre>
+<p>执行的项目构建指令必须包含测试生命周期，否则无效果。例如执行compile生命周期，不经过test生命周期。</p>
+<p>细粒度控制跳过测试：</p>
+<pre><code>&lt;plugin&gt;
+  &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+  &lt;version&gt;2.22.1&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;skipTests&gt;true&lt;/skipTests&gt;&lt;!--设置跳过测试--&gt;
+    &lt;includes&gt; &lt;!--包含指定的测试用例--&gt;
+      &lt;include&gt;**/User*Test.java&lt;/include&gt;
+    &lt;/includes&gt;
+    &lt;excludes&gt;&lt;!--排除指定的测试用例--&gt;
+      &lt;exclude&gt;**/User*TestCase.java&lt;/exclude&gt;
+    &lt;/excludes&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;
+</code></pre>
+<hr>
+<h3 id="私服"><a href="#私服" class="headerlink" title="私服"></a>私服</h3><hr>
+<p>私服是一台独立的服务器，用于解决团队内部的资源共享与资源同步问题。</p>
+<p>Sonatype公司的一款maven私服产品：Nexus。</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://help.sonatype.com/repomanager3/download">https://help.sonatype.com/repomanager3/download</a> </p>
+<p>启动服务器（命令行启动）：</p>
+<pre><code>nexus.exe /run nexus
+</code></pre>
+<p>访问服务器（默认端口：8081）：</p>
+<pre><code>http://localhost:8081
+</code></pre>
+<p>修改基础配置信息：安装路径下etc目录中nexus-default.properties文件保存有nexus基础配置信息，例如默认访问端口。</p>
+<p>修改服务器运行配置信息：安装路径下bin目录中nexus.vmoptions文件保存有nexus服务器启动对应的配置信息，例如默认占用内存空间。</p>
+<p>本地仓库访问私服权限设置（setting.xml文件中）：</p>
+<pre><code>&lt;servers&gt;
+  &lt;server&gt;
+    &lt;id&gt;tea-release&lt;/id&gt;
+    &lt;username&gt;admin&lt;/username&gt;
+    &lt;password&gt;admin&lt;/password&gt;
+  &lt;/server&gt;
+  &lt;server&gt;
+    &lt;id&gt;tea-snapshots&lt;/id&gt;
+    &lt;username&gt;admin&lt;/username&gt;
+    &lt;password&gt;admin&lt;/password&gt;
+  &lt;/server&gt;
+&lt;/servers&gt;
+</code></pre>
+<p>本地仓库访问私服地址设置（setting.xml文件中）:</p>
+<pre><code>&lt;mirrors&gt;
+  &lt;mirror&gt;
+    &lt;id&gt;nexus-tea&lt;/id&gt;
+    &lt;mirrorOf&gt;*&lt;/mirrorOf&gt;
+    &lt;url&gt;http://localhost:8081/repository/maven-public/&lt;/url&gt;
+  &lt;/mirror&gt;
+&lt;/mirrors&gt;
+</code></pre>
+<p>工程上传到私服服务器设置（工程pom文件中）:</p>
+<pre><code>&lt;distributionManagement&gt;
+    &lt;repository&gt;
+      	&lt;!--和maven/settings.xml中server中的id一致，表示使用该id对应的用户名和密码--&gt;
+        &lt;id&gt;tea-nexus&lt;/id&gt;
+      	&lt;!--如果jar的版本是release版本，那么就上传到这个仓库，根据自己情况修改--&gt;
+        &lt;url&gt;http://localhost:8081/repository/tea-releases/&lt;/url&gt;
+    &lt;/repository&gt;
+    &lt;snapshotRepository&gt;
+      	&lt;!--和maven/settings.xml中server中的id一致，表示使用该id对应的用户名和密码--&gt;
+        &lt;id&gt;tea-nexus&lt;/id&gt;
+      	&lt;!--如果jar的版本是snapshot版本，那么就上传到这个仓库，根据自己情况修改--&gt;
+        &lt;url&gt;http://localhost:8081/repository/tea-snapshots/&lt;/url&gt;
+    &lt;/snapshotRepository&gt;
+&lt;/distributionManagement&gt;
+</code></pre>
+<p>注意：要和maven的settings.xml中server中定义的<id>tea-nexus</id>对应</p>
+<p>发布资源到私服命令:</p>
+<pre><code>mvn deploy
 </code></pre>
 <hr>
 
