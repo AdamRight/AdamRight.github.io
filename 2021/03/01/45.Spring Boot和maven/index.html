@@ -7164,6 +7164,188 @@ mvn install –D skipTests
 <pre><code>mvn deploy
 </code></pre>
 <hr>
+<h2 id="MyBatis-Plus"><a href="#MyBatis-Plus" class="headerlink" title="MyBatis Plus"></a>MyBatis Plus</h2><h3 id="入门案例-1"><a href="#入门案例-1" class="headerlink" title="入门案例"></a>入门案例</h3><hr>
+<p>MyBatisPlus（简称MP）是基于MyBatis框架基础上开发的增强型工具，旨在简化开发、提高效率。</p>
+<p>官网：</p>
+<pre><code>https://mybatis.plus/	
+https://mp.baomidou.com/
+</code></pre>
+<p>手动添加mp起步依赖:</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+    &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;3.4.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;druid&lt;/artifactId&gt;
+    &lt;version&gt;1.1.16&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>设置Jdbc参数（<strong>application.yml</strong>）</p>
+<pre><code>spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mybatisplus_db?serverTimezone=UTC
+    username: root
+    password: *******
+</code></pre>
+<p>定义数据接口，继承<strong>BaseMapper</strong>：</p>
+<pre><code>import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface UserDao extends BaseMapper&lt;User&gt; &#123;
+&#125;
+</code></pre>
+<p>测试功能：</p>
+<pre><code>@Autowired
+private UserDao userDao;
+
+@Test
+void testGetAll() &#123;
+    List&lt;User&gt; userList = userDao.selectList(null);
+    System.out.println(userList);
+&#125;
+</code></pre>
+<p>MyBatisPlus特性：</p>
+<pre><code>无侵入：只做增强不做改变，不会对现有工程产生影响
+强大的 CRUD 操作：内置通用 Mapper，少量配置即可实现单表CRUD 操作
+支持 Lambda：编写查询条件无需担心字段写错
+支持主键自动生成
+内置分页插件
+</code></pre>
+<hr>
+<h3 id="CRUD操作"><a href="#CRUD操作" class="headerlink" title="CRUD操作"></a>CRUD操作</h3><hr>
+<p>新增：</p>
+<pre><code>int insert(T t)
+</code></pre>
+<p>删除：</p>
+<pre><code>int deleteById(Serializable id)
+</code></pre>
+<p>修改：</p>
+<pre><code>int updateById(T t)
+</code></pre>
+<p>根据id查询:</p>
+<pre><code>T selectById(Serializable id)
+</code></pre>
+<p>查询全部:</p>
+<pre><code>List&lt;T&gt; selectList()
+</code></pre>
+<hr>
+<h3 id="Lombok"><a href="#Lombok" class="headerlink" title="Lombok"></a>Lombok</h3><hr>
+<p>坐标：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+    &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+    &lt;version&gt;1.18.12&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>常用注解：<code>@Data</code>，为当前实体类在编译期设置对应的get&#x2F;set方法，无参&#x2F;无参构造方法，toString方法，hashCode方法，equals方法等。</p>
+<pre><code>生成getter和setter方法：@Getter、@Setter
+生成toString方法：@ToString
+生成equals和hashcode方法：@EqualsAndHashCode
+统一成以上所有：@Data
+
+生成空参构造： @NoArgsConstructor
+生成全参构造： @AllArgsConstructor
+
+lombok还给我们提供了builder的方式创建对象,好处就是可以链式编程。 @Builder【扩展】
+</code></pre>
+<hr>
+<h3 id="分页功能"><a href="#分页功能" class="headerlink" title="分页功能"></a>分页功能</h3><hr>
+<p>分页查询:</p>
+<pre><code>IPage&lt;T&gt; selectPage(IPage&lt;T&gt; page)
+</code></pre>
+<p>设置分页拦截器作为Spring管理的bean:</p>
+<pre><code>import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class MybatisPlusConfig &#123;
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor()&#123;
+        //1 创建MybatisPlusInterceptor拦截器对象
+        MybatisPlusInterceptor mpInterceptor=new MybatisPlusInterceptor();
+        //2 添加分页拦截器
+        mpInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
+        return mpInterceptor;
+    &#125;
+&#125;
+</code></pre>
+<p>执行分页查询:</p>
+<pre><code>//分页查询
+@Test
+void testSelectPage()&#123;
+    //1 创建IPage分页对象,设置分页参数
+    IPage&lt;User&gt; page=new Page&lt;&gt;(1,3);
+    //2 执行分页查询
+    userDao.selectPage(page,null);
+    //3 获取分页结果
+    System.out.println(&quot;当前页码值：&quot;+page.getCurrent());
+    System.out.println(&quot;每页显示数：&quot;+page.getSize());
+    System.out.println(&quot;总页数：&quot;+page.getPages());
+    System.out.println(&quot;总条数：&quot;+page.getTotal());
+    System.out.println(&quot;当前页数据：&quot;+page.getRecords());
+&#125;
+</code></pre>
+<p>开启MyBatisPlus日志:</p>
+<pre><code>spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mybatisplus_db?serverTimezone=UTC
+    username: root
+    password: *******
+# 开启mp的日志（输出到控制台）
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+</code></pre>
+<p>取消SpringBoot启动banner图标:</p>
+<pre><code>spring:
+  main:
+    banner-mode: off # 关闭SpringBoot启动图标(banner)
+</code></pre>
+<p>取消MybatisPlus启动banner图标:</p>
+<pre><code># mybatis-plus日志控制台输出
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: off # 关闭mybatisplus启动图标
+</code></pre>
+<hr>
+<h3 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h3><hr>
+<p>MyBatisPlus将书写复杂的SQL查询条件进行了封装，使用编程的形式完成查询条件的组合</p>
+<p>方式一：按条件查询</p>
+<pre><code>//方式一：按条件查询
+QueryWrapper&lt;User&gt; qw=new QueryWrapper&lt;&gt;();
+qw.lt(&quot;age&quot;, 18);
+List&lt;User&gt; userList = userDao.selectList(qw);
+System.out.println(userList);
+</code></pre>
+<p>方式二：lambda格式按条件查询</p>
+<pre><code>//方式二：lambda格式按条件查询
+QueryWrapper&lt;User&gt; qw = new QueryWrapper&lt;User&gt;();
+qw.lambda().lt(User::getAge, 10);
+List&lt;User&gt; userList = userDao.selectList(qw);
+System.out.println(userList);
+</code></pre>
+<p>方式三：lambda格式按条件查询（推荐）:</p>
+<pre><code>//方式三：lambda格式按条件查询
+LambdaQueryWrapper&lt;User&gt; lqw = new LambdaQueryWrapper&lt;User&gt;();
+lqw.lt(User::getAge, 10);
+List&lt;User&gt; userList = userDao.selectList(lqw);
+System.out.println(userList);
+</code></pre>
+<hr>
+<p>按条件查询:</p>
+<pre><code>IPage&lt;T&gt; selectPage(Wrapper&lt;T&gt; queryWrapper)
+</code></pre>
 
                 
             </div>
