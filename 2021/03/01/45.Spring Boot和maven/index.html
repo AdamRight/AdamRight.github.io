@@ -7258,6 +7258,9 @@ lombok还给我们提供了builder的方式创建对象,好处就是可以链式
 <p>分页查询:</p>
 <pre><code>IPage&lt;T&gt; selectPage(IPage&lt;T&gt; page)
 </code></pre>
+<p>按条件查询:</p>
+<pre><code>IPage&lt;T&gt; selectPage(Wrapper&lt;T&gt; queryWrapper)
+</code></pre>
 <p>设置分页拦截器作为Spring管理的bean:</p>
 <pre><code>import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
@@ -7343,9 +7346,358 @@ List&lt;User&gt; userList = userDao.selectList(lqw);
 System.out.println(userList);
 </code></pre>
 <hr>
-<p>按条件查询:</p>
-<pre><code>IPage&lt;T&gt; selectPage(Wrapper&lt;T&gt; queryWrapper)
+<h3 id="组合条件"><a href="#组合条件" class="headerlink" title="组合条件"></a>组合条件</h3><hr>
+<p>并且关系（and）：</p>
+<pre><code>LambdaQueryWrapper&lt;User&gt; lqw = new LambdaQueryWrapper&lt;User&gt;();
+//并且关系：10到30岁之间
+lqw.lt(User::getAge, 30).gt(User::getAge, 10);
+List&lt;User&gt; userList = userDao.selectList(lqw);
+System.out.println(userList);
 </code></pre>
+<p>或者关系（or）：</p>
+<pre><code>//或者关系
+LambdaQueryWrapper&lt;User&gt; lqw = new LambdaQueryWrapper&lt;User&gt;();
+//或者关系：小于10岁或者大于30岁
+lqw.lt(User::getAge, 10).or().gt(User::getAge, 30);
+List&lt;User&gt; userList = userDao.selectList(lqw);
+System.out.println(userList);
+</code></pre>
+<hr>
+<h3 id="NULL值处理"><a href="#NULL值处理" class="headerlink" title="NULL值处理"></a>NULL值处理</h3><hr>
+<p>if语句控制条件追加:</p>
+<pre><code>Integer minAge=10;  //将来有用户传递进来,此处简化成直接定义变量了
+Integer maxAge=null;  //将来有用户传递进来,此处简化成直接定义变量了
+LambdaQueryWrapper&lt;User&gt; lqw = new LambdaQueryWrapper&lt;User&gt;();
+if(minAge!=null)&#123;
+    lqw.gt(User::getAge, minAge);
+&#125;
+if(maxAge!=null)&#123;
+    lqw.lt(User::getAge, maxAge);
+&#125;
+List&lt;User&gt; userList = userDao.selectList(lqw);
+userList.forEach(System.out::println);
+</code></pre>
+<p>条件参数控制:</p>
+<pre><code>Integer minAge=10;  //将来有用户传递进来,此处简化成直接定义变量了
+Integer maxAge=null;  //将来有用户传递进来,此处简化成直接定义变量了
+LambdaQueryWrapper&lt;User&gt; lqw = new LambdaQueryWrapper&lt;User&gt;();
+//参数1：如果表达式为true，那么查询才使用该条件
+lqw.gt(minAge!=null,User::getAge, minAge);
+lqw.lt(maxAge!=null,User::getAge, maxAge);
+List&lt;User&gt; userList = userDao.selectList(lqw);
+userList.forEach(System.out::println);
+</code></pre>
+<p>条件参数控制（链式编程）:</p>
+<pre><code>Integer minAge=10;  //将来有用户传递进来,此处简化成直接定义变量了
+Integer maxAge=null;  //将来有用户传递进来,此处简化成直接定义变量了
+LambdaQueryWrapper&lt;User&gt; lqw = new LambdaQueryWrapper&lt;User&gt;();
+//参数1：如果表达式为true，那么查询才使用该条件
+lqw.gt(minAge!=null,User::getAge, minAge)
+   .lt(maxAge!=null,User::getAge, maxAge);
+List&lt;User&gt; userList = userDao.selectList(lqw);
+userList.forEach(System.out::println);
+</code></pre>
+<hr>
+<h3 id="查询投影"><a href="#查询投影" class="headerlink" title="查询投影"></a>查询投影</h3><hr>
+<p>查询结果包含模型类中部分属性:</p>
+<pre><code>/*LambdaQueryWrapper&lt;User&gt; lqw = new LambdaQueryWrapper&lt;User&gt;();
+lqw.select(User::getId, User::getName, User::getAge);*/
+//或者
+QueryWrapper&lt;User&gt; lqw = new QueryWrapper&lt;User&gt;();
+lqw.select(&quot;id&quot;, &quot;name&quot;, &quot;age&quot;, &quot;tel&quot;);
+List&lt;User&gt; userList = userDao.selectList(lqw);
+System.out.println(userList);
+</code></pre>
+<p>查询结果包含模型类中未定义的属性:</p>
+<pre><code>QueryWrapper&lt;User&gt; lqw = new QueryWrapper&lt;User&gt;();
+lqw.select(&quot;count(*) as count, tel&quot;);
+lqw.groupBy(&quot;tel&quot;);
+List&lt;Map&lt;String, Object&gt;&gt; userList = userDao.selectMaps(lqw);
+System.out.println(userList);
+</code></pre>
+<hr>
+<h3 id="查询条件"><a href="#查询条件" class="headerlink" title="查询条件"></a>查询条件</h3><hr>
+<p>多条件查询有哪些组合：</p>
+<pre><code>范围匹配（&gt; 、 = 、between）
+模糊匹配（like）
+空判定（null）
+包含性匹配（in）
+分组（group）
+排序（order）
+……
+</code></pre>
+<p>用户登录（eq匹配）：</p>
+<pre><code>LambdaQueryWrapper&lt;User&gt; lqw = new LambdaQueryWrapper&lt;User&gt;();
+//等同于=
+lqw.eq(User::getName, &quot;Jerry&quot;).eq(User::getPassword, &quot;jerry&quot;);
+User loginUser = userDao.selectOne(lqw);
+System.out.println(loginUser);
+</code></pre>
+<p>购物设定价格区间、户籍设定年龄区间（le ge匹配 或 between匹配）：</p>
+<pre><code>LambdaQueryWrapper&lt;User&gt; lqw = new LambdaQueryWrapper&lt;User&gt;();
+//范围查询 lt le gt ge eq between
+lqw.between(User::getAge, 10, 30);
+List&lt;User&gt; userList = userDao.selectList(lqw);
+System.out.println(userList);
+</code></pre>
+<p>查信息，搜索新闻（非全文检索版：like匹配）：</p>
+<pre><code>LambdaQueryWrapper&lt;User&gt; lqw = new LambdaQueryWrapper&lt;User&gt;();
+//模糊匹配 like
+lqw.likeLeft(User::getName, &quot;J&quot;);
+List&lt;User&gt; userList = userDao.selectList(lqw);
+System.out.println(userList);
+</code></pre>
+<p>统计报表（分组查询聚合函数）：</p>
+<pre><code>QueryWrapper&lt;User&gt; qw = new QueryWrapper&lt;User&gt;();
+qw.select(&quot;gender&quot;,&quot;count(*) as nums&quot;);
+qw.groupBy(&quot;gender&quot;);
+List&lt;Map&lt;String, Object&gt;&gt; maps = userDao.selectMaps(qw);
+System.out.println(maps);
+</code></pre>
+<p>更多查询条件设置参看<a target="_blank" rel="noopener" href="https://mybatis.plus/guide/wrapper.html#abstractwrapper%E3%80%82">https://mybatis.plus/guide/wrapper.html#abstractwrapper。</a></p>
+<hr>
+<h3 id="字段映射与表名映射"><a href="#字段映射与表名映射" class="headerlink" title="字段映射与表名映射"></a>字段映射与表名映射</h3><hr>
+<p>表字段与编码属性设计不同步:在模型类属性上方，使用**@TableField<strong>属性注解，通过</strong>value**属性，设置当前属性对应的数据库表中的字段关系。</p>
+<pre><code>@TableField(value=&quot;pwd&quot;)
+private String password;
+</code></pre>
+<p>编码中添加了数据库中未定义的属性:在模型类属性上方，使用**@TableField<strong>注解，通过</strong>exist**属性，设置属性在数据库表字段中是否存在，默认为true。此属性无法与value合并使用。</p>
+<pre><code>@TableField(exist = false)
+private Integer online;
+</code></pre>
+<p>采用默认查询开放了更多的字段查看权限:在模型类属性上方，使用**@TableField<strong>注解，通过</strong>select**属性：设置该属性是否参与查询。此属性与select()映射配置不冲突。</p>
+<pre><code>@TableField(value=&quot;pwd&quot;,select = false)
+private String password;
+</code></pre>
+<p>表名与编码开发设计不同步:在<strong>模型类</strong>上方，使用**@TableName<strong>注解，通过</strong>value**属性，设置当前类对应的数据库表名称。</p>
+<pre><code>@TableName(&quot;tbl_user&quot;)
+public class User &#123;&#125;
+</code></pre>
+<p>代码：</p>
+<pre><code>@Data
+@TableName(&quot;tbl_user&quot;)
+public class User &#123;
+    /*
+        id为Long类型，因为数据库中id为bigint类型，
+        并且mybatis有自己的一套id生成方案，生成出来的id必须是Long类型
+     */
+    private Long id;
+    private String name;
+    @TableField(value = &quot;pwd&quot;,select = false)
+    private String password;
+    private Integer age;
+    private String tel;
+    @TableField(exist = false) //表示online字段不参与CRUD操作
+    private Boolean online;
+&#125;
+</code></pre>
+<hr>
+<h3 id="id生成策略控制（Insert）"><a href="#id生成策略控制（Insert）" class="headerlink" title="id生成策略控制（Insert）"></a>id生成策略控制（Insert）</h3><hr>
+<p>id生成策略控制（@TableId注解）：<strong>属性注解</strong>,模型类中用于表示主键的属性定义上方,设置当前类中主键属性的生成策略。<strong>type</strong>：设置主键属性的生成策略，值参照IdType枚举值：</p>
+<pre><code>public class User &#123;
+    @TableId(type = IdType.AUTO)
+    private Long id;
+&#125;
+</code></pre>
+<p>全局策略配置（id生成和表名前缀）：</p>
+<pre><code>mybatis-plus:
+  global-config:
+    db-config:
+      id-type: assign_id
+      table-prefix: tbl_
+</code></pre>
+<p>id生成策略控制：</p>
+<pre><code>AUTO(0)：使用数据库id自增策略控制id生成
+NONE(1)：不设置id生成策略
+INPUT(2)：用户手工输入id
+ASSIGN_ID(3)：雪花算法生成id（可兼容数值型与字符串型）
+ASSIGN_UUID(4)：以UUID生成算法作为id生成策略
+</code></pre>
+<hr>
+<h3 id="多记录操作（批量Delete-x2F-Select）"><a href="#多记录操作（批量Delete-x2F-Select）" class="headerlink" title="多记录操作（批量Delete&#x2F;Select）"></a>多记录操作（批量Delete&#x2F;Select）</h3><hr>
+<p>按照主键删除多条记录:</p>
+<pre><code>//删除指定多条数据
+List&lt;Long&gt; list = new ArrayList&lt;&gt;();
+list.add(1402551342481838081L);
+list.add(1402553134049501186L);
+list.add(1402553619611430913L);
+
+userDao.deleteBatchIds(list);
+</code></pre>
+<p>根据主键查询多条记录:</p>
+<pre><code>//查询指定多条数据
+List&lt;Long&gt; list = new ArrayList&lt;&gt;();
+list.add(1L);
+list.add(3L);
+list.add(4L);
+userDao.selectBatchIds(list);
+</code></pre>
+<hr>
+<h3 id="逻辑删除（Delete-x2F-Update）"><a href="#逻辑删除（Delete-x2F-Update）" class="headerlink" title="逻辑删除（Delete&#x2F;Update）"></a>逻辑删除（Delete&#x2F;Update）</h3><hr>
+<p>在实际环境中，如果想删除一条数据，是否会真的从数据库中删除该条数据？删除操作业务问题：业务数据从数据库中丢弃</p>
+<p>逻辑删除：为数据设置是否可用状态字段，删除时设置状态字段为不可用状态，数据保留在数据库中。</p>
+<p>数据库表中添加逻辑删除标记字段</p>
+<p>实体类中添加对应字段，并设定当前字段为逻辑删除标记字段：</p>
+<pre><code>import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
+
+@Data
+public class User &#123;
+    private Long id;
+    //逻辑删除字段，标记当前记录是否被删除
+    @TableLogic
+    private Integer deleted;
+&#125;
+</code></pre>
+<p>配置逻辑删除字面值：</p>
+<pre><code>mybatis-plus:
+  global-config:
+    db-config:
+      table-prefix: tbl_
+      # 逻辑删除字段名
+      logic-delete-field: deleted
+      # 逻辑删除字面值：未删除为0
+      logic-not-delete-value: 0
+      # 逻辑删除字面值：删除为1
+      logic-delete-value: 1
+</code></pre>
+<p><strong>逻辑删除本质：逻辑删除的本质其实是修改操作。如果加了逻辑删除字段，查询数据时也会自动带上逻辑删除字段。</strong></p>
+<p>执行SQL语句：</p>
+<pre><code>UPDATE tbl_user SET deleted=1 WHERE id=? AND deleted=0
+</code></pre>
+<hr>
+<h3 id="乐观锁（Update）"><a href="#乐观锁（Update）" class="headerlink" title="乐观锁（Update）"></a>乐观锁（Update）</h3><hr>
+<p>乐观锁主张的思想是什么？业务并发现象带来的问题：秒杀</p>
+<p>数据库表中添加锁标记字段</p>
+<p>实体类中添加对应字段，并设定当前字段为逻辑删除标记字段:</p>
+<pre><code>import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.Version;
+import lombok.Data;
+@Data
+public class User &#123;
+    private Long id;
+    @Version
+    private Integer version;
+&#125;
+</code></pre>
+<p>配置乐观锁拦截器实现锁机制对应的动态SQL语句拼装:</p>
+<pre><code>import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+@Configuration
+public class MpConfig &#123;
+    @Bean
+    public MybatisPlusInterceptor mpInterceptor() &#123;
+        //1.定义Mp拦截器
+        MybatisPlusInterceptor mpInterceptor = new MybatisPlusInterceptor();
+        //2.添加乐观锁拦截器
+        mpInterceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
+        return mpInterceptor;
+    &#125;
+&#125;
+</code></pre>
+<p>使用乐观锁机制在修改前必须先获取到对应数据的verion方可正常进行:</p>
+<pre><code>@Test
+public void testUpdate() &#123;
+    /*User user = new User();
+    user.setId(3L);
+    user.setName(&quot;Jock666&quot;);
+    user.setVersion(1);
+    userDao.updateById(user);*/
+    
+    //1.先通过要修改的数据id将当前数据查询出来
+    //User user = userDao.selectById(3L);
+    //2.将要修改的属性逐一设置进去
+    //user.setName(&quot;Jock888&quot;);
+    //userDao.updateById(user);
+    
+    //1.先通过要修改的数据id将当前数据查询出来
+    User user = userDao.selectById(3L);     //version=3
+    User user2 = userDao.selectById(3L);    //version=3
+    user2.setName(&quot;Jock aaa&quot;);
+    userDao.updateById(user2);              //version=&gt;4
+    user.setName(&quot;Jock bbb&quot;);
+    userDao.updateById(user);               //verion=3?条件还成立吗？
+&#125;
+</code></pre>
+<p>执行修改前先执行查询语句：</p>
+<pre><code>SELECT id,name,age,tel,deleted,version FROM tbl_user WHERE id=? 
+</code></pre>
+<p>执行修改时使用version字段作为乐观锁检查依据：</p>
+<pre><code>UPDATE tbl_user SET name=?, age=?, tel=?, version=? WHERE id=? AND version=?
+</code></pre>
+<hr>
+<h3 id="代码生成器"><a href="#代码生成器" class="headerlink" title="代码生成器"></a>代码生成器</h3><hr>
+<p>工程搭建和基本代码编写:</p>
+<p>第一步：创建SpringBoot工程，添加代码生成器相关依赖，其他依赖自行添加:</p>
+<pre><code>&lt;!--代码生成器--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+    &lt;artifactId&gt;mybatis-plus-generator&lt;/artifactId&gt;
+    &lt;version&gt;3.4.1&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;!--velocity模板引擎--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.velocity&lt;/groupId&gt;
+    &lt;artifactId&gt;velocity-engine-core&lt;/artifactId&gt;
+    &lt;version&gt;2.3&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>第二步：编写代码生成器类</p>
+<pre><code>import com.baomidou.mybatisplus.generator.AutoGenerator;
+import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
+public class Generator &#123;
+    public static void main(String[] args) &#123;
+        //1. 创建代码生成器对象，执行生成代码操作
+        AutoGenerator autoGenerator = new AutoGenerator();
+        //2. 数据源相关配置：读取数据库中的信息，根据数据库表结构生成代码
+        DataSourceConfig dataSource = new DataSourceConfig();
+        dataSource.setDriverName(&quot;com.mysql.cj.jdbc.Driver&quot;);
+        dataSource.setUrl(&quot;jdbc:mysql://localhost:3306/mybatisplus_db?serverTimezone=UTC&quot;);
+        dataSource.setUsername(&quot;root&quot;);
+        dataSource.setPassword(&quot;*******&quot;);
+        autoGenerator.setDataSource(dataSource);
+         //3. 执行生成操作
+        autoGenerator.execute();
+    &#125;
+&#125;
+</code></pre>
+<p>开发者自定义配置:</p>
+<p>设置全局配置:</p>
+<pre><code>//设置全局配置
+GlobalConfig globalConfig = new GlobalConfig();
+globalConfig.setOutputDir(System.getProperty(&quot;user.dir&quot;)+&quot;/mybatisplus_04_generator/src/main/java&quot;);    //设置代码生成位置
+globalConfig.setOpen(false);    //设置生成完毕后是否打开生成代码所在的目录
+globalConfig.setAuthor(&quot;Author&quot;);    //设置作者
+globalConfig.setFileOverride(true);     //设置是否覆盖原始生成的文件
+globalConfig.setMapperName(&quot;%sDao&quot;);    //设置数据层接口名，%s为占位符，指代模块名称
+globalConfig.setIdType(IdType.ASSIGN_ID);   //设置Id生成策略
+autoGenerator.setGlobalConfig(globalConfig);
+</code></pre>
+<p>设置包名相关配置:</p>
+<pre><code>//设置包名相关配置
+PackageConfig packageInfo = new PackageConfig();
+packageInfo.setParent(&quot;com.aaa&quot;);   //设置生成的包名，与代码所在位置不冲突，二者叠加组成完整路径
+packageInfo.setEntity(&quot;domain&quot;);    //设置实体类包名
+packageInfo.setMapper(&quot;dao&quot;);   //设置数据层包名
+autoGenerator.setPackageInfo(packageInfo);
+</code></pre>
+<p>策略设置:</p>
+<pre><code>//策略设置
+StrategyConfig strategyConfig = new StrategyConfig();
+strategyConfig.setInclude(&quot;tbl_user&quot;);  //设置当前参与生成的表名，参数为可变参数
+strategyConfig.setTablePrefix(&quot;tbl_&quot;);  //设置数据库表的前缀名称，模块名 = 数据库表名 - 前缀名  例如： User = tbl_user - tbl_
+strategyConfig.setRestControllerStyle(true);    //设置是否启用Rest风格
+strategyConfig.setVersionFieldName(&quot;version&quot;);  //设置乐观锁字段名
+strategyConfig.setLogicDeleteFieldName(&quot;deleted&quot;);  //设置逻辑删除字段名
+strategyConfig.setEntityLombokModel(true);  //设置是否启用lombok
+autoGenerator.setStrategy(strategyConfig);
+</code></pre>
+<hr>
 
                 
             </div>
