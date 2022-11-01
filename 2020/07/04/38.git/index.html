@@ -370,7 +370,14 @@ Git 全局设置：
 
 注意：上面设置的user.name和user.email并不是我们在注册码云账号时使用的用户名和邮箱，此处可以任意设置。
 </code></pre>
-<p>git分为工作区、暂存区、版本库。</p>
+<p>创建本地仓库执行命令：</p>
+<pre><code>git init
+</code></pre>
+<p>git分为工作区、暂存区、版本库：</p>
+<pre><code>版本库：.git隐藏文件夹就是版本库，版本库中存储了很多配置信息、日志信息和文件版本信息等
+工作区：包含.git文件夹的目录就是工作区，也称为工作目录，主要用于存放开发的代码
+暂存区：.git文件夹中有很多文件，其中有一个index文件就是暂存区，也可以叫做stage。暂存区是一个临时保存修改文件的地方
+</code></pre>
 <p>使用如下命令可以查看版本记录：</p>
 <pre><code>git log
 //简短log
@@ -384,11 +391,9 @@ git log --pretty=oneline --graph
 <p>使用如下命令查看当前工作树的状态：</p>
 <pre><code>git status
 </code></pre>
-<p>创建仓库执行命令：</p>
-<pre><code>git init
-</code></pre>
 <p>使用如下两条命令可以创建一个版本：</p>
 <pre><code>git add 文件名.格式
+//git add *
 git commit –m &#39;版本提交说明1&#39;
 </code></pre>
 <p>撤销工作区修改可以使用(没使用add)： </p>
@@ -404,7 +409,7 @@ git commit –m &#39;版本提交说明1&#39;
 git reset --hard HEAD~1
 git reset --hard HEAD~100
 </code></pre>
-<p>假如我们现在又想回到回退前的版本，可以使用如下命令：</p>
+<p>假如我们现在又想回到回退前的版本(使用了commit)，可以使用如下命令：</p>
 <pre><code>git reset --hard 版本号
 </code></pre>
 <p>对比工作区和某个版本文件的不同：</p>
@@ -419,6 +424,34 @@ git reset --hard HEAD~100
 <p>确实要从版本库中删除文件:</p>
 <pre><code>git rm 文件名.格式
 git commit –m &#39;版本提交说明&#39;
+</code></pre>
+<hr>
+<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><hr>
+<p>查看远程仓库:</p>
+<pre><code>git remote 	
+git remote -v
+</code></pre>
+<p>本地仓库，添加到远程仓库：</p>
+<pre><code>git remote add
+git remote add &lt;shortname&gt; &lt;url&gt; 
+git remote add origin https://gitee.com/...../....git 	
+</code></pre>
+<p>从远程仓库克隆:</p>
+<pre><code>git clone
+git clone [url]
+</code></pre>
+<p>推送到远程仓库:</p>
+<pre><code>git push
+git push [remote-name] [branch-name]
+git push origin master
+</code></pre>
+<p>从远程仓库拉取:</p>
+<pre><code>git pull
+git pull [short-name] [branch-name]	
+git pull origin master
+</code></pre>
+<p>如果当前本地仓库不是从远程仓库克隆，而是本地创建的仓库，并且仓库中存在文件，此时再从远程仓库拉取文件的时候会报错（fatal: refusing to merge unrelated histories ）。解决此问题可以在git pull命令后加入参数–allow-unrelated-histories：</p>
+<pre><code>git pull origin master --allow-unrelated-histories
 </code></pre>
 <hr>
 <h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><hr>
