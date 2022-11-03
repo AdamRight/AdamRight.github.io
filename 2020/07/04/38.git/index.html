@@ -459,13 +459,24 @@ git pull origin master
 <p>查看当前有几个分支并且看到在哪个分支下工作：</p>
 <pre><code>git branch
 </code></pre>
+<p>列出所有远程分支：</p>
+<pre><code>git branch -r	
+</code></pre>
+<p>列出所有本地分支和远程分支：</p>
+<pre><code>git branch -a	
+</code></pre>
 <p>创建一个分支dev,并切换到其上进行工作:</p>
 <pre><code>git checkout -b dev
 //只创建分支
+//创建分支命令格式：git branch [name]
 git branch dev
 </code></pre>
+<p>推送至远程仓库分支命令格式：</p>
+<pre><code>git push [shortName] [name]
+</code></pre>
 <p>切换回master分支：</p>
-<pre><code>git checkout master
+<pre><code>//切换分支命令格式：git checkout [name]
+git checkout master
 </code></pre>
 <p>当前在master分支，把dev分支的工作成果合并到master分支上：</p>
 <pre><code>git merge dev
@@ -484,6 +495,18 @@ git branch dev
 //切换回来后
 //git stash list
 git stash pop //恢复工作现场
+</code></pre>
+<hr>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><hr>
+<p>列出已有的标签：</p>
+<pre><code>git tag
+</code></pre>
+<p>创建标签，将标签推送至远程仓库：</p>
+<pre><code>git tag [name]			
+git push [shortName] [name]
+</code></pre>
+<p>检出标签：	</p>
+<pre><code>git checkout -b [branch] [name]	
 </code></pre>
 <hr>
 <h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><hr>
