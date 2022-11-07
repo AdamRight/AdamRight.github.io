@@ -727,6 +727,144 @@ source /etc/profile
 使用上下箭头快速调出曾经使用过的命令
 使用clear命令或者Ctrl+l快捷键实现清屏
 </code></pre>
+<p>ls:</p>
+<pre><code>ls -a 	//显示所有文件及目录 (. 开头的隐藏文件也会列出)
+ls -l 	//除文件名称外，同时将文件型态(d表示目录，-表示文件)、权限、拥有者、文件大小等信息详细列出
+
+注意：由于我们使用ls命令时经常需要加入-l选项，所以Linux为ls -l命令提供了一种简写方式，即ll
+</code></pre>
+<p>cd:</p>
+<pre><code>特殊说明：
+~表示用户的home目录
+. 表示目前所在的目录
+.. 表示目前目录位置的上级目录
+
+举例：
+cd ..		切换到当前目录的上级目录
+cd ~		切换到用户的home目录
+cd /usr/local	切换到/usr/local目录
+</code></pre>
+<p>cat:</p>
+<pre><code>作用：用于显示文件内容。语法： cat [-n] fileName
+
+说明:-n ：由1开始对所有输出的行数编号，即显示行数。
+
+举例：
+cat /etc/profile		查看/etc目录下的profile文件内容
+</code></pre>
+<p>more：</p>
+<pre><code>作用：以分页的形式显示文件内容。语法： more fileName
+
+操作说明:
+回车键 	向下滚动一行
+空格键 	向下滚动一屏
+b 		返回上一屏
+q或者Ctrl+C	退出more
+
+举例：
+more /etc/profile		以分页方式显示/etc目录下的profile文件内容
+</code></pre>
+<p>tail：</p>
+<pre><code>作用：查看文件末尾的内容。语法：tail [-f] fileName
+
+说明:-f ：动态读取文件末尾内容并显示，通常用于日志文件的内容输出
+
+举例：
+tail /etc/profile		显示/etc目录下的profile文件末尾10行的内容
+tail -20 /etc/profile	显示/etc目录下的profile文件末尾20行的内容
+tail -f /tea/my.log	动态读取/tea目录下的my.log文件末尾内容并显示
+</code></pre>
+<p>mkdir：</p>
+<pre><code>作用：创建目录。语法：mkdir [-p] dirName
+
+说明：-p：确保目录名称存在，不存在的就创建一个。通过此选项，可以实现多层目录同时创建
+
+举例：
+mkdir tea  在当前目录下，建立一个名为tea的子目录
+mkdir -p tea/test   在工作目录下的tea目录中建立一个名为test的子目录，若tea目录不存在，则建立一个
+</code></pre>
+<p>rmdir：</p>
+<pre><code>作用：删除空目录。语法：rmdir [-p] dirName
+
+说明：-p：当子目录被删除后使父目录为空目录的话，则一并删除
+
+举例：
+rmdir tea   删除名为tea的空目录
+rmdir -p tea/test   删除tea目录中名为test的子目录，若test目录删除后tea目录变为空目录，则也被删除
+rmdir ----------*   删除名称以tea开始的空目录
+</code></pre>
+<p>rm：</p>
+<pre><code>作用：删除文件或者目录。语法：rm [-rf] name
+
+说明：
+    -r：将目录及目录中所有文件（目录）逐一删除，即递归删除
+    -f：无需确认，直接删除
+
+举例：
+rm -r tea/    删除名为tea的目录和目录中所有文件，删除前需确认
+rm -rf tea/   无需确认，直接删除名为tea的目录和目录中所有文件
+rm -f hello.txt   无需确认，直接删除hello.txt文件
+</code></pre>
+<p>cp：</p>
+<pre><code>作用：用于复制文件或目录。语法：cp [-r] source dest
+
+说明:-r：如果复制的是目录需要使用此选项，此时将复制该目录下所有的子目录和文件
+
+举例：
+cp hello.txt tea/            将hello.txt复制到tea目录中
+cp hello.txt ./hi.txt           将hello.txt复制到当前目录，并改名为hi.txt
+cp -r tea/ ./it/    将tea目录和目录下所有文件复制到it目录下
+cp -r tea/* ./it/  将tea目录下所有文件复制到it目录下
+</code></pre>
+<p>mv:</p>
+<pre><code>作用：为文件或目录改名、或将文件或目录移动到其它位置。语法：mv source dest
+
+举例：
+mv hello.txt hi.txt                   将hello.txt改名为hi.txt
+mv hi.txt it/                  将文件hi.txt移动到it目录中
+mv hi.txt it/hello.txt   将hi.txt移动到it目录中，并改名为hello.txt
+mv tea/ itheima/                如果it目录不存在，将tea目录改名为it
+mv tea/ it/						如果it目录存在，将tea目录移动到it目录中
+</code></pre>
+<p>打包压缩命令tar:</p>
+<pre><code>作用：对文件进行打包、解包、压缩、解压
+语法：tar [-zcxvf] fileName [files]
+包文件后缀为.tar表示只是完成了打包，并没有压缩
+包文件后缀为.tar.gz表示打包的同时还进行了压缩
+
+说明：
+-z：z代表的是gzip，通过gzip命令处理文件，gzip可以对文件压缩或者解压
+-c：c代表的是create，即创建新的包文件
+-x：x代表的是extract，实现从包文件中还原文件
+-v：v代表的是verbose，显示命令的执行过程
+-f：f代表的是file，用于指定包文件的名称
+
+举例：
+打包
+tar -cvf hello.tar ./*		  将当前目录下所有文件打包，打包后的文件名为hello.tar
+tar -zcvf hello.tar.gz ./*		  将当前目录下所有文件打包并压缩，打包后的文件名为hello.tar.gz
+
+解包
+tar -xvf hello.tar		  将hello.tar文件进行解包，并将解包后的文件放在当前目录
+tar -zxvf hello.tar.gz		  将hello.tar.gz文件进行解压，并将解压后的文件放在当前目录
+tar -zxvf hello.tar.gz -C /usr/local     将hello.tar.gz文件进行解压，并将解压后的文件放在/usr/local目录
+</code></pre>
+<p>文本编辑命令 vi&#x2F;vim：</p>
+<pre><code>vi作用：vi命令是Linux系统提供的一个文本编辑工具，可以对文件内容进行编辑，类似于Windows中的记事本
+语法：vi fileName
+
+说明：
+1、vim是从vi发展来的一个功能更加强大的文本编辑工具，在编辑文件时可以对文本内容进行着色，方便我们对文件进行编辑处理，所以实际工作中vim更加常用。
+2、要使用vim命令，需要我们自己完成安装。可以使用下面的命令来完成安装：
+yum install vim
+
+vim作用：对文件内容进行编辑，vim其实就是一个文本编辑器
+语法：vim fileName
+
+说明：
+1、在使用vim命令编辑文件时，如果指定的文件存在则直接打开此文件。如果指定的文件不存在则新建文件。
+2、vim在进行文本编辑时共分为三种模式，分别是命令模式（Command mode），插入模式（Insert mode）和底行模式（Last line mode）。这三种模式之间可以相互切换。我们在使用vim时一定要注意我们当前所处的是哪种模式。
+</code></pre>
 <hr>
 
                 
