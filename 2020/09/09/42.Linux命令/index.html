@@ -1010,6 +1010,116 @@ yum update
 </code></pre>
 <p>Yum（全称为 Yellow dog Updater, Modified）是一个在Fedora和RedHat以及CentOS中的Shell前端软件包管理器。基于RPM包管理，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。</p>
 <hr>
+<h3 id="项目部署"><a href="#项目部署" class="headerlink" title="项目部署"></a>项目部署</h3><hr>
+<p>将程序在后台运行,输出到日志文件：</p>
+<pre><code>nohup 命令：英文全称 no hang up（不挂起），用于不挂断地运行指定命令，退出终端不会影响程序的运行
+语法格式： nohup Command [ Arg … ] [&amp;]
+参数说明：
+Command：要执行的命令
+Arg：一些参数，可以指定输出文件
+&amp;：让命令在后台运行
+
+举例：后台运行java -jar命令，并将日志输出到hello.log文件:
+nohup java -jar boot工程.jar &amp;&gt; hello.log &amp;
+</code></pre>
+<p>停止SpringBoot程序:</p>
+<pre><code>ps -ef | grep java
+kill -9 id
+</code></pre>
+<p>通过Shell脚本自动部署项目,操作步骤:</p>
+<pre><code>1、在Linux中安装Git
+    yum list git			列出git安装包
+    yum install git			在线安装git
+
+2、在Linux中安装maven
+    tar -zxvf apache-maven-3.5.4-bin.tar.gz -C /usr/local
+    vim /etc/profile		修改配置文件，加入如下内容
+    export MAVEN_HOME=/usr/local/apache-maven-3.5.4
+    export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH
+    source /etc/profile		保存配置文件
+    mvn –version			查看是否安装成功
+    vim /usr/local/apache-maven-3.5.4/conf/settings.xml	  修改添加配置文件内容如下
+    &lt;localRepository&gt;/usr/local/repo&lt;/localRepository&gt;
+
+3、编写Shell脚本（拉取代码、编译、打包、启动）
+    #!/bin/sh
+    echo =================================
+    echo  自动化部署脚本启动
+    echo =================================
+    
+    echo 停止原来运行中的工程
+    APP_NAME=helloworld
+    
+    tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk &#39;&#123;print $2&#125;&#39;`
+    if [ $&#123;tpid&#125; ]; then
+        echo &#39;Stop Process...&#39;
+        kill -15 $tpid
+    fi
+    sleep 2
+    tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk &#39;&#123;print $2&#125;&#39;`
+    if [ $&#123;tpid&#125; ]; then
+        echo &#39;Kill Process!&#39;
+        kill -9 $tpid
+    else
+        echo &#39;Stop Success!&#39;
+    fi
+    
+    echo 准备从Git仓库拉取最新代码
+    cd /usr/local/helloworld
+    
+    echo 开始从Git仓库拉取最新代码
+    git pull
+    echo 代码拉取完成
+    
+    echo 开始打包
+    output=`mvn clean package -Dmaven.test.skip=true`
+    
+    cd target
+    
+    echo 启动项目
+    nohup java -jar helloworld-1.0-SNAPSHOT.jar &amp;&gt; helloworld.log &amp;
+    echo 项目启动完成
+
+4、为用户授予执行Shell脚本的权限（chomd 777 bootStart.sh）
+    chmod（英文全拼：change mode）命令是控制用户对文件的权限的命令
+    Linux中的权限分为：读(r)、写(w)、执行(x)三种权限
+    Linux的文件调用权限分为三级 : 文件所有者（Owner）、用户组（Group）、其它用户（Other Users）
+    只有文件的所有者和超级用户可以修改文件或目录的权限
+    要执行Shell脚本需要有对此脚本文件的执行权限，如果没有则不能执行
+
+    举例：
+    chmod 777 bootStart.sh   为所有用户授予读、写、执行权限
+    chmod 755 bootStart.sh   为文件拥有者授予读、写、执行权限，同组用户和其他用户授予读、执行权限
+    chmod 210 bootStart.sh   为文件拥有者授予写权限，同组用户授予执行权限，其他用户没有任何权限
+    
+    注意：三位数字分别代表不同用户的权限
+    第1位表示文件拥有者的权限
+    第2位表示同组用户的权限
+    第3位表示其他用户的权限
+
+    0代表无权限，---
+    1代表只执行，--x
+    2代表只写，-w-
+    3代表写+执行，-wx
+    4代表只读，r--
+    5代表读+执行，r-x
+    6代表读+写，rw-
+    7代表读+写+执行，rwx
+
+5、执行Shell脚本(./bootStart.sh)
+</code></pre>
+<p>设置静态ip:</p>
+<pre><code>修改文件/etc/sysconfig/network-scripts/ifcfg-ens33，内容如下：
+BOOTPROTO=&quot;static&quot;		# 使用静态IP地址，默认为dhcp
+IPADDR=&quot;192.168.138.100&quot;	# 设置的静态IP地址
+NETMASK=&quot;255.255.255.0&quot;	# 子网掩码
+GATEWAY=&quot;192.168.138.2&quot;	# 网关地址
+DNS1=&quot;192.168.138.2&quot; 	# DNS服务器
+
+重启网络服务:
+systemctl restart network
+</code></pre>
+<hr>
 
                 
             </div>
